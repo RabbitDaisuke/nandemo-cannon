@@ -40,6 +40,7 @@ if [[ "$build_mode" != check && "$build_mode" != runtime ]]; then
     touch node_modules/.gdignore
   fi
   node tools/rasterize-assets.mjs
+  node tools/prepare-generated-art.mjs
 fi
 if [[ "$build_mode" == preview ]]; then
   node tools/render-cannon.mjs
@@ -87,6 +88,7 @@ if [[ "$build_mode" == runtime ]]; then
   exec node tools/build-web.mjs runtime
 fi
 node tests/web-mirrors.mjs
+node tests/web-share.mjs
 node tools/check-game.mjs
 [[ "$build_mode" != check ]] || exit 0
 node tools/render-cannon.mjs

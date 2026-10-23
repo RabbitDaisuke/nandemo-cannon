@@ -1,9 +1,10 @@
 class_name AimCannon
 extends Node2D
-## A fixed carriage and independent elevation joint. All artwork is authored SVG.
+## A fixed carriage and independent elevation joint, with separate artwork pieces.
 
 signal fired(direction: Vector2, power: float, origin: Vector2)
 signal aim_changed(elevation: float, power: float)
+signal aim_dragged
 
 const PIVOT_OFFSET = Vector2(0.0, -55.0)
 const MUZZLE_LOCAL = Vector2(-104.0, 0.0)
@@ -18,8 +19,8 @@ var power: float = 0.65
 var enabled: bool = true
 var _joint: Node2D
 var _barrel: Sprite2D
-var _base_highlight: Sprite2D
-var _barrel_highlight: Sprite2D
+var _parts: Array[Sprite2D] = []
+var _hover_material: ShaderMaterial
 var _grabbed: bool = false
 var _dragged: bool = false
 var _pointer_id: int = -1
@@ -45,26 +46,42 @@ func configure(ground_position: Vector2) -> void:
 
 func _part(file_name: String, at: Vector2, parent: Node) -> Sprite2D:
 	var part = Sprite2D.new()
-	part.texture = load("res://assets/cannon/" + file_name) as Texture2D
+	var source = "res://assets/cannon/" + file_name
+	var generated = source.get_basename() + ".webp"
+	part.texture = load(generated if ResourceLoader.exists(generated) else source) as Texture2D
 	part.centered = false
 	part.position = at
+	part.material = _hover_material
 	part.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	parent.add_child(part)
+	_parts.append(part)
 	return part
 
 
 func _ensure_visuals() -> void:
 	if is_instance_valid(_joint):
 		return
-	_base_highlight = _part("base-highlight.svg", Vector2(-55.0, -82.0), self)
-	_base_highlight.visible = false
+	var shader = Shader.new()
+	# Highlight the actual artwork's alpha edge, including replacement cannon art.
+	shader.code = """shader_type canvas_item;
+uniform bool selected = false;
+void fragment() {
+	vec4 pixel = texture(TEXTURE, UV);
+	vec2 step_uv = TEXTURE_PIXEL_SIZE * 2.0;
+	float inside = min(min(texture(TEXTURE, UV + vec2(step_uv.x, 0.0)).a,
+		texture(TEXTURE, UV - vec2(step_uv.x, 0.0)).a),
+		min(texture(TEXTURE, UV + vec2(0.0, step_uv.y)).a,
+		texture(TEXTURE, UV - vec2(0.0, step_uv.y)).a));
+	if (selected && pixel.a > 0.1 && inside < 0.5) pixel.rgb = vec3(1.0, 0.83, 0.32);
+	COLOR = pixel;
+}"""
+	_hover_material = ShaderMaterial.new()
+	_hover_material.shader = shader
 	_part("base.svg", Vector2(-51.0, -78.0), self)
 	_joint = Node2D.new()
 	_joint.name = "ElevationJoint"
 	_joint.position = PIVOT_OFFSET
 	add_child(_joint)
-	_barrel_highlight = _part("barrel-highlight.svg", Vector2(-108.0, -29.0), _joint)
-	_barrel_highlight.visible = false
 	_barrel = _part("barrel.svg", Vector2(-104.0, -25.0), _joint)
 	_part("trunnion.svg", PIVOT_OFFSET - Vector2(13.0, 13.0), self)
 
@@ -91,7 +108,13 @@ func _update_pose() -> void:
 		return
 	_joint.rotation = deg_to_rad(elevation_degrees)
 	_barrel.position = Vector2(-104.0 + _recoil, -25.0)
-	_barrel_highlight.position = Vector2(-108.0 + _recoil, -29.0)
+
+
+func visual_snapshot() -> Array:
+	var result: Array = []
+	for part in _parts:
+		result.append({"texture": part.texture.resource_path, "position": [part.global_position.x, part.global_position.y], "rotation": part.global_rotation, "scale": [part.global_scale.x, part.global_scale.y]})
+	return result
 
 
 func pivot_global() -> Vector2:
@@ -142,10 +165,8 @@ func _hit_test(world_position: Vector2) -> bool:
 
 
 func _update_highlight() -> void:
-	if is_instance_valid(_base_highlight):
-		var selected = enabled and (_hovered or _grabbed)
-		_base_highlight.visible = selected
-		_barrel_highlight.visible = selected
+	if _hover_material != null:
+		_hover_material.set_shader_parameter("selected", enabled and (_hovered or _grabbed))
 
 
 func _screen_to_world(screen_position: Vector2) -> Vector2:
@@ -167,10 +188,11 @@ func _begin_pointer(point: Vector2, pointer: int) -> bool:
 
 func _move_pointer(point: Vector2) -> void:
 	var delta = point - _press_position
-	if delta.length() > CLICK_SLOP:
+	if not _dragged and delta.length() > CLICK_SLOP:
 		_dragged = true
+		aim_dragged.emit()
 	if _dragged:
-		# Drag up raises the barrel; drag left increases the charge.
+		# Original controls: drag up raises elevation; drag left adds power.
 		set_aim(_press_elevation - delta.y * 0.35, _press_power - delta.x / 220.0)
 
 

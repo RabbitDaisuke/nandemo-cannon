@@ -10,6 +10,11 @@ const files=new Map();
 async function asset(name){
   name=name.replace(/^res:\/\//,'');
   if(files.has(name))return files.get(name);
+  if(!name.endsWith('.svg')){
+    const buffer=await sharp(path.join(root,name)).png().toBuffer(),info=await sharp(buffer).metadata();
+    const item={viewBox:[0,0,info.width,info.height],width:info.width,height:info.height,content:`<image href="data:image/png;base64,${buffer.toString('base64')}" width="${info.width}" height="${info.height}" style="image-rendering:pixelated"/>`};
+    files.set(name,item);return item;
+  }
   const source=await read(name);
   const viewBox=source.match(/viewBox="([^"]+)"/)[1].trim().split(/\s+/).map(Number);
   const width=Number(source.match(/\bwidth="([\d.]+)"/)?.[1]??viewBox[2]);
@@ -18,47 +23,72 @@ async function asset(name){
   const item={viewBox,width,height,content};files.set(name,item);return item;
 }
 function nested(item,x,y,width,height){return `<svg x="${x}" y="${y}" width="${width}" height="${height}" viewBox="${item.viewBox.join(' ')}" preserveAspectRatio="none" fill="none">${item.content}</svg>`;}
-const fontAdvances=new Map();
-for(const line of (await read('assets/font/fuhotoki-pixel.fnt')).split('\n')){
-  const id=line.match(/^char id=(\d+)/),advance=line.match(/xadvance=(\d+)/);
-  if(id&&advance)fontAdvances.set(Number(id[1]),Number(advance[1]));
+let font,definitions=[];
+const colorFilters=new Map();
+async function loadFont(name){
+  name=name.replace(/^res:\/\//,'');
+  const lines=(await read(name)).split('\n'),glyphs=new Map();
+  const fields=line=>Object.fromEntries([...line.matchAll(/(\w+)=(-?[\d.]+)/g)].map(m=>[m[1],Number(m[2])]));
+  for(const line of lines)if(line.startsWith('char ')){const glyph=fields(line);glyphs.set(glyph.id,glyph);}
+  const info=fields(lines.find(l=>l.startsWith('info ')));
+  const page=lines.find(l=>l.startsWith('page ')).match(/file="([^"]+)"/)[1];
+  const atlas=await asset(path.posix.join(path.posix.dirname(name),page));
+  definitions.push(`<g id="font-atlas">${atlas.content}</g>`);
+  return {size:info.size,lineHeight:fields(lines.find(l=>l.startsWith('common '))).lineHeight,glyphs};
+}
+function colorFilter(color){
+  if(colorFilters.has(color))return colorFilters.get(color);
+  const id=`ink-${colorFilters.size}`,hex=color.replace('#','');
+  const values=[0,2,4,6].map((offset,index)=>index===3&&hex.length<8?1:parseInt(hex.slice(offset,offset+2),16)/255);
+  definitions.push(`<filter id="${id}" color-interpolation-filters="sRGB"><feComponentTransfer>${['R','G','B','A'].map((c,i)=>`<feFunc${c} type="linear" slope="${values[i]}"/>`).join('')}</feComponentTransfer></filter>`);
+  colorFilters.set(color,id);return id;
 }
 async function text(value,rect,size=16,color='#fff0c8',align=0,outline=0,outlineColor='#081421'){
-  const scale=size/16,width=[...value].reduce((sum,char)=>sum+(fontAdvances.get(char.codePointAt(0))??9)*scale,0);
-  const x=rect[0]+(align===1?(rect[2]-width)/2:align===2?rect[2]-width:0),y=rect[1]+scale;
+  if(value.includes('\n')){
+    let output='';
+    for(const [index,line] of value.split('\n').entries())output+=await text(line,[rect[0],rect[1]+index*font.lineHeight*size/font.size,rect[2],rect[3]],size,color,align,outline,outlineColor);
+    return output;
+  }
+  const scale=size/font.size,width=[...value].reduce((sum,char)=>sum+(font.glyphs.get(char.codePointAt(0))?.xadvance??12)*scale,0);
+  const x=rect[0]+(align===1?(rect[2]-width)/2:align===2?rect[2]-width:0),y=rect[1];
   let paths='',cursor=0;
   for(const char of value){
-    const key='U'+char.codePointAt(0).toString(16).toUpperCase().padStart(4,'0');
-    const glyph=await asset(`assets/font/${key}.svg`);
-    paths+=`<g transform="translate(${cursor} 0)">${glyph.content.replace(/ color="#ffffff"/g,'')}</g>`;
-    cursor+=fontAdvances.get(char.codePointAt(0))??glyph.width+1;
+    const glyph=font.glyphs.get(char.codePointAt(0));
+    if(!glyph)throw new Error(`Font has no glyph ${JSON.stringify(char)} in ${JSON.stringify(value)}`);
+    if(glyph.width&&glyph.height)paths+=`<svg x="${x+(cursor+glyph.xoffset)*scale}" y="${y+glyph.yoffset*scale}" width="${glyph.width*scale}" height="${glyph.height*scale}" viewBox="${glyph.x} ${glyph.y} ${glyph.width} ${glyph.height}"><use href="#font-atlas"/></svg>`;
+    cursor+=glyph.xadvance;
   }
-  let output='';
-  if(outline>0){
-    const expanded=paths.replace(/stroke-width="([\d.]+)"/g,(_,w)=>`stroke-width="${Number(w)+2*outline/scale}"`);
-    output+=`<g color="${outlineColor}" transform="translate(${x} ${y}) scale(${scale})">${expanded}</g>`;
-  }
-  return output+`<g color="${color}" transform="translate(${x} ${y}) scale(${scale})">${paths}</g>`;
+  return `<g filter="url(#${colorFilter(color)})">${paths}</g>`;
 }
 function rectangle(rect,color,stroke='',strokeWidth=0){return `<rect x="${rect[0]}" y="${rect[1]}" width="${rect[2]}" height="${rect[3]}" fill="${color}"${stroke?` stroke="${stroke}" stroke-width="${strokeWidth}"`:''}/>`;}
 async function fitTexture(file,rect){
-  if(!file.endsWith('.svg'))return '';
   const image=await asset(file),scale=Math.min(rect[2]/image.width,rect[3]/image.height);
   return nested(image,rect[0]+(rect[2]-image.width*scale)/2,rect[1]+(rect[3]-image.height*scale)/2,image.width*scale,image.height*scale);
 }
 async function cannon(snapshot){
+  if(snapshot.cannonVisuals){
+    let output='';
+    for(const part of snapshot.cannonVisuals){
+      const item=await asset(part.texture);
+      output+=`<g transform="translate(${part.position.join(' ')}) rotate(${part.rotation*180/Math.PI}) scale(${part.scale.join(' ')})">${nested(item,0,0,item.width,item.height)}</g>`;
+    }
+    return output;
+  }
   const ground=snapshot.cannon,angle=snapshot.angle,recoil=snapshot.recoil??0;
   const base=await asset('assets/cannon/base.svg'),barrel=await asset('assets/cannon/barrel.svg'),cap=await asset('assets/cannon/trunnion.svg');
   return `<g transform="translate(${ground[0]} ${ground[1]})">${nested(base,-51,-78,150,78)}<g transform="translate(0 -55) rotate(${angle})">${nested(barrel,-104+recoil,-25,144,50)}</g>${nested(cap,-13,-68,26,26)}</g>`;
 }
 async function render(snapshot){
-  let output=nested(await asset(`assets/maps/${snapshot.map}.svg`),0,0,960,540);
+  definitions=[];colorFilters.clear();
+  font=await loadFont(snapshot.font??'assets/font/fuhotoki-pixel.fnt');
+  let output=nested(await asset(`assets/maps/${snapshot.map}.png`),0,0,960,540);
   if(snapshot.playable){
     const r=snapshot.scoreZone;
-    output+=rectangle(r,'#19f2e60b');
-    output+=`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" stroke="#44f4e9" stroke-width="3" stroke-dasharray="10 8" fill="none"/>`;
+    const points=snapshot.scoreMarker??[[r[0]+18,r[1]+r[3]-14],[r[0]+r[2]-18,r[1]+r[3]-14],[r[0]+r[2],r[1]+r[3]+8],[r[0],r[1]+r[3]+8]];
+    output+=`<polygon points="${points.map(p=>p.join(',')).join(' ')}" fill="#19f2e624" stroke="#44f4e9" stroke-width="3" stroke-dasharray="10 8"/>`;
   }
   for(const point of snapshot.trajectory??[])output+=rectangle([point[0]-2,point[1]-2,4,4],`rgba(255,235,166,${point[2]})`);
+  for(const points of snapshot.tutorialArrows??[])output+=`<polygon points="${points.map(p=>p.join(',')).join(' ')}" fill="#ffd36c" stroke="#080d14" stroke-width="3"/>`;
   output+=await cannon(snapshot);
   for(const actor of snapshot.actors){
     const sprite=await asset(actor.texture),p=actor.visualPosition,scale=actor.visualScale;
@@ -81,29 +111,35 @@ async function render(snapshot){
     const w=Math.min(92,Math.max(30,actor.record.worldWidth*0.9));
     output+=nested(fire,actor.x-w/2,actor.y-w,w,w);
   }
+  if(snapshot.loadedItem?.texture){
+    const loaded=snapshot.loadedItem,item=await asset(loaded.texture),w=item.width*loaded.scale[0],h=item.height*loaded.scale[1];
+    output+=nested(item,loaded.position[0]-w/2,loaded.position[1]-h/2,w,h);
+  }
   for(const c of snapshot.controls){
     const r=c.rect;
     if(c.type==='label')output+=await text(c.text,r,c.fontSize,'#'+c.color,c.align,c.outlineSize,'#'+c.outline);
     else if(c.type==='button'){
-      output+=rectangle(r,'#193346','#080f18',2);
+      output+=rectangle(r,'#'+(c.background??'193346'),'#'+(c.border??'080f18'),2);
       output+=await text(c.text,[r[0],r[1]+(r[3]-c.fontSize*1.25)/2,r[2],c.fontSize*1.25],c.fontSize,c.disabled?'#668091':'#f7e9ba',1);
     }else if(c.type==='texture')output+=await fitTexture(c.texture,r);
     else if(c.type==='slider'){
       const f=(c.value-c.minimum)/(c.maximum-c.minimum),cy=r[1]+r[3]/2;
-      output+=rectangle([r[0],cy-3,r[2],6],'#1b3040','#080f18',2);
-      output+=rectangle([r[0],cy-2,r[2]*f,4],'#d5a650');
-      output+=rectangle([r[0]+r[2]*f-5,cy-8,10,16],'#f5d077','#080f18',2);
+      const knobX=r[0]+8+(r[2]-16)*f;
+      output+=rectangle([r[0],cy-5,r[2],10],'#273944','#080d14',3);
+      output+=rectangle([r[0],cy-5,knobX-r[0],10],'#e8af45','#080d14',3);
+      output+=rectangle([knobX-8,cy-13,16,26],'#080d14');
+      output+=rectangle([knobX-5,cy-10,10,20],'#ffe09a');
     }else if(c.type==='rect')output+=rectangle(r,'#'+c.color);
     else if(c.type==='panel')output+=rectangle(r,'#142c3e','#080f18',4);
   }
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges">${output}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges"><defs>${definitions.join('')}</defs>${output}</svg>`;
 }
-const names=['01-initial','01-after-five','04-alley','16-ice'];
+const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result'];
 for(const name of names){
   const snapshot=JSON.parse(await read(`previews/game-state-${name}.json`));
   const svg=await render(snapshot);
   await fs.writeFile(path.join(root,`previews/game-${name}.svg`),svg);
   await sharp(Buffer.from(svg)).png().toFile(path.join(root,`previews/game-${name}.png`));
 }
-await fs.writeFile(path.join(root,'previews/game-preview-info.json'),JSON.stringify({source:'Godot 4.7.2 headless debug_snapshot from real physics and gameplay',renderer:'Node.js sharp: SVG sprites and custom SVG glyphs composed at recorded positions',browserUsed:false,engineFramebuffer:false,files:names.map(n=>`game-${n}.png`)},null,2));
-console.log('Rendered 4 game-state previews from real Godot physics snapshots, not browser screenshots.');
+await fs.writeFile(path.join(root,'previews/game-preview-info.json'),JSON.stringify({source:'Godot 4.7.2 headless debug_snapshot from real physics and gameplay',renderer:'Node.js sharp: actual sprite assets and custom FNT glyph atlas composed at recorded positions',browserUsed:false,engineFramebuffer:false,files:names.map(n=>`game-${n}.png`)},null,2));
+console.log(`Rendered ${names.length} game-state previews from real Godot physics snapshots, not browser screenshots or captured JPEGs.`);

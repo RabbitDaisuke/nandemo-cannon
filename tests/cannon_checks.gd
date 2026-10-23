@@ -89,7 +89,16 @@ func _run() -> void:
 	_mouse(moved, false)
 	await process_frame
 	_check(shots.size() == 1, "Aiming drag fired on release")
-	_check(cannon.elevation_degrees > 35.0 and cannon.power > 0.65, "Drag did not raise angle and power")
+	_check(cannon.elevation_degrees > 35.0 and cannon.power > 0.65, "Diagonal drag did not raise angle and power")
+	var drag_angle = cannon.elevation_degrees
+	var drag_power = cannon.power
+	_mouse(point, true)
+	_motion(point + Vector2(100, 0))
+	_mouse(point + Vector2(100, 0), false)
+	await process_frame
+	_check(is_equal_approx(cannon.elevation_degrees, drag_angle) and cannon.power < drag_power, "Rightward drag did not reduce power while retaining angle")
+	_check(shots.size() == 1, "Horizontal aiming drag fired on release")
+	var adjusted_power = cannon.power
 	_mouse(point, true)
 	_mouse(point, false)
 	await process_frame
@@ -101,6 +110,7 @@ func _run() -> void:
 	_mouse(point, false)
 	await process_frame
 	_check(shots.size() == 3, "Touch plus emulated mouse did not produce exactly one shot")
+	_check(is_equal_approx(cannon.power, adjusted_power), "Firing or recoil altered the adjusted power")
 	# A drag started on the cannon must end even when a GUI control consumes release.
 	await create_timer(0.8).timeout
 	var blocker = Button.new()
@@ -113,6 +123,7 @@ func _run() -> void:
 	await process_frame
 	_check(not cannon._grabbed, "Drag remained captured after release over HUD")
 	_check(shots.size() == 3, "Release over HUD fired an aiming drag")
+	_check(cannon.power > adjusted_power, "Leftward drag over the HUD did not finish adjusting power")
 	blocker.queue_free()
 	var result = {"suite": "cannon", "checks": checks, "failures": failures, "status": "passed" if failures.is_empty() else "failed"}
 	result["engine"] = Engine.get_version_info().string

@@ -36,7 +36,16 @@
 		"tutorial blast1 reaches every stacked crate only once",
 		"tutorial blast2 reaches every stacked crate only once",
 		"tutorial blast3 reaches every stacked crate only once",
-		"all six tutorial crates are removed after their third received blast"
+		"all six tutorial crates are removed after their third received blast",
+		"a launched firework physically hits the floor and remains solid before its fuse expires",
+		"the firework fuse does not burst early",
+		"a timed firework creates exactly one explosion after the fuse",
+		"fireworks reuse flammable-object ignition and finite animated fire patches",
+		"the timed blast pushes a surviving physical garage part",
+		"firework-rocket survives impact until its own fuse ends",
+		"firework-rocket bursts on its configured timer",
+		"firework-fountain survives impact until its own fuse ends",
+		"firework-fountain bursts on its configured timer"
 	],
 	"engine": "4.7.2-stable (official)",
 	"failures": [],

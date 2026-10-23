@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://yjpbk4s2dxfk"
+path="res://.godot/imported/arcade-generated.fnt-86bc168cd325d8265f7c9e1efb8a3d4c.fontdata"
+
+[deps]
+
+source_file="res://assets/font/arcade-generated.fnt"
+dest_files=["res://.godot/imported/arcade-generated.fnt-86bc168cd325d8265f7c9e1efb8a3d4c.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

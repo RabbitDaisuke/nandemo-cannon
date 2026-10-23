@@ -1,12 +1,14 @@
 {
   "source": "Godot 4.7.2 headless debug_snapshot from real physics and gameplay",
-  "renderer": "Node.js sharp: SVG sprites and custom SVG glyphs composed at recorded positions",
+  "renderer": "Node.js sharp: actual sprite assets and custom FNT glyph atlas composed at recorded positions",
   "browserUsed": false,
   "engineFramebuffer": false,
   "files": [
     "game-01-initial.png",
     "game-01-after-five.png",
     "game-04-alley.png",
-    "game-16-ice.png"
+    "game-18-ice.png",
+    "game-01-final-score.png",
+    "game-01-result.png"
   ]
 }

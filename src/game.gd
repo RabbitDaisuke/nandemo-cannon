@@ -1,31 +1,8 @@
 extends Node2D
 ## Game orchestration; physics, cannon, hazards and liquid have separate owners.
 
-const STAGE_NAMES = ["POC", "UNDERGROUND", "MOON", "ALLEY", "VOLCANO", "ROOFTOPS", "HOME", "PIRATE SHIP", "NINJA", "BOWLING", "RIVER", "WASHBASIN", "GAS STOVE", "IMPERIAL CASTLE", "SANDBOX", "ICE FLOOR", "HOLLOW DAIS", "OLD SUBWAY", "AQUEDUCT", "RUINED CASTLE"]
-const LESSONS = [
-	"LAND THE WHOLE OBJECT INSIDE THE CYAN ZONE.",
-	"FILL THE REAL UNDERGROUND CAVITY. STACK UPWARDS.",
-	"LOW GRAVITY. REDUCE POWER BEFORE YOU FIRE.",
-	"BURN THE TRASH. THEN USE WATER ON THE BURNING FLOOR.",
-	"PAPER BURNS AWAY. WATER AND ICE PUT OUT THE FIRE.",
-	"THE GAPS ARE ABYSSES. FALLEN ITEMS ARE LOST.",
-	"THE WASHER BLOCKS YOUR SHOT. KEEP THE EXISTING POINTS.",
-	"HIT THE CRATE PILE WITH ALL THREE BOMBS.",
-	"BELLS AND SHURIKEN HAVE ROUND COLLISION SHAPES.",
-	"KNOCK THE PINS OVER. KEEP YOUR ITEMS IN THE ZONE.",
-	"WATER SLOWS AND CARRIES ITEMS. TABLES RESIST THE FLOW.",
-	"THE TAP FILLS THE BASIN. THE WHOLE UMBRELLA REPELS WATER.",
-	"NO WATER. METAL PANS BLOCK HEAT FROM THE BURNERS.",
-	"FIRE WATER ICE WHEELS AND A HOLLOW CASTLE PLATFORM.",
-	"CHOOSE ANY OF THE 117 ITEMS. YOU STILL GET 15 SHOTS.",
-	"ALL ITEMS SLIDE. BOOT SOLES GRIP ICE. UPSIDE DOWN THEY SLIP.",
-	"MAP PREVIEW. THIS STAGE HAS NO GAME RULES YET.",
-	"MAP PREVIEW. THIS STAGE HAS NO GAME RULES YET.",
-	"MAP PREVIEW. THIS STAGE HAS NO GAME RULES YET.",
-	"MAP PREVIEW. THIS STAGE HAS NO GAME RULES YET."
-]
-
 var catalog = GameCatalog.new()
+var ui_text: Dictionary = {}
 var rng = RandomNumberGenerator.new()
 var seed_text: String = ""
 var stage_index: int = 0
@@ -55,12 +32,16 @@ var ui_root: Control
 var modal: Control
 var theme: Theme
 var score_label: Label
+var score_caption: Label
 var remaining_label: Label
 var stage_label: Label
 var lesson_label: Label
 var aim_label: Label
+var power_label: Label
 var next_name: Label
 var next_icon: TextureRect
+var loaded_icon: Sprite2D
+var loaded_label: Label
 var catalog_button: Button
 var power_slider: HSlider
 var angle_slider: HSlider
@@ -69,14 +50,35 @@ var destroyed_counts: Dictionary = {}
 var save_progress_enabled: bool = true
 var _web_document: JavaScriptObject
 var _visibility_callback: JavaScriptObject
+var shot_audio: AudioStreamPlayer
+var result_jpeg: PackedByteArray = PackedByteArray()
+var result_stage_name: String = ""
+var result_capture_status: String = "none"
+var _capture_generation: int = 0
+var _share_bridge: JavaScriptObject
+var tutorial_label: Label
+var tutorial_active: bool = false
+var tutorial_completed: bool = false
 
 func _ready() -> void:
+	var localized = JSON.parse_string(FileAccess.get_file_as_string("res://data/ui-ja.json"))
+	if localized is Dictionary:
+		ui_text = localized
+	if OS.has_feature("web"):
+		_share_bridge = JavaScriptBridge.get_interface("NandemoShare")
 	seed_text = "%08X%08X" % [randi(), randi()]
 	if FileAccess.file_exists("user://progress.json"):
 		var data = JSON.parse_string(FileAccess.get_file_as_string("user://progress.json"))
 		if data is Dictionary:
 			best_scores = data
 	_build_ui()
+	shot_audio = AudioStreamPlayer.new()
+	shot_audio.name = "CannonShotAudio"
+	shot_audio.volume_db = linear_to_db(0.25)
+	shot_audio.max_polyphony = 3
+	if ResourceLoader.exists("res://assets/audio/Onoma-Impact01-1.mp3"):
+		shot_audio.stream = load("res://assets/audio/Onoma-Impact01-1.mp3")
+	add_child(shot_audio)
 	load_stage(0)
 	if OS.has_feature("web"):
 		_web_document = JavaScriptBridge.get_interface("document")
@@ -94,9 +96,9 @@ func _on_web_visibility_changed(_arguments: Array) -> void:
 func _pause_for_visibility() -> void:
 	if simulation_paused or result_shown or not playable:
 		return
-	_open_modal("PAUSED", Vector2(440, 202))
-	_label("THE GAME WAS PAUSED WHILE HIDDEN.", Vector2(35, 68), 14, Color("b3dbea"), modal)
-	_button("RESUME", Vector2(130, 130), Vector2(180, 44), func(): _close_modal(), modal)
+	_open_modal("いちじていし", Vector2(440, 202))
+	_label("がめんを はなれたので とめています。", Vector2(35, 68), 14, Color("b3dbea"), modal)
+	_button("つづける", Vector2(130, 130), Vector2(180, 44), func(): _close_modal(), modal)
 
 func load_stage(index: int) -> void:
 	_close_modal(false)
@@ -150,8 +152,16 @@ func load_stage(index: int) -> void:
 	stage_root.add_child(cannon)
 	var ground = GameCatalog.vector(current_stage.get("cannon", [810, 420]))
 	cannon.configure(ground)
+	loaded_icon = Sprite2D.new()
+	loaded_icon.name = "LoadedItemPreview"
+	loaded_icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	loaded_icon.position = ground + Vector2(65, -94)
+	loaded_icon.z_index = 1
+	stage_root.add_child(loaded_icon)
+	loaded_label.position = ground + Vector2(42, -143)
 	cannon.fired.connect(_on_fired)
 	cannon.aim_changed.connect(_on_aim_changed)
+	cannon.aim_dragged.connect(_dismiss_tutorial)
 	# The light tutorial consumables otherwise overshoot their intended first target.
 	var initial_power = 0.22 if stage_index == 2 else (0.34 if stage_index in [3, 4] else 0.65)
 	cannon.set_aim(25.0 if stage_index == 2 else 35.0, initial_power)
@@ -172,9 +182,13 @@ func load_stage(index: int) -> void:
 			# Ordinary contact cannot bypass the three-explosion tutorial rule.
 			actor.spec["impactSpeed"] = 100000.0
 			actor.spec["loadForceThreshold"] = 100000000.0
-	stage_label.text = "%02d / %s" % [stage_index + 1, STAGE_NAMES[stage_index]]
-	lesson_label.text = LESSONS[stage_index]
-	catalog_button.visible = stage_index == 14
+	stage_label.text = "%02d / %s" % [stage_index + 1, _stage_display_name(stage_index)]
+	var lessons: Array = ui_text.get("lessons", [])
+	lesson_label.text = str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。"
+	catalog_button.visible = bool(current_stage.get("selectAnyCatalogItem", false))
+	tutorial_active = stage_index == 0 and not tutorial_completed
+	tutorial_label.position = ground + Vector2(-300, -72)
+	tutorial_label.visible = tutorial_active
 	_update_hud()
 	queue_redraw()
 
@@ -199,11 +213,25 @@ func _create_actor(record: Dictionary, at: Vector2) -> ThrowBody:
 	return actor
 
 func next_item_id() -> String:
-	if not playable or shots_fired >= 15:
+	# Kept as the gameplay API for the currently loaded object.
+	return _queued_item_id(0)
+
+func following_item_id() -> String:
+	return _queued_item_id(1)
+
+func _queued_item_id(offset: int) -> String:
+	if not playable or shots_fired + offset >= 15:
 		return ""
-	if stage_index == 14 and not selected_catalog_id.is_empty():
+	if bool(current_stage.get("selectAnyCatalogItem", false)) and not selected_catalog_id.is_empty():
 		return selected_catalog_id
-	return str(current_stage.queue[shots_fired])
+	return str(current_stage.queue[shots_fired + offset])
+
+func _stage_display_name(index: int) -> String:
+	var names: Array = ui_text.get("stages", [])
+	return str(names[index]) if index < names.size() else "ステージ %d" % (index + 1)
+
+func _item_display_name(id: String) -> String:
+	return str(ui_text.get("items", {}).get(id, "もの"))
 
 func launch_speed(record: Dictionary, power: float) -> float:
 	var mass_factor = clampf(pow(8.0 / float(record.mass), 0.2), 0.7, 1.35)
@@ -212,6 +240,7 @@ func launch_speed(record: Dictionary, power: float) -> float:
 func _on_fired(direction: Vector2, power: float, origin: Vector2) -> void:
 	if simulation_paused or result_shown or cooldown > 0.0 or next_item_id().is_empty():
 		return
+	_dismiss_tutorial()
 	var record: Dictionary = catalog.items[next_item_id()]
 	var actor = _create_actor(record, origin)
 	# The backmost fixture starts just outside the actual muzzle, even for large items.
@@ -222,9 +251,11 @@ func _on_fired(direction: Vector2, power: float, origin: Vector2) -> void:
 	actor.is_launched = true
 	actor.linear_velocity = direction * launch_speed(record, power)
 	actor.angular_velocity = rng.randf_range(-0.35, 0.35)
-	actor.can_score = not actor.behavior in ["water_release", "ignite_on_break", "explosion", "cold_release"]
+	actor.can_score = not actor.behavior in ["water_release", "ignite_on_break", "explosion", "cold_release", "firework"]
 	hazards.on_launch(actor)
 	shots_fired += 1
+	if shot_audio.stream != null:
+		shot_audio.play()
 	cooldown = 0.65
 	cannon.set_enabled(false)
 	spawn_effect("splash", origin, 0.3, Color(1.0, 0.9, 0.6))
@@ -289,7 +320,7 @@ func on_actor_impact(actor: ThrowBody, point: Vector2, normal_speed: float, ener
 		hazards.impact(actor, point, normal_speed, energy)
 
 func surface_friction_at(point: Vector2) -> float:
-	if stage_index == 15 and point.y >= 375.0:
+	if bool(current_stage.get("iceFloor", false)) and point.y >= 375.0:
 		return 0.025
 	return liquid.ice_friction(point) if is_instance_valid(liquid) else -1.0
 
@@ -329,18 +360,28 @@ func calculate_score() -> int:
 	return total
 
 func _update_hud() -> void:
-	score_value = calculate_score()
-	score_label.text = "仮得点 %04d" % score_value
-	remaining_label.text = "残り %02d/15" % maxi(0, 15 - shots_fired)
-	var next = next_item_id()
+	if not result_shown:
+		score_value = calculate_score()
+	score_caption.text = "さいしゅう得点" if result_shown else "仮得点"
+	score_label.text = "%04d" % score_value
+	remaining_label.text = "%02d/15" % maxi(0, 15 - shots_fired)
+	var next = following_item_id()
 	next_icon.texture = load("res://assets/" + str(catalog.items[next].svg)) if not next.is_empty() else null
-	next_name.text = next.replace("-", " ").to_upper() if not next.is_empty() else ("SETTLING" if not result_shown and playable else "")
+	next_name.text = _item_display_name(next) if not next.is_empty() else "おわり"
+	var loaded = next_item_id()
+	loaded_icon.visible = not loaded.is_empty()
+	loaded_label.visible = loaded_icon.visible
+	if loaded_icon.visible:
+		loaded_icon.texture = load("res://assets/" + str(catalog.items[loaded].svg))
+		var texture_size = loaded_icon.texture.get_size()
+		loaded_icon.scale = Vector2.ONE * minf(58.0 / texture_size.x, 58.0 / texture_size.y)
 	_on_aim_changed(cannon.elevation_degrees, cannon.power)
 
 func _on_aim_changed(angle: float, power: float) -> void:
 	if not is_instance_valid(aim_label):
 		return
-	aim_label.text = "角度 %02d°   火力 %02d%%" % [roundi(angle), roundi(power * 100)]
+	aim_label.text = "角度 %02d°" % roundi(angle)
+	power_label.text = "火力 %02d%%" % roundi(power * 100)
 	updating_sliders = true
 	angle_slider.value = angle
 	power_slider.value = power * 100.0
@@ -352,26 +393,75 @@ func _finish_stage(timed_out: bool) -> void:
 		return
 	score_value = calculate_score()
 	result_shown = true
+	_pause(true)
+	_update_hud()
+	result_jpeg = PackedByteArray()
+	result_stage_name = str(current_stage.get("nameJa", _stage_display_name(stage_index)))
+	_capture_generation += 1
+	var capture_generation = _capture_generation
 	var previous = int(best_scores.get(str(stage_index + 1), 0))
 	best_scores[str(stage_index + 1)] = maxi(previous, score_value)
 	if save_progress_enabled:
 		var file = FileAccess.open("user://progress.json", FileAccess.WRITE)
 		if file != null:
 			file.store_string(JSON.stringify(best_scores))
-	_open_modal("RESULT", Vector2(520, 314))
-	var score = _label("%04d" % score_value, Vector2(52, 64), 54, Color("ffd36c"), modal)
-	score.size.x = 416
+	# Capture the final-score game frame before any result overlay is created.
+	# Headless has no rendered framebuffer and must never await frame_post_draw.
+	result_capture_status = "headless" if DisplayServer.get_name() == "headless" else "pending"
+	if result_capture_status != "headless":
+		await RenderingServer.frame_post_draw
+		if capture_generation != _capture_generation or not is_inside_tree() or not result_shown:
+			return
+		var image = get_viewport().get_texture().get_image()
+		if image != null and not image.is_empty():
+			image.convert(Image.FORMAT_RGB8)
+			result_jpeg = image.save_jpg_to_buffer(0.85)
+		result_capture_status = "captured" if not result_jpeg.is_empty() else "unavailable"
+	_open_modal("けっか", Vector2(660, 450))
+	if _share_bridge != null:
+		_share_bridge.setResult(result_stage_name, score_value, Marshalls.raw_to_base64(result_jpeg))
+	var score = _label("%04d" % score_value, Vector2(52, 53), 54, Color("ffd36c"), modal)
+	score.size.x = 556
 	score.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_label("BEST %04d" % int(best_scores[str(stage_index + 1)]), Vector2(168, 134), 20, Color("b3dbea"), modal)
-	_label("MOVING ITEMS SNAPSHOT" if timed_out else "STACK SETTLED", Vector2(104, 171), 16, Color("edebd5"), modal)
-	_label("SEED " + seed_text, Vector2(90, 205), 14, Color("9fc4d2"), modal)
-	_button("RETRY", Vector2(40, 250), Vector2(130, 42), func(): load_stage(stage_index), modal)
-	_button("MAPS", Vector2(195, 250), Vector2(130, 42), _show_maps, modal)
-	var next = _button("NEXT", Vector2(350, 250), Vector2(130, 42), func(): load_stage(mini(15, stage_index + 1)), modal)
-	next.disabled = stage_index >= 15
+	var best = _label("ベスト %04d" % int(best_scores[str(stage_index + 1)]), Vector2(50, 120), 20, Color("b3dbea"), modal)
+	best.size.x = 560
+	best.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var status = _label("じかんぎれで 得点をかくてい" if timed_out else "すべてのものが おちつきました", Vector2(35, 153), 16, Color("edebd5"), modal)
+	status.size.x = 590
+	status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var seed = _label("シード " + seed_text, Vector2(50, 183), 14, Color("9fc4d2"), modal)
+	seed.size.x = 560
+	seed.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var post = _button("X でポスト", Vector2(50, 221), Vector2(560, 44), func():
+		if _share_bridge != null:
+			_share_bridge.tweet(), modal)
+	post.set_meta("share_action", "tweet")
+	post.add_theme_font_size_override("font_size", 24)
+	post.disabled = _share_bridge == null
+	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
+		var black = StyleBoxFlat.new()
+		black.bg_color = Color("181818") if state in ["hover", "pressed"] else Color("080808")
+		black.border_color = Color("fff0c8") if state == "focus" else Color("000000")
+		black.set_border_width_all(2)
+		post.add_theme_stylebox_override(state, black)
+	var image_share = _share_bridge != null and bool(_share_bridge.canShareImage())
+	var save = _button("がぞうをほぞん", Vector2(50, 278), Vector2(270 if image_share else 560, 36), func():
+		if _share_bridge != null:
+			_share_bridge.download(), modal)
+	save.set_meta("share_action", "download")
+	save.disabled = _share_bridge == null or result_jpeg.is_empty()
+	if image_share:
+		_button("がぞうつきでシェア", Vector2(340, 278), Vector2(270, 36), func(): _share_bridge.shareImage(), modal)
+	_label("がぞうは ほぞんして X にそえてください。", Vector2(50, 326), 13, Color("b3dbea"), modal)
+	_button("やりなおす", Vector2(45, 385), Vector2(180, 42), func(): load_stage(stage_index), modal)
+	_button("マップ", Vector2(240, 385), Vector2(180, 42), _show_maps, modal)
+	var next = _button("つぎへ", Vector2(435, 385), Vector2(180, 42), func(): load_stage(mini(catalog.stages.size() - 1, stage_index + 1)), modal)
+	next.disabled = stage_index >= catalog.stages.size() - 1
 
 func _pause(value: bool) -> void:
 	simulation_paused = value
+	if is_instance_valid(tutorial_label):
+		tutorial_label.visible = tutorial_active and not value
 	for actor in actors:
 		if is_instance_valid(actor) and actor.alive:
 			actor.freeze = value
@@ -396,9 +486,14 @@ func _open_modal(title: String, size_value: Vector2 = Vector2(864, 430)) -> void
 	shade.add_child(modal)
 	_label(title, Vector2(22, 14), 22, Color("ffd36c"), modal)
 	if not result_shown:
-		_button("X", Vector2(size_value.x - 52, 9), Vector2(36, 32), func(): _close_modal(), modal)
+		_button("とじる", Vector2(size_value.x - 92, 9), Vector2(76, 32), func(): _close_modal(), modal)
 
 func _close_modal(resume: bool = true) -> void:
+	_capture_generation += 1
+	if result_capture_status == "pending":
+		result_capture_status = "cancelled"
+	if _share_bridge != null:
+		_share_bridge.hideResult()
 	if is_instance_valid(modal):
 		var shade = modal.get_parent()
 		shade.get_parent().remove_child(shade)
@@ -408,8 +503,8 @@ func _close_modal(resume: bool = true) -> void:
 		_pause(false)
 
 func _show_maps() -> void:
-	_open_modal("MAPS / 16 STAGES + 4 PREVIEWS")
-	for index in range(20):
+	_open_modal("ステージをえらぶ / %d" % catalog.stages.size())
+	for index in range(catalog.stages.size()):
 		var col = index % 5
 		var row = index / 5
 		var at = Vector2(22 + col * 166, 54 + row * 86)
@@ -423,15 +518,17 @@ func _show_maps() -> void:
 		preview.size = Vector2(148, 48)
 		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(preview)
-		var text = "%02d %s" % [index + 1, STAGE_NAMES[index]]
-		var caption = _label(text, Vector2(5, 55), 10, Color("fff0b5") if index < 16 else Color("9ab6c5"), button)
+		var text = "%02d %s" % [index + 1, _stage_display_name(index)]
+		var caption = _label(text, Vector2(5, 55), 10, Color("fff0b5"), button)
 		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_label("17-20 ARE MAP PREVIEWS. RULES ARE NOT SET.", Vector2(23, 403), 12, Color("b5cad2"), modal)
+	_label("1ステージに なげられるのは15こ。", Vector2(23, 403), 12, Color("b5cad2"), modal)
 
 func _show_catalog(page: int = 0) -> void:
-	if stage_index != 14:
+	if not bool(current_stage.get("selectAnyCatalogItem", false)):
 		return
-	_open_modal("CHOOSE NEXT ITEM / %03d" % catalog.ordered_items.size())
+	var pages = ceili(catalog.ordered_items.size() / 24.0)
+	page = clampi(page, 0, pages - 1)
+	_open_modal("なげるもの / %03dしゅるい" % catalog.ordered_items.size())
 	for slot in range(24):
 		var index = page * 24 + slot
 		if index >= catalog.ordered_items.size():
@@ -451,16 +548,16 @@ func _show_catalog(page: int = 0) -> void:
 		icon.size = Vector2(46, 43)
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(icon)
-		var caption = _label(str(item.id).replace("-", " ").to_upper(), Vector2(3, 50), 10, Color("f7e9ba"), button)
+		var caption = _label(_item_display_name(str(item.id)), Vector2(3, 50), 10, Color("f7e9ba"), button)
 		caption.size = Vector2(124, 18)
 		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_button("PREV", Vector2(22, 374), Vector2(104, 34), func(): _show_catalog(maxi(0, page - 1)), modal).disabled = page == 0
-	_label("PAGE %d / 5" % (page + 1), Vector2(359, 382), 14, Color("b3dbea"), modal)
-	_button("NEXT", Vector2(738, 374), Vector2(104, 34), func(): _show_catalog(mini(4, page + 1)), modal).disabled = page == 4
+	_button("まえへ", Vector2(22, 374), Vector2(104, 34), func(): _show_catalog(maxi(0, page - 1)), modal).disabled = page == 0
+	_label("%d / %d ページ" % [page + 1, pages], Vector2(346, 382), 14, Color("b3dbea"), modal)
+	_button("つぎへ", Vector2(738, 374), Vector2(104, 34), func(): _show_catalog(mini(pages - 1, page + 1)), modal).disabled = page == pages - 1
 
 func _show_seed() -> void:
-	_open_modal("SEED", Vector2(530, 235))
-	_label("SAME SEED REPEATS THE RANDOM DRAWS.", Vector2(30, 60), 14, Color("b3dbea"), modal)
+	_open_modal("シード", Vector2(530, 235))
+	_label("おなじシードで もういちどためせます。", Vector2(30, 60), 14, Color("b3dbea"), modal)
 	var edit = LineEdit.new()
 	edit.position = Vector2(54, 100)
 	edit.size = Vector2(422, 40)
@@ -469,7 +566,7 @@ func _show_seed() -> void:
 	edit.theme = theme
 	edit.add_theme_font_size_override("font_size", 24)
 	modal.add_child(edit)
-	_button("APPLY + RETRY", Vector2(130, 166), Vector2(270, 44), func():
+	_button("このシードで やりなおす", Vector2(130, 166), Vector2(270, 44), func():
 		var cleaned = ""
 		for character in edit.text.to_upper():
 			if "0123456789ABCDEF".contains(character):
@@ -479,7 +576,8 @@ func _show_seed() -> void:
 
 func _build_ui() -> void:
 	theme = Theme.new()
-	theme.default_font = load("res://assets/font/fuhotoki-pixel.fnt")
+	var generated_font = "res://assets/font/arcade-generated.fnt"
+	theme.default_font = load(generated_font if ResourceLoader.exists(generated_font) else "res://assets/font/fuhotoki-pixel.fnt")
 	theme.default_font_size = 16
 	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
 		var style = StyleBoxFlat.new()
@@ -497,40 +595,76 @@ func _build_ui() -> void:
 	theme.set_color("font_color", "Button", Color("f7e9ba"))
 	theme.set_color("font_hover_color", "Button", Color("ffd36c"))
 	theme.set_color("font_disabled_color", "Button", Color("668091"))
+	for kind in ["slider", "grabber_area", "grabber_area_highlight"]:
+		var track = StyleBoxFlat.new()
+		track.bg_color = Color("273944") if kind == "slider" else Color("e8af45")
+		track.border_color = Color("080d14")
+		track.set_border_width_all(3)
+		track.content_margin_top = 5
+		track.content_margin_bottom = 5
+		theme.set_stylebox(kind, "HSlider", track)
+	var knob_image = Image.create(16, 26, false, Image.FORMAT_RGBA8)
+	knob_image.fill(Color("080d14"))
+	knob_image.fill_rect(Rect2i(3, 3, 10, 20), Color("ffe09a"))
+	var knob = ImageTexture.create_from_image(knob_image)
+	for kind in ["grabber", "grabber_highlight", "grabber_disabled"]:
+		theme.set_icon(kind, "HSlider", knob)
 	ui = CanvasLayer.new()
 	add_child(ui)
 	ui_root = Control.new()
 	ui_root.size = Vector2(960, 540)
 	ui_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	ui_root.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	ui_root.theme = theme
 	ui.add_child(ui_root)
-	_label("なんでもキャノン", Vector2(14, 9), 24, Color("ffd36c"))
-	score_label = _label("仮得点 0000", Vector2(280, 12), 20)
-	remaining_label = _label("残り 15/15", Vector2(455, 12), 20)
-	_label("次", Vector2(614, 12), 20)
+	if ResourceLoader.exists("res://assets/ui/logo.webp"):
+		var logo = TextureRect.new()
+		logo.name = "GameLogo"
+		logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		logo.texture = load("res://assets/ui/logo.webp")
+		logo.position = Vector2(14, 10)
+		logo.size = Vector2(260, 60)
+		logo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		ui_root.add_child(logo)
+	else:
+		_label("なんでもキャノン", Vector2(14, 18), 28, Color("ffd36c"))
+	score_caption = _label("仮得点", Vector2(302, 8), 20)
+	score_label = _label("0000", Vector2(302, 30), 36, Color("ffd36c"))
+	_label("残り", Vector2(462, 8), 20)
+	remaining_label = _label("15/15", Vector2(462, 33), 32)
+	_label("つぎ", Vector2(624, 12), 20)
 	next_icon = TextureRect.new()
-	next_icon.position = Vector2(646, 4)
-	next_icon.size = Vector2(42, 42)
+	next_icon.position = Vector2(704, 7)
+	next_icon.size = Vector2(62, 62)
 	next_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	next_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	next_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ui_root.add_child(next_icon)
-	next_name = _label("", Vector2(618, 48), 10, Color("fff0b5"))
-	_button("MAP", Vector2(713, 8), Vector2(70, 33), _show_maps)
-	_button("RETRY", Vector2(790, 8), Vector2(83, 33), func(): load_stage(stage_index))
-	_button("SEED", Vector2(880, 8), Vector2(68, 33), _show_seed)
-	stage_label = _label("", Vector2(16, 48), 13, Color("c8e5ed"))
+	next_name = _label("", Vector2(620, 75), 10, Color("fff0b5"))
+	next_name.size.x = 172
+	next_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_button("マップ", Vector2(804, 10), Vector2(64, 32), _show_maps)
+	_button("シード", Vector2(876, 10), Vector2(72, 32), _show_seed)
+	_button("やりなおす", Vector2(804, 50), Vector2(144, 32), func(): load_stage(stage_index))
+	stage_label = _label("", Vector2(18, 77), 15, Color("fff0b5"))
 	lesson_label = _label("", Vector2(16, 515), 13, Color("fff0b5"))
-	aim_label = _label("", Vector2(708, 116), 16, Color("fff0b5"))
-	angle_slider = _slider(Vector2(716, 151), 5.0, 85.0, 35.0, func(value):
+	aim_label = _label("", Vector2(720, 115), 26)
+	angle_slider = _slider(Vector2(720, 155), 5.0, 85.0, 35.0, func(value):
 		if not updating_sliders and is_instance_valid(cannon):
+			_dismiss_tutorial()
 			cannon.set_aim(value, cannon.power))
-	power_slider = _slider(Vector2(716, 185), 15.0, 100.0, 65.0, func(value):
+	power_label = _label("", Vector2(720, 193), 26, Color("ffd36c"))
+	power_slider = _slider(Vector2(720, 233), 15.0, 100.0, 65.0, func(value):
 		if not updating_sliders and is_instance_valid(cannon):
+			_dismiss_tutorial()
 			cannon.set_aim(cannon.elevation_degrees, value / 100.0))
-	_label("ドラッグで調整", Vector2(720, 224), 13, Color("c8e5ed"))
-	_label("クリックで発射", Vector2(720, 245), 13, Color("c8e5ed"))
-	catalog_button = _button("ITEM", Vector2(846, 282), Vector2(94, 34), func(): _show_catalog())
+	_label("ひだり・みぎキーで火力", Vector2(720, 263), 10, Color("fff0b5"))
+	loaded_label = _label("いま", Vector2.ZERO, 12, Color("ffd36c"))
+	_label("ドラッグで調整・クリックで発射", Vector2(686, 477), 16)
+	catalog_button = _button("もの", Vector2(846, 435), Vector2(94, 34), func(): _show_catalog())
+	tutorial_label = _label("たてドラッグで角度\nよこドラッグで火力\nクリックで発射", Vector2.ZERO, 16, Color("ffd36c"))
+	tutorial_label.visible = false
 
 func _slider(at: Vector2, minimum: float, maximum: float, initial: float, callback: Callable) -> HSlider:
 	var slider = HSlider.new()
@@ -553,7 +687,8 @@ func _label(text_value: String, at: Vector2, font_size: int, color_value: Color 
 	label.add_theme_font_size_override("font_size", font_size)
 	label.add_theme_color_override("font_color", color_value)
 	label.add_theme_color_override("font_outline_color", Color("081421"))
-	label.add_theme_constant_override("outline_size", 2 if font_size >= 20 else 1)
+	# Generated glyphs already include the bold black outline.
+	label.add_theme_constant_override("outline_size", 0 if theme.default_font.resource_path.ends_with("arcade-generated.fnt") else (2 if font_size >= 20 else 1))
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	(parent if parent != null else ui_root).add_child(label)
 	return label
@@ -576,6 +711,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if event.keycode == KEY_ESCAPE and not result_shown:
 			_close_modal()
 		return
+	if event.keycode in [KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT]:
+		_dismiss_tutorial()
 	match event.keycode:
 		KEY_UP:
 			cannon.set_aim(cannon.elevation_degrees + 2.0, cannon.power)
@@ -595,8 +732,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _draw() -> void:
 	if not is_instance_valid(cannon) or not playable:
 		return
-	draw_rect(score_zone, Color(0.1, 0.95, 0.9, 0.045))
-	var corners = [score_zone.position, Vector2(score_zone.end.x, score_zone.position.y), score_zone.end, Vector2(score_zone.position.x, score_zone.end.y)]
+	var corners = _score_marker()
+	draw_colored_polygon(corners, Color(0.1, 0.95, 0.9, 0.14))
 	for index in range(4):
 		var a: Vector2 = corners[index]
 		var b: Vector2 = corners[(index + 1) % 4]
@@ -604,6 +741,11 @@ func _draw() -> void:
 		var direction = (b - a).normalized()
 		for start in range(0, int(length), 18):
 			draw_line(a + direction * start, a + direction * minf(start + 10, length), Color("44f4e9"), 3.0, false)
+	for arrow in _tutorial_arrows():
+		draw_colored_polygon(arrow, Color("ffd36c"))
+		var border: PackedVector2Array = arrow.duplicate()
+		border.append(arrow[0])
+		draw_polyline(border, Color("080d14"), 3.0)
 	var next = next_item_id()
 	if next.is_empty() or simulation_paused:
 		return
@@ -618,14 +760,53 @@ func _draw() -> void:
 			break
 		draw_rect(Rect2(point - Vector2(2, 2), Vector2(4, 4)), Color(1.0, 0.92, 0.65, 1.0 - float(step) * 0.06))
 
-func debug_snapshot() -> Dictionary:
+func _score_marker() -> PackedVector2Array:
+	var left = score_zone.position.x
+	var right = score_zone.end.x
+	var floor_y = score_zone.end.y
+	return PackedVector2Array([Vector2(left + 18, floor_y - 14), Vector2(right - 18, floor_y - 14), Vector2(right, floor_y + 8), Vector2(left, floor_y + 8)])
+
+func _dismiss_tutorial() -> void:
+	if not tutorial_active:
+		return
+	tutorial_completed = true
+	tutorial_active = false
+	tutorial_label.hide()
+	queue_redraw()
+
+func _tutorial_arrows() -> Array:
+	var arrows: Array = []
+	if not tutorial_active or simulation_paused or not is_instance_valid(cannon):
+		return arrows
+	var center = cannon.position + Vector2(10, -30)
+	for direction in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]:
+		var side = Vector2(-direction.y, direction.x)
+		var start = center + direction * 40.0
+		var tip = center + direction * (80.0 if direction == Vector2.DOWN else 110.0)
+		var neck = tip - direction * 16.0
+		arrows.append(PackedVector2Array([tip, neck + side * 10.0, neck + side * 4.0, start + side * 4.0, start - side * 4.0, neck - side * 4.0, neck - side * 10.0]))
+	return arrows
+
+func debug_snapshot(include_modal: bool = true) -> Dictionary:
+	var tutorial_arrows: Array = []
+	for arrow in _tutorial_arrows():
+		var points: Array = []
+		for point in arrow:
+			points.append([point.x, point.y])
+		tutorial_arrows.append(points)
+	var marker: Array = []
+	for point in _score_marker():
+		marker.append([point.x, point.y])
+	var loaded: Dictionary = {}
+	if loaded_icon.visible:
+		loaded = {"id": next_item_id(), "texture": loaded_icon.texture.resource_path, "position": [loaded_icon.position.x, loaded_icon.position.y], "scale": [loaded_icon.scale.x, loaded_icon.scale.y]}
 	var entries: Array = []
 	for actor in actors:
 		if not is_instance_valid(actor) or not actor.alive:
 			continue
 		entries.append({"id": actor.item_id, "x": actor.position.x, "y": actor.position.y, "rotation": actor.rotation, "record": actor.record, "burning": actor.burning, "frozen": actor.frozen_seconds, "fuel": actor.fuel_seconds, "texture": actor.visual.texture.resource_path, "visualPosition": [actor.visual.position.x, actor.visual.position.y], "visualScale": [actor.visual.scale.x, actor.visual.scale.y], "tint": actor.visual.modulate.to_html(), "canScore": actor.can_score})
 	var controls: Array = []
-	_snapshot_controls(ui_root, controls)
+	_snapshot_controls(ui_root, controls, include_modal)
 	var patches: Array = []
 	for patch in hazards.patches:
 		patches.append({"x": patch.point.x, "y": patch.point.y, "radius": patch.radius, "source": patch.source})
@@ -652,9 +833,11 @@ func debug_snapshot() -> Dictionary:
 			if point.y > 500 or point.x < 0:
 				break
 			trajectory.append([point.x, point.y, 1.0 - step * 0.06])
-	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "score": calculate_score(), "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate()}
+	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "scoreMarker": marker, "score": score_value if result_shown else calculate_score(), "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "cannonVisuals": cannon.visual_snapshot(), "loadedItem": loaded, "followingItem": following_item_id(), "font": theme.default_font.resource_path, "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "tutorialArrows": tutorial_arrows, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate()}
 
-func _snapshot_controls(node: Node, output: Array) -> void:
+func _snapshot_controls(node: Node, output: Array, include_modal: bool = true) -> void:
+	if not include_modal and is_instance_valid(modal) and node == modal.get_parent():
+		return
 	if node is Control and not node.is_visible_in_tree():
 		return
 	if node is Control:
@@ -663,7 +846,8 @@ func _snapshot_controls(node: Node, output: Array) -> void:
 		if node is Label:
 			entry.merge({"type": "label", "text": node.text, "fontSize": node.get_theme_font_size("font_size"), "color": node.get_theme_color("font_color").to_html(), "outline": node.get_theme_color("font_outline_color").to_html(), "outlineSize": node.get_theme_constant("outline_size"), "align": node.horizontal_alignment})
 		elif node is Button:
-			entry.merge({"type": "button", "text": node.text, "fontSize": node.get_theme_font_size("font_size"), "disabled": node.disabled})
+			var style = node.get_theme_stylebox("disabled" if node.disabled else "normal") as StyleBoxFlat
+			entry.merge({"type": "button", "text": node.text, "fontSize": node.get_theme_font_size("font_size"), "disabled": node.disabled, "background": style.bg_color.to_html() if style != null else "193346ff", "border": style.border_color.to_html() if style != null else "080f18ff"})
 		elif node is HSlider:
 			entry.merge({"type": "slider", "value": node.value, "minimum": node.min_value, "maximum": node.max_value})
 		elif node is TextureRect and node.texture != null:
@@ -675,4 +859,4 @@ func _snapshot_controls(node: Node, output: Array) -> void:
 		if entry.has("type"):
 			output.append(entry)
 	for child in node.get_children():
-		_snapshot_controls(child, output)
+		_snapshot_controls(child, output, include_modal)

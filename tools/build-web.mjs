@@ -140,23 +140,15 @@ for (const name of await fs.readdir(stage)) {
   if (/^index\.(js|wasm|audio\..*\.js)$/.test(name)) continue;
   await fs.copyFile(path.join(stage, name), path.join(standalone, name));
 }
-async function svgText(text, color) {
-  let x = 0, content = '';
-  for (const char of text) {
-    const glyph = await fs.readFile(path.join(root, 'assets/font', `U${char.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')}.svg`), 'utf8');
-    const box = glyph.match(/viewBox="([^"]+)"/)[1].split(' ').map(Number);
-    content += `<g transform="translate(${x} 0)">${glyph.replace(/<svg\b[^>]*>/, '').replace(/<\/svg>\s*$/, '').replaceAll('#ffffff', color)}</g>`;
-    x += box[2] + 3;
-  }
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${x - 3} 18" shape-rendering="crispEdges">${content}</svg>`;
-}
-await fs.writeFile(path.join(standalone, 'title.svg'), await svgText('なんでもキャノン', '#ffffff'));
-await fs.writeFile(path.join(standalone, 'start.svg'), await svgText('START', '#152536'));
+await fs.copyFile(path.join(root, 'assets/ui/logo.webp'), path.join(standalone, 'logo.webp'));
+await fs.copyFile(path.join(root, 'assets/ui/start.webp'), path.join(standalone, 'start.webp'));
 await fs.copyFile(path.join(root, 'previews/game-01-initial.png'), path.join(standalone, 'opening.png'));
 await fs.copyFile(path.join(root, 'web/third-party-licenses.txt'), path.join(standalone, 'third-party-licenses.txt'));
 await fs.copyFile(path.join(root, 'LICENSE'), path.join(standalone, 'LICENSE'));
 await writeRuntimeLicenses(root, standalone);
+await fs.copyFile(path.join(root, 'web/licenses/otologic.txt'), path.join(standalone, 'licenses/otologic.txt'));
 await fs.copyFile(path.join(root, 'web/wasm-loader.mjs'), path.join(standalone, 'wasm-loader.mjs'));
+await fs.copyFile(path.join(root, 'web/share.mjs'), path.join(standalone, 'share.mjs'));
 await fs.writeFile(path.join(standalone, 'runtime.json'), JSON.stringify(runtimeSettings));
 if (mode !== 'source') await fs.cp(path.join(root, 'out/runtime'), path.join(standalone, 'runtime'), {recursive: true});
 const html = await fs.readFile(path.join(standalone, 'index.html'), 'utf8');

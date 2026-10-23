@@ -1,10 +1,7 @@
 {
   "schemaVersion": 1,
   "bodyKind": "static",
-  "sourceAliases": {
-    "16-subway-candidate": "18-subway-candidate",
-    "18-ice-store-candidate": "16-ice-floor"
-  },
+  "sourceAliases": {},
   "maps": [
     {
       "id": "01-poc",
@@ -565,11 +562,123 @@
       "backgroundCollision": false
     },
     {
-      "id": "16-ice-floor",
+      "id": "16-restaurant",
       "stage": 16,
+      "nameJa": "レストラン 凹んだ皿",
+      "status": "specified",
+      "svg": "maps/16-restaurant.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            478,
+            960,
+            62
+          ]
+        },
+        {
+          "polygon": [
+            [
+              80,
+              382
+            ],
+            [
+              110,
+              382
+            ],
+            [
+              150,
+              438
+            ],
+            [
+              510,
+              438
+            ],
+            [
+              550,
+              382
+            ],
+            [
+              580,
+              382
+            ],
+            [
+              530,
+              462
+            ],
+            [
+              130,
+              462
+            ]
+          ]
+        },
+        {
+          "rect": [
+            230,
+            462,
+            200,
+            16
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "17-garage",
+      "stage": 17,
+      "nameJa": "ガレージ",
+      "status": "specified",
+      "svg": "maps/17-garage.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            452,
+            960,
+            88
+          ]
+        },
+        {
+          "rect": [
+            90,
+            390,
+            430,
+            24
+          ]
+        },
+        {
+          "rect": [
+            110,
+            414,
+            32,
+            38
+          ]
+        },
+        {
+          "rect": [
+            468,
+            414,
+            32,
+            38
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "18-ice-floor",
+      "stage": 18,
       "nameJa": "氷床 靴を足場に",
       "status": "specified",
-      "svg": "maps/16-ice-floor.svg",
+      "svg": "maps/18-ice-floor.svg",
       "worldSize": [
         960,
         540
@@ -600,14 +709,15 @@
           ]
         }
       ],
-      "backgroundCollision": false
+      "backgroundCollision": false,
+      "assignment": "implementation-assumption: preserve original ice stage at 18; latest user did not specify stage18"
     },
     {
-      "id": "17-hollow-dais-candidate",
-      "stage": 17,
-      "nameJa": "候補 空洞の台座",
-      "status": "candidate-art-only",
-      "svg": "maps/17-hollow-dais-candidate.svg",
+      "id": "19-festival",
+      "stage": 19,
+      "nameJa": "祭り 花火と紅白の台",
+      "status": "specified",
+      "svg": "maps/19-festival.svg",
       "worldSize": [
         960,
         540
@@ -616,223 +726,87 @@
         {
           "rect": [
             0,
-            426,
+            452,
             960,
-            114
+            88
           ]
         },
         {
           "rect": [
-            136,
-            336,
-            324,
-            32
+            84,
+            386,
+            470,
+            66
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "20-laboratory",
+      "stage": 20,
+      "nameJa": "なんでも実験室",
+      "status": "specified",
+      "svg": "maps/20-laboratory.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            452,
+            190,
+            88
           ]
         },
         {
           "rect": [
-            136,
-            368,
-            38,
-            116
-          ]
-        },
-        {
-          "rect": [
-            422,
-            368,
-            38,
-            116
-          ]
-        },
-        {
-          "rect": [
-            136,
-            484,
-            324,
+            190,
+            510,
+            290,
             30
           ]
-        }
-      ],
-      "backgroundCollision": false
-    },
-    {
-      "id": "18-subway-candidate",
-      "stage": 18,
-      "nameJa": "候補 地下鉄跡",
-      "status": "candidate-art-only",
-      "svg": "maps/18-subway-candidate.svg",
-      "worldSize": [
-        960,
-        540
-      ],
-      "terrain": [
+        },
         {
           "rect": [
-            0,
-            428,
-            400,
-            112
+            480,
+            452,
+            480,
+            88
           ]
         },
         {
           "rect": [
-            640,
-            428,
-            320,
-            112
+            92,
+            360,
+            150,
+            22
           ]
         },
         {
           "rect": [
-            400,
-            540,
-            240,
-            24
-          ]
-        }
-      ],
-      "backgroundCollision": false
-    },
-    {
-      "id": "19-aqueduct-candidate",
-      "stage": 19,
-      "nameJa": "候補 水道橋",
-      "status": "candidate-art-only",
-      "svg": "maps/19-aqueduct-candidate.svg",
-      "worldSize": [
-        960,
-        540
-      ],
-      "terrain": [
-        {
-          "rect": [
-            80,
-            194,
-            700,
-            38
+            92,
+            382,
+            22,
+            70
           ]
         },
         {
           "rect": [
-            104,
-            232,
-            46,
-            208
+            220,
+            382,
+            22,
+            70
           ]
         },
         {
           "rect": [
-            304,
-            232,
-            46,
-            208
-          ]
-        },
-        {
-          "rect": [
-            504,
-            232,
-            46,
-            208
-          ]
-        },
-        {
-          "rect": [
-            704,
-            232,
-            46,
-            208
-          ]
-        },
-        {
-          "rect": [
-            0,
-            440,
-            260,
-            100
-          ]
-        },
-        {
-          "rect": [
-            560,
-            440,
-            400,
-            100
-          ]
-        }
-      ],
-      "backgroundCollision": false
-    },
-    {
-      "id": "20-ruined-castle-candidate",
-      "stage": 20,
-      "nameJa": "候補 崩れた古城",
-      "status": "candidate-art-only",
-      "svg": "maps/20-ruined-castle-candidate.svg",
-      "worldSize": [
-        960,
-        540
-      ],
-      "terrain": [
-        {
-          "polygon": [
-            [
-              0,
-              450
-            ],
-            [
-              150,
-              450
-            ],
-            [
-              150,
-              420
-            ],
-            [
-              300,
-              420
-            ],
-            [
-              300,
-              468
-            ],
-            [
-              456,
-              468
-            ],
-            [
-              456,
-              410
-            ],
-            [
-              560,
-              410
-            ],
-            [
-              560,
-              460
-            ],
-            [
-              700,
-              460
-            ],
-            [
-              700,
-              422
-            ],
-            [
-              960,
-              422
-            ],
-            [
-              960,
-              540
-            ],
-            [
-              0,
-              540
-            ]
+            520,
+            408,
+            130,
+            18
           ]
         }
       ],

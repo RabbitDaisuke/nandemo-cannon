@@ -19,6 +19,7 @@ class InteractionWorld:
 	var hazards: HazardSystem
 	var destroyed: Array[Dictionary] = []
 	var effects: Array[String] = []
+	var impacts: Array[Dictionary] = []
 	func surface_friction_at(point: Vector2) -> float:
 		return liquid.ice_friction(point)
 	func cast_solid(start: Vector2, end: Vector2, exclude: Array[RID] = [], mask: int = 3) -> Dictionary:
@@ -42,6 +43,7 @@ class InteractionWorld:
 		actors.erase(actor)
 		actor.queue_free()
 	func on_actor_impact(actor: ThrowBody, point: Vector2, speed: float, energy: float) -> void:
+		impacts.append({"id": actor.item_id, "speed": speed})
 		hazards.impact(actor, point, speed, energy)
 	func spawn_effect(kind: String, _point: Vector2, _scale: float = 1.0, _tint: Color = Color.WHITE) -> void:
 		effects.append(kind)
@@ -230,6 +232,49 @@ func _run() -> void:
 		if item.id == "wooden-crate" and item.reason == "explosion":
 			broken_crates += 1
 	_expect(broken_crates == 6, "all six tutorial crates are removed after their third received blast")
+	await _reset()
+	var firework_floor = StaticBody2D.new()
+	firework_floor.collision_layer = 1
+	var floor_shape = RectangleShape2D.new()
+	floor_shape.size = Vector2(600, 30)
+	var floor_collision = CollisionShape2D.new()
+	floor_collision.shape = floor_shape
+	floor_collision.position = Vector2(400, 345)
+	firework_floor.add_child(floor_collision)
+	fixture_world.add_child(firework_floor)
+	var shell = _spawn("firework-shell", Vector2(400, 240), false)
+	shell.age = 1.0
+	shell.linear_velocity = Vector2(0, 300)
+	fixture_world.hazards.on_launch(shell)
+	for i in range(60):
+		await physics_frame
+		fixture_world.hazards.tick(1.0 / 120.0)
+	var shell_impacts = 0
+	for entry in fixture_world.impacts:
+		if entry.id == "firework-shell":
+			shell_impacts += 1
+	_expect(shell_impacts > 0 and shell.alive and shell.collision_layer == 2 and not shell.release_triggered, "a launched firework physically hits the floor and remains solid before its fuse expires")
+	var surviving_part = _spawn("metal-drum", shell.position + Vector2(70, -35), false)
+	surviving_part.spec.explosionResistance = 1.0
+	var festival_log = _spawn("log", shell.position + Vector2(-65, -35))
+	festival_log.spec.explosionResistance = 1.0
+	await _physics_steps(2)
+	fixture_world.hazards.tick(float(shell.get_meta("fuse")) - 0.01)
+	_expect(shell.alive and not shell.release_triggered, "the firework fuse does not burst early")
+	fixture_world.hazards.tick(0.02)
+	fixture_world.hazards.detonate(shell)
+	_expect(not shell.alive and fixture_world.hazards.explosion_serial == 1 and fixture_world.effects.count("explosion") == 1, "a timed firework creates exactly one explosion after the fuse")
+	_expect(festival_log.burning and not fixture_world.hazards.patches.is_empty(), "fireworks reuse flammable-object ignition and finite animated fire patches")
+	await _physics_steps(2)
+	_expect(is_instance_valid(surviving_part) and surviving_part.linear_velocity.length() > 5.0, "the timed blast pushes a surviving physical garage part")
+	for firework_id in ["firework-rocket", "firework-fountain"]:
+		await _reset()
+		var timed_item = _spawn(firework_id, Vector2(400, 250), false)
+		fixture_world.hazards.on_launch(timed_item)
+		fixture_world.hazards.impact(timed_item, timed_item.position, 800.0, 100.0)
+		_expect(timed_item.alive and not timed_item.release_triggered, "%s survives impact until its own fuse ends" % firework_id)
+		fixture_world.hazards.tick(float(timed_item.spec.fuseSeconds) + 0.01)
+		_expect(not timed_item.alive and fixture_world.hazards.explosion_serial == 1, "%s bursts on its configured timer" % firework_id)
 	var result = {"engine": Engine.get_version_info().string, "passed": failures.is_empty(), "checks": checks, "failures": failures}
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://previews"))
 	var report = FileAccess.open("res://previews/hazard-checks.json", FileAccess.WRITE)

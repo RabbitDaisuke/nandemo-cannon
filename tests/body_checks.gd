@@ -99,6 +99,40 @@ func _run() -> void:
 	_spawn_record(_block_record("load-weight", 12.0), Vector2(200.0, 339.0))
 	await _steps(150)
 	_expect(_has_break("load-test", "load"), "sustained upper load breaks after its hold duration")
+	await _reset(false)
+	var donut = _spawn("donut", Vector2(500, 200))
+	donut.freeze = true
+	await _steps(2)
+	var hole_query = PhysicsPointQueryParameters2D.new()
+	hole_query.collision_mask = 2
+	hole_query.position = donut.to_global(Vector2.ZERO)
+	_expect(fixture_world.get_world_2d().direct_space_state.intersect_point(hole_query).is_empty(), "the donut's visible center hole is also empty in the real physics collider")
+	hole_query.position = donut.to_global(Vector2(40, 0) * float(donut.record.worldScale))
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(hole_query).is_empty(), "the donut ring remains physically solid around its hole")
+	await _reset(false)
+	for child in fixture_world.get_children():
+		if child is StaticBody2D:
+			child.queue_free()
+	await process_frame
+	var catalog = GameCatalog.new()
+	var restaurant: Dictionary = catalog.stages[15]
+	catalog.make_terrain(fixture_world, restaurant)
+	await _steps(2)
+	var point_query = PhysicsPointQueryParameters2D.new()
+	point_query.collision_mask = 1
+	point_query.position = Vector2(300, 400)
+	_expect(fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "the restaurant plate interior is empty collision space")
+	point_query.position = Vector2(300, 450)
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "the concave restaurant plate has a solid bottom")
+	point_query.position = Vector2(126, 420)
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "the restaurant plate has a real sloped side wall")
+	var food = _spawn("hamburger", Vector2(300, 330))
+	await _steps(240)
+	_expect(is_instance_valid(food) and food.get_world_bounds().end.y > 436.0 and food.get_world_bounds().end.y < 442.0, "food falls into the concave plate and rests on its lower interior")
+	var ice_terrain = Node2D.new()
+	fixture_world.add_child(ice_terrain)
+	catalog.make_terrain(ice_terrain, catalog.stages[17])
+	_expect(bool(catalog.stages[17].get("iceFloor", false)) and not bool(restaurant.get("iceFloor", false)) and is_equal_approx(ice_terrain.get_child(0).physics_material_override.friction, 0.025), "ice terrain follows its stage flag after reassignment to stage18")
 	var result = {"engine": Engine.get_version_info().string, "passed": failures.is_empty(), "checks": checks, "failures": failures, "measurements": {"skateboard_upright_px": upright_distance, "skateboard_flipped_px": flipped_distance, "boots_sole_px": grip_distance, "boots_inverted_px": no_grip_distance}}
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://previews"))
 	var report = FileAccess.open("res://previews/body-checks.json", FileAccess.WRITE)

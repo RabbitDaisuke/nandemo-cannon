@@ -1,29 +1,1690 @@
 {
-  "schemaVersion":1,
-  "status":"Godot 4.7.2 implementation: stages 1-16 playable; 17-20 preview only; browser playtesting pending",
-  "coordinateSystem":"960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
-  "shotsPerStage":15,
-  "tutorialOrder":"ordered queues; do not shuffle prerequisite fire/water/bomb slots",
-  "stages":[
-    {"id":1,"nameJa":"POC 平地","map":"01-poc","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[70,70,390,350],"terrain":[{"rect":[0,420,960,120]}],"queue":["refrigerator","crt-tv","chair","flower-pot","soccer-ball","washing-machine","stool","cushion","toaster","suitcase","low-table","bucket","basketball","teddy-bear","toolbox"],"preplaced":[],"previewItems":[{"id":"refrigerator","x":115,"groundY":420,"width":90},{"id":"crt-tv","x":206,"groundY":420,"width":76},{"id":"chair","x":280,"groundY":420,"width":68},{"id":"flower-pot","x":346,"groundY":420,"width":64},{"id":"soccer-ball","x":403,"groundY":420,"width":48}]},
-    {"id":2,"nameJa":"POC 地下へ積む","map":"02-underground","status":"specified","gravity":980,"cannon":[810,350],"scoreZone":[160,70,260,430],"terrain":[{"rect":[0,350,160,190]},{"rect":[420,350,540,190]},{"rect":[160,500,260,40]}],"queue":["low-table","wooden-crate","washing-machine","plank","refrigerator","bookshelf","sofa","chair","cushion","flower-pot","towel","suitcase","toolbox","soccer-ball","pillow"],"preplaced":[],"notes":["地下は実際にコライダーを空ける。背景を暗くするだけの穴にしない。","積み上げで採点範囲上端を超えた物は範囲外。"]},
-    {"id":3,"nameJa":"月面 クレーター","map":"03-moon","status":"specified","gravity":160,"cannon":[810,426],"scoreZone":[152,70,290,396],"terrain":[{"polygon":[[0,426],[150,426],[178,446],[214,446],[238,466],[366,466],[390,446],[420,446],[444,426],[960,426],[960,540],[0,540]]}],"queue":["bowling-ball","soccer-ball","ice-block","refrigerator","dumbbell","tire","skateboard","barrel","cushion","metal-drum","pillow","backpack","basketball","toolbox","grip-boots"],"preplaced":[]},
-    {"id":4,"nameJa":"路地裏 燃やして消す","map":"04-alley","status":"specified","gravity":980,"cannon":[810,424],"scoreZone":[88,70,420,354],"terrain":[{"rect":[0,424,960,116]}],"surfaceZones":[{"rect":[80,420,460,16],"flammable":true,"burnSeconds":5}],"queue":["molotov","flamethrower","water-balloon","water-jug","water-balloon","trash-bin","washing-machine","plank","bucket","toolbox","backpack","tire","chair","crt-tv","soccer-ball"],"preplaced":[{"id":"wooden-crate","x":160,"groundY":424},{"id":"wooden-crate","x":220,"groundY":424},{"id":"trash-bag","x":296,"groundY":424},{"id":"newspaper","x":356,"groundY":424}],"notes":["消火前の追加投射は禁止せず、燃え残りの上へ置くと引火する。"]},
-    {"id":5,"nameJa":"火山 燃える床","map":"05-volcano","status":"specified","gravity":980,"cannon":[810,430],"scoreZone":[80,70,450,360],"terrain":[{"rect":[0,430,960,110]}],"surfaceZones":[{"rect":[80,420,470,18],"initialState":"burning","burnSeconds":5,"reignite":false}],"queue":["newspaper","water-jug","water-balloon","water-jug","fire-extinguisher","cannonball","frying-pan","metal-drum","cooking-pot","toolbox","bowling-ball","ice-block","refrigerator","dumbbell","bell"],"preplaced":[],"notes":["最初の新聞束で着火から消滅までを示す。常時再着火する床にはしない。"]},
-    {"id":6,"nameJa":"高層ビル 奈落","map":"06-rooftops","status":"specified","gravity":980,"cannon":[800,320],"scoreZone":[80,70,240,330],"terrain":[{"rect":[80,400,240,140]},{"rect":[490,450,160,90]},{"rect":[720,320,160,220]}],"abyss":[[0,520,80,120],[320,520,170,120],[650,520,70,120],[880,520,80,120]],"queue":["cushion","refrigerator","plank","sofa","wheelbarrow","skateboard","tire","soccer-ball","umbrella","grip-boots","suitcase","low-table","flower-pot","pillow","backpack"],"preplaced":[]},
-    {"id":7,"nameJa":"家 洗濯機が邪魔","map":"07-home","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[75,70,380,350],"terrain":[{"rect":[0,420,960,120]}],"queue":["microwave","toaster","rice-cooker","towel","refrigerator","vacuum","towel","flat-tv","heater","cushion","floor-lamp","pillow","washing-machine","toolbox","towel"],"preplaced":[{"id":"flower-pot","x":148,"groundY":420,"scoring":true},{"id":"alarm-clock","x":220,"groundY":420,"scoring":true},{"id":"washing-machine","x":590,"groundY":420,"width":112,"scoring":false}]},
-    {"id":8,"nameJa":"船 爆弾を3回","map":"08-ship","status":"specified","gravity":980,"cannon":[810,410],"scoreZone":[60,70,420,340],"terrain":[{"rect":[0,410,960,38]}],"queue":["bomb","bomb","bomb","treasure-chest","anchor","ship-wheel","rope-coil","lifebuoy","cannonball","spyglass","compass","gold-sack","pirate-flag","flamethrower","barrel"],"preplaced":[{"id":"wooden-crate","x":170,"groundY":410,"tutorialFractureHits":3},{"id":"wooden-crate","x":228,"groundY":410,"tutorialFractureHits":3},{"id":"wooden-crate","x":286,"groundY":410,"tutorialFractureHits":3},{"id":"wooden-crate","x":200,"groundY":354,"tutorialFractureHits":3},{"id":"wooden-crate","x":258,"groundY":354,"tutorialFractureHits":3},{"id":"wooden-crate","x":228,"groundY":298,"tutorialFractureHits":3}],"notes":["チュートリアル木箱のみ、届いた爆風を3回受けると破壊。通常物の乱数耐性とは別の保証ルール案。","外した爆弾は命中回数に加算しない。再挑戦可能。"]},
-    {"id":9,"nameJa":"忍者 円形判定","map":"09-ninja","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[70,70,410,350],"terrain":[{"rect":[0,420,960,120]}],"queue":["bell","shuriken","shuriken","daruma","ninja-drum","gong","scroll","kunai","lantern","folding-fan","ninja-log","bell","shuriken","hourglass","fuel-lantern"],"preplaced":[],"notes":["鐘と手裏剣は指定どおり円形当たり判定。外観どおりの尖った判定にしない。"]},
-    {"id":10,"nameJa":"ボーリング場","map":"10-bowling","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[65,70,420,350],"terrain":[{"rect":[0,420,960,120]}],"queue":["bowling-ball","bowling-ball","bowling-pin","skateboard","basketball","soccer-ball","bowling-ball","bowling-pin","tire","platform-cart","dumbbell","cushion","bowling-ball","teddy-bear","toy-car"],"preplaced":[{"id":"bowling-pin","x":120,"groundY":420},{"id":"bowling-pin","x":165,"groundY":420},{"id":"bowling-pin","x":210,"groundY":420},{"id":"bowling-pin","x":255,"groundY":420},{"id":"bowling-pin","x":300,"groundY":420}]},
-    {"id":11,"nameJa":"川 水と橋","map":"11-river","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[65,70,275,350],"terrain":[{"rect":[0,420,350,120]},{"rect":[710,420,250,120]},{"rect":[380,330,270,22]},{"rect":[406,352,16,150]},{"rect":[608,352,16,150]}],"water":[{"rect":[350,410,360,130],"type":"flow","direction":[-1,0],"speed":65,"volumeCap":128}],"queue":["lifebuoy","desk","water-balloon","umbrella","barrel","low-table","platform-cart","towel","ice-block","refrigerator","bucket","soccer-ball","sponge","wheelbarrow","watering-can"],"preplaced":[],"notes":["机・ローテーブルは水流の押力係数0。重力と衝突は通常通り。","橋の天板と支柱は実際の当たり判定を持つ。"]},
-    {"id":12,"nameJa":"洗面台","map":"12-washbasin","status":"specified","gravity":980,"cannon":[810,350],"scoreZone":[226,90,318,390],"terrain":[{"rect":[0,350,180,190]},{"polygon":[[180,386],[226,446],[226,540],[180,540]]},{"rect":[226,480,318,60]},{"polygon":[[544,446],[590,386],[590,540],[544,540]]},{"rect":[590,350,370,190]}],"sources":[{"position":[404,334],"rateUnitsPerSecond":2,"maxUnits":96}],"queue":["toothbrush","toothpaste","soap","towel","sponge","basin","water-bottle","umbrella","toothbrush","toothpaste","water-balloon","cold-pack","towel","soap","bucket"],"preplaced":[]},
-    {"id":13,"nameJa":"ガスコンロ 水なし","map":"13-gas-stove","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[80,70,470,350],"terrain":[{"rect":[0,420,960,120]},{"rect":[140,404,258,16]},{"rect":[528,404,164,16]}],"surfaceZones":[{"rect":[140,398,258,10],"initialState":"burning","heatSource":true},{"rect":[528,398,164,10],"initialState":"burning","heatSource":true}],"queue":["frying-pan","cooking-pot","kettle","frying-pan","metal-drum","toolbox","dumbbell","bell","microwave","cooking-pot","anchor","cannonball","heater","rice-cooker","toaster"],"preplaced":[],"notes":["水・冷却アイテムは入れない。金属の鍋やフライパンで熱を遮り、燃えない物を積む。","遮熱は火源そのものの消滅ではない。"]},
-    {"id":14,"nameJa":"帝国城 全部入り","map":"14-imperial-castle","status":"specified","gravity":980,"cannon":[810,412],"scoreZone":[110,70,220,430],"terrain":[{"rect":[0,440,110,100]},{"rect":[110,378,220,24]},{"rect":[110,402,34,98]},{"rect":[296,402,34,98]},{"rect":[110,500,220,40]},{"rect":[526,442,134,98]},{"rect":[660,412,300,128]}],"water":[{"rect":[330,472,196,68],"type":"flow","direction":[1,0],"speed":40,"volumeCap":64}],"surfaceZones":[{"rect":[110,372,220,14],"flammable":true,"burnSeconds":5}],"queue":["bomb","flamethrower","water-jug","ice-bomb","umbrella","wheelbarrow","platform-cart","grip-boots","treasure-chest","bell","refrigerator","skateboard","fuel-lantern","cold-pack","hourglass"],"preplaced":[{"id":"wooden-crate","x":180,"groundY":378},{"id":"trash-bag","x":250,"groundY":378}]},
-    {"id":15,"nameJa":"砂場 なんでもあり","map":"15-sandbox","status":"specified","gravity":980,"cannon":[810,430],"scoreZone":[65,70,520,360],"terrain":[{"rect":[0,430,960,110]}],"queue":["wheelbarrow","sand-bucket","shovel","rake","molotov","water-balloon","bomb","frost-bottle","umbrella","tennis-racket","backpack","fuel-lantern","platform-cart","hourglass","grip-boots"],"preplaced":[],"selectAnyCatalogItem":true,"selectionPolicy":"free item choice only on this stage, total shots remains 15"},
-    {"id":16,"nameJa":"氷床 靴を足場に","map":"16-ice-floor","status":"specified","gravity":980,"cannon":[810,420],"scoreZone":[65,70,500,350],"terrain":[{"rect":[0,420,184,120]},{"rect":[184,386,166,154]},{"rect":[350,420,610,120]}],"surfaceZones":[{"rect":[0,380,960,60],"state":"ice","friction":0.025,"permanent":true}],"queue":["grip-boots","grip-boots","plank","cushion","skateboard","wheelbarrow","platform-cart","refrigerator","bowling-ball","umbrella","backpack","hourglass","towel","tennis-racket","teddy-bear"],"preplaced":[],"notes":["氷床は永久。通常物は低摩擦。靴底が接地した接触点だけ高摩擦。","靴の上に載った物は靴との接触摩擦で支える。周囲の氷を自動で通常床に変えない。","靴を裏返すと上側は滑る。靴自身も転倒・押し出しを受ける。"]},
-    {"id":17,"nameJa":"候補 空洞の台座","map":"17-hollow-dais-candidate","status":"candidate-art-only","queue":null,"terrain":[{"rect":[0,426,960,114]},{"rect":[136,336,324,32]},{"rect":[136,368,38,116]},{"rect":[422,368,38,116]},{"rect":[136,484,324,30]}]},
-    {"id":18,"nameJa":"候補 地下鉄跡","map":"18-subway-candidate","status":"candidate-art-only","queue":null,"terrain":[{"rect":[0,428,400,112]},{"rect":[640,428,320,112]},{"rect":[400,540,240,24]}]},
-    {"id":19,"nameJa":"候補 水道橋","map":"19-aqueduct-candidate","status":"candidate-art-only","queue":null,"terrain":[{"rect":[80,194,700,38]},{"rect":[104,232,46,208]},{"rect":[304,232,46,208]},{"rect":[504,232,46,208]},{"rect":[704,232,46,208]},{"rect":[0,440,260,100]},{"rect":[560,440,400,100]}]},
-    {"id":20,"nameJa":"候補 崩れた古城","map":"20-ruined-castle-candidate","status":"candidate-art-only","queue":null,"terrain":[{"polygon":[[0,450],[150,450],[150,420],[300,420],[300,468],[456,468],[456,410],[560,410],[560,460],[700,460],[700,422],[960,422],[960,540],[0,540]]}]}
+  "schemaVersion": 1,
+  "status": "Godot 4.7.2: 20 playable stages, 15 throws each. Stage18 ice-floor reassignment is an implementation assumption; browser playtesting pending.",
+  "coordinateSystem": "960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
+  "shotsPerStage": 15,
+  "tutorialOrder": "ordered queues; do not shuffle prerequisite fire/water/bomb slots",
+  "stages": [
+    {
+      "id": 1,
+      "nameJa": "POC 平地",
+      "map": "01-poc",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        70,
+        70,
+        390,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "queue": [
+        "refrigerator",
+        "crt-tv",
+        "chair",
+        "flower-pot",
+        "soccer-ball",
+        "washing-machine",
+        "stool",
+        "cushion",
+        "toaster",
+        "suitcase",
+        "low-table",
+        "bucket",
+        "basketball",
+        "teddy-bear",
+        "toolbox"
+      ],
+      "preplaced": [],
+      "previewItems": [
+        {
+          "id": "refrigerator",
+          "x": 115,
+          "groundY": 420,
+          "width": 90
+        },
+        {
+          "id": "crt-tv",
+          "x": 206,
+          "groundY": 420,
+          "width": 76
+        },
+        {
+          "id": "chair",
+          "x": 280,
+          "groundY": 420,
+          "width": 68
+        },
+        {
+          "id": "flower-pot",
+          "x": 346,
+          "groundY": 420,
+          "width": 64
+        },
+        {
+          "id": "soccer-ball",
+          "x": 403,
+          "groundY": 420,
+          "width": 48
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nameJa": "POC 地下へ積む",
+      "map": "02-underground",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        350
+      ],
+      "scoreZone": [
+        160,
+        70,
+        260,
+        430
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            350,
+            160,
+            190
+          ]
+        },
+        {
+          "rect": [
+            420,
+            350,
+            540,
+            190
+          ]
+        },
+        {
+          "rect": [
+            160,
+            500,
+            260,
+            40
+          ]
+        }
+      ],
+      "queue": [
+        "low-table",
+        "wooden-crate",
+        "washing-machine",
+        "plank",
+        "refrigerator",
+        "bookshelf",
+        "sofa",
+        "chair",
+        "cushion",
+        "flower-pot",
+        "towel",
+        "suitcase",
+        "toolbox",
+        "soccer-ball",
+        "pillow"
+      ],
+      "preplaced": [],
+      "notes": [
+        "地下は実際にコライダーを空ける。背景を暗くするだけの穴にしない。",
+        "積み上げで採点範囲上端を超えた物は範囲外。"
+      ]
+    },
+    {
+      "id": 3,
+      "nameJa": "月面 クレーター",
+      "map": "03-moon",
+      "status": "specified",
+      "gravity": 160,
+      "cannon": [
+        810,
+        426
+      ],
+      "scoreZone": [
+        152,
+        70,
+        290,
+        396
+      ],
+      "terrain": [
+        {
+          "polygon": [
+            [
+              0,
+              426
+            ],
+            [
+              150,
+              426
+            ],
+            [
+              178,
+              446
+            ],
+            [
+              214,
+              446
+            ],
+            [
+              238,
+              466
+            ],
+            [
+              366,
+              466
+            ],
+            [
+              390,
+              446
+            ],
+            [
+              420,
+              446
+            ],
+            [
+              444,
+              426
+            ],
+            [
+              960,
+              426
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              0,
+              540
+            ]
+          ]
+        }
+      ],
+      "queue": [
+        "bowling-ball",
+        "soccer-ball",
+        "ice-block",
+        "refrigerator",
+        "dumbbell",
+        "tire",
+        "skateboard",
+        "barrel",
+        "cushion",
+        "metal-drum",
+        "pillow",
+        "backpack",
+        "basketball",
+        "toolbox",
+        "grip-boots"
+      ],
+      "preplaced": []
+    },
+    {
+      "id": 4,
+      "nameJa": "路地裏 燃やして消す",
+      "map": "04-alley",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        424
+      ],
+      "scoreZone": [
+        88,
+        70,
+        420,
+        354
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            424,
+            960,
+            116
+          ]
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            80,
+            420,
+            460,
+            16
+          ],
+          "flammable": true,
+          "burnSeconds": 5
+        }
+      ],
+      "queue": [
+        "molotov",
+        "flamethrower",
+        "water-balloon",
+        "water-jug",
+        "water-balloon",
+        "trash-bin",
+        "washing-machine",
+        "plank",
+        "bucket",
+        "toolbox",
+        "backpack",
+        "tire",
+        "chair",
+        "crt-tv",
+        "soccer-ball"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 160,
+          "groundY": 424
+        },
+        {
+          "id": "wooden-crate",
+          "x": 220,
+          "groundY": 424
+        },
+        {
+          "id": "trash-bag",
+          "x": 296,
+          "groundY": 424
+        },
+        {
+          "id": "newspaper",
+          "x": 356,
+          "groundY": 424
+        }
+      ],
+      "notes": [
+        "消火前の追加投射は禁止せず、燃え残りの上へ置くと引火する。"
+      ]
+    },
+    {
+      "id": 5,
+      "nameJa": "火山 燃える床",
+      "map": "05-volcano",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        430
+      ],
+      "scoreZone": [
+        80,
+        70,
+        450,
+        360
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            430,
+            960,
+            110
+          ]
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            80,
+            420,
+            470,
+            18
+          ],
+          "initialState": "burning",
+          "burnSeconds": 5,
+          "reignite": false
+        }
+      ],
+      "queue": [
+        "newspaper",
+        "water-jug",
+        "water-balloon",
+        "water-jug",
+        "fire-extinguisher",
+        "cannonball",
+        "frying-pan",
+        "metal-drum",
+        "cooking-pot",
+        "toolbox",
+        "bowling-ball",
+        "ice-block",
+        "refrigerator",
+        "dumbbell",
+        "bell"
+      ],
+      "preplaced": [],
+      "notes": [
+        "最初の新聞束で着火から消滅までを示す。常時再着火する床にはしない。"
+      ]
+    },
+    {
+      "id": 6,
+      "nameJa": "高層ビル 奈落",
+      "map": "06-rooftops",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        800,
+        320
+      ],
+      "scoreZone": [
+        80,
+        70,
+        240,
+        330
+      ],
+      "terrain": [
+        {
+          "rect": [
+            80,
+            400,
+            240,
+            140
+          ]
+        },
+        {
+          "rect": [
+            490,
+            450,
+            160,
+            90
+          ]
+        },
+        {
+          "rect": [
+            720,
+            320,
+            160,
+            220
+          ]
+        }
+      ],
+      "abyss": [
+        [
+          0,
+          520,
+          80,
+          120
+        ],
+        [
+          320,
+          520,
+          170,
+          120
+        ],
+        [
+          650,
+          520,
+          70,
+          120
+        ],
+        [
+          880,
+          520,
+          80,
+          120
+        ]
+      ],
+      "queue": [
+        "cushion",
+        "refrigerator",
+        "plank",
+        "sofa",
+        "wheelbarrow",
+        "skateboard",
+        "tire",
+        "soccer-ball",
+        "umbrella",
+        "grip-boots",
+        "suitcase",
+        "low-table",
+        "flower-pot",
+        "pillow",
+        "backpack"
+      ],
+      "preplaced": []
+    },
+    {
+      "id": 7,
+      "nameJa": "家 洗濯機が邪魔",
+      "map": "07-home",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        75,
+        70,
+        380,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "queue": [
+        "microwave",
+        "toaster",
+        "rice-cooker",
+        "towel",
+        "refrigerator",
+        "vacuum",
+        "towel",
+        "flat-tv",
+        "heater",
+        "cushion",
+        "floor-lamp",
+        "pillow",
+        "washing-machine",
+        "toolbox",
+        "towel"
+      ],
+      "preplaced": [
+        {
+          "id": "flower-pot",
+          "x": 148,
+          "groundY": 420,
+          "scoring": true
+        },
+        {
+          "id": "alarm-clock",
+          "x": 220,
+          "groundY": 420,
+          "scoring": true
+        },
+        {
+          "id": "washing-machine",
+          "x": 590,
+          "groundY": 420,
+          "width": 112,
+          "scoring": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "nameJa": "船 爆弾を3回",
+      "map": "08-ship",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        410
+      ],
+      "scoreZone": [
+        60,
+        70,
+        420,
+        340
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            410,
+            960,
+            38
+          ]
+        }
+      ],
+      "queue": [
+        "bomb",
+        "bomb",
+        "bomb",
+        "treasure-chest",
+        "anchor",
+        "ship-wheel",
+        "rope-coil",
+        "lifebuoy",
+        "cannonball",
+        "spyglass",
+        "compass",
+        "gold-sack",
+        "pirate-flag",
+        "flamethrower",
+        "barrel"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 170,
+          "groundY": 410,
+          "tutorialFractureHits": 3
+        },
+        {
+          "id": "wooden-crate",
+          "x": 228,
+          "groundY": 410,
+          "tutorialFractureHits": 3
+        },
+        {
+          "id": "wooden-crate",
+          "x": 286,
+          "groundY": 410,
+          "tutorialFractureHits": 3
+        },
+        {
+          "id": "wooden-crate",
+          "x": 200,
+          "groundY": 354,
+          "tutorialFractureHits": 3
+        },
+        {
+          "id": "wooden-crate",
+          "x": 258,
+          "groundY": 354,
+          "tutorialFractureHits": 3
+        },
+        {
+          "id": "wooden-crate",
+          "x": 228,
+          "groundY": 298,
+          "tutorialFractureHits": 3
+        }
+      ],
+      "notes": [
+        "チュートリアル木箱のみ、届いた爆風を3回受けると破壊。通常物の乱数耐性とは別の保証ルール案。",
+        "外した爆弾は命中回数に加算しない。再挑戦可能。"
+      ]
+    },
+    {
+      "id": 9,
+      "nameJa": "忍者 円形判定",
+      "map": "09-ninja",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        70,
+        70,
+        410,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "queue": [
+        "bell",
+        "shuriken",
+        "shuriken",
+        "daruma",
+        "ninja-drum",
+        "gong",
+        "scroll",
+        "kunai",
+        "lantern",
+        "folding-fan",
+        "ninja-log",
+        "bell",
+        "shuriken",
+        "hourglass",
+        "fuel-lantern"
+      ],
+      "preplaced": [],
+      "notes": [
+        "鐘と手裏剣は指定どおり円形当たり判定。外観どおりの尖った判定にしない。"
+      ]
+    },
+    {
+      "id": 10,
+      "nameJa": "ボーリング場",
+      "map": "10-bowling",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        65,
+        70,
+        420,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "queue": [
+        "bowling-ball",
+        "bowling-ball",
+        "bowling-pin",
+        "skateboard",
+        "basketball",
+        "soccer-ball",
+        "bowling-ball",
+        "bowling-pin",
+        "tire",
+        "platform-cart",
+        "dumbbell",
+        "cushion",
+        "bowling-ball",
+        "teddy-bear",
+        "toy-car"
+      ],
+      "preplaced": [
+        {
+          "id": "bowling-pin",
+          "x": 120,
+          "groundY": 420
+        },
+        {
+          "id": "bowling-pin",
+          "x": 165,
+          "groundY": 420
+        },
+        {
+          "id": "bowling-pin",
+          "x": 210,
+          "groundY": 420
+        },
+        {
+          "id": "bowling-pin",
+          "x": 255,
+          "groundY": 420
+        },
+        {
+          "id": "bowling-pin",
+          "x": 300,
+          "groundY": 420
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "nameJa": "川 水と橋",
+      "map": "11-river",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        65,
+        70,
+        275,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            350,
+            120
+          ]
+        },
+        {
+          "rect": [
+            710,
+            420,
+            250,
+            120
+          ]
+        },
+        {
+          "rect": [
+            380,
+            330,
+            270,
+            22
+          ]
+        },
+        {
+          "rect": [
+            406,
+            352,
+            16,
+            150
+          ]
+        },
+        {
+          "rect": [
+            608,
+            352,
+            16,
+            150
+          ]
+        }
+      ],
+      "water": [
+        {
+          "rect": [
+            350,
+            410,
+            360,
+            130
+          ],
+          "type": "flow",
+          "direction": [
+            -1,
+            0
+          ],
+          "speed": 65,
+          "volumeCap": 128
+        }
+      ],
+      "queue": [
+        "lifebuoy",
+        "desk",
+        "water-balloon",
+        "umbrella",
+        "barrel",
+        "low-table",
+        "platform-cart",
+        "towel",
+        "ice-block",
+        "refrigerator",
+        "bucket",
+        "soccer-ball",
+        "sponge",
+        "wheelbarrow",
+        "watering-can"
+      ],
+      "preplaced": [],
+      "notes": [
+        "机・ローテーブルは水流の押力係数0。重力と衝突は通常通り。",
+        "橋の天板と支柱は実際の当たり判定を持つ。"
+      ]
+    },
+    {
+      "id": 12,
+      "nameJa": "洗面台",
+      "map": "12-washbasin",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        350
+      ],
+      "scoreZone": [
+        226,
+        90,
+        318,
+        390
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            350,
+            180,
+            190
+          ]
+        },
+        {
+          "polygon": [
+            [
+              180,
+              386
+            ],
+            [
+              226,
+              446
+            ],
+            [
+              226,
+              540
+            ],
+            [
+              180,
+              540
+            ]
+          ]
+        },
+        {
+          "rect": [
+            226,
+            480,
+            318,
+            60
+          ]
+        },
+        {
+          "polygon": [
+            [
+              544,
+              446
+            ],
+            [
+              590,
+              386
+            ],
+            [
+              590,
+              540
+            ],
+            [
+              544,
+              540
+            ]
+          ]
+        },
+        {
+          "rect": [
+            590,
+            350,
+            370,
+            190
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "position": [
+            404,
+            334
+          ],
+          "rateUnitsPerSecond": 2,
+          "maxUnits": 96
+        }
+      ],
+      "queue": [
+        "toothbrush",
+        "toothpaste",
+        "soap",
+        "towel",
+        "sponge",
+        "basin",
+        "water-bottle",
+        "umbrella",
+        "toothbrush",
+        "toothpaste",
+        "water-balloon",
+        "cold-pack",
+        "towel",
+        "soap",
+        "bucket"
+      ],
+      "preplaced": []
+    },
+    {
+      "id": 13,
+      "nameJa": "ガスコンロ 水なし",
+      "map": "13-gas-stove",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        80,
+        70,
+        470,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        },
+        {
+          "rect": [
+            140,
+            404,
+            258,
+            16
+          ]
+        },
+        {
+          "rect": [
+            528,
+            404,
+            164,
+            16
+          ]
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            140,
+            398,
+            258,
+            10
+          ],
+          "initialState": "burning",
+          "heatSource": true
+        },
+        {
+          "rect": [
+            528,
+            398,
+            164,
+            10
+          ],
+          "initialState": "burning",
+          "heatSource": true
+        }
+      ],
+      "queue": [
+        "frying-pan",
+        "cooking-pot",
+        "kettle",
+        "frying-pan",
+        "metal-drum",
+        "toolbox",
+        "dumbbell",
+        "bell",
+        "microwave",
+        "cooking-pot",
+        "anchor",
+        "cannonball",
+        "heater",
+        "rice-cooker",
+        "toaster"
+      ],
+      "preplaced": [],
+      "notes": [
+        "水・冷却アイテムは入れない。金属の鍋やフライパンで熱を遮り、燃えない物を積む。",
+        "遮熱は火源そのものの消滅ではない。"
+      ]
+    },
+    {
+      "id": 14,
+      "nameJa": "帝国城 全部入り",
+      "map": "14-imperial-castle",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        412
+      ],
+      "scoreZone": [
+        110,
+        70,
+        220,
+        430
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            440,
+            110,
+            100
+          ]
+        },
+        {
+          "rect": [
+            110,
+            378,
+            220,
+            24
+          ]
+        },
+        {
+          "rect": [
+            110,
+            402,
+            34,
+            98
+          ]
+        },
+        {
+          "rect": [
+            296,
+            402,
+            34,
+            98
+          ]
+        },
+        {
+          "rect": [
+            110,
+            500,
+            220,
+            40
+          ]
+        },
+        {
+          "rect": [
+            526,
+            442,
+            134,
+            98
+          ]
+        },
+        {
+          "rect": [
+            660,
+            412,
+            300,
+            128
+          ]
+        }
+      ],
+      "water": [
+        {
+          "rect": [
+            330,
+            472,
+            196,
+            68
+          ],
+          "type": "flow",
+          "direction": [
+            1,
+            0
+          ],
+          "speed": 40,
+          "volumeCap": 64
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            110,
+            372,
+            220,
+            14
+          ],
+          "flammable": true,
+          "burnSeconds": 5
+        }
+      ],
+      "queue": [
+        "bomb",
+        "flamethrower",
+        "water-jug",
+        "ice-bomb",
+        "umbrella",
+        "wheelbarrow",
+        "platform-cart",
+        "grip-boots",
+        "treasure-chest",
+        "bell",
+        "refrigerator",
+        "skateboard",
+        "fuel-lantern",
+        "cold-pack",
+        "hourglass"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 180,
+          "groundY": 378
+        },
+        {
+          "id": "trash-bag",
+          "x": 250,
+          "groundY": 378
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "nameJa": "砂場 なんでもあり",
+      "map": "15-sandbox",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        430
+      ],
+      "scoreZone": [
+        65,
+        70,
+        520,
+        360
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            430,
+            960,
+            110
+          ]
+        }
+      ],
+      "queue": [
+        "wheelbarrow",
+        "sand-bucket",
+        "shovel",
+        "rake",
+        "molotov",
+        "water-balloon",
+        "bomb",
+        "frost-bottle",
+        "umbrella",
+        "tennis-racket",
+        "backpack",
+        "fuel-lantern",
+        "platform-cart",
+        "hourglass",
+        "grip-boots"
+      ],
+      "preplaced": [],
+      "selectAnyCatalogItem": true,
+      "selectionPolicy": "free item choice only on this stage, total shots remains 15"
+    },
+    {
+      "id": 16,
+      "nameJa": "レストラン 凹んだ皿",
+      "displayNameASCII": "RESTAURANT",
+      "map": "16-restaurant",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        478
+      ],
+      "scoreZone": [
+        80,
+        70,
+        500,
+        394
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            478,
+            960,
+            62
+          ]
+        },
+        {
+          "polygon": [
+            [
+              80,
+              382
+            ],
+            [
+              110,
+              382
+            ],
+            [
+              150,
+              438
+            ],
+            [
+              510,
+              438
+            ],
+            [
+              550,
+              382
+            ],
+            [
+              580,
+              382
+            ],
+            [
+              530,
+              462
+            ],
+            [
+              130,
+              462
+            ]
+          ]
+        },
+        {
+          "rect": [
+            230,
+            462,
+            200,
+            16
+          ]
+        }
+      ],
+      "queue": [
+        "hamburger",
+        "steak",
+        "watermelon",
+        "cheese-wedge",
+        "bread-slice",
+        "rice-bowl",
+        "apple",
+        "ice-cream-cup",
+        "steak-knife",
+        "fork",
+        "crossed-chopsticks",
+        "lunch-pick",
+        "fried-shrimp",
+        "donut",
+        "fried-egg"
+      ],
+      "preplaced": [],
+      "lesson": "STACK FOOD INSIDE THE PLATE. THE MIDDLE IS HOLLOW.",
+      "notes": [
+        "The plate is a real concave collision polygon; its open interior is not filled by a bounding box.",
+        "15 food/tool throws; the spoon belongs to the ice-cream cup body."
+      ]
+    },
+    {
+      "id": 17,
+      "nameJa": "ガレージ",
+      "displayNameASCII": "GARAGE",
+      "map": "17-garage",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        452
+      ],
+      "scoreZone": [
+        80,
+        70,
+        450,
+        384
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            452,
+            960,
+            88
+          ]
+        },
+        {
+          "rect": [
+            90,
+            390,
+            430,
+            24
+          ]
+        },
+        {
+          "rect": [
+            110,
+            414,
+            32,
+            38
+          ]
+        },
+        {
+          "rect": [
+            468,
+            414,
+            32,
+            38
+          ]
+        }
+      ],
+      "queue": [
+        "tire",
+        "steering-wheel",
+        "engine-block",
+        "car-battery",
+        "electric-drill",
+        "muffler",
+        "impact-wrench",
+        "car-jack",
+        "car-door",
+        "passenger-seat",
+        "traffic-cone",
+        "work-helmet",
+        "metal-drum",
+        "bucket",
+        "fire-extinguisher"
+      ],
+      "preplaced": [],
+      "lesson": "HEAVY PARTS HIT HARD. USE THE LIFT AS A PLATFORM."
+    },
+    {
+      "id": 18,
+      "nameJa": "氷床 靴を足場に",
+      "map": "18-ice-floor",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        65,
+        70,
+        500,
+        350
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            184,
+            120
+          ]
+        },
+        {
+          "rect": [
+            184,
+            386,
+            166,
+            154
+          ]
+        },
+        {
+          "rect": [
+            350,
+            420,
+            610,
+            120
+          ]
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            0,
+            380,
+            960,
+            60
+          ],
+          "state": "ice",
+          "friction": 0.025,
+          "permanent": true
+        }
+      ],
+      "queue": [
+        "grip-boots",
+        "grip-boots",
+        "plank",
+        "cushion",
+        "skateboard",
+        "wheelbarrow",
+        "platform-cart",
+        "refrigerator",
+        "bowling-ball",
+        "umbrella",
+        "backpack",
+        "hourglass",
+        "towel",
+        "tennis-racket",
+        "teddy-bear"
+      ],
+      "preplaced": [],
+      "notes": [
+        "氷床は永久。通常物は低摩擦。靴底が接地した接触点だけ高摩擦。",
+        "靴の上に載った物は靴との接触摩擦で支える。周囲の氷を自動で通常床に変えない。",
+        "靴を裏返すと上側は滑る。靴自身も転倒・押し出しを受ける。"
+      ],
+      "iceFloor": true,
+      "displayNameASCII": "ICE FLOOR",
+      "assignment": "implementation-assumption: preserve original ice stage at 18; latest user did not specify stage18",
+      "lesson": "ICE IS SLIPPERY. ONLY THE BOOT SOLES ADD GRIP."
+    },
+    {
+      "id": 19,
+      "nameJa": "祭り 花火と紅白の台",
+      "displayNameASCII": "FESTIVAL",
+      "map": "19-festival",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        452
+      ],
+      "scoreZone": [
+        70,
+        70,
+        500,
+        384
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            452,
+            960,
+            88
+          ]
+        },
+        {
+          "rect": [
+            84,
+            386,
+            470,
+            66
+          ]
+        }
+      ],
+      "queue": [
+        "firework-shell",
+        "firework-rocket",
+        "firework-fountain",
+        "candy-apple",
+        "cotton-candy",
+        "chocolate-banana",
+        "grilled-corn",
+        "takoyaki-tray",
+        "yakisoba",
+        "frankfurter",
+        "shaved-ice",
+        "water-yoyo",
+        "fish-scoop",
+        "festival-mask",
+        "lantern"
+      ],
+      "preplaced": [],
+      "lesson": "FIREWORKS BOUNCE FIRST, THEN BURST WHEN THEIR FUSE ENDS.",
+      "surfaceZones": [
+        {
+          "rect": [
+            84,
+            382,
+            470,
+            12
+          ],
+          "flammable": true,
+          "burnSeconds": 3
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "nameJa": "なんでも実験室",
+      "displayNameASCII": "LABORATORY",
+      "map": "20-laboratory",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        452
+      ],
+      "scoreZone": [
+        68,
+        70,
+        600,
+        440
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            452,
+            190,
+            88
+          ]
+        },
+        {
+          "rect": [
+            190,
+            510,
+            290,
+            30
+          ]
+        },
+        {
+          "rect": [
+            480,
+            452,
+            480,
+            88
+          ]
+        },
+        {
+          "rect": [
+            92,
+            360,
+            150,
+            22
+          ]
+        },
+        {
+          "rect": [
+            92,
+            382,
+            22,
+            70
+          ]
+        },
+        {
+          "rect": [
+            220,
+            382,
+            22,
+            70
+          ]
+        },
+        {
+          "rect": [
+            520,
+            408,
+            130,
+            18
+          ]
+        }
+      ],
+      "queue": [
+        "water-jug",
+        "flamethrower",
+        "bomb",
+        "ice-block",
+        "firework-rocket",
+        "water-yoyo",
+        "campfire",
+        "freeze-sprayer",
+        "gas-canister",
+        "umbrella",
+        "grip-boots",
+        "car-jack",
+        "water-balloon",
+        "fried-egg",
+        "refrigerator"
+      ],
+      "preplaced": [
+        {
+          "id": "log",
+          "x": 565,
+          "groundY": 408,
+          "scoring": false
+        },
+        {
+          "id": "ice-block",
+          "x": 144,
+          "groundY": 360,
+          "scoring": false
+        }
+      ],
+      "lesson": "WATER, FIRE, ICE AND BLASTS. TRY THEIR INTERACTIONS.",
+      "water": [
+        {
+          "rect": [
+            198,
+            462,
+            274,
+            48
+          ],
+          "type": "flow",
+          "direction": [
+            1,
+            0
+          ],
+          "speed": 42,
+          "volumeCap": 72
+        }
+      ],
+      "sources": [
+        {
+          "position": [
+            360,
+            425
+          ],
+          "rateUnitsPerSecond": 1,
+          "maxUnits": 18
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            520,
+            402,
+            130,
+            18
+          ],
+          "initialState": "burning",
+          "burnSeconds": 5,
+          "reignite": false
+        },
+        {
+          "rect": [
+            0,
+            446,
+            190,
+            12
+          ],
+          "state": "ice",
+          "friction": 0.025,
+          "permanent": true
+        }
+      ]
+    }
   ]
 }

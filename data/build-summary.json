@@ -1,12 +1,14 @@
 {
-  "objects": 117,
+  "objects": 157,
   "maps": 20,
-  "specifiedStages": 16,
-  "fontGlyphs": 85,
+  "specifiedStages": 19,
+  "fontGlyphs": 246,
   "animationFamilies": 8,
   "assetRenderer": "Node.js + sharp/librsvg",
   "gameRenderer": "Godot 4.7.2 Compatibility / WebGL 2",
   "browserUsed": false,
-  "originalArtwork": "hand-authored SVG",
-  "gameRuntimeIncluded": true
+  "originalArtwork": "SVG objects/maps; image-generated cannon, logo and Japanese bitmap font",
+  "gameRuntimeIncluded": true,
+  "playableStages": 20,
+  "stage18Assignment": "implementation assumption: retained ice floor"
 }

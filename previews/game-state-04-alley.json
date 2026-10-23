@@ -146,7 +146,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": 0.00000193588380170695,
+			"rotation": 0.00000193551795746316,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -292,7 +292,7 @@
 				"worldScale": 0.377358490566038,
 				"worldWidth": 40.0
 			},
-			"rotation": 0.00519723258912563,
+			"rotation": 0.00514820124953985,
 			"texture": "res://assets/objects/newspaper.svg",
 			"tint": "ffc291ff",
 			"visualPosition": [
@@ -303,8 +303,8 @@
 				0.377358496189117,
 				0.377358496189117
 			],
-			"x": 355.581939697266,
-			"y": 406.795959472656
+			"x": 355.583770751953,
+			"y": 406.794830322266
 		}
 	],
 	"angle": 35.0,
@@ -312,141 +312,210 @@
 		810.0,
 		424.0
 	],
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				346.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				288.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				356.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
 	"controls": [
 		{
-			"align": 0,
-			"color": "ffd36cff",
-			"fontSize": 24,
-			"outline": "081421ff",
-			"outlineSize": 2,
 			"rect": [
 				14.0,
-				9.0,
-				204.0,
-				30.0
+				10.0,
+				260.0,
+				60.0
 			],
-			"text": "なんでもキャノン",
-			"type": "label"
-		},
-		{
-			"align": 0,
-			"color": "fff0c8ff",
-			"fontSize": 20,
-			"outline": "081421ff",
-			"outlineSize": 2,
-			"rect": [
-				280.0,
-				12.0,
-				120.0,
-				25.0
-			],
-			"text": "仮得点 0000",
-			"type": "label"
-		},
-		{
-			"align": 0,
-			"color": "fff0c8ff",
-			"fontSize": 20,
-			"outline": "081421ff",
-			"outlineSize": 2,
-			"rect": [
-				455.0,
-				12.0,
-				110.0,
-				25.0
-			],
-			"text": "残り 14/15",
-			"type": "label"
-		},
-		{
-			"align": 0,
-			"color": "fff0c8ff",
-			"fontSize": 20,
-			"outline": "081421ff",
-			"outlineSize": 2,
-			"rect": [
-				614.0,
-				12.0,
-				22.0,
-				25.0
-			],
-			"text": "次",
-			"type": "label"
-		},
-		{
-			"rect": [
-				646.0,
-				4.0,
-				42.0,
-				42.0
-			],
-			"texture": "res://assets/objects/flamethrower.svg",
+			"texture": "res://assets/ui/logo.webp",
 			"type": "texture"
 		},
 		{
 			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				62.0,
+				25.0
+			],
+			"text": "仮得点",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "14/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/water-balloon.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
 			"color": "fff0b5ff",
 			"fontSize": 10,
 			"outline": "081421ff",
-			"outlineSize": 1,
+			"outlineSize": 0,
 			"rect": [
-				618.0,
-				48.0,
-				68.0,
-				12.5
+				620.0,
+				75.0,
+				172.0,
+				13.0
 			],
-			"text": "FLAMETHROWER",
+			"text": "みずふうせん",
 			"type": "label"
 		},
 		{
+			"background": "193346ff",
+			"border": "080f18ff",
 			"disabled": false,
 			"fontSize": 16,
 			"rect": [
-				713.0,
-				8.0,
-				70.0,
-				33.0
+				804.0,
+				10.0,
+				64.0,
+				32.0
 			],
-			"text": "MAP",
+			"text": "マップ",
 			"type": "button"
 		},
 		{
+			"background": "193346ff",
+			"border": "080f18ff",
 			"disabled": false,
 			"fontSize": 16,
 			"rect": [
-				790.0,
-				8.0,
-				83.0,
-				33.0
+				876.0,
+				10.0,
+				72.0,
+				32.0
 			],
-			"text": "RETRY",
+			"text": "シード",
 			"type": "button"
 		},
 		{
+			"background": "193346ff",
+			"border": "080f18ff",
 			"disabled": false,
 			"fontSize": 16,
 			"rect": [
-				880.0,
-				8.0,
-				68.0,
-				33.0
+				804.0,
+				50.0,
+				144.0,
+				32.0
 			],
-			"text": "SEED",
+			"text": "やりなおす",
 			"type": "button"
 		},
 		{
 			"align": 0,
-			"color": "c8e5edff",
-			"fontSize": 13,
+			"color": "fff0b5ff",
+			"fontSize": 15,
 			"outline": "081421ff",
-			"outlineSize": 1,
+			"outlineSize": 0,
 			"rect": [
-				16.0,
-				48.0,
-				74.0,
-				16.25
+				18.0,
+				77.0,
+				105.0,
+				18.75
 			],
-			"text": "04 / ALLEY",
+			"text": "04 / ろじうら",
 			"type": "label"
 		},
 		{
@@ -454,83 +523,113 @@
 			"color": "fff0b5ff",
 			"fontSize": 13,
 			"outline": "081421ff",
-			"outlineSize": 1,
+			"outlineSize": 0,
 			"rect": [
 				16.0,
 				515.0,
-				381.0,
+				292.0,
 				16.25
 			],
-			"text": "BURN THE TRASH. THEN USE WATER ON THE BURNING FLOOR.",
+			"text": "ごみを もやして、みずで ひを けしてから つもう。",
 			"type": "label"
 		},
 		{
 			"align": 0,
-			"color": "fff0b5ff",
-			"fontSize": 16,
+			"color": "fff0c8ff",
+			"fontSize": 26,
 			"outline": "081421ff",
-			"outlineSize": 1,
+			"outlineSize": 0,
 			"rect": [
-				708.0,
-				116.0,
-				167.0,
-				20.0
+				720.0,
+				115.0,
+				121.0,
+				32.5
 			],
-			"text": "角度 35°   火力 34%",
+			"text": "角度 35°",
 			"type": "label"
 		},
 		{
 			"maximum": 85.0,
 			"minimum": 5.0,
 			"rect": [
-				716.0,
-				151.0,
+				720.0,
+				155.0,
 				220.0,
-				24.0
+				26.0
 			],
 			"type": "slider",
 			"value": 35.0
 		},
 		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 26,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				720.0,
+				193.0,
+				129.0,
+				32.5
+			],
+			"text": "火力 34%",
+			"type": "label"
+		},
+		{
 			"maximum": 100.0,
 			"minimum": 15.0,
 			"rect": [
-				716.0,
-				185.0,
+				720.0,
+				233.0,
 				220.0,
-				24.0
+				26.0
 			],
 			"type": "slider",
 			"value": 34.0
 		},
 		{
 			"align": 0,
-			"color": "c8e5edff",
-			"fontSize": 13,
+			"color": "fff0b5ff",
+			"fontSize": 10,
 			"outline": "081421ff",
-			"outlineSize": 1,
+			"outlineSize": 0,
 			"rect": [
 				720.0,
-				224.0,
-				97.0,
-				16.25
+				263.0,
+				103.0,
+				12.5
 			],
-			"text": "ドラッグで調整",
+			"text": "ひだり・みぎキーで火力",
 			"type": "label"
 		},
 		{
 			"align": 0,
-			"color": "c8e5edff",
-			"fontSize": 13,
+			"color": "ffd36cff",
+			"fontSize": 12,
 			"outline": "081421ff",
-			"outlineSize": 1,
+			"outlineSize": 0,
 			"rect": [
-				720.0,
-				245.0,
-				97.0,
-				16.25
+				852.0,
+				281.0,
+				24.0,
+				15.0
 			],
-			"text": "クリックで発射",
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				686.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
 			"type": "label"
 		}
 	],
@@ -567,16 +666,48 @@
 		{
 			"radius": 26.0,
 			"source": false,
-			"x": 355.1015625,
+			"x": 355.101989746094,
 			"y": 417.0
 		}
 	],
+	"followingItem": "water-balloon",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "flamethrower",
+		"position": [
+			875.0,
+			330.0
+		],
+		"scale": [
+			0.537037014961243,
+			0.537037014961243
+		],
+		"texture": "res://assets/objects/flamethrower.svg"
+	},
 	"map": "04-alley",
 	"playable": true,
 	"power": 0.34,
 	"recoil": 0.0,
 	"result": false,
 	"score": 0,
+	"scoreMarker": [
+		[
+			106.0,
+			410.0
+		],
+		[
+			490.0,
+			410.0
+		],
+		[
+			508.0,
+			432.0
+		],
+		[
+			88.0,
+			432.0
+		]
+	],
 	"scoreZone": [
 		88.0,
 		70.0,
@@ -638,6 +769,7 @@
 			0.4
 		]
 	],
+	"tutorialArrows": [],
 	"waterCells": [],
 	"waterRegions": []
 }

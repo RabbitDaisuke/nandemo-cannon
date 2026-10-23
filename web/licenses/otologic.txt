@@ -1,0 +1,14 @@
+Sound effect: オノマトペ 衝撃01 (Onoma-Impact01-1.mp3)
+Creator / copyright: OtoLogic
+Source: https://otologic.jp/
+Source terms: https://otologic.jp/free/license.html
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+License URL: https://creativecommons.org/licenses/by/4.0/
+
+The supplied MP3 is included unchanged. The game plays it as the cannon
+launch sound with a playback gain of 0.25 (25%, approximately -12.04 dB).
+The original remains under CC BY 4.0; the game's MIT license does not
+replace the license of this third-party sound.
+
+Attribution displayed at the top of the game page:
+効果音：OtoLogic — CC BY 4.0

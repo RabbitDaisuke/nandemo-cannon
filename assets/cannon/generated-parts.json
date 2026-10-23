@@ -1,0 +1,93 @@
+{
+  "selected": "b",
+  "pivot": [
+    104,
+    25
+  ],
+  "muzzle": [
+    0,
+    25
+  ],
+  "groundPivot": [
+    0,
+    -55
+  ],
+  "candidates": {
+    "a": {
+      "barrel": {
+        "source": [
+          28,
+          168,
+          642,
+          249
+        ],
+        "logicalSize": [
+          144,
+          50
+        ]
+      },
+      "base": {
+        "source": [
+          701,
+          195,
+          593,
+          276
+        ],
+        "logicalSize": [
+          150,
+          78
+        ]
+      },
+      "trunnion": {
+        "source": [
+          1364,
+          250,
+          128,
+          132
+        ],
+        "logicalSize": [
+          26,
+          26
+        ]
+      }
+    },
+    "b": {
+      "barrel": {
+        "source": [
+          19,
+          571,
+          667,
+          279
+        ],
+        "logicalSize": [
+          144,
+          50
+        ]
+      },
+      "base": {
+        "source": [
+          701,
+          601,
+          623,
+          307
+        ],
+        "logicalSize": [
+          150,
+          78
+        ]
+      },
+      "trunnion": {
+        "source": [
+          1364,
+          665,
+          148,
+          149
+        ],
+        "logicalSize": [
+          26,
+          26
+        ]
+      }
+    }
+  }
+}

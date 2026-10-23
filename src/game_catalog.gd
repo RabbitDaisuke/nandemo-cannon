@@ -37,7 +37,7 @@ func make_terrain(parent: Node2D, stage: Dictionary) -> void:
 		body.set_meta("terrain", true)
 		var material = PhysicsMaterial.new()
 		material.friction = 0.6
-		if int(stage.id) == 16:
+		if bool(stage.get("iceFloor", false)):
 			material.friction = 0.025
 		body.physics_material_override = material
 		parent.add_child(body)

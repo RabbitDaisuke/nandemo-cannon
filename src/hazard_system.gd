@@ -42,6 +42,9 @@ func on_launch(actor: ThrowBody) -> void:
 				actor.set_texture_path("res://assets/effects/campfire-charred.svg")
 		"explosion":
 			actor.set_meta("fuse", 2.8)
+		"firework":
+			# The shell remains a normal colliding RigidBody2D until this fuse ends.
+			actor.set_meta("fuse", float(actor.spec.get("fuseSeconds", 2.2)))
 
 func impact(actor: ThrowBody, point: Vector2, speed: float, _energy: float) -> void:
 	if not is_instance_valid(actor) or not actor.alive or actor.release_triggered:
@@ -171,7 +174,7 @@ func heat_actor(actor: ThrowBody, heat: float) -> void:
 	if actor.behavior in ["campfire", "fuel_light"]:
 		# These use a single finite fuel supply, not a second independent burn clock.
 		return
-	if actor.behavior == "explosion":
+	if actor.behavior in ["explosion", "firework"]:
 		actor.set_meta("fuse", minf(float(actor.get_meta("fuse", 0.8)), 0.8))
 	if not bool(actor.spec.get("flammable", false)) or actor.burning:
 		return
@@ -280,6 +283,10 @@ func detonate(actor: ThrowBody) -> void:
 	var strength = float(actor.spec.get("strength", 1.0))
 	explosion_serial += 1
 	world.spawn_effect("explosion", origin, radius / 34.0)
+	if actor.behavior == "firework":
+		ignite_area(origin, float(actor.spec.get("fireRadius", 80.0)), actor, 0.4)
+		for dx in [-24.0, 0.0, 24.0]:
+			add_fire(origin + Vector2(dx, -5.0), 24.0, float(actor.spec.get("fireSeconds", 1.4)))
 	for target in world.actors.duplicate():
 		if not is_instance_valid(target) or not target.alive or target == actor:
 			continue
@@ -316,6 +323,9 @@ func _draw() -> void:
 	for actor in world.actors:
 		if not is_instance_valid(actor) or not actor.alive:
 			continue
+		if actor.behavior == "firework" and actor.has_meta("fuse") and not actor.release_triggered:
+			var fuse_point = actor.to_global(Vector2(0.0, -actor.get_world_bounds().size.y * 0.45))
+			draw_texture_rect(fire_frames[frame], Rect2(fuse_point - Vector2(5, 14), Vector2(10, 16)), false)
 		if actor.burning or (actor.fuel_seconds > 0.0 and actor.behavior in ["campfire", "fuel_light"]):
 			var width = clampf(actor.get_world_bounds().size.x * 0.9, 30.0, 92.0)
 			draw_texture_rect(fire_frames[frame], Rect2(actor.global_position - Vector2(width * 0.5, width), Vector2(width, width)), false)
