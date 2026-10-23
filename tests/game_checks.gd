@@ -359,6 +359,10 @@ func _run() -> void:
 	var file = FileAccess.open("res://previews/game-checks.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t"))
 	print(JSON.stringify(report))
+	# The final waiting-speed check fires a shot immediately before shutdown.
+	# Let the audio thread consume its queued stop before releasing the scene.
+	game.shot_audio.stop()
+	await create_timer(0.25, true, false, true).timeout
 	game.queue_free()
 	await process_frame
 	await process_frame
