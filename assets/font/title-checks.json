@@ -1,0 +1,21 @@
+{
+  "title": "なんでもキャノン",
+  "glyphCount": 85,
+  "addedGlyphs": [
+    "な",
+    "も",
+    "ん",
+    "キ",
+    "ノ",
+    "ャ",
+    "ン"
+  ],
+  "unchangedGlyphFiles": 78,
+  "unchangedMetricRecords": 78,
+  "unchangedAtlasGlyphPixels": 78,
+  "sourceSymbols": 85,
+  "rebuildIdentical": true,
+  "browserUsed": false,
+  "renderer": "Node.js sharp from authored SVG glyphs",
+  "preview": "assets/font/title-preview.png"
+}

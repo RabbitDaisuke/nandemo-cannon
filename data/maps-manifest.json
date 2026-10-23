@@ -1,0 +1,842 @@
+{
+  "schemaVersion": 1,
+  "bodyKind": "static",
+  "sourceAliases": {
+    "16-subway-candidate": "18-subway-candidate",
+    "18-ice-store-candidate": "16-ice-floor"
+  },
+  "maps": [
+    {
+      "id": "01-poc",
+      "stage": 1,
+      "nameJa": "POC 平地",
+      "status": "specified",
+      "svg": "maps/01-poc.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "02-underground",
+      "stage": 2,
+      "nameJa": "POC 地下へ積む",
+      "status": "specified",
+      "svg": "maps/02-underground.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            350,
+            160,
+            190
+          ]
+        },
+        {
+          "rect": [
+            420,
+            350,
+            540,
+            190
+          ]
+        },
+        {
+          "rect": [
+            160,
+            500,
+            260,
+            40
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "03-moon",
+      "stage": 3,
+      "nameJa": "月面 クレーター",
+      "status": "specified",
+      "svg": "maps/03-moon.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "polygon": [
+            [
+              0,
+              426
+            ],
+            [
+              150,
+              426
+            ],
+            [
+              178,
+              446
+            ],
+            [
+              214,
+              446
+            ],
+            [
+              238,
+              466
+            ],
+            [
+              366,
+              466
+            ],
+            [
+              390,
+              446
+            ],
+            [
+              420,
+              446
+            ],
+            [
+              444,
+              426
+            ],
+            [
+              960,
+              426
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              0,
+              540
+            ]
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "04-alley",
+      "stage": 4,
+      "nameJa": "路地裏 燃やして消す",
+      "status": "specified",
+      "svg": "maps/04-alley.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            424,
+            960,
+            116
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "05-volcano",
+      "stage": 5,
+      "nameJa": "火山 燃える床",
+      "status": "specified",
+      "svg": "maps/05-volcano.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            430,
+            960,
+            110
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "06-rooftops",
+      "stage": 6,
+      "nameJa": "高層ビル 奈落",
+      "status": "specified",
+      "svg": "maps/06-rooftops.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            80,
+            400,
+            240,
+            140
+          ]
+        },
+        {
+          "rect": [
+            490,
+            450,
+            160,
+            90
+          ]
+        },
+        {
+          "rect": [
+            720,
+            320,
+            160,
+            220
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "07-home",
+      "stage": 7,
+      "nameJa": "家 洗濯機が邪魔",
+      "status": "specified",
+      "svg": "maps/07-home.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "08-ship",
+      "stage": 8,
+      "nameJa": "船 爆弾を3回",
+      "status": "specified",
+      "svg": "maps/08-ship.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            410,
+            960,
+            38
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "09-ninja",
+      "stage": 9,
+      "nameJa": "忍者 円形判定",
+      "status": "specified",
+      "svg": "maps/09-ninja.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "10-bowling",
+      "stage": 10,
+      "nameJa": "ボーリング場",
+      "status": "specified",
+      "svg": "maps/10-bowling.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "11-river",
+      "stage": 11,
+      "nameJa": "川 水と橋",
+      "status": "specified",
+      "svg": "maps/11-river.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            350,
+            120
+          ]
+        },
+        {
+          "rect": [
+            710,
+            420,
+            250,
+            120
+          ]
+        },
+        {
+          "rect": [
+            380,
+            330,
+            270,
+            22
+          ]
+        },
+        {
+          "rect": [
+            406,
+            352,
+            16,
+            150
+          ]
+        },
+        {
+          "rect": [
+            608,
+            352,
+            16,
+            150
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "12-washbasin",
+      "stage": 12,
+      "nameJa": "洗面台",
+      "status": "specified",
+      "svg": "maps/12-washbasin.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            350,
+            180,
+            190
+          ]
+        },
+        {
+          "polygon": [
+            [
+              180,
+              386
+            ],
+            [
+              226,
+              446
+            ],
+            [
+              226,
+              540
+            ],
+            [
+              180,
+              540
+            ]
+          ]
+        },
+        {
+          "rect": [
+            226,
+            480,
+            318,
+            60
+          ]
+        },
+        {
+          "polygon": [
+            [
+              544,
+              446
+            ],
+            [
+              590,
+              386
+            ],
+            [
+              590,
+              540
+            ],
+            [
+              544,
+              540
+            ]
+          ]
+        },
+        {
+          "rect": [
+            590,
+            350,
+            370,
+            190
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "13-gas-stove",
+      "stage": 13,
+      "nameJa": "ガスコンロ 水なし",
+      "status": "specified",
+      "svg": "maps/13-gas-stove.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            960,
+            120
+          ]
+        },
+        {
+          "rect": [
+            140,
+            404,
+            258,
+            16
+          ]
+        },
+        {
+          "rect": [
+            528,
+            404,
+            164,
+            16
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "14-imperial-castle",
+      "stage": 14,
+      "nameJa": "帝国城 全部入り",
+      "status": "specified",
+      "svg": "maps/14-imperial-castle.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            440,
+            110,
+            100
+          ]
+        },
+        {
+          "rect": [
+            110,
+            378,
+            220,
+            24
+          ]
+        },
+        {
+          "rect": [
+            110,
+            402,
+            34,
+            98
+          ]
+        },
+        {
+          "rect": [
+            296,
+            402,
+            34,
+            98
+          ]
+        },
+        {
+          "rect": [
+            110,
+            500,
+            220,
+            40
+          ]
+        },
+        {
+          "rect": [
+            526,
+            442,
+            134,
+            98
+          ]
+        },
+        {
+          "rect": [
+            660,
+            412,
+            300,
+            128
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "15-sandbox",
+      "stage": 15,
+      "nameJa": "砂場 なんでもあり",
+      "status": "specified",
+      "svg": "maps/15-sandbox.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            430,
+            960,
+            110
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "16-ice-floor",
+      "stage": 16,
+      "nameJa": "氷床 靴を足場に",
+      "status": "specified",
+      "svg": "maps/16-ice-floor.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            420,
+            184,
+            120
+          ]
+        },
+        {
+          "rect": [
+            184,
+            386,
+            166,
+            154
+          ]
+        },
+        {
+          "rect": [
+            350,
+            420,
+            610,
+            120
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "17-hollow-dais-candidate",
+      "stage": 17,
+      "nameJa": "候補 空洞の台座",
+      "status": "candidate-art-only",
+      "svg": "maps/17-hollow-dais-candidate.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            426,
+            960,
+            114
+          ]
+        },
+        {
+          "rect": [
+            136,
+            336,
+            324,
+            32
+          ]
+        },
+        {
+          "rect": [
+            136,
+            368,
+            38,
+            116
+          ]
+        },
+        {
+          "rect": [
+            422,
+            368,
+            38,
+            116
+          ]
+        },
+        {
+          "rect": [
+            136,
+            484,
+            324,
+            30
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "18-subway-candidate",
+      "stage": 18,
+      "nameJa": "候補 地下鉄跡",
+      "status": "candidate-art-only",
+      "svg": "maps/18-subway-candidate.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            428,
+            400,
+            112
+          ]
+        },
+        {
+          "rect": [
+            640,
+            428,
+            320,
+            112
+          ]
+        },
+        {
+          "rect": [
+            400,
+            540,
+            240,
+            24
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "19-aqueduct-candidate",
+      "stage": 19,
+      "nameJa": "候補 水道橋",
+      "status": "candidate-art-only",
+      "svg": "maps/19-aqueduct-candidate.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            80,
+            194,
+            700,
+            38
+          ]
+        },
+        {
+          "rect": [
+            104,
+            232,
+            46,
+            208
+          ]
+        },
+        {
+          "rect": [
+            304,
+            232,
+            46,
+            208
+          ]
+        },
+        {
+          "rect": [
+            504,
+            232,
+            46,
+            208
+          ]
+        },
+        {
+          "rect": [
+            704,
+            232,
+            46,
+            208
+          ]
+        },
+        {
+          "rect": [
+            0,
+            440,
+            260,
+            100
+          ]
+        },
+        {
+          "rect": [
+            560,
+            440,
+            400,
+            100
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "20-ruined-castle-candidate",
+      "stage": 20,
+      "nameJa": "候補 崩れた古城",
+      "status": "candidate-art-only",
+      "svg": "maps/20-ruined-castle-candidate.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "polygon": [
+            [
+              0,
+              450
+            ],
+            [
+              150,
+              450
+            ],
+            [
+              150,
+              420
+            ],
+            [
+              300,
+              420
+            ],
+            [
+              300,
+              468
+            ],
+            [
+              456,
+              468
+            ],
+            [
+              456,
+              410
+            ],
+            [
+              560,
+              410
+            ],
+            [
+              560,
+              460
+            ],
+            [
+              700,
+              460
+            ],
+            [
+              700,
+              422
+            ],
+            [
+              960,
+              422
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              0,
+              540
+            ]
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    }
+  ]
+}

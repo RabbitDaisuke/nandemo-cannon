@@ -1,0 +1,15 @@
+{
+	"checks": 103,
+	"engine": "4.7.2-stable (official)",
+	"failures": [],
+	"observations": {
+		"final_score": 700,
+		"finalize_seconds": 12.0083333333333,
+		"first_shot_bodies": 1,
+		"first_shot_score": 300,
+		"home_initial_score": 200
+	},
+	"status": "passed",
+	"suite": "game",
+	"verification": "Godot headless scene integration; no browser or rendered engine screenshot"
+}

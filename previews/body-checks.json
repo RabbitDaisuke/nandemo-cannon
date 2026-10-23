@@ -1,0 +1,25 @@
+{
+	"checks": [
+		"umbrella shaft participates in water containment",
+		"umbrella hook participates in water containment",
+		"umbrella empty space stays empty",
+		"upright skateboard recognizes wheel support",
+		"flipped skateboard uses a solid body surface",
+		"wheel contact slides farther than the flipped deck",
+		"upright boots recognize sole support",
+		"upside-down boots do not activate the soles",
+		"sole friction limits sliding on ice without fixing the body",
+		"a strong normal impact breaks and removes a fragile body",
+		"the floor support alone does not count as upper load",
+		"sustained upper load breaks after its hold duration"
+	],
+	"engine": "4.7.2-stable (official)",
+	"failures": [],
+	"measurements": {
+		"boots_inverted_px": 119.05810546875,
+		"boots_sole_px": 76.6129302978516,
+		"skateboard_flipped_px": 38.4562530517578,
+		"skateboard_upright_px": 147.54931640625
+	},
+	"passed": true
+}

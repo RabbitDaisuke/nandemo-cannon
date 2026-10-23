@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="miter" stroke-linecap="square">
+<symbol id="U0020" data-char=" " viewBox="0 0 8 16"></symbol>
+<symbol id="U0030" data-char="0" viewBox="0 0 8 16"><path d="M2 3H6V13H2ZM2 11L6 5"/></symbol>
+<symbol id="U0031" data-char="1" viewBox="0 0 8 16"><path d="M2 5L4 3V13M2 13H6"/></symbol>
+<symbol id="U0032" data-char="2" viewBox="0 0 8 16"><path d="M2 3H6V7L2 11V13H6"/></symbol>
+<symbol id="U0033" data-char="3" viewBox="0 0 8 16"><path d="M2 3H6V13H2M3 8H6"/></symbol>
+<symbol id="U0034" data-char="4" viewBox="0 0 8 16"><path d="M2 3V8H6M6 3V13"/></symbol>
+<symbol id="U0035" data-char="5" viewBox="0 0 8 16"><path d="M6 3H2V8H6V13H2"/></symbol>
+<symbol id="U0036" data-char="6" viewBox="0 0 8 16"><path d="M6 3H2V13H6V8H2"/></symbol>
+<symbol id="U0037" data-char="7" viewBox="0 0 8 16"><path d="M2 3H6V7L4 9V13"/></symbol>
+<symbol id="U0038" data-char="8" viewBox="0 0 8 16"><path d="M2 3H6V13H2ZM2 8H6"/></symbol>
+<symbol id="U0039" data-char="9" viewBox="0 0 8 16"><path d="M6 8H2V3H6V13H2"/></symbol>
+<symbol id="U0041" data-char="A" viewBox="0 0 8 16"><path d="M2 13V5L4 3L6 5V13M2 9H6"/></symbol>
+<symbol id="U0042" data-char="B" viewBox="0 0 8 16"><path d="M2 3V13H5L6 12V9L5 8L6 7V4L5 3ZM2 8H5"/></symbol>
+<symbol id="U0043" data-char="C" viewBox="0 0 8 16"><path d="M6 3H3L2 4V12L3 13H6"/></symbol>
+<symbol id="U0044" data-char="D" viewBox="0 0 8 16"><path d="M2 3V13H4L6 11V5L4 3Z"/></symbol>
+<symbol id="U0045" data-char="E" viewBox="0 0 8 16"><path d="M6 3H2V13H6M2 8H5"/></symbol>
+<symbol id="U0046" data-char="F" viewBox="0 0 8 16"><path d="M6 3H2V13M2 8H5"/></symbol>
+<symbol id="U0047" data-char="G" viewBox="0 0 8 16"><path d="M6 3H2V13H6V8H4"/></symbol>
+<symbol id="U0048" data-char="H" viewBox="0 0 8 16"><path d="M2 3V13M6 3V13M2 8H6"/></symbol>
+<symbol id="U0049" data-char="I" viewBox="0 0 8 16"><path d="M2 3H6M4 3V13M2 13H6"/></symbol>
+<symbol id="U004A" data-char="J" viewBox="0 0 8 16"><path d="M2 3H6V12L5 13H2V10"/></symbol>
+<symbol id="U004B" data-char="K" viewBox="0 0 8 16"><path d="M2 3V13M6 3L2 8L6 13"/></symbol>
+<symbol id="U004C" data-char="L" viewBox="0 0 8 16"><path d="M2 3V13H6"/></symbol>
+<symbol id="U004D" data-char="M" viewBox="0 0 8 16"><path d="M1 13V3L4 7L7 3V13"/></symbol>
+<symbol id="U004E" data-char="N" viewBox="0 0 8 16"><path d="M2 13V3L6 13V3"/></symbol>
+<symbol id="U004F" data-char="O" viewBox="0 0 8 16"><path d="M2 3H6V13H2Z"/></symbol>
+<symbol id="U0050" data-char="P" viewBox="0 0 8 16"><path d="M2 13V3H6V8H2"/></symbol>
+<symbol id="U0051" data-char="Q" viewBox="0 0 8 16"><path d="M2 3H6V13H2ZM4 10L7 14"/></symbol>
+<symbol id="U0052" data-char="R" viewBox="0 0 8 16"><path d="M2 13V3H6V8H2M4 8L6 13"/></symbol>
+<symbol id="U0053" data-char="S" viewBox="0 0 8 16"><path d="M6 3H2V8H6V13H2"/></symbol>
+<symbol id="U0054" data-char="T" viewBox="0 0 8 16"><path d="M1 3H7M4 3V13"/></symbol>
+<symbol id="U0055" data-char="U" viewBox="0 0 8 16"><path d="M2 3V13H6V3"/></symbol>
+<symbol id="U0056" data-char="V" viewBox="0 0 8 16"><path d="M1 3L4 13L7 3"/></symbol>
+<symbol id="U0057" data-char="W" viewBox="0 0 8 16"><path d="M1 3V13L4 9L7 13V3"/></symbol>
+<symbol id="U0058" data-char="X" viewBox="0 0 8 16"><path d="M2 3L6 13M6 3L2 13"/></symbol>
+<symbol id="U0059" data-char="Y" viewBox="0 0 8 16"><path d="M1 3L4 8L7 3M4 8V13"/></symbol>
+<symbol id="U005A" data-char="Z" viewBox="0 0 8 16"><path d="M2 3H6L2 13H6"/></symbol>
+<symbol id="U002F" data-char="/" viewBox="0 0 8 16"><path d="M6 3L2 13"/></symbol>
+<symbol id="U002D" data-char="-" viewBox="0 0 8 16"><path d="M2 8H6"/></symbol>
+<symbol id="U002E" data-char="." viewBox="0 0 8 16"><path d="M3 13H4"/></symbol>
+<symbol id="U003A" data-char=":" viewBox="0 0 8 16"><path d="M3 5H4M3 11H4"/></symbol>
+<symbol id="U0025" data-char="%" viewBox="0 0 8 16"><path d="M2 3H3V5H2ZM5 11H6V13H5ZM6 3L2 13"/></symbol>
+<symbol id="U002B" data-char="+" viewBox="0 0 8 16"><path d="M1 8H7M4 5V11"/></symbol>
+<symbol id="U00B0" data-char="°" viewBox="0 0 8 16"><path d="M2 2H5V5H2Z"/></symbol>
+<symbol id="U4E0D" data-char="不" viewBox="0 0 16 16"><path d="M1 2H15M9 2L7 7L2 11M8 6V15M11 7L15 11"/></symbol>
+<symbol id="U6CD5" data-char="法" viewBox="0 0 16 16"><path d="M1 2L3 3M1 6L3 7M1 14L4 10M6 4H14M10 1V8M5 8H15M10 8L6 14H14L12 11"/></symbol>
+<symbol id="U6295" data-char="投" viewBox="0 0 16 16"><path d="M1 5H5M3 1V14H1M1 10L5 8M7 6V2H12V6H15M7 9H14L11 13L6 15M8 10L10 13L15 15"/></symbol>
+<symbol id="U68C4" data-char="棄" viewBox="0 0 16 16"><path d="M8 1V2M1 3H15M6 3L4 6H13L11 4M3 8H13M5 7V10H11V7M1 12H15M8 10V15M6 12L2 15M10 12L14 15"/></symbol>
+<symbol id="U4EEE" data-char="仮" viewBox="0 0 16 16"><path d="M4 1L1 7M3 5V15M7 2H15M7 2V10L5 15M8 6H14L12 11L8 15M9 7L11 12L15 15"/></symbol>
+<symbol id="U5F97" data-char="得" viewBox="0 0 16 16"><path d="M4 1L1 4M4 5L1 9M3 7V15M7 1H14V6H7ZM7 3H14M6 8H15M6 11H15M12 8V15H10M7 12L8 13"/></symbol>
+<symbol id="U70B9" data-char="点" viewBox="0 0 16 16"><path d="M7 1V6M8 3H14M3 6H13V10H3ZM3 12L1 15M6 12V15M10 12V15M13 12L15 15"/></symbol>
+<symbol id="U6B8B" data-char="残" viewBox="0 0 16 16"><path d="M1 2H7M4 2L2 8M3 6H7L5 12L1 15M2 9L5 11M9 4L15 3M8 7L15 6M10 1L11 10L14 15L15 12M14 9L8 14"/></symbol>
+<symbol id="U308A" data-char="り" viewBox="0 0 16 16"><path d="M4 2V8L5 6M11 2V10L9 14L6 15"/></symbol>
+<symbol id="U6B21" data-char="次" viewBox="0 0 16 16"><path d="M1 3L4 5M1 13L4 9M8 1L6 6M7 4H14L13 7M10 5V9L8 12L5 15M10 9L12 12L15 15"/></symbol>
+<symbol id="U89D2" data-char="角" viewBox="0 0 16 16"><path d="M6 1L2 5M5 2H11L9 5M3 5H13V15H11M3 5V12L1 15M3 8H13M3 11H13M8 5V14"/></symbol>
+<symbol id="U5EA6" data-char="度" viewBox="0 0 16 16"><path d="M8 1V2M2 3H15M2 3V12L1 15M3 6H15M6 4V8H12V4M4 10H13L9 13L4 15M6 11L10 14L15 15"/></symbol>
+<symbol id="U706B" data-char="火" viewBox="0 0 16 16"><path d="M8 1V8L5 12L1 15M8 8L11 12L15 15M2 4L3 8M14 3L12 7"/></symbol>
+<symbol id="U529B" data-char="力" viewBox="0 0 16 16"><path d="M2 5H14L13 14H9M8 1L7 8L5 12L1 15"/></symbol>
+<symbol id="U767A" data-char="発" viewBox="0 0 16 16"><path d="M2 2H7L5 5L1 8M2 3L4 5M10 1L12 4L15 6M13 1L11 3M15 3L13 5M5 7H11M2 10H14M6 7V12L3 15M10 7V14H14V12"/></symbol>
+<symbol id="U5C04" data-char="射" viewBox="0 0 16 16"><path d="M5 1L3 3M3 3H8V14H5M3 6H8M3 9H8M1 12L8 10M3 3V10M10 5H15M13 1V15H10M10 8L11 10"/></symbol>
+<symbol id="U6C34" data-char="水" viewBox="0 0 16 16"><path d="M8 1V15H5M1 5H5L4 9L1 12M9 5L12 10L15 13M14 3L10 6"/></symbol>
+<symbol id="U6C37" data-char="氷" viewBox="0 0 16 16"><path d="M8 1V15H5M1 6H5L4 10L1 13M9 5L12 10L15 13M14 3L10 6M3 1L5 3"/></symbol>
+<symbol id="U5E8A" data-char="床" viewBox="0 0 16 16"><path d="M8 1V2M2 3H15M2 3V12L1 15M4 7H14M9 4V15M9 8L5 13M10 8L15 13"/></symbol>
+<symbol id="U30B7" data-char="シ" viewBox="0 0 16 16"><path d="M3 2L6 4M2 6L5 8M3 14L8 12L12 8L14 3"/></symbol>
+<symbol id="U30E5" data-char="ュ" viewBox="0 0 16 16"><path d="M4 7H11L10 13M2 13H14"/></symbol>
+<symbol id="U30FC" data-char="ー" viewBox="0 0 16 16"><path d="M2 8H14"/></symbol>
+<symbol id="U30C8" data-char="ト" viewBox="0 0 16 16"><path d="M6 1V15M6 6L13 9"/></symbol>
+<symbol id="U30C9" data-char="ド" viewBox="0 0 16 16"><path d="M5 1V15M5 6L12 9M11 1V3M14 1V3"/></symbol>
+<symbol id="U30E9" data-char="ラ" viewBox="0 0 16 16"><path d="M4 2H12M2 6H14L12 10L9 13L5 15"/></symbol>
+<symbol id="U30C3" data-char="ッ" viewBox="0 0 16 16"><path d="M3 7L4 10M7 6L8 9M13 6L11 12L7 15"/></symbol>
+<symbol id="U30B0" data-char="グ" viewBox="0 0 16 16"><path d="M6 2L2 7M5 4H13L11 10L8 13L4 15M11 1V2M14 1V2"/></symbol>
+<symbol id="U3067" data-char="で" viewBox="0 0 16 16"><path d="M2 4H14L9 6L7 9V12L10 14H13M12 7V9M15 7V9"/></symbol>
+<symbol id="U8ABF" data-char="調" viewBox="0 0 16 16"><path d="M2 1H4M1 4H5M2 7H4M2 9H4M1 11H5V15H1ZM7 2H15V15H13M7 2V12L6 15M9 5H13M11 3V8M9 8H13M9 10H13V13H9Z"/></symbol>
+<symbol id="U6574" data-char="整" viewBox="0 0 16 16"><path d="M1 2H8M4 1V8M1 4H7V6H1ZM4 6L1 8M5 7L7 8M11 1L9 4M10 3H15M13 3L12 6L9 8M10 4L12 6L15 8M2 10H14M8 10V14M8 12H13M4 11V14M1 15H15"/></symbol>
+<symbol id="U30FB" data-char="・" viewBox="0 0 8 16"><path d="M3 8H4"/></symbol>
+<symbol id="U30AF" data-char="ク" viewBox="0 0 16 16"><path d="M6 2L2 7M5 4H13L11 10L8 13L4 15"/></symbol>
+<symbol id="U30EA" data-char="リ" viewBox="0 0 16 16"><path d="M4 2V8M12 2V10L10 13L6 15"/></symbol>
+<symbol id="U2605" data-char="★" viewBox="0 0 16 16"><path d="M8 1L10 6H15L11 9L13 14L8 11L3 14L5 9L1 6H6Z"/></symbol>
+<symbol id="U306A" data-char="な" viewBox="0 0 16 16"><path d="M1 4H8M5 1L4 7L1 11M10 3L14 5M11 7V12L9 14H6L5 12L7 10H10L14 13"/></symbol>
+<symbol id="U3093" data-char="ん" viewBox="0 0 16 16"><path d="M9 1L3 13M5 9L8 7L10 8V12L11 14H13L15 10"/></symbol>
+<symbol id="U3082" data-char="も" viewBox="0 0 16 16"><path d="M7 1L5 10V12L7 14H11L14 11V8M2 4H11M1 8H10"/></symbol>
+<symbol id="U30AD" data-char="キ" viewBox="0 0 16 16"><path d="M2 5L13 3M1 10L14 8M6 1L9 15"/></symbol>
+<symbol id="U30E3" data-char="ャ" viewBox="0 0 16 16"><path d="M2 9L13 6L11 10M6 5L9 15"/></symbol>
+<symbol id="U30CE" data-char="ノ" viewBox="0 0 16 16"><path d="M13 2L11 7L7 11L2 14"/></symbol>
+<symbol id="U30F3" data-char="ン" viewBox="0 0 16 16"><path d="M3 3L6 5M3 14L8 12L12 8L14 3"/></symbol>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "objects": 117,
+  "maps": 20,
+  "specifiedStages": 16,
+  "fontGlyphs": 85,
+  "animationFamilies": 8,
+  "assetRenderer": "Node.js + sharp/librsvg",
+  "gameRenderer": "Godot 4.7.2 Compatibility / WebGL 2",
+  "browserUsed": false,
+  "originalArtwork": "hand-authored SVG",
+  "gameRuntimeIncluded": true
+}

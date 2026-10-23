@@ -1,0 +1,23 @@
+{
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "Compatibility / WebGL 2",
+  "threads": false,
+  "sourcePatched": false,
+  "wasmBytes": 39514754,
+  "wasmSHA256": "fc74679e3b97f76878947fcd4fbe1268cbfa6188182a2e33bbc3f5dc9bfa57d0",
+  "gzipBytes": 10153810,
+  "compressedTransportChecks": 3,
+  "cdnProvider": "Statically",
+  "gameBytes": 924304,
+  "wasmCompilation": "passed",
+  "officialJSCDNRouting": "passed",
+  "exportedPCKSmoke": "passed",
+  "remoteVerification": null,
+  "browserTests": "not run",
+  "pagesProduced": false,
+  "output": {
+    "standalone": "out/standalone",
+    "runtime": "out/runtime/godot/4.7.2",
+    "pages": null
+  }
+}

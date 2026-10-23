@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "delivery": "browser",
+  "requiredBrowserFamilies": ["Safari", "Chrome", "Firefox"],
+  "minimumBrowserVersions": null,
+  "engine": {
+    "name": "Godot",
+    "majorVersion": 4,
+    "exactVersion": "4.7.2.stable.official.ed1daf0bf",
+    "language": "GDScript",
+    "renderer": "Compatibility",
+    "execution": "WebAssembly",
+    "graphics": "WebGL 2",
+    "threadSupport": false,
+    "extensionSupport": false,
+    "webGpuRequired": false,
+    "status": "implemented-exported-headless-verified; actual browser validation pending"
+  },
+  "distribution": {
+    "https": true,
+    "wasmMimeType": "application/wasm",
+    "wasmTransport": "real .wasm.gz via Statically, SHA256 checked and decompressed in the browser; no raw or split fallback",
+    "deployment": "root build.sh -> GitHub Actions -> cdn-assets Git branch and GitHub Pages",
+    "nativeInstallRequired": false,
+    "nodeJsRequiredForPlayer": false
+  },
+  "assetSource": "SVG",
+  "productionTextures": "Godot SVG import; maps and custom font atlas rasterized using Node.js sharp",
+  "content": {"objects": 117, "maps": 20, "playableStages": 16, "previewStages": 4, "shotsPerStage": 15},
+  "validation": {
+    "nodeSvgRendering": "passed",
+    "localBrowserUsed": false,
+    "webBuildProduced": true,
+    "headlessGodot": "passed",
+    "wasmTransportAndCompileStreaming": "gzip and already HTTP-decoded responses compiled; corrupt bytes rejected",
+    "remoteStaticallyDeployment": "not-run: target repository not supplied",
+    "Safari": "not-tested",
+    "Chrome": "not-tested",
+    "Firefox": "not-tested"
+  }
+}

@@ -1,0 +1,643 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.9818181818182,
+				"worldScale": 0.509090909090909,
+				"worldWidth": 56.0
+			},
+			"rotation": 0.00000193588380170695,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-28.0,
+				-25.9636363983154
+			],
+			"visualScale": [
+				0.509090900421143,
+				0.509090900421143
+			],
+			"x": 160.000106811523,
+			"y": 395.5068359375
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.9818181818182,
+				"worldScale": 0.509090909090909,
+				"worldWidth": 56.0
+			},
+			"rotation": 0.00000193588380170695,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-28.0,
+				-25.9636363983154
+			],
+			"visualScale": [
+				0.509090900421143,
+				0.509090900421143
+			],
+			"x": 220.000106811523,
+			"y": 395.5068359375
+		},
+		{
+			"burning": true,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "trash-bag",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							14.0,
+							8.0,
+							100.0,
+							112.0
+						]
+					}
+				],
+				"id": "trash-bag",
+				"mass": 2.0,
+				"material": "paper",
+				"nameJa": "ごみ袋",
+				"opaquePixels": 8101.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					51.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/trash-bag.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/trash-bag.svg",
+				"viewBox": [
+					13.0,
+					7.0,
+					102.0,
+					114.0
+				],
+				"webp": "raster/objects/trash-bag.webp",
+				"worldHeight": 53.6470588235294,
+				"worldScale": 0.470588235294118,
+				"worldWidth": 48.0
+			},
+			"rotation": 0.0000013965016023576,
+			"texture": "res://assets/objects/trash-bag.svg",
+			"tint": "ffc291ff",
+			"visualPosition": [
+				-24.0,
+				-26.8235301971436
+			],
+			"visualScale": [
+				0.470588237047195,
+				0.470588237047195
+			],
+			"x": 296.000061035156,
+			"y": 397.659210205078
+		},
+		{
+			"burning": true,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "newspaper",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							18.0,
+							104.0,
+							92.0
+						]
+					}
+				],
+				"id": "newspaper",
+				"mass": 1.0,
+				"material": "paper",
+				"nameJa": "新聞束",
+				"opaquePixels": 9448.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					55.0,
+					47.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/newspaper.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/newspaper.svg",
+				"viewBox": [
+					9.0,
+					17.0,
+					106.0,
+					94.0
+				],
+				"webp": "raster/objects/newspaper.webp",
+				"worldHeight": 35.4716981132075,
+				"worldScale": 0.377358490566038,
+				"worldWidth": 40.0
+			},
+			"rotation": 0.00519723258912563,
+			"texture": "res://assets/objects/newspaper.svg",
+			"tint": "ffc291ff",
+			"visualPosition": [
+				-20.7547168731689,
+				-17.7358493804932
+			],
+			"visualScale": [
+				0.377358496189117,
+				0.377358496189117
+			],
+			"x": 355.581939697266,
+			"y": 406.795959472656
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		424.0
+	],
+	"controls": [
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 24,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				14.0,
+				9.0,
+				204.0,
+				30.0
+			],
+			"text": "なんでもキャノン",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				280.0,
+				12.0,
+				120.0,
+				25.0
+			],
+			"text": "仮得点 0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				455.0,
+				12.0,
+				110.0,
+				25.0
+			],
+			"text": "残り 14/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				614.0,
+				12.0,
+				22.0,
+				25.0
+			],
+			"text": "次",
+			"type": "label"
+		},
+		{
+			"rect": [
+				646.0,
+				4.0,
+				42.0,
+				42.0
+			],
+			"texture": "res://assets/objects/flamethrower.svg",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				618.0,
+				48.0,
+				68.0,
+				12.5
+			],
+			"text": "FLAMETHROWER",
+			"type": "label"
+		},
+		{
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				713.0,
+				8.0,
+				70.0,
+				33.0
+			],
+			"text": "MAP",
+			"type": "button"
+		},
+		{
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				790.0,
+				8.0,
+				83.0,
+				33.0
+			],
+			"text": "RETRY",
+			"type": "button"
+		},
+		{
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				880.0,
+				8.0,
+				68.0,
+				33.0
+			],
+			"text": "SEED",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "c8e5edff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				16.0,
+				48.0,
+				74.0,
+				16.25
+			],
+			"text": "04 / ALLEY",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				16.0,
+				515.0,
+				381.0,
+				16.25
+			],
+			"text": "BURN THE TRASH. THEN USE WATER ON THE BURNING FLOOR.",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				708.0,
+				116.0,
+				167.0,
+				20.0
+			],
+			"text": "角度 35°   火力 34%",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				716.0,
+				151.0,
+				220.0,
+				24.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				716.0,
+				185.0,
+				220.0,
+				24.0
+			],
+			"type": "slider",
+			"value": 34.0
+		},
+		{
+			"align": 0,
+			"color": "c8e5edff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				720.0,
+				224.0,
+				97.0,
+				16.25
+			],
+			"text": "ドラッグで調整",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "c8e5edff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				720.0,
+				245.0,
+				97.0,
+				16.25
+			],
+			"text": "クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {
+		"fire": 1
+	},
+	"droplets": [],
+	"elapsed": 2.92499999999999,
+	"firePatches": [
+		{
+			"radius": 30.0,
+			"source": false,
+			"x": 300.931396484375,
+			"y": 382.550018310547
+		},
+		{
+			"radius": 30.0,
+			"source": false,
+			"x": 335.931396484375,
+			"y": 382.550018310547
+		},
+		{
+			"radius": 30.0,
+			"source": false,
+			"x": 370.931396484375,
+			"y": 382.550018310547
+		},
+		{
+			"radius": 26.0,
+			"source": false,
+			"x": 296.000061035156,
+			"y": 417.0
+		},
+		{
+			"radius": 26.0,
+			"source": false,
+			"x": 355.1015625,
+			"y": 417.0
+		}
+	],
+	"map": "04-alley",
+	"playable": true,
+	"power": 0.34,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreZone": [
+		88.0,
+		70.0,
+		420.0,
+		354.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 1,
+	"stage": 4,
+	"trajectory": [
+		[
+			672.384460449219,
+			274.404602050781,
+			0.94
+		],
+		[
+			650.269409179688,
+			264.211486816406,
+			0.88
+		],
+		[
+			628.154357910156,
+			257.546356201172,
+			0.82
+		],
+		[
+			606.039306640625,
+			254.409210205078,
+			0.76
+		],
+		[
+			583.924255371094,
+			254.800079345703,
+			0.7
+		],
+		[
+			561.809204101562,
+			258.718963623047,
+			0.64
+		],
+		[
+			539.694091796875,
+			266.165832519531,
+			0.58
+		],
+		[
+			517.5791015625,
+			277.140716552734,
+			0.52
+		],
+		[
+			495.463989257812,
+			291.6435546875,
+			0.46
+		],
+		[
+			473.348937988281,
+			309.674438476562,
+			0.4
+		]
+	],
+	"waterCells": [],
+	"waterRegions": []
+}

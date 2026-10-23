@@ -1,0 +1,468 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "grip-boots",
+			"record": {
+				"behavior": "grip_sole",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "boots",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								22.0,
+								20.0
+							],
+							[
+								56.0,
+								20.0
+							],
+							[
+								56.0,
+								72.0
+							],
+							[
+								74.0,
+								84.0
+							],
+							[
+								74.0,
+								104.0
+							],
+							[
+								12.0,
+								104.0
+							],
+							[
+								12.0,
+								80.0
+							],
+							[
+								22.0,
+								72.0
+							]
+						]
+					},
+					{
+						"polygon": [
+							[
+								72.0,
+								14.0
+							],
+							[
+								106.0,
+								14.0
+							],
+							[
+								106.0,
+								68.0
+							],
+							[
+								122.0,
+								80.0
+							],
+							[
+								122.0,
+								100.0
+							],
+							[
+								64.0,
+								100.0
+							],
+							[
+								64.0,
+								78.0
+							],
+							[
+								72.0,
+								68.0
+							]
+						]
+					},
+					{
+						"rect": [
+							10.0,
+							104.0,
+							66.0,
+							18.0
+						]
+					},
+					{
+						"rect": [
+							64.0,
+							100.0,
+							60.0,
+							18.0
+						]
+					}
+				],
+				"id": "grip-boots",
+				"mass": 5.0,
+				"material": "rubber",
+				"nameJa": "滑り止め付きの靴",
+				"opaquePixels": 9528.0,
+				"physics": {
+					"burnSeconds": 6.0,
+					"explosionResistance": 0.65,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.85,
+					"otherIceFriction": 0.025,
+					"restitution": 0.45,
+					"soleFixtures": [
+						2.0,
+						3.0
+					],
+					"soleIceFriction": 0.95,
+					"soleNormalMinDot": 0.6,
+					"stability": "no world anchoring; tipping and overload can move the boots",
+					"upperFriction": 0.8
+				},
+				"pivotCropped": [
+					57.0,
+					53.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/grip-boots.png",
+				"score": 200.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/grip-boots.svg",
+				"viewBox": [
+					7.0,
+					11.0,
+					120.0,
+					112.0
+				],
+				"webp": "raster/objects/grip-boots.webp",
+				"worldHeight": 50.4,
+				"worldScale": 0.45,
+				"worldWidth": 54.0
+			},
+			"rotation": 1.8085640668869,
+			"texture": "res://assets/objects/grip-boots.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-25.6499996185303,
+				-23.8499984741211
+			],
+			"visualScale": [
+				0.449999988079071,
+				0.449999988079071
+			],
+			"x": 475.849945068359,
+			"y": 396.390594482422
+		}
+	],
+	"angle": 38.0,
+	"cannon": [
+		810.0,
+		420.0
+	],
+	"controls": [
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 24,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				14.0,
+				9.0,
+				204.0,
+				30.0
+			],
+			"text": "なんでもキャノン",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				280.0,
+				12.0,
+				120.0,
+				25.0
+			],
+			"text": "仮得点 0200",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				455.0,
+				12.0,
+				110.0,
+				25.0
+			],
+			"text": "残り 13/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 2,
+			"rect": [
+				614.0,
+				12.0,
+				22.0,
+				25.0
+			],
+			"text": "次",
+			"type": "label"
+		},
+		{
+			"rect": [
+				646.0,
+				4.0,
+				42.0,
+				42.0
+			],
+			"texture": "res://assets/objects/plank.svg",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				618.0,
+				48.0,
+				29.0,
+				12.5
+			],
+			"text": "PLANK",
+			"type": "label"
+		},
+		{
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				713.0,
+				8.0,
+				70.0,
+				33.0
+			],
+			"text": "MAP",
+			"type": "button"
+		},
+		{
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				790.0,
+				8.0,
+				83.0,
+				33.0
+			],
+			"text": "RETRY",
+			"type": "button"
+		},
+		{
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				880.0,
+				8.0,
+				68.0,
+				33.0
+			],
+			"text": "SEED",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "c8e5edff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				16.0,
+				48.0,
+				103.0,
+				16.25
+			],
+			"text": "16 / ICE FLOOR",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				16.0,
+				515.0,
+				439.0,
+				16.25
+			],
+			"text": "ALL ITEMS SLIDE. BOOT SOLES GRIP ICE. UPSIDE DOWN THEY SLIP.",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				708.0,
+				116.0,
+				167.0,
+				20.0
+			],
+			"text": "角度 38°   火力 42%",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				716.0,
+				151.0,
+				220.0,
+				24.0
+			],
+			"type": "slider",
+			"value": 38.0
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				716.0,
+				185.0,
+				220.0,
+				24.0
+			],
+			"type": "slider",
+			"value": 42.0
+		},
+		{
+			"align": 0,
+			"color": "c8e5edff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				720.0,
+				224.0,
+				97.0,
+				16.25
+			],
+			"text": "ドラッグで調整",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "c8e5edff",
+			"fontSize": 13,
+			"outline": "081421ff",
+			"outlineSize": 1,
+			"rect": [
+				720.0,
+				245.0,
+				97.0,
+				16.25
+			],
+			"text": "クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {
+		"abyss": 1
+	},
+	"droplets": [],
+	"elapsed": 5.35833333333339,
+	"firePatches": [],
+	"map": "16-ice-floor",
+	"playable": true,
+	"power": 0.42,
+	"recoil": 0.0,
+	"result": false,
+	"score": 200,
+	"scoreZone": [
+		65.0,
+		70.0,
+		500.0,
+		350.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 2,
+	"stage": 16,
+	"trajectory": [
+		[
+			660.106994628906,
+			249.654708862305,
+			0.94
+		],
+		[
+			632.355590820312,
+			233.264953613281,
+			0.88
+		],
+		[
+			604.604248046875,
+			220.403213500977,
+			0.82
+		],
+		[
+			576.852844238281,
+			211.069458007812,
+			0.76
+		],
+		[
+			549.101501464844,
+			205.263702392578,
+			0.7
+		],
+		[
+			521.35009765625,
+			202.985961914062,
+			0.64
+		],
+		[
+			493.598754882812,
+			204.236206054688,
+			0.58
+		],
+		[
+			465.847381591797,
+			209.014465332031,
+			0.52
+		],
+		[
+			438.096008300781,
+			217.320709228516,
+			0.46
+		],
+		[
+			410.344635009766,
+			229.15495300293,
+			0.4
+		]
+	],
+	"waterCells": [],
+	"waterRegions": []
+}

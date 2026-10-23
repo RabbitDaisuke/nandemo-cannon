@@ -1,0 +1,32 @@
+{
+  "objects": 117,
+  "maps": 20,
+  "stagesWith15Shots": 16,
+  "croppedSpritesChecked": 117,
+  "uniqueRenderedSprites": 117,
+  "animationFrames": 34,
+  "checks": [
+    "117 unique SVG artworks without embedded raster images",
+    "UTF-8 catalog and SVG reads",
+    "Each sprite has at most 2px outer transparency after cropping",
+    "All manifest references and collider dimensions valid",
+    "16 specified stages each contain exactly 15 launch items",
+    "Stage 8 has three bomb slots and explicit tutorial fracture rule",
+    "Stage 13 has no water or cold tools",
+    "Stage 16 has permanent ice and sole-grip boots",
+    "6-second flamethrower lifecycle data consistent",
+    "All animated GIF frames present",
+    "Custom font HUD coverage and BMFont character count consistent",
+    "20 maps have static terrain data",
+    "Flamethrower GIF contains exactly 6000ms of active flame",
+    "Logs are flammable; dollar sack never spawns contents",
+    "Fragile objects have separate impact and sustained-load thresholds; debris is non-colliding"
+  ],
+  "limits": [
+    "This report records original SVG asset checks; current runtime checks are in previews/*-checks.json",
+    "Godot 4.7.2 headless tests and Web export passed; mobile FPS, actual browsers and level balance remain unverified",
+    "Object box/circle colliders include intentional approximations",
+    "Japanese font covers HUD glyphs only"
+  ],
+  "flameGifActiveMilliseconds": 6000
+}

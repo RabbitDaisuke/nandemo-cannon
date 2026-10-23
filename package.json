@@ -1,0 +1,14 @@
+{
+  "name": "nandemo-cannon",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Godot 4.7.2 browser physics game. Direct SVG artwork, WebAssembly, single-thread WebGL 2.",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "build": "bash build.sh",
+    "check": "bash build.sh check",
+    "preview:art": "bash build.sh preview"
+  },
+  "devDependencies": {"sharp": "0.35.5"}
+}

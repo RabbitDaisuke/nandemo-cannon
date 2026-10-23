@@ -1,0 +1,156 @@
+{
+  "fire": {
+    "frames": [
+      "effects/fire-0.svg",
+      "effects/fire-1.svg",
+      "effects/fire-2.svg",
+      "effects/fire-3.svg",
+      "effects/fire-4.svg",
+      "effects/fire-5.svg"
+    ],
+    "fps": 12,
+    "loop": true,
+    "runtimeFormat": "raster/effects/fire-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "splash": {
+    "frames": [
+      "effects/splash-0.svg",
+      "effects/splash-1.svg",
+      "effects/splash-2.svg",
+      "effects/splash-3.svg"
+    ],
+    "fps": 12,
+    "loop": false,
+    "runtimeFormat": "raster/effects/splash-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "explosion": {
+    "frames": [
+      "effects/explosion-0.svg",
+      "effects/explosion-1.svg",
+      "effects/explosion-2.svg",
+      "effects/explosion-3.svg",
+      "effects/explosion-4.svg",
+      "effects/explosion-5.svg"
+    ],
+    "fps": 15,
+    "loop": false,
+    "runtimeFormat": "raster/effects/explosion-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "ice-burst": {
+    "frames": [
+      "effects/ice-burst-0.svg",
+      "effects/ice-burst-1.svg",
+      "effects/ice-burst-2.svg",
+      "effects/ice-burst-3.svg"
+    ],
+    "fps": 12,
+    "loop": false,
+    "runtimeFormat": "raster/effects/ice-burst-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "water-source": {
+    "frames": [
+      "effects/water-source-0.svg",
+      "effects/water-source-1.svg"
+    ],
+    "fps": 4,
+    "loop": true,
+    "runtimeFormat": "raster/effects/water-source-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "water-flow": {
+    "frames": [
+      "effects/water-flow-0.svg",
+      "effects/water-flow-1.svg"
+    ],
+    "fps": 6,
+    "loop": true,
+    "runtimeFormat": "raster/effects/water-flow-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "shatter": {
+    "frames": [
+      "effects/shatter-0.svg",
+      "effects/shatter-1.svg",
+      "effects/shatter-2.svg",
+      "effects/shatter-3.svg"
+    ],
+    "fps": 12,
+    "loop": false,
+    "runtimeFormat": "raster/effects/shatter-strip.png",
+    "frameSize": [
+      64,
+      64
+    ],
+    "anchor": [
+      32,
+      58
+    ]
+  },
+  "flame-jet": {
+    "frames": [
+      "effects/flame-jet-0.svg",
+      "effects/flame-jet-1.svg",
+      "effects/flame-jet-2.svg",
+      "effects/flame-jet-3.svg",
+      "effects/flame-jet-4.svg",
+      "effects/flame-jet-5.svg"
+    ],
+    "fps": 12,
+    "loop": true,
+    "anchor": [
+      174,
+      32
+    ],
+    "direction": [
+      -1,
+      0
+    ],
+    "durationSeconds": 6
+  }
+}
