@@ -12,7 +12,9 @@ const generated = path.join(root, 'assets/generated');
 const sourcePaths = process.argv.slice(2);
 await fs.mkdir(generated, {recursive:true});
 // Optional three input files: cannon sheet, glyph sheet, logo. Preserve originals.
-if (sourcePaths[0] === '--kana') {
+if (sourcePaths[0] === '--glyph-a') {
+  await sharp(sourcePaths[1]).webp({lossless:true,quality:100,effort:6}).toFile(path.join(generated,'katakana-a.webp'));
+} else if (sourcePaths[0] === '--kana') {
   if (sourcePaths.length !== 3) throw new Error('Expected hiragana and katakana source paths.');
   for (const [i,name] of ['hiragana-sheet','katakana-sheet'].entries()) await sharp(sourcePaths[i+1]).webp({lossless:true,quality:100,effort:6}).toFile(path.join(generated,`${name}.webp`));
 } else if (sourcePaths[0] === '--corrections') {
@@ -112,6 +114,8 @@ await addSheet('katakana-sheet.webp',[...katakana],12,8);
 // Obsolete voiced katakana are not used by the Japanese UI; keep only reviewed forms.
 for(const char of 'ヷヸヹヺ') glyphImages.delete(char);
 await addSheet('kana-corrections.webp',[...'ゐゑゔゕゖヲヰヱ'],8,1,true);
+// The small glyph in the original grid read like フ. Keep this isolated retake.
+await addSheet('katakana-a.webp',['ア'],1,1,true);
 const chars=[' ',...glyphImages.keys()],cell=44,columns=16,atlasWidth=columns*cell,atlasHeight=Math.ceil(chars.length/columns)*cell;
 const composites=[],entries=['char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=12 page=0 chnl=15'];
 for(const [i,char] of chars.slice(1).entries()){

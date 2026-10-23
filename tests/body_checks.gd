@@ -133,6 +133,44 @@ func _run() -> void:
 	fixture_world.add_child(ice_terrain)
 	catalog.make_terrain(ice_terrain, catalog.stages[17])
 	_expect(bool(catalog.stages[17].get("iceFloor", false)) and not bool(restaurant.get("iceFloor", false)) and is_equal_approx(ice_terrain.get_child(0).physics_material_override.friction, 0.025), "ice terrain follows its stage flag after reassignment to stage18")
+	var queue_rng = RandomNumberGenerator.new()
+	var varied: bool = false
+	for stage in catalog.stages:
+		queue_rng.seed = 1234
+		var first_queue = catalog.build_queue(stage, queue_rng)
+		queue_rng.seed = 1234
+		var repeated = catalog.build_queue(stage, queue_rng)
+		queue_rng.seed = 9876
+		var alternate = catalog.build_queue(stage, queue_rng)
+		_expect(first_queue.size() == 15 and first_queue == repeated, "stage %d queue has fifteen reproducible seeded throws" % int(stage.id))
+		varied = varied or first_queue != alternate
+		if int(stage.id) == 10:
+			_expect(first_queue[0] == "bowling-ball" and first_queue[1] == "blast-bomb", "bowling always begins with its ball and strong bomb")
+		if int(stage.id) == 11:
+			_expect(first_queue.count("sponge") == 2, "river queue always keeps two sponges")
+	_expect(varied, "different seeds change ordinary queue selections")
+	await _reset(false)
+	for child in fixture_world.get_children():
+		if child is StaticBody2D:
+			child.queue_free()
+	await process_frame
+	catalog.make_terrain(fixture_world, catalog.stages[0])
+	await _steps(2)
+	point_query.position = Vector2(970, 300)
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "stage one has a physical wall just beyond its right screen edge")
+	point_query.position = Vector2(-10, 300)
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "stage one also closes the marked left screen edge")
+	await _reset(false)
+	for child in fixture_world.get_children():
+		if child is StaticBody2D:
+			child.queue_free()
+	await process_frame
+	catalog.make_terrain(fixture_world, catalog.stages[4])
+	await _steps(2)
+	point_query.position = Vector2(250, 330)
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "volcano summit is real collision terrain at y320")
+	point_query.position = Vector2(320, 330)
+	_expect(fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "the volcano crater retains its concave open center")
 	var result = {"engine": Engine.get_version_info().string, "passed": failures.is_empty(), "checks": checks, "failures": failures, "measurements": {"skateboard_upright_px": upright_distance, "skateboard_flipped_px": flipped_distance, "boots_sole_px": grip_distance, "boots_inverted_px": no_grip_distance}}
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://previews"))
 	var report = FileAccess.open("res://previews/body-checks.json", FileAccess.WRITE)

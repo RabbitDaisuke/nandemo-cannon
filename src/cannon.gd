@@ -21,6 +21,7 @@ var _joint: Node2D
 var _barrel: Sprite2D
 var _parts: Array[Sprite2D] = []
 var _hover_material: ShaderMaterial
+var _art_group: CanvasGroup
 var _grabbed: bool = false
 var _dragged: bool = false
 var _pointer_id: int = -1
@@ -51,7 +52,6 @@ func _part(file_name: String, at: Vector2, parent: Node) -> Sprite2D:
 	part.texture = load(generated if ResourceLoader.exists(generated) else source) as Texture2D
 	part.centered = false
 	part.position = at
-	part.material = _hover_material
 	part.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	parent.add_child(part)
 	_parts.append(part)
@@ -62,28 +62,38 @@ func _ensure_visuals() -> void:
 	if is_instance_valid(_joint):
 		return
 	var shader = Shader.new()
-	# Highlight the actual artwork's alpha edge, including replacement cannon art.
+	# CanvasGroup composites first, so the outline never follows part seams.
+	# https://docs.godotengine.org/en/stable/classes/class_canvasgroup.html
 	shader.code = """shader_type canvas_item;
+render_mode unshaded;
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 uniform bool selected = false;
 void fragment() {
-	vec4 pixel = texture(TEXTURE, UV);
-	vec2 step_uv = TEXTURE_PIXEL_SIZE * 2.0;
-	float inside = min(min(texture(TEXTURE, UV + vec2(step_uv.x, 0.0)).a,
-		texture(TEXTURE, UV - vec2(step_uv.x, 0.0)).a),
-		min(texture(TEXTURE, UV + vec2(0.0, step_uv.y)).a,
-		texture(TEXTURE, UV - vec2(0.0, step_uv.y)).a));
-	if (selected && pixel.a > 0.1 && inside < 0.5) pixel.rgb = vec3(1.0, 0.83, 0.32);
-	COLOR = pixel;
+	vec4 pixel = textureLod(screen_texture, SCREEN_UV, 0.0);
+	if (pixel.a > 0.0001) pixel.rgb /= pixel.a;
+	vec2 step_uv = SCREEN_PIXEL_SIZE * 2.0;
+	float edge = max(max(textureLod(screen_texture, SCREEN_UV + vec2(step_uv.x, 0.0), 0.0).a,
+		textureLod(screen_texture, SCREEN_UV - vec2(step_uv.x, 0.0), 0.0).a),
+		max(textureLod(screen_texture, SCREEN_UV + vec2(0.0, step_uv.y), 0.0).a,
+		textureLod(screen_texture, SCREEN_UV - vec2(0.0, step_uv.y), 0.0).a));
+	if (selected && pixel.a < 0.1 && edge > 0.1) pixel = vec4(1.0, 0.83, 0.32, edge);
+	COLOR *= pixel;
 }"""
 	_hover_material = ShaderMaterial.new()
 	_hover_material.shader = shader
-	_part("base.svg", Vector2(-51.0, -78.0), self)
+	_art_group = CanvasGroup.new()
+	_art_group.name = "AssembledCannon"
+	_art_group.fit_margin = 4.0
+	_art_group.clear_margin = 4.0
+	_art_group.material = _hover_material
+	add_child(_art_group)
+	_part("base.svg", Vector2(-51.0, -78.0), _art_group)
 	_joint = Node2D.new()
 	_joint.name = "ElevationJoint"
 	_joint.position = PIVOT_OFFSET
-	add_child(_joint)
+	_art_group.add_child(_joint)
 	_barrel = _part("barrel.svg", Vector2(-104.0, -25.0), _joint)
-	_part("trunnion.svg", PIVOT_OFFSET - Vector2(13.0, 13.0), self)
+	_part("trunnion.svg", PIVOT_OFFSET - Vector2(13.0, 13.0), _art_group)
 
 
 func set_enabled(value: bool) -> void:

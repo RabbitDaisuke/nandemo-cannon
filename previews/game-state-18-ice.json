@@ -148,7 +148,7 @@
 				"worldScale": 0.45,
 				"worldWidth": 54.0
 			},
-			"rotation": -3.02265763282776,
+			"rotation": -3.02100539207458,
 			"texture": "res://assets/objects/grip-boots.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -159,8 +159,170 @@
 				0.449999988079071,
 				0.449999988079071
 			],
-			"x": 594.312866210938,
-			"y": 398.120697021484
+			"x": 616.945495605469,
+			"y": 398.117736816406
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "grip-boots",
+			"record": {
+				"behavior": "grip_sole",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "boots",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								22.0,
+								20.0
+							],
+							[
+								56.0,
+								20.0
+							],
+							[
+								56.0,
+								72.0
+							],
+							[
+								74.0,
+								84.0
+							],
+							[
+								74.0,
+								104.0
+							],
+							[
+								12.0,
+								104.0
+							],
+							[
+								12.0,
+								80.0
+							],
+							[
+								22.0,
+								72.0
+							]
+						]
+					},
+					{
+						"polygon": [
+							[
+								72.0,
+								14.0
+							],
+							[
+								106.0,
+								14.0
+							],
+							[
+								106.0,
+								68.0
+							],
+							[
+								122.0,
+								80.0
+							],
+							[
+								122.0,
+								100.0
+							],
+							[
+								64.0,
+								100.0
+							],
+							[
+								64.0,
+								78.0
+							],
+							[
+								72.0,
+								68.0
+							]
+						]
+					},
+					{
+						"rect": [
+							10.0,
+							104.0,
+							66.0,
+							18.0
+						]
+					},
+					{
+						"rect": [
+							64.0,
+							100.0,
+							60.0,
+							18.0
+						]
+					}
+				],
+				"id": "grip-boots",
+				"mass": 5.0,
+				"material": "rubber",
+				"nameJa": "滑り止め付きの靴",
+				"opaquePixels": 9528.0,
+				"physics": {
+					"burnSeconds": 6.0,
+					"explosionResistance": 0.65,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.85,
+					"otherIceFriction": 0.025,
+					"restitution": 0.45,
+					"soleFixtures": [
+						2.0,
+						3.0
+					],
+					"soleIceFriction": 0.95,
+					"soleNormalMinDot": 0.6,
+					"stability": "no world anchoring; tipping and overload can move the boots",
+					"upperFriction": 0.8
+				},
+				"pivotCropped": [
+					57.0,
+					53.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/grip-boots.png",
+				"score": 200.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/grip-boots.svg",
+				"viewBox": [
+					7.0,
+					11.0,
+					120.0,
+					112.0
+				],
+				"webp": "raster/objects/grip-boots.webp",
+				"worldHeight": 50.4,
+				"worldScale": 0.45,
+				"worldWidth": 54.0
+			},
+			"rotation": 0.00075571407796815,
+			"texture": "res://assets/objects/grip-boots.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-25.6499996185303,
+				-23.8499984741211
+			],
+			"visualScale": [
+				0.449999988079071,
+				0.449999988079071
+			],
+			"x": 475.461669921875,
+			"y": 393.95703125
 		}
 	],
 	"angle": 38.0,
@@ -168,6 +330,7 @@
 		810.0,
 		420.0
 	],
+	"cannonSelected": false,
 	"cannonVisuals": [
 		{
 			"position": [
@@ -226,10 +389,10 @@
 			"rect": [
 				302.0,
 				8.0,
-				62.0,
+				74.0,
 				25.0
 			],
-			"text": "仮得点",
+			"text": "とくてん",
 			"type": "label"
 		},
 		{
@@ -241,10 +404,10 @@
 			"rect": [
 				302.0,
 				30.0,
-				126.0,
+				121.0,
 				45.0
 			],
-			"text": "0000",
+			"text": "0210",
 			"type": "label"
 		},
 		{
@@ -377,14 +540,14 @@
 		{
 			"align": 0,
 			"color": "fff0b5ff",
-			"fontSize": 13,
+			"fontSize": 12,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				16.0,
-				515.0,
-				344.0,
-				16.25
+				18.0,
+				451.0,
+				318.0,
+				15.0
 			],
 			"text": "こおりの ゆかは すべるよ。くつの そこだけが すべりどめ。",
 			"type": "label"
@@ -392,14 +555,14 @@
 		{
 			"align": 0,
 			"color": "fff0c8ff",
-			"fontSize": 26,
+			"fontSize": 16,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				720.0,
-				115.0,
-				120.0,
-				32.5
+				506.0,
+				476.0,
+				74.0,
+				20.0
 			],
 			"text": "角度 38°",
 			"type": "label"
@@ -408,9 +571,9 @@
 			"maximum": 85.0,
 			"minimum": 5.0,
 			"rect": [
-				720.0,
-				155.0,
-				220.0,
+				506.0,
+				501.0,
+				204.0,
 				26.0
 			],
 			"type": "slider",
@@ -419,14 +582,14 @@
 		{
 			"align": 0,
 			"color": "ffd36cff",
-			"fontSize": 26,
+			"fontSize": 16,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				720.0,
-				193.0,
-				130.0,
-				32.5
+				738.0,
+				476.0,
+				80.0,
+				20.0
 			],
 			"text": "火力 42%",
 			"type": "label"
@@ -435,28 +598,13 @@
 			"maximum": 100.0,
 			"minimum": 15.0,
 			"rect": [
-				720.0,
-				233.0,
-				220.0,
+				738.0,
+				501.0,
+				204.0,
 				26.0
 			],
 			"type": "slider",
 			"value": 42.0
-		},
-		{
-			"align": 0,
-			"color": "fff0b5ff",
-			"fontSize": 10,
-			"outline": "081421ff",
-			"outlineSize": 0,
-			"rect": [
-				720.0,
-				263.0,
-				103.0,
-				12.5
-			],
-			"text": "ひだり・みぎキーで火力",
-			"type": "label"
 		},
 		{
 			"align": 0,
@@ -480,7 +628,7 @@
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				686.0,
+				18.0,
 				477.0,
 				215.0,
 				20.0
@@ -489,9 +637,7 @@
 			"type": "label"
 		}
 	],
-	"destroyedCounts": {
-		"abyss": 1
-	},
+	"destroyedCounts": {},
 	"droplets": [],
 	"elapsed": 5.35833333333339,
 	"firePatches": [],
@@ -504,8 +650,8 @@
 			326.0
 		],
 		"scale": [
-			0.460317462682724,
-			0.460317462682724
+			0.761904776096344,
+			0.761904776096344
 		],
 		"texture": "res://assets/objects/plank.svg"
 	},
@@ -514,7 +660,7 @@
 	"power": 0.42,
 	"recoil": 0.0,
 	"result": false,
-	"score": 0,
+	"score": 210,
 	"scoreMarker": [
 		[
 			83.0,

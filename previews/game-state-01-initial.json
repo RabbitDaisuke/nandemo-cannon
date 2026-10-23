@@ -5,6 +5,7 @@
 		810.0,
 		420.0
 	],
+	"cannonSelected": false,
 	"cannonVisuals": [
 		{
 			"position": [
@@ -63,10 +64,10 @@
 			"rect": [
 				302.0,
 				8.0,
-				62.0,
+				74.0,
 				25.0
 			],
-			"text": "仮得点",
+			"text": "とくてん",
 			"type": "label"
 		},
 		{
@@ -136,7 +137,7 @@
 				62.0,
 				62.0
 			],
-			"texture": "res://assets/objects/crt-tv.svg",
+			"texture": "res://assets/objects/toolbox.svg",
 			"type": "texture"
 		},
 		{
@@ -151,7 +152,7 @@
 				172.0,
 				13.0
 			],
-			"text": "ブラウンかんテレビ",
+			"text": "こうぐばこ",
 			"type": "label"
 		},
 		{
@@ -205,23 +206,23 @@
 			"rect": [
 				18.0,
 				77.0,
-				168.0,
+				159.0,
 				18.75
 			],
-			"text": "01 / はじめてのひろば",
+			"text": "01 / なんでもキャノン",
 			"type": "label"
 		},
 		{
 			"align": 0,
 			"color": "fff0b5ff",
-			"fontSize": 13,
+			"fontSize": 12,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				16.0,
-				515.0,
-				312.0,
-				16.25
+				18.0,
+				451.0,
+				288.0,
+				15.0
 			],
 			"text": "わくの なかに ものを つもう。15かい なげられるよ。",
 			"type": "label"
@@ -229,14 +230,14 @@
 		{
 			"align": 0,
 			"color": "fff0c8ff",
-			"fontSize": 26,
+			"fontSize": 16,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				720.0,
-				115.0,
-				121.0,
-				32.5
+				506.0,
+				476.0,
+				74.0,
+				20.0
 			],
 			"text": "角度 35°",
 			"type": "label"
@@ -245,9 +246,9 @@
 			"maximum": 85.0,
 			"minimum": 5.0,
 			"rect": [
-				720.0,
-				155.0,
-				220.0,
+				506.0,
+				501.0,
+				204.0,
 				26.0
 			],
 			"type": "slider",
@@ -256,14 +257,14 @@
 		{
 			"align": 0,
 			"color": "ffd36cff",
-			"fontSize": 26,
+			"fontSize": 16,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				720.0,
-				193.0,
-				130.0,
-				32.5
+				738.0,
+				476.0,
+				80.0,
+				20.0
 			],
 			"text": "火力 65%",
 			"type": "label"
@@ -272,28 +273,13 @@
 			"maximum": 100.0,
 			"minimum": 15.0,
 			"rect": [
-				720.0,
-				233.0,
-				220.0,
+				738.0,
+				501.0,
+				204.0,
 				26.0
 			],
 			"type": "slider",
 			"value": 65.0
-		},
-		{
-			"align": 0,
-			"color": "fff0b5ff",
-			"fontSize": 10,
-			"outline": "081421ff",
-			"outlineSize": 0,
-			"rect": [
-				720.0,
-				263.0,
-				103.0,
-				12.5
-			],
-			"text": "ひだり・みぎキーで火力",
-			"type": "label"
 		},
 		{
 			"align": 0,
@@ -317,7 +303,7 @@
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				686.0,
+				18.0,
 				477.0,
 				215.0,
 				20.0
@@ -345,7 +331,7 @@
 	"droplets": [],
 	"elapsed": 0.025,
 	"firePatches": [],
-	"followingItem": "crt-tv",
+	"followingItem": "toolbox",
 	"font": "res://assets/font/arcade-generated.fnt",
 	"loadedItem": {
 		"id": "refrigerator",
@@ -354,8 +340,8 @@
 			326.0
 		],
 		"scale": [
-			0.5,
-			0.5
+			0.872340440750122,
+			0.872340440750122
 		],
 		"texture": "res://assets/objects/refrigerator.svg"
 	},

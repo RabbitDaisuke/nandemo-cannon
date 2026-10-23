@@ -6,7 +6,7 @@
     {
       "id": "01-poc",
       "stage": 1,
-      "nameJa": "POC 平地",
+      "nameJa": "なんでもキャノン",
       "status": "specified",
       "svg": "maps/01-poc.svg",
       "worldSize": [
@@ -21,6 +21,24 @@
             960,
             120
           ]
+        },
+        {
+          "rect": [
+            -24,
+            -500,
+            24,
+            1040
+          ],
+          "feedbackBoundary": true
+        },
+        {
+          "rect": [
+            960,
+            -500,
+            24,
+            1040
+          ],
+          "feedbackBoundary": true
         }
       ],
       "backgroundCollision": false
@@ -28,7 +46,7 @@
     {
       "id": "02-underground",
       "stage": 2,
-      "nameJa": "POC 地下へ積む",
+      "nameJa": "ちかしつ",
       "status": "specified",
       "svg": "maps/02-underground.svg",
       "worldSize": [
@@ -132,7 +150,7 @@
     {
       "id": "04-alley",
       "stage": 4,
-      "nameJa": "路地裏 燃やして消す",
+      "nameJa": "ろじうら",
       "status": "specified",
       "svg": "maps/04-alley.svg",
       "worldSize": [
@@ -154,7 +172,7 @@
     {
       "id": "05-volcano",
       "stage": 5,
-      "nameJa": "火山 燃える床",
+      "nameJa": "かざん",
       "status": "specified",
       "svg": "maps/05-volcano.svg",
       "worldSize": [
@@ -163,11 +181,63 @@
       ],
       "terrain": [
         {
-          "rect": [
-            0,
-            430,
-            960,
-            110
+          "polygon": [
+            [
+              0,
+              430
+            ],
+            [
+              80,
+              430
+            ],
+            [
+              162,
+              378
+            ],
+            [
+              226,
+              320
+            ],
+            [
+              284,
+              320
+            ],
+            [
+              306,
+              346
+            ],
+            [
+              334,
+              346
+            ],
+            [
+              356,
+              320
+            ],
+            [
+              398,
+              320
+            ],
+            [
+              458,
+              378
+            ],
+            [
+              530,
+              430
+            ],
+            [
+              960,
+              430
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              0,
+              540
+            ]
           ]
         }
       ],

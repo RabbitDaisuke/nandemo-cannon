@@ -72,6 +72,10 @@ async function cannon(snapshot){
       const item=await asset(part.texture);
       output+=`<g transform="translate(${part.position.join(' ')}) rotate(${part.rotation*180/Math.PI}) scale(${part.scale.join(' ')})">${nested(item,0,0,item.width,item.height)}</g>`;
     }
+    if(snapshot.cannonSelected){
+      definitions.push('<filter id="cannon-outline" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded"/><feComposite in="expanded" in2="SourceAlpha" operator="out" result="edge"/><feFlood flood-color="#ffd452"/><feComposite in2="edge" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>');
+      return `<g filter="url(#cannon-outline)">${output}</g>`;
+    }
     return output;
   }
   const ground=snapshot.cannon,angle=snapshot.angle,recoil=snapshot.recoil??0;

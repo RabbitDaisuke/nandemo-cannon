@@ -1581,6 +1581,16 @@
       46,
       "festival-mask",
       "solid"
+    ],
+    [
+      "blast-bomb",
+      "強力爆弾",
+      "metal",
+      3,
+      0,
+      42,
+      "circle",
+      "explosion"
     ]
   ]
 }

@@ -29,7 +29,7 @@ func configure(owner_world: Node2D, stage: Dictionary) -> void:
 	for entry in stage.get("water", []):
 		regions.append({"rect": GameCatalog.rectangle(entry.rect), "velocity": GameCatalog.vector(entry.get("direction", [0, 0])) * float(entry.get("speed", 0))})
 	for entry in stage.get("sources", []):
-		sources.append({"point": GameCatalog.vector(entry.position), "rate": float(entry.rateUnitsPerSecond), "remaining": float(entry.maxUnits), "accumulator": 0.0})
+		sources.append({"point": GameCatalog.vector(entry.position), "rate": float(entry.rateUnitsPerSecond), "remaining": float(entry.maxUnits), "accumulator": 0.0, "stopped": false, "stop_at": float(entry.get("stopAtStoredUnits", -1.0)), "stored_region": GameCatalog.rectangle(entry.get("storedRegion", [0, 0, 960, 540]))})
 	wave_textures = [load("res://assets/effects/water-flow-0.svg"), load("res://assets/effects/water-flow-1.svg")]
 	drop_texture = load("res://assets/ui/water-drop.svg")
 	ice_texture = load("res://assets/effects/ice-tile.svg")
@@ -50,7 +50,9 @@ func release(at: Vector2, units: int, spread: float = 1.0) -> void:
 func tick(delta: float) -> void:
 	clock += delta
 	for source in sources:
-		if float(source.remaining) <= 0.0:
+		if float(source.stop_at) >= 0.0 and stored_volume(source.stored_region) >= float(source.stop_at):
+			source.stopped = true
+		if bool(source.stopped) or float(source.remaining) <= 0.0:
 			continue
 		source.accumulator = minf(float(source.remaining), float(source.accumulator) + delta * float(source.rate))
 		while float(source.accumulator) >= 1.0 and float(source.remaining) >= 1.0 and droplets.size() < MAX_DROPS:
@@ -80,14 +82,8 @@ func tick(delta: float) -> void:
 			if collider is ThrowBody:
 				world.hazards.wet_actor(collider, 3.0)
 				if collider.behavior == "absorb":
-					var capacity = float(collider.spec.get("capacity", 6.0))
-					var held = float(collider.get_meta("absorbed", 0.0))
-					var absorbed = minf(float(drop.volume), maxf(0.0, capacity - held))
-					collider.set_meta("absorbed", held + absorbed)
-					absorbed_volume += absorbed
+					var absorbed = _absorb(collider, float(drop.volume))
 					drop.volume -= absorbed
-					var wet_multiplier = float(collider.spec.get("wetMassMultiplier", 2.0))
-					collider.mass = float(collider.record.mass) * (1.0 + maxf(0.0, wet_multiplier - 1.0) * minf(1.0, (held + absorbed) / maxf(capacity, VOLUME_EPSILON)))
 					if float(drop.volume) <= VOLUME_EPSILON:
 						droplets.remove_at(i)
 						continue
@@ -225,6 +221,8 @@ func _affect_bodies() -> void:
 		if not is_instance_valid(actor) or not actor.alive or actor.behavior == "repel_water":
 			continue
 		var bounds: Rect2 = actor.get_world_bounds()
+		if actor.behavior == "absorb":
+			_absorb_surrounding(actor, bounds)
 		var points = [actor.global_position, Vector2(bounds.get_center().x, bounds.end.y - 2.0), bounds.position + bounds.size * 0.25, bounds.position + bounds.size * 0.75]
 		var fraction: float = 0.0
 		var flow = Vector2.ZERO
@@ -240,6 +238,50 @@ func _affect_bodies() -> void:
 		var buoyancy = float(actor.spec.get("buoyancy", 0.45))
 		actor.apply_central_impulse((-actor.linear_velocity * 1.2 + Vector2.UP * world.gravity_value * buoyancy) * actor.mass * fraction * 0.05)
 		actor.apply_central_impulse(flow * response * actor.mass * 1.4 * 0.05)
+
+func _absorb(actor: ThrowBody, amount: float) -> float:
+	var capacity = float(actor.spec.get("capacity", 6.0))
+	var held = float(actor.get_meta("absorbed", 0.0))
+	var accepted = minf(maxf(amount, 0.0), maxf(0.0, capacity - held))
+	if accepted <= VOLUME_EPSILON:
+		return 0.0
+	actor.set_meta("absorbed", held + accepted)
+	absorbed_volume += accepted
+	var multiplier = float(actor.spec.get("wetMassMultiplier", 2.0))
+	actor.mass = float(actor.record.mass) * (1.0 + maxf(0.0, multiplier - 1.0) * (held + accepted) / maxf(capacity, VOLUME_EPSILON))
+	world.hazards.wet_actor(actor, 2.0)
+	return accepted
+
+func _absorb_surrounding(actor: ThrowBody, bounds: Rect2) -> void:
+	var budget: float = 0.25
+	var reach = bounds.grow(CELL * 0.5)
+	for key in cells.keys():
+		if budget <= VOLUME_EPSILON:
+			break
+		var cell: Dictionary = cells[key]
+		if float(cell.frozen) > 0.0 or not reach.has_point(center_for(key)):
+			continue
+		var accepted = _absorb(actor, minf(budget, float(cell.amount)))
+		cell.amount -= accepted
+		budget -= accepted
+		if float(cell.amount) <= VOLUME_EPSILON:
+			cells.erase(key)
+	if budget <= VOLUME_EPSILON:
+		return
+	# Regions represent persistent river water; account for the finite amount drawn
+	# into the sponge without removing the river's flow field.
+	for region in regions:
+		if bounds.intersects(Rect2(region.rect)):
+			var accepted = _absorb(actor, budget)
+			region_drawn_volume += accepted
+			break
+
+func stored_volume(region: Rect2) -> float:
+	var amount: float = 0.0
+	for key in cells:
+		if region.has_point(center_for(key)):
+			amount += float(cells[key].amount)
+	return amount
 
 func freeze_near(point: Vector2, radius: float) -> void:
 	for key in cells.keys():

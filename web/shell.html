@@ -9,18 +9,18 @@
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#122331;color:#fff}body{font-family:system-ui,sans-serif}#canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}#cover{position:fixed;inset:0;display:grid;place-content:center;justify-items:center;gap:24px;padding:24px;background:#122331;text-align:center}#cover[hidden]{display:none}.title{width:min(680px,88vw);height:auto;image-rendering:pixelated}.scene{width:min(600px,86vw);max-height:44vh;object-fit:contain;image-rendering:pixelated;border:3px solid #06111c}button{background:#e9b84f;color:#152536;border:3px solid #080e18;border-bottom-width:7px;padding:16px 44px;cursor:pointer;min-height:56px}button:active{transform:translateY(3px);border-bottom-width:4px}button:focus-visible{outline:3px solid #75e8e4;outline-offset:5px}button img{display:block;width:140px;height:28px}button:disabled{opacity:.55;cursor:wait}progress{width:min(380px,80vw);accent-color:#79e0db;height:14px}#message{margin:0;max-width:42em;line-height:1.6;font-size:14px}#message:empty{display:none}@media(max-height:550px){#cover{gap:14px}.scene{max-height:28vh}.title{max-height:44px}button{padding:10px 36px}}
 </style>
 <style>
-#sound-credit{height:26px;display:flex;align-items:center;justify-content:center;gap:.4em;font-size:12px;position:relative;z-index:5;background:#101c29;color:#d6dbe3}#sound-credit a{color:#ffe098;text-underline-offset:2px}#sound-credit a:focus-visible{outline:2px solid #75e8e4}#canvas{height:calc(100% - 26px)}#cover{top:26px}
+#sound-credit{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:.4em;font-size:clamp(16px,2vw,22px);color:#d6dbe3;line-height:1.5}#sound-credit a{color:#ffe098;text-underline-offset:4px}#sound-credit .creator{font-size:1.3em;font-weight:800}#sound-credit a:focus-visible{outline:2px solid #75e8e4}@media(max-height:550px){#sound-credit{font-size:14px}}
 </style>
 $GODOT_HEAD_INCLUDE
 </head>
 <body>
-<header id="sound-credit" aria-label="効果音クレジット">効果音：<a href="https://otologic.jp/" target="_blank" rel="noopener noreferrer">OtoLogic</a> — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a><span> / </span><a href="licenses/otologic.txt" target="_blank" rel="noopener noreferrer">素材情報</a></header>
 <canvas id="canvas" tabindex="0" aria-label="なんでもキャノン ゲーム画面"></canvas>
 <p id="share-status" role="status" hidden style="position:fixed;bottom:12px;left:5%;right:5%;z-index:10;background:#122331;padding:10px;border:2px solid #ffe098;text-align:center"></p>
 <section id="cover" aria-label="ゲームを開始">
   <img class="title" src="logo.webp" alt="なんでもキャノン">
   <img class="scene" src="opening.png" alt="大砲で物を投げ、青いエリアに積み上げる">
   <button id="start" type="button" aria-label="ゲームを開始"><img src="start.webp" alt="はじめる"></button>
+  <div id="sound-credit" aria-label="効果音クレジット">効果音：<a class="creator" href="https://otologic.jp/" target="_blank" rel="noopener noreferrer">OtoLogic</a> — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a><span> / </span><a href="licenses/otologic.txt" target="_blank" rel="noopener noreferrer">素材情報</a></div>
   <progress id="progress" hidden aria-label="読み込み"></progress>
   <p id="message" role="status"></p>
 </section>
@@ -30,19 +30,8 @@ import {installCompressedWasm} from './wasm-loader.mjs';
 import {installResultSharing} from './share.mjs';
 installResultSharing();
 const config = $GODOT_CONFIG;
-// Reserve the visible attribution strip; Godot must not resize over it.
-const canvas = document.querySelector('#canvas');
-config.canvasResizePolicy = 0;
-function resizeCanvas() {
-  const box = canvas.getBoundingClientRect(), ratio = window.devicePixelRatio || 1;
-  const width = Math.max(1, Math.round(box.width * ratio));
-  const height = Math.max(1, Math.round(box.height * ratio));
-  if (canvas.width !== width) canvas.width = width;
-  if (canvas.height !== height) canvas.height = height;
-}
-new ResizeObserver(resizeCanvas).observe(canvas);
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+// Attribution belongs to the start screen. Gameplay uses the full canvas.
+config.canvasResizePolicy = 2;
 const start = document.querySelector('#start');
 const progress = document.querySelector('#progress');
 const message = document.querySelector('#message');

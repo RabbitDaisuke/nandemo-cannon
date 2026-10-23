@@ -37,6 +37,8 @@ func configure(owner_world: Node2D, stage: Dictionary) -> void:
 func on_launch(actor: ThrowBody) -> void:
 	match actor.behavior:
 		"flame_jet", "cold_jet", "fuel_light", "campfire":
+			if bool(actor.get_meta("fuel_depleted", false)):
+				return
 			actor.fuel_seconds = float(actor.spec.get("durationSeconds", 6.0))
 			if actor.behavior == "campfire":
 				actor.set_texture_path("res://assets/effects/campfire-charred.svg")
@@ -215,6 +217,7 @@ func wet_actor(actor: ThrowBody, seconds: float) -> void:
 
 func _deplete_fuel(actor: ThrowBody) -> void:
 	actor.fuel_seconds = 0.0
+	actor.set_meta("fuel_depleted", true)
 	if actor.spec.has("depletedSprite"):
 		actor.set_texture_path("res://assets/" + str(actor.spec.depletedSprite))
 	elif actor.spec.has("charredSprite"):
@@ -222,7 +225,7 @@ func _deplete_fuel(actor: ThrowBody) -> void:
 
 func _put_out_actor(actor: ThrowBody) -> void:
 	actor.burning = false
-	if actor.behavior in ["campfire", "fuel_light"] and actor.fuel_seconds > 0.0:
+	if actor.behavior == "flame_jet" or (actor.behavior in ["campfire", "fuel_light"] and actor.fuel_seconds > 0.0):
 		_deplete_fuel(actor)
 
 func extinguish_at(at: Vector2, radius: float) -> void:
@@ -310,7 +313,7 @@ func detonate(actor: ThrowBody) -> void:
 			if world.rng.randf() < probability:
 				target.request_break("explosion")
 		# Explosions push all survivors. Tutorial barriers receive a smaller kick so repeated hits remain possible.
-		var impulse_scale = 75.0 if tutorial_required > 0 else 300.0
+		var impulse_scale = 75.0 if tutorial_required > 0 else 300.0 * float(actor.spec.get("impulseMultiplier", 1.0))
 		target.apply_central_impulse(offset.normalized() * (impulse_scale * attenuation * minf(target.mass, 8.0)))
 	world.destroy_actor(actor, "exploded")
 

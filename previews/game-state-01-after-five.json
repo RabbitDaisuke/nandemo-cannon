@@ -59,7 +59,7 @@
 				"worldScale": 0.872340425531915,
 				"worldWidth": 82.0
 			},
-			"rotation": -0.00298118521459401,
+			"rotation": -1.57166743278503,
 			"texture": "res://assets/objects/refrigerator.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -70,15 +70,15 @@
 				0.872340440750122,
 				0.872340440750122
 			],
-			"x": 310.151306152344,
-			"y": 369.537475585938
+			"x": 237.000473022461,
+			"y": 379.921234130859
 		},
 		{
 			"burning": false,
 			"canScore": true,
 			"frozen": 0.0,
 			"fuel": -1.0,
-			"id": "crt-tv",
+			"id": "toolbox",
 			"record": {
 				"behavior": "solid",
 				"bodyKind": "dynamic",
@@ -87,177 +87,137 @@
 					{
 						"rect": [
 							10.0,
-							7.0,
+							20.0,
 							108.0,
-							111.0
+							90.0
 						]
 					}
 				],
-				"id": "crt-tv",
-				"mass": 13.0,
-				"material": "appliance",
-				"nameJa": "ブラウン管テレビ",
-				"opaquePixels": 9847.0,
+				"id": "toolbox",
+				"mass": 8.0,
+				"material": "metal",
+				"nameJa": "工具箱",
+				"opaquePixels": 8506.0,
 				"physics": {
 					"burnSeconds": null,
-					"explosionResistance": 0.55,
+					"explosionResistance": 0.85,
 					"flammable": false,
-					"flowResponse": 0.5,
-					"friction": 0.5,
-					"restitution": 0.07
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
 				},
 				"pivotCropped": [
 					55.0,
-					58.0
+					45.0
 				],
 				"pivotSource": [
 					64.0,
 					64.0
 				],
-				"png": "raster/objects/crt-tv.png",
-				"score": 200.0,
+				"png": "raster/objects/toolbox.png",
+				"score": 100.0,
 				"sourceGrid": [
 					128.0,
 					128.0
 				],
-				"svg": "objects/crt-tv.svg",
+				"svg": "objects/toolbox.svg",
 				"viewBox": [
 					9.0,
-					6.0,
+					19.0,
 					110.0,
-					113.0
+					92.0
 				],
-				"webp": "raster/objects/crt-tv.webp",
-				"worldHeight": 71.9090909090909,
-				"worldScale": 0.636363636363636,
-				"worldWidth": 70.0
+				"webp": "raster/objects/toolbox.webp",
+				"worldHeight": 51.8545454545455,
+				"worldScale": 0.563636363636364,
+				"worldWidth": 62.0
 			},
-			"rotation": -0.000323541375109926,
-			"texture": "res://assets/objects/crt-tv.svg",
+			"rotation": 0.000512011931277812,
+			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
-				-35.0,
-				-36.9090919494629
+				-31.0,
+				-25.3636360168457
 			],
 			"visualScale": [
-				0.636363625526428,
-				0.636363625526428
+				0.563636362552643,
+				0.563636362552643
 			],
-			"x": 384.845825195312,
-			"y": 385.678161621094
+			"x": 319.898773193359,
+			"y": 394.124603271484
 		},
 		{
 			"burning": false,
 			"canScore": true,
 			"frozen": 0.0,
 			"fuel": -1.0,
-			"id": "chair",
+			"id": "bucket",
 			"record": {
 				"behavior": "solid",
 				"bodyKind": "dynamic",
-				"colliderTemplate": "chair",
+				"colliderTemplate": "box",
 				"fixtures": [
 					{
 						"rect": [
-							24.0,
-							14.0,
-							10.0,
-							102.0
-						]
-					},
-					{
-						"rect": [
-							86.0,
-							14.0,
-							10.0,
-							102.0
-						]
-					},
-					{
-						"rect": [
-							34.0,
-							18.0,
-							52.0,
-							12.0
-						]
-					},
-					{
-						"rect": [
-							20.0,
-							72.0,
-							80.0,
-							14.0
-						]
-					},
-					{
-						"rect": [
-							44.0,
-							30.0,
-							8.0,
-							38.0
-						]
-					},
-					{
-						"rect": [
-							66.0,
-							30.0,
-							8.0,
-							38.0
+							22.0,
+							15.0,
+							84.0,
+							103.0
 						]
 					}
 				],
-				"id": "chair",
-				"mass": 6.0,
-				"material": "wood",
-				"nameJa": "椅子",
-				"opaquePixels": 6136.0,
+				"id": "bucket",
+				"mass": 2.0,
+				"material": "plastic",
+				"nameJa": "バケツ",
+				"opaquePixels": 6384.0,
 				"physics": {
 					"burnSeconds": 5.0,
-					"explosionResistance": 0.25,
+					"explosionResistance": 0.3,
 					"flammable": true,
 					"flowResponse": 1.0,
-					"friction": 0.6,
-					"restitution": 0.1
+					"friction": 0.5,
+					"restitution": 0.15
 				},
 				"pivotCropped": [
-					47.0,
-					53.0
+					43.0,
+					50.0
 				],
 				"pivotSource": [
 					64.0,
 					64.0
 				],
-				"png": "raster/objects/chair.png",
-				"score": 200.0,
+				"png": "raster/objects/bucket.png",
+				"score": 100.0,
 				"sourceGrid": [
 					128.0,
 					128.0
 				],
-				"svg": "objects/chair.svg",
+				"svg": "objects/bucket.svg",
 				"viewBox": [
-					17.0,
-					11.0,
+					21.0,
+					14.0,
 					86.0,
-					108.0
+					105.0
 				],
-				"webp": "raster/objects/chair.webp",
-				"worldHeight": 80.3720930232558,
-				"worldScale": 0.744186046511628,
-				"worldWidth": 64.0
+				"webp": "raster/objects/bucket.webp",
+				"worldHeight": 63.4883720930233,
+				"worldScale": 0.604651162790698,
+				"worldWidth": 52.0
 			},
-			"rotation": 1.63857543468475,
-			"texture": "res://assets/objects/chair.svg",
+			"rotation": -0.0000154155859490857,
+			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
-				-34.9767456054688,
-				-39.4418601989746
+				-26.0,
+				-30.2325572967529
 			],
 			"visualScale": [
-				0.744186043739319,
-				0.744186043739319
+				0.604651153087616,
+				0.604651153087616
 			],
-			"x": 460.354736328125,
-			"y": 393.762084960938
+			"x": 318.332641601562,
+			"y": 336.717254638672
 		},
 		{
 			"burning": false,
@@ -318,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": 0.00290277553722262,
+			"rotation": -0.00106203032191843,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -329,15 +289,15 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 379.183349609375,
-			"y": 316.626800537109
+			"x": 396.231048583984,
+			"y": 387.25732421875
 		},
 		{
 			"burning": false,
 			"canScore": true,
 			"frozen": 0.0,
 			"fuel": -1.0,
-			"id": "soccer-ball",
+			"id": "basketball",
 			"record": {
 				"behavior": "bouncy",
 				"bodyKind": "dynamic",
@@ -347,15 +307,15 @@
 						"circle": [
 							64.0,
 							64.0,
-							56.0
+							54.0
 						]
 					}
 				],
-				"id": "soccer-ball",
-				"mass": 1.0,
+				"id": "basketball",
+				"mass": 1.2,
 				"material": "rubber",
-				"nameJa": "サッカーボール",
-				"opaquePixels": 10408.0,
+				"nameJa": "バスケットボール",
+				"opaquePixels": 9606.0,
 				"physics": {
 					"burnSeconds": 6.0,
 					"explosionResistance": 0.65,
@@ -365,44 +325,44 @@
 					"restitution": 0.65
 				},
 				"pivotCropped": [
-					57.0,
-					57.0
+					55.0,
+					55.0
 				],
 				"pivotSource": [
 					64.0,
 					64.0
 				],
-				"png": "raster/objects/soccer-ball.png",
+				"png": "raster/objects/basketball.png",
 				"score": 100.0,
 				"sourceGrid": [
 					128.0,
 					128.0
 				],
-				"svg": "objects/soccer-ball.svg",
+				"svg": "objects/basketball.svg",
 				"viewBox": [
-					7.0,
-					7.0,
-					114.0,
-					114.0
+					9.0,
+					9.0,
+					110.0,
+					110.0
 				],
-				"webp": "raster/objects/soccer-ball.webp",
-				"worldHeight": 42.0,
-				"worldScale": 0.368421052631579,
-				"worldWidth": 42.0
+				"webp": "raster/objects/basketball.webp",
+				"worldHeight": 44.0,
+				"worldScale": 0.4,
+				"worldWidth": 44.0
 			},
-			"rotation": 1.74794554710388,
-			"texture": "res://assets/objects/soccer-ball.svg",
+			"rotation": -0.728968977928162,
+			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
-				-21.0,
-				-21.0
+				-22.0,
+				-22.0
 			],
 			"visualScale": [
-				0.368421047925949,
-				0.368421047925949
+				0.400000005960464,
+				0.400000005960464
 			],
-			"x": 601.359619140625,
-			"y": 399.389739990234
+			"x": 449.408477783203,
+			"y": 346.831481933594
 		}
 	],
 	"angle": 38.0,
@@ -410,6 +370,7 @@
 		810.0,
 		420.0
 	],
+	"cannonSelected": false,
 	"cannonVisuals": [
 		{
 			"position": [
@@ -468,10 +429,10 @@
 			"rect": [
 				302.0,
 				8.0,
-				62.0,
+				74.0,
 				25.0
 			],
-			"text": "仮得点",
+			"text": "とくてん",
 			"type": "label"
 		},
 		{
@@ -486,7 +447,7 @@
 				126.0,
 				45.0
 			],
-			"text": "0600",
+			"text": "0700",
 			"type": "label"
 		},
 		{
@@ -610,23 +571,23 @@
 			"rect": [
 				18.0,
 				77.0,
-				168.0,
+				159.0,
 				18.75
 			],
-			"text": "01 / はじめてのひろば",
+			"text": "01 / なんでもキャノン",
 			"type": "label"
 		},
 		{
 			"align": 0,
 			"color": "fff0b5ff",
-			"fontSize": 13,
+			"fontSize": 12,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				16.0,
-				515.0,
-				312.0,
-				16.25
+				18.0,
+				451.0,
+				288.0,
+				15.0
 			],
 			"text": "わくの なかに ものを つもう。15かい なげられるよ。",
 			"type": "label"
@@ -634,14 +595,14 @@
 		{
 			"align": 0,
 			"color": "fff0c8ff",
-			"fontSize": 26,
+			"fontSize": 16,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				720.0,
-				115.0,
-				120.0,
-				32.5
+				506.0,
+				476.0,
+				74.0,
+				20.0
 			],
 			"text": "角度 38°",
 			"type": "label"
@@ -650,9 +611,9 @@
 			"maximum": 85.0,
 			"minimum": 5.0,
 			"rect": [
-				720.0,
-				155.0,
-				220.0,
+				506.0,
+				501.0,
+				204.0,
 				26.0
 			],
 			"type": "slider",
@@ -661,14 +622,14 @@
 		{
 			"align": 0,
 			"color": "ffd36cff",
-			"fontSize": 26,
+			"fontSize": 16,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				720.0,
-				193.0,
-				129.0,
-				32.5
+				738.0,
+				476.0,
+				79.0,
+				20.0
 			],
 			"text": "火力 32%",
 			"type": "label"
@@ -677,28 +638,13 @@
 			"maximum": 100.0,
 			"minimum": 15.0,
 			"rect": [
-				720.0,
-				233.0,
-				220.0,
+				738.0,
+				501.0,
+				204.0,
 				26.0
 			],
 			"type": "slider",
 			"value": 32.0
-		},
-		{
-			"align": 0,
-			"color": "fff0b5ff",
-			"fontSize": 10,
-			"outline": "081421ff",
-			"outlineSize": 0,
-			"rect": [
-				720.0,
-				263.0,
-				103.0,
-				12.5
-			],
-			"text": "ひだり・みぎキーで火力",
-			"type": "label"
 		},
 		{
 			"align": 0,
@@ -722,7 +668,7 @@
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				686.0,
+				18.0,
 				477.0,
 				215.0,
 				20.0
@@ -744,8 +690,8 @@
 			326.0
 		],
 		"scale": [
-			0.5,
-			0.5
+			0.764705896377563,
+			0.764705896377563
 		],
 		"texture": "res://assets/objects/washing-machine.svg"
 	},
@@ -754,7 +700,7 @@
 	"power": 0.32,
 	"recoil": 0.0,
 	"result": false,
-	"score": 600,
+	"score": 700,
 	"scoreMarker": [
 		[
 			88.0,

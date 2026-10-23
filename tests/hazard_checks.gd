@@ -275,6 +275,52 @@ func _run() -> void:
 		_expect(timed_item.alive and not timed_item.release_triggered, "%s survives impact until its own fuse ends" % firework_id)
 		fixture_world.hazards.tick(float(timed_item.spec.fuseSeconds) + 0.01)
 		_expect(not timed_item.alive and fixture_world.hazards.explosion_serial == 1, "%s bursts on its configured timer" % firework_id)
+	await _reset()
+	var cell_sponge = _spawn("sponge", Vector2(400, 250))
+	var near_key = fixture_world.liquid.key_for(Vector2(400, 250))
+	fixture_world.liquid.cells[near_key] = {"amount": 4.0, "frozen": 0.0}
+	for i in range(20):
+		fixture_world.liquid._affect_bodies()
+	_expect(is_equal_approx(float(cell_sponge.get_meta("absorbed", 0.0)), 4.0) and is_zero_approx(fixture_world.liquid.current_volume()), "a sponge absorbs existing finite cells and accounts for their volume")
+	fixture_world.liquid.cells[near_key] = {"amount": 4.0, "frozen": 0.0}
+	for i in range(40):
+		fixture_world.liquid._affect_bodies()
+	_expect(is_equal_approx(float(cell_sponge.get_meta("absorbed", 0.0)), 6.0) and is_equal_approx(fixture_world.liquid.current_volume(), 2.0), "a saturated sponge leaves excess cell water intact")
+	_expect(is_equal_approx(cell_sponge.mass, float(cell_sponge.record.mass) * 2.0), "a saturated sponge reaches its configured wet mass")
+	await _reset({"water": [{"rect": [300, 200, 200, 150], "direction": [1, 0], "speed": 65}]})
+	var river_sponge = _spawn("sponge", Vector2(400, 250))
+	for i in range(60):
+		fixture_world.liquid._affect_bodies()
+	_expect(is_equal_approx(float(river_sponge.get_meta("absorbed", 0.0)), 6.0) and is_equal_approx(fixture_world.liquid.region_drawn_volume, 6.0), "river absorption stops at sponge capacity and records the finite amount drawn")
+	await _reset({"sources": [{"position": [100, 100], "rateUnitsPerSecond": 2, "maxUnits": 96, "stopAtStoredUnits": 4, "storedRegion": [300, 200, 200, 150]}]})
+	fixture_world.liquid.droplets.append(_drop(Vector2(100, 100), Vector2.ZERO))
+	fixture_world.liquid.cells[Vector2i(25, 15)] = {"amount": 3.0, "frozen": 0.0}
+	fixture_world.liquid.tick(0.0)
+	_expect(not fixture_world.liquid.sources[0].stopped, "source threshold excludes falling droplets")
+	fixture_world.liquid.cells[Vector2i(25, 15)].amount = 4.0
+	fixture_world.liquid.tick(0.0)
+	fixture_world.liquid.cells.clear()
+	fixture_world.liquid.tick(0.0)
+	_expect(fixture_world.liquid.sources[0].stopped and fixture_world.liquid.sources[0].remaining == 96.0, "a filled basin latches its source off even after stored water is removed")
+	_expect(float(records["blast-bomb"].physics.radius) > float(records["bomb"].physics.radius) and float(records["blast-bomb"].physics.impulseMultiplier) > 1.0 and not records["bomb"].physics.has("impulseMultiplier"), "the bowling blast bomb has stronger reach and push without modifying ordinary bombs")
+	await _reset({"water": [{"rect": [300, 200, 200, 150], "direction": [1, 0], "speed": 65}]})
+	var drowned_jet = _spawn("flamethrower", Vector2(400, 250))
+	fixture_world.hazards.on_launch(drowned_jet)
+	fixture_world.liquid._affect_bodies()
+	_expect(drowned_jet.fuel_seconds == 0.0 and drowned_jet.visual.texture.resource_path.ends_with("flamethrower-empty.svg"), "river immersion stops a flamethrower and changes it to its empty texture")
+	fixture_world.hazards.on_launch(drowned_jet)
+	fixture_world.hazards.heat_actor(drowned_jet, 20.0)
+	_expect(drowned_jet.fuel_seconds == 0.0, "an extinguished flamethrower cannot restart from heat or another launch callback")
+	await _reset()
+	var pooled_jet = _spawn("flamethrower", Vector2(400, 250))
+	fixture_world.hazards.on_launch(pooled_jet)
+	fixture_world.liquid.cells[fixture_world.liquid.key_for(pooled_jet.position)] = {"amount": 1.0, "frozen": 0.0}
+	fixture_world.liquid._affect_bodies()
+	_expect(pooled_jet.fuel_seconds == 0.0, "finite pooled water also extinguishes the flame jet")
+	var splashed_jet = _spawn("flamethrower", Vector2(700, 250))
+	fixture_world.hazards.on_launch(splashed_jet)
+	fixture_world.hazards.wet_actor(splashed_jet, 3.0)
+	_expect(splashed_jet.fuel_seconds == 0.0, "droplet wetting uses the same permanent flame-jet shutdown path")
 	var result = {"engine": Engine.get_version_info().string, "passed": failures.is_empty(), "checks": checks, "failures": failures}
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://previews"))
 	var report = FileAccess.open("res://previews/hazard-checks.json", FileAccess.WRITE)

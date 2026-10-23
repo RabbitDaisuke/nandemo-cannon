@@ -7,7 +7,7 @@
   "stages": [
     {
       "id": 1,
-      "nameJa": "POC 平地",
+      "nameJa": "なんでもキャノン",
       "map": "01-poc",
       "status": "specified",
       "gravity": 980,
@@ -29,6 +29,24 @@
             960,
             120
           ]
+        },
+        {
+          "rect": [
+            -24,
+            -500,
+            24,
+            1040
+          ],
+          "feedbackBoundary": true
+        },
+        {
+          "rect": [
+            960,
+            -500,
+            24,
+            1040
+          ],
+          "feedbackBoundary": true
         }
       ],
       "queue": [
@@ -80,11 +98,245 @@
           "groundY": 420,
           "width": 48
         }
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "crt-tv",
+            "washing-machine",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            71.9090909090909
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "chair",
+            "flower-pot",
+            "suitcase",
+            "bucket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            80.37209302325581
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "chair",
+            "flower-pot",
+            "suitcase",
+            "bucket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            69.37254901960785
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball",
+            "basketball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "crt-tv",
+            "washing-machine"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            78,
+            88.70588235294117
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "stool",
+            "cushion",
+            "bucket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            56,
+            49.411764705882355
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "stool",
+            "cushion",
+            "bucket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toaster",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            54,
+            48.31578947368421
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "chair",
+            "flower-pot",
+            "suitcase",
+            "bucket"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            62,
+            82.18604651162791
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "low-table"
+          ],
+          "role": "fixed-flow_immune",
+          "heightBucket": "medium",
+          "referenceSize": [
+            94,
+            58.94915254237288
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "chair",
+            "flower-pot",
+            "stool",
+            "cushion",
+            "suitcase",
+            "bucket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            63.48837209302326
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball",
+            "basketball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "chair",
+            "flower-pot",
+            "stool",
+            "cushion",
+            "bucket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            58.11764705882353
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "crt-tv",
+            "toaster",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        }
       ]
     },
     {
       "id": 2,
-      "nameJa": "POC 地下へ積む",
+      "nameJa": "ちかしつ",
       "map": "02-underground",
       "status": "specified",
       "gravity": 980,
@@ -145,7 +397,228 @@
       "notes": [
         "地下は実際にコライダーを空ける。背景を暗くするだけの穴にしない。",
         "積み上げで採点範囲上端を超えた物は範囲外。"
-      ]
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "low-table"
+          ],
+          "role": "fixed-flow_immune",
+          "heightBucket": "medium",
+          "referenceSize": [
+            94,
+            58.94915254237288
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "wooden-crate"
+          ],
+          "role": "fragile",
+          "heightBucket": "medium",
+          "referenceSize": [
+            56,
+            54.981818181818184
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "washing-machine",
+            "refrigerator"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            78,
+            88.70588235294117
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "plank"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            96,
+            38.095238095238095
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "washing-machine",
+            "refrigerator"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bookshelf",
+            "chair",
+            "flower-pot",
+            "suitcase"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            72,
+            82.5
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "sofa",
+            "wardrobe",
+            "bed"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            114,
+            85.9672131147541
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bookshelf",
+            "chair",
+            "flower-pot",
+            "suitcase"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            80.37209302325581
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bookshelf",
+            "chair",
+            "flower-pot",
+            "suitcase"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            69.37254901960785
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bookshelf",
+            "chair",
+            "flower-pot",
+            "suitcase"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            62,
+            82.18604651162791
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "crt-tv",
+            "flat-tv",
+            "microwave",
+            "toaster",
+            "rice-cooker"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            33.81818181818182
+          ],
+          "fixed": false
+        }
+      ],
+      "scoreGroundY": 500
     },
     {
       "id": 3,
@@ -234,11 +707,224 @@
         "toolbox",
         "grip-boots"
       ],
-      "preplaced": []
+      "preplaced": [],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-ball"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball",
+            "basketball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "ice-block"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            56.945454545454545
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "metal-drum"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "dumbbell",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            66,
+            48
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "barrel",
+            "cushion",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            53.9622641509434
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "skateboard"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "low",
+          "referenceSize": [
+            86,
+            40.885245901639344
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "barrel",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            70.88888888888889
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "metal-drum"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            60,
+            79.53488372093024
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            33.81818181818182
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "barrel",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            66.28571428571429
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball",
+            "basketball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "dumbbell",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "grip-boots"
+          ],
+          "role": "fixed-grip_sole",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            50.4
+          ],
+          "fixed": true
+        }
+      ]
     },
     {
       "id": 4,
-      "nameJa": "路地裏 燃やして消す",
+      "nameJa": "ろじうら",
       "map": "04-alley",
       "status": "specified",
       "gravity": 980,
@@ -294,32 +980,274 @@
       "preplaced": [
         {
           "id": "wooden-crate",
-          "x": 160,
+          "x": 150,
           "groundY": 424
         },
         {
           "id": "wooden-crate",
-          "x": 220,
+          "x": 208,
+          "groundY": 424
+        },
+        {
+          "id": "wooden-crate",
+          "x": 266,
           "groundY": 424
         },
         {
           "id": "trash-bag",
-          "x": 296,
+          "x": 330,
           "groundY": 424
         },
         {
-          "id": "newspaper",
-          "x": 356,
+          "id": "trash-bin",
+          "x": 392,
           "groundY": 424
+        },
+        {
+          "id": "cardboard-box",
+          "x": 179,
+          "groundY": 369
+        },
+        {
+          "id": "wooden-crate",
+          "x": 237,
+          "groundY": 369
+        },
+        {
+          "id": "trash-bag",
+          "x": 300,
+          "groundY": 370
+        },
+        {
+          "id": "newspaper",
+          "x": 213,
+          "groundY": 314
         }
       ],
       "notes": [
         "消火前の追加投射は禁止せず、燃え残りの上へ置くと引火する。"
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "molotov"
+          ],
+          "role": "fixed-ignite_on_break",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            67.41379310344827
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower"
+          ],
+          "role": "fixed-flame_jet",
+          "heightBucket": "medium",
+          "referenceSize": [
+            68,
+            59.18518518518518
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-balloon"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            44.89795918367347
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-jug"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            62.76923076923077
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-balloon"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            44.89795918367347
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "trash-bin",
+            "washing-machine",
+            "toolbox",
+            "crt-tv"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            69.91489361702128
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "trash-bin",
+            "washing-machine",
+            "crt-tv"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            78,
+            88.70588235294117
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "plank"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            96,
+            38.095238095238095
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bucket",
+            "backpack",
+            "tire",
+            "chair"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            63.48837209302326
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "trash-bin",
+            "toolbox",
+            "crt-tv"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bucket",
+            "backpack",
+            "tire",
+            "chair"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            66.28571428571429
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bucket",
+            "backpack",
+            "tire"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            53.9622641509434
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bucket",
+            "backpack",
+            "chair"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            80.37209302325581
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "trash-bin",
+            "washing-machine",
+            "toolbox",
+            "crt-tv"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            71.9090909090909
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        }
       ]
     },
     {
       "id": 5,
-      "nameJa": "火山 燃える床",
+      "nameJa": "かざん",
       "map": "05-volcano",
       "status": "specified",
       "gravity": 980,
@@ -335,21 +1263,95 @@
       ],
       "terrain": [
         {
-          "rect": [
-            0,
-            430,
-            960,
-            110
+          "polygon": [
+            [
+              0,
+              430
+            ],
+            [
+              80,
+              430
+            ],
+            [
+              162,
+              378
+            ],
+            [
+              226,
+              320
+            ],
+            [
+              284,
+              320
+            ],
+            [
+              306,
+              346
+            ],
+            [
+              334,
+              346
+            ],
+            [
+              356,
+              320
+            ],
+            [
+              398,
+              320
+            ],
+            [
+              458,
+              378
+            ],
+            [
+              530,
+              430
+            ],
+            [
+              960,
+              430
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              0,
+              540
+            ]
           ]
         }
       ],
       "surfaceZones": [
         {
           "rect": [
-            80,
-            420,
-            470,
-            18
+            226,
+            313,
+            58,
+            12
+          ],
+          "initialState": "burning",
+          "burnSeconds": 5,
+          "reignite": false
+        },
+        {
+          "rect": [
+            306,
+            339,
+            28,
+            12
+          ],
+          "initialState": "burning",
+          "burnSeconds": 5,
+          "reignite": false
+        },
+        {
+          "rect": [
+            356,
+            313,
+            42,
+            12
           ],
           "initialState": "burning",
           "burnSeconds": 5,
@@ -376,6 +1378,216 @@
       "preplaced": [],
       "notes": [
         "最初の新聞束で着火から消滅までを示す。常時再着火する床にはしない。"
+      ],
+      "scoreGroundY": 430,
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "newspaper"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            35.471698113207545
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-jug"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            62.76923076923077
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-balloon"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            44.89795918367347
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-jug"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            62.76923076923077
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "fire-extinguisher"
+          ],
+          "role": "fixed-extinguisher",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            67.88571428571429
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cannonball",
+            "bowling-ball"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            39.27272727272727
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan",
+            "cooking-pot"
+          ],
+          "role": "heat-shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            54.833333333333336
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "refrigerator",
+            "bell"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            60,
+            79.53488372093024
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan",
+            "cooking-pot"
+          ],
+          "role": "heat-shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            58.52459016393443
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "dumbbell"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cannonball",
+            "bowling-ball"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "ice-block"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            56.945454545454545
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "refrigerator",
+            "bell"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "dumbbell"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            66,
+            48
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "refrigerator",
+            "bell"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            77.06122448979592
+          ],
+          "fixed": false
+        }
       ]
     },
     {
@@ -463,7 +1675,222 @@
         "pillow",
         "backpack"
       ],
-      "preplaced": []
+      "preplaced": [],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "cushion"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "washing-machine",
+            "vacuum",
+            "fan",
+            "heater"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "plank"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            96,
+            38.095238095238095
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "sofa",
+            "wardrobe",
+            "bed"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            114,
+            85.9672131147541
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "wheelbarrow"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            94,
+            83.35849056603773
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "skateboard"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "low",
+          "referenceSize": [
+            86,
+            40.885245901639344
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "tire",
+            "flower-pot",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            53.9622641509434
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "umbrella"
+          ],
+          "role": "fixed-repel_water",
+          "heightBucket": "tall",
+          "referenceSize": [
+            90,
+            84.09836065573771
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "grip-boots"
+          ],
+          "role": "fixed-grip_sole",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            50.4
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "suitcase",
+            "flower-pot",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            62,
+            82.18604651162791
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "low-table"
+          ],
+          "role": "fixed-flow_immune",
+          "heightBucket": "medium",
+          "referenceSize": [
+            94,
+            58.94915254237288
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "suitcase",
+            "flower-pot",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            69.37254901960785
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            33.81818181818182
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "suitcase",
+            "flower-pot",
+            "backpack"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            66.28571428571429
+          ],
+          "fixed": false
+        }
+      ]
     },
     {
       "id": 7,
@@ -527,6 +1954,243 @@
           "groundY": 420,
           "width": 112,
           "scoring": false
+        }
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "microwave"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            56.94915254237288
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "microwave",
+            "toaster",
+            "rice-cooker",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            54,
+            48.31578947368421
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "microwave",
+            "toaster",
+            "rice-cooker",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            54,
+            44.526315789473685
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "vacuum",
+            "heater",
+            "washing-machine"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "microwave",
+            "refrigerator",
+            "vacuum",
+            "flat-tv",
+            "heater",
+            "floor-lamp",
+            "washing-machine"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            80,
+            78.59649122807018
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "microwave",
+            "vacuum",
+            "flat-tv",
+            "heater",
+            "washing-machine",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            82,
+            69.49152542372882
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "microwave",
+            "refrigerator",
+            "vacuum",
+            "flat-tv",
+            "heater",
+            "floor-lamp",
+            "washing-machine"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            66,
+            75.625
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "vacuum",
+            "heater",
+            "floor-lamp",
+            "washing-machine"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            58,
+            81.2
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "pillow"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            33.81818181818182
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "vacuum",
+            "flat-tv",
+            "heater",
+            "floor-lamp",
+            "washing-machine"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            78,
+            88.70588235294117
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "microwave",
+            "toaster",
+            "rice-cooker",
+            "flat-tv",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
         }
       ]
     },
@@ -614,6 +2278,229 @@
       "notes": [
         "チュートリアル木箱のみ、届いた爆風を3回受けると破壊。通常物の乱数耐性とは別の保証ルール案。",
         "外した爆弾は命中回数に加算しない。再挑戦可能。"
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "bomb"
+          ],
+          "role": "fixed-explosion",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            46.84615384615385
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bomb"
+          ],
+          "role": "fixed-explosion",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            46.84615384615385
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bomb"
+          ],
+          "role": "fixed-explosion",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            46.84615384615385
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "treasure-chest",
+            "ship-wheel",
+            "rope-coil",
+            "gold-sack",
+            "barrel"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            66,
+            56.0377358490566
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "anchor"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            72.5
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "treasure-chest",
+            "ship-wheel",
+            "rope-coil",
+            "gold-sack",
+            "pirate-flag",
+            "barrel"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            64,
+            64
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "treasure-chest",
+            "ship-wheel",
+            "rope-coil",
+            "gold-sack"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            50,
+            46.81818181818182
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "lifebuoy"
+          ],
+          "role": "fixed-buoyant",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            59.96610169491525
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cannonball",
+            "spyglass",
+            "compass"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            39.27272727272727
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cannonball",
+            "spyglass"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            56,
+            33.793103448275865
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cannonball",
+            "compass"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            34,
+            36.56603773584906
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "treasure-chest",
+            "ship-wheel",
+            "rope-coil",
+            "gold-sack",
+            "barrel"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            64.36363636363636
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "ship-wheel",
+            "pirate-flag",
+            "barrel"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "tall",
+          "referenceSize": [
+            72,
+            84.46153846153847
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower"
+          ],
+          "role": "fixed-flame_jet",
+          "heightBucket": "medium",
+          "referenceSize": [
+            68,
+            59.18518518518518
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "treasure-chest",
+            "ship-wheel",
+            "gold-sack",
+            "pirate-flag",
+            "barrel"
+          ],
+          "role": "pirate-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            70.88888888888889
+          ],
+          "fixed": false
+        }
       ]
     },
     {
@@ -662,6 +2549,231 @@
       "preplaced": [],
       "notes": [
         "鐘と手裏剣は指定どおり円形当たり判定。外観どおりの尖った判定にしない。"
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "bell"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            77.06122448979592
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "shuriken"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            40.97560975609756
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "shuriken"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            40.97560975609756
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "daruma",
+            "ninja-drum",
+            "scroll",
+            "lantern",
+            "folding-fan",
+            "ninja-log"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            46,
+            44.3859649122807
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "daruma",
+            "ninja-drum",
+            "scroll",
+            "lantern",
+            "folding-fan",
+            "ninja-log"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            52,
+            45.132075471698116
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bell",
+            "gong"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            67.62711864406779
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "daruma",
+            "ninja-drum",
+            "scroll",
+            "lantern",
+            "folding-fan"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            49.1764705882353
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "kunai"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            32,
+            68.41379310344827
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "daruma",
+            "ninja-drum",
+            "scroll",
+            "lantern",
+            "folding-fan"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            60.09756097560975
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "daruma",
+            "ninja-drum",
+            "scroll",
+            "lantern",
+            "folding-fan",
+            "ninja-log"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "low",
+          "referenceSize": [
+            54,
+            48.50847457627118
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "daruma",
+            "ninja-drum",
+            "folding-fan",
+            "ninja-log"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "medium",
+          "referenceSize": [
+            64,
+            53.69491525423729
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bell",
+            "gong"
+          ],
+          "role": "ninja-prop",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            77.06122448979592
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "shuriken"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            40.97560975609756
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hourglass"
+          ],
+          "role": "fragile",
+          "heightBucket": "medium",
+          "referenceSize": [
+            40,
+            60.51282051282051
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "fuel-lantern"
+          ],
+          "role": "fixed-fuel_light",
+          "heightBucket": "medium",
+          "referenceSize": [
+            42,
+            65.15384615384616
+          ],
+          "fixed": true
+        }
       ]
     },
     {
@@ -692,7 +2804,7 @@
       ],
       "queue": [
         "bowling-ball",
-        "bowling-ball",
+        "blast-bomb",
         "bowling-pin",
         "skateboard",
         "basketball",
@@ -711,27 +2823,252 @@
         {
           "id": "bowling-pin",
           "x": 120,
-          "groundY": 420
+          "groundY": 420,
+          "scorePenalty": 100,
+          "scoring": true
         },
         {
           "id": "bowling-pin",
           "x": 165,
-          "groundY": 420
+          "groundY": 420,
+          "scorePenalty": 100,
+          "scoring": true
         },
         {
           "id": "bowling-pin",
           "x": 210,
-          "groundY": 420
+          "groundY": 420,
+          "scorePenalty": 100,
+          "scoring": true
         },
         {
           "id": "bowling-pin",
           "x": 255,
-          "groundY": 420
+          "groundY": 420,
+          "scorePenalty": 100,
+          "scoring": true
         },
         {
           "id": "bowling-pin",
           "x": 300,
-          "groundY": 420
+          "groundY": 420,
+          "scorePenalty": 100,
+          "scoring": true
+        }
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-ball"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "blast-bomb"
+          ],
+          "role": "fixed-explosion",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            46.84615384615385
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-pin"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            61.81818181818182
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "skateboard"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "low",
+          "referenceSize": [
+            86,
+            40.885245901639344
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "basketball",
+            "soccer-ball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "basketball",
+            "soccer-ball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-ball",
+            "toaster",
+            "rice-cooker",
+            "alarm-clock"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-pin"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            61.81818181818182
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "cushion",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            53.9622641509434
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "platform-cart"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            92,
+            79.73333333333333
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "dumbbell",
+            "microwave",
+            "toaster",
+            "rice-cooker",
+            "toolbox"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            66,
+            48
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "cushion",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-ball",
+            "toaster",
+            "rice-cooker",
+            "alarm-clock"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "cushion",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            58.11764705882353
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toy-car"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            27.263157894736842
+          ],
+          "fixed": true
         }
       ]
     },
@@ -818,7 +3155,7 @@
         "barrel",
         "low-table",
         "platform-cart",
-        "towel",
+        "sponge",
         "ice-block",
         "refrigerator",
         "bucket",
@@ -831,6 +3168,205 @@
       "notes": [
         "机・ローテーブルは水流の押力係数0。重力と衝突は通常通り。",
         "橋の天板と支柱は実際の当たり判定を持つ。"
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "lifebuoy"
+          ],
+          "role": "fixed-buoyant",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            59.96610169491525
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "desk"
+          ],
+          "role": "fixed-flow_immune",
+          "heightBucket": "tall",
+          "referenceSize": [
+            104,
+            83.54098360655738
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-balloon"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            44.89795918367347
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "umbrella"
+          ],
+          "role": "fixed-repel_water",
+          "heightBucket": "tall",
+          "referenceSize": [
+            90,
+            84.09836065573771
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "barrel",
+            "bucket"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            70.88888888888889
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "low-table"
+          ],
+          "role": "fixed-flow_immune",
+          "heightBucket": "medium",
+          "referenceSize": [
+            94,
+            58.94915254237288
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "platform-cart"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            92,
+            79.73333333333333
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "sponge"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            31.428571428571427
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "ice-block"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            56.945454545454545
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "barrel",
+            "bucket"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            63.48837209302326
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soccer-ball"
+          ],
+          "role": "bouncy-ball",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            42
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "sponge"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            31.428571428571427
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "wheelbarrow"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            94,
+            83.35849056603773
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "watering-can"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "low",
+          "referenceSize": [
+            58,
+            45.71186440677966
+          ],
+          "fixed": true
+        }
       ]
     },
     {
@@ -922,7 +3458,14 @@
             334
           ],
           "rateUnitsPerSecond": 2,
-          "maxUnits": 96
+          "maxUnits": 96,
+          "stopAtStoredUnits": 40,
+          "storedRegion": [
+            226,
+            350,
+            318,
+            130
+          ]
         }
       ],
       "queue": [
@@ -942,7 +3485,204 @@
         "soap",
         "bucket"
       ],
-      "preplaced": []
+      "preplaced": [],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "toothbrush"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            28,
+            85.47368421052632
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toothpaste"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            60.5625
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soap"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            30.14814814814815
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "sponge"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            31.428571428571427
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "basin"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            62,
+            32.107142857142854
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-bottle"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            32,
+            65.18518518518519
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "umbrella"
+          ],
+          "role": "fixed-repel_water",
+          "heightBucket": "tall",
+          "referenceSize": [
+            90,
+            84.09836065573771
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toothbrush"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            28,
+            85.47368421052632
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toothpaste"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            60.5625
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-balloon"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            44.89795918367347
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cold-pack"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "low",
+          "referenceSize": [
+            34,
+            47.6
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "soap"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            30.14814814814815
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bucket"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            63.48837209302326
+          ],
+          "fixed": false
+        }
+      ]
     },
     {
       "id": 13,
@@ -1029,6 +3769,257 @@
       "notes": [
         "水・冷却アイテムは入れない。金属の鍋やフライパンで熱を遮り、燃えない物を積む。",
         "遮熱は火源そのものの消滅ではない。"
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan"
+          ],
+          "role": "fixed-heat_shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            54.833333333333336
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan",
+            "cooking-pot",
+            "kettle"
+          ],
+          "role": "heat-shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            58.52459016393443
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan",
+            "cooking-pot",
+            "kettle"
+          ],
+          "role": "heat-shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            58.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan",
+            "cooking-pot",
+            "kettle"
+          ],
+          "role": "heat-shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            54.833333333333336
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "bell",
+            "microwave",
+            "anchor",
+            "heater"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            60,
+            79.53488372093024
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "dumbbell",
+            "microwave",
+            "anchor",
+            "rice-cooker",
+            "toaster"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            51.85454545454545
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "dumbbell",
+            "microwave",
+            "rice-cooker",
+            "toaster"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            66,
+            48
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "bell",
+            "microwave",
+            "anchor",
+            "heater"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            77.06122448979592
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "toolbox",
+            "dumbbell",
+            "bell",
+            "microwave",
+            "anchor",
+            "heater",
+            "rice-cooker",
+            "toaster"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            56.94915254237288
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "frying-pan",
+            "cooking-pot",
+            "kettle"
+          ],
+          "role": "heat-shield",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            58.52459016393443
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "toolbox",
+            "bell",
+            "microwave",
+            "anchor",
+            "heater"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            70,
+            72.5
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cannonball",
+            "rice-cooker",
+            "toaster"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            40,
+            39.27272727272727
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "metal-drum",
+            "bell",
+            "microwave",
+            "anchor",
+            "heater"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            66,
+            75.625
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "dumbbell",
+            "microwave",
+            "cannonball",
+            "rice-cooker",
+            "toaster"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            54,
+            44.526315789473685
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "toolbox",
+            "dumbbell",
+            "microwave",
+            "cannonball",
+            "rice-cooker",
+            "toaster"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            54,
+            48.31578947368421
+          ],
+          "fixed": false
+        }
       ]
     },
     {
@@ -1161,6 +4152,205 @@
           "id": "trash-bag",
           "x": 250,
           "groundY": 378
+        }
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "bomb"
+          ],
+          "role": "fixed-explosion",
+          "heightBucket": "low",
+          "referenceSize": [
+            42,
+            46.84615384615385
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower"
+          ],
+          "role": "fixed-flame_jet",
+          "heightBucket": "medium",
+          "referenceSize": [
+            68,
+            59.18518518518518
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-jug"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            62.76923076923077
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "ice-bomb"
+          ],
+          "role": "fixed-cold_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            42,
+            52.0625
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "umbrella"
+          ],
+          "role": "fixed-repel_water",
+          "heightBucket": "tall",
+          "referenceSize": [
+            90,
+            84.09836065573771
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "wheelbarrow"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            94,
+            83.35849056603773
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "platform-cart"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            92,
+            79.73333333333333
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "grip-boots"
+          ],
+          "role": "fixed-grip_sole",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            50.4
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "treasure-chest"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            66,
+            56.0377358490566
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bell",
+            "refrigerator"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            64,
+            77.06122448979592
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bell",
+            "refrigerator"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "skateboard"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "low",
+          "referenceSize": [
+            86,
+            40.885245901639344
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "fuel-lantern"
+          ],
+          "role": "fixed-fuel_light",
+          "heightBucket": "medium",
+          "referenceSize": [
+            42,
+            65.15384615384616
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cold-pack"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "low",
+          "referenceSize": [
+            34,
+            47.6
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hourglass"
+          ],
+          "role": "fragile",
+          "heightBucket": "medium",
+          "referenceSize": [
+            40,
+            60.51282051282051
+          ],
+          "fixed": false
         }
       ]
     },
@@ -1304,6 +4494,280 @@
       "notes": [
         "The plate is a real concave collision polygon; its open interior is not filled by a bounding box.",
         "15 food/tool throws; the spoon belongs to the ice-cream cup body."
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            66,
+            59.05263157894737
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            68,
+            59.49999999999999
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "apple",
+            "fried-shrimp",
+            "donut"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            68.07843137254902
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            60,
+            50.357142857142854
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            56.11764705882353
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "low",
+          "referenceSize": [
+            56,
+            46.666666666666664
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            55.83673469387755
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "ice-cream-cup"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "medium",
+          "referenceSize": [
+            56,
+            61.49019607843138
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "steak-knife"
+          ],
+          "role": "table-tool",
+          "heightBucket": "tall",
+          "referenceSize": [
+            32,
+            104.88888888888889
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "fork"
+          ],
+          "role": "table-tool",
+          "heightBucket": "medium",
+          "referenceSize": [
+            36,
+            61.411764705882355
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "crossed-chopsticks",
+            "lunch-pick"
+          ],
+          "role": "table-tool",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            59
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "crossed-chopsticks",
+            "lunch-pick"
+          ],
+          "role": "table-tool",
+          "heightBucket": "medium",
+          "referenceSize": [
+            42,
+            56.96551724137931
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            52.5045045045045
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "watermelon",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            52
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hamburger",
+            "steak",
+            "cheese-wedge",
+            "bread-slice",
+            "rice-bowl",
+            "apple",
+            "fried-shrimp",
+            "donut",
+            "fried-egg"
+          ],
+          "role": "food",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            48.421052631578945
+          ],
+          "fixed": false
+        }
       ]
     },
     {
@@ -1375,7 +4839,262 @@
         "fire-extinguisher"
       ],
       "preplaced": [],
-      "lesson": "HEAVY PARTS HIT HARD. USE THE LIFT AS A PLATFORM."
+      "lesson": "HEAVY PARTS HIT HARD. USE THE LIFT AS A PLATFORM.",
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "tire"
+          ],
+          "role": "fixed-solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            53.9622641509434
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "steering-wheel",
+            "passenger-seat",
+            "traffic-cone",
+            "work-helmet",
+            "bucket"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            60,
+            60
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "engine-block",
+            "car-battery",
+            "car-jack",
+            "car-door"
+          ],
+          "role": "garage-part",
+          "heightBucket": "tall",
+          "referenceSize": [
+            86,
+            81.55172413793103
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "engine-block",
+            "car-battery",
+            "electric-drill",
+            "impact-wrench",
+            "car-jack",
+            "car-door",
+            "metal-drum"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            62,
+            64.4313725490196
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "car-battery",
+            "electric-drill",
+            "muffler",
+            "impact-wrench",
+            "car-jack"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            64,
+            55.01754385964912
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "electric-drill",
+            "muffler",
+            "impact-wrench",
+            "car-jack"
+          ],
+          "role": "garage-part",
+          "heightBucket": "low",
+          "referenceSize": [
+            76,
+            45.08474576271186
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "car-battery",
+            "electric-drill",
+            "muffler",
+            "impact-wrench",
+            "car-jack",
+            "car-door"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            60,
+            56.72727272727272
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "engine-block",
+            "car-battery",
+            "electric-drill",
+            "muffler",
+            "impact-wrench",
+            "car-jack",
+            "car-door",
+            "metal-drum"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            64,
+            61.83050847457627
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "engine-block",
+            "car-battery",
+            "impact-wrench",
+            "car-jack",
+            "car-door",
+            "metal-drum"
+          ],
+          "role": "garage-part",
+          "heightBucket": "tall",
+          "referenceSize": [
+            76,
+            77.38181818181818
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "steering-wheel",
+            "passenger-seat",
+            "traffic-cone",
+            "bucket"
+          ],
+          "role": "garage-part",
+          "heightBucket": "tall",
+          "referenceSize": [
+            72,
+            83.52
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "steering-wheel",
+            "passenger-seat",
+            "traffic-cone",
+            "work-helmet",
+            "bucket"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            61.16363636363636
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "steering-wheel",
+            "traffic-cone",
+            "work-helmet",
+            "bucket"
+          ],
+          "role": "garage-part",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            49.285714285714285
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "car-battery",
+            "car-jack",
+            "car-door",
+            "metal-drum"
+          ],
+          "role": "garage-part",
+          "heightBucket": "tall",
+          "referenceSize": [
+            60,
+            79.53488372093024
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "tire",
+            "steering-wheel",
+            "passenger-seat",
+            "traffic-cone",
+            "work-helmet",
+            "bucket"
+          ],
+          "role": "garage-part",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            63.48837209302326
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "fire-extinguisher"
+          ],
+          "role": "fixed-extinguisher",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            67.88571428571429
+          ],
+          "fixed": true
+        }
+      ]
     },
     {
       "id": 18,
@@ -1458,7 +5177,219 @@
       "iceFloor": true,
       "displayNameASCII": "ICE FLOOR",
       "assignment": "implementation-assumption: preserve original ice stage at 18; latest user did not specify stage18",
-      "lesson": "ICE IS SLIPPERY. ONLY THE BOOT SOLES ADD GRIP."
+      "lesson": "ICE IS SLIPPERY. ONLY THE BOOT SOLES ADD GRIP.",
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "grip-boots"
+          ],
+          "role": "fixed-grip_sole",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            50.4
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "grip-boots"
+          ],
+          "role": "fixed-grip_sole",
+          "heightBucket": "medium",
+          "referenceSize": [
+            54,
+            50.4
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "plank"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            96,
+            38.095238095238095
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            60,
+            46.90909090909091
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "skateboard"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "low",
+          "referenceSize": [
+            86,
+            40.885245901639344
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "wheelbarrow"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            94,
+            83.35849056603773
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "platform-cart"
+          ],
+          "role": "fixed-wheeled",
+          "heightBucket": "tall",
+          "referenceSize": [
+            92,
+            79.73333333333333
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "refrigerator",
+            "washing-machine",
+            "vacuum",
+            "fan",
+            "heater"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            82,
+            101.19148936170212
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "bowling-ball",
+            "toaster",
+            "rice-cooker",
+            "alarm-clock"
+          ],
+          "role": "solid",
+          "heightBucket": "low",
+          "referenceSize": [
+            44,
+            44
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "umbrella"
+          ],
+          "role": "fixed-repel_water",
+          "heightBucket": "tall",
+          "referenceSize": [
+            90,
+            84.09836065573771
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "backpack",
+            "tennis-racket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            58,
+            66.28571428571429
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "hourglass"
+          ],
+          "role": "fragile",
+          "heightBucket": "medium",
+          "referenceSize": [
+            40,
+            60.51282051282051
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "towel"
+          ],
+          "role": "fixed-absorb",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            52.18604651162791
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "backpack",
+            "tennis-racket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "tall",
+          "referenceSize": [
+            58,
+            75.27659574468085
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cushion",
+            "backpack",
+            "tennis-racket",
+            "teddy-bear"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            58.11764705882353
+          ],
+          "fixed": false
+        }
+      ]
     },
     {
       "id": 19,
@@ -1512,7 +5443,28 @@
         "festival-mask",
         "lantern"
       ],
-      "preplaced": [],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 205,
+          "groundY": 386
+        },
+        {
+          "id": "wooden-crate",
+          "x": 265,
+          "groundY": 386
+        },
+        {
+          "id": "trash-bag",
+          "x": 325,
+          "groundY": 386
+        },
+        {
+          "id": "newspaper",
+          "x": 235,
+          "groundY": 331
+        }
+      ],
       "lesson": "FIREWORKS BOUNCE FIRST, THEN BURST WHEN THEIR FUSE ENDS.",
       "surfaceZones": [
         {
@@ -1524,6 +5476,225 @@
           ],
           "flammable": true,
           "burnSeconds": 3
+        }
+      ],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "firework-shell"
+          ],
+          "role": "fixed-firework",
+          "heightBucket": "medium",
+          "referenceSize": [
+            46,
+            54.17777777777778
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "firework-rocket"
+          ],
+          "role": "fixed-firework",
+          "heightBucket": "medium",
+          "referenceSize": [
+            38,
+            69.0909090909091
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "firework-fountain"
+          ],
+          "role": "fixed-firework",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            53.829787234042556
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "candy-apple",
+            "cotton-candy",
+            "chocolate-banana",
+            "grilled-corn",
+            "frankfurter"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            38,
+            59.567567567567565
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "candy-apple",
+            "cotton-candy",
+            "grilled-corn",
+            "takoyaki-tray"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            48,
+            58.212765957446805
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "candy-apple",
+            "chocolate-banana",
+            "grilled-corn",
+            "frankfurter"
+          ],
+          "role": "food",
+          "heightBucket": "tall",
+          "referenceSize": [
+            38,
+            81.62962962962963
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "candy-apple",
+            "cotton-candy",
+            "chocolate-banana",
+            "grilled-corn",
+            "frankfurter"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            42,
+            66.97297297297297
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "cotton-candy",
+            "takoyaki-tray",
+            "yakisoba"
+          ],
+          "role": "food",
+          "heightBucket": "low",
+          "referenceSize": [
+            66,
+            49.220338983050844
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "takoyaki-tray",
+            "yakisoba"
+          ],
+          "role": "food",
+          "heightBucket": "low",
+          "referenceSize": [
+            70,
+            48.644067796610166
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "candy-apple",
+            "chocolate-banana",
+            "grilled-corn",
+            "frankfurter"
+          ],
+          "role": "food",
+          "heightBucket": "medium",
+          "referenceSize": [
+            34,
+            70.34482758620689
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "shaved-ice"
+          ],
+          "role": "fixed-ice_mass",
+          "heightBucket": "medium",
+          "referenceSize": [
+            52,
+            53.89090909090909
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "water-yoyo"
+          ],
+          "role": "fixed-water_release",
+          "heightBucket": "medium",
+          "referenceSize": [
+            42,
+            53.26829268292683
+          ],
+          "fixed": true
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "fish-scoop"
+          ],
+          "role": "fragile",
+          "heightBucket": "tall",
+          "referenceSize": [
+            48,
+            85.81818181818183
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "festival-mask",
+            "lantern"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            46,
+            57.75555555555555
+          ],
+          "fixed": false
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "festival-mask",
+            "lantern"
+          ],
+          "role": "solid",
+          "heightBucket": "medium",
+          "referenceSize": [
+            44,
+            60.09756097560975
+          ],
+          "fixed": false
         }
       ]
     },
@@ -1684,7 +5855,9 @@
           "friction": 0.025,
           "permanent": true
         }
-      ]
+      ],
+      "selectAnyCatalogItem": true,
+      "selectionPolicy": "optional free choice; otherwise preserve the authored fifteen-item queue"
     }
   ]
 }

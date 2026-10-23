@@ -22,6 +22,82 @@ func _frames(count: int) -> void:
 	for _index in range(count):
 		await physics_frame
 
+func _click(point: Vector2, button_index: MouseButton) -> void:
+	for pressed in [true, false]:
+		var event = InputEventMouseButton.new()
+		event.button_index = button_index
+		event.position = point
+		event.pressed = pressed
+		root.push_input(event)
+
+func _score_and_wait_checks() -> void:
+	game.load_stage(0)
+	await _frames(2)
+	var actor = game._create_actor(game.catalog.items["refrigerator"], Vector2(220, 300))
+	actor.freeze = true
+	var ground_y = float(game.current_stage.get("scoreGroundY", game.score_zone.end.y))
+	actor.position.y += ground_y - 80.5 - actor.get_world_bounds().get_center().y
+	var base_score = int(actor.record.score)
+	_check(game.calculate_score() == base_score + 50, "Height score is not five 16px rows above the scoring floor")
+	actor.position.y -= 16
+	_check(game.calculate_score() == base_score + 60, "Raising a valid object one row did not add ten points")
+	actor.position.x += 24
+	_check(game.calculate_score() == base_score + 60, "Horizontal distance changed the height bonus")
+	_check(game.score_value == 0, "Score refreshed before the half-second update")
+	await _frames(64)
+	_check(game.score_value == base_score + 60, "HUD did not recompute the current score after half a second")
+	await _frames(64)
+	_check(game.score_value == base_score + 60, "Score accumulated repeatedly instead of replacing the current total")
+	var valid_position = actor.position
+	actor.position.y += game.score_zone.end.y + 0.3 - actor.get_world_bounds().end.y
+	_check(game.calculate_score() >= base_score, "Subpixel contact with the real floor incorrectly excludes a valid item")
+	actor.position.y += 2.0
+	_check(game.calculate_score() == 0, "An item beyond the floor-contact tolerance still scores")
+	actor.position = valid_position
+	actor.position.x += game.score_zone.position.x - 0.1 - actor.get_world_bounds().position.x
+	_check(game.calculate_score() == 0, "Floor tolerance leaked into the left boundary")
+	actor.position = valid_position
+	actor.position.x += game.score_zone.end.x + 0.1 - actor.get_world_bounds().end.x
+	_check(game.calculate_score() == 0, "An outside tower gained points through right-boundary tolerance")
+	actor.position = valid_position
+	actor.position.y += game.score_zone.position.y - 0.1 - actor.get_world_bounds().position.y
+	_check(game.calculate_score() == 0, "Floor tolerance leaked into the top boundary")
+	actor.position = valid_position
+	actor.can_score = false
+	_check(game.calculate_score() == 0, "A non-scoring item received height points")
+	actor.can_score = true
+	actor.alive = false
+	_check(game.calculate_score() == 0, "A destroyed item received height points")
+	actor.alive = true
+	actor.set_meta("score_penalty", -100)
+	_check(game.calculate_score() == -100, "Fixed obstacle penalty received a height bonus")
+	actor.position.y -= 16
+	_check(game.calculate_score() == -100, "Moving a penalty object vertically changed its fixed penalty")
+	actor.position.x = game.score_zone.end.x + 100
+	_check(game.calculate_score() == 0, "An out-of-zone penalty object still subtracts points")
+	game.destroy_actor(actor, "test")
+	_check(game.calculate_score() == 0, "Destroyed penalty still affects the total")
+	# Exercise the waiting flow with a real launched body and impact callback.
+	game.load_stage(0)
+	await _frames(2)
+	game.cannon.fire()
+	var waiting = game.actors[0]
+	waiting.freeze = true
+	waiting.is_launched = true
+	waiting.set_meta("has_landed", false)
+	game.shots_fired = 15
+	game._launched_count = 15
+	game._landed_count = 14
+	await _frames(2)
+	_check(is_equal_approx(Engine.time_scale, 1.0), "Waiting accelerated before the final projectile landed")
+	game.on_actor_impact(waiting, waiting.position, 0.0, 0.0)
+	await _frames(2)
+	_check(is_equal_approx(Engine.time_scale, 1.5) and Engine.physics_ticks_per_second == game._base_physics_ticks * 3 / 2, "Landed waiting flow did not preserve physics step size at 1.5x")
+	game._show_maps()
+	_check(is_equal_approx(Engine.time_scale, 1.0) and Engine.physics_ticks_per_second == game._base_physics_ticks, "Opening a modal did not reset waiting speed")
+	game.load_stage(1)
+	_check(is_equal_approx(Engine.time_scale, 1.0), "Changing stage retained accelerated simulation")
+
 
 func _snapshot(name: String, include_modal: bool = true) -> void:
 	game._update_hud()
@@ -71,8 +147,10 @@ func _run() -> void:
 	_check(game.tutorial_active and game.tutorial_label.visible and game.debug_snapshot().tutorialArrows.size() == 4, "First stage is missing its four-direction aiming tutorial")
 	var logo = game.ui_root.get_node_or_null("GameLogo") as TextureRect
 	_check(logo != null and logo.size.x <= 260.0 and logo.size.y <= 60.0 and logo.get_global_rect().end.x < game.score_label.position.x, "Logo texture minimum size overlaps the score HUD")
-	var loaded_size = game.loaded_icon.texture.get_size() * game.loaded_icon.scale
-	_check(loaded_size.x <= 58.01 and loaded_size.y <= 58.01 and game.loaded_icon.position.y + loaded_size.y * 0.5 < game.cannon.position.y - 60.0, "Loaded preview obscures the cannon carriage")
+	var preview_probe = game._create_actor(game.catalog.items[game.next_item_id()], Vector2(600, 180))
+	_check(game.loaded_icon.texture == preview_probe.visual.texture and game.loaded_icon.scale.is_equal_approx(preview_probe.visual.scale), "Loaded preview is not 1:1 with its real projectile")
+	game.actors.erase(preview_probe)
+	preview_probe.free()
 	_check(game.next_item_id() == game.current_stage.queue[0] and game.following_item_id() == game.current_stage.queue[1], "Loaded and NEXT previews do not represent successive items")
 	_check(game.loaded_icon.visible and game.next_icon.texture.resource_path.ends_with(str(game.catalog.items[game.following_item_id()].svg)), "NEXT icon displays the loaded item instead of the following object")
 	var drag_origin = game.cannon.position + Vector2(-10, -20)
@@ -103,8 +181,10 @@ func _run() -> void:
 	game._unhandled_key_input(key)
 	_check(is_equal_approx(game.cannon.power, 0.59), "Power key did not increment the selected power")
 	game.power_slider.value = 65
-	game.cannon.fire()
+	_click(Vector2(600, 170), MOUSE_BUTTON_MIDDLE)
 	_check(game.shots_fired == 1 and game.actors.size() == 1, "Cannon signal did not create exactly one first item")
+	_click(Vector2(600, 170), MOUSE_BUTTON_MIDDLE)
+	_check(game.shots_fired == 1, "Middle-click bypassed shot cooldown")
 	_check(game.shot_audio.stream != null and game.shot_audio.playing and is_equal_approx(db_to_linear(game.shot_audio.volume_db), 0.25), "Successful cannon shot did not play its sound at quarter volume")
 	var first_spin = game.actors[0].angular_velocity
 	await _frames(480)
@@ -112,7 +192,12 @@ func _run() -> void:
 	_check(game.next_item_id() == game.current_stage.queue[1] and game.following_item_id() == game.current_stage.queue[2], "Loaded and NEXT previews did not advance together after firing")
 	observations.first_shot_score = game.calculate_score()
 	observations.first_shot_bodies = game.actors.size()
-	_check(game.calculate_score() == 300, "Default stage 1 first shot did not land the refrigerator inside the target")
+	observations.first_shot_floor_overlap = game.actors[0].get_world_bounds().end.y - game.score_zone.end.y
+	_check(game.calculate_score() >= 300, "Default stage 1 first shot did not land the refrigerator inside the target")
+	_click(game.power_slider.position + Vector2(80, 10), MOUSE_BUTTON_MIDDLE)
+	_check(game.shots_fired == 1, "Middle-click on a HUD control fired into the game")
+	_click(Vector2(600, 170), MOUSE_BUTTON_LEFT)
+	_check(game.shots_fired == 2, "Left-click on open game space did not fire")
 	# The seed repeats the launch draw. The test does not claim cross-platform bit-exact physics.
 	game.load_stage(0)
 	await _frames(2)
@@ -153,6 +238,10 @@ func _run() -> void:
 	game.load_stage(6)
 	await _frames(240)
 	observations.home_initial_score = game.calculate_score()
+	observations.home_scoring_floor_overlaps = []
+	for actor in game.actors:
+		if actor.can_score:
+			observations.home_scoring_floor_overlaps.append(actor.get_world_bounds().end.y - game.score_zone.end.y)
 	_check(game.calculate_score() > 0, "Home stage's existing score props do not score")
 	var washer_checked = false
 	for actor in game.actors:
@@ -178,9 +267,11 @@ func _run() -> void:
 			if child is Button and child.has_meta("item_id"):
 				seen[child.get_meta("item_id")] = true
 	_check(seen.size() == game.catalog.ordered_items.size(), "Sandbox picker did not expose every catalog object")
+	var camera_page: int = 0
 	for index in range(game.catalog.ordered_items.size()):
 		if game.catalog.ordered_items[index].id == "camera":
-			game._show_catalog(index / 24)
+			camera_page = index / 24
+			game._show_catalog(camera_page)
 			break
 	var camera_button = _button_with_meta("item_id", "camera")
 	_check(camera_button != null, "Sandbox camera page has no camera")
@@ -189,6 +280,15 @@ func _run() -> void:
 	_check(game.next_item_id() == "camera", "Catalog callback chose a different item")
 	game.cannon.fire()
 	_check(game.shots_fired == 1 and game.actors[0].item_id == "camera", "Selected sandbox item was not actually fired")
+	game.load_stage(19)
+	await _frames(2)
+	_check(game.current_stage.queue == game.catalog.stages[19].queue and game.next_item_id() == str(game.catalog.stages[19].queue[0]), "Laboratory without a selection lost its original queue")
+	game._show_catalog(camera_page)
+	camera_button = _button_with_meta("item_id", "camera")
+	if camera_button != null:
+		camera_button.pressed.emit()
+	game.cannon.fire()
+	_check(camera_button != null and game.next_item_id() == "camera" and game.actors.back().item_id == "camera", "Laboratory did not launch its freely selected item")
 	# Visual samples come from the actual physical scene, not hand-placed mockups.
 	game.load_stage(3)
 	await _frames(180)
@@ -241,7 +341,7 @@ func _run() -> void:
 	await _frames(1500)
 	_check(game.result_shown and game.simulation_paused, "Fifteen shots did not enter the frozen result screen")
 	_check(game.end_clock >= 12.0 and game.end_clock < 12.1, "Perpetual motion did not finalize at the 12-second bound")
-	_check(game.score_caption.text == "さいしゅう得点" and game.score_label.text == "%04d" % game.score_value, "Result HUD does not show the final score")
+	_check(game.score_caption.text == "とくてん" and game.score_label.text == "%04d" % game.score_value, "Result HUD does not show the final score")
 	_check(game.result_capture_status == "headless" and game.result_jpeg.is_empty() and is_instance_valid(game.modal), "Headless result capture waited for an unavailable framebuffer")
 	_check(game.result_stage_name == game.current_stage.nameJa, "Share result lost the formal Japanese stage name")
 	var post = _button_with_meta("share_action", "tweet")
@@ -254,8 +354,12 @@ func _run() -> void:
 	game.cannon.set_enabled(true)
 	game.cannon.fire()
 	_check(game.shots_fired == 15, "Result state admitted a sixteenth shot")
+	await _score_and_wait_checks()
 	var report = {"suite": "game", "engine": Engine.get_version_info().string, "checks": checks, "failures": failures, "observations": observations, "status": "passed" if failures.is_empty() else "failed", "verification": "Godot headless scene integration; no browser or rendered engine screenshot"}
 	var file = FileAccess.open("res://previews/game-checks.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t"))
 	print(JSON.stringify(report))
+	game.queue_free()
+	await process_frame
+	await process_frame
 	quit(0 if failures.is_empty() else 1)

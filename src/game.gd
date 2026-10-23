@@ -1,6 +1,8 @@
 extends Node2D
 ## Game orchestration; physics, cannon, hazards and liquid have separate owners.
 
+const SCORE_FLOOR_SLOP = 1.5
+
 var catalog = GameCatalog.new()
 var ui_text: Dictionary = {}
 var rng = RandomNumberGenerator.new()
@@ -59,6 +61,9 @@ var _share_bridge: JavaScriptObject
 var tutorial_label: Label
 var tutorial_active: bool = false
 var tutorial_completed: bool = false
+var _base_physics_ticks: int = int(ProjectSettings.get_setting("physics/common/physics_ticks_per_second", 120))
+var _launched_count: int = 0
+var _landed_count: int = 0
 
 func _ready() -> void:
 	var localized = JSON.parse_string(FileAccess.get_file_as_string("res://data/ui-ja.json"))
@@ -86,6 +91,7 @@ func _ready() -> void:
 		_web_document.addEventListener("visibilitychange", _visibility_callback)
 
 func _exit_tree() -> void:
+	_set_wait_speed(1.0)
 	if _web_document != null and _visibility_callback != null:
 		_web_document.removeEventListener("visibilitychange", _visibility_callback)
 
@@ -101,6 +107,7 @@ func _pause_for_visibility() -> void:
 	_button("つづける", Vector2(130, 130), Vector2(180, 44), func(): _close_modal(), modal)
 
 func load_stage(index: int) -> void:
+	_set_wait_speed(1.0)
 	_close_modal(false)
 	if is_instance_valid(stage_root):
 		remove_child(stage_root)
@@ -115,12 +122,16 @@ func load_stage(index: int) -> void:
 	hash_context.start(HashingContext.HASH_SHA256)
 	hash_context.update((seed_text + ":" + str(stage_index)).to_utf8_buffer())
 	rng.seed = hash_context.finish().decode_s64(0)
+	current_stage.queue = catalog.build_queue(current_stage, rng)
+	_launched_count = 0
+	_landed_count = 0
 	shots_fired = 0
 	score_value = 0
 	cooldown = 0.0
 	end_clock = 0.0
 	settle_clock = 0.0
 	elapsed = 0.0
+	hud_clock = 0.0
 	result_shown = false
 	simulation_paused = false
 	selected_catalog_id = ""
@@ -177,6 +188,9 @@ func load_stage(index: int) -> void:
 		var actor = _create_actor(record, Vector2(float(entry.x), 0.0))
 		actor.position.y = float(entry.groundY) - actor.get_world_bounds().end.y - 1.0
 		actor.can_score = bool(entry.get("scoring", false))
+		if entry.has("scorePenalty"):
+			actor.can_score = true
+			actor.set_meta("score_penalty", -absi(int(entry.scorePenalty)))
 		if entry.has("tutorialFractureHits"):
 			actor.set_meta("tutorial_required", int(entry.tutorialFractureHits))
 			# Ordinary contact cannot bypass the three-explosion tutorial rule.
@@ -189,6 +203,7 @@ func load_stage(index: int) -> void:
 	tutorial_active = stage_index == 0 and not tutorial_completed
 	tutorial_label.position = ground + Vector2(-300, -72)
 	tutorial_label.visible = tutorial_active
+	score_value = calculate_score()
 	_update_hud()
 	queue_redraw()
 
@@ -249,6 +264,7 @@ func _on_fired(direction: Vector2, power: float, origin: Vector2) -> void:
 		clearance = maxf(clearance, -(point - actor.global_position).dot(direction))
 	actor.position += direction * (clearance + 3.0)
 	actor.is_launched = true
+	_launched_count += 1
 	actor.linear_velocity = direction * launch_speed(record, power)
 	actor.angular_velocity = rng.randf_range(-0.35, 0.35)
 	actor.can_score = not actor.behavior in ["water_release", "ignite_on_break", "explosion", "cold_release", "firework"]
@@ -284,11 +300,13 @@ func _physics_process(delta: float) -> void:
 			if GameCatalog.rectangle(rect).has_point(actor.global_position):
 				destroy_actor(actor, "abyss")
 				break
-	hud_clock += delta
-	if hud_clock >= 0.1:
-		hud_clock = 0.0
+	hud_clock += delta / Engine.time_scale
+	if hud_clock >= 0.5:
+		hud_clock = fmod(hud_clock, 0.5)
+		score_value = calculate_score()
 		_update_hud()
 	if playable and shots_fired == 15:
+		_set_wait_speed(1.5 if _launched_count == 15 and _landed_count == _launched_count else 1.0)
 		end_clock += delta
 		var resting = true
 		for actor in actors:
@@ -316,6 +334,9 @@ func destroy_actor(actor: ThrowBody, reason: String) -> void:
 	actor.queue_free()
 
 func on_actor_impact(actor: ThrowBody, point: Vector2, normal_speed: float, energy: float) -> void:
+	if actor.is_launched and not actor.get_meta("has_landed", false):
+		actor.set_meta("has_landed", true)
+		_landed_count += 1
 	if not simulation_paused and is_instance_valid(hazards):
 		hazards.impact(actor, point, normal_speed, energy)
 
@@ -347,22 +368,31 @@ func spawn_effect(animation: String, at: Vector2, size_scale: float = 1.0, tint:
 
 func calculate_score() -> int:
 	var total: int = 0
+	var ground_y = float(current_stage.get("scoreGroundY", score_zone.end.y))
 	for actor in actors:
 		if not is_instance_valid(actor) or not actor.alive or not actor.can_score:
 			continue
 		var contained = true
 		for point in actor.get_world_outline():
-			if not score_zone.grow(1.5).has_point(point):
+			if point.x < score_zone.position.x or point.y < score_zone.position.y or point.x > score_zone.end.x:
 				contained = false
 				break
+			if point.y > score_zone.end.y:
+				# The physics solver permits a subpixel overlap with the floor.
+				# Only the bottom edge gets tolerance, and only over static support.
+				if point.y > score_zone.end.y + SCORE_FLOOR_SLOP or cast_solid(Vector2(point.x, score_zone.end.y - 2.0), Vector2(point.x, score_zone.end.y + SCORE_FLOOR_SLOP + 2.0), [actor.get_rid()], 1).is_empty():
+					contained = false
+					break
 		if contained:
-			total += int(actor.record.score)
+			if actor.has_meta("score_penalty"):
+				total += int(actor.get_meta("score_penalty"))
+			else:
+				var height = maxf(0.0, ground_y - actor.get_world_bounds().get_center().y)
+				total += int(actor.record.score) + 10 * floori(height / 16.0)
 	return total
 
 func _update_hud() -> void:
-	if not result_shown:
-		score_value = calculate_score()
-	score_caption.text = "さいしゅう得点" if result_shown else "仮得点"
+	score_caption.text = "とくてん"
 	score_label.text = "%04d" % score_value
 	remaining_label.text = "%02d/15" % maxi(0, 15 - shots_fired)
 	var next = following_item_id()
@@ -372,9 +402,13 @@ func _update_hud() -> void:
 	loaded_icon.visible = not loaded.is_empty()
 	loaded_label.visible = loaded_icon.visible
 	if loaded_icon.visible:
-		loaded_icon.texture = load("res://assets/" + str(catalog.items[loaded].svg))
+		var record: Dictionary = catalog.items[loaded]
+		loaded_icon.texture = load("res://assets/" + str(record.svg))
 		var texture_size = loaded_icon.texture.get_size()
-		loaded_icon.scale = Vector2.ONE * minf(58.0 / texture_size.x, 58.0 / texture_size.y)
+		var viewbox: Array = record.get("viewBox", [0, 0, 128, 128])
+		if texture_size == Vector2(128, 128):
+			viewbox = [0, 0, 128, 128]
+		loaded_icon.scale = Vector2(float(viewbox[2]), float(viewbox[3])) * float(record.worldScale) / texture_size
 	_on_aim_changed(cannon.elevation_degrees, cannon.power)
 
 func _on_aim_changed(angle: float, power: float) -> void:
@@ -459,6 +493,7 @@ func _finish_stage(timed_out: bool) -> void:
 	next.disabled = stage_index >= catalog.stages.size() - 1
 
 func _pause(value: bool) -> void:
+	_set_wait_speed(1.0)
 	simulation_paused = value
 	if is_instance_valid(tutorial_label):
 		tutorial_label.visible = tutorial_active and not value
@@ -467,6 +502,10 @@ func _pause(value: bool) -> void:
 			actor.freeze = value
 	if is_instance_valid(cannon):
 		cannon.set_enabled(not value and playable and not result_shown and shots_fired < 15)
+
+func _set_wait_speed(multiplier: float) -> void:
+	Engine.time_scale = multiplier
+	Engine.physics_ticks_per_second = roundi(_base_physics_ticks * multiplier)
 
 func _open_modal(title: String, size_value: Vector2 = Vector2(864, 430)) -> void:
 	_close_modal(false)
@@ -629,7 +668,7 @@ func _build_ui() -> void:
 		ui_root.add_child(logo)
 	else:
 		_label("なんでもキャノン", Vector2(14, 18), 28, Color("ffd36c"))
-	score_caption = _label("仮得点", Vector2(302, 8), 20)
+	score_caption = _label("とくてん", Vector2(302, 8), 20)
 	score_label = _label("0000", Vector2(302, 30), 36, Color("ffd36c"))
 	_label("残り", Vector2(462, 8), 20)
 	remaining_label = _label("15/15", Vector2(462, 33), 32)
@@ -648,20 +687,19 @@ func _build_ui() -> void:
 	_button("シード", Vector2(876, 10), Vector2(72, 32), _show_seed)
 	_button("やりなおす", Vector2(804, 50), Vector2(144, 32), func(): load_stage(stage_index))
 	stage_label = _label("", Vector2(18, 77), 15, Color("fff0b5"))
-	lesson_label = _label("", Vector2(16, 515), 13, Color("fff0b5"))
-	aim_label = _label("", Vector2(720, 115), 26)
-	angle_slider = _slider(Vector2(720, 155), 5.0, 85.0, 35.0, func(value):
+	lesson_label = _label("", Vector2(18, 451), 12, Color("fff0b5"))
+	aim_label = _label("", Vector2(506, 476), 16)
+	angle_slider = _slider(Vector2(506, 501), 5.0, 85.0, 35.0, func(value):
 		if not updating_sliders and is_instance_valid(cannon):
 			_dismiss_tutorial()
 			cannon.set_aim(value, cannon.power))
-	power_label = _label("", Vector2(720, 193), 26, Color("ffd36c"))
-	power_slider = _slider(Vector2(720, 233), 15.0, 100.0, 65.0, func(value):
+	power_label = _label("", Vector2(738, 476), 16, Color("ffd36c"))
+	power_slider = _slider(Vector2(738, 501), 15.0, 100.0, 65.0, func(value):
 		if not updating_sliders and is_instance_valid(cannon):
 			_dismiss_tutorial()
 			cannon.set_aim(cannon.elevation_degrees, value / 100.0))
-	_label("ひだり・みぎキーで火力", Vector2(720, 263), 10, Color("fff0b5"))
 	loaded_label = _label("いま", Vector2.ZERO, 12, Color("ffd36c"))
-	_label("ドラッグで調整・クリックで発射", Vector2(686, 477), 16)
+	_label("ドラッグで調整・クリックで発射", Vector2(18, 477), 16)
 	catalog_button = _button("もの", Vector2(846, 435), Vector2(94, 34), func(): _show_catalog())
 	tutorial_label = _label("たてドラッグで角度\nよこドラッグで火力\nクリックで発射", Vector2.ZERO, 16, Color("ffd36c"))
 	tutorial_label.visible = false
@@ -669,7 +707,7 @@ func _build_ui() -> void:
 func _slider(at: Vector2, minimum: float, maximum: float, initial: float, callback: Callable) -> HSlider:
 	var slider = HSlider.new()
 	slider.position = at
-	slider.size = Vector2(220, 24)
+	slider.size = Vector2(204, 22)
 	slider.min_value = minimum
 	slider.max_value = maximum
 	slider.value = initial
@@ -728,6 +766,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			load_stage(stage_index)
 		KEY_M, KEY_ESCAPE:
 			_show_maps()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if simulation_paused or result_shown or not playable or not event is InputEventMouseButton:
+		return
+	var button = event as InputEventMouseButton
+	if button.pressed and button.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE]:
+		# Cannon capture and GUI controls consume their events before this fallback.
+		if button.button_index == MOUSE_BUTTON_LEFT and cannon._hit_test(cannon._screen_to_world(button.position)):
+			return
+		cannon.fire()
+		get_viewport().set_input_as_handled()
 
 func _draw() -> void:
 	if not is_instance_valid(cannon) or not playable:
@@ -833,7 +882,7 @@ func debug_snapshot(include_modal: bool = true) -> Dictionary:
 			if point.y > 500 or point.x < 0:
 				break
 			trajectory.append([point.x, point.y, 1.0 - step * 0.06])
-	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "scoreMarker": marker, "score": score_value if result_shown else calculate_score(), "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "cannonVisuals": cannon.visual_snapshot(), "loadedItem": loaded, "followingItem": following_item_id(), "font": theme.default_font.resource_path, "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "tutorialArrows": tutorial_arrows, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate()}
+	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "scoreMarker": marker, "score": score_value, "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "cannonVisuals": cannon.visual_snapshot(), "cannonSelected": cannon.enabled and (cannon._hovered or cannon._grabbed), "loadedItem": loaded, "followingItem": following_item_id(), "font": theme.default_font.resource_path, "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "tutorialArrows": tutorial_arrows, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate()}
 
 func _snapshot_controls(node: Node, output: Array, include_modal: bool = true) -> void:
 	if not include_modal and is_instance_valid(modal) and node == modal.get_parent():

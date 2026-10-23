@@ -48,6 +48,9 @@ func _run() -> void:
 	root.add_child(cannon)
 	var ground = Vector2(810, 420)
 	cannon.configure(ground)
+	_check(cannon._art_group is CanvasGroup and cannon._art_group.material != null, "Cannon is not composited before applying its hover outline")
+	for part in cannon._parts:
+		_check(part.material == null, "A cannon part still has its own seam outline material")
 	cannon.fired.connect(func(direction: Vector2, charge: float, origin: Vector2) -> void:
 		shots.append({"direction": direction, "power": charge, "origin": origin})
 	)

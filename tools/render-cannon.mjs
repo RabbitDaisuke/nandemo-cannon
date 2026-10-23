@@ -33,4 +33,7 @@ for(const [i,angle] of [15,35,75].entries()) {
   angles+=`<g transform="translate(${x+232} 350) scale(2)">${cannon('b',angle)}</g>`;
 }
 await sharp(Buffer.from(wrap(angles,1440,450))).png().toFile(path.join(output,'cannon-angles.png'));
+const outline='<filter id="outline" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="2" result="expanded"/><feComposite in="expanded" in2="SourceAlpha" operator="out" result="edge"/><feFlood flood-color="#ffd452"/><feComposite in2="edge" operator="in"/><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+const hover=`<defs>${outline}</defs><g transform="translate(270 350) scale(2)"><g filter="url(#outline)">${cannon('b',35)}</g></g>`;
+await sharp(Buffer.from(wrap(hover,600,450))).png().toFile(path.join(output,'cannon-hover.png'));
 console.log('Compared two cannon candidates and selected B at 15/35/75 degrees using imported WebP parts.');

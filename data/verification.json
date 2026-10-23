@@ -1,8 +1,8 @@
 {
-  "objects": 157,
+  "objects": 158,
   "maps": 20,
   "stagesWith15Shots": 20,
-  "croppedSpritesChecked": 157,
+  "croppedSpritesChecked": 158,
   "uniqueRenderedSprites": 157,
   "animationFrames": 34,
   "checks": [
@@ -18,16 +18,16 @@
     "Flamethrower GIF contains exactly 6000ms of active flame",
     "Logs are flammable; dollar sack never spawns contents",
     "Fragile objects have separate impact and sustained-load thresholds; debris is non-colliding",
-    "157 authored object SVG records; all 20 queues reference 15 existing items",
     "40 new SVG silhouettes cropped from alpha bounds, with compound collision fixtures",
     "Stage 18 retains permanent ice and sole-grip boots; numbering is an implementation assumption",
-    "Stage 16 plate uses an open concave terrain polygon; timed fireworks are physical bodies"
+    "Stage 16 plate uses an open concave terrain polygon; timed fireworks are physical bodies",
+    "158 item records use 157 authored SVGs; blast-bomb deliberately shares the ordinary bomb artwork"
   ],
   "limits": [
     "This report records original SVG asset checks; current runtime checks are in previews/*-checks.json",
     "Godot 4.7.2 headless tests and Web export passed; mobile FPS, actual browsers and level balance remain unverified",
     "Object box/circle colliders include intentional approximations",
-    "Japanese font covers HUD glyphs only"
+    "Japanese font covers generated hiragana, katakana and HUD glyphs; coverage is recorded in assets/font/generated-coverage.json"
   ],
   "flameGifActiveMilliseconds": 6000
 }

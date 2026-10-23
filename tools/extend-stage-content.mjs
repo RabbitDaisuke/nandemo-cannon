@@ -191,3 +191,5 @@ const mapImages=[];
 for(const [index,id] of Object.keys(artById).entries())mapImages.push({input:await sharp(await fs.readFile(path.join(root,`assets/maps/${id}.svg`))).resize(480,270,{kernel:'nearest'}).png().toBuffer(),left:index%2*480,top:Math.floor(index/2)*270});
 await sharp({create:{width:960,height:540,channels:4,background:'#243449'}}).composite(mapImages).png().toFile(path.join(root,'previews/stage-content-maps.png'));
 console.log(`Authored ${entries.length} new SVG items; ${manifest.items.length} total items, 20 maps and 20 fifteen-shot queues.`);
+// Preserve later user feedback when regenerating the original stage collection.
+await import('./apply-feedback-content.mjs');

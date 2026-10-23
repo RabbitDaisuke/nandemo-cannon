@@ -29,6 +29,23 @@ static func vector(value: Array) -> Vector2:
 static func rectangle(value: Array) -> Rect2:
 	return Rect2(float(value[0]), float(value[1]), float(value[2]), float(value[3]))
 
+func build_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
+	if not stage.has("queueSlots"):
+		return stage.queue.duplicate()
+	var result: Array = []
+	for slot in stage.queueSlots:
+		var available: Array = slot.candidates.duplicate()
+		var count = int(slot.get("count", 1))
+		assert(count > 0 and count <= available.size(), "Queue slot must sample without replacement")
+		for index in range(count):
+			var chosen = rng.randi_range(0, available.size() - 1)
+			var id = str(available[chosen])
+			assert(items.has(id), "Unknown queue item: " + id)
+			result.append(id)
+			available.remove_at(chosen)
+	assert(result.size() == 15, "Every stage must contain fifteen throws")
+	return result
+
 func make_terrain(parent: Node2D, stage: Dictionary) -> void:
 	for part in stage.get("terrain", []):
 		var body = StaticBody2D.new()

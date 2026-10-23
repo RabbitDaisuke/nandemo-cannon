@@ -436,7 +436,20 @@
       "loadForceThreshold": 1000,
       "loadHoldSeconds": 0.3
     },
-    "festival-mask": {}
+    "festival-mask": {},
+    "blast-bomb": {
+      "friction": 0.55,
+      "restitution": 0.08,
+      "flammable": false,
+      "explosionResistance": 0.85,
+      "burnSeconds": null,
+      "flowResponse": 0.45,
+      "radius": 220,
+      "strength": 1.5,
+      "trigger": "first impact or burning fuse completes",
+      "removeSelf": true,
+      "impulseMultiplier": 2.2
+    }
   },
   "stateRules": {
     "breakage": {

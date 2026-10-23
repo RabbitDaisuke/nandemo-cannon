@@ -11704,6 +11704,63 @@
         "flowResponse": 1
       },
       "opaquePixels": 6986
+    },
+    {
+      "id": "blast-bomb",
+      "nameJa": "強力爆弾",
+      "svg": "objects/bomb.svg",
+      "png": "raster/objects/bomb.png",
+      "webp": "raster/objects/bomb.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        3,
+        104,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        61
+      ],
+      "worldWidth": 42,
+      "worldHeight": 46.84615384615385,
+      "worldScale": 0.40384615384615385,
+      "material": "metal",
+      "mass": 3,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "explosion",
+      "colliderTemplate": "circle",
+      "fixtures": [
+        {
+          "circle": [
+            67,
+            61,
+            51
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "radius": 220,
+        "strength": 1.5,
+        "trigger": "first impact or burning fuse completes",
+        "removeSelf": true,
+        "impulseMultiplier": 2.2
+      },
+      "opaquePixels": 7516
     }
   ]
 }
