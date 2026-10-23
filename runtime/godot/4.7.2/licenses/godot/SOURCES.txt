@@ -1,8 +1,0 @@
-Godot 4.7.2-stable
-Official source commit: ed1daf0bf001b61586d9930840f2f1394092c079
-The following four files are copied without changing their bytes:
-
-LICENSE.txt: https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/LICENSE.txt
-COPYRIGHT.txt: https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/COPYRIGHT.txt
-AUTHORS.md: https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/AUTHORS.md
-thirdparty/README.md: https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/thirdparty/README.md
