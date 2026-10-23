@@ -16,7 +16,7 @@ SVG素材からGodotの実ゲームへ接続した版。ユーザーの指定に
 
 |操作|意味|
 |---|---|
-|`./build.sh` / `./build.sh bundle`|物理4suite→Node画像→公式Web export→開発用出力とCDN用ランタイムを作成|
+|`./build.sh` / `./build.sh bundle`|物理4suite→Node画像→公式Web export→自己完結出力とランタイムを作成|
 |`./build.sh check`|4suiteを再検証し、実ゲームの状態JSONを更新|
 |`./build.sh preview`|保存済み状態JSONとSVGからNodeだけでプレビュー生成|
 |`./build.sh runtime`|公式テンプレートから`out/engine/`にランタイムを抽出|
@@ -24,25 +24,37 @@ SVG素材からGodotの実ゲームへ接続した版。ユーザーの指定に
 |`./build.sh deploy`|結合済みWeb出力をZIP化し、ローカル検証後にZIP公開とPages版生成を行う|
 |`./build.sh pages`|`bundle`→`deploy`を順に実行|
 
-`out/standalone/`は圧縮ランタイムを同梱した自己完結版で、Actionsの成果物結合先でもある。`bundle`の`out/runtime/godot/4.7.2/`と`runtime`の`out/engine/runtime/godot/4.7.2/`には公式JS3ファイル、`godot.wasm.gz`、manifest、原本ライセンスを作る。展開後のWASMは未改変の公式原本と同一。ZIPは`out/packages/nandemo-cannon-web-4.7.2.zip`で、エンジンを含む完全な自己完結Web版。`dist/`はゲーム本体と公式JS・音声worklet約290KBをGitHub Pagesで配信し、WASMだけをStaticallyのZIPから取得する。生WASMと分割ファイルは配布しない。
+`out/standalone/`は圧縮ランタイムを同梱した自己完結版で、Actionsの成果物結合先でもある。`bundle`の`out/runtime/godot/4.7.2/`と`runtime`の`out/engine/runtime/godot/4.7.2/`には公式JS3ファイル、`godot.wasm.gz`、manifest、原本ライセンスを作る。展開後のWASMは未改変の公式原本と同一。ZIPは`out/packages/nandemo-cannon-web-4.7.2.zip`で、エンジンを含む完全な自己完結Web版。同じZIPを`dist/downloads/`へ置き、ゲーム本体と公式JS・音声worklet約290KBとともにGitHub Pagesで配信する。生WASMと分割ファイルは配布しない。
 
 ## 配信方針
 
-公開リポジトリ`RabbitDaisuke/nandemo-cannon`からGitHub Actionsでゲーム本体と小さな公式JSをGitHub Pagesへ公開する。Staticallyは完全版ZIPを配信し、ブラウザがZIP内のWASMのgzipを取り出す。Sitesは使わない。SettingsのPages公開元をGitHub Actionsにし、mainへpushするか、Actionsの`Deploy Pages`からRun workflowを実行する。外部URLの手入力や追加のCDN資格情報は不要。
+公開リポジトリ`RabbitDaisuke/nandemo-cannon`からGitHub Actionsでゲーム本体、小さな公式JS、完全版ZIPをGitHub Pagesへ公開する。ブラウザはZIP内のWASMのgzipを取り出す。Sitesは使わない。SettingsのPages公開元をGitHub Actionsにし、mainへpushするか、Actionsの`Deploy Pages`からRun workflowを実行する。
 
 Actionsはruntime/sourceの2jobを並列実行し、`./build.sh runtime`と`./build.sh source`の結果を`web-runtime`、`web-game`としてupload-artifactへ渡す。deploy jobは両方を待ち、download-artifactの`pattern: web-*`、`merge-multiple: true`で`out/standalone/`へ結合して`./build.sh deploy`を実行する。
-deployはstore方式で完全版ZIPを作り、`unzip -t`と内容の整合性をローカルで確認する。標準の`GITHUB_TOKEN`と`GITHUB_REPOSITORY`を使い、同じリポジトリの`cdn-assets`へ`downloads/nandemo-cannon-web-4.7.2.zip`、ルートの`LICENSE`、`licenses/godot/`の原本4文書・元URL、管理用README・マーカーだけを置く。展開済みWeb一式は重複保存しない。deploy jobに`contents: write`が必要。mainやソースブランチは変更せず、管理対象でない既存ブランチは上書きせず止める。
+deployはstore方式で完全版ZIPを作り、`unzip -t`と内容の整合性をローカルで確認する。`tools/publish-archive.mjs`は標準の`GITHUB_TOKEN`と`GITHUB_REPOSITORY`を使い、同じリポジトリの`cdn-assets`へZIP、ルートの`LICENSE`、`licenses/godot/`の原本4文書・元URL、管理用README・マーカーだけを保管する。展開済みWeb一式は重複保存しない。deploy jobに`contents: write`が必要。main、ソースブランチ、指定ミラーのリポジトリは変更せず、管理対象でない既存ブランチは上書きせず止める。
 
-配信URLは`https://cdn.statically.io/gh/OWNER/REPO@SHA/downloads/nandemo-cannon-web-4.7.2.zip`。生成物の実コミットSHAを固定し、Pagesの`runtime.json`へ`archiveURL`とZIPのSHA256を記録する。ローカルのZIP・内容検証後に`dist/`を作り、upload-pages-artifactとdeploy-pagesで公開する。CDNからの事前取得は公開条件にせず、一時的なタイムアウトで公開を止めない。
+配信providerはGitHub Pages。`runtime.json`の`archives`配列に`{url, bytes?, sha256?}`を設定する。URLは`./downloads/nandemo-cannon-web-4.7.2.zip`と、ユーザー指定の`https://daisukedaisuketeam.github.io/nanndemo/downloads/nandemo-cannon-web-4.7.2.zip`。ローカル検査後に`dist/`を作り、upload-pages-artifactとdeploy-pagesで公開する。配信先への事前プローブは行わない。
 
-Pagesの`runtime/godot/4.7.2/`には未改変の公式JSと音声workletを置く。`wasm-loader.mjs`は対象WASMのfetchを捕捉し、Staticallyから完全版ZIPを1回取得してSHA256を照合し、中の`runtime/godot/4.7.2/godot.wasm.gz`を取り出す。gzipの整合性も確認して`DecompressionStream`で展開し、公式Godotへ`application/wasm`のResponseを返す。自己完結版では同梱gzipを読む。起動処理後にfetchを復元する。CDN取得失敗時は起動エラーとし、重いWASMをPagesへfallbackしない。詳細は`BROWSER.md`を参照。
+Pagesの`runtime/godot/4.7.2/`には未改変の公式JSと音声workletを置く。起動ごとに2ミラーを50%ずつで選び、通常はZIPを1回取得する。同時要求はPromiseを共有し、HTTP・通信・整合性エラー時だけ他方を1回試す。自前ZIPは全体のサイズとSHA256を照合し、指定ミラーの旧ZIPは取り出した公式WASMのSHA256で互換性を確認する。`wasm-loader.mjs`がgzipを展開して公式Godotへ渡す。両方に失敗したら起動エラーを表示する。自己完結版は同梱gzipを使う。詳細は`BROWSER.md`を参照。
 
 ## 検証と残作業
 
 Godot 4.7.2でgame 103、body 12、hazard 37、cannon 26の計178項目を確認した。初期冷蔵庫の得点、既存得点物、20マップ読み込み、砂場の117種類選択、15投の終了、有限燃料、水・氷・爆発、接地摩擦、大砲入力を含む。公式Web exportと出力PCKのheadless起動も成功した。圧縮ローダー3経路（gzip、HTTP解凍済み、不正データ拒否）はNodeで検証した。`previews/game-*.png`は実Godot状態をNodeで再構成した画像で、実ブラウザのスクリーンショットではない。
 
-2026-10-23の[初回Actions実行](https://github.com/RabbitDaisuke/nandemo-cannon/actions/runs/39948450309)ではruntime/sourceの両jobと178項目の検証が成功し、成果物結合、ZIP検査、`cdn-assets`への保存まで完了した。この実行は旧構成で、公開条件にしていたStaticallyのGETが60秒でタイムアウトし、再実行を含め2回ともPages公開に到達しなかった。新構成でのPages公開と実CDNからの完全版ZIP取得は未確認。HEADや小さなテキストの成功をZIP全体の取得成功と扱わない。
+2026-10-23の[Actions実行39950881028](https://github.com/RabbitDaisuke/nandemo-cannon/actions/runs/39950881028)は全jobが成功し、GitHub Pagesへの公開まで完了した。今回の2ミラー構成を反映する次の実行結果と、実配信先からのZIP取得は未確認。
 
 許可された環境でのSafari・Chrome・Firefox実機確認も残る。ローカル出力の成功でこれらの完了を代替しない。実機結果から最低ブラウザバージョン、GPU性能、音声、保存、スマートフォンの文字サイズ・ドラッグ量を調整する。全ステージの攻略バランスにも実プレイでの調整余地がある。
 
-ステージ17以降のルールはユーザーが後から考える意向を尊重して未設定。既存117個の原稿を余白付き画像へ置き換えたり、滑走物を速度固定の疑似物理へ戻したり、炎を静止画だけに戻したりしない。
+## 配布完了後の追加要望（未実装）
+
+現在はデプロイを優先する。以下は最新要望の引き継ぎで、現行のステージ16（氷床）と17〜20のプレビューを変更したものではない。
+
+|ステージ|追加要望|
+|---|---|
+|16|レストラン。凹型の皿を使う地形。ハンバーガー、ステーキ、スイカ、チーズ、食パン、白米、リンゴ、カップアイスと付属スプーン、ステーキナイフ、フォーク、少し縦にクロスした割りばし、お子様ランチピックなど、指定された食品・道具候補から15個を選定する|
+|17|ガレージ。タイヤ、ハンドル、エンジン、バッテリー、電動ドリル、マフラー、インパクトレンチ、ジャッキ、車のドア、助手席、三角コーン、ヘルメット、ドラム缶、バケツ、消火器の15個|
+|18|最新要望では未指定。氷床の移設は助手側の仮案であり、ユーザー確認済みとして扱わない|
+|19|祭り。紅白の台。花火は発射後も剛体として衝突し、一定時間後に炸裂して周囲を吹き飛ばす。既存の火炎・爆発処理を再利用する|
+|20|「なんでも実験研究所」。水・火・爆発・氷が混在するステージ。既存117種類と追加物体から15個を選定する|
+
+既存117個の原稿を余白付き画像へ置き換えたり、滑走物を速度固定の疑似物理へ戻したり、炎を静止画だけに戻したりしない。

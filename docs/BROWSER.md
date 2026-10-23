@@ -10,7 +10,7 @@
 |thread_support / extensions_support|どちらもfalse|
 |WebGPU|不要|
 |SharedArrayBuffer / COOP / COEP|単一スレッド構成では必須にしない|
-|ランタイムCDN|Statically上の完全版ZIP、実コミットSHA固定|
+|ランタイム配信|GitHub Pagesの完全版ZIP、2ミラーから50%ずつで選択|
 |圧縮展開|ZIPからWASMを取り出し、DecompressionStream / gzipで展開。SHA256を検証|
 |対象ブラウザ系統|Safari、Chrome、Firefoxの必要APIに対応する版|
 |実機ブラウザ検証|未実施。ローカルブラウザは起動していない|
@@ -23,7 +23,7 @@
 
 |コマンド|実行内容|
 |---|---|
-|`./build.sh` / `./build.sh bundle`|SVGラスタライズ、4suiteのheadless検証、Nodeプレビュー、公式Web export、開発用出力とCDN用ランタイムの作成|
+|`./build.sh` / `./build.sh bundle`|SVGラスタライズ、4suiteのheadless検証、Nodeプレビュー、公式Web export、自己完結出力とランタイムの作成|
 |`./build.sh check`|body・cannon・hazard・gameの実行検証とゲーム状態JSONの更新|
 |`./build.sh preview`|SVGと保存済み状態をNodeで画像化。Godotやブラウザは起動しない|
 |`./build.sh runtime`|公式Webテンプレートを抽出し、`out/engine/`にランタイム成果物を作成|
@@ -41,7 +41,7 @@
 |`out/runtime/godot/4.7.2/`|bundleが作るランタイム|公式JS3ファイル、gzip化WASM、manifest、原本ライセンス|
 |`out/engine/` / `out/game/`|並列jobの成果物|`web-runtime` / `web-game`としてupload-artifactへ渡す|
 |`out/packages/nandemo-cannon-web-4.7.2.zip`|自己完結Web版の配布ZIP|Web全体と元のライセンス。ZIP32のstore方式で作成し、`unzip -t`で確認|
-|`dist/`|Pages公開対象|ゲームPCK、画像、起動設定、復号ローダー、公式JS・音声worklet、ライセンス。WASMは含めない|
+|`dist/`|Pages公開対象|ゲームPCK、画像、起動設定、復号ローダー、公式JS・音声worklet、ライセンス、`downloads/`の完全版ZIP|
 
 `bundle`は公開を行わない。`out/standalone/`はHTTPサーバーで配信して使い、`file://`直開きは対象外。公開用の出力には生WASMや分割ファイルを置かない。`out/export/`の生WASMは公式exportの検証用中間生成物であり、配布対象ではない。
 
@@ -52,17 +52,11 @@
 3. mainへのpushで起動する**Deploy Pages**を確認する。手動では**Actions → Deploy Pages → Run workflow**を実行する。
 
 `runtime`と`source`の2jobが並列に`./build.sh runtime`と`./build.sh source`を呼ぶ。runtimeは公式テンプレートを抽出し、sourceは既存の公式Web export処理を使ってエンジンファイルを成果物から除外する。upload-artifactへ渡した`web-runtime`と`web-game`は、両jobを`needs`に持つdeploy jobでdownload-artifactの`pattern: web-*`、`merge-multiple: true`により`out/standalone/`へ結合する。その後`./build.sh deploy`でZIPを作成・検査し、公開処理を行う。
-外部CDNのURL入力や個人アクセストークンの追加登録は不要。deploy jobは標準の`GITHUB_TOKEN`と`GITHUB_REPOSITORY`を使い、`contents: write`、`pages: write`、`id-token: write`を持つ。公開先environmentは`github-pages`。リポジトリや組織の設定でこれらの権限・ブランチ作成を禁止している場合は、その設定の調整が必要。
+deploy jobは標準の`GITHUB_TOKEN`と`GITHUB_REPOSITORY`を使い、`contents: write`、`pages: write`、`id-token: write`を持つ。公開先environmentは`github-pages`。リポジトリや組織の設定でこれらの権限・ブランチ作成を禁止している場合は、その設定の調整が必要。
 
-生成物専用の`cdn-assets`ブランチには、`downloads/nandemo-cannon-web-4.7.2.zip`、ルートの`LICENSE`、`licenses/godot/`の公式原本、管理用README・マーカーだけを通常のGitファイルとして保存する。展開済みWeb一式は重複して置かない。ZIPはエンジンを含む完全な自己完結版。mainや作業中のソースブランチは変更しない。既存の`cdn-assets`がこのビルドの管理対象でない場合は上書きせず停止する。
+`tools/publish-archive.mjs`は保管・配布用の`cdn-assets`ブランチへ、`downloads/nandemo-cannon-web-4.7.2.zip`、ルートの`LICENSE`、`licenses/godot/`の公式原本、管理用README・マーカーだけを通常のGitファイルとして保存する。展開済みWeb一式は重複して置かない。ZIPはエンジンを含む完全な自己完結版。main、作業中のソースブランチ、指定ミラーのリポジトリは変更しない。既存の`cdn-assets`がこのビルドの管理対象でない場合は上書きせず停止する。
 
-生成されるURLの形式は次のとおり。`OWNER`、`REPO`、`SHA`はActionsが実際の値から決定する。
-
-```text
-https://cdn.statically.io/gh/OWNER/REPO@SHA/downloads/nandemo-cannon-web-4.7.2.zip
-```
-
-可変ブランチ名ではなく生成物の実コミットSHAを固定する。`runtime.json`へZIPの`archiveURL`とSHA256を記録する。deployはローカルZIPの`unzip -t`と必要な内容の検査後に`dist/`を生成する。CDNへの事前アクセスは公開条件にせず、一時的なCDNタイムアウトでPages公開を止めない。生成済みZIPは後続の公開処理に失敗した場合もActions artifactへ保存する。
+同じZIPを`dist/downloads/`にもコピーする。`runtime.json`の`archives`配列は`{url, bytes?, sha256?}`を持ち、配信providerはGitHub Pages。自前ZIPにはサイズとSHA256を設定する。deployはローカルZIPの`unzip -t`と必要な内容の検査後に`dist/`を生成し、配信先への事前プローブは行わない。生成済みZIPは後続の公開処理に失敗した場合もActions artifactへ保存する。
 
 ## ランタイムの読み込み
 
@@ -77,9 +71,16 @@ https://cdn.statically.io/gh/OWNER/REPO@SHA/downloads/nandemo-cannon-web-4.7.2.z
 
 ゲーム本体のPCK、画像、起動設定、ライセンスと、合計約290KBの未改変の公式JS・音声workletをGitHub Pagesで配信する。JS・workletの配置先は`runtime/godot/4.7.2/`。重いWASMは完全版ZIPから取得する。
 
-`wasm-loader.mjs`は起動時にStaticallyのZIPを1回ダウンロードし、SHA256を照合して中の`godot.wasm.gz`を取り出す。gzipと復号後の原本も照合し、`DecompressionStream('gzip')`で展開したWASMを`Content-Type: application/wasm`のResponseとして公式Godotへ渡す。自己完結版は同梱のgzipを使う。CDN取得に失敗した場合は起動エラーを表示し、Pagesへ重いWASMを同梱するfallbackは行わない。
+`wasm-loader.mjs`は起動ごとに次のどちらかを50%ずつの確率で選ぶ。
 
-WASM原本は39,514,754バイト、ZIP内のgzipは10,153,810バイト。復号後は公式原本と同一で、エンジンコードの変更、拡張子の偽装、分割配信は行わない。ZIPの取得にはCORSが必要で、`no-cors`は代用できない。
+|ミラー|ZIPのURL|
+|---|---|
+|現在のPages|`./downloads/nandemo-cannon-web-4.7.2.zip`|
+|ユーザー指定|`https://daisukedaisuketeam.github.io/nanndemo/downloads/nandemo-cannon-web-4.7.2.zip`|
+
+通常は1回のZIP取得で起動し、同時要求は同じPromiseを共有する。HTTP・通信・整合性エラーの場合だけ、もう片方を1回試す。自前ZIPはサイズとSHA256を照合し、指定ミラーの旧ZIPは取り出した公式WASMのSHA256で互換性を確認する。中の`godot.wasm.gz`を取り出し、`DecompressionStream('gzip')`で展開したWASMを`Content-Type: application/wasm`のResponseとして公式Godotへ渡す。両方に失敗した場合は起動エラーを表示する。自己完結版は同梱のgzipを使う。
+
+WASM原本は39,514,754バイト、ZIP内のgzipは10,153,810バイト。復号後は公式原本と同一で、エンジンコードの変更、拡張子の偽装、分割配信は行わない。別originのミラーからZIPを取得する場合はCORSが必要で、`no-cors`は代用できない。
 
 圧縮展開に対応する新しいブラウザが必要。`DecompressionStream`がない環境でgzipを受け取った場合は更新を促す非対応メッセージを出す。SHA256検証にはWeb Cryptoも使う。これらのAPIの存在だけでSafari・Chrome・Firefoxの実動作確認済みとは扱わない。
 
@@ -87,8 +88,8 @@ WASM原本は39,514,754バイト、ZIP内のgzipは10,153,810バイト。復号�
 
 Godot 4.7.2のheadless検証はgame 103、body 12、hazard 37、cannon 26の計178項目が成功した。公式Web export、出力PCKのheadless起動、WASMコンパイルも確認した。
 
-Nodeではgzipファイルの復号、HTTP解凍済み原本の受け渡し、不正データの拒否を確認し、正常な2経路ではバイト列一致と`WebAssembly.compileStreaming`を確認した。これは実StaticallyからのZIP取得の確認ではない。
+Nodeではgzipファイルの復号、HTTP解凍済み原本の受け渡し、不正データの拒否を確認し、正常な2経路ではバイト列一致と`WebAssembly.compileStreaming`を確認した。これは実配信先からのZIP取得の確認ではない。
 
-2026-10-23の[初回Actions実行](https://github.com/RabbitDaisuke/nandemo-cannon/actions/runs/39948450309)で並列2job、178項目の検証、Web export、2成果物の結合、ZIP検査、`cdn-assets`への保存が成功した。当時のCDN事前取得が60秒でタイムアウトし、再実行も同じ箇所で失敗したため、その実行はPages公開へ到達していない。現在はこの事前取得を外している。変更後のPages公開結果と、実StaticallyからのZIPダウンロードはまだ未確認。
+2026-10-23の[Actions実行39950881028](https://github.com/RabbitDaisuke/nandemo-cannon/actions/runs/39950881028)は全jobが成功し、GitHub Pagesへの公開まで完了した。今回の2ミラー構成を反映する次の実行結果と、実配信先からのZIP取得は未確認。
 
 Safari・Chrome・Firefoxでの起動、タッチ入力、WebGL描画、音声、性能、保存も未確認。Nodeプレビューは実ゲーム状態とSVG素材の再構成で、ブラウザのスクリーンショットではない。最低ブラウザバージョンは実機確認後に決める。

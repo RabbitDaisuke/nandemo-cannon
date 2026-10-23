@@ -6,7 +6,7 @@ import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {publishRuntime} from './publish-statically.mjs';
+import {publishRuntime} from './publish-archive.mjs';
 import {installCompressedWasm, extractStoredZipEntry} from '../web/wasm-loader.mjs';
 import {writeRuntimeLicenses} from './runtime-licenses.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -37,16 +37,22 @@ if (mode === 'deploy') {
   for (const name of await fs.readdir(standalone)) {
     if (name !== 'runtime') await fs.cp(path.join(standalone, name), path.join(dist, name), {recursive: true});
   }
-  // Keep the small, unchanged JavaScript/worklets on Pages. Only the large WASM
-  // comes from the single CDN ZIP; no unpacked runtime is published to that branch.
+  // Keep the small, unchanged JavaScript/worklets on Pages. Pick one of the two
+  // Pages ZIP mirrors for the WASM; the archive branch contains no unpacked game.
   const pagesRuntime = path.join(dist, 'runtime/godot/4.7.2');
   await fs.mkdir(pagesRuntime, {recursive: true});
   for (const entry of runtimeManifest.files.filter(entry => entry.name.endsWith('.js'))) {
     await fs.copyFile(path.join(standalone, 'runtime/godot/4.7.2', entry.name), path.join(pagesRuntime, entry.name));
   }
-  await fs.writeFile(path.join(dist, 'runtime.json'), JSON.stringify({...settings, executable: 'runtime/godot/4.7.2/godot', archiveURL: publication.archiveURL, archiveBytes: archive.length, archiveSHA256: hash(archive), wasmEntry: 'runtime/godot/4.7.2/godot.wasm.gz'}));
+  await fs.mkdir(path.join(dist, 'downloads'), {recursive: true});
+  await fs.copyFile(path.join(root, 'out/packages/nandemo-cannon-web-4.7.2.zip'), path.join(dist, 'downloads/nandemo-cannon-web-4.7.2.zip'));
+  const archives = [
+    {url: publication.archiveURL, bytes: archive.length, sha256: hash(archive)},
+    {url: 'https://daisukedaisuketeam.github.io/nanndemo/downloads/nandemo-cannon-web-4.7.2.zip'},
+  ];
+  await fs.writeFile(path.join(dist, 'runtime.json'), JSON.stringify({...settings, executable: 'runtime/godot/4.7.2/godot', archives, wasmEntry: 'runtime/godot/4.7.2/godot.wasm.gz'}));
   await fs.writeFile(path.join(dist, '.nojekyll'), '');
-  await fs.writeFile(path.join(root, 'out/deployment.json'), JSON.stringify({publication, zipIntegrity: 'passed', remoteVerification: 'not run; CDN availability does not gate Pages deployment'}, null, 2) + '\n');
+  await fs.writeFile(path.join(root, 'out/deployment.json'), JSON.stringify({publication, archives, zipIntegrity: 'passed', remoteVerification: 'not run'}, null, 2) + '\n');
   process.exit(0);
 }
 async function run(args) {
@@ -160,6 +166,6 @@ if (!html.includes("config.mainPack = 'index.pck'")) throw new Error('Missing se
 const gameFiles = (await fs.readdir(standalone)).filter(name => name !== 'runtime');
 async function sizeOf(name) { const info = await fs.stat(name); return info.isDirectory() ? (await Promise.all((await fs.readdir(name)).map(child => sizeOf(path.join(name, child))))).reduce((a, b) => a + b, 0) : info.size; }
 const gameBytes = (await Promise.all(gameFiles.map(name => sizeOf(path.join(standalone, name))))).reduce((a, b) => a + b, 0);
-const report = {engine: version, renderer: 'Compatibility / WebGL 2', threads: false, sourcePatched: false, wasmBytes: raw.length, wasmSHA256: hash(raw), gzipBytes: gzip.length, compressedTransportChecks: 3, cdnProvider: 'Statically', gameBytes, wasmCompilation: 'passed', officialJSCDNRouting: 'passed', exportedPCKSmoke: 'passed', remoteVerification: null, browserTests: 'not run', pagesProduced: false, output: {standalone: path.relative(root, standalone), runtime: 'out/runtime/godot/4.7.2', pages: null}};
+const report = {engine: version, renderer: 'Compatibility / WebGL 2', threads: false, sourcePatched: false, wasmBytes: raw.length, wasmSHA256: hash(raw), gzipBytes: gzip.length, compressedTransportChecks: 3, cdnProvider: 'GitHub Pages mirrors', gameBytes, wasmCompilation: 'passed', officialJSCDNRouting: 'passed', exportedPCKSmoke: 'passed', remoteVerification: null, browserTests: 'not run', pagesProduced: false, output: {standalone: path.relative(root, standalone), runtime: 'out/runtime/godot/4.7.2', pages: null}};
 await fs.writeFile(path.join(root, 'previews/web-build.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report, null, 2));

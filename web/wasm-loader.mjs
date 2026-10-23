@@ -1,5 +1,5 @@
 // Read the controlled ZIP32 STORE archive made by build.sh (zip -0 -X).
-// The caller authenticates the complete archive before reading an entry.
+// The caller always authenticates the extracted engine; archive hashes are optional.
 export function extractStoredZipEntry(input, name) {
   const bytes = input instanceof Uint8Array ? input : new Uint8Array(input);
   const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
@@ -48,28 +48,41 @@ export function installCompressedWasm(runtime, baseURL, scope = globalThis) {
   const wasmURL = new URL(runtime.executable + '.wasm', baseURL).href;
   const compressedURL = new URL(runtime.executable + '.wasm.gz', baseURL).href;
   const digest = async bytes => [...new Uint8Array(await scope.crypto.subtle.digest('SHA-256', bytes))].map(x => x.toString(16).padStart(2, '0')).join('');
+  const archives = runtime.archives?.length ? runtime.archives : runtime.archiveURL ? [{url: runtime.archiveURL, bytes: runtime.archiveBytes, sha256: runtime.archiveSHA256}] : [];
+  const firstMirror = archives.length > 1 ? Math.floor((scope.random || Math.random)() * archives.length) : 0;
+  const verifyEngine = async bytes => {
+    const compressed = bytes[0] === 0x1f && bytes[1] === 0x8b;
+    if (await digest(bytes) !== (compressed ? runtime.gzipSHA256 : runtime.wasmSHA256)) throw new Error('Engine integrity check failed');
+    if (!compressed && bytes.length !== runtime.wasmBytes) throw new Error('Engine size check failed');
+    return bytes;
+  };
   let archivePromise;
   const intercepted = async (input, init) => {
     const inputURL = typeof input === 'string' || input instanceof URL ? String(input) : input.url;
     if (new URL(inputURL, baseURL).href !== wasmURL) return nativeFetch(input, init);
     let bytes;
-    if (runtime.archiveURL) {
+    if (archives.length) {
       archivePromise ||= (async () => {
-        const response = await nativeFetch(new URL(runtime.archiveURL, baseURL).href, init);
-        if (!response.ok) throw new Error(`Engine archive download failed (${response.status})`);
-        const archive = new Uint8Array(await response.arrayBuffer());
-        if (archive.length !== runtime.archiveBytes || await digest(archive) !== runtime.archiveSHA256) throw new Error('Engine archive integrity check failed');
-        return archive;
+        let failure;
+        for (let attempt = 0; attempt < archives.length; attempt++) {
+          const source = archives[(firstMirror + attempt) % archives.length];
+          try {
+            const response = await nativeFetch(new URL(source.url, baseURL).href, init);
+            if (!response.ok) throw new Error(`Engine archive download failed (${response.status})`);
+            const archive = new Uint8Array(await response.arrayBuffer());
+            if ((source.bytes !== undefined && archive.length !== source.bytes) || (source.sha256 !== undefined && await digest(archive) !== source.sha256)) throw new Error('Engine archive integrity check failed');
+            return await verifyEngine(extractStoredZipEntry(archive, runtime.wasmEntry || 'runtime/godot/4.7.2/godot.wasm.gz'));
+          } catch (error) { failure = error; }
+        }
+        throw failure;
       })();
-      bytes = extractStoredZipEntry(await archivePromise, runtime.wasmEntry || 'runtime/godot/4.7.2/godot.wasm.gz');
+      bytes = await archivePromise;
     } else {
       const response = await nativeFetch(compressedURL, init);
       if (!response.ok) throw new Error(`Engine download failed (${response.status})`);
-      bytes = new Uint8Array(await response.arrayBuffer());
+      bytes = await verifyEngine(new Uint8Array(await response.arrayBuffer()));
     }
     const compressed = bytes[0] === 0x1f && bytes[1] === 0x8b;
-    if (await digest(bytes) !== (compressed ? runtime.gzipSHA256 : runtime.wasmSHA256)) throw new Error('Engine integrity check failed');
-    if (!compressed && bytes.length !== runtime.wasmBytes) throw new Error('Engine size check failed');
     let body = new Blob([bytes]).stream();
     if (compressed) {
       if (typeof scope.DecompressionStream !== 'function') throw new Error('このブラウザは圧縮データの展開に対応していません。新しいバージョンへ更新してください。');

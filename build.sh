@@ -86,6 +86,7 @@ if [[ "$build_mode" == runtime ]]; then
   export GODOT_WEB_TEMPLATE="$godot_template_dir/web_nothreads_release.zip"
   exec node tools/build-web.mjs runtime
 fi
+node tests/web-mirrors.mjs
 node tools/check-game.mjs
 [[ "$build_mode" != check ]] || exit 0
 node tools/render-cannon.mjs
