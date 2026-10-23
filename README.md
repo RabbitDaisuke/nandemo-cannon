@@ -57,7 +57,7 @@
 |`./build.sh preview`|NodeだけでSVG素材と保存済みゲーム状態から確認画像を生成する|
 |`./build.sh runtime`|公式テンプレートからランタイムを抽出し、`out/engine/`を作る|
 |`./build.sh source`|検証と公式Web exportを行い、エンジンを除いた`out/game/`を作る|
-|`./build.sh deploy`|結合済み`out/standalone/`をZIP化・公開し、CDN検証後に`dist/`を作る|
+|`./build.sh deploy`|結合済み`out/standalone/`をZIP化してローカル検証し、ZIPを公開して`dist/`を作る|
 |`./build.sh pages`|`bundle`→`deploy`を順に実行する|
 
 Godotの自動セットアップはLinux x86_64のみ対応する。ほかのOS、または既存エディタを使う場合は、公式4.7.2の実行ファイルを`GODOT_BIN`で指定する。同じ版のExport Templatesも必要。WindowsではGit BashなどのBash環境から実行する。
@@ -70,7 +70,7 @@ Godotエディタで編集する場合は`project.godot`を開き、F5でゲー�
 
 ## GitHub ActionsとPages
 
-ゲーム本体はGitHub Pagesへ公開し、Staticallyは約10MBのGodotエンジンの配信に使う。公開リポジトリは[RabbitDaisuke/nandemo-cannon](https://github.com/RabbitDaisuke/nandemo-cannon)。`Deploy Pages` workflowはmainへのpushと手動実行で起動する。Sitesは使用しない。
+ゲーム本体と小さな公式JS・音声workletはGitHub Pagesで配信する。重いWASMは、Staticallyから取得する完全版ZIPに入ったgzipを使う。公開リポジトリは[RabbitDaisuke/nandemo-cannon](https://github.com/RabbitDaisuke/nandemo-cannon)。`Deploy Pages` workflowはmainへのpushと手動実行で起動する。Sitesは使用しない。
 
 1. ソースを`RabbitDaisuke/nandemo-cannon`のmainへpushする。
 2. リポジトリの **Settings → Pages → Source** を **GitHub Actions** にする。
@@ -78,14 +78,15 @@ Godotエディタで編集する場合は`project.godot`を開き、F5でゲー�
 
 `runtime`と`source`の2jobが並列に`./build.sh runtime`と`./build.sh source`を実行し、`web-runtime`と`web-game`をupload-artifactへ渡す。両方の完了後、deploy jobがdownload-artifactの`pattern: web-*`、`merge-multiple: true`で`out/standalone/`へ結合し、`./build.sh deploy`を実行する。
 
-deployはWeb全体のZIP32（store方式）を作り、`unzip -t`で確認する。標準の`GITHUB_TOKEN`で、同じリポジトリの`cdn-assets`ブランチのルートへWeb全体と元の`LICENSE`、Godotの原本4文書を保存し、`downloads/nandemo-cannon-web-4.7.2.zip`も置く。deploy jobに`contents: write`が必要で、mainのソースは変更しない。外部URLの手入力や追加のCDN資格情報は不要。
-StaticallyのURLには生成物の実コミットSHAを固定する。Web全体を同じブランチで更新するため、ゲーム側の変更でもランタイムURLは変わる。実CDNからの取得、CORS、JavaScriptのMIME、SHA256照合に成功した後だけ`dist/`をPagesへ渡す。CDNで取得できない場合は公開を止める。
+deployはエンジンを含むWeb全体をZIPのstore方式でまとめ、`unzip -t`と内容の整合性をローカルで確認する。標準の`GITHUB_TOKEN`で、同じリポジトリの`cdn-assets`ブランチへ`downloads/nandemo-cannon-web-4.7.2.zip`、ルートの`LICENSE`、Godotの原本ライセンス、管理用README・マーカーだけを保存する。展開済みWeb一式はブランチへ重複保存しない。deploy jobに`contents: write`が必要で、mainのソースは変更しない。外部URLの手入力や追加のCDN資格情報は不要。
+
+`runtime.json`には生成物の実コミットSHAを含むStaticallyのZIP URL（`archiveURL`）とZIPのSHA256を設定する。Pagesへの公開はローカルのZIP・内容検証を条件とし、CDNの一時的なタイムアウトで止めない。ブラウザは起動時にZIPを1回取得し、中のgzipを取り出して整合性を確認する。CDNから取得できなければゲーム起動時にエラーとなり、重いWASMをPagesへ切り替えて配信する処理はない。
 
 `out/standalone/`は圧縮ランタイムを同梱した自己完結出力。`bundle`の`out/runtime/godot/4.7.2/`と`runtime`の`out/engine/runtime/godot/4.7.2/`には、公式のJS3ファイル、`godot.wasm.gz`、manifest、原本ライセンスを生成する。ZIPは`out/packages/nandemo-cannon-web-4.7.2.zip`。復号後のWASMは公式原本と同一で、分割ファイルや生WASMは配布しない。
 
-Pages側にはエンジンを除いたゲーム資産を置き、GodotのJS・WASM・音声workletはStaticallyから読む。gzipをSHA256で確認し、`DecompressionStream`で復号してGodotへ渡すため、対応する新しいブラウザが必要。HTTP側で解凍済みの場合は二重解凍しない。詳しくは`docs/BROWSER.md`。
+Pages側はゲーム資産に加え、未改変の公式JS・音声worklet約290KBを`runtime/godot/4.7.2/`で配信する。WASMはStaticallyのZIPから取り出したgzipをSHA256で確認し、`DecompressionStream`で展開してGodotへ渡す。自己完結版では同梱gzipを使う。詳しくは`docs/BROWSER.md`。
 
-ソースは`RabbitDaisuke/nandemo-cannon`へpush済み。更新したworkflowの実行結果、Staticallyの実取得、Pages公開結果はまだ確認していない。
+2026-10-23の[初回Actions実行](https://github.com/RabbitDaisuke/nandemo-cannon/actions/runs/39948450309)では、並列2job、178項目の検証、成果物の結合、ZIP検査、`cdn-assets`への保存まで成功した。この時点の旧構成ではCDN取得を公開条件にしており、60秒タイムアウトが再実行を含め2回発生し、この実行はPages公開に到達しなかった。新構成でのPages公開と、Statically経由の完全版ZIP取得はまだ確認できていない。
 
 ## 確認した範囲
 

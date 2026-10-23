@@ -46,11 +46,13 @@ Godotは**4.7.2 stable**へ固定し、エディタとExport Templatesの版を�
 
 ## StaticallyとGitHub Pages
 
-ゲーム本体はGitHub Pagesへ公開し、StaticallyはGodotエンジンの配信に使う。対象は公開リポジトリ`RabbitDaisuke/nandemo-cannon`。`Deploy Pages`はmainへのpushと、入力項目のない`workflow_dispatch`で起動する。
+ゲーム本体と合計約290KBの未改変の公式JS・音声workletはGitHub Pagesへ公開する。重いWASMはStatically上の完全版ZIPから取得する。対象は公開リポジトリ`RabbitDaisuke/nandemo-cannon`。`Deploy Pages`はmainへのpushと、入力項目のない`workflow_dispatch`で起動する。
 
 runtime/sourceの2jobを並列に実行する。`./build.sh runtime`は公式Webテンプレートを抽出し、`./build.sh source`は検証と公式Web exportを行ってエンジンファイルを成果物から除く。upload-artifactの名前は`web-runtime`と`web-game`。両jobを`needs`に持つdeploy jobで、download-artifactの`pattern: web-*`、`merge-multiple: true`により`out/standalone/`へ結合し、`GITHUB_TOKEN`を渡して`./build.sh deploy`を実行する。
-deployはZIP32のstore方式で`out/packages/nandemo-cannon-web-4.7.2.zip`を作り、`unzip -t`を通す。同じリポジトリの生成物専用`cdn-assets`ブランチ1つへ、Web全体をルートから保存し、`downloads/nandemo-cannon-web-4.7.2.zip`も置く。元の`LICENSE`と`web/licenses/godot/`の公式原本4文書・元URLをバイト改変せず同梱する。通常のGitファイルを使い、Git LFSは使わない。`main`やソースのブランチをこの処理からpushしない。
+deployはZIP32のstore方式で`out/packages/nandemo-cannon-web-4.7.2.zip`を作り、`unzip -t`と必要な内容の検査を通す。ZIPにはエンジンを含む自己完結Web一式を収める。同じリポジトリの生成物専用`cdn-assets`ブランチには、`downloads/nandemo-cannon-web-4.7.2.zip`、ルートの`LICENSE`、`licenses/godot/`の公式原本、管理用README・マーカーだけを保存する。展開済みWeb一式は置かない。公式原本の文書はバイト改変せず同梱する。通常のGitファイルを使い、Git LFSは使わない。`main`やソースのブランチをこの処理からpushしない。
 
-エンジンの配信先は`https://cdn.statically.io/gh/OWNER/REPO@SHA/runtime/godot/4.7.2/`とし、`SHA`には生成物の実コミットSHAを入れる。Web全体を同じブランチで更新するため、ゲーム側の変更でもランタイムURLは変わる。移動するブランチ名で配信先を固定した扱いにしない。Staticallyから実際に取得し、CORS、内容のハッシュ、MIMEを検証した後で`dist/`を生成する。取得失敗や内容不一致を成功と扱わず、Pages側のエンジン同梱へ切り替えて配信失敗を隠さない。小さなテキストの取得成功を、大きなgzipエンジンの配信確認として扱わない。
+配信先は`https://cdn.statically.io/gh/OWNER/REPO@SHA/downloads/nandemo-cannon-web-4.7.2.zip`とし、`SHA`には生成物の実コミットSHAを入れる。Pagesの`runtime.json`へ`archiveURL`とZIPのSHA256を記録する。JS・workletはPagesの`runtime/godot/4.7.2/`へ置く。クライアントはZIPを1回取得してWASMを取り出し、ZIP・gzip・復号後WASMの整合性を確認する。
+
+CDNへの事前アクセスをPages公開の条件にせず、不要なCDNプローブを追加しない。ローカル検査後に`dist/`を作って公開する。ブラウザのCDN取得失敗は起動エラーにし、PagesへのWASM同梱で隠さない。実CDNからのZIP取得を確認していない場合は未確認と記載する。
 
 deploy jobは生成物ブランチ保存用の`contents: write`と、Pages公開用の`pages: write`、`id-token: write`を持ち、`github-pages`環境を使う。書き込み先の限定は公開スクリプトで維持する。ZIPをupload-artifactへ保存した後、`dist/`をupload-pages-artifactへ渡し、deploy-pagesでゲームをGitHub Pagesへ公開する。公式Actionは完全なコミットSHAで固定する。

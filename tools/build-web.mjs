@@ -6,9 +6,8 @@ import {fileURLToPath} from 'node:url';
 import {spawn} from 'node:child_process';
 import {gzipSync, gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
-import {verifyRuntime} from './verify-runtime.mjs';
 import {publishRuntime} from './publish-statically.mjs';
-import {installCompressedWasm} from '../web/wasm-loader.mjs';
+import {installCompressedWasm, extractStoredZipEntry} from '../web/wasm-loader.mjs';
 import {writeRuntimeLicenses} from './runtime-licenses.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const mode = process.argv[2] || 'bundle';
@@ -27,16 +26,27 @@ if (mode === 'deploy') {
   const settings = JSON.parse(await fs.readFile(path.join(standalone, 'runtime.json'), 'utf8'));
   const wasm = runtimeManifest.files.find(entry => entry.name === 'godot.wasm.gz');
   if (settings.gzipSHA256 !== wasm.sha256 || settings.wasmSHA256 !== wasm.decodedSHA256) throw new Error('Game and runtime artifacts use different engine bytes');
+  const archive = await fs.readFile(path.join(root, 'out/packages/nandemo-cannon-web-4.7.2.zip'));
+  for (const entry of runtimeManifest.files) {
+    const bytes = extractStoredZipEntry(archive, `runtime/godot/4.7.2/${entry.name}`);
+    if (bytes.length !== entry.bytes || hash(bytes) !== entry.sha256) throw new Error(`ZIP runtime is incomplete: ${entry.name}`);
+  }
   const publication = await publishRuntime(root);
-  const remoteVerification = await verifyRuntime(publication.baseURL, runtimeManifest);
   await fs.rm(dist, {recursive: true, force: true});
   await fs.mkdir(dist, {recursive: true});
   for (const name of await fs.readdir(standalone)) {
     if (name !== 'runtime') await fs.cp(path.join(standalone, name), path.join(dist, name), {recursive: true});
   }
-  await fs.writeFile(path.join(dist, 'runtime.json'), JSON.stringify({...settings, executable: publication.baseURL + 'godot'}));
+  // Keep the small, unchanged JavaScript/worklets on Pages. Only the large WASM
+  // comes from the single CDN ZIP; no unpacked runtime is published to that branch.
+  const pagesRuntime = path.join(dist, 'runtime/godot/4.7.2');
+  await fs.mkdir(pagesRuntime, {recursive: true});
+  for (const entry of runtimeManifest.files.filter(entry => entry.name.endsWith('.js'))) {
+    await fs.copyFile(path.join(standalone, 'runtime/godot/4.7.2', entry.name), path.join(pagesRuntime, entry.name));
+  }
+  await fs.writeFile(path.join(dist, 'runtime.json'), JSON.stringify({...settings, executable: 'runtime/godot/4.7.2/godot', archiveURL: publication.archiveURL, archiveBytes: archive.length, archiveSHA256: hash(archive), wasmEntry: 'runtime/godot/4.7.2/godot.wasm.gz'}));
   await fs.writeFile(path.join(dist, '.nojekyll'), '');
-  await fs.writeFile(path.join(root, 'out/deployment.json'), JSON.stringify({publication, remoteVerification}, null, 2) + '\n');
+  await fs.writeFile(path.join(root, 'out/deployment.json'), JSON.stringify({publication, zipIntegrity: 'passed', remoteVerification: 'not run; CDN availability does not gate Pages deployment'}, null, 2) + '\n');
   process.exit(0);
 }
 async function run(args) {
