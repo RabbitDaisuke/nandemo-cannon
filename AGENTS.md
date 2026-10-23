@@ -8,18 +8,21 @@
 - `src/`はGDScriptによるゲーム実装、`data/`は物体とステージの定義、`assets/`はSVG原稿と生成素材。
 - `tools/`はビルドと検証の補助実装、`tests/`はGodotのheadless試験、`web/`はWeb起動用のファイル。
 - `docs/`は仕様と引き継ぎ、`previews/`は検証結果とNode.jsで作った確認画像。
-- `out/standalone/`は自己完結するWeb出力、`out/runtime/godot/4.7.2/`は別配布するランタイム、`dist/`はPages公開対象の生成物。`.github/workflows/pages.yml`は手動のGitHub Pages公開ワークフロー。
+- `out/standalone/`は自己完結するWeb出力とActions成果物の結合先、`out/engine/`と`out/game/`は並列jobの成果物、`out/packages/`は配布ZIP、`dist/`はPages公開対象。`.github/workflows/pages.yml`はmainへのpushと手動実行で起動する。
 
-人とCIのビルド入口はルートの`./build.sh`へ統一する。サブコマンドは`bundle`（省略時）、`check`、`preview`、`pages`。依存の導入、Godotの取得、Export Templatesの準備、素材生成、Web出力はこの入口から行う。GitHub Actions側へ`npm install`、Godotのダウンロード、個別のビルド処理を重複して追加しない。
+人とCIのビルド入口はルートの`./build.sh`へ統一する。サブコマンドは`bundle`（省略時）、`check`、`preview`、`pages`、`runtime`、`source`、`deploy`。依存の導入、Godotの取得、Export Templatesの準備、素材生成、Web出力はこの入口から行う。GitHub Actions側へ`npm install`、Godotのダウンロード、個別のビルド処理を重複して追加しない。
 
 ```sh
 ./build.sh
 ./build.sh check
 ./build.sh preview
 ./build.sh pages
+./build.sh runtime
+./build.sh source
+./build.sh deploy
 ```
 
-`pages`はGitHubへの生成物保存を伴う公開用の処理。GitHub Actionsでは実行対象の`GITHUB_REPOSITORY`と、ビルドステップへ渡す`GITHUB_TOKEN`を使う。外部ランタイムURLの入力・repository variableは不要。対象が公開リポジトリでない場合は失敗させ、公開設定を自動変更しない。
+`pages`は`bundle`→`deploy`を実行する。`deploy`は結合済み成果物をGitHubへ保存する公開用の処理で、実行対象の`GITHUB_REPOSITORY`と、そのステップへ渡す`GITHUB_TOKEN`を使う。外部ランタイムURLの入力・repository variableは不要。対象が公開リポジトリでない場合は失敗させ、公開設定を自動変更しない。
 
 ビルド入口はNode.js 22以上を確認し、`sharp`を解決できない場合に`npm ci`で依存を用意する。`GODOT_BIN`の指定がないLinux x86_64環境では、公式バイナリのダウンロード、SHA検証、同版テンプレートの配置を行う。ダウンロードキャッシュは`.cache/godot/`へ置く。
 
@@ -43,10 +46,11 @@ Godotは**4.7.2 stable**へ固定し、エディタとExport Templatesの版を�
 
 ## StaticallyとGitHub Pages
 
-公開は入力項目のない`Deploy Pages`の`workflow_dispatch`で手動実行する。ワークフローのビルドコマンドは`./build.sh pages`だけとし、`GITHUB_TOKEN`をそのステップの環境変数へ渡す。
+ゲーム本体はGitHub Pagesへ公開し、StaticallyはGodotエンジンの配信に使う。対象は公開リポジトリ`RabbitDaisuke/nandemo-cannon`。`Deploy Pages`はmainへのpushと、入力項目のない`workflow_dispatch`で起動する。
 
-`pages`の内部で試験とWeb出力を行い、`out/runtime/godot/4.7.2/`にある実際の`.wasm.gz`とエンジンJSなどを、同じリポジトリの`cdn-assets`ブランチへ通常のGitファイルとして保存する。Git LFSは使わない。生成ランタイムに変更がなければ既存コミットを再利用する。`main`やソースのブランチをこの処理からpushしない。
+runtime/sourceの2jobを並列に実行する。`./build.sh runtime`は公式Webテンプレートを抽出し、`./build.sh source`は検証と公式Web exportを行ってエンジンファイルを成果物から除く。upload-artifactの名前は`web-runtime`と`web-game`。両jobを`needs`に持つdeploy jobで、download-artifactの`pattern: web-*`、`merge-multiple: true`により`out/standalone/`へ結合し、`GITHUB_TOKEN`を渡して`./build.sh deploy`を実行する。
+deployはZIP32のstore方式で`out/packages/nandemo-cannon-web-4.7.2.zip`を作り、`unzip -t`を通す。同じリポジトリの生成物専用`cdn-assets`ブランチ1つへ、Web全体をルートから保存し、`downloads/nandemo-cannon-web-4.7.2.zip`も置く。元の`LICENSE`と`web/licenses/godot/`の公式原本4文書・元URLをバイト改変せず同梱する。通常のGitファイルを使い、Git LFSは使わない。`main`やソースのブランチをこの処理からpushしない。
 
-配信先は`https://cdn.statically.io/gh/OWNER/REPO@SHA/runtime/godot/4.7.2/`とし、`SHA`には生成物の実コミットSHAを入れる。移動するブランチ名で配信先を固定した扱いにしない。Staticallyから実際に取得し、CORS、内容のハッシュ、MIMEを検証した後で`dist/`を生成する。取得失敗や内容不一致を成功と扱わず、Pages側のエンジン同梱へ切り替えて配信失敗を隠さない。小さなテキストの取得成功を、大きなgzipエンジンの配信確認として扱わない。
+エンジンの配信先は`https://cdn.statically.io/gh/OWNER/REPO@SHA/runtime/godot/4.7.2/`とし、`SHA`には生成物の実コミットSHAを入れる。Web全体を同じブランチで更新するため、ゲーム側の変更でもランタイムURLは変わる。移動するブランチ名で配信先を固定した扱いにしない。Staticallyから実際に取得し、CORS、内容のハッシュ、MIMEを検証した後で`dist/`を生成する。取得失敗や内容不一致を成功と扱わず、Pages側のエンジン同梱へ切り替えて配信失敗を隠さない。小さなテキストの取得成功を、大きなgzipエンジンの配信確認として扱わない。
 
-ワークフローがPagesへアップロードするのは`dist/`だけ。ビルドジョブは生成物ブランチへの保存に必要な`contents: write`と`pages: read`を持つ。これはトークン自体をブランチ限定にする設定ではないため、書き込み先の限定は公開スクリプトで維持する。公開ジョブは`github-pages`環境と`pages: write`、`id-token: write`を使う。公式Actionは完全なコミットSHAで固定する。
+deploy jobは生成物ブランチ保存用の`contents: write`と、Pages公開用の`pages: write`、`id-token: write`を持ち、`github-pages`環境を使う。書き込み先の限定は公開スクリプトで維持する。ZIPをupload-artifactへ保存した後、`dist/`をupload-pages-artifactへ渡し、deploy-pagesでゲームをGitHub Pagesへ公開する。公式Actionは完全なコミットSHAで固定する。
