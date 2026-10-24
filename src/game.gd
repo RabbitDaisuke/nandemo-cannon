@@ -484,7 +484,7 @@ func _refresh_bgm_ui() -> void:
 		if state is Dictionary:
 			_bgm_state = state
 	bgm_button.disabled = _bgm_bridge == null or bool(_bgm_state.get("unavailable", false))
-	bgm_button.text = "BGM さいせい" if bool(_bgm_state.get("blocked", false)) else ("BGM オン" if bool(_bgm_state.get("enabled", true)) else "BGM オフ")
+	bgm_button.text = "BGM エラー" if bool(_bgm_state.get("errored", false)) else ("BGM さいせい" if bool(_bgm_state.get("blocked", false)) else ("BGM オン" if bool(_bgm_state.get("enabled", true)) else "BGM オフ"))
 	var percent = clampf(float(_bgm_state.get("volume", 0.025)), 0.0, 1.0) * 100.0
 	bgm_volume_label.text = "おと %04.1f%%" % percent
 	_updating_bgm = true

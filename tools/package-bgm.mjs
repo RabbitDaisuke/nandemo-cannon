@@ -1,5 +1,5 @@
 // Build entry: ./build.sh bgm. This ZIP is a deployment handoff, not a download
-// the game requests: browsers stream only their current MP3 from either host.
+// the game requests: browsers fetch and cache each selected MP3 once from either host.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';

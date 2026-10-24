@@ -45,7 +45,7 @@
 
 `bundle`は公開を行わない。`out/standalone/`はHTTPサーバーで配信して使い、`file://`直開きは対象外。公開用の出力には生WASMや分割ファイルを置かない。`out/export/`の生WASMは公式exportの検証用中間生成物であり、配布対象ではない。
 
-BGMer音源は`web/audio/.gdignore`でGodotから除外する。buildは`audio/bgm/`を出力へコピーし、曲を初めて使うときに自前URLと`https://daisukedaisuketeam.github.io/nanndemo/audio/bgm/`を50%ずつで選ぶ。通常は片方だけをストリーム再生し、事前プローブや先読みはしない。通信・デコード・CORSの失敗時だけ他方へ1回切り替え、自動再生拒否は同じ配信元のままユーザー操作を待つ。音声要素とMediaElementAudioSourceを再利用し、`crossOrigin = 'anonymous'`を`src`より先に設定する。ミラーの公開ルートへ音源ZIPを展開し、`audio/bgm/088.mp3`・`415.mp3`・`073.mp3`を配置する必要がある。配置前の404は自前配信へ戻す。起動時取得ZIP単体には音源を入れない。全音源付きのローカル配布には`out/standalone/`全体を使う。Safariの音量はHTMLMediaElement.volumeに依存せずGainNodeで制御し、最初の開始操作でAudioContextだけを解除する。音声要素はゲーム開始後に生成する。
+BGMer音源は`web/audio/.gdignore`でGodotから除外し、buildは`audio/bgm/`を出力へコピーする。ゲーム開始後、各曲の初回だけ自前URLと`https://daisukedaisuketeam.github.io/nanndemo/audio/bgm/`を50%ずつで選び、匿名CORSのfetchでMP3全体をBlobへ取得する。Promise・圧縮Blob・blob URL・音声要素をページ寿命にわたって保持し、以後の再生はメモリ内のblob URLだけを使う。停止やトップ復帰中も取得は完了させ、再開時は同じPromiseを共有する。HTTP・通信・CORS・本文取得失敗時だけ他方を1回試し、両方の失敗も保持する。自動再生拒否・中断は取得済みBlobから再試行でき、デコード失敗はエラー表示とする。全曲PCMデコード、先読み、事前プローブ、再生ごとのHTTPアクセスは行わない。3曲一巡ごとのランダム順で、周回境界も連続重複しない。ミラーの公開ルートへ音源ZIPを展開し、`audio/bgm/088.mp3`・`415.mp3`・`073.mp3`を配置する。起動時取得ZIP単体には音源を入れず、全音源付きの配布には`out/standalone/`全体を使う。Safariの音量はGainNodeで制御し、最初の開始操作でAudioContextを解除する。初回の非同期取得後に再生が拒否された場合は「BGM さいせい」の操作で取得済みBlobを同期的に再生する。実ブラウザの音声確認は未実施。
 
 ## GitHub Actionsから公開する
 

@@ -10,7 +10,7 @@
 - `docs/`は仕様と引き継ぎ、`previews/`は検証結果とNode.jsで作った確認画像。
 - `out/standalone/`は自己完結するWeb出力とActions成果物の結合先、`out/engine/`と`out/game/`は並列jobの成果物、`out/packages/`は配布ZIP、`dist/`はPages公開対象。`.github/workflows/pages.yml`はmainへのpushと手動実行で起動する。
 
-人とCIのビルド入口はルートの`./build.sh`へ統一する。サブコマンドは`bundle`（省略時）、`check`、`preview`、`pages`、`runtime`、`source`、`deploy`。依存の導入、Godotの取得、Export Templatesの準備、素材生成、Web出力はこの入口から行う。GitHub Actions側へ`npm install`、Godotのダウンロード、個別のビルド処理を重複して追加しない。
+人とCIのビルド入口はルートの`./build.sh`へ統一する。サブコマンドは`bundle`（省略時）、`check`、`preview`、`pages`、`runtime`、`source`、`deploy`、`bgm`。依存の導入、Godotの取得、Export Templatesの準備、素材生成、Web出力はこの入口から行う。GitHub Actions側へ`npm install`、Godotのダウンロード、個別のビルド処理を重複して追加しない。
 
 ```sh
 ./build.sh
@@ -49,7 +49,7 @@ UIは日本語にする。228物体・35ステージ・案内文のかな表示�
 
 BGMerの3曲はタイトルでは無音、ゲーム開始後だけ遅延読込する。初期音量2.5%、オン・オフと音量をlocalStorageへ保存し、iOSでもGainNodeで音量調整する。クレジットはトップに大きく置く。音源は`web/audio/bgm/`にあり、PCK・初回取得ZIPには入れずPagesへ別配信する。`web/licenses/bgmer.txt`の出典を保つ。水中で通常爆発物を起爆させず、実形状の半分以上が浸かると不発・得点物にする。`waterproofExplosive`の2種だけは水中でも起爆できる。薄膜水の蒸発量は水量収支へ計上し、凍結水を蒸発させない。
 
-音源は各曲の初回再生時に自前Pagesと`https://daisukedaisuketeam.github.io/nanndemo/audio/bgm/`を50%ずつ選ぶ。失敗した場合だけ他方を1回試し、事前プローブはしない。Web Audioのため`crossOrigin=anonymous`をsrcより先に設定する。自動再生拒否・再生中断では配信元を切り替えない。ミラー配置用ZIPは`./build.sh bgm`で作り、ユーザーが展開した`audio/`と`licenses/`をミラー公開ルートへ置く。ZIP自体をゲームに取得させず、必要な曲だけストリームする。
+音源は3曲を一巡ごとにランダム再生し、周回の境目でも同じ曲を連続させない。各曲の初回だけ自前Pagesと`https://daisukedaisuketeam.github.io/nanndemo/audio/bgm/`を50%ずつ選んでfetchし、取得Promise・圧縮MP3のBlob・blob URLをページの起動中ずっと保持する。再生・オンオフ・ステージ変更・トップ復帰で再ダウンロードやキャッシュ破棄をしない。音声要素にはblob URLのみを設定する。HTTP・通信・CORS・本文取得失敗時だけ他方を1回試し、両方失敗したPromiseも保持して再取得ループを防ぐ。自動再生拒否・中断・デコード失敗では再取得しない。先読みや事前プローブはしない。音源ZIPは`./build.sh bgm`で作り、ユーザーが展開した`audio/`と`licenses/`をミラー公開ルートへ置く。ZIP自体をゲームに取得させない。
 
 2本以上のタッチは全画面の位置を基準にした1〜2.5倍のピンチへ使う。物理座標は変えず、GUIと大砲の入力座標を表示変換へ対応させる。開始時に保留中の押下を取り消し、全指が離れるまで発射・調整・UI操作を抑止する。ゴムは凍結中だけ脆くし、グリップ靴も重力・回転・有限摩擦の通常剛体とする。物体や足場を固定して問題を回避しない。
 

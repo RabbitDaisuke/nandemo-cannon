@@ -29,7 +29,7 @@ fi
 if [[ "$build_mode" == deploy ]]; then
   mkdir -p out/packages
   rm -f out/packages/nandemo-cannon-web-4.7.2.partial.zip
-  # Music streams separately after play starts; never add it to the engine ZIP
+  # Music downloads separately on first use; never add it to the engine ZIP
   # that every browser downloads at boot.
   (cd out/standalone && zip -0 -X -q -r ../packages/nandemo-cannon-web-4.7.2.partial.zip . -x 'audio/bgm/*')
   unzip -t out/packages/nandemo-cannon-web-4.7.2.partial.zip
