@@ -287,6 +287,52 @@ func _button_with_meta(key: String, value: Variant) -> Button:
 	return null
 
 
+func _late_stage_checks() -> void:
+	game.load_stage(35)
+	await _frames(2)
+	_check(not game.power_slider.visible and not game.power_label.visible and game.angle_slider.visible, "Random cannon did not hide only its power controls")
+	game.cannon.set_aim(40, 0.15)
+	_check(is_equal_approx(game.cannon.elevation_degrees, 40) and is_equal_approx(game.cannon.power, 0.65), "Random stage allowed manual power changes or blocked angle changes")
+	_check(game.debug_snapshot().trajectory.size() <= 5, "Random stage trajectory was not shortened to half")
+	var first_queue = game.current_stage.queue.duplicate()
+	game.cannon.fire()
+	_check(game.shots_fired == 1 and game.actors.size() == 1, "Random cannon did not create a real thrown body")
+	var first_power = game.cannon.power
+	game.load_stage(35)
+	await _frames(2)
+	game.cannon.fire()
+	_check(game.current_stage.queue == first_queue and is_equal_approx(game.cannon.power, first_power), "Random stage seed did not reproduce items and shot strength")
+	game.load_stage(36)
+	await _frames(2)
+	_check(game.power_slider.visible and game.power_label.visible and game.cannon.is_power_adjustable(), "Leaving random cannon did not restore normal power controls")
+	var faller = game._create_actor(game.catalog.items["rice-bowl"], Vector2(655, 470))
+	await _frames(90)
+	_check(not is_instance_valid(faller) or not faller.alive, "Restaurant2 gap did not remove fallen objects")
+	game.load_stage(37)
+	await _frames(2)
+	_check(game.catalog_button.visible and game.liquid.regions.size() > 0, "Beach did not start with water and free item choice")
+	game._show_catalog(2)
+	game._close_modal()
+	game._show_catalog()
+	_check(game.catalog_page == 2, "Reopening the item picker forgot this stage's page")
+	var choice = _button_with_meta("item_id", str(game.catalog.ordered_items[48].id))
+	_check(choice != null, "Remembered picker page did not show the corresponding items")
+	if choice != null:
+		choice.pressed.emit()
+	game._show_catalog()
+	_check(game.catalog_page == 2, "Selecting an item reset the remembered picker page")
+	game._finish_stage(false)
+	_check(game.catalog_page == 0, "Completing a stage retained the previous picker page")
+	game.load_stage(37)
+	await process_frame
+	await _frames(2)
+	game._show_catalog()
+	_check(game.catalog_page == 0, "A new stage attempt inherited a previous picker page")
+	game._close_modal()
+	game.load_stage(38)
+	await _frames(2)
+	_check(game.current_stage.queue.size() == 15 and game.playable, "Cafe failed to load a playable fifteen-shot queue")
+
 func _run() -> void:
 	root.size = Vector2i(960, 540)
 	game = GameScript.new()
@@ -310,6 +356,7 @@ func _run() -> void:
 		_check_visible_glyphs("Stage %d HUD" % (index + 1))
 		if index >= 20:
 			await _snapshot(str(game.current_stage.map))
+	await _late_stage_checks()
 	game.load_stage(0)
 	await _frames(2)
 	await _snapshot("01-initial")

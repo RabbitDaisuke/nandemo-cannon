@@ -612,7 +612,46 @@
       "impulseMultiplier": 2.2,
       "waterproofExplosive": true
     },
-    "coffee-mill": {}
+    "coffee-mill": {},
+    "orange-juice": {
+      "waterUnits": 8,
+      "releaseUnits": 8,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120,
+      "minImpactEnergy": 2,
+      "loadForceThreshold": 5000,
+      "loadHoldSeconds": 0.35
+    },
+    "lemonade-glass": {
+      "waterUnits": 8,
+      "releaseUnits": 8,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120,
+      "minImpactEnergy": 2,
+      "loadForceThreshold": 5000,
+      "loadHoldSeconds": 0.35
+    },
+    "water-glass": {
+      "waterUnits": 8,
+      "releaseUnits": 8,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120,
+      "minImpactEnergy": 2,
+      "loadForceThreshold": 5000,
+      "loadHoldSeconds": 0.35
+    },
+    "ironplate-hamburg": {},
+    "chicken-steak": {},
+    "bill-holder": {},
+    "cash-reader": {},
+    "oven": {},
+    "parfait": {},
+    "counter": {
+      "flowResponse": 0
+    },
+    "coffee-beans": {},
+    "coffee-pot": {},
+    "menu": {}
   },
   "stateRules": {
     "breakage": {

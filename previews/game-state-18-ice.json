@@ -140,7 +140,7 @@
 				"worldScale": 0.45,
 				"worldWidth": 54.0
 			},
-			"rotation": -0.000533453596290201,
+			"rotation": -0.0000000343834578586666,
 			"texture": "res://assets/objects/grip-boots.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -151,8 +151,8 @@
 				0.449999988079071,
 				0.449999988079071
 			],
-			"x": 517.480529785156,
-			"y": 394.187042236328
+			"x": 547.4609375,
+			"y": 394.200012207031
 		},
 		{
 			"burning": false,
@@ -294,7 +294,7 @@
 				"worldScale": 0.45,
 				"worldWidth": 54.0
 			},
-			"rotation": 1.80863666534424,
+			"rotation": 1.80514764785767,
 			"texture": "res://assets/objects/grip-boots.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -305,8 +305,8 @@
 				0.449999988079071,
 				0.449999988079071
 			],
-			"x": 384.256866455078,
-			"y": 396.630950927734
+			"x": 385.874542236328,
+			"y": 396.582366943359
 		}
 	],
 	"angle": 38.0,

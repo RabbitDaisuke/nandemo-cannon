@@ -137,7 +137,9 @@ for (const extension of ['wasm', 'audio.worklet.js', 'audio.position.worklet.js'
 if (probe.config.mainPack !== 'index.pck') throw new Error('PCK was moved to the engine CDN');
 
 for (const name of await fs.readdir(stage)) {
-  if (/^index\.(js|wasm|audio\..*\.js)$/.test(name)) continue;
+  // Exporters can leave temporary runtime files behind. Only the game page,
+  // pack and icons belong to the source artifact; the runtime has its own job.
+  if (!/^index\.(html|pck|(?:[\w-]+\.)?png)$/.test(name)) continue;
   await fs.copyFile(path.join(stage, name), path.join(standalone, name));
 }
 await fs.copyFile(path.join(root, 'assets/ui/logo.webp'), path.join(standalone, 'logo.webp'));

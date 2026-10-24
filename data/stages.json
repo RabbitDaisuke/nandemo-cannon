@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Godot 4.7.2: 35 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
+  "status": "Godot 4.7.2: 39 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
   "coordinateSystem": "960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
   "shotsPerStage": 15,
   "tutorialOrder": "ordered queues; do not shuffle prerequisite fire/water/bomb slots",
@@ -7148,6 +7148,646 @@
       ],
       "preplaced": [],
       "lesson": "ゲームのどうぐを つみあげよう。コードも ひとつのかたち。"
+    },
+    {
+      "id": 36,
+      "nameJa": "ランダムはっしゃほう",
+      "map": "36-random-cannon",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        80,
+        540,
+        370
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            100,
+            390,
+            460,
+            24
+          ]
+        }
+      ],
+      "queue": [
+        "flamethrower",
+        "barrel",
+        "gunpowder-barrel",
+        "metal-drum",
+        "wooden-crate",
+        "water-jug",
+        "water-balloon",
+        "refrigerator",
+        "tire",
+        "plank",
+        "coffee-mill",
+        "rubber-duck",
+        "sand-bucket",
+        "umbrella",
+        "bomb"
+      ],
+      "preplaced": [],
+      "queueSlots": [
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        },
+        {
+          "count": 1,
+          "candidates": [
+            "flamethrower",
+            "barrel",
+            "gunpowder-barrel",
+            "metal-drum",
+            "wooden-crate",
+            "water-jug",
+            "water-balloon",
+            "refrigerator",
+            "tire",
+            "plank",
+            "coffee-mill",
+            "rubber-duck",
+            "sand-bucket",
+            "umbrella",
+            "bomb"
+          ]
+        }
+      ],
+      "cannonControls": {
+        "powerMode": "random",
+        "minPower": 0.15,
+        "maxPower": 1,
+        "trajectoryFraction": 0.5
+      },
+      "lesson": "なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？"
+    },
+    {
+      "id": 37,
+      "nameJa": "レストラン2",
+      "map": "37-restaurant-two",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        820,
+        410
+      ],
+      "scoreZone": [
+        90,
+        80,
+        520,
+        300
+      ],
+      "scoreGroundY": 380,
+      "terrain": [
+        {
+          "rect": [
+            90,
+            380,
+            520,
+            24
+          ]
+        },
+        {
+          "rect": [
+            90,
+            340,
+            14,
+            40
+          ]
+        },
+        {
+          "rect": [
+            596,
+            340,
+            14,
+            40
+          ]
+        },
+        {
+          "rect": [
+            114,
+            404,
+            28,
+            136
+          ]
+        },
+        {
+          "rect": [
+            558,
+            404,
+            28,
+            136
+          ]
+        },
+        {
+          "rect": [
+            720,
+            410,
+            220,
+            24
+          ]
+        },
+        {
+          "rect": [
+            744,
+            434,
+            24,
+            106
+          ]
+        },
+        {
+          "rect": [
+            892,
+            434,
+            24,
+            106
+          ]
+        }
+      ],
+      "queue": [
+        "call-bell",
+        "lemonade-glass",
+        "water-glass",
+        "coffee-mill",
+        "orange-juice",
+        "ironplate-hamburg",
+        "rice-bowl",
+        "sashimi",
+        "chicken-steak",
+        "bill-holder",
+        "cash-reader",
+        "frying-pan",
+        "oven",
+        "fork",
+        "crossed-chopsticks"
+      ],
+      "preplaced": [
+        {
+          "id": "call-bell",
+          "x": 545,
+          "groundY": 380,
+          "scoring": false
+        }
+      ],
+      "abyss": [
+        [
+          0,
+          525,
+          960,
+          100
+        ]
+      ],
+      "lesson": "テーブルのうえに つみあげよう。そとは ならく！"
+    },
+    {
+      "id": 38,
+      "nameJa": "ビーチ",
+      "map": "38-beach",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        410
+      ],
+      "scoreZone": [
+        50,
+        80,
+        550,
+        370
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            600,
+            90
+          ]
+        },
+        {
+          "polygon": [
+            [
+              600,
+              450
+            ],
+            [
+              700,
+              410
+            ],
+            [
+              960,
+              410
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              600,
+              540
+            ]
+          ]
+        }
+      ],
+      "queue": [
+        "sand-bucket",
+        "shovel",
+        "water-yoyo",
+        "lifebuoy",
+        "umbrella",
+        "watermelon",
+        "rubber-duck",
+        "water-balloon",
+        "submarine",
+        "barrel",
+        "towel",
+        "sponge",
+        "freeze-sprayer",
+        "flamethrower",
+        "soccer-ball"
+      ],
+      "preplaced": [],
+      "selectAnyCatalogItem": true,
+      "water": [
+        {
+          "rect": [
+            50,
+            375,
+            450,
+            75
+          ],
+          "direction": [
+            1,
+            0
+          ],
+          "speed": 18,
+          "type": "flow"
+        }
+      ],
+      "lesson": "ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。"
+    },
+    {
+      "id": 39,
+      "nameJa": "喫茶店",
+      "map": "39-cafe",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        80,
+        540,
+        370
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            75,
+            385,
+            530,
+            24
+          ]
+        },
+        {
+          "rect": [
+            100,
+            409,
+            25,
+            41
+          ]
+        },
+        {
+          "rect": [
+            555,
+            409,
+            25,
+            41
+          ]
+        }
+      ],
+      "queue": [
+        "coffee-mill",
+        "parfait",
+        "counter",
+        "chair",
+        "low-table",
+        "coffee-beans",
+        "coffee-pot",
+        "water-glass",
+        "menu",
+        "call-bell",
+        "teapot",
+        "pancakes",
+        "cheesecake",
+        "lemonade-glass",
+        "canele"
+      ],
+      "preplaced": [],
+      "lesson": "コーヒーのどうぐと おやつを カウンターにのせよう。"
     }
   ]
 }

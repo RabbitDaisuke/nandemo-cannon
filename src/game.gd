@@ -75,6 +75,7 @@ var _launched_count: int = 0
 var _landed_count: int = 0
 var touch_zoom: GameTouchZoom
 var map_page: int = 0
+var catalog_page: int = 0
 
 func _ready() -> void:
 	var localized = JSON.parse_string(FileAccess.get_file_as_string("res://data/ui-ja.json"))
@@ -154,6 +155,7 @@ func load_stage(index: int) -> void:
 	simulation_paused = false
 	_resume_tree_at_idle()
 	selected_catalog_id = ""
+	catalog_page = 0
 	destroyed_counts.clear()
 	score_zone = GameCatalog.rectangle(current_stage.get("scoreZone", [70, 70, 400, 350]))
 	stage_root = Node2D.new()
@@ -182,6 +184,10 @@ func load_stage(index: int) -> void:
 	stage_root.add_child(cannon)
 	var ground = GameCatalog.vector(current_stage.get("cannon", [810, 420]))
 	cannon.configure(ground)
+	cannon.configure_controls(current_stage.get("cannonControls", {}), rng.seed)
+	power_label.visible = cannon.is_power_adjustable()
+	power_slider.visible = cannon.is_power_adjustable()
+	power_slider.editable = cannon.is_power_adjustable()
 	if is_instance_valid(touch_zoom):
 		# Input is dispatched in reverse tree order: pinch cancellation must run first.
 		move_child(touch_zoom, -1)
@@ -480,6 +486,7 @@ func _refresh_bgm_ui() -> void:
 	if not is_instance_valid(bgm_button):
 		return
 	if _bgm_bridge != null:
+		_bgm_bridge.setGameplayPaused(simulation_paused or result_shown or get_tree().paused or Engine.time_scale <= 0.0)
 		var state = JSON.parse_string(str(_bgm_bridge.getStateJSON()))
 		if state is Dictionary:
 			_bgm_state = state
@@ -524,6 +531,7 @@ func _finish_stage(timed_out: bool) -> void:
 	touch_zoom.reset_view()
 	score_value = calculate_score()
 	result_shown = true
+	catalog_page = 0
 	_pause(true)
 	_update_hud()
 	result_jpeg = PackedByteArray()
@@ -596,6 +604,8 @@ func _pause(value: bool) -> void:
 	# Hand-opened menus never call this or mutate rigid-body motion.
 	if value:
 		get_tree().paused = true
+		if _bgm_bridge != null:
+			_bgm_bridge.setGameplayPaused(true)
 	else:
 		_resume_tree_at_idle()
 	if is_instance_valid(tutorial_label):
@@ -605,12 +615,16 @@ func _pause(value: bool) -> void:
 
 func _resume_tree_at_idle() -> void:
 	if not get_tree().paused:
+		if _bgm_bridge != null:
+			_bgm_bridge.setGameplayPaused(false)
 		return
 	# Resume between complete physics ticks, never from a deferred/physics callback.
 	# Godot issue #122378: otherwise a step can run before pending queries flush.
 	await get_tree().process_frame
 	if is_inside_tree() and not simulation_paused:
 		get_tree().paused = false
+		if _bgm_bridge != null:
+			_bgm_bridge.setGameplayPaused(false)
 
 func _set_wait_speed(multiplier: float) -> void:
 	Engine.time_scale = multiplier
@@ -690,11 +704,12 @@ func _show_maps(page: int = -1) -> void:
 	next.set_meta("map_page", map_page + 1)
 	_label("1ステージに なげられるのは15こ。", Vector2(23, 403), 12, Color("b5cad2"), modal)
 
-func _show_catalog(page: int = 0) -> void:
+func _show_catalog(page: int = -1) -> void:
 	if shots_fired >= 15 or result_shown or not bool(current_stage.get("selectAnyCatalogItem", false)):
 		return
 	var pages = ceili(catalog.ordered_items.size() / 24.0)
-	page = clampi(page, 0, pages - 1)
+	page = clampi(catalog_page if page < 0 else page, 0, pages - 1)
+	catalog_page = page
 	_open_modal("なげるもの / %03dしゅるい" % catalog.ordered_items.size())
 	for slot in range(24):
 		var index = page * 24 + slot
@@ -958,7 +973,7 @@ func _draw() -> void:
 	var direction = cannon.get_launch_direction()
 	var position_start = cannon.get_muzzle() + direction * (float(record.worldWidth) * 0.5 + 3.0)
 	var velocity = direction * launch_speed(record, cannon.power)
-	for step in range(1, 11):
+	for step in range(1, roundi(10.0 * cannon.trajectory_fraction) + 1):
 		var t = step * 0.06
 		var point = position_start + velocity * t + Vector2(0, gravity_value * t * t * 0.5)
 		if point.y > 500.0 or point.x < 0.0:
@@ -1038,7 +1053,7 @@ func debug_snapshot(include_modal: bool = true) -> Dictionary:
 		var direction = cannon.get_launch_direction()
 		var origin = cannon.get_muzzle() + direction * (float(item.worldWidth) * 0.5 + 3)
 		var velocity = direction * launch_speed(item, cannon.power)
-		for step in range(1, 11):
+		for step in range(1, roundi(10.0 * cannon.trajectory_fraction) + 1):
 			var t = step * 0.06
 			var point = origin + velocity * t + Vector2(0, gravity_value * t * t * 0.5)
 			if point.y > 500 or point.x < 0:

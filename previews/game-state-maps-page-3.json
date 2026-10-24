@@ -132,7 +132,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": 0.000176572342752479,
+			"rotation": 0.000176560919499025,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -205,7 +205,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": 0.00317950337193906,
+			"rotation": 0.00317972153425217,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -216,7 +216,7 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 317.904846191406,
+			"x": 317.904815673828,
 			"y": 336.775848388672
 		},
 		{
@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -0.00456214509904385,
+			"rotation": -0.00456212554126978,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -351,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": -2.77072024345398,
+			"rotation": -2.74963855743408,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -362,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 415.188690185547,
-			"y": 330.274719238281
+			"x": 415.64404296875,
+			"y": 330.272613525391
 		}
 	],
 	"angle": 38.0,
@@ -752,7 +752,7 @@
 				236.0,
 				27.5
 			],
-			"text": "ステージをえらぶ / 35",
+			"text": "ステージをえらぶ / 39",
 			"type": "label"
 		},
 		{
@@ -971,6 +971,162 @@
 			"fontSize": 16,
 			"rect": [
 				70.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				74.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/36-random-cannon.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				75.0,
+				250.0,
+				113.0,
+				12.5
+			],
+			"text": "36 ランダムはっしゃほう",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				236.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				240.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/37-restaurant-two.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				241.0,
+				250.0,
+				73.0,
+				12.5
+			],
+			"text": "37 レストラン2",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				402.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				406.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/38-beach.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				407.0,
+				250.0,
+				48.0,
+				12.5
+			],
+			"text": "38 ビーチ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				568.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				572.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/39-cafe.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				573.0,
+				250.0,
+				68.0,
+				12.5
+			],
+			"text": "39 きっさてん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				70.0,
 				403.0,
 				200.0,
 				40.0
@@ -1025,7 +1181,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 15.2333333333331,
+	"elapsed": 15.2583333333331,
 	"firePatches": [],
 	"followingItem": "stool",
 	"font": "res://assets/font/arcade-generated.fnt",

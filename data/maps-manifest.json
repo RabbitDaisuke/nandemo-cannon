@@ -1543,6 +1543,206 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "36-random-cannon",
+      "stage": 36,
+      "nameJa": "ランダムはっしゃほう",
+      "status": "specified",
+      "svg": "maps/36-random-cannon.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            100,
+            390,
+            460,
+            24
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "37-restaurant-two",
+      "stage": 37,
+      "nameJa": "レストラン2",
+      "status": "specified",
+      "svg": "maps/37-restaurant-two.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            90,
+            380,
+            520,
+            24
+          ]
+        },
+        {
+          "rect": [
+            90,
+            340,
+            14,
+            40
+          ]
+        },
+        {
+          "rect": [
+            596,
+            340,
+            14,
+            40
+          ]
+        },
+        {
+          "rect": [
+            114,
+            404,
+            28,
+            136
+          ]
+        },
+        {
+          "rect": [
+            558,
+            404,
+            28,
+            136
+          ]
+        },
+        {
+          "rect": [
+            720,
+            410,
+            220,
+            24
+          ]
+        },
+        {
+          "rect": [
+            744,
+            434,
+            24,
+            106
+          ]
+        },
+        {
+          "rect": [
+            892,
+            434,
+            24,
+            106
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "38-beach",
+      "stage": 38,
+      "nameJa": "ビーチ",
+      "status": "specified",
+      "svg": "maps/38-beach.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            600,
+            90
+          ]
+        },
+        {
+          "polygon": [
+            [
+              600,
+              450
+            ],
+            [
+              700,
+              410
+            ],
+            [
+              960,
+              410
+            ],
+            [
+              960,
+              540
+            ],
+            [
+              600,
+              540
+            ]
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "39-cafe",
+      "stage": 39,
+      "nameJa": "喫茶店",
+      "status": "specified",
+      "svg": "maps/39-cafe.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            75,
+            385,
+            530,
+            24
+          ]
+        },
+        {
+          "rect": [
+            100,
+            409,
+            25,
+            41
+          ]
+        },
+        {
+          "rect": [
+            555,
+            409,
+            25,
+            41
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }

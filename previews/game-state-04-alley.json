@@ -66,7 +66,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": 0.0000215281834243797,
+			"rotation": 0.0000773932988522574,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -77,8 +77,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 149.980422973633,
-			"y": 395.509399414062
+			"x": 149.982955932617,
+			"y": 395.508666992188
 		},
 		{
 			"burning": false,
@@ -146,7 +146,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": 0.00181737565435469,
+			"rotation": 0.00179600762203336,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -157,8 +157,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 208.168838500977,
-			"y": 395.577880859375
+			"x": 208.168518066406,
+			"y": 395.578155517578
 		},
 		{
 			"burning": false,
@@ -226,7 +226,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.00625468045473099,
+			"rotation": -0.00630378723144531,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -237,8 +237,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 266.426177978516,
-			"y": 395.617950439453
+			"x": 266.425018310547,
+			"y": 395.617004394531
 		},
 		{
 			"burning": true,
@@ -299,7 +299,7 @@
 				"worldScale": 0.470588235294118,
 				"worldWidth": 48.0
 			},
-			"rotation": -0.000708311679773033,
+			"rotation": -0.000711452856194228,
 			"texture": "res://assets/objects/trash-bag.svg",
 			"tint": "ffc291ff",
 			"visualPosition": [
@@ -310,8 +310,8 @@
 				0.470588237047195,
 				0.470588237047195
 			],
-			"x": 330.538269042969,
-			"y": 397.681579589844
+			"x": 330.538757324219,
+			"y": 397.681640625
 		},
 		{
 			"burning": false,
@@ -372,7 +372,7 @@
 				"worldScale": 0.659574468085106,
 				"worldWidth": 62.0
 			},
-			"rotation": -0.00000831278703117277,
+			"rotation": -0.00000831361103337258,
 			"texture": "res://assets/objects/trash-bin.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -445,7 +445,7 @@
 				"worldScale": 0.444444444444444,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.00347301131114364,
+			"rotation": -0.00216383370570838,
 			"texture": "res://assets/objects/cardboard-box.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -456,8 +456,8 @@
 				0.444444447755814,
 				0.444444447755814
 			],
-			"x": 178.80241394043,
-			"y": 346.213836669922
+			"x": 178.863372802734,
+			"y": 346.158386230469
 		},
 		{
 			"burning": false,
@@ -525,7 +525,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.000829617318231612,
+			"rotation": -0.000866818823851645,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -536,8 +536,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 240.023651123047,
-			"y": 341.813293457031
+			"x": 240.017669677734,
+			"y": 341.813018798828
 		},
 		{
 			"burning": true,
@@ -598,7 +598,7 @@
 				"worldScale": 0.470588235294118,
 				"worldWidth": 48.0
 			},
-			"rotation": 0.00250709941610694,
+			"rotation": 0.00253253988921642,
 			"texture": "res://assets/objects/trash-bag.svg",
 			"tint": "ffc291ff",
 			"visualPosition": [
@@ -609,8 +609,8 @@
 				0.470588237047195,
 				0.470588237047195
 			],
-			"x": 317.062255859375,
-			"y": 344.917266845703
+			"x": 317.060821533203,
+			"y": 344.917053222656
 		},
 		{
 			"burning": false,
@@ -671,7 +671,7 @@
 				"worldScale": 0.377358490566038,
 				"worldWidth": 40.0
 			},
-			"rotation": -1.56927728652954,
+			"rotation": -1.57585561275482,
 			"texture": "res://assets/objects/newspaper.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -682,8 +682,8 @@
 				0.377358496189117,
 				0.377358496189117
 			],
-			"x": 181.649719238281,
-			"y": 307.357391357422
+			"x": 181.020553588867,
+			"y": 307.359100341797
 		}
 	],
 	"angle": 35.0,
@@ -1069,7 +1069,7 @@
 		{
 			"radius": 26.0,
 			"source": false,
-			"x": 330.538269042969,
+			"x": 330.538757324219,
 			"y": 417.0
 		}
 	],

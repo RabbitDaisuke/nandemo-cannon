@@ -156,7 +156,7 @@ for(const name of names){
   const svg=await render(snapshot);
   await sharp(Buffer.from(svg)).png().toFile(path.join(root,`previews/game-${name}.png`));
 }
-const extraStages=stages.filter(stage=>stage.id>=21&&stage.id<=35);
-await sharp({create:{width:1440,height:1350,channels:4,background:'#080f18'}}).composite(await Promise.all(extraStages.map(async(stage,index)=>({input:await sharp(path.join(root,`previews/game-${stage.map}.png`)).resize(480,270,{kernel:'nearest'}).png().toBuffer(),left:(index%3)*480,top:Math.floor(index/3)*270})))).png().toFile(path.join(root,'previews/extra-game-stages.png'));
+const extraStages=stages.filter(stage=>stage.id>=21);
+await sharp({create:{width:1440,height:Math.ceil(extraStages.length/3)*270,channels:4,background:'#080f18'}}).composite(await Promise.all(extraStages.map(async(stage,index)=>({input:await sharp(path.join(root,`previews/game-${stage.map}.png`)).resize(480,270,{kernel:'nearest'}).png().toBuffer(),left:(index%3)*480,top:Math.floor(index/3)*270})))).png().toFile(path.join(root,'previews/extra-game-stages.png'));
 await fs.writeFile(path.join(root,'previews/game-preview-info.json'),JSON.stringify({source:'Godot 4.7.2 headless debug_snapshot from real physics and gameplay',renderer:'Node.js sharp: actual sprite assets and custom FNT glyph atlas composed at recorded positions',browserUsed:false,engineFramebuffer:false,files:[...names.map(n=>`game-${n}.png`),'extra-game-stages.png']},null,2));
 console.log(`Rendered ${names.length} game-state previews from real Godot physics snapshots, not browser screenshots or captured JPEGs.`);

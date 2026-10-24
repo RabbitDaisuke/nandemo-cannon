@@ -17,7 +17,9 @@ export function installBGM(host = window) {
     if (typeof saved?.enabled === 'boolean') enabled = saved.enabled;
     if (typeof saved?.volume === 'number' && Number.isFinite(saved.volume)) volume = Math.min(1, Math.max(0, saved.volume));
   } catch { /* Private mode, unavailable storage, and invalid JSON keep defaults. */ }
-  let context = null, gain = null, active = false, playing = false, blocked = false, errored = false;
+  let context = null, gain = null, envelopeGain = null, active = false, playing = false, blocked = false, errored = false;
+  let suspended = false, fadeTimer = null, fadeGeneration = 0;
+  let envelope = {from:0,to:0,start:0};
   let unavailable = false, index = -1, generation = 0, pending = null;
   let remaining = [];
   const media = new Map();
@@ -42,7 +44,10 @@ export function installBGM(host = window) {
       context = new AudioContext();
       gain = context.createGain();
       gain.gain.setValueAtTime(volume, context.currentTime);
-      gain.connect(context.destination);
+      envelopeGain = context.createGain();
+      envelopeGain.gain.setValueAtTime(0, context.currentTime);
+      gain.connect(envelopeGain);
+      envelopeGain.connect(context.destination);
       return true;
     } catch { context = null; gain = null; unavailable = true; return false; }
   }
@@ -69,7 +74,7 @@ export function installBGM(host = window) {
     const entry = {audio,source,urls,blob:null,objectURL:null,download:null,playToken:0};
     media.set(index, entry);
     audio.addEventListener('ended', () => {
-      if (!active || !enabled || !playing || audio !== media.get(index)?.audio) return;
+      if (!active || suspended || !enabled || !playing || audio !== media.get(index)?.audio) return;
       playing = false;
       index = nextTrack();
       generation += 1;
@@ -115,6 +120,8 @@ export function installBGM(host = window) {
     return false;
   }
   function stop() {
+    cancelFadeTimer();
+    fadeTo(0, 0);
     generation += 1;
     pending = null;
     playing = false;
@@ -122,8 +129,44 @@ export function installBGM(host = window) {
     // In-flight downloads finish into the same cache. Retain blobs on the top
     // screen and while muted; the browser releases them on document unload.
   }
+  function cancelFadeTimer() {
+    fadeGeneration += 1;
+    if (fadeTimer !== null) host.clearTimeout(fadeTimer);
+    fadeTimer = null;
+  }
+  function fadeTo(target, seconds = 1) {
+    if (!envelopeGain) return;
+    const now = context.currentTime;
+    const progress = Math.min(1, Math.max(0, now - envelope.start));
+    const level = envelope.from + (envelope.to - envelope.from) * progress;
+    envelopeGain.gain.cancelScheduledValues(now);
+    envelopeGain.gain.setValueAtTime(level, now);
+    if (seconds) envelopeGain.gain.linearRampToValueAtTime(target, now + seconds);
+    else envelopeGain.gain.setValueAtTime(target, now);
+    envelope = {from:seconds ? level : target,to:target,start:now};
+  }
+  function setGameplayPaused(value) {
+    value = Boolean(value);
+    if (suspended === value) return pending || Promise.resolve(playing);
+    suspended = value;
+    cancelFadeTimer();
+    if (!value) return play();
+    generation += 1;
+    pending = null;
+    fadeTo(0);
+    const token = fadeGeneration;
+    // Web Audio schedules the fade independently of the stopped Godot tree.
+    // The timer pauses the media without clearing its position or cached Blob.
+    fadeTimer = host.setTimeout(() => {
+      if (token !== fadeGeneration || !suspended) return;
+      fadeTimer = null;
+      playing = false;
+      for (const {audio} of media.values()) audio.pause();
+    }, 1000);
+    return Promise.resolve(false);
+  }
   function play() {
-    if (!active || !enabled || unavailable) return Promise.resolve(false);
+    if (!active || suspended || !enabled || unavailable) return Promise.resolve(false);
     if (pending) return pending;
     if (!ensureGraph()) return Promise.resolve(false);
     if (index < 0) index = nextTrack();
@@ -135,7 +178,7 @@ export function installBGM(host = window) {
       const audio = entry.audio;
       entry.playToken = token;
       const begin = () => {
-        if (token !== generation || !active || !enabled) return false;
+        if (token !== generation || !active || suspended || !enabled) return false;
         if (audio.src !== entry.objectURL) audio.src = entry.objectURL;
         if (audio.ended) audio.currentTime = 0;
         return audio.play();
@@ -144,9 +187,10 @@ export function installBGM(host = window) {
       // first download can need a later user retry on strict autoplay devices.
       const started = entry.objectURL ? begin() : download(entry).then(begin);
       pending = Promise.all([resumed, started]).then(([ok]) => {
-        if (token !== generation || !active || !enabled) return false;
+        if (token !== generation || !active || suspended || !enabled) return false;
         if (!ok) return failed(entry, token);
         playing = true; blocked = false; errored = false;
+        fadeTo(1);
         return true;
       }, error => failed(entry, token, ['NotAllowedError','AbortError'].includes(error?.name))).finally(() => { if (token === generation) pending = null; });
       return pending;
@@ -158,6 +202,7 @@ export function installBGM(host = window) {
   }
   const api = {
     unlock,
+    setGameplayPaused,
     startGameplay() {
       if (active && (playing || pending)) return pending || Promise.resolve(true);
       active = true;
@@ -180,7 +225,7 @@ export function installBGM(host = window) {
       return volume;
     },
     getStateJSON() {
-      return JSON.stringify({enabled,volume,active,playing,blocked,errored,unavailable,track:BGM_TRACKS[index]?.id || ''});
+      return JSON.stringify({enabled,volume,active,playing,blocked,errored,unavailable,suspended,track:BGM_TRACKS[index]?.id || ''});
     }
   };
   host.NandemoBGM = api;

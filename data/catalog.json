@@ -2228,7 +2228,7 @@
       "plastic",
       1.5,
       100,
-      72,
+      108,
       "game-logo",
       "solid"
     ],
@@ -2290,6 +2290,136 @@
       100,
       62,
       "coffee-mill",
+      "solid"
+    ],
+    [
+      "orange-juice",
+      "オレンジジュース",
+      "glass",
+      1.8,
+      0,
+      42,
+      "orange-juice",
+      "water_release"
+    ],
+    [
+      "lemonade-glass",
+      "レモネード",
+      "glass",
+      1.8,
+      0,
+      48,
+      "lemonade-glass",
+      "water_release"
+    ],
+    [
+      "water-glass",
+      "水グラス",
+      "glass",
+      1.5,
+      0,
+      42,
+      "water-glass",
+      "water_release"
+    ],
+    [
+      "ironplate-hamburg",
+      "鉄板ハンバーグ",
+      "metal",
+      4.8,
+      100,
+      87,
+      "ironplate-hamburg",
+      "solid"
+    ],
+    [
+      "chicken-steak",
+      "チキンステーキ",
+      "food",
+      2.7,
+      100,
+      81,
+      "chicken-steak",
+      "solid"
+    ],
+    [
+      "bill-holder",
+      "会計札",
+      "plastic",
+      1.2,
+      100,
+      45,
+      "bill-holder",
+      "solid"
+    ],
+    [
+      "cash-reader",
+      "現金読み取り機",
+      "appliance",
+      6,
+      100,
+      78,
+      "cash-reader",
+      "solid"
+    ],
+    [
+      "oven",
+      "オーブン",
+      "appliance",
+      24,
+      100,
+      112,
+      "oven",
+      "solid"
+    ],
+    [
+      "parfait",
+      "パフェ",
+      "glass",
+      2,
+      100,
+      49,
+      "parfait",
+      "solid"
+    ],
+    [
+      "counter",
+      "カウンター",
+      "wood",
+      22,
+      100,
+      140,
+      "counter",
+      "solid"
+    ],
+    [
+      "coffee-beans",
+      "コーヒー豆",
+      "paper",
+      1.8,
+      100,
+      55,
+      "coffee-beans",
+      "solid"
+    ],
+    [
+      "coffee-pot",
+      "コーヒーポット",
+      "metal",
+      3.4,
+      100,
+      66,
+      "coffee-pot",
+      "solid"
+    ],
+    [
+      "menu",
+      "メニュー",
+      "paper",
+      1.6,
+      100,
+      55,
+      "menu",
       "solid"
     ]
   ]

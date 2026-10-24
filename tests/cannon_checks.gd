@@ -155,6 +155,39 @@ func _run() -> void:
 	cannon.cancel_pointer()
 	_touch(transformed_point, false)
 	root.canvas_transform = Transform2D.IDENTITY
+	# Reusable stage controls retain vertical drag and click behavior, while
+	# horizontal input and programmatic power updates cannot change random power.
+	cannon.configure_controls({"powerMode": "random", "trajectoryFraction": 0.5}, 360039)
+	_check(not cannon.is_power_adjustable() and is_equal_approx(cannon.trajectory_fraction, 0.5), "Random-stage control settings were not applied")
+	cannon.set_aim(35.0, 0.99)
+	var initial_random_power = cannon.power
+	_check(is_equal_approx(initial_random_power, 0.65), "Random mode accepted a direct power adjustment")
+	cannon._begin_pointer(point, 0)
+	cannon._move_pointer(point + Vector2(-80, -60))
+	cannon._end_pointer(point + Vector2(-80, -60))
+	_check(cannon.elevation_degrees > 35.0 and is_equal_approx(cannon.power, initial_random_power), "Random mode changed vertical aiming or allowed horizontal power adjustment")
+	_check(shots.size() == previous_shots, "Random-mode aiming drag fired on release")
+	var random_powers: Array[float] = []
+	for i in range(6):
+		cannon._cooldown = 0.0
+		cannon.fire()
+		random_powers.append(float(shots.back().power))
+		var after_shot = cannon.power
+		cannon.fire()
+		cannon.set_aim(35.0 + i, 0.15)
+		_check(is_equal_approx(cannon.power, after_shot), "Rejected fire or aim input rerolled random power")
+	_check(random_powers.all(func(value): return value >= 0.15 and value <= 1.0), "Random launch power exceeded its configured bounds")
+	_check(random_powers.any(func(value): return not is_equal_approx(value, random_powers[0])), "Random stage used constant launch power")
+	cannon.configure_controls({"powerMode": "random"}, 360039)
+	var repeat_powers: Array[float] = []
+	for i in range(6):
+		cannon._cooldown = 0.0
+		cannon.fire()
+		repeat_powers.append(float(shots.back().power))
+	_check(random_powers == repeat_powers, "Input activity or cooldown rejection changed the seeded random shot sequence")
+	cannon.configure_controls()
+	cannon.set_aim(35.0, 0.88)
+	_check(cannon.is_power_adjustable() and is_equal_approx(cannon.trajectory_fraction, 1.0) and is_equal_approx(cannon.power, 0.88), "Leaving the random stage did not restore ordinary power and trajectory controls")
 	var result = {"suite": "cannon", "checks": checks, "failures": failures, "status": "passed" if failures.is_empty() else "failed"}
 	result["engine"] = Engine.get_version_info().string
 	var output = FileAccess.open("res://previews/cannon-checks.json", FileAccess.WRITE)

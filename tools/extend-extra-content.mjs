@@ -219,3 +219,4 @@ await sharp({create:{width:960,height:Math.ceil(additions.length/3)*180,channels
 console.log(JSON.stringify({added:items.length,objects:manifest.items.length,stages:stages.stages.length,ids:items.map(x=>x.id)}));
 // Keep the independent latest retakes last so older source layers cannot restore them.
 await import('./retake-content.mjs');
+await import('./extend-late-content.mjs');

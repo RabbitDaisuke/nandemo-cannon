@@ -5,6 +5,8 @@ import {installBGM, BGM_TRACKS, BGM_STORAGE_KEY, DEFAULT_BGM_VOLUME, BGM_MIRROR_
 function fixture(saved = null, random = 0) {
   const audios = [], contexts = [], sources = [], writes = [], requests = [], blobs = new Map(), responses = new Map();
   const storage = new Map(saved === null ? [] : [[BGM_STORAGE_KEY, saved]]);
+  const fades = [], timers = new Map();
+  let gains = 0, timerId = 0;
   class Audio {
     constructor() { this.events = {}; this.paused = true; this.ended = false; this.playCalls = 0; this.srcWrites = []; audios.push(this); }
     set volume(_value) { throw new Error('Do not depend on iOS element.volume'); }
@@ -18,12 +20,17 @@ function fixture(saved = null, random = 0) {
   }
   class AudioContext {
     constructor() { this.state = 'suspended'; this.currentTime = 0; this.destination = {}; this.resumeCalls = 0; contexts.push(this); }
-    createGain() { return {gain:{setValueAtTime:value => writes.push(value),setTargetAtTime:value => writes.push(value)},connect(){}}; }
+    createGain() {
+      const output = gains++ === 0 ? writes : fades;
+      return {gain:{setValueAtTime:value=>output.push(value),setTargetAtTime:value=>output.push(value),cancelScheduledValues(){},linearRampToValueAtTime:(value,time)=>output.push({value,time})},connect(){}};
+    }
     createMediaElementSource(audio) { assert(!sources.some(source => source.audio === audio)); const source = {audio,connect(){}}; sources.push(source); return source; }
     resume() { this.resumeCalls++; if(this.failure) return Promise.reject(this.failure); this.state = 'running'; return Promise.resolve(); }
   }
   const host = {
     Audio,AudioContext,Math:{random:typeof random==='function'?random:()=>random},
+    setTimeout(callback,ms){const id=++timerId;timers.set(id,{callback,at:(contexts[0]?.currentTime||0)+ms/1000});return id;},
+    clearTimeout(id){timers.delete(id);},
     URL:{createObjectURL(blob){const url=`blob:test/${blobs.size}`;blobs.set(url,blob);return url;}},
     async fetch(url,options){
       requests.push({url,options});
@@ -35,7 +42,11 @@ function fixture(saved = null, random = 0) {
     localStorage:{getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,value)}
   };
   const api = installBGM(host);
-  return {api,host,audios,contexts,sources,writes,storage,requests,blobs,responses,state:()=>JSON.parse(api.getStateJSON()),current:()=>audios.find(audio=>!audio.paused)};
+  const advance = seconds => {
+    contexts[0].currentTime += seconds;
+    for(const [id,timer] of [...timers])if(timer.at<=contexts[0].currentTime){timers.delete(id);timer.callback();}
+  };
+  return {api,host,audios,contexts,sources,writes,storage,requests,blobs,responses,fades,timers,advance,state:()=>JSON.parse(api.getStateJSON()),current:()=>audios.find(audio=>!audio.paused)};
 }
 const settle = async () => { for (let i=0;i<24;i++) await Promise.resolve(); };
 const defer = () => {let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no;});return {promise,resolve,reject};};
@@ -205,4 +216,34 @@ resume.reject(Error('Late autoplay refusal'));await settle();
 check(lateResume.state().errored&&!lateResume.state().blocked, 'Late AudioContext rejection changed a permanent error into autoplay blocking');
 await lateResume.api.toggle();
 check(!lateResume.state().enabled&&lateResume.requests.length===2, 'Late resume rejection prevented disabling music or retried downloads');
+const fade=fixture();await fade.api.startGameplay();fade.advance(1);
+check(fade.fades.some(x=>x.value===1&&x.time===1),'Gameplay did not fade in over one second');
+fade.audios[0].currentTime=42;
+await fade.api.setGameplayPaused(true);
+check(fade.state().suspended&&!fade.audios[0].paused&&fade.fades.at(-1).value===0&&fade.fades.at(-1).time===2,'Pause did not schedule a one-second fade before stopping');
+fade.advance(0.5);
+check(!fade.audios[0].paused,'Pause cut the music before the fade finished');
+fade.api.setVolume(0.07);
+check(fade.state().volume===0.07&&fade.fades.at(-1).value===0,'Volume adjustment canceled the pause fade');
+fade.advance(0.5);
+check(fade.audios[0].paused&&!fade.state().playing&&fade.audios[0].currentTime===42,'Fade completion failed to stop media at its retained position');
+await fade.api.startGameplay();
+check(fade.audios[0].paused&&fade.state().suspended,'A startup/visibility-style callback resumed a paused game');
+await fade.api.setGameplayPaused(false);
+check(fade.state().playing&&fade.fades.at(-1).value===1&&fade.fades.at(-1).time===3&&fade.requests.length===1,'Explicit game resume did not fade in from cached media');
+fade.advance(1);await fade.api.setGameplayPaused(true);fade.advance(0.4);
+await fade.api.setGameplayPaused(false);
+check(Math.abs(fade.fades.at(-2)-0.6)<1e-8,'Fast resume did not continue from the current fade level');
+fade.advance(1);
+check(fade.state().playing&&!fade.audios[0].paused&&fade.timers.size===0,'An old pause timer stopped resumed gameplay');
+await fade.api.setGameplayPaused(true);await fade.api.toggle();fade.advance(2);
+await fade.api.setGameplayPaused(false);
+check(!fade.state().playing&&!fade.state().enabled,'Resume ignored the saved off setting');
+const coldPause=fixture(), coldBody=defer();
+coldPause.responses.set(localURL,{ok:true,blob:()=>coldBody.promise});
+const coldPlay=coldPause.api.startGameplay();await settle();await coldPause.api.setGameplayPaused(true);
+coldBody.resolve(new Blob(['cached while paused']));await coldPlay;coldPause.advance(1);
+check(coldPause.audios[0].playCalls===0&&coldPause.blobs.size===1,'A download completion played during a game pause');
+await coldPause.api.setGameplayPaused(false);
+check(coldPause.state().playing&&coldPause.requests.length===1,'Resume after a paused download fetched the song again');
 console.log(JSON.stringify({suite:'web-bgm',checks,status:'passed',verification:'Node API fixtures; no browser, network, or audible playback'}));

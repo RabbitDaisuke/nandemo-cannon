@@ -16,6 +16,11 @@ const SHOT_INTERVAL = 0.45
 
 var elevation_degrees: float = 35.0
 var power: float = 0.65
+var power_mode: String = "manual"
+var trajectory_fraction: float = 1.0
+var _random_min_power: float = MIN_POWER
+var _random_max_power: float = 1.0
+var _power_rng = RandomNumberGenerator.new()
 var enabled: bool = true
 var input_suspended: bool = false
 var _joint: Node2D
@@ -44,6 +49,22 @@ func configure(ground_position: Vector2) -> void:
 	position = ground_position
 	_ensure_visuals()
 	_update_pose()
+
+
+func configure_controls(settings: Dictionary = {}, random_seed: int = 0) -> void:
+	# Stage-local controls: applying empty settings restores ordinary aiming.
+	cancel_pointer()
+	power_mode = "random" if str(settings.get("powerMode", "manual")) == "random" else "manual"
+	trajectory_fraction = clampf(float(settings.get("trajectoryFraction", 1.0)), 0.0, 1.0)
+	_random_min_power = clampf(float(settings.get("minPower", MIN_POWER)), MIN_POWER, 1.0)
+	_random_max_power = clampf(float(settings.get("maxPower", 1.0)), _random_min_power, 1.0)
+	_power_rng.seed = random_seed
+	power = clampf(0.65, _random_min_power, _random_max_power) if power_mode == "random" else 0.65
+	aim_changed.emit(elevation_degrees, power)
+
+
+func is_power_adjustable() -> bool:
+	return power_mode == "manual"
 
 
 func _part(file_name: String, at: Vector2, parent: Node) -> Sprite2D:
@@ -122,7 +143,8 @@ func set_input_suspended(value: bool) -> void:
 
 func set_aim(new_elevation: float, new_power: float) -> void:
 	elevation_degrees = clampf(new_elevation, MIN_ELEVATION, MAX_ELEVATION)
-	power = clampf(new_power, MIN_POWER, 1.0)
+	if is_power_adjustable():
+		power = clampf(new_power, MIN_POWER, 1.0)
 	_update_pose()
 	aim_changed.emit(elevation_degrees, power)
 
@@ -160,6 +182,10 @@ func get_muzzle() -> Vector2:
 func fire() -> void:
 	if not enabled or input_suspended or _cooldown > 0.0:
 		return
+	# Input, elapsed frames and rejected clicks never consume this stage's RNG.
+	if power_mode == "random":
+		power = _power_rng.randf_range(_random_min_power, _random_max_power)
+		aim_changed.emit(elevation_degrees, power)
 	# Resolve the origin before recoil: it is the same visible muzzle as this frame.
 	var origin = get_muzzle()
 	var direction = get_launch_direction()

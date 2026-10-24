@@ -1,0 +1,594 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "call-bell",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "call-bell",
+				"fixtures": [
+					{
+						"rect": [
+							12.0,
+							95.0,
+							104.0,
+							19.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								24.0,
+								95.0
+							],
+							[
+								24.0,
+								64.0
+							],
+							[
+								36.0,
+								43.0
+							],
+							[
+								53.0,
+								33.0
+							],
+							[
+								75.0,
+								33.0
+							],
+							[
+								92.0,
+								43.0
+							],
+							[
+								104.0,
+								64.0
+							],
+							[
+								104.0,
+								95.0
+							]
+						]
+					},
+					{
+						"rect": [
+							58.0,
+							15.0,
+							12.0,
+							19.0
+						]
+					}
+				],
+				"id": "call-bell",
+				"mass": 1.3,
+				"material": "metal",
+				"nameJa": "呼び出しベル",
+				"opaquePixels": 7562.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					55.0,
+					54.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/call-bell.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/call-bell.svg",
+				"viewBox": [
+					9.0,
+					10.0,
+					110.0,
+					107.0
+				],
+				"webp": "raster/objects/call-bell.webp",
+				"worldHeight": 42.8,
+				"worldScale": 0.4,
+				"worldWidth": 44.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/call-bell.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-22.0,
+				-21.6000003814697
+			],
+			"visualScale": [
+				0.400000005960464,
+				0.400000005960464
+			],
+			"x": 545.0,
+			"y": 359.068054199219
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		820.0,
+		410.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				769.0,
+				332.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				749.147583007812,
+				274.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				807.0,
+				342.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/lemonade-glass.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "レモネード",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				127.0,
+				18.75
+			],
+			"text": "37 / レストラン2",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				77.0,
+				304.0,
+				44.0
+			],
+			"text": "テーブルのうえに つみあげよう。そとは ならく！",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 1,
+			"color": "ffd36cff",
+			"fontSize": 14,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				746.0,
+				258.0,
+				196.0,
+				17.5
+			],
+			"text": "よびだしベル",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.0166666666666667,
+	"firePatches": [],
+	"followingItem": "lemonade-glass",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "call-bell",
+		"position": [
+			885.0,
+			316.0
+		],
+		"scale": [
+			0.400000005960464,
+			0.400000005960464
+		],
+		"texture": "res://assets/objects/call-bell.svg"
+	},
+	"map": "37-restaurant-two",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			108.0,
+			366.0
+		],
+		[
+			592.0,
+			366.0
+		],
+		[
+			610.0,
+			388.0
+		],
+		[
+			90.0,
+			388.0
+		]
+	],
+	"scoreZone": [
+		90.0,
+		80.0,
+		520.0,
+		300.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 37,
+	"trajectory": [
+		[
+			671.333679199219,
+			252.666763305664,
+			0.96,
+			"ff67dbff"
+		],
+		[
+			628.338012695312,
+			227.852874755859,
+			0.92,
+			"ff67dbff"
+		],
+		[
+			585.342407226562,
+			206.567001342773,
+			0.88,
+			"ff67dbff"
+		],
+		[
+			542.346740722656,
+			188.809112548828,
+			0.84,
+			"ff67dbff"
+		],
+		[
+			499.35107421875,
+			174.579223632812,
+			0.8,
+			"ff67dbff"
+		],
+		[
+			456.355407714844,
+			163.877349853516,
+			0.76,
+			"ff67dbff"
+		],
+		[
+			413.359771728516,
+			156.703460693359,
+			0.72,
+			"ff67dbff"
+		],
+		[
+			370.364105224609,
+			153.057586669922,
+			0.68,
+			"ff67dbff"
+		],
+		[
+			327.368438720703,
+			152.939697265625,
+			0.64,
+			"ff67dbff"
+		],
+		[
+			284.372772216797,
+			156.349822998047,
+			0.6,
+			"ff67dbff"
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}
