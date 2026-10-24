@@ -13,4 +13,4 @@ async function run(args) {
   });
 }
 await run(['--headless', '--editor', '--import']);
-for (const suite of ['body', 'cannon', 'hazard', 'game']) await run(['--headless', '--script', `res://tests/${suite}_checks.gd`]);
+for (const suite of ['search', 'body', 'cannon', 'hazard', 'game']) await run(['--headless', '--script', `res://tests/${suite}_checks.gd`]);

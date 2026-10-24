@@ -4,8 +4,10 @@ extends Node2D
 const SCORE_FLOOR_SLOP = 1.5
 const MAPS_PER_PAGE = 15
 const TRAJECTORY_COLOR = Color("ff67db")
+const ItemSearchScript = preload("res://src/item_search.gd")
 
 var catalog = GameCatalog.new()
+var item_search = ItemSearchScript.new(catalog.ordered_items)
 var ui_text: Dictionary = {}
 var rng = RandomNumberGenerator.new()
 var seed_text: String = ""
@@ -76,6 +78,14 @@ var _landed_count: int = 0
 var touch_zoom: GameTouchZoom
 var map_page: int = 0
 var catalog_page: int = 0
+var catalog_search_edit: LineEdit
+var catalog_search_count: Label
+var catalog_search_notice: Label
+var catalog_recent_buttons: Array[Button] = []
+var catalog_recent_searches: Array[String] = []
+var catalog_query: String = ""
+var catalog_result_page: int = 0
+var catalog_results: Array = []
 
 func _ready() -> void:
 	var localized = JSON.parse_string(FileAccess.get_file_as_string("res://data/ui-ja.json"))
@@ -654,6 +664,14 @@ func _open_modal(title: String, size_value: Vector2 = Vector2(864, 430), pause_s
 		_button("とじる", Vector2(size_value.x - 92, 9), Vector2(76, 32), func(): _close_modal(), modal)
 
 func _close_modal(resume: bool = true) -> void:
+	if _is_catalog_open():
+		_remember_catalog_search()
+		catalog_search_edit = null
+		catalog_search_count = null
+		catalog_search_notice = null
+		catalog_recent_buttons.clear()
+		catalog_query = ""
+		catalog_results.clear()
 	_capture_generation += 1
 	if result_capture_status == "pending":
 		result_capture_status = "cancelled"
@@ -708,21 +726,130 @@ func _show_maps(page: int = -1) -> void:
 func _show_catalog(page: int = -1) -> void:
 	if shots_fired >= 15 or result_shown or not bool(current_stage.get("selectAnyCatalogItem", false)):
 		return
-	var pages = ceili(catalog.ordered_items.size() / 24.0)
-	page = clampi(catalog_page if page < 0 else page, 0, pages - 1)
-	catalog_page = page
-	_open_modal("なげるもの / %03dしゅるい" % catalog.ordered_items.size())
+	if _is_catalog_open():
+		_render_catalog_page(catalog_result_page if page < 0 else page)
+		return
+	_open_modal("なげるもの")
+	modal.set_meta("catalog_picker", true)
+	catalog_query = ""
+	catalog_results = item_search.find_items("")
+	catalog_search_edit = LineEdit.new()
+	catalog_search_edit.name = "ItemSearch"
+	catalog_search_edit.position = Vector2(178, 10)
+	catalog_search_edit.size = Vector2(244, 32)
+	catalog_search_edit.theme = theme
+	catalog_search_edit.add_theme_font_size_override("font_size", 14)
+	var search_style = StyleBoxFlat.new()
+	search_style.bg_color = Color("0e2232")
+	search_style.border_color = Color("668091")
+	search_style.set_border_width_all(2)
+	search_style.content_margin_left = 7
+	search_style.content_margin_right = 7
+	catalog_search_edit.add_theme_stylebox_override("normal", search_style)
+	var search_focus = search_style.duplicate() as StyleBoxFlat
+	search_focus.border_color = Color("ffd36c")
+	catalog_search_edit.add_theme_stylebox_override("focus", search_focus)
+	catalog_search_edit.add_theme_color_override("font_color", Color("f7e9ba"))
+	catalog_search_edit.add_theme_color_override("font_placeholder_color", Color("a5b8c2"))
+	catalog_search_edit.add_theme_color_override("caret_color", Color("ffd36c"))
+	catalog_search_edit.placeholder_text = "かなで さがす"
+	catalog_search_edit.max_length = 24
+	catalog_search_edit.clear_button_enabled = true
+	catalog_search_edit.context_menu_enabled = false
+	catalog_search_edit.text_changed.connect(_catalog_search_changed)
+	catalog_search_edit.text_submitted.connect(func(_text): _remember_catalog_search())
+	modal.add_child(catalog_search_edit)
+	catalog_search_count = _label("", Vector2(22, 43), 10, Color("b3dbea"), modal)
+	catalog_search_notice = _label("かな・カナ・すうじでさがす", Vector2(178, 45), 9, Color("b3dbea"), modal)
+	_label("さいきんのけんさく", Vector2(430, 45), 9, Color("b3dbea"), modal)
+	for index in range(2):
+		var recent = _button("", Vector2(430 + index * 168, 10), Vector2(160, 32), func(): _restore_catalog_search(index), modal)
+		recent.set_meta("recent_search", index)
+		recent.add_theme_font_size_override("font_size", 12)
+		catalog_recent_buttons.append(recent)
+	_refresh_recent_search_buttons()
+	_render_catalog_page(catalog_page if page < 0 else page)
+	# Do not force focus here: opening the list on mobile must not immediately
+	# cover the choices with a software keyboard. A tap activates the input.
+
+func _is_catalog_open() -> bool:
+	return is_instance_valid(modal) and modal.has_meta("catalog_picker")
+
+func _catalog_search_changed(raw: String) -> void:
+	if not _is_catalog_open():
+		return
+	var cleaned: String = ItemSearchScript.sanitize_input(raw)
+	if cleaned != raw:
+		var caret = ItemSearchScript.sanitize_input(raw.left(catalog_search_edit.caret_column)).length()
+		catalog_search_edit.set_block_signals(true)
+		catalog_search_edit.text = cleaned
+		catalog_search_edit.caret_column = mini(caret, cleaned.length())
+		catalog_search_edit.set_block_signals(false)
+	catalog_search_notice.text = "つかえないもじを はずしました" if cleaned != raw else "かな・カナ・すうじでさがす"
+	catalog_query = cleaned.strip_edges()
+	catalog_results = item_search.find_items(catalog_query)
+	_render_catalog_page(catalog_page if catalog_query.is_empty() else 0)
+
+func _remember_catalog_search() -> void:
+	if catalog_query.is_empty():
+		return
+	var normalized: String = ItemSearchScript.normalize(catalog_query)
+	for index in range(catalog_recent_searches.size() - 1, -1, -1):
+		if ItemSearchScript.normalize(catalog_recent_searches[index]) == normalized:
+			catalog_recent_searches.remove_at(index)
+	catalog_recent_searches.push_front(catalog_query)
+	if catalog_recent_searches.size() > 2:
+		catalog_recent_searches.resize(2)
+	_refresh_recent_search_buttons()
+
+func _refresh_recent_search_buttons() -> void:
+	for index in range(catalog_recent_buttons.size()):
+		var button = catalog_recent_buttons[index]
+		if not is_instance_valid(button):
+			continue
+		button.disabled = index >= catalog_recent_searches.size()
+		var query = catalog_recent_searches[index] if not button.disabled else "りれきなし"
+		button.text = query if query.length() <= 11 else query.left(10) + "..."
+
+func _restore_catalog_search(index: int) -> void:
+	if not _is_catalog_open() or index >= catalog_recent_searches.size():
+		return
+	var query = catalog_recent_searches[index]
+	_remember_catalog_search()
+	catalog_search_edit.text = query
+	catalog_search_edit.caret_column = query.length()
+	_catalog_search_changed(query)
+	_remember_catalog_search()
+
+func _render_catalog_page(page: int) -> void:
+	# Keep the input alive while refreshing results, preserving IME/focus/caret.
+	for child in modal.get_children():
+		if child.has_meta("catalog_grid"):
+			modal.remove_child(child)
+			child.queue_free()
+	var pages = maxi(1, ceili(catalog_results.size() / 24.0))
+	page = clampi(page, 0, pages - 1)
+	catalog_result_page = page
+	if catalog_query.is_empty():
+		catalog_page = page
+	catalog_search_count.text = "%03d / %03dしゅるい" % [catalog_results.size(), catalog.ordered_items.size()]
+	if catalog_results.is_empty():
+		var empty = _label("みつかりませんでした\nことばをかえるか けしてください", Vector2(122, 164), 20, Color("fff0b5"), modal)
+		empty.size.x = 620
+		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty.set_meta("catalog_grid", true)
 	for slot in range(24):
 		var index = page * 24 + slot
-		if index >= catalog.ordered_items.size():
+		if index >= catalog_results.size():
 			break
-		var item: Dictionary = catalog.ordered_items[index]
-		var at = Vector2(22 + (slot % 6) * 138, 54 + (slot / 6) * 78)
+		var item: Dictionary = catalog_results[index]
+		var at = Vector2(22 + (slot % 6) * 138, 60 + (slot / 6) * 78)
 		var button = _button("", at, Vector2(130, 70), func():
 			selected_catalog_id = str(item.id)
 			_close_modal()
 			_update_hud(), modal)
 		button.set_meta("item_id", str(item.id))
+		button.set_meta("catalog_grid", true)
 		var icon = TextureRect.new()
 		icon.texture = load("res://assets/" + str(item.svg))
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -734,9 +861,15 @@ func _show_catalog(page: int = -1) -> void:
 		var caption = _label(_item_display_name(str(item.id)), Vector2(3, 50), 10, Color("f7e9ba"), button)
 		caption.size = Vector2(124, 18)
 		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_button("まえへ", Vector2(22, 374), Vector2(104, 34), func(): _show_catalog(maxi(0, page - 1)), modal).disabled = page == 0
-	_label("%d / %d ページ" % [page + 1, pages], Vector2(346, 382), 14, Color("b3dbea"), modal)
-	_button("つぎへ", Vector2(738, 374), Vector2(104, 34), func(): _show_catalog(mini(pages - 1, page + 1)), modal).disabled = page == pages - 1
+	var previous = _button("まえへ", Vector2(22, 374), Vector2(104, 34), func(): _show_catalog(maxi(0, page - 1)), modal)
+	previous.disabled = page == 0
+	previous.set_meta("catalog_grid", true)
+	previous.set_meta("catalog_previous", true)
+	_label("%d / %d ページ" % [page + 1, pages], Vector2(346, 382), 14, Color("b3dbea"), modal).set_meta("catalog_grid", true)
+	var next = _button("つぎへ", Vector2(738, 374), Vector2(104, 34), func(): _show_catalog(mini(pages - 1, page + 1)), modal)
+	next.disabled = page == pages - 1
+	next.set_meta("catalog_grid", true)
+	next.set_meta("catalog_next", true)
 
 func _show_seed() -> void:
 	_open_modal("シード", Vector2(530, 235))
@@ -1075,6 +1208,8 @@ func _snapshot_controls(node: Node, output: Array, include_modal: bool = true) -
 		elif node is Button:
 			var style = node.get_theme_stylebox("disabled" if node.disabled else "normal") as StyleBoxFlat
 			entry.merge({"type": "button", "text": node.text, "fontSize": node.get_theme_font_size("font_size"), "disabled": node.disabled, "background": style.bg_color.to_html() if style != null else "193346ff", "border": style.border_color.to_html() if style != null else "080f18ff"})
+		elif node is LineEdit:
+			entry.merge({"type": "line_edit", "text": node.text, "placeholder": node.placeholder_text, "fontSize": node.get_theme_font_size("font_size"), "focused": node.has_focus(), "clearEnabled": node.clear_button_enabled})
 		elif node is HSlider:
 			entry.merge({"type": "slider", "value": node.value, "minimum": node.min_value, "maximum": node.max_value, "editable": node.editable})
 		elif node is TextureRect and node.texture != null:

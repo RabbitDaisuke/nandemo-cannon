@@ -1,4 +1,7 @@
 # 実装引き継ぎ
+検索追加版の検証はGodot headless793項目（search20 / body73 / cannon68 / hazard119 / game513）が成功。BGM87項目と公式Web出力・PCK起動・WASMコンパイルも成功。`previews/game-catalog-search.png`と`game-catalog-search-history.png`は実際のGodot状態からNodeで再構成し、入力・件数・履歴2件と24個グリッドが重ならないことを視覚確認した。実ブラウザのIME・モバイルキーボードは未確認。
+もの検索：`src/item_search.gd`はIDと正式名・表示名、および`data/item-search-index.json`の手書きタグだけを検索対象にする。ゲーム分類・材質・behavior・物理設定には接続しない。全241件のタグを個別に記述し、自動生成処理を置かない。追加・改名時は`docs/ADDING_ITEMS.md`を読む。名前は実行時に自動取得し、ひらがな／カタカナを同一視して部分一致、空白区切りはAND検索。入力は実際の生成フォントのhas_charで制限し、HUDフォントに収録された漢字も拒否する。ASCII小文字は対応する大文字へ変換する。
+UIは一覧ヘッダーの入力欄と右側の履歴2件。検索中のページ移動でLineEditを作り直さず、入力・フォーカス・カーソルを保持する。Enter・選択・閉じるときなどに履歴を確定し、かな表記違いを重複除去する。閉じたら入力と絞り込みは消し、開き直し時は全件表示。未検索時のページ記憶は維持し、ステージ終了時にリセットする。検索履歴はページ起動中のメモリだけで、localStorageへ保存しない。検索中も物理は進み、ゲーム操作だけ遮断する。`tests/search_checks.gd`をルートbuild.shの検証へ追加した。
 今回の検証：Godot 4.7.2 headlessは752項目（body73 / cannon68 / hazard119 / game492）が成功。`./build.sh source`でBGM87項目、Web出力、出力PCK起動、WASMコンパイルも成功。Node再構成画像で第38面と菓子リテイクを確認。ブラウザ実機のタッチ操作は未確認。BGMのフェードは内部プレーヤー出力だけを変え、UIや保存する音量を変更しない。
 
 中央照準・吸水修正：`src/cannon.gd`の`AIM_AREA`は x=0〜960 / y=128〜470。UIを避けて左・中マウスまたは1本指のドラッグを開始でき、発射は短い押下のreleaseだけ。`game.gd`の全画面mouse-down発射は削除し、GUI越境releaseも除外する。ズーム逆変換、2本指抑止、第36面のランダム火力は維持する。

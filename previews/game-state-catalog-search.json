@@ -1,0 +1,714 @@
+{
+	"actors": [],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		410.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				332.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				274.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				342.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/shovel.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "スコップ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				89.0,
+				18.75
+			],
+			"text": "38 / ビーチ",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				77.0,
+				304.0,
+				44.0
+			],
+			"text": "ものを じゆうにえらべる ビーチ。さいしょから\nみずがいっぱい。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 1,
+			"color": "ffd36cff",
+			"fontSize": 14,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				746.0,
+				258.0,
+				196.0,
+				17.5
+			],
+			"text": "すなあそびバケツ",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				846.0,
+				435.0,
+				94.0,
+				34.0
+			],
+			"text": "もの",
+			"type": "button"
+		},
+		{
+			"color": "060e14d1",
+			"rect": [
+				0.0,
+				0.0,
+				960.0,
+				540.0
+			],
+			"type": "rect"
+		},
+		{
+			"rect": [
+				48.0,
+				55.0,
+				864.0,
+				430.0
+			],
+			"type": "panel"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 22,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				70.0,
+				69.0,
+				113.0,
+				27.5
+			],
+			"text": "なげるもの",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				820.0,
+				64.0,
+				76.0,
+				32.0
+			],
+			"text": "とじる",
+			"type": "button"
+		},
+		{
+			"clearEnabled": true,
+			"focused": true,
+			"fontSize": 14,
+			"placeholder": "かなで さがす",
+			"rect": [
+				226.0,
+				65.0,
+				244.0,
+				32.0
+			],
+			"text": "かみなり",
+			"type": "line_edit"
+		},
+		{
+			"align": 0,
+			"color": "b3dbeaff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				70.0,
+				98.0,
+				101.0,
+				12.5
+			],
+			"text": "001 / 241しゅるい",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "b3dbeaff",
+			"fontSize": 9,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				226.0,
+				100.0,
+				108.0,
+				11.25
+			],
+			"text": "かな・カナ・すうじでさがす",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "b3dbeaff",
+			"fontSize": 9,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				478.0,
+				100.0,
+				79.0,
+				11.25
+			],
+			"text": "さいきんのけんさく",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 12,
+			"rect": [
+				478.0,
+				65.0,
+				160.0,
+				32.0
+			],
+			"text": "かみなり",
+			"type": "button"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 12,
+			"rect": [
+				646.0,
+				65.0,
+				160.0,
+				32.0
+			],
+			"text": "りれきなし",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				70.0,
+				115.0,
+				130.0,
+				70.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				112.0,
+				118.0,
+				46.0,
+				43.0
+			],
+			"texture": "res://assets/objects/lightning-orb.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "f7e9baff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				73.0,
+				165.0,
+				124.0,
+				18.0
+			],
+			"text": "かみなりまほう",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 16,
+			"rect": [
+				70.0,
+				429.0,
+				104.0,
+				34.0
+			],
+			"text": "まえへ",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "b3dbeaff",
+			"fontSize": 14,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				394.0,
+				437.0,
+				86.0,
+				17.5
+			],
+			"text": "1 / 1 ページ",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 16,
+			"rect": [
+				786.0,
+				429.0,
+				104.0,
+				34.0
+			],
+			"text": "つぎへ",
+			"type": "button"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.108333333333333,
+	"firePatches": [],
+	"followingItem": "shovel",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "sand-bucket",
+		"position": [
+			875.0,
+			316.0
+		],
+		"scale": [
+			0.469387769699097,
+			0.469387799501419
+		],
+		"texture": "res://assets/objects/sand-bucket.svg"
+	},
+	"map": "38-beach",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			68.0,
+			436.0
+		],
+		[
+			582.0,
+			436.0
+		],
+		[
+			600.0,
+			458.0
+		],
+		[
+			50.0,
+			458.0
+		]
+	],
+	"scoreZone": [
+		50.0,
+		80.0,
+		550.0,
+		370.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 38,
+	"trajectory": [
+		[
+			660.514526367188,
+			252.093185424805,
+			0.96,
+			"ff67dbff"
+		],
+		[
+			617.518859863281,
+			227.279296875,
+			0.92,
+			"ff67dbff"
+		],
+		[
+			574.523193359375,
+			205.993423461914,
+			0.88,
+			"ff67dbff"
+		],
+		[
+			531.527587890625,
+			188.235534667969,
+			0.84,
+			"ff67dbff"
+		],
+		[
+			488.531921386719,
+			174.005645751953,
+			0.8,
+			"ff67dbff"
+		],
+		[
+			445.536254882812,
+			163.303771972656,
+			0.76,
+			"ff67dbff"
+		],
+		[
+			402.540618896484,
+			156.1298828125,
+			0.72,
+			"ff67dbff"
+		],
+		[
+			359.544952392578,
+			152.484008789062,
+			0.68,
+			"ff67dbff"
+		],
+		[
+			316.549285888672,
+			152.366119384766,
+			0.64,
+			"ff67dbff"
+		],
+		[
+			273.553619384766,
+			155.776245117188,
+			0.6,
+			"ff67dbff"
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": [
+		[
+			50.0,
+			375.0,
+			450.0,
+			75.0
+		]
+	]
+}

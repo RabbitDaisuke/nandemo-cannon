@@ -135,6 +135,12 @@ async function render(snapshot){
     else if(c.type==='button'){
       output+=rectangle(r,'#'+(c.background??'193346'),'#'+(c.border??'080f18'),2);
       output+=await text(c.text,[r[0],r[1]+(r[3]-c.fontSize*1.25)/2,r[2],c.fontSize*1.25],c.fontSize,c.disabled?'#668091':'#f7e9ba',1);
+    }else if(c.type==='line_edit'){
+      output+=rectangle(r,'#0e2232',c.focused?'#ffd36c':'#668091',2);
+      const clip=`input-${definitions.length}`;
+      definitions.push(`<clipPath id="${clip}">${rectangle([r[0]+6,r[1]+2,r[2]-(c.clearEnabled&&c.text?30:12),r[3]-4],'#fff')}</clipPath>`);
+      output+=`<g clip-path="url(#${clip})">${await text(c.text||c.placeholder,[r[0]+7,r[1]+(r[3]-c.fontSize*1.25)/2,r[2]-14,r[3]],c.fontSize,c.text?'#f7e9ba':'#a5b8c2')}</g>`;
+      if(c.clearEnabled&&c.text){const x=r[0]+r[2]-14,y=r[1]+r[3]/2;output+=`<path d="M${x-3} ${y-3}L${x+3} ${y+3}M${x+3} ${y-3}L${x-3} ${y+3}" stroke="#a5b8c2" stroke-width="2"/>`;}
     }else if(c.type==='texture')output+=await fitTexture(c.texture,r);
     else if(c.type==='slider'){
       const f=(c.value-c.minimum)/(c.maximum-c.minimum),cy=r[1]+r[3]/2;
@@ -148,7 +154,7 @@ async function render(snapshot){
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges"><defs>${definitions.join('')}</defs>${output}</svg>`;
 }
-const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result'];
+const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result','catalog-search','catalog-search-history'];
 const stages=JSON.parse(await read('data/stages.json')).stages;
 for(let page=1;page<=Math.ceil(stages.length/15);page++)names.push(`maps-page-${page}`);
 for(const stage of stages)if(stage.id>=21)names.push(stage.map);

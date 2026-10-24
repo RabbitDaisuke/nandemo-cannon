@@ -1,0 +1,27 @@
+{
+	"checks": [
+		"the authored index has exactly one entry per current item",
+		"new or renamed objects cannot silently omit manual tags or leave stale entries",
+		"manual tags are nonempty unique supported-character strings, without kanji",
+		"hiragana lightning finds only lightning magic",
+		"katakana lightning gives the same single result",
+		"the complete kana name finds the flamethrower",
+		"partial display names match automatically without hand-writing full names",
+		"meal tags find multiple foods without returning utensils",
+		"gohan is an authored meal alias, not just a rice-name match",
+		"manual water tags include tools for water but not unrelated food",
+		"the independent special tag exposes authored special items",
+		"space-separated words narrow results with AND matching",
+		"an unmatched query returns an empty result rather than all items",
+		"an empty search restores the catalog's original order",
+		"kanji are refused even when the HUD font contains them; emoji are also refused",
+		"supported kana, numbers, Latin letters and spaces remain usable",
+		"Latin input is converted to the supported uppercase glyphs",
+		"kana normalization preserves voiced sounds and normalizes repeated spaces",
+		"changing all gameplay classifications does not change search results",
+		"canonical name edits are searchable automatically without regenerating the manual index"
+	],
+	"failures": [],
+	"status": "passed",
+	"suite": "search"
+}

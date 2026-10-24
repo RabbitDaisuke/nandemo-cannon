@@ -271,7 +271,7 @@ func _snapshot(name: String, include_modal: bool = true) -> void:
 func _check_visible_glyphs(context: String) -> void:
 	var missing: Dictionary = {}
 	for control in game.debug_snapshot().controls:
-		if control.type in ["label", "button"]:
+		if control.type in ["label", "button", "line_edit"]:
 			for character in str(control.text):
 				if character == "\n":
 					continue
@@ -285,6 +285,74 @@ func _button_with_meta(key: String, value: Variant) -> Button:
 		if child is Button and child.has_meta(key) and child.get_meta(key) == value:
 			return child
 	return null
+
+func _type_catalog_query(value: String) -> void:
+	# LineEdit emits this signal after committed input/paste, not IME preedit.
+	game.catalog_search_edit.text = value
+	game.catalog_search_edit.caret_column = value.length()
+	game.catalog_search_edit.text_changed.emit(value)
+
+func _catalog_search_checks() -> void:
+	game.load_stage(37)
+	await _frames(2)
+	game._show_catalog(2)
+	var edit: LineEdit = game.catalog_search_edit
+	var editor_id = edit.get_instance_id()
+	_check(edit.text.is_empty() and game.catalog_query.is_empty() and game.catalog_results.size() == game.catalog.ordered_items.size(), "Opening the catalog did not start with an empty unfiltered search")
+	_check(not edit.has_focus(), "Opening the mobile item list forced a software keyboard focus")
+	edit.grab_focus()
+	_type_catalog_query("かみなり")
+	_check(game.catalog_results.size() == 1 and game.catalog_results[0].id == "lightning-orb" and _button_with_meta("item_id", "lightning-orb") != null, "Lightning query did not show only its named magic item")
+	_check(game.catalog_search_edit.get_instance_id() == editor_id and edit.has_focus() and edit.caret_column == 4, "Refreshing search replaced the input or lost its focus/caret")
+	edit.text_submitted.emit(edit.text)
+	_check(game.catalog_recent_searches == ["かみなり"], "Submitting a query did not add one completed search to recent history")
+	_check_visible_glyphs("Filtered lightning catalog")
+	await _snapshot("catalog-search")
+	_type_catalog_query("たべもの")
+	_check(game.catalog_results.size() > 24 and game.catalog_result_page == 0, "Food query has no second result page or did not reset filtered paging")
+	var next = _button_with_meta("catalog_next", true)
+	if next != null:
+		next.pressed.emit()
+	_check(game.catalog_query == "たべもの" and game.catalog_result_page == 1 and edit.get_instance_id() == editor_id and edit.has_focus(), "Paging filtered results discarded the query or recreated its focused input")
+	_check(game.catalog_page == 2, "Filtered page navigation overwrote the remembered unfiltered page")
+	game._close_modal()
+	_check(game.catalog_query.is_empty() and game.catalog_recent_searches == ["たべもの", "かみなり"], "Closing search retained a hidden filter or failed to keep the last two queries")
+	game._show_catalog()
+	_check(game.catalog_search_edit.text.is_empty() and game.catalog_results.size() == game.catalog.ordered_items.size() and game.catalog_page == 2, "Reopening catalog silently reused the last filter or lost its unfiltered page")
+	for button in game.catalog_recent_buttons:
+		_check(button.position.x >= game.catalog_search_edit.position.x + game.catalog_search_edit.size.x and button.position.x + button.size.x <= 772, "Recent searches are not entirely to the right of the input and before Close")
+	await _snapshot("catalog-search-history")
+	_button_with_meta("recent_search", 1).pressed.emit()
+	_check(game.catalog_query == "かみなり" and game.catalog_results.size() == 1, "Clicking the second recent query failed to restore its results")
+	_type_catalog_query("カミナリ")
+	game.catalog_search_edit.text_submitted.emit("カミナリ")
+	_check(game.catalog_recent_searches == ["カミナリ", "たべもの"], "Kana-equivalent recent searches were duplicated instead of moving one entry to the front")
+	_type_catalog_query("み水ず漢😀")
+	_check(game.catalog_search_edit.text == "みず" and game.catalog_query == "みず" and game.catalog_search_notice.text == "つかえないもじを はずしました", "Committed kanji or unsupported glyphs remained in the input or were rejected without feedback")
+	_type_catalog_query("ぬぬぬぬぬ")
+	_check(game.catalog_results.is_empty() and _button_with_meta("catalog_next", true).disabled and _button_with_meta("catalog_previous", true).disabled, "No-match results displayed stale items or enabled invalid page navigation")
+	_type_catalog_query("みず")
+	game.catalog_search_edit.grab_focus()
+	var before_stage = game.stage_index
+	var before_shots = game.shots_fired
+	var before_angle = game.cannon.elevation_degrees
+	for code in [KEY_SPACE, KEY_R, KEY_M, KEY_UP, KEY_DOWN]:
+		var key = InputEventKey.new()
+		key.pressed = true
+		key.keycode = code
+		root.push_input(key)
+	_check(game.stage_index == before_stage and game.shots_fired == before_shots and is_equal_approx(game.cannon.elevation_degrees, before_angle) and game._is_catalog_open(), "Typing in search leaked gameplay fire, reset, map, or aiming shortcuts")
+	_type_catalog_query("カミナリ")
+	var lightning = _button_with_meta("item_id", "lightning-orb")
+	if lightning != null:
+		lightning.pressed.emit()
+	_check(game.selected_catalog_id == "lightning-orb" and not is_instance_valid(game.modal), "Choosing a filtered result selected a different object or left the picker open")
+	game.load_stage(19)
+	await _frames(2)
+	game._show_catalog()
+	_check(game.catalog_query.is_empty() and game.catalog_page == 0 and game.catalog_recent_searches.size() == 2, "Changing stages leaked a search/page or cleared the in-memory recent searches")
+	_check_visible_glyphs("Search header and recent buttons")
+	game._close_modal()
 
 
 func _late_stage_checks() -> void:
@@ -361,6 +429,7 @@ func _run() -> void:
 		if index >= 20:
 			await _snapshot(str(game.current_stage.map))
 	await _late_stage_checks()
+	await _catalog_search_checks()
 	game.load_stage(0)
 	await _frames(2)
 	await _snapshot("01-initial")

@@ -358,7 +358,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 0.025,
+	"elapsed": 0.0166666666666667,
 	"firePatches": [],
 	"followingItem": "bunny-plush",
 	"font": "res://assets/font/arcade-generated.fnt",

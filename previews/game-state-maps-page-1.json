@@ -59,7 +59,7 @@
 				"worldScale": 0.872340425531915,
 				"worldWidth": 82.0
 			},
-			"rotation": -1.57188189029694,
+			"rotation": -1.57166755199432,
 			"texture": "res://assets/objects/refrigerator.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -70,8 +70,8 @@
 				0.872340440750122,
 				0.872340440750122
 			],
-			"x": 237.022445678711,
-			"y": 380.016876220703
+			"x": 237.000457763672,
+			"y": 379.921234130859
 		},
 		{
 			"burning": false,
@@ -132,7 +132,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": 0.000176560919499025,
+			"rotation": 0.000513911945745349,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -143,8 +143,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 319.894866943359,
-			"y": 394.085601806641
+			"x": 319.898773193359,
+			"y": 394.124633789062
 		},
 		{
 			"burning": false,
@@ -205,7 +205,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": 0.00317972153425217,
+			"rotation": 0.000185682016308419,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -216,8 +216,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 317.904815673828,
-			"y": 336.775848388672
+			"x": 318.333526611328,
+			"y": 336.717071533203
 		},
 		{
 			"burning": false,
@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -0.00456230621784925,
+			"rotation": -0.00106425699777901,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -289,8 +289,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 397.519317626953,
-			"y": 387.184265136719
+			"x": 396.230773925781,
+			"y": 387.25732421875
 		},
 		{
 			"burning": false,
@@ -351,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": -2.9321346282959,
+			"rotation": -0.619368016719818,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -362,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 411.702117919922,
-			"y": 330.290588378906
+			"x": 451.473754882812,
+			"y": 350.566314697266
 		}
 	],
 	"angle": 38.0,
@@ -445,10 +445,10 @@
 			"rect": [
 				302.0,
 				30.0,
-				125.0,
+				126.0,
 				45.0
 			],
-			"text": "0850",
+			"text": "0700",
 			"type": "label"
 		},
 		{
@@ -1437,7 +1437,7 @@
 	"power": 0.32,
 	"recoil": 0.0,
 	"result": false,
-	"score": 850,
+	"score": 700,
 	"scoreMarker": [
 		[
 			88.0,
