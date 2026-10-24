@@ -68,7 +68,7 @@
 
 通常の爆弾・花火などは実際の当たり判定の50%以上が水に浸かると不発化し、基本100点の得点物になる。乾燥・再加熱で復活しない。耐水ばくだん2種は水中でも起爆する。流出後の厚さ1px以下の薄い水は一定時間後に蒸発する。
 
-音源はゲーム開始後に必要な曲だけを読み込む。`web/audio/bgm/`はGodot PCKと起動時取得ZIPから除外し、Pagesの`audio/bgm/`へ別配置する。ZIP単体のゲームはBGMなしでも動き、音楽付きの自己完結版は`out/standalone/`一式を使う。音源の権利・加工情報は`web/licenses/bgmer.txt`。
+音源はゲーム開始後に必要な曲だけを読み込む。曲ごとに初回の配信元を50%ずつで選び、通常は自前の`audio/bgm/`または`https://daisukedaisuketeam.github.io/nanndemo/audio/bgm/`の片方だけを使う。通信・デコード・CORSの失敗時のみ他方を1回試し、自動再生の拒否では切り替えない。ユーザー側のミラーには音源ZIPを公開ルートへ展開し、`audio/bgm/088.mp3`・`415.mp3`・`073.mp3`を配置する。未配置なら自前音源へ戻る。`web/audio/bgm/`はGodot PCKと起動時取得ZIPから除外し、Pagesへ別配置する。ZIP単体のゲームはBGMなしでも動き、音楽付きの自己完結版は`out/standalone/`一式を使う。音源の権利・加工情報は`web/licenses/bgmer.txt`。
 
 ## ビルド
 
@@ -85,6 +85,7 @@
 |`./build.sh` または `./build.sh bundle`|検証とWeb export。`out/standalone/`と`out/runtime/godot/4.7.2/`を作る|
 |`./build.sh check`|Godot headlessで4つの検証suiteを実行する|
 |`./build.sh preview`|NodeだけでSVG素材と保存済みゲーム状態から確認画像を生成する|
+|`./build.sh bgm`|ミラー配置用の音源3曲・クレジット・配置説明を`out/packages/nandemo-cannon-bgm.zip`へまとめる|
 |`./build.sh runtime`|公式テンプレートからランタイムを抽出し、`out/engine/`を作る|
 |`./build.sh source`|検証と公式Web exportを行い、エンジンを除いた`out/game/`を作る|
 |`./build.sh deploy`|結合済み`out/standalone/`をZIP化してローカル検証し、ZIPを公開して`dist/`を作る|
@@ -120,7 +121,7 @@ Pages側はゲーム資産に加え、未改変の公式JS・音声worklet約290
 
 ## 確認した範囲
 
-現行228種類・35面のGodot 4.7.2 headless検証は644項目（剛体69・大砲39・相互作用98・ゲーム438）成功。BGMはNodeの26検証で遅延読込、音量、保存、オフ、再生拒否、曲の再利用を確認。24画面を実ゲーム状態からNodeで再構成し、21〜35面の一覧も確認した。ブラウザ実機での音声・タッチ・描画は未確認。
+現行228種類・35面のGodot 4.7.2 headless検証は644項目（剛体69・大砲39・相互作用98・ゲーム438）成功。BGMはNodeの41検証で遅延読込、音量、保存、オフ、再生拒否・中断、曲の再利用、2ミラーの選択と一度だけの切替、停止との競合を確認。24画面を実ゲーム状態からNodeで再構成し、21〜35面の一覧も確認した。ブラウザ実機での音声・タッチ・描画と追加音源ミラーの公開状態は未確認。
 
 従来の20面版ではGodot 4.7.2のheadless検証で、15投の進行、凹皿とドーナツの穴、花火の実衝突と時限爆発、火・水・氷、車輪と靴底、入力、装填表示、発射音設定などを扱った。最新の件数・結果は`previews/*-checks.json`を参照する。画像撮影やWeb Shareの実ブラウザ動作はheadless検証と区別する。
 

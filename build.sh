@@ -5,9 +5,9 @@ project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$project_root"
 build_mode="${1:-bundle}"
 case "$build_mode" in
-  bundle|check|preview|pages|runtime|source|deploy) ;;
+  bundle|check|preview|pages|runtime|source|deploy|bgm) ;;
   -h|--help)
-    printf '%s\n' './build.sh [bundle|check|preview|pages|runtime|source|deploy]' 'runtime/source: produce the two Actions artifacts' 'deploy: merge artifacts, package ZIP, push cdn-assets and prepare Pages' 'pages: bundle then deploy'
+    printf '%s\n' './build.sh [bundle|check|preview|pages|runtime|source|deploy|bgm]' 'runtime/source: produce the two Actions artifacts' 'deploy: merge artifacts, package ZIP, push cdn-assets and prepare Pages' 'pages: bundle then deploy' 'bgm: package the three music files and credits for mirror upload'
     exit 0 ;;
   *) printf 'Unknown build mode: %s\n' "$build_mode" >&2; exit 2 ;;
 esac
@@ -19,6 +19,9 @@ if [[ "$build_mode" == pages || "$build_mode" == deploy ]]; then
 fi
 mkdir -p out dist previews
 touch out/.gdignore dist/.gdignore previews/.gdignore
+if [[ "$build_mode" == bgm ]]; then
+  exec node tools/package-bgm.mjs
+fi
 if [[ "$build_mode" == pages ]]; then
   bash "$project_root/build.sh" bundle
   exec bash "$project_root/build.sh" deploy
