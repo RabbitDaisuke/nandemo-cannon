@@ -62,6 +62,8 @@ BGMerの3曲はタイトルでは無音、ゲーム開始後だけ遅延読込�
 
 ## ZIP配布とGitHub Pages
 
+投稿版だけの入力案内は`web/input-hint.mjs`の`STANDALONE_INPUT_HINT`を使う。ソースはfalse、Actionsのstandaloneステップの環境変数1で出力コピーだけtrueへ置換する。黒の半透明86%で初期画面を残し、カーソル検知・ポインター押下・キー入力で永久に（そのページ内だけ）消す。入力を消費せず、物理を止めない。Openclipartの原本・出典はdocs/third-party/openclipartに保存し、ゲームのクレジットは増やさない。
+
 GitHub Pagesは広告なし版のまま維持する。投稿用は`./build.sh standalone`で結合済み`out/standalone/`を変更せず`out/portal/`へ加工し、`out/packages/nandemo-cannon-standalone-4.7.2.zip`を別artifactとして保存する。新規ジョブやGodotの再ビルドは不要。ZIP直下のindex.html、未圧縮の公式WASM・JS・worklet、PCK、画像、BGM3曲、元のライセンスを同梱する。BGMは`mirrorBase: null`でローカルだけから取得し、1起動1曲1取得・ランダム再生を維持する。共有先URLは公開ゲームのURLを明示する。Pages側は従来のミラー設定を維持し、投稿ZIPをdistやcdn-assetsへ置かない。`tests/web-standalone.mjs`は実ZIPを展開して深いHTTPパスの起動シェルを描画スタブで実行する。ブラウザ実機QAではない。通常Web ZIPはBGMを除く配信用なので投稿用と取り違えない。
 
 ゲーム本体と合計約290KBの未改変の公式JS・音声workletはGitHub Pagesへ公開する。重いWASMは完全版ZIPから取り出す。対象は公開リポジトリ`RabbitDaisuke/nandemo-cannon`。`Deploy Pages`はmainへのpushと、入力項目のない`workflow_dispatch`で起動する。

@@ -122,6 +122,8 @@ GitHub Pagesの公開版は広告なしで維持する。PLiCy・itch.ioへの�
 
 投稿用ZIPは直下に`index.html`があり、公式GodotのJS・未圧縮WASM・音声worklet、ゲームPCK、画像、BGM全3曲、元のライセンスを同梱する。ゲーム内に広告を追加せず、起動・音楽はアップロード先の相対パスだけを参照する。外部ミラーを使わず、音楽は遅延取得・ランダム再生・起動中1曲1取得のまま。投稿先サービスが表示する広告はそのサービス側の設定による。共有ボタンは埋め込みCDNのURLを使わない。`https://html5.plicy.net/`ではパスの数値IDを正規表現で取り出し`https://plicy.net/GamePlay/ID`へ変換する（通信不要）。ほかの投稿先では既存の公開ゲームURLを使う。
 
+投稿版だけに大きな「画面をクリックしてください」の案内を出す。背景は黒86%を重ね、初期画面をうっすら残す。カーソル検出・タップ・キー操作で消え、同じページでは再表示しない。入力やゲームの演算は止めない。`web/input-hint.mjs`の`STANDALONE_INPUT_HINT`はソースではfalse、Actionsが`STANDALONE_INPUT_HINT: "1"`を渡して投稿コピーだけtrueへ切り替える。手元で無効にする場合は`STANDALONE_INPUT_HINT=0 ./build.sh standalone`。Pages版のフラグはfalseのまま。添付のOpenclipart SVG原本と出典は`docs/third-party/openclipart/`に保存し、画面内クレジットには追加しない。
+
 [itch.io](https://itch.io/docs/creators/html5)では種類を「HTML」にし、ZIPをブラウザで再生するファイルとして指定する。表示サイズの目安は960×540、モバイル対応・全画面を必要に応じて設定する。[PLiCy](https://plicy.net/ToolFAQ/GODOT)ではGodotのWeb出力として同じZIPをアップロードする。単一スレッドのためSharedArrayBuffer／COOP・COEPは不要。HTTP(S)配信向けであり、ZIPを展開して`file://`で直接開く形式ではない。各サービスへの実アップロード・ブラウザ動作は別途確認する。
 
 既存のruntime/sourceの2成果物を結合した後、`./build.sh standalone`で`out/portal/`と投稿ZIPを作り、upload-artifactへ保存してから従来どおりPagesへデプロイする。ジョブとGodotビルドは増やさない。投稿ZIPは`dist/`や`cdn-assets`へ追加せず、Pagesの配信量も増やさない。ローカルでは`./build.sh bundle`→`./build.sh standalone`。生成元の`out/standalone/`は変更せず、`out/portal/`だけでローダーを通常WASMへ切り替え、JSの拡張子を`.js`にする。ZIP展開の完全性・容量制限・深い配信パス・HTTP経由の起動シェル（描画スタブ）・公式WASMコンパイル・音源の存在をNodeで検証する。

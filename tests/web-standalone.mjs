@@ -31,9 +31,13 @@ try {
   }
   assert(total <= 500 * 1024 * 1024, 'Oversized upload');
   assert(!names.some(name => /\.(gz|mjs|zip)$/.test(name)), 'Unexpected compression or module MIME dependency');
+  assert(!names.some(name => name.includes('third-party/openclipart')), 'Source-only SVG provenance leaked into the upload files');
   for (const name of ['share', 'bgmer-player']) {
     assert((await fs.readFile(path.join(unpacked, `${name}.js`))).equals(await fs.readFile(path.join(root, `web/${name}.mjs`))), `Stale bundled module: ${name}`);
   }
+  const hintSource = await fs.readFile(path.join(root, 'web/input-hint.mjs'), 'utf8');
+  assert(hintSource.includes('export const STANDALONE_INPUT_HINT = false;'), 'Pages input hint must default to disabled');
+  assert.equal(await fs.readFile(path.join(unpacked, 'input-hint.js'), 'utf8'), hintSource.replace('export const STANDALONE_INPUT_HINT = false;', `export const STANDALONE_INPUT_HINT = ${(process.env.STANDALONE_INPUT_HINT ?? '1') === '1'};`));
   for (const name of ['index.pck','LICENSE','licenses/otologic.txt','licenses/bgmer.txt','licenses/godot/LICENSE.txt','licenses/godot/COPYRIGHT.txt']) assert(names.includes(name), `Missing ${name}`);
   const runtime = JSON.parse(await fs.readFile(path.join(unpacked, 'runtime.json'), 'utf8'));
   assert(!runtime.archives && !runtime.archiveURL && !runtime.gzipSHA256, 'Standalone still uses archive/mirror loading');
@@ -78,6 +82,7 @@ try {
   }]));
   let started = false, musicStarted = false;
   const context = vm.createContext({console, URL, Response, WebAssembly, fetch:localFetch,
+    installInputHint(){},
     installBGM(_host, options) {
       assert.equal(options.mirrorBase, null, 'Portal did not select local-only music');
       return {unlock(){},startGameplay(){musicStarted=true;},stopGameplay(){}};
@@ -103,6 +108,7 @@ try {
               for (const name of ['godot.audio.worklet.js','godot.audio.position.worklet.js']) await localFetch(locations.locateFile(name));
               const pck = new Uint8Array(await (await localFetch(this.config.mainPack)).arrayBuffer());
               assert.equal(Buffer.from(pck.subarray(0,4)).toString(), 'GDPC');
+              assert(!Buffer.from(pck).includes(Buffer.from('docs/third-party/openclipart')), 'Source-only SVG originals entered the game pack');
               started = true;
             }
           };

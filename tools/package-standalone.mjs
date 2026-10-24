@@ -15,6 +15,8 @@ const target = path.join(root, 'out/portal');
 const runtimePath = 'runtime/godot/4.7.2';
 const archive = path.join(root, 'out/packages/nandemo-cannon-standalone-4.7.2.zip');
 const partial = archive.replace(/\.zip$/, '.partial.zip');
+const inputHint = process.env.STANDALONE_INPUT_HINT ?? '1';
+if (!['0', '1'].includes(inputHint)) throw Error('STANDALONE_INPUT_HINT must be 0 or 1');
 const hash = data => createHash('sha256').update(data).digest('hex');
 const manifest = JSON.parse(await fs.readFile(path.join(source, runtimePath, 'runtime-manifest.json'), 'utf8'));
 const settings = JSON.parse(await fs.readFile(path.join(source, 'runtime.json'), 'utf8'));
@@ -65,10 +67,15 @@ replaceOnce('const bgm = installBGM(window);', 'const bgm = installBGM(window, {
 // ID locally; other upload hosts fall back to the established public game URL.
 replaceOnce('installResultSharing();', "installResultSharing(window, {gameURL: 'https://rabbitdaisuke.github.io/nandemo-cannon/'});");
 // Use universally served JavaScript extensions on upload hosts.
-for (const name of ['share', 'bgmer-player']) {
+for (const name of ['share', 'bgmer-player', 'input-hint']) {
   replaceOnce(`'./${name}.mjs'`, `'./${name}.js'`);
   await fs.rename(path.join(target, `${name}.mjs`), path.join(target, `${name}.js`));
 }
+const hintPath = path.join(target, 'input-hint.js');
+const hintSource = await fs.readFile(hintPath, 'utf8');
+const hintFlag = 'export const STANDALONE_INPUT_HINT = false;';
+if (hintSource.split(hintFlag).length !== 2) throw Error('Input hint source flag changed');
+await fs.writeFile(hintPath, hintSource.replace(hintFlag, `export const STANDALONE_INPUT_HINT = ${inputHint === '1'};`));
 await fs.writeFile(path.join(target, 'index.html'), html);
 await fs.mkdir(path.dirname(archive), {recursive:true});
 await fs.rm(partial, {force:true});
