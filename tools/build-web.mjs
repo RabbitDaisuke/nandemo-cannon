@@ -145,6 +145,7 @@ for (const name of await fs.readdir(stage)) {
 await fs.copyFile(path.join(root, 'assets/ui/logo.webp'), path.join(standalone, 'logo.webp'));
 await fs.copyFile(path.join(root, 'assets/ui/start.webp'), path.join(standalone, 'start.webp'));
 await fs.copyFile(path.join(root, 'previews/game-01-initial.png'), path.join(standalone, 'opening.png'));
+await fs.copyFile(path.join(root, 'web/nandemo-cannon-release.jpg'), path.join(standalone, 'nandemo-cannon-release.jpg'));
 await fs.copyFile(path.join(root, 'web/third-party-licenses.txt'), path.join(standalone, 'third-party-licenses.txt'));
 await fs.copyFile(path.join(root, 'LICENSE'), path.join(standalone, 'LICENSE'));
 await writeRuntimeLicenses(root, standalone);
