@@ -1,0 +1,17 @@
+音楽：BGMer
+https://bgmer.net/
+
+陽気な週末 — https://bgmer.net/music/088/
+おめざのじかん — https://bgmer.net/music/415/
+いったりきたり — https://bgmer.net/music/073/
+
+著作権・原盤権：BGMer。ゲームでの使用許諾はBGMer利用規約に従います。
+https://bgmer.net/terms/
+確認日：2026-10-24
+本作のコードのライセンスやOtoLogicのCC BY 4.0は、これらの音源には適用されません。
+
+ユーザー提供のLONG版MP3を、ゲーム配信用にモノラル64kbps MP3へ変換しました。
+楽曲の長さ・速度・メロディは変更していません。ゲーム内初期音量は2.5%。
+3曲はゲーム開始後に必要な曲だけを読み込みます。タイトル画面では無音です。
+
+原本ファイル名：088_long_BPM130.mp3 / 415_long_BPM120.mp3 / 073_long_BPM110.mp3
