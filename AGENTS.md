@@ -13,7 +13,7 @@
 - `docs/`は仕様と引き継ぎ、`previews/`は検証結果とNode.jsで作った確認画像。
 - `out/standalone/`は自己完結するWeb出力とActions成果物の結合先、`out/engine/`と`out/game/`は並列jobの成果物、`out/packages/`は配布ZIP、`dist/`はPages公開対象。`.github/workflows/pages.yml`はmainへのpushと手動実行で起動する。
 
-人とCIのビルド入口はルートの`./build.sh`へ統一する。サブコマンドは`bundle`（省略時）、`check`、`preview`、`pages`、`runtime`、`source`、`deploy`、`bgm`。依存の導入、Godotの取得、Export Templatesの準備、素材生成、Web出力はこの入口から行う。GitHub Actions側へ`npm install`、Godotのダウンロード、個別のビルド処理を重複して追加しない。
+人とCIのビルド入口はルートの`./build.sh`へ統一する。サブコマンドは`bundle`（省略時）、`check`、`preview`、`pages`、`runtime`、`source`、`deploy`、`standalone`、`bgm`。依存の導入、Godotの取得、Export Templatesの準備、素材生成、Web出力はこの入口から行う。GitHub Actions側へ`npm install`、Godotのダウンロード、個別のビルド処理を重複して追加しない。
 
 ```sh
 ./build.sh
@@ -61,6 +61,8 @@ BGMerの3曲はタイトルでは無音、ゲーム開始後だけ遅延読込�
 検証結果は実行した環境と範囲に合わせて報告する。Godotのheadless成功、WebAssemblyの生成・ロード、Node.jsの確認画像を、Safari・Chrome・Firefoxでの実機QA成功と言い換えない。未確認の描画、入力、端末差、難易度調整は未確認と記載する。
 
 ## ZIP配布とGitHub Pages
+
+GitHub Pagesは広告なし版のまま維持する。投稿用は`./build.sh standalone`で結合済み`out/standalone/`を変更せず`out/portal/`へ加工し、`out/packages/nandemo-cannon-standalone-4.7.2.zip`を別artifactとして保存する。新規ジョブやGodotの再ビルドは不要。ZIP直下のindex.html、未圧縮の公式WASM・JS・worklet、PCK、画像、BGM3曲、元のライセンスを同梱する。BGMは`mirrorBase: null`でローカルだけから取得し、1起動1曲1取得・ランダム再生を維持する。共有先URLは公開ゲームのURLを明示する。Pages側は従来のミラー設定を維持し、投稿ZIPをdistやcdn-assetsへ置かない。`tests/web-standalone.mjs`は実ZIPを展開して深いHTTPパスの起動シェルを描画スタブで実行する。ブラウザ実機QAではない。通常Web ZIPはBGMを除く配信用なので投稿用と取り違えない。
 
 ゲーム本体と合計約290KBの未改変の公式JS・音声workletはGitHub Pagesへ公開する。重いWASMは完全版ZIPから取り出す。対象は公開リポジトリ`RabbitDaisuke/nandemo-cannon`。`Deploy Pages`はmainへのpushと、入力項目のない`workflow_dispatch`で起動する。
 

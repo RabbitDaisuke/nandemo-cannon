@@ -10,10 +10,20 @@ export function tweetURL(stage, score, gameURL) {
   intent.searchParams.set('url', gameURL);
   return intent.href;
 }
-export function installResultSharing(host = window) {
+export function resolveGameURL(locationHref, fallback = new URL('.', locationHref).href) {
+  const location = new URL(locationHref);
+  // PLiCy serves the uploaded files under a separate host. Resolve its public
+  // game page locally; query strings, fragments and other hosts are ignored.
+  if (location.protocol === 'https:' && location.hostname === 'html5.plicy.net') {
+    const id = location.pathname.match(/\/([0-9]+)(?:\/|$)/)?.[1];
+    if (id) return `https://plicy.net/GamePlay/${id}`;
+  }
+  return fallback;
+}
+export function installResultSharing(host = window, {gameURL = new URL('.', host.location.href).href} = {}) {
   let result = null;
   let active = false;
-  const gameURL = new URL('.', host.location.href).href;
+  const resolvedGameURL = resolveGameURL(host.location.href, gameURL);
   const status = host.document.querySelector('#share-status');
   function message(value = '') {
     if (status) { status.textContent = value; status.hidden = !value; }
@@ -41,7 +51,7 @@ export function installResultSharing(host = window) {
     },
     tweet() {
       if (!active || !result) return false;
-      host.open(tweetURL(result.stage,result.score,gameURL),'_blank','noopener,noreferrer');
+      host.open(tweetURL(result.stage,result.score,resolvedGameURL),'_blank','noopener,noreferrer');
       return true;
     },
     download() {
@@ -59,7 +69,7 @@ export function installResultSharing(host = window) {
         await host.navigator.share({
           title:'なんでもキャノン',
           text:`${resultText(result.stage,result.score)}\n#${RESULT_HASHTAG}`,
-          url:gameURL,
+          url:resolvedGameURL,
           files:[result.file]
         });
         return true;

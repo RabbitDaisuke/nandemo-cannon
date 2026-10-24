@@ -104,6 +104,7 @@
 |`./build.sh bgm`|ミラー配置用の音源3曲・クレジット・配置説明を`out/packages/nandemo-cannon-bgm.zip`へまとめる|
 |`./build.sh runtime`|公式テンプレートからランタイムを抽出し、`out/engine/`を作る|
 |`./build.sh source`|検証と公式Web exportを行い、エンジンを除いた`out/game/`を作る|
+|`./build.sh standalone`|結合済み`out/standalone/`からPLiCy・itch.io投稿用の音楽付きZIPを作り検証する。再export・公開はしない|
 |`./build.sh deploy`|結合済み`out/standalone/`をZIP化してローカル検証し、ZIPを公開して`dist/`を作る|
 |`./build.sh pages`|`bundle`→`deploy`を順に実行する|
 
@@ -117,6 +118,14 @@ Godotエディタで編集する場合は`project.godot`を開き、F5でゲー�
 
 ## GitHub ActionsとPages
 
+GitHub Pagesの公開版は広告なしで維持する。PLiCy・itch.ioへの投稿用は、同じActions実行のArtifactsにある **`nandemo-cannon-standalone-4.7.2`** をダウンロードする。Actionsが付ける外側のZIPを展開し、中の **`nandemo-cannon-standalone-4.7.2.zip`** を投稿先へアップロードする。従来の`nandemo-cannon-web-4.7.2`はPagesのエンジン配信用で、BGMを含まないため投稿には使わない。
+
+投稿用ZIPは直下に`index.html`があり、公式GodotのJS・未圧縮WASM・音声worklet、ゲームPCK、画像、BGM全3曲、元のライセンスを同梱する。ゲーム内に広告を追加せず、起動・音楽はアップロード先の相対パスだけを参照する。外部ミラーを使わず、音楽は遅延取得・ランダム再生・起動中1曲1取得のまま。投稿先サービスが表示する広告はそのサービス側の設定による。共有ボタンは埋め込みCDNのURLを使わない。`https://html5.plicy.net/`ではパスの数値IDを正規表現で取り出し`https://plicy.net/GamePlay/ID`へ変換する（通信不要）。ほかの投稿先では既存の公開ゲームURLを使う。
+
+[itch.io](https://itch.io/docs/creators/html5)では種類を「HTML」にし、ZIPをブラウザで再生するファイルとして指定する。表示サイズの目安は960×540、モバイル対応・全画面を必要に応じて設定する。[PLiCy](https://plicy.net/ToolFAQ/GODOT)ではGodotのWeb出力として同じZIPをアップロードする。単一スレッドのためSharedArrayBuffer／COOP・COEPは不要。HTTP(S)配信向けであり、ZIPを展開して`file://`で直接開く形式ではない。各サービスへの実アップロード・ブラウザ動作は別途確認する。
+
+既存のruntime/sourceの2成果物を結合した後、`./build.sh standalone`で`out/portal/`と投稿ZIPを作り、upload-artifactへ保存してから従来どおりPagesへデプロイする。ジョブとGodotビルドは増やさない。投稿ZIPは`dist/`や`cdn-assets`へ追加せず、Pagesの配信量も増やさない。ローカルでは`./build.sh bundle`→`./build.sh standalone`。生成元の`out/standalone/`は変更せず、`out/portal/`だけでローダーを通常WASMへ切り替え、JSの拡張子を`.js`にする。ZIP展開の完全性・容量制限・深い配信パス・HTTP経由の起動シェル（描画スタブ）・公式WASMコンパイル・音源の存在をNodeで検証する。
+
 ゲーム本体と小さな公式JS・音声workletはGitHub Pagesで配信する。重いWASMは完全版ZIPから取り出す。公開リポジトリは[RabbitDaisuke/nandemo-cannon](https://github.com/RabbitDaisuke/nandemo-cannon)。`Deploy Pages` workflowはmainへのpushと手動実行で起動する。Sitesは使用しない。
 
 1. ソースを`RabbitDaisuke/nandemo-cannon`のmainへpushする。
@@ -129,9 +138,9 @@ deployはエンジンを含むWeb全体をZIPのstore方式でまとめ、`unzip
 
 `runtime.json`の`archives`には`./downloads/nandemo-cannon-web-4.7.2.zip`と、ユーザー指定の`https://daisukedaisuketeam.github.io/nanndemo/downloads/nandemo-cannon-web-4.7.2.zip`を設定する。起動ごとに50%ずつの確率で片方を選び、通常はZIPを1回だけ取得する。HTTP・通信・整合性エラー時だけ、もう片方を1回試す。同時要求は同じPromiseを共有する。自前ZIPはサイズとSHA256を照合し、指定ミラーの旧ZIPは取り出した公式WASMのSHA256で互換性を確認する。配信先への事前プローブは行わない。
 
-`out/standalone/`は圧縮ランタイムを同梱した自己完結出力。`bundle`の`out/runtime/godot/4.7.2/`と`runtime`の`out/engine/runtime/godot/4.7.2/`には、公式のJS3ファイル、`godot.wasm.gz`、manifest、原本ライセンスを生成する。ZIPは`out/packages/nandemo-cannon-web-4.7.2.zip`。復号後のWASMは公式原本と同一で、分割ファイルや生WASMは配布しない。
+`out/standalone/`は圧縮ランタイムを同梱した結合出力（BGMは既定でミラー併用）。`bundle`の`out/runtime/godot/4.7.2/`と`runtime`の`out/engine/runtime/godot/4.7.2/`には、公式のJS3ファイル、`godot.wasm.gz`、manifest、原本ライセンスを生成する。Pages配信用ZIPは`out/packages/nandemo-cannon-web-4.7.2.zip`。復号後のWASMは公式原本と同一。未圧縮WASMを同梱する投稿用は別の`out/portal/`とstandalone ZIPである。
 
-Pages側はゲーム資産に加え、未改変の公式JS・音声worklet約290KBを`runtime/godot/4.7.2/`で配信する。WASMは選ばれたZIPから取り出したgzipを`DecompressionStream`で展開してGodotへ渡す。自己完結版では同梱gzipを使う。詳しくは`docs/BROWSER.md`。
+Pages側はゲーム資産に加え、未改変の公式JS・音声worklet約290KBを`runtime/godot/4.7.2/`で配信する。WASMは選ばれたZIPから取り出したgzipを`DecompressionStream`で展開してGodotへ渡す。結合直後の出力は同梱gzip、PLiCy・itch.io投稿版は同梱の未圧縮WASMを使う。詳しくは`docs/BROWSER.md`。
 
 2ミラー構成は[Actions実行39953964261](https://github.com/RabbitDaisuke/nandemo-cannon/actions/runs/39953964261)で全job成功・Pages公開済み。以降の変更の公開結果は該当コミットのDeploy Pages実行を参照。
 

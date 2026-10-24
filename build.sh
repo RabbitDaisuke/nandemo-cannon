@@ -5,9 +5,9 @@ project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$project_root"
 build_mode="${1:-bundle}"
 case "$build_mode" in
-  bundle|check|preview|pages|runtime|source|deploy|bgm) ;;
+  bundle|check|preview|pages|runtime|source|deploy|standalone|bgm) ;;
   -h|--help)
-    printf '%s\n' './build.sh [bundle|check|preview|pages|runtime|source|deploy|bgm]' 'runtime/source: produce the two Actions artifacts' 'deploy: merge artifacts, package ZIP, push cdn-assets and prepare Pages' 'pages: bundle then deploy' 'bgm: package the three music files and credits for mirror upload'
+    printf '%s\n' './build.sh [bundle|check|preview|pages|runtime|source|deploy|standalone|bgm]' 'runtime/source: produce the two Actions artifacts' 'deploy: merge artifacts, package ZIP, push cdn-assets and prepare Pages' 'standalone: package merged output for PLiCy/itch.io with local engine and music' 'pages: bundle then deploy' 'bgm: package the three music files and credits for mirror upload'
     exit 0 ;;
   *) printf 'Unknown build mode: %s\n' "$build_mode" >&2; exit 2 ;;
 esac
@@ -21,6 +21,10 @@ mkdir -p out dist previews
 touch out/.gdignore dist/.gdignore previews/.gdignore
 if [[ "$build_mode" == bgm ]]; then
   exec node tools/package-bgm.mjs
+fi
+if [[ "$build_mode" == standalone ]]; then
+  node tools/package-standalone.mjs
+  exec node tests/web-standalone.mjs
 fi
 if [[ "$build_mode" == pages ]]; then
   bash "$project_root/build.sh" bundle

@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import {installBGM, BGM_TRACKS, BGM_STORAGE_KEY, DEFAULT_BGM_VOLUME, BGM_MIRROR_BASE} from '../web/bgmer-player.mjs';
 
-function fixture(saved = null, random = 0) {
+function fixture(saved = null, random = 0, options = {}) {
   const audios = [], contexts = [], sources = [], writes = [], requests = [], blobs = new Map(), responses = new Map();
   const storage = new Map(saved === null ? [] : [[BGM_STORAGE_KEY, saved]]);
   const fades = [], timers = new Map();
@@ -41,7 +41,7 @@ function fixture(saved = null, random = 0) {
     document:{baseURI:'https://example.test/nandemo-cannon/'},
     localStorage:{getItem:key=>storage.get(key)??null,setItem:(key,value)=>storage.set(key,value)}
   };
-  const api = installBGM(host);
+  const api = installBGM(host, options);
   const advance = seconds => {
     contexts[0].currentTime += seconds;
     for(const [id,timer] of [...timers])if(timer.at<=contexts[0].currentTime){timers.delete(id);timer.callback();}
@@ -144,6 +144,27 @@ let remoteCalls=0;
 const reverseFailure=fixture(null,()=>remoteCalls++===0?0:0.99);
 reverseFailure.responses.set(remoteURL,new Error('Remote missing'));await reverseFailure.api.startGameplay();
 check(reverseFailure.requests.map(r=>r.url).join()===`${remoteURL},${localURL}`&&reverseFailure.state().playing, 'Remote failure did not fall back locally');
+for (const mirrorBase of [null, '']) {
+  let localRandomCalls = 0;
+  const local = fixture(null, () => { localRandomCalls++; return 0.99; }, {mirrorBase});
+  local.host.document.baseURI = 'https://portal.test/uploads/version/game/index.html';
+  await local.api.startGameplay();
+  const localOrder = [local.state().track];
+  for (let i = 0; i < 17; i++) { local.current().end(); await settle(); localOrder.push(local.state().track); }
+  check(local.requests.length === 3 && local.blobs.size === 3, 'Local-only playback downloaded a song again across six playlist rounds');
+  check(local.requests.every(request => request.url.startsWith('https://portal.test/uploads/version/game/audio/bgm/')), 'Local-only music escaped the uploaded game directory');
+  check(new Set(local.requests.map(request => request.url)).size === BGM_TRACKS.length, 'Local-only playback did not load all three bundled songs');
+  check(localRandomCalls === 18 && localOrder.every((id, i) => !i || id !== localOrder[i - 1]), 'Local-only playback randomized a source or repeated adjacent songs');
+  check(Array.from({length:6}, (_, i) => new Set(localOrder.slice(i * 3, i * 3 + 3)).size).every(size => size === 3), 'Local-only shuffle skipped or repeated a song in a round');
+  await local.api.toggle(); await local.api.toggle(); local.api.stopGameplay(); await local.api.startGameplay();
+  check(local.requests.length === 3 && local.state().playing, 'Local-only restart or toggle discarded the music cache');
+  const failedLocal = fixture(null, 0, {mirrorBase});
+  failedLocal.responses.set(localURL, new Error('Bundled file missing'));
+  await failedLocal.api.startGameplay();
+  await failedLocal.api.toggle(); await failedLocal.api.toggle();
+  failedLocal.api.stopGameplay(); await failedLocal.api.startGameplay();
+  check(failedLocal.requests.length === 1 && failedLocal.requests[0].url === localURL && failedLocal.state().errored, 'Local-only failure used an external mirror or retried the cached failed request');
+}
 const both=fixture();both.responses.set(localURL,new Error('Local failure'));both.responses.set(remoteURL,new Error('Remote failure'));
 await both.api.startGameplay();
 check(both.state().errored&&!both.state().blocked,"Failed downloads were misclassified as autoplay blocking");

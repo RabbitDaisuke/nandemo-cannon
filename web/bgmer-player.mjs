@@ -9,7 +9,7 @@ export const BGM_STORAGE_KEY = 'nandemo-cannon.bgm.v1';
 export const DEFAULT_BGM_VOLUME = 0.025;
 export const BGM_MIRROR_BASE = 'https://daisukedaisuketeam.github.io/nanndemo/audio/bgm/';
 
-export function installBGM(host = window) {
+export function installBGM(host = window, {mirrorBase = BGM_MIRROR_BASE} = {}) {
   if (host.NandemoBGM) return host.NandemoBGM;
   let enabled = true, volume = DEFAULT_BGM_VOLUME;
   try {
@@ -66,8 +66,13 @@ export function installBGM(host = window) {
     audio.playsInline = true;
     audio.crossOrigin = 'anonymous';
     const track = BGM_TRACKS[index];
-    const urls = [new URL(track.url, host.document.baseURI).href, `${BGM_MIRROR_BASE}${track.id}.mp3`];
-    if (random() >= 0.5) urls.reverse();
+    const urls = [new URL(track.url, host.document.baseURI).href];
+    // Self-contained portal packages disable the mirror explicitly. Their
+    // bundled MP3 remains the only source, including after a failed download.
+    if (mirrorBase) {
+      urls.push(new URL(`${track.id}.mp3`, mirrorBase).href);
+      if (random() >= 0.5) urls.reverse();
+    }
     const source = context.createMediaElementSource(audio);
     // GainNode controls actual output on iOS, where element.volume is ignored.
     source.connect(gain);
