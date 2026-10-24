@@ -29,6 +29,13 @@ static func vector(value: Array) -> Vector2:
 static func rectangle(value: Array) -> Rect2:
 	return Rect2(float(value[0]), float(value[1]), float(value[2]), float(value[3]))
 
+func is_catalog_selectable(id: String) -> bool:
+	return items.has(id) and bool(items[id].get("catalogSelectable", true))
+
+func selectable_items() -> Array:
+	# Picker visibility is independent of search tags and authored/random queues.
+	return ordered_items.filter(func(item): return is_catalog_selectable(str(item.id)))
+
 func build_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
 	if str(stage.get("queuePolicy", "")) == "randomCatalog":
 		var random_queue: Array = []
@@ -109,5 +116,7 @@ func make_terrain(parent: Node2D, stage: Dictionary) -> void:
 
 func _add_moving_terrain(parent: Node2D, entry: Dictionary, hanging: bool) -> void:
 	var body = preload("res://src/moving_terrain.gd").new()
-	parent.add_child(body)
+	# Establish the initial pose before physics sees this animatable collider;
+	# moving it from the origin after insertion produces a false first-step sweep.
 	body.configure(entry, hanging)
+	parent.add_child(body)

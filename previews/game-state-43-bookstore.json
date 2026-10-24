@@ -1,0 +1,782 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "book-stack",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "book-stack",
+				"fixtures": [
+					{
+						"rect": [
+							9.0,
+							84.0,
+							113.0,
+							32.0
+						]
+					},
+					{
+						"rect": [
+							17.0,
+							51.0,
+							100.0,
+							33.0
+						]
+					},
+					{
+						"rect": [
+							6.0,
+							17.0,
+							111.0,
+							34.0
+						]
+					}
+				],
+				"id": "book-stack",
+				"mass": 3.8,
+				"material": "paper",
+				"nameJa": "本の山",
+				"opaquePixels": 10690.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					58.0,
+					47.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/book-stack.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/book-stack.svg",
+				"viewBox": [
+					6.0,
+					17.0,
+					116.0,
+					99.0
+				],
+				"webp": "raster/objects/book-stack.webp",
+				"worldHeight": 53.7672413793103,
+				"worldScale": 0.543103448275862,
+				"worldWidth": 63.0
+			},
+			"rotation": 0.00000308010999106045,
+			"texture": "res://assets/objects/book-stack.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.5,
+				-25.5258617401123
+			],
+			"visualScale": [
+				0.543103456497192,
+				0.543103456497192
+			],
+			"x": 81.9998016357422,
+			"y": 291.770812988281
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "hardcover-book",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "hardcover-book",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								25.0,
+								16.0
+							],
+							[
+								88.0,
+								7.0
+							],
+							[
+								108.0,
+								22.0
+							],
+							[
+								108.0,
+								111.0
+							],
+							[
+								44.0,
+								122.0
+							],
+							[
+								25.0,
+								108.0
+							]
+						]
+					}
+				],
+				"id": "hardcover-book",
+				"mass": 1.4,
+				"material": "paper",
+				"nameJa": "本",
+				"opaquePixels": 8622.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					39.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/hardcover-book.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/hardcover-book.svg",
+				"viewBox": [
+					25.0,
+					7.0,
+					83.0,
+					115.0
+				],
+				"webp": "raster/objects/hardcover-book.webp",
+				"worldHeight": 51.2650602409639,
+				"worldScale": 0.445783132530121,
+				"worldWidth": 37.0
+			},
+			"rotation": 0.166859209537506,
+			"texture": "res://assets/objects/hardcover-book.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-17.3855419158936,
+				-25.4096393585205
+			],
+			"visualScale": [
+				0.445783138275146,
+				0.445783138275146
+			],
+			"x": 147.25129699707,
+			"y": 296.185455322266
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "open-book",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "open-book",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								3.0,
+								24.0
+							],
+							[
+								50.0,
+								31.0
+							],
+							[
+								64.0,
+								43.0
+							],
+							[
+								78.0,
+								31.0
+							],
+							[
+								125.0,
+								24.0
+							],
+							[
+								125.0,
+								102.0
+							],
+							[
+								80.0,
+								108.0
+							],
+							[
+								64.0,
+								119.0
+							],
+							[
+								48.0,
+								108.0
+							],
+							[
+								3.0,
+								102.0
+							]
+						]
+					}
+				],
+				"id": "open-book",
+				"mass": 1.7,
+				"material": "paper",
+				"nameJa": "開いた本",
+				"opaquePixels": 9460.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					61.0,
+					40.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/open-book.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/open-book.svg",
+				"viewBox": [
+					3.0,
+					24.0,
+					122.0,
+					95.0
+				],
+				"webp": "raster/objects/open-book.webp",
+				"worldHeight": 54.5081967213115,
+				"worldScale": 0.573770491803279,
+				"worldWidth": 70.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/open-book.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-35.0,
+				-22.9508190155029
+			],
+			"visualScale": [
+				0.573770463466644,
+				0.573770463466644
+			],
+			"x": 510.0,
+			"y": 318.454772949219
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0550",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/open-book.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "ひらいたほん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				124.0,
+				18.75
+			],
+			"text": "43 / ほんやさん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				77.0,
+				304.0,
+				44.0
+			],
+			"text": "うごくたなに ほんをのせよう。たなのしたは おとしあな！",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 1,
+			"color": "ffd36cff",
+			"fontSize": 14,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				746.0,
+				298.0,
+				196.0,
+				17.5
+			],
+			"text": "ほん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 1.5,
+	"firePatches": [],
+	"followingItem": "open-book",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "hardcover-book",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			0.566265046596527,
+			0.566265046596527
+		],
+		"texture": "res://assets/objects/hardcover-book.svg"
+	},
+	"map": "43-bookstore",
+	"movingTerrain": [
+		{
+			"hanging": false,
+			"length": 0.0,
+			"position": [
+				315.0,
+				439.938903808594
+			],
+			"rotation": 0.0,
+			"size": [
+				150.0,
+				20.0
+			]
+		}
+	],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 550,
+	"scoreMarker": [
+		[
+			43.0,
+			496.0
+		],
+		[
+			622.0,
+			496.0
+		],
+		[
+			640.0,
+			518.0
+		],
+		[
+			25.0,
+			518.0
+		]
+	],
+	"scoreZone": [
+		25.0,
+		80.0,
+		615.0,
+		430.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 43,
+	"trajectory": [
+		[
+			660.10498046875,
+			291.806427001953,
+			0.96,
+			"ff67dbff"
+		],
+		[
+			617.109313964844,
+			266.992523193359,
+			0.92,
+			"ff67dbff"
+		],
+		[
+			574.113647460938,
+			245.706649780273,
+			0.88,
+			"ff67dbff"
+		],
+		[
+			531.118041992188,
+			227.948760986328,
+			0.84,
+			"ff67dbff"
+		],
+		[
+			488.122375488281,
+			213.718872070312,
+			0.8,
+			"ff67dbff"
+		],
+		[
+			445.126708984375,
+			203.016998291016,
+			0.76,
+			"ff67dbff"
+		],
+		[
+			402.131072998047,
+			195.843109130859,
+			0.72,
+			"ff67dbff"
+		],
+		[
+			359.135406494141,
+			192.197235107422,
+			0.68,
+			"ff67dbff"
+		],
+		[
+			316.139739990234,
+			192.079345703125,
+			0.64,
+			"ff67dbff"
+		],
+		[
+			273.144073486328,
+			195.489471435547,
+			0.6,
+			"ff67dbff"
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

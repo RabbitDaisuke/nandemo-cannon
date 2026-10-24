@@ -706,7 +706,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.0617909580469131,
+			"rotation": -0.071923702955246,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -717,7 +717,7 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 159.883071899414,
+			"x": 159.636535644531,
 			"y": 420.558959960938
 		},
 		{
@@ -830,7 +830,7 @@
 				"worldScale": 0.575757575757576,
 				"worldWidth": 38.0
 			},
-			"rotation": -0.0494563207030296,
+			"rotation": 0.196272164583206,
 			"texture": "res://assets/objects/vase.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -841,7 +841,7 @@
 				0.575757563114166,
 				0.575757563114166
 			],
-			"x": 119.008293151855,
+			"x": 119.715255737305,
 			"y": 417.977142333984
 		},
 		{
@@ -922,7 +922,7 @@
 				"worldScale": 0.5,
 				"worldWidth": 43.0
 			},
-			"rotation": 0.437644481658936,
+			"rotation": 0.427163302898407,
 			"texture": "res://assets/objects/drinking-glass.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -933,7 +933,7 @@
 				0.5,
 				0.5
 			],
-			"x": 191.306716918945,
+			"x": 191.155670166016,
 			"y": 422.568054199219
 		},
 		{

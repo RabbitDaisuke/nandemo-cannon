@@ -1,0 +1,596 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "cannon-object",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"cannonArtwork": {
+					"barrel": [
+						-104.0,
+						-25.0
+					],
+					"base": [
+						77.0,
+						162.0
+					],
+					"elevation": 35.0,
+					"pivot": [
+						128.0,
+						185.0
+					],
+					"scale": 1.0,
+					"source": "selected-cannon-parts",
+					"trunnion": [
+						115.0,
+						172.0
+					]
+				},
+				"catalogSelectable": false,
+				"colliderTemplate": "cannon-object",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								96.0,
+								168.0
+							],
+							[
+								177.0,
+								164.0
+							],
+							[
+								190.0,
+								183.0
+							],
+							[
+								190.0,
+								205.0
+							],
+							[
+								124.0,
+								211.0
+							],
+							[
+								94.0,
+								207.0
+							]
+						]
+					},
+					{
+						"polygon": [
+							[
+								183.0,
+								190.0
+							],
+							[
+								218.0,
+								205.0
+							],
+							[
+								226.0,
+								220.0
+							],
+							[
+								226.0,
+								236.0
+							],
+							[
+								207.0,
+								236.0
+							],
+							[
+								178.0,
+								210.0
+							]
+						]
+					},
+					{
+						"circle": [
+							102.0,
+							221.0,
+							18.0
+						]
+					},
+					{
+						"circle": [
+							175.0,
+							215.0,
+							25.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								51.4118339392105,
+								113.060769955156
+							],
+							[
+								62.3080861763929,
+								109.703436611013
+							],
+							[
+								86.8826475050627,
+								126.910729701544
+							],
+							[
+								89.9944052412683,
+								136.414253458086
+							],
+							[
+								156.508871216139,
+								187.87128228873
+							],
+							[
+								164.781116826017,
+								202.208993144019
+							],
+							[
+								155.030317408049,
+								216.134577896932
+							],
+							[
+								136.844121992741,
+								210.725114308347
+							],
+							[
+								67.9529250519906,
+								166.149302660428
+							],
+							[
+								56.3199459909944,
+								165.328450562652
+							],
+							[
+								34.7764172315427,
+								149.022734736884
+							],
+							[
+								34.2045408486792,
+								137.635331283826
+							]
+						]
+					},
+					{
+						"circle": [
+							128.0,
+							185.0,
+							13.0
+						]
+					}
+				],
+				"id": "cannon-object",
+				"mass": 24.0,
+				"material": "metal",
+				"nameJa": "なんでもキャノン",
+				"opaquePixels": 11578.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					94.0,
+					70.0
+				],
+				"pivotSource": [
+					128.0,
+					180.0
+				],
+				"png": "raster/objects/cannon-object.png",
+				"score": 100.0,
+				"sourceGrid": [
+					256.0,
+					256.0
+				],
+				"svg": "objects/cannon-object.svg",
+				"viewBox": [
+					34.0,
+					110.0,
+					193.0,
+					130.0
+				],
+				"webp": "raster/objects/cannon-object.webp",
+				"worldHeight": 130.0,
+				"worldScale": 1.0,
+				"worldWidth": 193.0
+			},
+			"rotation": -0.00481905741617084,
+			"texture": "res://assets/objects/cannon-object.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-94.0,
+				-70.0
+			],
+			"visualScale": [
+				1.0,
+				1.0
+			],
+			"x": 479.172515869141,
+			"y": 229.341262817383
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				133.0,
+				40.0
+			],
+			"text": "00/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "おわり",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				174.0,
+				18.75
+			],
+			"text": "45 / なんでもキャノン2",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				96.0,
+				924.0,
+				30.0
+			],
+			"text": "なんでもキャノン、いままではっしゃしていなかったものがあった。\nそれは、なんでもキャノンでなんでもキャノンをとばすことだった！",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.4,
+	"firePatches": [],
+	"followingItem": "",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {},
+	"map": "45-cannon-two",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			58.0,
+			436.0
+		],
+		[
+			627.0,
+			436.0
+		],
+		[
+			645.0,
+			458.0
+		],
+		[
+			40.0,
+			458.0
+		]
+	],
+	"scoreZone": [
+		40.0,
+		75.0,
+		605.0,
+		375.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 15,
+	"stage": 45,
+	"trajectory": [],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

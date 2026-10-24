@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Godot 4.7.2: 41 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
+  "status": "Godot 4.7.2: 45 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
   "coordinateSystem": "960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
   "shotsPerStage": 15,
   "tutorialOrder": "ordered queues; do not shuffle prerequisite fire/water/bomb slots",
@@ -7997,6 +7997,492 @@
       ],
       "shuffleQueue": true,
       "lesson": "へいわな ひとざとに キャノンがきた！？ もりと いえを わくにのこそう！"
+    },
+    {
+      "id": 42,
+      "nameJa": "コンピューター",
+      "map": "42-computer",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        35,
+        80,
+        620,
+        400
+      ],
+      "scoreGroundY": 480,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            480,
+            960,
+            60
+          ]
+        },
+        {
+          "rect": [
+            45,
+            418,
+            120,
+            62
+          ]
+        },
+        {
+          "rect": [
+            165,
+            450,
+            80,
+            30
+          ]
+        },
+        {
+          "rect": [
+            245,
+            360,
+            100,
+            120
+          ]
+        },
+        {
+          "rect": [
+            345,
+            426,
+            95,
+            54
+          ]
+        },
+        {
+          "rect": [
+            440,
+            395,
+            145,
+            85
+          ]
+        },
+        {
+          "rect": [
+            585,
+            454,
+            100,
+            26
+          ]
+        },
+        {
+          "rect": [
+            705,
+            450,
+            255,
+            30
+          ]
+        }
+      ],
+      "queue": [
+        "cpu",
+        "ram",
+        "storage-drive",
+        "optical-drive",
+        "graphics-card",
+        "ram",
+        "motherboard",
+        "pc-case",
+        "wifi-antenna",
+        "pc-cable",
+        "power-supply",
+        "ram",
+        "usb-drive",
+        "os-package",
+        "sd-card"
+      ],
+      "preplaced": [],
+      "lesson": "コンピューターの なかにきちゃった！？ デコボコのきばんに ぶひんをのせよう。"
+    },
+    {
+      "id": 43,
+      "nameJa": "ほんやさん",
+      "map": "43-bookstore",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        25,
+        80,
+        615,
+        430
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            190,
+            90
+          ]
+        },
+        {
+          "rect": [
+            440,
+            450,
+            520,
+            90
+          ]
+        },
+        {
+          "rect": [
+            35,
+            320,
+            140,
+            18
+          ]
+        },
+        {
+          "rect": [
+            455,
+            350,
+            160,
+            18
+          ]
+        }
+      ],
+      "queue": [
+        "hardcover-book",
+        "open-book",
+        "book-stack",
+        "bookshelf",
+        "newspaper",
+        "scroll",
+        "paper-bag",
+        "desk",
+        "stool",
+        "floor-lamp",
+        "book-stack",
+        "hardcover-book",
+        "menu",
+        "cash-reader",
+        "chair"
+      ],
+      "preplaced": [
+        {
+          "id": "book-stack",
+          "x": 82,
+          "groundY": 320,
+          "width": 63,
+          "scoring": true
+        },
+        {
+          "id": "hardcover-book",
+          "x": 143,
+          "groundY": 320,
+          "width": 37,
+          "scoring": true
+        },
+        {
+          "id": "open-book",
+          "x": 510,
+          "groundY": 350,
+          "width": 70,
+          "scoring": true
+        }
+      ],
+      "movingPlatforms": [
+        {
+          "center": [
+            315,
+            380
+          ],
+          "size": [
+            150,
+            20
+          ],
+          "axis": [
+            0,
+            1
+          ],
+          "travel": 60,
+          "period": 5.8,
+          "phase": 0
+        }
+      ],
+      "abyss": [
+        [
+          190,
+          525,
+          250,
+          100
+        ]
+      ],
+      "lesson": "うごくたなに ほんをのせよう。たなのしたは おとしあな！"
+    },
+    {
+      "id": 44,
+      "nameJa": "なんでもおさらい",
+      "map": "44-review",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        35,
+        80,
+        610,
+        410
+      ],
+      "scoreGroundY": 490,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            490,
+            960,
+            50
+          ]
+        },
+        {
+          "rect": [
+            0,
+            420,
+            200,
+            70
+          ]
+        },
+        {
+          "rect": [
+            500,
+            390,
+            100,
+            100
+          ]
+        },
+        {
+          "rect": [
+            680,
+            450,
+            280,
+            40
+          ]
+        },
+        {
+          "rect": [
+            55,
+            310,
+            160,
+            18
+          ]
+        }
+      ],
+      "queue": [
+        "flamethrower",
+        "water-jug",
+        "water-balloon",
+        "fire-extinguisher",
+        "freeze-sprayer",
+        "ice-bomb",
+        "bomb",
+        "blast-bomb",
+        "waterproof-bomb",
+        "strong-waterproof-bomb",
+        "gunpowder-barrel",
+        "lightning-orb",
+        "sponge",
+        "towel",
+        "umbrella",
+        "grip-boots",
+        "rubber-block",
+        "skateboard",
+        "wheelbarrow",
+        "platform-cart",
+        "refrigerator",
+        "washing-machine",
+        "plank",
+        "low-table",
+        "wooden-crate",
+        "log",
+        "barrel",
+        "bowling-ball",
+        "teapot",
+        "vase"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 78,
+          "groundY": 420,
+          "width": 48,
+          "scorePenalty": 50
+        },
+        {
+          "id": "wooden-crate",
+          "x": 132,
+          "groundY": 420,
+          "width": 48,
+          "scorePenalty": 50
+        },
+        {
+          "id": "wooden-crate",
+          "x": 105,
+          "groundY": 372,
+          "width": 44,
+          "scorePenalty": 50
+        },
+        {
+          "id": "trash-bag",
+          "x": 180,
+          "groundY": 420,
+          "width": 36,
+          "scorePenalty": 30
+        },
+        {
+          "id": "vase",
+          "x": 90,
+          "groundY": 310,
+          "scoring": true
+        },
+        {
+          "id": "teapot",
+          "x": 165,
+          "groundY": 310,
+          "scoring": true
+        },
+        {
+          "id": "refrigerator",
+          "x": 274,
+          "groundY": 490
+        },
+        {
+          "id": "wooden-crate",
+          "x": 390,
+          "groundY": 490,
+          "width": 55,
+          "scorePenalty": 50
+        },
+        {
+          "id": "metal-drum",
+          "x": 630,
+          "groundY": 490
+        },
+        {
+          "id": "log",
+          "x": 545,
+          "groundY": 390,
+          "width": 75
+        }
+      ],
+      "shuffleQueue": true,
+      "water": [
+        {
+          "rect": [
+            205,
+            430,
+            290,
+            60
+          ],
+          "type": "flow",
+          "direction": [
+            1,
+            0
+          ],
+          "speed": 28,
+          "finite": true
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            0,
+            414,
+            200,
+            12
+          ],
+          "state": "ice",
+          "friction": 0.025,
+          "permanent": true
+        },
+        {
+          "rect": [
+            500,
+            384,
+            100,
+            12
+          ],
+          "initialState": "burning",
+          "burnSeconds": 5,
+          "reignite": false
+        }
+      ],
+      "lesson": "みず・ほのお・こおり・ばくはつ！ マイナスのじゃまものを かたづけよう。"
+    },
+    {
+      "id": 45,
+      "nameJa": "なんでもキャノン2",
+      "map": "45-cannon-two",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        40,
+        75,
+        605,
+        375
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            65,
+            420,
+            245,
+            30
+          ]
+        },
+        {
+          "rect": [
+            330,
+            390,
+            220,
+            60
+          ]
+        }
+      ],
+      "queue": [
+        "refrigerator",
+        "wooden-crate",
+        "water-jug",
+        "flamethrower",
+        "fire-extinguisher",
+        "grip-boots",
+        "skateboard",
+        "freeze-sprayer",
+        "rubber-block",
+        "bomb",
+        "umbrella",
+        "low-table",
+        "plank",
+        "game-logo",
+        "cannon-object"
+      ],
+      "preplaced": [],
+      "lesson": "なんでもキャノン、いままではっしゃしていなかったものがあった。\nそれは、なんでもキャノンでなんでもキャノンをとばすことだった！"
     }
   ]
 }

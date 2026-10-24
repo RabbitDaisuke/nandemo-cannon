@@ -223,7 +223,7 @@ func load_stage(index: int) -> void:
 		_create_preplaced_actor(entry)
 	stage_label.text = "%02d / %s" % [stage_index + 1, _stage_display_name(stage_index)]
 	var lessons: Array = ui_text.get("lessons", [])
-	lesson_label.text = _wrap_hud_text(str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。", 304.0, 12)
+	_layout_lesson(str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。")
 	catalog_button.visible = bool(current_stage.get("selectAnyCatalogItem", false))
 	tutorial_active = stage_index == 0 and not tutorial_completed
 	tutorial_label.position = ground + Vector2(-300, -72)
@@ -239,8 +239,7 @@ func _create_preplaced_actor(entry: Dictionary) -> ThrowBody:
 		record.worldWidth = float(entry.width)
 		record.worldHeight *= factor
 		record.worldScale *= factor
-	var actor = _create_actor(record, Vector2(float(entry.x), 0.0))
-	actor.position.y = float(entry.groundY) - actor.get_world_bounds().end.y - 1.0
+	var actor = _create_actor(record, Vector2(float(entry.x), 0.0), float(entry.groundY))
 	# Any stage may opt a placed prop into the same containment/height scoring
 	# used by thrown objects. Unmarked scenery stays neutral; penalties stay fixed.
 	actor.can_score = bool(entry.get("scoring", false))
@@ -266,10 +265,14 @@ func _add_cannon_base_collider(ground: Vector2) -> void:
 	base.add_child(collision)
 	stage_root.add_child(base)
 
-func _create_actor(record: Dictionary, at: Vector2) -> ThrowBody:
+func _create_actor(record: Dictionary, at: Vector2, ground_y: float = NAN) -> ThrowBody:
 	var actor = ThrowBody.new()
 	actor.configure(record, self)
 	actor.position = at
+	if is_finite(ground_y):
+		# Settle the authored starting pose before CCD sees the body. Otherwise
+		# placement below a shelf can be swept down from y=0 onto the shelf top.
+		actor.position.y += ground_y - actor.get_world_bounds().end.y - 1.0
 	stage_root.add_child(actor)
 	actors.append(actor)
 	return actor
@@ -284,7 +287,7 @@ func following_item_id() -> String:
 func _queued_item_id(offset: int) -> String:
 	if not playable or shots_fired + offset >= 15:
 		return ""
-	if bool(current_stage.get("selectAnyCatalogItem", false)) and not selected_catalog_id.is_empty():
+	if bool(current_stage.get("selectAnyCatalogItem", false)) and catalog.is_catalog_selectable(selected_catalog_id):
 		return selected_catalog_id
 	return str(current_stage.queue[shots_fired + offset])
 
@@ -390,6 +393,10 @@ func on_actor_impact(actor: ThrowBody, point: Vector2, normal_speed: float, ener
 func surface_friction_at(point: Vector2) -> float:
 	if bool(current_stage.get("iceFloor", false)) and point.y >= 375.0:
 		return 0.025
+	if is_instance_valid(hazards):
+		for zone in hazards.surface_zones:
+			if str(zone.get("state", "")) == "ice" and Rect2(zone.bounds).has_point(point):
+				return clampf(float(zone.get("friction", 0.025)), 0.0, 1.0)
 	return liquid.ice_friction(point) if is_instance_valid(liquid) else -1.0
 
 func cast_solid(start: Vector2, end: Vector2, exclude: Array[RID] = [], mask: int = 3) -> Dictionary:
@@ -471,6 +478,12 @@ func _fit_label_width(label: Label, width: float, initial_size: int, minimum_siz
 	label.size = Vector2(width, theme.default_font.get_height(font_size))
 
 func _wrap_hud_text(value: String, width: float, font_size: int) -> String:
+	# An authored line break is a boundary, not an oversized word to reflow.
+	if value.contains("\n"):
+		var paragraphs: Array[String] = []
+		for paragraph in value.split("\n"):
+			paragraphs.append(_wrap_hud_text(paragraph, width, font_size))
+		return "\n".join(paragraphs)
 	var lines: Array[String] = []
 	var words: Array[String] = []
 	var word = ""
@@ -498,6 +511,20 @@ func _wrap_hud_text(value: String, width: float, font_size: int) -> String:
 			line += character
 	lines.append(line.strip_edges())
 	return "\n".join(lines)
+
+func _layout_lesson(value: String) -> void:
+	var narrow = _wrap_hud_text(value, 304.0, 12)
+	var wide = narrow.split("\n").size() > 3 or (value.contains("\n") and narrow != value)
+	lesson_label.text = _wrap_hud_text(value, 924.0, 12) if wide else narrow
+	# Longer stories use the row below the stage name and NEXT caption. Font
+	# size stays readable and the central aiming region still begins at y=128.
+	lesson_label.position = Vector2(18, 96) if wide else Vector2(302, 77)
+	if wide:
+		lesson_label.add_theme_constant_override("line_spacing", 0)
+	else:
+		lesson_label.remove_theme_constant_override("line_spacing")
+	lesson_label.size = Vector2(924, 30) if wide else Vector2(304, 44)
+	lesson_label.set_meta("wide_lesson", wide)
 
 func _refresh_bgm_ui() -> void:
 	if not is_instance_valid(bgm_button):
@@ -738,7 +765,7 @@ func _show_catalog(page: int = -1) -> void:
 	_open_modal("なげるもの")
 	modal.set_meta("catalog_picker", true)
 	catalog_query = ""
-	catalog_results = item_search.find_items("")
+	catalog_results = _find_catalog_items("")
 	catalog_search_edit = LineEdit.new()
 	catalog_search_edit.name = "ItemSearch"
 	catalog_search_edit.position = Vector2(178, 10)
@@ -781,6 +808,17 @@ func _show_catalog(page: int = -1) -> void:
 func _is_catalog_open() -> bool:
 	return is_instance_valid(modal) and modal.has_meta("catalog_picker")
 
+func _find_catalog_items(query: String) -> Array:
+	# Keep the complete independent search index; only this picker hides entries.
+	return item_search.find_items(query).filter(func(item): return catalog.is_catalog_selectable(str(item.id)))
+
+func _select_catalog_item(id: String) -> void:
+	if not _is_catalog_open() or shots_fired >= 15 or result_shown or not bool(current_stage.get("selectAnyCatalogItem", false)) or not catalog.is_catalog_selectable(id):
+		return
+	selected_catalog_id = id
+	_close_modal()
+	_update_hud()
+
 func _catalog_search_changed(raw: String) -> void:
 	if not _is_catalog_open():
 		return
@@ -793,7 +831,7 @@ func _catalog_search_changed(raw: String) -> void:
 		catalog_search_edit.set_block_signals(false)
 	catalog_search_notice.text = "つかえないもじを はずしました" if cleaned != raw else "かな・カナ・すうじでさがす"
 	catalog_query = cleaned.strip_edges()
-	catalog_results = item_search.find_items(catalog_query)
+	catalog_results = _find_catalog_items(catalog_query)
 	_render_catalog_page(catalog_page if catalog_query.is_empty() else 0)
 
 func _remember_catalog_search() -> void:
@@ -838,7 +876,7 @@ func _render_catalog_page(page: int) -> void:
 	catalog_result_page = page
 	if catalog_query.is_empty():
 		catalog_page = page
-	catalog_search_count.text = "%03d / %03dしゅるい" % [catalog_results.size(), catalog.ordered_items.size()]
+	catalog_search_count.text = "%03d / %03dしゅるい" % [catalog_results.size(), catalog.selectable_items().size()]
 	if catalog_results.is_empty():
 		var empty = _label("みつかりませんでした\nことばをかえるか けしてください", Vector2(122, 164), 20, Color("fff0b5"), modal)
 		empty.size.x = 620
@@ -850,10 +888,7 @@ func _render_catalog_page(page: int) -> void:
 			break
 		var item: Dictionary = catalog_results[index]
 		var at = Vector2(22 + (slot % 6) * 138, 60 + (slot / 6) * 78)
-		var button = _button("", at, Vector2(130, 70), func():
-			selected_catalog_id = str(item.id)
-			_close_modal()
-			_update_hud(), modal)
+		var button = _button("", at, Vector2(130, 70), func(): _select_catalog_item(str(item.id)), modal)
 		button.set_meta("item_id", str(item.id))
 		button.set_meta("catalog_grid", true)
 		var icon = TextureRect.new()
@@ -878,23 +913,32 @@ func _render_catalog_page(page: int) -> void:
 	next.set_meta("catalog_next", true)
 
 func _show_seed() -> void:
-	_open_modal("シード", Vector2(530, 235))
+	_open_modal("シード", Vector2(700, 235))
 	_label("おなじシードで もういちどためせます。", Vector2(30, 60), 14, Color("b3dbea"), modal)
 	var edit = LineEdit.new()
 	edit.position = Vector2(54, 100)
-	edit.size = Vector2(422, 40)
+	edit.size = Vector2(592, 40)
 	edit.text = seed_text
 	edit.max_length = 16
 	edit.theme = theme
 	edit.add_theme_font_size_override("font_size", 24)
 	modal.add_child(edit)
-	_button("このシードで やりなおす", Vector2(130, 166), Vector2(270, 44), func():
+	var repeat = _button("このシードで やりなおす", Vector2(30, 166), Vector2(300, 44), func():
 		var cleaned = ""
 		for character in edit.text.to_upper():
 			if "0123456789ABCDEF".contains(character):
 				cleaned += character
 		seed_text = cleaned.lpad(16, "0").left(16)
 		load_stage(stage_index), modal)
+	repeat.set_meta("seed_action", "repeat")
+	var different = _button("べつのしーどにする", Vector2(370, 166), Vector2(300, 44), _restart_with_new_seed, modal)
+	different.set_meta("seed_action", "different")
+
+func _restart_with_new_seed() -> void:
+	var previous = seed_text
+	while seed_text == previous:
+		seed_text = "%08X%08X" % [randi(), randi()]
+	load_stage(stage_index)
 
 func _build_ui() -> void:
 	theme = Theme.new()

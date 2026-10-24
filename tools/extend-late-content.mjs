@@ -1,4 +1,4 @@
-// Authored SVG collection: stages 36–41 and their restaurant/cafe/office/village objects.
+// Authored SVG collection: stages 36–45 and their throwable objects.
 // Run after the older content layers; checked-in SVG/data are the build inputs.
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -37,6 +37,7 @@ add('oven','オーブン','オーブン','appliance',24,112,[rect(8,12,112,108)]
 add('parfait','パフェ','パフェ','glass',2,49,[poly([27,49],[101,49],[92,88],[72,101],[72,113],[94,113],[94,123],[34,123],[34,113],[56,113],[56,101],[36,88]),poly([25,46],[31,29],[45,17],[65,11],[88,25],[102,46])],P('M25 46L31 29L45 17L65 11L88 25L102 46V62L92 89L73 102V112H95V123H33V112H55V102L36 89L25 62Z',ink)+P('M31 52H96L87 85L68 97H60L41 85Z','#bbd9d6')+P('M36 59H92L87 72H40Z',pink())+P('M40 75H86L82 85L68 92H60L46 85Z','#d6a46c')+R(61,97,7,19,'#d6e6dc')+R(40,116,48,3,'#d6e6dc')+P('M30 46L36 30L48 23L65 18L83 29L96 46L89 55H39Z',cream)+R(43,33,9,9,'#f5d6a6')+R(68,29,8,9,'#f5d6a6')+P('M62 16L68 3H81L87 15L78 26H68Z',red));
 function pink(){return '#d98492';}
 add('counter','カウンター','カウンター','wood',22,140,[rect(4,18,120,22),rect(12,40,104,76)],R(4,18,120,22,ink)+R(10,23,108,11,'#deb884')+R(12,40,104,76,ink)+R(18,41,92,68,wood)+R(25,49,78,8,'#c49262')+R(28,66,3,35,'#714b3c')+R(63,66,3,35,'#714b3c')+R(98,66,3,35,'#714b3c')+R(20,104,88,6,'#684739'),'solid',{flowResponse:0});
+items.at(-1).metadata={catalogSelectable:false};
 add('coffee-beans','コーヒー豆','コーヒーまめ','paper',1.8,55,[poly([26,7],[99,7],[106,111],[96,122],[29,122],[20,111])],P('M26 7H99L106 111L96 122H29L20 111Z',ink)+P('M32 14H92L99 108L91 116H34L27 108Z','#b98a58')+R(34,20,54,9,'#76513c')+R(30,44,66,46,'#f0dfba')+P('M48 56L63 49L78 56L82 73L70 83L53 81L44 68Z','#704733')+P('M63 53L60 64L70 77L65 80L54 66L58 55Z','#d4b584')+R(39,99,48,7,'#76513c'));
 add('coffee-pot','コーヒーポット','コーヒーポット','metal',3.4,66,[rect(19,30,65,88),rect(84,45,30,10),rect(104,55,10,38),rect(84,93,30,10),rect(39,16,25,14)],R(80,41,38,66,ink)+R(88,49,22,50,steel)+R(88,58,14,32,ink)+R(19,30,65,88,ink)+R(25,36,53,76,'#9dafb5')+R(31,42,9,62,'#edf1da')+R(44,44,13,63,'#c6d4ca')+R(69,37,8,71,'#627c8b')+P('M19 30L9 21L30 21L37 30Z',ink)+R(33,22,38,8,'#dbe3d1')+R(39,14,25,10,ink)+R(44,17,15,4,'#a4bfc0'));
 add('menu','メニュー','メニュー','paper',1.6,55,[poly([17,18],[97,7],[113,112],[35,123])],P('M17 18L97 7L113 112L35 123Z',ink)+P('M24 24L91 15L105 106L40 115Z','#8e4e4d')+P('M33 32L84 25L94 91L44 98Z',cream)+R(44,39,34,6,'#714c45')+R(47,52,29,4,'#714c45')+R(49,63,31,4,'#714c45')+R(52,75,25,4,'#714c45')+R(49,103,40,4,gold));
@@ -160,6 +161,96 @@ add('charred-log','燃えた丸太','もえたまるた','wood',1.8,72,
  P('M92 53L104 49L114 58L109 79L95 81L87 70Z','#77726a')+P('M97 58L104 56L108 62L105 73L98 75L94 68Z','#353941')+
  R(26,57,48,5,'#797168')+R(32,72,43,4,'#262c35')+P('M48 49L57 49L53 62L61 70L55 82H47L51 71L44 63Z','#222a32'),'solid',{flammable:false,burnSeconds:null,explosionResistance:0.12});
 
+// Individual computer parts use a restrained green PCB, dark housings and gold
+// contact palette. Their labels and manual search tags are separate data.
+const computerItemIds=['cpu','ram','storage-drive','optical-drive','graphics-card','motherboard','pc-case','wifi-antenna','pc-cable','power-supply','usb-drive','os-package'];
+const pcb='#38845f',pcbLight='#72b17a',pcbDark='#215440',contact='#d8b765';
+const pins=(x,y,count,vertical=false)=>Array.from({length:count},(_,i)=>R(x+(vertical?0:i*9),y+(vertical?i*9:0),vertical?9:5,vertical?5:9,contact)).join('');
+add('cpu','演算装置','えんざんそうち','metal',2.0,49,[rect(17,17,94,94)],
+ R(17,17,94,94,ink)+R(22,22,84,84,pcb)+R(27,27,74,74,pcbDark)+pins(32,8,8)+pins(32,111,8)+pins(8,32,8,true)+pins(111,32,8,true)+
+ R(34,34,60,60,ink)+R(39,39,50,50,'#aab8b5')+R(43,43,42,8,'#e0e5d4')+R(43,53,8,31,'#c7d2c7')+R(56,59,23,4,'#697e85')+R(56,68,17,3,'#697e85')+P('M26 25H34L26 33Z',gold));
+add('ram','メモリ','メモリ','metal',1.1,86,[rect(4,36,120,53),rect(12,89,43,10),rect(64,89,52,10)],
+ R(4,36,120,53,ink)+R(9,41,110,43,pcb)+R(9,45,110,3,pcbLight)+
+ [16,42,68,94].map(x=>R(x,52,21,26,ink)+R(x+3,55,15,17,'#38494e')+R(x+4,56,12,3,'#65747a')).join('')+
+ pins(13,89,5)+pins(67,89,6)+R(12,81,43,5,contact)+R(64,81,52,5,contact)+R(6,60,5,9,'#c8c6a5')+R(117,60,5,9,'#c8c6a5'));
+add('storage-drive','ストレージ','ストレージ','metal',4.0,65,[rect(19,8,90,114)],
+ R(19,8,90,114,ink)+R(25,14,78,102,'#8a9da3')+R(30,19,68,83,'#bac7c5')+R(34,24,60,6,'#e7e7d5')+
+ P('M51 38H76L89 52V77L75 91H51L37 77V53Z','#738992')+P('M53 43H74L84 54V74L73 86H54L43 74V55Z','#d1d9ca')+
+ R(59,57,13,14,'#526b79')+P('M89 36H96V57L70 69L65 63L89 50Z',ink)+R(30,107,20,8,contact)+R(57,107,39,8,'#4a5f6c')+
+ [30,94].map(x=>[19,97].map(y=>R(x,y,5,5,ink)).join('')).join(''));
+add('optical-drive','ディスク読み取り機','ディスクよみとりき','metal',4.8,90,[rect(7,24,114,82)],
+ R(7,24,114,82,ink)+R(13,30,102,70,'#a7b6b6')+R(17,34,94,42,'#d0d5c6')+[30,45,60,75,90].map(x=>R(x,40,5,25,'#8da0a6')).join('')+
+ R(7,76,114,30,ink)+R(13,82,102,18,'#566b79')+R(20,85,76,7,ink)+R(25,86,66,3,'#9aabb0')+R(102,87,7,7,'#e1d4ad')+R(20,95,5,3,'#84bf8a'));
+const fan=(x,y)=>P(`M${x-13} ${y-20}H${x+13}L${x+21} ${y-12}V${y+12}L${x+13} ${y+20}H${x-13}L${x-21} ${y+12}V${y-12}Z`,ink)+
+ P(`M${x-10} ${y-15}H${x+10}L${x+16} ${y-9}V${y+9}L${x+10} ${y+15}H${x-10}L${x-16} ${y+9}V${y-9}Z`,'#52636b')+
+ P(`M${x-3} ${y-4}L${x-12} ${y-13}H${x-2}L${x+3} ${y-5}L${x+14} ${y-10}V${y}L${x+5} ${y+3}L${x+10} ${y+14}H${x}L${x-3} ${y+5}L${x-14} ${y+8}V${y-2}Z`,'#1c2d36')+R(x-4,y-4,8,8,'#9cacac');
+add('graphics-card','グラフィック装置','グラフィックそうち','metal',5.1,107,[rect(5,27,118,62),rect(10,18,9,84),rect(28,89,75,10)],
+ R(10,18,9,84,ink)+R(13,21,3,76,'#aabbb9')+R(5,27,118,62,ink)+R(20,32,97,50,pcb)+R(23,35,90,43,'#34464d')+R(23,35,90,5,pcbLight)+
+ fan(47,57)+fan(94,57)+R(28,83,75,6,pcb)+pins(29,89,8)+R(116,40,7,32,'#71877b'));
+items.at(-1).metadata={manufacturer:'NVIDIA',hardwareFamily:'graphics-card'};
+add('motherboard','マザーボード','マザーボード','metal',5.5,99,[rect(8,5,112,118)],
+ R(8,5,112,118,ink)+R(14,11,100,106,pcb)+R(19,15,90,4,pcbLight)+
+ R(25,26,42,44,ink)+R(31,32,30,32,'#a7b5ad')+R(35,36,22,24,'#d4dbcb')+
+ [80,96].map(x=>R(x,24,10,58,ink)+R(x+3,28,4,50,'#c3b16b')).join('')+
+ [81,96].map(y=>R(26,y,75,10,ink)+R(30,y+3,67,4,'#bfcac0')).join('')+
+ R(15,32,8,52,'#9faeae')+R(67,104,40,6,'#b4aa68')+R(21,100,21,10,pcbDark)+
+ [25,42,59].map(x=>R(x,72,8,6,'#cfb963')).join('')+R(71,22,4,30,pcbLight)+R(69,57,6,42,pcbLight));
+add('pc-case','パソコンの箱','パソコンのはこ','metal',16,73,[poly([19,15],[89,5],[112,23],[112,120],[19,120])],
+ P('M19 15L89 5L112 23V120H19Z',ink)+P('M25 21L86 12L105 27V114H25Z','#526977')+
+ P('M25 21L86 12V114H25Z','#8da2aa')+R(31,29,48,16,'#213542')+R(36,33,38,4,'#617d89')+
+ R(31,53,48,9,'#314853')+R(34,54,42,3,'#b1c2bc')+[76,86,96,106].map(y=>R(32,y,47,4,'#49616e')).join('')+
+ R(91,31,8,8,'#91c29d')+R(92,50,6,47,'#1d303c')+R(26,115,16,8,ink)+R(88,115,16,8,ink));
+add('wifi-antenna','電波のアンテナ','でんぱのアンテナ','plastic',1.8,69,
+ [poly([14,102],[36,85],[93,85],[116,102],[116,120],[14,120]),poly([31,18],[40,15],[58,90],[46,94]),poly([89,15],[99,18],[85,95],[73,91])],
+ P('M31 18L40 15L58 90L46 94Z',ink)+P('M35 23L38 22L51 82L48 84Z','#809da5')+P('M89 15L99 18L85 95L73 91Z',ink)+P('M91 23L95 24L81 87L78 86Z','#809da5')+
+ P('M14 102L36 85H93L116 102V120H14Z',ink)+P('M21 103L39 92H90L109 104V114H21Z','#728f9b')+R(25,106,79,4,'#a9bdb9')+R(87,107,5,4,'#a0d68c'));
+// The cable is a continuous physical bent strip, with empty space between runs.
+const cablePath='M25 24H84V31H32V52H98V75H91V59H25Z';
+add('pc-cable','ケーブル','ケーブル','rubber',1.8,75,
+ [rect(25,24,59,7),rect(25,31,7,28),rect(32,52,66,7),rect(91,59,7,16),rect(80,12,27,27),rect(103,18,13,15),rect(91,75,27,27),rect(109,102,9,15)],
+ P(cablePath,ink)+R(28,27,56,2,'#74878f')+R(28,29,2,28,'#74878f')+R(31,55,64,2,'#74878f')+R(94,57,2,18,'#74878f')+
+ R(80,12,27,27,ink)+R(85,17,17,17,'#526c7e')+R(103,18,13,15,ink)+R(107,21,9,9,'#bdc7be')+R(91,75,27,27,ink)+R(96,80,17,17,'#526c7e')+R(109,102,9,15,ink)+R(112,103,3,10,'#bdc7be'));
+add('power-supply','電源装置','でんげんそうち','metal',7.8,88,[rect(8,16,106,100),rect(114,55,10,44)],
+ R(8,16,106,100,ink)+R(14,22,94,88,'#738b98')+R(19,27,84,73,'#a7b6b6')+fan(61,63)+
+ [24,90].map(x=>[31,91].map(y=>R(x,y,5,5,ink)).join('')).join('')+
+ R(23,104,62,6,'#334a59')+R(114,55,10,44,ink)+R(118,58,3,37,'#bd9056')+R(111,90,11,6,'#d1b266'));
+add('usb-drive','USBストレージ','USBストレージ','plastic',0.5,46,[rect(37,5,54,37),rect(26,42,76,81)],
+ R(37,5,54,37,ink)+R(43,11,42,31,'#b6c5c4')+R(48,17,11,9,'#405664')+R(69,17,11,9,'#405664')+
+ R(26,42,76,81,ink)+R(32,48,64,69,'#3d7694')+R(37,53,11,58,'#74abc0')+R(55,65,30,8,'#cee0d5')+R(57,87,27,4,'#1e4c67')+R(57,98,27,4,'#1e4c67'));
+add('os-package','パソコンのプログラム','パソコンのプログラム','paper',1.2,61,[poly([23,17],[91,7],[109,19],[109,112],[40,123],[23,110])],
+ P('M23 17L91 7L109 19V112L40 123L23 110Z',ink)+P('M30 22L89 14L102 23V106L42 116L30 106Z','#3e7d99')+
+ P('M42 29L96 21V101L42 110Z','#84b8c6')+P('M30 22L42 29V110L30 104Z','#24576f')+
+ P('M51 45L67 43V59L51 62Z','#eee6bc')+P('M73 42L90 39V55L73 58Z','#d3e7d2')+P('M51 68L67 65V82L51 85Z','#d3e7d2')+P('M73 64L90 61V77L73 81Z','#eee6bc')+
+ R(51,91,32,4,'#356c82')+R(52,99,24,3,'#356c82'));
+items.at(-1).metadata={softwareKind:'operating-system'};
+
+const bookstoreItemIds=['hardcover-book','open-book','book-stack'];
+add('hardcover-book','本','ほん','paper',1.4,47,[poly([25,16],[88,7],[108,22],[108,111],[44,122],[25,108])],
+ P('M25 16L88 7L108 22V111L44 122L25 108Z',ink)+P('M31 21L86 14L101 25V105L45 115L31 104Z','#a75d5c')+P('M45 31L101 23V105L45 115Z','#cf8980')+
+ P('M31 21L44 31V108L31 101Z','#76454a')+P('M49 105L96 98V105L49 112Z','#f0e5c6')+P('M55 44L88 39V65L55 70Z','#edce86')+P('M61 49L83 45V59L61 63Z','#ad6e52')+R(55,79,31,4,'#8d5153'));
+add('open-book','開いた本','ひらいたほん','paper',1.7,87,
+ [poly([3,24],[50,31],[64,43],[78,31],[125,24],[125,102],[80,108],[64,119],[48,108],[3,102])],
+ P('M3 24L50 31L64 43L78 31L125 24V102L80 108L64 119L48 108L3 102Z',ink)+P('M9 31L48 37L61 48V110L46 102L9 96Z','#e1d5b2')+P('M67 48L80 37L119 31V96L82 102L67 110Z','#fff0ce')+
+ [48,60,72,84].map(y=>P(`M16 ${y}L48 ${y+5}V${y+8}L16 ${y+3}Z`,'#968975')+P(`M80 ${y+5}L111 ${y}V${y+3}L80 ${y+8}Z`,'#a49b83')).join('')+R(62,51,4,60,'#baab8e'));
+add('book-stack','本の山','ほんのやま','paper',3.8,78,[rect(9,84,113,32),rect(17,51,100,33),rect(6,17,111,34)],
+ R(9,84,113,32,ink)+R(14,89,103,22,'#699588')+R(31,94,80,12,'#e7ddbd')+R(35,98,73,3,'#b5b399')+
+ R(17,51,100,33,ink)+R(22,56,90,23,'#b07553')+R(27,61,64,13,'#efe4c6')+R(31,66,56,3,'#b6aa90')+
+ R(6,17,111,34,ink)+R(11,22,101,24,'#8d6891')+R(27,27,78,13,'#f0e4c6')+R(31,32,69,3,'#b7a991'));
+
+// Exact selected cannon textures, at the same world-pixel size and 35° pose as
+// AimCannon. The item is an ordinary inert rigid body; it never spawns a cannon.
+const pixelArt=async name=>{
+ const {data,info}=await sharp(path.join(root,`assets/cannon/${name}.webp`)).ensureAlpha().raw().toBuffer({resolveWithObject:true});let art='';
+ for(let y=0;y<info.height;y++)for(let x=0;x<info.width;){const p=(y*info.width+x)*4,c=[...data.subarray(p,p+4)];let end=x+1;while(end<info.width&&c.every((v,i)=>data[(y*info.width+end)*4+i]===v))end++;if(c[3])art+=`<rect x="${x}" y="${y}" width="${end-x}" height="1" fill="#${c.slice(0,3).map(v=>v.toString(16).padStart(2,'0')).join('')}" opacity="${c[3]/255}"/>`;x=end;}return art;
+};
+const cannonAngle=35*Math.PI/180;
+const barrelPoint=(x,y)=>[128+x*Math.cos(cannonAngle)-y*Math.sin(cannonAngle),185+x*Math.sin(cannonAngle)+y*Math.cos(cannonAngle)];
+add('cannon-object','なんでもキャノン','なんでもキャノン','metal',24,null,
+ [poly([96,168],[177,164],[190,183],[190,205],[124,211],[94,207]),poly([183,190],[218,205],[226,220],[226,236],[207,236],[178,210]),{circle:[102,221,18]},{circle:[175,215,25]},poly(...[[-104,-15],[-97,-24],[-67,-24],[-59,-18],[25,-14],[40,-7],[40,10],[22,16],[-60,19],[-70,25],[-97,24],[-104,15]].map(([x,y])=>barrelPoint(x,y))),{circle:[128,185,13]}],
+ `<g transform="translate(77 162)">${await pixelArt('base')}</g><g transform="translate(128 185) rotate(35) translate(-104 -25)">${await pixelArt('barrel')}</g><g transform="translate(115 172)">${await pixelArt('trunnion')}</g>`);
+items.at(-1).grid=256;items.at(-1).pivot=[128,180];
+items.at(-1).metadata={catalogSelectable:false,cannonArtwork:{source:'selected-cannon-parts',scale:1,elevation:35,base:[77,162],pivot:[128,185],barrel:[-104,-25],trunnion:[115,172]}};
+
 // Shrink the approved title logo and convert its exact colored pixels to SVG.
 // No handwritten sign, checkerboard, margin scaling or external image reference.
 const title=await sharp(path.join(root,'assets/ui/logo.webp')).resize(120,29,{fit:'fill',kernel:'nearest'}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
@@ -169,17 +260,18 @@ add('game-logo','なんでもキャノンのロゴ','なんでもキャノンの
 
 const sheet=[];
 for(const [index,e]of items.entries()){
- const raw=`<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" shape-rendering="crispEdges">${e.art}</svg>`;
- const {data,info}=await sharp(Buffer.from(raw)).ensureAlpha().raw().toBuffer({resolveWithObject:true});let x0=128,y0=128,x1=-1,y1=-1,pixels=0;
+ const grid=e.grid??128,pivot=e.pivot??[64,64];
+ const raw=`<svg xmlns="http://www.w3.org/2000/svg" width="${grid}" height="${grid}" viewBox="0 0 ${grid} ${grid}" shape-rendering="crispEdges">${e.art}</svg>`;
+ const {data,info}=await sharp(Buffer.from(raw)).ensureAlpha().raw().toBuffer({resolveWithObject:true});let x0=grid,y0=grid,x1=-1,y1=-1,pixels=0;
  for(let y=0;y<info.height;y++)for(let x=0;x<info.width;x++)if(data[(y*info.width+x)*4+3]){x0=Math.min(x0,x);y0=Math.min(y0,y);x1=Math.max(x1,x);y1=Math.max(y1,y);pixels++;}
- const box=[x0,y0,x1-x0+1,y1-y0+1],scale=e.width/box[2];
- const svg=raw.replace('width="128" height="128" viewBox="0 0 128 128"',`width="${box[2]}" height="${box[3]}" viewBox="${box.join(' ')}"`);
+ const box=[x0,y0,x1-x0+1,y1-y0+1],width=e.width??box[2],scale=width/box[2];
+ const svg=raw.replace(`width="${grid}" height="${grid}" viewBox="0 0 ${grid} ${grid}"`,`width="${box[2]}" height="${box[3]}" viewBox="${box.join(' ')}"`);
  await fs.writeFile(path.join(root,`assets/objects/${e.id}.svg`),svg+'\n');
  for(const ext of ['png','webp'])await sharp(Buffer.from(svg)).toFormat(ext,ext==='webp'?{lossless:true}:{}).toFile(path.join(root,`assets/raster/objects/${e.id}.${ext}`));
  const score=e.behavior==='water_release'?0:100;
- const record={id:e.id,nameJa:e.name,svg:`objects/${e.id}.svg`,png:`raster/objects/${e.id}.png`,webp:`raster/objects/${e.id}.webp`,sourceGrid:[128,128],viewBox:box,pivotSource:[64,64],pivotCropped:[64-x0,64-y0],worldWidth:e.width,worldHeight:box[3]*scale,worldScale:scale,material:e.material,mass:e.mass,score,bodyKind:'dynamic',behavior:e.behavior,colliderTemplate:e.id,fixtures:e.fixtures,physics:{...physics.materials[e.material],...physics.behaviors[e.behavior],...e.extra},opaquePixels:pixels};
+ const record={id:e.id,nameJa:e.name,svg:`objects/${e.id}.svg`,png:`raster/objects/${e.id}.png`,webp:`raster/objects/${e.id}.webp`,sourceGrid:[grid,grid],viewBox:box,pivotSource:pivot,pivotCropped:[pivot[0]-x0,pivot[1]-y0],worldWidth:width,worldHeight:box[3]*scale,worldScale:scale,material:e.material,mass:e.mass,score,bodyKind:'dynamic',behavior:e.behavior,colliderTemplate:e.id,fixtures:e.fixtures,physics:{...physics.materials[e.material],...physics.behaviors[e.behavior],...e.extra},opaquePixels:pixels,...e.metadata};
  const i=manifest.items.findIndex(x=>x.id===e.id);if(i<0)manifest.items.push(record);else manifest.items[i]=record;
- const row=[e.id,e.name,e.material,e.mass,score,e.width,e.id,e.behavior],j=catalog.items.findIndex(x=>x[0]===e.id);if(j<0)catalog.items.push(row);else catalog.items[j]=row;
+ const row=[e.id,e.name,e.material,e.mass,score,width,e.id,e.behavior],j=catalog.items.findIndex(x=>x[0]===e.id);if(j<0)catalog.items.push(row);else catalog.items[j]=row;
  colliders.templates[e.id]=e.fixtures;physics.overrides[e.id]=e.extra;ui.items[e.id]=e.kana;
  const thumb=await sharp(Buffer.from(svg)).resize({width:176,height:160,fit:'inside',kernel:'nearest'}).png().toBuffer({resolveWithObject:true});
  sheet.push({input:thumb.data,left:index%7*200+Math.floor((200-thumb.info.width)/2),top:Math.floor(index/7)*190+Math.floor((180-thumb.info.height)/2)});
@@ -202,9 +294,33 @@ const villagePool=[...villageItemIds,'rice-bowl','charcoal','flamethrower','camp
 const village=stage(41,'ひとざと','41-village',villagePool,[rect(0,450,960,90)],[810,450],[35,80,605,370]);
 village.shuffleQueue=true;
 village.preplaced=[...[76,142,208,460,526,592].map(x=>({id:'forest',x,groundY:450,width:62,scoring:true})),{id:'wooden-house',x:287,groundY:450,width:82,scoring:true},{id:'wooden-house',x:377,groundY:450,width:82,scoring:true}];
-const additions=[random,restaurant,beach,cafe,office,village];
-const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。','さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。','へいわな ひとざとに キャノンがきた！？ もりと いえを わくにのこそう！'];
-for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん','オフィス','ひとざと'][i];ui.lessons[s.id-1]=s.lesson;}
+const computer=stage(42,'コンピューター','42-computer',
+ ['cpu','ram','storage-drive','optical-drive','graphics-card','ram','motherboard','pc-case','wifi-antenna','pc-cable','power-supply','ram','usb-drive','os-package','sd-card'],
+ [rect(0,480,960,60),rect(45,418,120,62),rect(165,450,80,30),rect(245,360,100,120),rect(345,426,95,54),rect(440,395,145,85),rect(585,454,100,26),rect(705,450,255,30)],
+ [810,450],[35,80,620,400]);
+const bookstore=stage(43,'ほんやさん','43-bookstore',
+ ['hardcover-book','open-book','book-stack','bookshelf','newspaper','scroll','paper-bag','desk','stool','floor-lamp','book-stack','hardcover-book','menu','cash-reader','chair'],
+ [rect(0,450,190,90),rect(440,450,520,90),rect(35,320,140,18),rect(455,350,160,18)],
+ [810,450],[25,80,615,430]);
+bookstore.scoreGroundY=450;
+bookstore.movingPlatforms=[{center:[315,380],size:[150,20],axis:[0,1],travel:60,period:5.8,phase:0}];
+bookstore.abyss=[[190,525,250,100]];
+bookstore.preplaced=[{id:'book-stack',x:82,groundY:320,width:63,scoring:true},{id:'hardcover-book',x:143,groundY:320,width:37,scoring:true},{id:'open-book',x:510,groundY:350,width:70,scoring:true}];
+const reviewPool=['flamethrower','water-jug','water-balloon','fire-extinguisher','freeze-sprayer','ice-bomb','bomb','blast-bomb','waterproof-bomb','strong-waterproof-bomb','gunpowder-barrel','lightning-orb','sponge','towel','umbrella','grip-boots','rubber-block','skateboard','wheelbarrow','platform-cart','refrigerator','washing-machine','plank','low-table','wooden-crate','log','barrel','bowling-ball','teapot','vase'];
+const review=stage(44,'なんでもおさらい','44-review',reviewPool,
+ [rect(0,490,960,50),rect(0,420,200,70),rect(500,390,100,100),rect(680,450,280,40),rect(55,310,160,18)],
+ [810,450],[35,80,610,410]);
+review.shuffleQueue=true;
+review.water=[{rect:[205,430,290,60],type:'flow',direction:[1,0],speed:28,finite:true}];
+review.surfaceZones=[{rect:[0,414,200,12],state:'ice',friction:0.025,permanent:true},{rect:[500,384,100,12],initialState:'burning',burnSeconds:5,reignite:false}];
+review.preplaced=[{id:'wooden-crate',x:78,groundY:420,width:48,scorePenalty:50},{id:'wooden-crate',x:132,groundY:420,width:48,scorePenalty:50},{id:'wooden-crate',x:105,groundY:372,width:44,scorePenalty:50},{id:'trash-bag',x:180,groundY:420,width:36,scorePenalty:30},{id:'vase',x:90,groundY:310,scoring:true},{id:'teapot',x:165,groundY:310,scoring:true},{id:'refrigerator',x:274,groundY:490},{id:'wooden-crate',x:390,groundY:490,width:55,scorePenalty:50},{id:'metal-drum',x:630,groundY:490},{id:'log',x:545,groundY:390,width:75}];
+const sequel=stage(45,'なんでもキャノン2','45-cannon-two',
+ ['refrigerator','wooden-crate','water-jug','flamethrower','fire-extinguisher','grip-boots','skateboard','freeze-sprayer','rubber-block','bomb','umbrella','low-table','plank','game-logo','cannon-object'],
+ [rect(0,450,960,90),rect(65,420,245,30),rect(330,390,220,60)],
+ [810,450],[40,75,605,375]);
+const additions=[random,restaurant,beach,cafe,office,village,computer,bookstore,review,sequel];
+const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。','さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。','へいわな ひとざとに キャノンがきた！？ もりと いえを わくにのこそう！','コンピューターの なかにきちゃった！？ デコボコのきばんに ぶひんをのせよう。','うごくたなに ほんをのせよう。たなのしたは おとしあな！','みず・ほのお・こおり・ばくはつ！ マイナスのじゃまものを かたづけよう。','なんでもキャノン、いままではっしゃしていなかったものがあった。\nそれは、なんでもキャノンでなんでもキャノンをとばすことだった！'];
+for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん','オフィス','ひとざと','コンピューター','ほんやさん','なんでもおさらい','なんでもキャノン2'][i];ui.lessons[s.id-1]=s.lesson;}
 stages.status=`Godot 4.7.2: ${stages.stages.length} authored stages, 15 throws each; current checks are in previews/*-checks.json.`;
 const terrainArt=(s,c)=>s.terrain.map(t=>t.rect?R(...t.rect,ink)+R(t.rect[0]+3,t.rect[1]+3,t.rect[2]-6,t.rect[3]-3,c):P('M'+t.polygon.map(p=>p.join(' ')).join('L')+'Z',c)).join('');
 const window=(x,y,w,h)=>R(x,y,w,h,ink)+R(x+7,y+7,w-14,h-14,'#83bbca')+R(x+w/2-4,y+7,8,h-14,cream)+R(x+7,y+h/2-4,w-14,8,cream);
@@ -239,6 +355,50 @@ artwork[41]=R(0,0,960,540,'#b4d7d2')+R(0,0,960,118,'#bcded7')+
  P('M728 333L774 333L926 450H810Z','#d1bf8f')+P('M739 333H748L862 450H846Z','#e4d7aa')+
  terrainArt(village,'#967651')+R(0,450,960,10,'#557b48')+R(0,460,960,6,'#91a365')+
  [26,129,238,363,486,617,744,873].map((x,i)=>R(x,480+i%2*21,23,5,'#c4a474')+R(x+42,512-i%2*12,10,4,'#6d5b47')).join('');
+// Computer landscape: copper traces are background decoration; every raised
+// chip/connector silhouette below corresponds exactly to an authored rectangle.
+artwork[42]=R(0,0,960,540,'#1e423d')+R(0,115,960,365,'#306752')+
+ [40,105,172,241,314,387,461,536,611,688,766,846,924].map((x,i)=>
+  P(`M${x} 118V${160+i%3*25}L${x+25} ${185+i%3*25}V340H${x+43}V480H${x+37}V346H${x+19}V${188+i%3*25}L${x-6} ${163+i%3*25}V118Z`,'#4a8460')+
+  R(x-11,126,16,7,'#91a265')+R(x+28,355,20,7,'#809957')).join('')+
+ R(59,166,157,112,ink)+R(66,173,143,98,'#42625b')+[80,100,120,140,160,180].map(x=>R(x,157,8,9,contact)+R(x,278,8,9,contact)).join('')+
+ R(84,191,108,64,'#637977')+R(90,197,96,8,'#98a79c')+R(99,219,63,5,'#bfd0af')+R(99,232,44,4,'#8eaaa0')+
+ [283,399,515].map(x=>R(x,174,85,98,ink)+R(x+6,180,73,86,'#335348')+R(x+12,185,61,10,'#597864')+[199,213,227,241].map(y=>R(x+14,y,57,5,'#173d39')).join('')).join('')+
+ [691,729,767,805,843,881].map(x=>R(x,184,25,104,ink)+R(x+5,190,15,92,'#bbbda0')+R(x+7,194,11,76,'#dfd9b2')).join('')+
+ R(680,293,244,12,'#827a47')+R(686,295,232,4,contact)+
+ terrainArt(computer,'#305f4b')+
+ computer.terrain.slice(1).map((t,i)=>{const [x,y,w,h]=t.rect;return R(x+4,y+4,w-8,8,i%2?'#c5c7ac':'#73988e')+
+  R(x+6,y+17,w-12,h-21,i%2?'#647a76':'#203d3a')+
+  Array.from({length:Math.floor((w-16)/14)},(_,j)=>R(x+9+j*14,y+h-10,6,7,contact)).join('');}).join('')+
+ R(0,484,960,8,'#5c9a63')+[40,190,375,570,780,918].map(x=>R(x,504,28,12,'#a29b5b')+R(x+5,507,18,6,'#d9c580')).join('');
+const bookRow=(x,y,n)=>Array.from({length:n},(_,i)=>R(x+i*18,y-(i%3)*5,15,47+(i%3)*5,['#976a68','#849987','#b69d70','#707c97'][i%4])+R(x+i*18+4,y+5-(i%3)*5,7,3,'#d1c5a0')+R(x+i*18+4,y+34,7,3,'#d1c5a0')).join('');
+artwork[43]=R(0,0,960,540,'#c7b18c')+R(0,113,960,24,'#775644')+
+ [45,365,685].map(x=>R(x,155,228,256,'#4b4039')+R(x+9,164,210,238,'#6d5844')+
+  [182,268,354].map(y=>bookRow(x+17,y,10)+R(x+9,y+49,210,12,'#a27c50')+R(x+11,y+50,206,4,'#c3a06c')).join('')).join('')+
+ R(0,420,960,30,'#8d7050')+R(0,428,960,6,'#b89b6d')+
+ R(190,450,250,90,'#302c34')+R(198,456,234,84,'#3f3941')+
+ terrainArt(bookstore,'#a47a52')+[bookstore.terrain[2],bookstore.terrain[3]].map(t=>tableLines(t.rect[0],t.rect[1],t.rect[2])+
+  P(`M${t.rect[0]+10} ${t.rect[1]+18}H${t.rect[0]+35}L${t.rect[0]+10} ${t.rect[1]+45}Z`,'#755440')+
+  P(`M${t.rect[0]+t.rect[2]-10} ${t.rect[1]+18}H${t.rect[0]+t.rect[2]-35}L${t.rect[0]+t.rect[2]-10} ${t.rect[1]+45}Z`,'#755440')).join('')+
+ R(253,156,9,288,'#5d4c43')+R(369,156,9,288,'#5d4c43')+R(256,160,3,280,'#c0a681')+R(372,160,3,280,'#c0a681')+
+ [25,455,625,795].map(x=>P(`M${x} 450L${x+48} 540H${x+52}L${x+4} 450Z`,'#73513d')).join('');
+artwork[44]=R(0,0,960,540,'#293f50')+R(0,114,960,310,'#466577')+
+ [64,272,480,688].map((x,i)=>R(x,145,169,135,ink)+R(x+7,152,155,121,'#294a5d')+
+  R(x+15,161,139,9,['#b9d8d7','#e6a075','#91b9db','#d7b35b'][i])+
+  R(x+24,190,120,4,'#5f8c98')+R(x+24,207,91,4,'#5f8c98')+R(x+24,224,108,4,'#5f8c98')+
+  R(x+24,247,30,12,['#74b1c7','#d8875b','#91b9db','#cfa95b'][i])).join('')+
+ R(0,291,960,10,'#abc0b6')+R(0,306,960,8,'#1f3d4f')+
+ [18,232,456,660,935].map(x=>R(x,119,9,371,'#608596')+R(x+3,122,3,365,'#94b1b6')).join('')+
+ terrainArt(review,'#607e8b')+R(3,423,194,8,'#a7d8d7')+R(503,393,94,8,'#b97d55')+tableLines(55,310,160)+
+ R(0,493,960,8,'#b5b9a0')+[0,60,120,180,240,300,360,420,480,540,600,660,720,780,840,900].map(x=>P(`M${x} 517H${x+22}L${x+38} 540H${x+16}Z`,'#354b5b')).join('');
+artwork[45]=R(0,0,960,540,'#6fa5ba')+R(0,0,960,117,'#6497ae')+
+ R(0,117,960,8,'#97c2cd')+R(34,125,12,325,'#94bcc8')+R(47,125,4,325,'#507e96')+R(909,125,12,325,'#94bcc8')+R(922,125,4,325,'#507e96')+
+ R(60,149,829,186,'#78aabd')+R(67,156,815,172,'#7db0c0')+
+ [114,240,365,491,617,743,861].map((x,i)=>R(x,176+(i%3)*15,7,7,'#e3c775')+R(x+14,206+(i%2)*18,5,5,'#b5d8cb')).join('')+
+ P('M65 375H310V420H65Z','#578ca4')+P('M330 345H550V390H330Z','#578ca4')+
+ terrainArt(sequel,'#bda16e')+R(0,453,960,8,'#ead39a')+R(0,471,960,6,'#836f4c')+
+ tableLines(65,420,245)+tableLines(330,390,220)+R(69,434,237,6,'#8d754e')+R(334,410,212,6,'#8d754e')+
+ [90,365,640,915].map(x=>P(`M${x} 478L${x+40} 540H${x+44}L${x+4} 478Z`,'#947a50')).join('')+R(0,510,960,3,'#947a50');
 const mapSheet=[];
 for(const [i,s]of additions.entries()){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" shape-rendering="crispEdges">${artwork[s.id]}</svg>\n`;
@@ -264,4 +424,9 @@ const villageSheet=await Promise.all(villageItemIds.map(async(id,i)=>{
  return {input:thumb.data,left:i%4*200+Math.floor((200-thumb.info.width)/2),top:Math.floor(i/4)*190+Math.floor((180-thumb.info.height)/2)};
 }));
 await sharp({create:{width:800,height:570,channels:4,background:'#283b4c'}}).composite(villageSheet).png().toFile(path.join(root,'previews/village-items.png'));
+const computerSheet=await Promise.all([...computerItemIds,...bookstoreItemIds,'cannon-object'].map(async(id,i)=>{
+ const thumb=await sharp(path.join(root,`assets/raster/objects/${id}.png`)).resize({width:176,height:160,fit:'inside',kernel:'nearest'}).png().toBuffer({resolveWithObject:true});
+ return {input:thumb.data,left:i%4*200+Math.floor((200-thumb.info.width)/2),top:Math.floor(i/4)*190+Math.floor((180-thumb.info.height)/2)};
+}));
+await sharp({create:{width:800,height:760,channels:4,background:'#283b4c'}}).composite(computerSheet).png().toFile(path.join(root,'previews/computer-book-items.png'));
 console.log(JSON.stringify({items:items.map(x=>x.id),objects:manifest.items.length,stages:stages.stages.length}));

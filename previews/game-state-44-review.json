@@ -1,0 +1,1411 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 47.1272727272727,
+				"worldScale": 0.436363636363636,
+				"worldWidth": 48.0
+			},
+			"rotation": -0.00000370351449419104,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-24.0,
+				-22.254545211792
+			],
+			"visualScale": [
+				0.436363637447357,
+				0.436363637447357
+			],
+			"x": 77.9999313354492,
+			"y": 395.57958984375
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 47.1272727272727,
+				"worldScale": 0.436363636363636,
+				"worldWidth": 48.0
+			},
+			"rotation": 0.000000392171870089442,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-24.0,
+				-22.254545211792
+			],
+			"visualScale": [
+				0.436363637447357,
+				0.436363637447357
+			],
+			"x": 131.999893188477,
+			"y": 395.57958984375
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 43.2,
+				"worldScale": 0.4,
+				"worldWidth": 44.0
+			},
+			"rotation": -0.000011317243661324,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-22.0,
+				-20.3999996185303
+			],
+			"visualScale": [
+				0.400000005960464,
+				0.400000005960464
+			],
+			"x": 104.998207092285,
+			"y": 351.484069824219
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "trash-bag",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							14.0,
+							8.0,
+							100.0,
+							112.0
+						]
+					}
+				],
+				"id": "trash-bag",
+				"mass": 2.0,
+				"material": "paper",
+				"nameJa": "ごみ袋",
+				"opaquePixels": 8101.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					51.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/trash-bag.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/trash-bag.svg",
+				"viewBox": [
+					13.0,
+					7.0,
+					102.0,
+					114.0
+				],
+				"webp": "raster/objects/trash-bag.webp",
+				"worldHeight": 40.2352941176471,
+				"worldScale": 0.352941176470588,
+				"worldWidth": 36.0
+			},
+			"rotation": 0.00000188693536529172,
+			"texture": "res://assets/objects/trash-bag.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-18.0,
+				-20.1176471710205
+			],
+			"visualScale": [
+				0.352941185235977,
+				0.352941185235977
+			],
+			"x": 180.000076293945,
+			"y": 400.247406005859
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "vase",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "vase",
+				"fixtures": [
+					{
+						"rect": [
+							40.0,
+							10.0,
+							48.0,
+							14.0
+						]
+					},
+					{
+						"rect": [
+							50.0,
+							24.0,
+							28.0,
+							28.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								50.0,
+								52.0
+							],
+							[
+								78.0,
+								52.0
+							],
+							[
+								94.0,
+								72.0
+							],
+							[
+								94.0,
+								100.0
+							],
+							[
+								82.0,
+								118.0
+							],
+							[
+								46.0,
+								118.0
+							],
+							[
+								34.0,
+								100.0
+							],
+							[
+								34.0,
+								72.0
+							]
+						]
+					}
+				],
+				"id": "vase",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "花瓶",
+				"opaquePixels": 5642.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 140.0,
+					"loadForceThreshold": 4900.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 6.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					33.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/vase.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/vase.svg",
+				"viewBox": [
+					31.0,
+					7.0,
+					66.0,
+					114.0
+				],
+				"webp": "raster/objects/vase.webp",
+				"worldHeight": 65.6363636363636,
+				"worldScale": 0.575757575757576,
+				"worldWidth": 38.0
+			},
+			"rotation": 0.000142749660881236,
+			"texture": "res://assets/objects/vase.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-19.0,
+				-32.8181800842285
+			],
+			"visualScale": [
+				0.575757563114166,
+				0.575757563114166
+			],
+			"x": 90.0071487426758,
+			"y": 278.917297363281
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "teapot",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "teapot",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								42.0,
+								44.0
+							],
+							[
+								82.0,
+								44.0
+							],
+							[
+								94.0,
+								62.0
+							],
+							[
+								94.0,
+								92.0
+							],
+							[
+								82.0,
+								112.0
+							],
+							[
+								42.0,
+								112.0
+							],
+							[
+								28.0,
+								94.0
+							],
+							[
+								28.0,
+								76.0
+							]
+						]
+					},
+					{
+						"polygon": [
+							[
+								6.0,
+								40.0
+							],
+							[
+								18.0,
+								40.0
+							],
+							[
+								34.0,
+								60.0
+							],
+							[
+								36.0,
+								78.0
+							],
+							[
+								10.0,
+								54.0
+							]
+						]
+					},
+					{
+						"rect": [
+							38.0,
+							36.0,
+							48.0,
+							12.0
+						]
+					},
+					{
+						"rect": [
+							54.0,
+							24.0,
+							18.0,
+							12.0
+						]
+					},
+					{
+						"rect": [
+							88.0,
+							44.0,
+							28.0,
+							10.0
+						]
+					},
+					{
+						"rect": [
+							106.0,
+							50.0,
+							12.0,
+							34.0
+						]
+					},
+					{
+						"rect": [
+							90.0,
+							80.0,
+							24.0,
+							10.0
+						]
+					}
+				],
+				"id": "teapot",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "ティーポット",
+				"opaquePixels": 6606.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 150.0,
+					"loadForceThreshold": 5880.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 8.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					62.0,
+					43.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/teapot.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/teapot.svg",
+				"viewBox": [
+					2.0,
+					21.0,
+					117.0,
+					94.0
+				],
+				"webp": "raster/objects/teapot.webp",
+				"worldHeight": 46.5982905982906,
+				"worldScale": 0.495726495726496,
+				"worldWidth": 58.0
+			},
+			"rotation": 0.000122195779113099,
+			"texture": "res://assets/objects/teapot.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-30.7350425720215,
+				-21.3162384033203
+			],
+			"visualScale": [
+				0.495726495981216,
+				0.495726495981216
+			],
+			"x": 165.004608154297,
+			"y": 286.213623046875
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "refrigerator",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							8.0,
+							92.0,
+							114.0
+						]
+					}
+				],
+				"id": "refrigerator",
+				"mass": 24.0,
+				"material": "metal",
+				"nameJa": "冷蔵庫",
+				"opaquePixels": 10021.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					47.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/refrigerator.png",
+				"score": 300.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/refrigerator.svg",
+				"viewBox": [
+					17.0,
+					7.0,
+					94.0,
+					116.0
+				],
+				"webp": "raster/objects/refrigerator.webp",
+				"worldHeight": 101.191489361702,
+				"worldScale": 0.872340425531915,
+				"worldWidth": 82.0
+			},
+			"rotation": 0.00000285629539575893,
+			"texture": "res://assets/objects/refrigerator.svg",
+			"tint": "c7e0faff",
+			"visualPosition": [
+				-41.0,
+				-49.7234039306641
+			],
+			"visualScale": [
+				0.872340440750122,
+				0.872340440750122
+			],
+			"x": 274.000274658203,
+			"y": 439.417419433594
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.0,
+				"worldScale": 0.5,
+				"worldWidth": 55.0
+			},
+			"rotation": 0.00000362308924195531,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "c7e0faff",
+			"visualPosition": [
+				-27.5,
+				-25.5
+			],
+			"visualScale": [
+				0.5,
+				0.5
+			],
+			"x": 390.002532958984,
+			"y": 462.026275634766
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "metal-drum",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							22.0,
+							10.0,
+							84.0,
+							112.0
+						]
+					}
+				],
+				"id": "metal-drum",
+				"mass": 10.0,
+				"material": "metal",
+				"nameJa": "金属ドラム缶",
+				"opaquePixels": 8880.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					43.0,
+					55.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/metal-drum.png",
+				"score": 200.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/metal-drum.svg",
+				"viewBox": [
+					21.0,
+					9.0,
+					86.0,
+					114.0
+				],
+				"webp": "raster/objects/metal-drum.webp",
+				"worldHeight": 79.5348837209302,
+				"worldScale": 0.697674418604651,
+				"worldWidth": 60.0
+			},
+			"rotation": 0.00000671473526381305,
+			"texture": "res://assets/objects/metal-drum.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-29.9999980926514,
+				-38.3720932006836
+			],
+			"visualScale": [
+				0.69767439365387,
+				0.69767439365387
+			],
+			"x": 630.000549316406,
+			"y": 449.564392089844
+		},
+		{
+			"burning": true,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "log",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							4.0,
+							30.0,
+							116.0,
+							74.0
+						]
+					}
+				],
+				"id": "log",
+				"mass": 7.0,
+				"material": "wood",
+				"nameJa": "丸太",
+				"opaquePixels": 7312.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.1
+				},
+				"pivotCropped": [
+					61.0,
+					35.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/log.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/log.svg",
+				"viewBox": [
+					3.0,
+					29.0,
+					118.0,
+					76.0
+				],
+				"webp": "raster/objects/log.webp",
+				"worldHeight": 48.3050847457627,
+				"worldScale": 0.635593220338983,
+				"worldWidth": 75.0
+			},
+			"rotation": -0.0000000341660104652419,
+			"texture": "res://assets/objects/log.svg",
+			"tint": "ffc291ff",
+			"visualPosition": [
+				-38.7711868286133,
+				-22.2457637786865
+			],
+			"visualScale": [
+				0.635593235492706,
+				0.635593235492706
+			],
+			"x": 545.0,
+			"y": 364.592193603516
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0220",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/ice-bomb.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "ひょうけつだま",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				169.0,
+				18.75
+			],
+			"text": "44 / なんでもおさらい",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				77.0,
+				304.0,
+				44.0
+			],
+			"text": "みず・ほのお・こおり・ばくはつ！ マイナスのじゃまものを\nかたづけよう。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 1,
+			"color": "ffd36cff",
+			"fontSize": 14,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				746.0,
+				298.0,
+				196.0,
+				17.5
+			],
+			"text": "かえんほうしゃき",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 1.00833333333333,
+	"firePatches": [
+		{
+			"radius": 23.0,
+			"source": false,
+			"x": 512.0,
+			"y": 381.0
+		},
+		{
+			"radius": 23.0,
+			"source": false,
+			"x": 544.0,
+			"y": 381.0
+		},
+		{
+			"radius": 23.0,
+			"source": false,
+			"x": 576.0,
+			"y": 381.0
+		}
+	],
+	"followingItem": "ice-bomb",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "flamethrower",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			0.629629611968994,
+			0.629629611968994
+		],
+		"texture": "res://assets/objects/flamethrower.svg"
+	},
+	"map": "44-review",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 220,
+	"scoreMarker": [
+		[
+			53.0,
+			476.0
+		],
+		[
+			627.0,
+			476.0
+		],
+		[
+			645.0,
+			498.0
+		],
+		[
+			35.0,
+			498.0
+		]
+	],
+	"scoreZone": [
+		35.0,
+		80.0,
+		610.0,
+		410.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 44,
+	"trajectory": [
+		[
+			660.764709472656,
+			292.268341064453,
+			0.96,
+			"ff67dbff"
+		],
+		[
+			627.029846191406,
+			273.93896484375,
+			0.92,
+			"ff67dbff"
+		],
+		[
+			593.295043945312,
+			259.137573242188,
+			0.88,
+			"ff67dbff"
+		],
+		[
+			559.560180664062,
+			247.864196777344,
+			0.84,
+			"ff67dbff"
+		],
+		[
+			525.825317382812,
+			240.118804931641,
+			0.8,
+			"ff67dbff"
+		],
+		[
+			492.090515136719,
+			235.901428222656,
+			0.76,
+			"ff67dbff"
+		],
+		[
+			458.355712890625,
+			235.212036132812,
+			0.72,
+			"ff67dbff"
+		],
+		[
+			424.620880126953,
+			238.050659179688,
+			0.68,
+			"ff67dbff"
+		],
+		[
+			390.886016845703,
+			244.417266845703,
+			0.64,
+			"ff67dbff"
+		],
+		[
+			357.151184082031,
+			254.311874389648,
+			0.6,
+			"ff67dbff"
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": [
+		[
+			205.0,
+			430.0,
+			290.0,
+			60.0
+		]
+	]
+}

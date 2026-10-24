@@ -1,9 +1,9 @@
 {
-	"checks": 554,
+	"checks": 629,
 	"engine": "4.7.2-stable (official)",
 	"failures": [],
 	"observations": {
-		"final_score": 1740,
+		"final_score": 1750,
 		"finalize_seconds": 12.0083333333333,
 		"first_shot_bodies": 1,
 		"first_shot_floor_overlap": 0.154449462890625,
@@ -20,6 +20,8 @@
 			"monitor"
 		],
 		"office_initial_score": 620,
+		"review_dry_slide": 1.8966064453125,
+		"review_ice_slide": 28.3837127685547,
 		"village_initial_forests": 6,
 		"village_initial_score": 900,
 		"village_selected_queue": [

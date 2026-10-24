@@ -698,7 +698,23 @@
       "flammable": false,
       "burnSeconds": null,
       "explosionResistance": 0.12
-    }
+    },
+    "cpu": {},
+    "ram": {},
+    "storage-drive": {},
+    "optical-drive": {},
+    "graphics-card": {},
+    "motherboard": {},
+    "pc-case": {},
+    "wifi-antenna": {},
+    "pc-cable": {},
+    "power-supply": {},
+    "usb-drive": {},
+    "os-package": {},
+    "hardcover-book": {},
+    "open-book": {},
+    "book-stack": {},
+    "cannon-object": {}
   },
   "stateRules": {
     "breakage": {

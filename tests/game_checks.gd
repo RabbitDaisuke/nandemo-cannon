@@ -298,7 +298,7 @@ func _catalog_search_checks() -> void:
 	game._show_catalog(2)
 	var edit: LineEdit = game.catalog_search_edit
 	var editor_id = edit.get_instance_id()
-	_check(edit.text.is_empty() and game.catalog_query.is_empty() and game.catalog_results.size() == game.catalog.ordered_items.size(), "Opening the catalog did not start with an empty unfiltered search")
+	_check(edit.text.is_empty() and game.catalog_query.is_empty() and game.catalog_results.size() == game.catalog.selectable_items().size(), "Opening the catalog did not start with an empty unfiltered search")
 	_check(not edit.has_focus(), "Opening the mobile item list forced a software keyboard focus")
 	edit.grab_focus()
 	_type_catalog_query("かみなり")
@@ -318,7 +318,7 @@ func _catalog_search_checks() -> void:
 	game._close_modal()
 	_check(game.catalog_query.is_empty() and game.catalog_recent_searches == ["たべもの", "かみなり"], "Closing search retained a hidden filter or failed to keep the last two queries")
 	game._show_catalog()
-	_check(game.catalog_search_edit.text.is_empty() and game.catalog_results.size() == game.catalog.ordered_items.size() and game.catalog_page == 2, "Reopening catalog silently reused the last filter or lost its unfiltered page")
+	_check(game.catalog_search_edit.text.is_empty() and game.catalog_results.size() == game.catalog.selectable_items().size() and game.catalog_page == 2, "Reopening catalog silently reused the last filter or lost its unfiltered page")
 	for button in game.catalog_recent_buttons:
 		_check(button.position.x >= game.catalog_search_edit.position.x + game.catalog_search_edit.size.x and button.position.x + button.size.x <= 772, "Recent searches are not entirely to the right of the input and before Close")
 	await _snapshot("catalog-search-history")
@@ -353,6 +353,68 @@ func _catalog_search_checks() -> void:
 	_check(game.catalog_query.is_empty() and game.catalog_page == 0 and game.catalog_recent_searches.size() == 2, "Changing stages leaked a search/page or cleared the in-memory recent searches")
 	_check_visible_glyphs("Search header and recent buttons")
 	game._close_modal()
+
+func _catalog_visibility_checks() -> void:
+	game.load_stage(37)
+	await _frames(2)
+	game._show_catalog()
+	for id in ["counter", "cannon-object"]:
+		_check(game.catalog.items.has(id) and not game.catalog.is_catalog_selectable(id), "Restricted oversized item is not marked hidden from free selection: " + id)
+		_check(game.item_search.find_items(game._item_display_name(id)).any(func(item): return str(item.id) == id), "Hidden free-choice item was removed from the independent search index: " + id)
+		_type_catalog_query(game._item_display_name(id))
+		_check(not game.catalog_results.any(func(item): return str(item.id) == id) and _button_with_meta("item_id", id) == null, "Search exposed a hidden free-choice item: " + id)
+		game.catalog_search_edit.text_submitted.emit(game.catalog_query)
+		game._close_modal()
+		game._show_catalog()
+		_button_with_meta("recent_search", 0).pressed.emit()
+		_check(not game.catalog_results.any(func(item): return str(item.id) == id), "Recent search restored a hidden free-choice item: " + id)
+		game._select_catalog_item(id)
+		_check(game.selected_catalog_id.is_empty() and game._is_catalog_open(), "Selection callback accepted a hidden item: " + id)
+		game.selected_catalog_id = id
+		_check(game.next_item_id() == str(game.current_stage.queue[0]), "A stale hidden free selection bypassed the launch guard: " + id)
+		game.selected_catalog_id = ""
+	# Prove visibility is data-driven without editing a tag or adding an ID branch.
+	game.catalog.items["camera"].catalogSelectable = false
+	_type_catalog_query("カメラ")
+	_check(game.catalog_results.is_empty() and game.item_search.find_items("カメラ").any(func(item): return str(item.id) == "camera"), "Picker restriction is not independent of names and manual search tags")
+	game.catalog.items["camera"].erase("catalogSelectable")
+	_type_catalog_query("カメラ")
+	_check(game.catalog_results.any(func(item): return str(item.id) == "camera"), "Omitting catalogSelectable did not restore the default visible behavior")
+	game._close_modal()
+	game.load_stage(38)
+	await _frames(2)
+	_check(game.current_stage.queue.has("counter") and float(game.catalog.items["counter"].worldWidth) == 140.0, "Hiding the counter changed its authored stage availability or original size")
+
+func _seed_menu_checks() -> void:
+	var initial_seed: String = game.seed_text
+	game.load_stage(40)
+	await _frames(2)
+	var original_queue: Array = game.current_stage.queue.duplicate()
+	game._show_seed()
+	var repeat = _button_with_meta("seed_action", "repeat")
+	var different = _button_with_meta("seed_action", "different")
+	_check(repeat != null and different != null, "Seed menu is missing one of its restart choices")
+	if repeat == null or different == null:
+		return
+	_check(is_equal_approx(repeat.position.y, different.position.y) and repeat.get_rect().end.x < different.position.x and different.get_rect().end.x <= game.modal.size.x, "Seed restart buttons are not placed side by side inside the panel")
+	_check_visible_glyphs("Seed restart choices")
+	await _snapshot("seed-menu")
+	repeat.pressed.emit()
+	await _frames(2)
+	_check(game.stage_index == 40 and game.seed_text == initial_seed and game.current_stage.queue == original_queue and game.shots_fired == 0, "Repeating a seed did not reproduce the same stage and queue")
+	game._show_seed()
+	_button_with_meta("seed_action", "different").pressed.emit()
+	await _frames(2)
+	var new_seed: String = game.seed_text
+	var new_queue: Array = game.current_stage.queue.duplicate()
+	_check(new_seed != initial_seed and new_seed.length() == 16 and game.stage_index == 40 and game.shots_fired == 0 and not is_instance_valid(game.modal), "New-seed button failed to start a fresh attempt on the same stage")
+	game._show_seed()
+	_button_with_meta("seed_action", "repeat").pressed.emit()
+	await _frames(2)
+	_check(game.seed_text == new_seed and game.current_stage.queue == new_queue, "Generated seed cannot reproduce its selected queue through the existing restart button")
+	game.seed_text = initial_seed
+	game.load_stage(0)
+	await _frames(2)
 
 
 func _late_stage_checks() -> void:
@@ -520,6 +582,110 @@ func _village_stage_checks() -> void:
 		await _frames(20)
 		_check(forest.alive and forest.position.distance_to(start_position) > 1.0, "A village forest prop does not move under an impulse")
 
+func _computer_and_bookstore_checks() -> void:
+	game.load_stage(41)
+	await _frames(2)
+	_check(game.current_stage.queue.count("ram") == 3 and game.current_stage.queue.has("os-package") and game.current_stage.queue.size() == 15, "Computer stage lost its repeated memory sticks, operating-system package, or fifteen throws")
+	var support_heights: Dictionary = {}
+	var no_exclusions: Array[RID] = []
+	for x in [80, 205, 300, 390, 500, 630]:
+		var hit: Dictionary = game.cast_solid(Vector2(x, 150), Vector2(x, 525), no_exclusions, 1)
+		if not hit.is_empty():
+			support_heights[roundi(Vector2(hit.position).y)] = true
+	_check(support_heights.size() >= 4, "Computer circuit board is visually uneven but lacks different physical support heights")
+	await _snapshot("42-computer")
+	game.load_stage(42)
+	await _frames(120)
+	var terrain = game.stage_root.get_node("StaticTerrain")
+	var moving: Node2D = null
+	for child in terrain.get_children():
+		if child.has_meta("moving_terrain"):
+			moving = child
+	_check(moving != null and game.current_stage.get("abyss", []).size() > 0, "Bookstore is missing its moving physical shelf or the pit below it")
+	if moving != null:
+		var at = moving.position
+		await _frames(60)
+		_check(moving.position.distance_to(at) > 2.0 and moving is AnimatableBody2D, "Bookstore shelf art moves without a real moving collider")
+		_check(game.cast_solid(Vector2(315, 462), Vector2(315, 540), no_exclusions, 1).is_empty(), "A fixed floor underneath the bookstore lift can trap objects")
+	_check(game.actors.size() == 3 and game.actors.all(func(actor): return actor.alive and actor.can_score and not actor.freeze) and game.calculate_score() > 0, "Bookstore's initially placed books are not movable scoring objects")
+	await _snapshot("43-bookstore")
+	var falling = game._create_actor(game.catalog.items["hardcover-book"], Vector2(315, 505))
+	falling.linear_velocity = Vector2(0, 100)
+	await _frames(45)
+	_check(not is_instance_valid(falling) or not falling.alive, "A book dropped below the moving shelf survived its pit")
+
+func _review_stage_checks() -> void:
+	game.load_stage(43)
+	await _frames(120)
+	var source: Dictionary = game.catalog.stages[43]
+	var distinct: Dictionary = {}
+	for id in game.current_stage.queue:
+		distinct[id] = true
+	_check(source.queue.size() == 30 and distinct.size() == 15 and game.current_stage.queue.all(func(id): return id in source.queue), "Review stage did not sample fifteen distinct kinds from its thirty candidates")
+	_check(game.actors.size() >= 8 and game.actors.any(func(actor): return actor.has_meta("score_penalty")), "Review stage lost its crowded obstacles and negative-score objects")
+	var upper_crates = game.actors.filter(func(actor): return actor.item_id == "wooden-crate" and is_equal_approx(float(actor.record.worldWidth), 44.0))
+	_check(upper_crates.size() == 1 and upper_crates[0].get_world_bounds().position.y >= 328.0 and upper_crates[0].get_world_bounds().end.y < 380.0, "A preplaced crate below the shelf was swept onto its top during physics insertion")
+	_check(not game.liquid.regions.is_empty() and Vector2(game.liquid.regions[0].velocity).x > 0.0 and not game.hazards.patches.is_empty(), "Review stage did not instantiate real flowing water and floor fire")
+	_check(is_equal_approx(game.surface_friction_at(Vector2(65, 420)), 0.025) and game.surface_friction_at(Vector2(705, 450)) < 0.0, "Review's localized ice either has no friction effect or leaks onto an ordinary floor")
+	await _snapshot("44-review")
+	var negative: ThrowBody = null
+	for actor in game.actors:
+		if actor.has_meta("score_penalty"):
+			negative = actor
+			break
+	if negative != null:
+		# Isolate one penalty inside the score area, then change its height.
+		for actor in game.actors:
+			actor.can_score = actor == negative
+		negative.position = Vector2(300, 200)
+		var low_score = game.calculate_score()
+		negative.position.y -= 50
+		_check(low_score < 0 and game.calculate_score() == low_score, "Review obstacle gives positive points or receives a height bonus")
+	# Equal boxes start at rest on ice and dry floor; compare their real motion.
+	for actor in game.actors.duplicate():
+		game.actors.erase(actor)
+		actor.free()
+	var icy = game._create_preplaced_actor({"id": "wooden-crate", "x": 65, "groundY": 420, "width": 32})
+	var dry = game._create_preplaced_actor({"id": "wooden-crate", "x": 705, "groundY": 450, "width": 32})
+	await _frames(120)
+	var ice_x: float = icy.position.x
+	var dry_x: float = dry.position.x
+	icy.sleeping = false
+	dry.sleeping = false
+	icy.linear_velocity = Vector2(50, 0)
+	dry.linear_velocity = Vector2(50, 0)
+	await _frames(90)
+	var ice_slide = absf(icy.position.x - ice_x)
+	var dry_slide = absf(dry.position.x - dry_x)
+	_check(ice_slide > dry_slide + 4.0 and icy.physics_material_override.friction < 0.05 and dry.physics_material_override.friction > 0.1, "The ice tile is only metadata: an equal physical box does not slide farther than on dry floor")
+	observations.review_ice_slide = ice_slide
+	observations.review_dry_slide = dry_slide
+
+func _cannon_two_checks() -> void:
+	game.load_stage(44)
+	await _frames(2)
+	var story = "なんでもキャノン、いままではっしゃしていなかったものがあった。\nそれは、なんでもキャノンでなんでもキャノンをとばすことだった！"
+	_check(game.current_stage.queue.back() == "cannon-object" and game.current_stage.queue.count("cannon-object") == 1 and game.current_stage.queue.size() == 15, "Cannon2 does not reserve the original-size cannon for its fifteenth throw")
+	_check(game.lesson_label.text == story and game.lesson_label.get_line_count() == 2 and game.lesson_label.get_theme_font_size("font_size") == 12, "Cannon2 story changed, was truncated, or was squeezed into unreadable type")
+	var record: Dictionary = game.catalog.items["cannon-object"]
+	_check(is_equal_approx(float(record.worldScale), 1.0) and float(record.worldWidth) > 140.0 and int(record.score) == 100 and str(record.behavior) == "solid", "Throwable cannon was shrunk, given inflated points, or activated as another launcher")
+	var original_position: Vector2 = game.cannon.position
+	var original_parts: Array = game.cannon.visual_snapshot()
+	_check(original_parts.all(func(part): return Vector2(part.scale[0], part.scale[1]).is_equal_approx(Vector2.ONE)) and float(record.cannonArtwork.scale) == 1.0, "Throwable cannon scale does not match the existing original cannon parts")
+	await _snapshot("45-cannon-two")
+	game.shots_fired = 14
+	game._update_hud()
+	game.cannon.fire()
+	_check(game.shots_fired == 15 and game.actors.size() == 1 and game.actors[0].item_id == "cannon-object", "The final cannon item was not launched as one physical object")
+	if game.actors.size() != 1:
+		return
+	var actor: ThrowBody = game.actors[0]
+	var at = actor.position
+	_check(actor.is_launched and not actor.freeze and actor.can_score and not actor.has_method("fire") and actor.fuel_seconds <= 0.0, "Throwable cannon acquired launcher behavior instead of ordinary rigid-body scoring")
+	await _frames(45)
+	_check(is_instance_valid(actor) and actor.alive and actor.position.distance_to(at) > 10.0 and game.cannon.position == original_position and game.actors.size() == 1, "Launching the cannon moved the fixed launcher, created extra projectiles, or failed to move the item")
+	await _snapshot("45-cannon-flight")
+
 func _run() -> void:
 	root.size = Vector2i(960, 540)
 	game = GameScript.new()
@@ -535,7 +701,10 @@ func _run() -> void:
 		_check(game.playable and game.current_stage.queue.size() == 15, "Stage is not playable with fifteen throws")
 		_check(game.shots_fired == 0 and not game.next_item_id().is_empty(), "Playable stage has no first item")
 		_check(game.loaded_label.text == game._item_display_name(game.next_item_id()) and game.loaded_label.get_global_rect().end.x <= 948, "Loaded item name is missing or extends outside the HUD")
-		_check(game.lesson_label.position.x == game.score_label.position.x and game.lesson_label.position.y >= game.score_label.get_global_rect().end.y and game.lesson_label.get_global_rect().end.x < game.next_name.position.x, "Lesson is not below the score or overlaps the NEXT label")
+		if bool(game.lesson_label.get_meta("wide_lesson", false)):
+			_check(game.lesson_label.position.y >= game.stage_label.get_global_rect().end.y and game.lesson_label.position.y >= game.next_name.get_global_rect().end.y and game.lesson_label.get_global_rect().end.x <= 948, "Wide lesson overlaps the stage/NEXT captions or extends off screen")
+		else:
+			_check(game.lesson_label.position.x == game.score_label.position.x and game.lesson_label.position.y >= game.score_label.get_global_rect().end.y and game.lesson_label.get_global_rect().end.x < game.next_name.position.x, "Lesson is not below the score or overlaps the NEXT label")
 		_check(game.lesson_label.get_line_count() <= 3 and game.lesson_label.get_global_rect().end.y <= 127.0, "Lesson extends beyond the upper HUD")
 		if index in [32, 34]:
 			var lesson_lines = game.lesson_label.text.split("\n")
@@ -547,7 +716,12 @@ func _run() -> void:
 	await _preplaced_scoring_checks()
 	await _office_stage_checks()
 	await _village_stage_checks()
+	await _computer_and_bookstore_checks()
+	await _review_stage_checks()
+	await _cannon_two_checks()
 	await _catalog_search_checks()
+	await _catalog_visibility_checks()
+	await _seed_menu_checks()
 	game.load_stage(0)
 	await _frames(2)
 	await _snapshot("01-initial")
@@ -709,16 +883,17 @@ func _run() -> void:
 	game.load_stage(14)
 	await _frames(2)
 	var seen: Dictionary = {}
-	for page in range(ceili(game.catalog.ordered_items.size() / 24.0)):
+	var selectable: Array = game.catalog.selectable_items()
+	for page in range(ceili(selectable.size() / 24.0)):
 		game._show_catalog(page)
 		_check_visible_glyphs("Catalog page %d" % (page + 1))
 		for child in game.modal.get_children():
 			if child is Button and child.has_meta("item_id"):
 				seen[child.get_meta("item_id")] = true
-	_check(seen.size() == game.catalog.ordered_items.size(), "Sandbox picker did not expose every catalog object")
+	_check(seen.size() == selectable.size() and not seen.has("counter") and not seen.has("cannon-object"), "Sandbox picker did not expose exactly the selectable catalog objects")
 	var camera_page: int = 0
-	for index in range(game.catalog.ordered_items.size()):
-		if game.catalog.ordered_items[index].id == "camera":
+	for index in range(selectable.size()):
+		if selectable[index].id == "camera":
 			camera_page = index / 24
 			game._show_catalog(camera_page)
 			break

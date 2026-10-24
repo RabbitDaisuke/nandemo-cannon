@@ -154,7 +154,7 @@ async function render(snapshot){
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges"><defs>${definitions.join('')}</defs>${output}</svg>`;
 }
-const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result','catalog-search','catalog-search-history'];
+const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result','catalog-search','catalog-search-history','seed-menu','45-cannon-flight'];
 const stages=JSON.parse(await read('data/stages.json')).stages;
 for(let page=1;page<=Math.ceil(stages.length/15);page++)names.push(`maps-page-${page}`);
 for(const stage of stages)if(stage.id>=21)names.push(stage.map);

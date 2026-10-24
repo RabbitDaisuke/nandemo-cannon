@@ -240,10 +240,15 @@ func _run() -> void:
 	future_item.id = "future-catalog-item"
 	var random_catalog = GameCatalog.new()
 	random_catalog.ordered_items = [future_item]
+	random_catalog.items = {"future-catalog-item": future_item}
+	_expect(random_catalog.selectable_items().size() == 1 and random_catalog.is_catalog_selectable("future-catalog-item") and not random_catalog.is_catalog_selectable("missing-item"), "catalog visibility defaults to available only for known items")
+	future_item.catalogSelectable = false
+	_expect(random_catalog.selectable_items().is_empty() and not random_catalog.is_catalog_selectable("future-catalog-item"), "catalogSelectable hides an arbitrary item without an item-ID special case")
 	var laboratory_rng = RandomNumberGenerator.new()
 	laboratory_rng.seed = 91
 	var future_queue = random_catalog.build_queue({"queuePolicy": "randomCatalog", "queue": ["refrigerator"]}, laboratory_rng)
-	_expect(future_queue.size() == 15 and future_queue.count("future-catalog-item") == 15, "random laboratory samples the live catalog including later additions")
+	_expect(future_queue.size() == 15 and future_queue.count("future-catalog-item") == 15, "random laboratory samples the full live catalog including later additions and picker-hidden entries")
+	_expect(random_catalog.build_queue({"queue": future_queue}, laboratory_rng) == future_queue, "picker-hidden entries remain valid in an authored stage queue")
 	_queue_pool_checks(catalog)
 	await _reset(false)
 	var mover = preload("res://src/moving_terrain.gd").new()

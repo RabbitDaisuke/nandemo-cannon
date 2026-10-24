@@ -8,7 +8,7 @@
   "gzipBytes": 10153810,
   "compressedTransportChecks": 3,
   "cdnProvider": "GitHub Pages mirrors",
-  "gameBytes": 13059462,
+  "gameBytes": 13239809,
   "wasmCompilation": "passed",
   "officialJSCDNRouting": "passed",
   "exportedPCKSmoke": "passed",
@@ -21,5 +21,5 @@
     "pages": null
   },
   "lazyMusicBytes": 9463354,
-  "initialGameBytes": 3596108
+  "initialGameBytes": 3776455
 }

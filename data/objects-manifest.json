@@ -17970,7 +17970,8 @@
         "burnSeconds": 5,
         "flowResponse": 0
       },
-      "opaquePixels": 10544
+      "opaquePixels": 10544,
+      "catalogSelectable": false
     },
     {
       "id": "coffee-beans",
@@ -19816,6 +19817,1273 @@
         "flowResponse": 1
       },
       "opaquePixels": 4653
+    },
+    {
+      "id": "cpu",
+      "nameJa": "演算装置",
+      "svg": "objects/cpu.svg",
+      "png": "raster/objects/cpu.png",
+      "webp": "raster/objects/cpu.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        8,
+        112,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        56
+      ],
+      "worldWidth": 49,
+      "worldHeight": 49,
+      "worldScale": 0.4375,
+      "material": "metal",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "cpu",
+      "fixtures": [
+        {
+          "rect": [
+            17,
+            17,
+            94,
+            94
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 10276
+    },
+    {
+      "id": "ram",
+      "nameJa": "メモリ",
+      "svg": "objects/ram.svg",
+      "png": "raster/objects/ram.png",
+      "webp": "raster/objects/ram.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        36,
+        120,
+        62
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        28
+      ],
+      "worldWidth": 86,
+      "worldHeight": 44.43333333333334,
+      "worldScale": 0.7166666666666667,
+      "material": "metal",
+      "mass": 1.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "ram",
+      "fixtures": [
+        {
+          "rect": [
+            4,
+            36,
+            120,
+            53
+          ]
+        },
+        {
+          "rect": [
+            12,
+            89,
+            43,
+            10
+          ]
+        },
+        {
+          "rect": [
+            64,
+            89,
+            52,
+            10
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 6855
+    },
+    {
+      "id": "storage-drive",
+      "nameJa": "ストレージ",
+      "svg": "objects/storage-drive.svg",
+      "png": "raster/objects/storage-drive.png",
+      "webp": "raster/objects/storage-drive.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        19,
+        8,
+        90,
+        114
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        45,
+        56
+      ],
+      "worldWidth": 65,
+      "worldHeight": 82.33333333333333,
+      "worldScale": 0.7222222222222222,
+      "material": "metal",
+      "mass": 4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "storage-drive",
+      "fixtures": [
+        {
+          "rect": [
+            19,
+            8,
+            90,
+            114
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 10260
+    },
+    {
+      "id": "optical-drive",
+      "nameJa": "ディスク読み取り機",
+      "svg": "objects/optical-drive.svg",
+      "png": "raster/objects/optical-drive.png",
+      "webp": "raster/objects/optical-drive.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        24,
+        114,
+        82
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        40
+      ],
+      "worldWidth": 90,
+      "worldHeight": 64.73684210526316,
+      "worldScale": 0.7894736842105263,
+      "material": "metal",
+      "mass": 4.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "optical-drive",
+      "fixtures": [
+        {
+          "rect": [
+            7,
+            24,
+            114,
+            82
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 9348
+    },
+    {
+      "id": "graphics-card",
+      "nameJa": "グラフィック装置",
+      "svg": "objects/graphics-card.svg",
+      "png": "raster/objects/graphics-card.png",
+      "webp": "raster/objects/graphics-card.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        18,
+        118,
+        84
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        46
+      ],
+      "worldWidth": 107,
+      "worldHeight": 76.16949152542374,
+      "worldScale": 0.9067796610169492,
+      "material": "metal",
+      "mass": 5.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "graphics-card",
+      "fixtures": [
+        {
+          "rect": [
+            5,
+            27,
+            118,
+            62
+          ]
+        },
+        {
+          "rect": [
+            10,
+            18,
+            9,
+            84
+          ]
+        },
+        {
+          "rect": [
+            28,
+            89,
+            75,
+            10
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 7874,
+      "manufacturer": "NVIDIA",
+      "hardwareFamily": "graphics-card"
+    },
+    {
+      "id": "motherboard",
+      "nameJa": "マザーボード",
+      "svg": "objects/motherboard.svg",
+      "png": "raster/objects/motherboard.png",
+      "webp": "raster/objects/motherboard.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        5,
+        112,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        59
+      ],
+      "worldWidth": 99,
+      "worldHeight": 104.30357142857143,
+      "worldScale": 0.8839285714285714,
+      "material": "metal",
+      "mass": 5.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "motherboard",
+      "fixtures": [
+        {
+          "rect": [
+            8,
+            5,
+            112,
+            118
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 13216
+    },
+    {
+      "id": "pc-case",
+      "nameJa": "パソコンの箱",
+      "svg": "objects/pc-case.svg",
+      "png": "raster/objects/pc-case.png",
+      "webp": "raster/objects/pc-case.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        19,
+        5,
+        93,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        45,
+        59
+      ],
+      "worldWidth": 73,
+      "worldHeight": 92.6236559139785,
+      "worldScale": 0.7849462365591398,
+      "material": "metal",
+      "mass": 16,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pc-case",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              19,
+              15
+            ],
+            [
+              89,
+              5
+            ],
+            [
+              112,
+              23
+            ],
+            [
+              112,
+              120
+            ],
+            [
+              19,
+              120
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 10229
+    },
+    {
+      "id": "wifi-antenna",
+      "nameJa": "電波のアンテナ",
+      "svg": "objects/wifi-antenna.svg",
+      "png": "raster/objects/wifi-antenna.png",
+      "webp": "raster/objects/wifi-antenna.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        15,
+        102,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        49
+      ],
+      "worldWidth": 69,
+      "worldHeight": 71.02941176470588,
+      "worldScale": 0.6764705882352942,
+      "material": "plastic",
+      "mass": 1.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wifi-antenna",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              14,
+              102
+            ],
+            [
+              36,
+              85
+            ],
+            [
+              93,
+              85
+            ],
+            [
+              116,
+              102
+            ],
+            [
+              116,
+              120
+            ],
+            [
+              14,
+              120
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              31,
+              18
+            ],
+            [
+              40,
+              15
+            ],
+            [
+              58,
+              90
+            ],
+            [
+              46,
+              94
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              89,
+              15
+            ],
+            [
+              99,
+              18
+            ],
+            [
+              85,
+              95
+            ],
+            [
+              73,
+              91
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 4741
+    },
+    {
+      "id": "pc-cable",
+      "nameJa": "ケーブル",
+      "svg": "objects/pc-cable.svg",
+      "png": "raster/objects/pc-cable.png",
+      "webp": "raster/objects/pc-cable.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        25,
+        12,
+        93,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        39,
+        52
+      ],
+      "worldWidth": 75,
+      "worldHeight": 84.6774193548387,
+      "worldScale": 0.8064516129032258,
+      "material": "rubber",
+      "mass": 1.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pc-cable",
+      "fixtures": [
+        {
+          "rect": [
+            25,
+            24,
+            59,
+            7
+          ]
+        },
+        {
+          "rect": [
+            25,
+            31,
+            7,
+            28
+          ]
+        },
+        {
+          "rect": [
+            32,
+            52,
+            66,
+            7
+          ]
+        },
+        {
+          "rect": [
+            91,
+            59,
+            7,
+            16
+          ]
+        },
+        {
+          "rect": [
+            80,
+            12,
+            27,
+            27
+          ]
+        },
+        {
+          "rect": [
+            103,
+            18,
+            13,
+            15
+          ]
+        },
+        {
+          "rect": [
+            91,
+            75,
+            27,
+            27
+          ]
+        },
+        {
+          "rect": [
+            109,
+            102,
+            9,
+            15
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.85,
+        "restitution": 0.45,
+        "flammable": true,
+        "explosionResistance": 0.65,
+        "burnSeconds": 6,
+        "flowResponse": 1,
+        "coldBrittle": true
+      },
+      "opaquePixels": 2883
+    },
+    {
+      "id": "power-supply",
+      "nameJa": "電源装置",
+      "svg": "objects/power-supply.svg",
+      "png": "raster/objects/power-supply.png",
+      "webp": "raster/objects/power-supply.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        16,
+        116,
+        100
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        48
+      ],
+      "worldWidth": 88,
+      "worldHeight": 75.86206896551724,
+      "worldScale": 0.7586206896551724,
+      "material": "metal",
+      "mass": 7.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "power-supply",
+      "fixtures": [
+        {
+          "rect": [
+            8,
+            16,
+            106,
+            100
+          ]
+        },
+        {
+          "rect": [
+            114,
+            55,
+            10,
+            44
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 11040
+    },
+    {
+      "id": "usb-drive",
+      "nameJa": "USBストレージ",
+      "svg": "objects/usb-drive.svg",
+      "png": "raster/objects/usb-drive.png",
+      "webp": "raster/objects/usb-drive.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        26,
+        5,
+        76,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        38,
+        59
+      ],
+      "worldWidth": 46,
+      "worldHeight": 71.42105263157895,
+      "worldScale": 0.6052631578947368,
+      "material": "plastic",
+      "mass": 0.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "usb-drive",
+      "fixtures": [
+        {
+          "rect": [
+            37,
+            5,
+            54,
+            37
+          ]
+        },
+        {
+          "rect": [
+            26,
+            42,
+            76,
+            81
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 8154
+    },
+    {
+      "id": "os-package",
+      "nameJa": "パソコンのプログラム",
+      "svg": "objects/os-package.svg",
+      "png": "raster/objects/os-package.png",
+      "webp": "raster/objects/os-package.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        23,
+        7,
+        86,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        41,
+        57
+      ],
+      "worldWidth": 61,
+      "worldHeight": 82.27906976744187,
+      "worldScale": 0.7093023255813954,
+      "material": "paper",
+      "mass": 1.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "os-package",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              23,
+              17
+            ],
+            [
+              91,
+              7
+            ],
+            [
+              109,
+              19
+            ],
+            [
+              109,
+              112
+            ],
+            [
+              40,
+              123
+            ],
+            [
+              23,
+              110
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 9039,
+      "softwareKind": "operating-system"
+    },
+    {
+      "id": "hardcover-book",
+      "nameJa": "本",
+      "svg": "objects/hardcover-book.svg",
+      "png": "raster/objects/hardcover-book.png",
+      "webp": "raster/objects/hardcover-book.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        25,
+        7,
+        83,
+        115
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        39,
+        57
+      ],
+      "worldWidth": 47,
+      "worldHeight": 65.12048192771086,
+      "worldScale": 0.5662650602409639,
+      "material": "paper",
+      "mass": 1.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "hardcover-book",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              25,
+              16
+            ],
+            [
+              88,
+              7
+            ],
+            [
+              108,
+              22
+            ],
+            [
+              108,
+              111
+            ],
+            [
+              44,
+              122
+            ],
+            [
+              25,
+              108
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 8622
+    },
+    {
+      "id": "open-book",
+      "nameJa": "開いた本",
+      "svg": "objects/open-book.svg",
+      "png": "raster/objects/open-book.png",
+      "webp": "raster/objects/open-book.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        3,
+        24,
+        122,
+        95
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        61,
+        40
+      ],
+      "worldWidth": 87,
+      "worldHeight": 67.74590163934427,
+      "worldScale": 0.7131147540983607,
+      "material": "paper",
+      "mass": 1.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "open-book",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              3,
+              24
+            ],
+            [
+              50,
+              31
+            ],
+            [
+              64,
+              43
+            ],
+            [
+              78,
+              31
+            ],
+            [
+              125,
+              24
+            ],
+            [
+              125,
+              102
+            ],
+            [
+              80,
+              108
+            ],
+            [
+              64,
+              119
+            ],
+            [
+              48,
+              108
+            ],
+            [
+              3,
+              102
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 9460
+    },
+    {
+      "id": "book-stack",
+      "nameJa": "本の山",
+      "svg": "objects/book-stack.svg",
+      "png": "raster/objects/book-stack.png",
+      "webp": "raster/objects/book-stack.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        6,
+        17,
+        116,
+        99
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        58,
+        47
+      ],
+      "worldWidth": 78,
+      "worldHeight": 66.56896551724138,
+      "worldScale": 0.6724137931034483,
+      "material": "paper",
+      "mass": 3.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "book-stack",
+      "fixtures": [
+        {
+          "rect": [
+            9,
+            84,
+            113,
+            32
+          ]
+        },
+        {
+          "rect": [
+            17,
+            51,
+            100,
+            33
+          ]
+        },
+        {
+          "rect": [
+            6,
+            17,
+            111,
+            34
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 10690
+    },
+    {
+      "id": "cannon-object",
+      "nameJa": "なんでもキャノン",
+      "svg": "objects/cannon-object.svg",
+      "png": "raster/objects/cannon-object.png",
+      "webp": "raster/objects/cannon-object.webp",
+      "sourceGrid": [
+        256,
+        256
+      ],
+      "viewBox": [
+        34,
+        110,
+        193,
+        130
+      ],
+      "pivotSource": [
+        128,
+        180
+      ],
+      "pivotCropped": [
+        94,
+        70
+      ],
+      "worldWidth": 193,
+      "worldHeight": 130,
+      "worldScale": 1,
+      "material": "metal",
+      "mass": 24,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "cannon-object",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              96,
+              168
+            ],
+            [
+              177,
+              164
+            ],
+            [
+              190,
+              183
+            ],
+            [
+              190,
+              205
+            ],
+            [
+              124,
+              211
+            ],
+            [
+              94,
+              207
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              183,
+              190
+            ],
+            [
+              218,
+              205
+            ],
+            [
+              226,
+              220
+            ],
+            [
+              226,
+              236
+            ],
+            [
+              207,
+              236
+            ],
+            [
+              178,
+              210
+            ]
+          ]
+        },
+        {
+          "circle": [
+            102,
+            221,
+            18
+          ]
+        },
+        {
+          "circle": [
+            175,
+            215,
+            25
+          ]
+        },
+        {
+          "polygon": [
+            [
+              51.41183393921054,
+              113.06076995515633
+            ],
+            [
+              62.3080861763929,
+              109.70343661101275
+            ],
+            [
+              86.88264750506266,
+              126.91072970154413
+            ],
+            [
+              89.99440524126832,
+              136.41425345808642
+            ],
+            [
+              156.50887121613945,
+              187.87128228873027
+            ],
+            [
+              164.78111682601698,
+              202.2089931440189
+            ],
+            [
+              155.0303174080492,
+              216.13457789693177
+            ],
+            [
+              136.84412199274107,
+              210.72511430834686
+            ],
+            [
+              67.9529250519906,
+              166.14930266042808
+            ],
+            [
+              56.31994599099442,
+              165.32845056265157
+            ],
+            [
+              34.77641723154269,
+              149.02273473688436
+            ],
+            [
+              34.20454084867916,
+              137.63533128382608
+            ]
+          ]
+        },
+        {
+          "circle": [
+            128,
+            185,
+            13
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 11578,
+      "catalogSelectable": false,
+      "cannonArtwork": {
+        "source": "selected-cannon-parts",
+        "scale": 1,
+        "elevation": 35,
+        "base": [
+          77,
+          162
+        ],
+        "pivot": [
+          128,
+          185
+        ],
+        "barrel": [
+          -104,
+          -25
+        ],
+        "trunnion": [
+          115,
+          172
+        ]
+      }
     }
   ]
 }

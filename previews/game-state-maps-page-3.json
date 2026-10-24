@@ -59,7 +59,7 @@
 				"worldScale": 0.872340425531915,
 				"worldWidth": 82.0
 			},
-			"rotation": -1.57166957855225,
+			"rotation": -1.57166814804077,
 			"texture": "res://assets/objects/refrigerator.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -70,8 +70,8 @@
 				0.872340440750122,
 				0.872340440750122
 			],
-			"x": 237.000671386719,
-			"y": 379.921142578125
+			"x": 237.000640869141,
+			"y": 379.921173095703
 		},
 		{
 			"burning": false,
@@ -132,7 +132,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": 0.000491212704218924,
+			"rotation": 0.000502260576467961,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -143,8 +143,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 319.898742675781,
-			"y": 394.124328613281
+			"x": 319.898315429688,
+			"y": 394.123474121094
 		},
 		{
 			"burning": false,
@@ -205,7 +205,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": 0.00000779736637923634,
+			"rotation": -0.00127668492496014,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -216,8 +216,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 318.282867431641,
-			"y": 336.696929931641
+			"x": 318.368591308594,
+			"y": 336.750793457031
 		},
 		{
 			"burning": false,
@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -0.00106329575646669,
+			"rotation": -0.00100275292061269,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -289,8 +289,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 396.202850341797,
-			"y": 387.257110595703
+			"x": 396.236877441406,
+			"y": 387.257598876953
 		},
 		{
 			"burning": false,
@@ -351,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": -0.265441656112671,
+			"rotation": -0.129120960831642,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -362,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 465.891937255859,
-			"y": 385.588165283203
+			"x": 470.825500488281,
+			"y": 385.627410888672
 		}
 	],
 	"angle": 38.0,
@@ -749,10 +749,10 @@
 			"rect": [
 				70.0,
 				69.0,
-				234.0,
+				237.0,
 				27.5
 			],
-			"text": "ステージをえらぶ / 41",
+			"text": "ステージをえらぶ / 45",
 			"type": "label"
 		},
 		{
@@ -1204,6 +1204,162 @@
 			"disabled": false,
 			"fontSize": 16,
 			"rect": [
+				236.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				240.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/42-computer.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				241.0,
+				336.0,
+				82.0,
+				12.5
+			],
+			"text": "42 コンピューター",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				402.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				406.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/43-bookstore.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				407.0,
+				336.0,
+				71.0,
+				12.5
+			],
+			"text": "43 ほんやさん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				568.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				572.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/44-review.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				573.0,
+				336.0,
+				101.0,
+				12.5
+			],
+			"text": "44 なんでもおさらい",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				734.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				738.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/45-cannon-two.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				739.0,
+				336.0,
+				105.0,
+				12.5
+			],
+			"text": "45 なんでもキャノン2",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
 				70.0,
 				403.0,
 				200.0,
@@ -1259,7 +1415,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 15.2666666666664,
+	"elapsed": 15.2833333333331,
 	"firePatches": [],
 	"followingItem": "stool",
 	"font": "res://assets/font/arcade-generated.fnt",

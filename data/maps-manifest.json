@@ -1811,6 +1811,222 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "42-computer",
+      "stage": 42,
+      "nameJa": "コンピューター",
+      "status": "specified",
+      "svg": "maps/42-computer.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            480,
+            960,
+            60
+          ]
+        },
+        {
+          "rect": [
+            45,
+            418,
+            120,
+            62
+          ]
+        },
+        {
+          "rect": [
+            165,
+            450,
+            80,
+            30
+          ]
+        },
+        {
+          "rect": [
+            245,
+            360,
+            100,
+            120
+          ]
+        },
+        {
+          "rect": [
+            345,
+            426,
+            95,
+            54
+          ]
+        },
+        {
+          "rect": [
+            440,
+            395,
+            145,
+            85
+          ]
+        },
+        {
+          "rect": [
+            585,
+            454,
+            100,
+            26
+          ]
+        },
+        {
+          "rect": [
+            705,
+            450,
+            255,
+            30
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "43-bookstore",
+      "stage": 43,
+      "nameJa": "ほんやさん",
+      "status": "specified",
+      "svg": "maps/43-bookstore.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            190,
+            90
+          ]
+        },
+        {
+          "rect": [
+            440,
+            450,
+            520,
+            90
+          ]
+        },
+        {
+          "rect": [
+            35,
+            320,
+            140,
+            18
+          ]
+        },
+        {
+          "rect": [
+            455,
+            350,
+            160,
+            18
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "44-review",
+      "stage": 44,
+      "nameJa": "なんでもおさらい",
+      "status": "specified",
+      "svg": "maps/44-review.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            490,
+            960,
+            50
+          ]
+        },
+        {
+          "rect": [
+            0,
+            420,
+            200,
+            70
+          ]
+        },
+        {
+          "rect": [
+            500,
+            390,
+            100,
+            100
+          ]
+        },
+        {
+          "rect": [
+            680,
+            450,
+            280,
+            40
+          ]
+        },
+        {
+          "rect": [
+            55,
+            310,
+            160,
+            18
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "45-cannon-two",
+      "stage": 45,
+      "nameJa": "なんでもキャノン2",
+      "status": "specified",
+      "svg": "maps/45-cannon-two.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            65,
+            420,
+            245,
+            30
+          ]
+        },
+        {
+          "rect": [
+            330,
+            390,
+            220,
+            60
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }
