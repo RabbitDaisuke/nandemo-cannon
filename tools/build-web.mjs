@@ -155,6 +155,7 @@ await fs.copyFile(path.join(root, 'web/bgmer-player.mjs'), path.join(standalone,
 await fs.copyFile(path.join(root, 'web/wasm-loader.mjs'), path.join(standalone, 'wasm-loader.mjs'));
 await fs.copyFile(path.join(root, 'web/share.mjs'), path.join(standalone, 'share.mjs'));
 await fs.copyFile(path.join(root, 'web/input-hint.mjs'), path.join(standalone, 'input-hint.mjs'));
+await fs.copyFile(path.join(root, 'web/progress-store.mjs'), path.join(standalone, 'progress-store.mjs'));
 await fs.writeFile(path.join(standalone, 'runtime.json'), JSON.stringify(runtimeSettings));
 if (mode !== 'source') await fs.cp(path.join(root, 'out/runtime'), path.join(standalone, 'runtime'), {recursive: true});
 const html = await fs.readFile(path.join(standalone, 'index.html'), 'utf8');

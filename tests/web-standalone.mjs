@@ -9,6 +9,7 @@ import {fileURLToPath} from 'node:url';
 import {createServer} from 'node:http';
 import {execFileSync} from 'node:child_process';
 import {BGM_TRACKS} from '../web/bgmer-player.mjs';
+import {installProgressStore} from '../web/progress-store.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const archive = path.join(root, 'out/packages/nandemo-cannon-standalone-4.7.2.zip');
@@ -32,7 +33,7 @@ try {
   assert(total <= 500 * 1024 * 1024, 'Oversized upload');
   assert(!names.some(name => /\.(gz|mjs|zip)$/.test(name)), 'Unexpected compression or module MIME dependency');
   assert(!names.some(name => name.includes('third-party/openclipart')), 'Source-only SVG provenance leaked into the upload files');
-  for (const name of ['share', 'bgmer-player']) {
+  for (const name of ['share', 'bgmer-player', 'progress-store']) {
     assert((await fs.readFile(path.join(unpacked, `${name}.js`))).equals(await fs.readFile(path.join(root, `web/${name}.mjs`))), `Stale bundled module: ${name}`);
   }
   const hintSource = await fs.readFile(path.join(root, 'web/input-hint.mjs'), 'utf8');
@@ -75,6 +76,11 @@ try {
   const script = html.match(/<script type="module">([\s\S]*?)<\/script>/)?.[1];
   assert(script, 'Missing boot script');
   for (const [, name] of script.matchAll(/from '([^']+)'/g)) await localFetch(name);
+  // Simulate both host identities while serving every file from loopback.
+  // These PLiCy URLs are fixtures; no request is sent to that service.
+  for (const locationHref of [base, 'https://html5.plicy.net/uploads/246810/index.html']) {
+  const plicy = locationHref.startsWith('https://html5.plicy.net/');
+  const saved = new Map();
   const nodes = new Map(['#start','#progress','#message','#cover','#canvas'].map(id => [id, {
     hidden:id === '#progress', disabled:false, textContent:'',
     addEventListener(name, fn) { this[name] = fn; },
@@ -82,6 +88,9 @@ try {
   }]));
   let started = false, musicStarted = false;
   const context = vm.createContext({console, URL, Response, WebAssembly, fetch:localFetch,
+    location:{href:locationHref},
+    localStorage:{getItem:key=>saved.get(key)??null,setItem:(key,value)=>saved.set(key,value)},
+    installProgressStore,
     installInputHint(){},
     installBGM(_host, options) {
       assert.equal(options.mirrorBase, null, 'Portal did not select local-only music');
@@ -102,6 +111,20 @@ try {
             async startGame() {
               assert.equal(this.config.mainPack, 'index.pck');
               assert.equal(this.config.canvasResizePolicy, 2);
+              assert.equal(JSON.stringify(this.config.persistentPaths), plicy ? '[]' : '["/userfs"]');
+              if (plicy) {
+                // Execute the unchanged official filesystem initializer. With
+                // no persistent mounts it must never touch IDBFS or indexedDB.
+                const fsStart = officialJS.indexOf('var GodotFS=');
+                const fsEnd = officialJS.indexOf(';var GodotOS=', fsStart);
+                assert(fsStart >= 0 && fsEnd > fsStart);
+                const storageContext = vm.createContext({});
+                for (const key of ['indexedDB','IDBFS','FS']) Object.defineProperty(storageContext,key,{get(){throw Error(`PLiCy accessed ${key}`);}});
+                vm.runInContext(officialJS.slice(fsStart, fsEnd + 1), storageContext);
+                await storageContext.GodotFS.init(this.config.persistentPaths);
+                assert.equal(context.NandemoProgress.saveJSON('{"45":1234}'), true);
+                assert.equal(context.NandemoProgress.loadJSON(), '{"45":1234}');
+              }
               const locations = this.config.getModuleConfig(this.config.executable, null);
               const wasmResponse = await localFetch(locations.locateFile('godot.wasm'));
               await WebAssembly.compileStreaming(wasmResponse);
@@ -121,11 +144,12 @@ try {
   vm.runInContext(script.replace(/^import .*;\n/gm, ''), context);
   await nodes.get('#start').click();
   assert(started && musicStarted && nodes.get('#cover').hidden, `Shell boot failed: ${nodes.get('#message').textContent}`);
+  }
   for (const track of BGM_TRACKS) {
     const bytes = Buffer.from(await (await localFetch(track.url)).arrayBuffer());
     assert(bytes.equals(await fs.readFile(path.join(root, 'web', track.url))), `Bundled song changed: ${track.id}`);
   }
-  console.log(JSON.stringify({suite:'standalone',status:'passed',files:names.length,extractedBytes:total,zipBytes:(await fs.stat(archive)).size,httpRequests:requests.length,checks:['ZIP round-trip','upload limits','deep relative paths','exported shell startup with renderer stub','official WASM compilation','official JS worklet routing','PCK and three local songs','original licenses','unchanged Pages input'],browserTests:'not run'}));
+  console.log(JSON.stringify({suite:'standalone',status:'passed',files:names.length,extractedBytes:total,zipBytes:(await fs.stat(archive)).size,httpRequests:requests.length,checks:['ZIP round-trip','upload limits','deep relative paths','exported shell startup with renderer stub','official WASM compilation','official JS worklet routing','PLiCy localStorage with no IDBFS mounts','PCK and three local songs','original licenses','unchanged Pages input'],browserTests:'not run'}));
 } finally {
   if (server) { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
   await fs.rm(unpacked, {recursive:true, force:true});

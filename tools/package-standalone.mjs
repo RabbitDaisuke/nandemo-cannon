@@ -67,7 +67,7 @@ replaceOnce('const bgm = installBGM(window);', 'const bgm = installBGM(window, {
 // ID locally; other upload hosts fall back to the established public game URL.
 replaceOnce('installResultSharing();', "installResultSharing(window, {gameURL: 'https://rabbitdaisuke.github.io/nandemo-cannon/'});");
 // Use universally served JavaScript extensions on upload hosts.
-for (const name of ['share', 'bgmer-player', 'input-hint']) {
+for (const name of ['share', 'bgmer-player', 'input-hint', 'progress-store']) {
   replaceOnce(`'./${name}.mjs'`, `'./${name}.js'`);
   await fs.rename(path.join(target, `${name}.mjs`), path.join(target, `${name}.js`));
 }

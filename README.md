@@ -124,6 +124,8 @@ GitHub Pagesの公開版は広告なしで維持する。PLiCy・itch.ioへの�
 
 投稿版だけに大きな「画面をクリックしてください」の案内を出す。背景は黒86%を重ね、初期画面をうっすら残す。カーソル検出・タップ・キー操作で消え、同じページでは再表示しない。入力やゲームの演算は止めない。`web/input-hint.mjs`の`STANDALONE_INPUT_HINT`はソースではfalse、Actionsが`STANDALONE_INPUT_HINT: "1"`を渡して投稿コピーだけtrueへ切り替える。手元で無効にする場合は`STANDALONE_INPUT_HINT=0 ./build.sh standalone`。Pages版のフラグはfalseのまま。添付のOpenclipart SVG原本と出典は`docs/third-party/openclipart/`に保存し、画面内クレジットには追加しない。
 
+PLiCy（`https://html5.plicy.net/`）の永続データはすべてlocalStorageへ保存する。全ステージの最高得点は`nandemo-cannon.progress.v1`、BGM設定は既存の`nandemo-cannon.bgm.v1`。Godotの`persistentPaths`を空にしてIndexedDBのマウント自体を無効にする。保存領域が利用できない場合はその起動中のメモリだけに保持し、IndexedDBへは戻さない。Pages・itch.io・ネイティブの既存得点保存経路は維持する。音源キャッシュ、リザルトJPEG、選択ページ・検索など元々セッション限定のデータは、これまでどおりメモリだけに保持する。
+
 [itch.io](https://itch.io/docs/creators/html5)では種類を「HTML」にし、ZIPをブラウザで再生するファイルとして指定する。表示サイズの目安は960×540、モバイル対応・全画面を必要に応じて設定する。[PLiCy](https://plicy.net/ToolFAQ/GODOT)ではGodotのWeb出力として同じZIPをアップロードする。単一スレッドのためSharedArrayBuffer／COOP・COEPは不要。HTTP(S)配信向けであり、ZIPを展開して`file://`で直接開く形式ではない。各サービスへの実アップロード・ブラウザ動作は別途確認する。
 
 既存のruntime/sourceの2成果物を結合した後、`./build.sh standalone`で`out/portal/`と投稿ZIPを作り、upload-artifactへ保存してから従来どおりPagesへデプロイする。ジョブとGodotビルドは増やさない。投稿ZIPは`dist/`や`cdn-assets`へ追加せず、Pagesの配信量も増やさない。ローカルでは`./build.sh bundle`→`./build.sh standalone`。生成元の`out/standalone/`は変更せず、`out/portal/`だけでローダーを通常WASMへ切り替え、JSの拡張子を`.js`にする。ZIP展開の完全性・容量制限・深い配信パス・HTTP経由の起動シェル（描画スタブ）・公式WASMコンパイル・音源の存在をNodeで検証する。

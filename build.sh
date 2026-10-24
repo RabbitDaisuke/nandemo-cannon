@@ -100,6 +100,7 @@ node tests/web-mirrors.mjs
 node tests/web-share.mjs
 node tests/web-bgm.mjs
 node tests/web-input-hint.mjs
+node tests/web-progress.mjs
 node tools/check-game.mjs
 [[ "$build_mode" != check ]] || exit 0
 node tools/render-cannon.mjs

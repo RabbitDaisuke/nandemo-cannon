@@ -66,10 +66,17 @@ import {installCompressedWasm} from './wasm-loader.mjs';
 import {installResultSharing} from './share.mjs';
 import {installBGM} from './bgmer-player.mjs';
 import {installInputHint} from './input-hint.mjs';
+import {installProgressStore} from './progress-store.mjs';
 installInputHint();
 installResultSharing();
 const bgm = installBGM(window);
 const config = $GODOT_CONFIG;
+const progressStore = installProgressStore(window);
+if (progressStore.isLocalStorage()) {
+  // PLiCy uses localStorage through the game bridge, never Godot's IDBFS.
+  config.persistentPaths = [];
+  config.persistentDrops = false;
+}
 // Attribution belongs to the start screen. Gameplay uses the full canvas.
 config.canvasResizePolicy = 2;
 const start = document.querySelector('#start');

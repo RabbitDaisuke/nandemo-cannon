@@ -67,6 +67,7 @@ var result_capture_status: String = "none"
 var _capture_generation: int = 0
 var _share_bridge: JavaScriptObject
 var _bgm_bridge: JavaScriptObject
+var _progress_bridge: Object
 var _bgm_state: Dictionary = {"enabled": true, "volume": 0.025, "blocked": false, "unavailable": false}
 var _updating_bgm: bool = false
 var tutorial_label: Label
@@ -94,11 +95,9 @@ func _ready() -> void:
 	if OS.has_feature("web"):
 		_share_bridge = JavaScriptBridge.get_interface("NandemoShare")
 		_bgm_bridge = JavaScriptBridge.get_interface("NandemoBGM")
+		_progress_bridge = JavaScriptBridge.get_interface("NandemoProgress")
 	seed_text = "%08X%08X" % [randi(), randi()]
-	if FileAccess.file_exists("user://progress.json"):
-		var data = JSON.parse_string(FileAccess.get_file_as_string("user://progress.json"))
-		if data is Dictionary:
-			best_scores = data
+	_load_progress()
 	_build_ui()
 	shot_audio = AudioStreamPlayer.new()
 	shot_audio.name = "CannonShotAudio"
@@ -115,6 +114,39 @@ func _ready() -> void:
 		_web_document = JavaScriptBridge.get_interface("document")
 		_visibility_callback = JavaScriptBridge.create_callback(_on_web_visibility_changed)
 		_web_document.addEventListener("visibilitychange", _visibility_callback)
+
+func _load_progress() -> void:
+	var data: Variant
+	if _progress_bridge != null and bool(_progress_bridge.isLocalStorage()):
+		# PLiCy has no IndexedDB. A denied or empty localStorage must never fall
+		# back to user://, whose Web persistence uses IndexedDB on other hosts.
+		data = JSON.parse_string(str(_progress_bridge.loadJSON()))
+	else:
+		data = _read_progress_file()
+	if data is Dictionary:
+		best_scores = data
+
+func _save_progress() -> bool:
+	if not save_progress_enabled:
+		return false
+	var json = JSON.stringify(best_scores)
+	if _progress_bridge != null and bool(_progress_bridge.isLocalStorage()):
+		return bool(_progress_bridge.saveJSON(json))
+	return _write_progress_file(json)
+
+func _read_progress_file() -> Variant:
+	if FileAccess.file_exists("user://progress.json"):
+		return JSON.parse_string(FileAccess.get_file_as_string("user://progress.json"))
+	return null
+
+func _write_progress_file(json: String) -> bool:
+	var file = FileAccess.open("user://progress.json", FileAccess.WRITE)
+	if file == null:
+		return false
+	file.store_string(json)
+	var succeeded = file.get_error() == OK
+	file.close()
+	return succeeded
 
 func _exit_tree() -> void:
 	_set_wait_speed(1.0)
@@ -584,10 +616,7 @@ func _finish_stage(timed_out: bool) -> void:
 	var capture_generation = _capture_generation
 	var previous = int(best_scores.get(str(stage_index + 1), 0))
 	best_scores[str(stage_index + 1)] = maxi(previous, score_value)
-	if save_progress_enabled:
-		var file = FileAccess.open("user://progress.json", FileAccess.WRITE)
-		if file != null:
-			file.store_string(JSON.stringify(best_scores))
+	_save_progress()
 	# Capture the final-score game frame before any result overlay is created.
 	# Headless has no rendered framebuffer and must never await frame_post_draw.
 	result_capture_status = "headless" if DisplayServer.get_name() == "headless" else "pending"
