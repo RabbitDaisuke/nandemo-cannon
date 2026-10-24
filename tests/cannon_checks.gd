@@ -17,9 +17,9 @@ func _check(condition: bool, message: String) -> void:
 		failures.append(message)
 
 
-func _mouse(point: Vector2, pressed: bool) -> void:
+func _mouse(point: Vector2, pressed: bool, button: MouseButton = MOUSE_BUTTON_LEFT) -> void:
 	var event = InputEventMouseButton.new()
-	event.button_index = MOUSE_BUTTON_LEFT
+	event.button_index = button
 	event.position = point
 	event.global_position = point
 	event.pressed = pressed
@@ -188,6 +188,51 @@ func _run() -> void:
 	cannon.configure_controls()
 	cannon.set_aim(35.0, 0.88)
 	_check(cannon.is_power_adjustable() and is_equal_approx(cannon.trajectory_fraction, 1.0) and is_equal_approx(cannon.power, 0.88), "Leaving the random stage did not restore ordinary power and trajectory controls")
+	# The scene, not only the small cannon sprite, accepts the same gestures.
+	var center = Vector2(470, 270)
+	var scene_shots = shots.size()
+	cannon._last_touch_msec = -10000
+	cannon._cooldown = 0.0
+	cannon.set_aim(35.0, 0.65)
+	_mouse(center, true)
+	_check(cannon._grabbed and shots.size() == scene_shots, "Central mouse press did not begin aiming or fired before release")
+	_motion(center + Vector2(-60, -40))
+	_mouse(center + Vector2(-60, -40), false)
+	_check(cannon.elevation_degrees > 35.0 and cannon.power > 0.65 and shots.size() == scene_shots, "Central mouse drag failed to adjust without firing")
+	_mouse(center, true)
+	_check(shots.size() == scene_shots, "Central click fired on press")
+	_mouse(center, false)
+	_check(shots.size() == scene_shots + 1, "Central mouse release did not fire exactly once")
+	cannon._cooldown = 0.0
+	_mouse(center, true, MOUSE_BUTTON_MIDDLE)
+	_mouse(center, false)
+	_check(cannon._grabbed and shots.size() == scene_shots + 1, "Unrelated mouse-button release completed a middle-button gesture")
+	_mouse(center, false, MOUSE_BUTTON_MIDDLE)
+	_check(not cannon._grabbed and shots.size() == scene_shots + 2, "Middle-button release did not fire exactly once")
+	cannon._cooldown = 0.0
+	for outside in [Vector2(470, 40), Vector2(470, 510), Vector2(-8, 270), Vector2(968, 270)]:
+		_mouse(outside, true)
+		_check(not cannon._grabbed, "A non-playfield press started cannon capture")
+		_mouse(outside, false)
+	_check(shots.size() == scene_shots + 2, "Header, footer or outside click fired a shot")
+	_touch(center, true)
+	_check(cannon._grabbed, "Central single-finger touch did not begin aiming")
+	var touch_drag = InputEventScreenDrag.new()
+	touch_drag.index = 0
+	touch_drag.position = center + Vector2(40, 30)
+	root.push_input(touch_drag)
+	_touch(touch_drag.position, false)
+	_check(not cannon._grabbed and shots.size() == scene_shots + 2, "Central touch drag fired or stayed captured")
+	_touch(center, true)
+	_touch(center, false)
+	_check(shots.size() == scene_shots + 3, "Central touch tap did not fire exactly once")
+	cannon._cooldown = 0.0
+	root.canvas_transform = Transform2D(Vector2(2, 0), Vector2(0, 2), Vector2(-300, -200))
+	_touch(root.canvas_transform * center, true)
+	_check(cannon._grabbed and cannon._press_position.is_equal_approx(center), "Zoomed central playfield failed to map the gesture to game coordinates")
+	cannon.cancel_pointer()
+	_touch(root.canvas_transform * center, false)
+	root.canvas_transform = Transform2D.IDENTITY
 	var result = {"suite": "cannon", "checks": checks, "failures": failures, "status": "passed" if failures.is_empty() else "failed"}
 	result["engine"] = Engine.get_version_info().string
 	var output = FileAccess.open("res://previews/cannon-checks.json", FileAccess.WRITE)

@@ -358,7 +358,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 0.025,
+	"elapsed": 0.075,
 	"firePatches": [],
 	"followingItem": "stool",
 	"font": "res://assets/font/arcade-generated.fnt",

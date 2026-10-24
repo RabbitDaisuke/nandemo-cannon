@@ -13,6 +13,9 @@ const MAX_ELEVATION = 85.0
 const MIN_POWER = 0.15
 const CLICK_SLOP = 7.0
 const SHOT_INTERVAL = 0.45
+# Logical game coordinates: both mouse and touch use the same broad play area.
+# Keep the score/instructions and bottom controls out of tap-to-fire targeting.
+const AIM_AREA = Rect2(0.0, 128.0, 960.0, 342.0)
 
 var elevation_degrees: float = 35.0
 var power: float = 0.65
@@ -23,6 +26,7 @@ var _random_max_power: float = 1.0
 var _power_rng = RandomNumberGenerator.new()
 var enabled: bool = true
 var input_suspended: bool = false
+var pointer_blocked: Callable
 var _joint: Node2D
 var _barrel: Sprite2D
 var _parts: Array[Sprite2D] = []
@@ -31,6 +35,7 @@ var _art_group: CanvasGroup
 var _grabbed: bool = false
 var _dragged: bool = false
 var _pointer_id: int = -1
+var _mouse_button: int = MOUSE_BUTTON_LEFT
 var _press_position: Vector2
 var _press_elevation: float = 35.0
 var _press_power: float = 0.65
@@ -223,12 +228,17 @@ func _screen_to_world(screen_position: Vector2) -> Vector2:
 	return get_canvas_transform().affine_inverse() * screen_position
 
 
-func _begin_pointer(point: Vector2, pointer: int) -> bool:
-	if not enabled or input_suspended or _grabbed or not _hit_test(point):
+func _aim_hit_test(point: Vector2) -> bool:
+	return AIM_AREA.has_point(point) and (not pointer_blocked.is_valid() or not pointer_blocked.call(point))
+
+
+func _begin_pointer(point: Vector2, pointer: int, mouse_button: int = MOUSE_BUTTON_LEFT) -> bool:
+	if not enabled or input_suspended or _grabbed or not _aim_hit_test(point):
 		return false
 	_grabbed = true
 	_dragged = false
 	_pointer_id = pointer
+	_mouse_button = mouse_button
 	_press_position = point
 	_press_elevation = elevation_degrees
 	_press_power = power
@@ -248,7 +258,7 @@ func _move_pointer(point: Vector2) -> void:
 
 func _end_pointer(point: Vector2) -> void:
 	_move_pointer(point)
-	var click = not _dragged
+	var click = not _dragged and _aim_hit_test(point)
 	_grabbed = false
 	_pointer_id = -1
 	_update_highlight()
@@ -279,7 +289,7 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 	elif event is InputEventMouseButton and _pointer_id == -2:
 		var button = event as InputEventMouseButton
-		if button.button_index == MOUSE_BUTTON_LEFT and not button.pressed:
+		if button.button_index == _mouse_button and not button.pressed:
 			_end_pointer(_screen_to_world(button.position))
 			get_viewport().set_input_as_handled()
 
@@ -311,13 +321,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		if Time.get_ticks_msec() - _last_touch_msec < 750:
 			return
 		var button = event as InputEventMouseButton
-		if button.button_index != MOUSE_BUTTON_LEFT:
+		if button.button_index not in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE]:
 			return
 		var point = _screen_to_world(button.position)
 		if button.pressed:
-			if _begin_pointer(point, -2):
+			if _begin_pointer(point, -2, button.button_index):
 				get_viewport().set_input_as_handled()
-		elif _grabbed and _pointer_id == -2:
+		elif _grabbed and _pointer_id == -2 and button.button_index == _mouse_button:
 			_end_pointer(point)
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseMotion:

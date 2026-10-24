@@ -17,6 +17,11 @@ const rect=(...r)=>({rect:r}),poly=(...p)=>({polygon:p});
 const items=[];
 const add=(id,name,kana,material,mass,width,fixtures,art,behavior='solid',extra={})=>items.push({id,name,kana,material,mass,width,fixtures,art,behavior,extra});
 const water={waterUnits:8,releaseUnits:8,breakImpactSpeed:120,impactSpeed:120,minImpactEnergy:2,loadForceThreshold:5000,loadHoldSeconds:0.35};
+// Per-object storage: the sponge holds one jug, the towel one balloon.
+for(const [id,capacity] of [['sponge',24],['towel',12]]){
+ physics.overrides[id]={...physics.overrides[id],capacity};
+ manifest.items.find(item=>item.id===id).physics.capacity=capacity;
+}
 const glassBody=R(28,25,72,31,ink)+P('M36 56H92V122H36Z',ink)+R(32,29,64,22,'#b8d9db')+R(40,51,48,67,'#b8d9db')+R(36,29,52,5,'#f5f5df')+R(44,111,36,7,'#f5f5df');
 const glassFixtures=[rect(28,25,72,31),rect(36,56,56,66)];
 const straw=R(70,3,12,76,ink)+R(74,7,4,68,'#e77c87')+R(74,15,4,8,cream)+R(74,35,4,8,cream)+R(74,55,4,8,cream);
@@ -70,7 +75,7 @@ restaurant.abyss=[[0,525,960,100]];
 restaurant.preplaced=[{id:'call-bell',x:545,groundY:380,scoring:false}];
 const beach=stage(38,'ビーチ','38-beach',['sand-bucket','shovel','water-yoyo','lifebuoy','umbrella','watermelon','rubber-duck','water-balloon','submarine','barrel','towel','sponge','freeze-sprayer','flamethrower','soccer-ball'],[rect(0,450,600,90),poly([600,450],[700,410],[960,410],[960,540],[600,540])],[810,410],[50,80,550,370]);
 beach.selectAnyCatalogItem=true;
-beach.water=[{rect:[50,375,450,75],direction:[1,0],speed:18,type:'flow'}];
+beach.water=[{rect:[50,375,450,75],direction:[0,0],speed:0,type:'pool',finite:true}];
 const cafe=stage(39,'喫茶店','39-cafe',['coffee-mill','parfait','counter','chair','low-table','coffee-beans','coffee-pot','water-glass','menu','call-bell','teapot','pancakes','cheesecake','lemonade-glass','canele'],[rect(0,450,960,90),rect(75,385,530,24),rect(100,409,25,41),rect(555,409,25,41)]);
 const additions=[random,restaurant,beach,cafe];
 const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。'];
@@ -82,7 +87,8 @@ const tableLines=(x,y,w)=>R(x+5,y+4,w-10,5,'#e4bf83')+R(x+7,y+15,w-14,3,'#684638
 const artwork={};
 artwork[36]=R(0,0,960,540,'#28344e')+R(0,90,960,220,'#465269')+R(38,116,527,156,ink)+R(46,124,511,140,'#6b8795')+[80,180,280,380,480].map((x,i)=>R(x,155,55,60,[red,gold,blue,mint,red][i])+R(x+8,164,39,8,cream)+R(x+23,225,9,20,'#aabfc1')).join('')+R(657,135,224,150,'#765666')+R(671,149,196,120,'#d1a779')+R(702,173,50,70,'#b9625b')+R(782,173,50,70,'#678f9a')+terrainArt(random,'#9a7960')+tableLines(100,390,460);
 artwork[37]=R(0,0,960,540,'#dcc5a5')+R(0,84,960,32,'#8e5e4a')+window(125,130,270,153)+R(502,134,125,155,'#865c4b')+R(512,144,105,135,'#3f564e')+[170,192,214,236].map(y=>R(530,y,66,4,'#d9ddba')).join('')+R(700,134,165,118,'#b88e67')+R(715,149,135,88,'#ead9b4')+R(0,470,960,70,'#322d35')+terrainArt(restaurant,'#b18055')+tableLines(90,380,520)+tableLines(720,410,220)+R(93,343,8,34,'#e4bf83')+R(599,343,8,34,'#e4bf83');
-artwork[38]=R(0,0,960,540,'#9bd7df')+R(0,244,960,132,'#4c9eaf')+R(0,281,960,10,'#79c4cd')+R(0,331,960,8,'#87d0d4')+P('M0 355L240 367L430 352L610 364L780 350L960 360V540H0Z','#e1c68a')+P('M689 260L710 211L728 134L743 138L730 221L709 264Z','#876448')+P('M734 142L683 113L639 122L680 90L725 114L726 81L759 63L751 114L789 94L840 115L784 119L753 140L791 167L817 205L770 179Z','#4b9172')+terrainArt(beach,'#d9b97b')+R(50,375,450,75,'#5da9b9')+R(50,375,450,5,'#e0edcd')+R(80,406,105,4,'#a8dbd7')+R(270,423,86,4,'#a8dbd7')+R(673,462,28,5,'#edd49b')+R(726,486,36,5,'#edd49b');
+// Foreground water is drawn by LiquidField, so an absorbed pool exposes sand.
+artwork[38]=R(0,0,960,540,'#9bd7df')+R(0,244,960,132,'#4c9eaf')+R(0,281,960,10,'#79c4cd')+R(0,331,960,8,'#87d0d4')+P('M0 355L240 367L430 352L610 364L780 350L960 360V540H0Z','#e1c68a')+P('M689 260L710 211L728 134L743 138L730 221L709 264Z','#876448')+P('M734 142L683 113L639 122L680 90L725 114L726 81L759 63L751 114L789 94L840 115L784 119L753 140L791 167L817 205L770 179Z','#4b9172')+terrainArt(beach,'#d9b97b')+R(80,434,24,4,'#edd49b')+R(270,422,18,4,'#c9a46a')+R(673,462,28,5,'#edd49b')+R(726,486,36,5,'#edd49b');
 artwork[39]=R(0,0,960,540,'#9b785c')+R(0,93,960,32,'#493d39')+window(82,139,259,145)+R(405,143,194,146,'#463f38')+R(416,154,172,124,'#5a6852')+[178,203,228,252].map(y=>R(437,y,125,4,'#e4dfb9')).join('')+R(657,142,238,18,'#503c36')+R(657,230,238,18,'#503c36')+[680,736,792,848].map(x=>R(x,172,33,44,'#cfba88')+R(x+4,179,25,24,'#8a6346')).join('')+R(0,313,960,137,'#72533f')+R(0,325,960,6,'#c3a077')+terrainArt(cafe,'#b18359')+tableLines(75,385,530)+[100,250,400,550,700,850].map(x=>P(`M${x} 450L${x+70} 540H${x+74}L${x+4} 450Z`,'#77543e')).join('');
 const mapSheet=[];
 for(const [i,s]of additions.entries()){

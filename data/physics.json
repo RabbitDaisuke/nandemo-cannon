@@ -651,7 +651,13 @@
     },
     "coffee-beans": {},
     "coffee-pot": {},
-    "menu": {}
+    "menu": {},
+    "sponge": {
+      "capacity": 24
+    },
+    "towel": {
+      "capacity": 12
+    }
   },
   "stateRules": {
     "breakage": {

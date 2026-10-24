@@ -156,11 +156,11 @@ func _run() -> void:
 	desk.linear_velocity = Vector2.ZERO
 	barrel.linear_velocity = Vector2.ZERO
 	fixture_world.liquid._affect_bodies()
-	await _physics_steps(1)
+	await _physics_steps(4)
 	_expect(absf(desk.linear_velocity.x) < 0.01 and barrel.linear_velocity.x > 1.0, "water current moves a barrel while a flow-immune table stays unpushed")
 	barrel.linear_velocity = Vector2(200, 0)
 	fixture_world.liquid._affect_bodies()
-	await _physics_steps(1)
+	await _physics_steps(4)
 	_expect(barrel.linear_velocity.x < 199.0, "water drag reduces a fast body's velocity")
 	await _reset()
 	var accepted = fixture_world.liquid.add_cell(Vector2(200, 200), 9.75)
@@ -277,6 +277,7 @@ func _run() -> void:
 		_expect(not timed_item.alive and fixture_world.hazards.explosion_serial == 1, "%s bursts on its configured timer" % firework_id)
 	await _reset()
 	var cell_sponge = _spawn("sponge", Vector2(400, 250))
+	cell_sponge.spec.capacity = 6.0
 	var near_key = fixture_world.liquid.key_for(Vector2(400, 250))
 	fixture_world.liquid.cells[near_key] = {"amount": 4.0, "frozen": 0.0}
 	for i in range(20):
@@ -289,6 +290,7 @@ func _run() -> void:
 	_expect(is_equal_approx(cell_sponge.mass, float(cell_sponge.record.mass) * 2.0), "a saturated sponge reaches its configured wet mass")
 	await _reset({"water": [{"rect": [300, 200, 200, 150], "direction": [1, 0], "speed": 65}]})
 	var river_sponge = _spawn("sponge", Vector2(400, 250))
+	river_sponge.spec.capacity = 6.0
 	for i in range(60):
 		fixture_world.liquid._affect_bodies()
 	_expect(is_equal_approx(float(river_sponge.get_meta("absorbed", 0.0)), 6.0) and is_equal_approx(fixture_world.liquid.region_drawn_volume, 6.0), "river absorption stops at sponge capacity and records the finite amount drawn")
@@ -460,6 +462,7 @@ func _run() -> void:
 	for i in range(20):
 		fixture_world.liquid._step_cells(0.05)
 	_expect(is_equal_approx(fixture_world.liquid.current_volume(), 0.05) and fixture_world.liquid.sample(Vector2(408, 392)).wet and is_zero_approx(fixture_world.liquid.evaporated_volume), "river water is excluded from thin-film evaporation")
+	await _check_water_balance()
 	var result = {"engine": Engine.get_version_info().string, "passed": failures.is_empty(), "checks": checks, "failures": failures}
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://previews"))
 	var report = FileAccess.open("res://previews/hazard-checks.json", FileAccess.WRITE)
@@ -471,6 +474,79 @@ func _run() -> void:
 	fixture_world.queue_free()
 	await process_frame
 	quit(0 if failures.is_empty() else 1)
+
+func _check_water_balance() -> void:
+	_expect(float(records.sponge.physics.capacity) == 24.0 and float(records.towel.physics.capacity) == 12.0, "sponge and towel capacities counter one large jug and one water balloon respectively")
+	for id in ["sponge", "towel"]:
+		await _reset()
+		var absorber = _spawn(id, Vector2(400, 250))
+		absorber.rotation = PI / 4.0
+		var bounds = absorber.get_world_bounds()
+		# A corner lies inside the rotated AABB but outside the actual cloth.
+		var dry_corner = Rect2(bounds.position, Vector2(1, 1))
+		fixture_world.liquid.regions = [{"rect": dry_corner, "velocity": Vector2.ZERO}]
+		fixture_world.liquid._affect_bodies()
+		_expect(is_zero_approx(float(absorber.get_meta("absorbed", 0.0))), "%s cannot absorb water through the empty corner of its rotated bounding box" % id)
+		fixture_world.liquid.regions = [{"rect": Rect2(300, 200, 200, 150), "velocity": Vector2.ZERO}]
+		for i in range(100):
+			fixture_world.liquid._affect_bodies()
+		var capacity = float(absorber.spec.capacity)
+		_expect(is_equal_approx(float(absorber.get_meta("absorbed", 0.0)), capacity), "%s absorbs contacting water until its own capacity and then stops" % id)
+		_expect(is_equal_approx(fixture_world.liquid.region_drawn_volume, capacity) and is_equal_approx(fixture_world.liquid.absorbed_volume, capacity), "%s absorption records exactly the volume removed" % id)
+		_expect(is_equal_approx(absorber.mass, float(absorber.record.mass) * 2.0), "%s saturates at twice its dry mass" % id)
+		await _reset()
+		var almost_full = _spawn(id, Vector2(400, 250))
+		fixture_world.liquid._absorb(almost_full, capacity - 0.25)
+		await _physics_steps(2)
+		fixture_world.liquid.droplets.append(_drop(Vector2(350, 250), Vector2(1000, 0)))
+		fixture_world.liquid.tick(0.07)
+		_expect(is_equal_approx(float(almost_full.get_meta("absorbed", 0.0)), capacity) and is_equal_approx(fixture_world.liquid.current_volume(), 0.75), "%s absorbs only its remaining capacity from a real contacting droplet and preserves the excess" % id)
+	await _reset({"water": [{"rect": [300, 200, 200, 150], "finite": true}]})
+	var pool = fixture_world.liquid.regions[0]
+	var initial_volume = fixture_world.liquid.current_volume()
+	var sponge = _spawn("sponge", Vector2(400, 300))
+	for i in range(100):
+		fixture_world.liquid._affect_bodies()
+	_expect(is_equal_approx(initial_volume - fixture_world.liquid.current_volume(), 24.0) and Rect2(pool.rect).position.y > 200.0, "a finite pool loses the sponge's absorbed volume and visibly lowers its water surface")
+	_expect(is_equal_approx(fixture_world.liquid.current_volume() + fixture_world.liquid.absorbed_volume, fixture_world.liquid.introduced_volume) and is_zero_approx(fixture_world.liquid.region_drawn_volume), "finite pool absorption conserves water without an imaginary replenishing supply")
+	fixture_world.liquid.freeze_near(Rect2(pool.rect).position + Vector2(40, 0), 30.0)
+	_expect(is_equal_approx(fixture_world.liquid.current_volume() + fixture_world.liquid.absorbed_volume, initial_volume), "freezing a finite pool transfers its volume into ice without creating extra water")
+	await _reset({"water": [{"rect": [390, 245, 16, 16], "finite": true}]})
+	_spawn("sponge", Vector2(400, 250))
+	for i in range(10):
+		fixture_world.liquid._affect_bodies()
+	_expect(is_zero_approx(fixture_world.liquid.current_volume()) and not fixture_world.liquid.sample(Vector2(400, 250)).wet, "a fully absorbed finite pool has no invisible remaining water")
+	await _reset()
+	var thin_barrel = _spawn("barrel", Vector2(400, 220))
+	var thin_bounds = thin_barrel.get_world_bounds()
+	var key = fixture_world.liquid.key_for(Vector2(400, thin_bounds.end.y - 2.0))
+	fixture_world.liquid.cells[key] = {"amount": 0.05, "frozen": 0.0}
+	fixture_world.liquid._affect_bodies()
+	_expect(thin_barrel.water_fraction < 0.02, "a thin water film does not turn one bounding-box point into 25 percent immersion")
+	await _reset({"water": [{"rect": [0, 0, 960, 400], "direction": [0, 0], "speed": 0}]})
+	fixture_world.gravity_value = 980.0
+	PhysicsServer2D.area_set_param(fixture_world.get_world_2d().space, PhysicsServer2D.AREA_PARAM_GRAVITY, 980.0)
+	_add_static_rect(Rect2(0, 400, 960, 30))
+	var resting = _spawn("barrel", Vector2(400, 350), false)
+	for i in range(420):
+		if i % 6 == 0:
+			fixture_world.liquid._affect_bodies()
+		await _physics_steps(1)
+	var settled_at = resting.position
+	var settled_impacts = fixture_world.impacts.size()
+	for i in range(120):
+		if i % 6 == 0:
+			fixture_world.liquid._affect_bodies()
+		await _physics_steps(1)
+	_expect(resting.sleeping and resting.position.distance_to(settled_at) < 0.05, "a heavy body settles and sleeps in still water without slow contact-induced drift")
+	_expect(fixture_world.impacts.size() == settled_impacts and absf(resting.linear_velocity.x) < 0.01, "still water does not repeatedly create impact events or horizontal movement")
+	fixture_world.liquid.regions[0].velocity = Vector2(65, 0)
+	fixture_world.liquid._affect_bodies()
+	_expect(not resting.sleeping, "a real current can wake a submerged body after still water allowed it to settle")
+	fixture_world.liquid.regions.clear()
+	fixture_world.liquid._affect_bodies()
+	_expect(is_zero_approx(resting.water_fraction) and resting.water_velocity == Vector2.ZERO, "leaving the water clears its drag and flow state")
+	_expect(is_equal_approx(resting.gravity_scale, 1.0) and is_equal_approx(resting.linear_damp, 0.06), "leaving water restores the original gravity and damping without wet paralysis")
 
 func _reset(stage: Dictionary = {}) -> void:
 	if is_instance_valid(fixture_world):

@@ -30,7 +30,11 @@ func configure(owner_world: Node2D, stage: Dictionary) -> void:
 	world = owner_world
 	z_index = 5
 	for entry in stage.get("water", []):
-		regions.append({"rect": GameCatalog.rectangle(entry.rect), "velocity": GameCatalog.vector(entry.get("direction", [0, 0])) * float(entry.get("speed", 0))})
+		var rect = GameCatalog.rectangle(entry.rect)
+		var finite = bool(entry.get("finite", false))
+		var volume = rect.get_area() / (CELL * CELL) if finite else 0.0
+		regions.append({"rect": rect, "velocity": GameCatalog.vector(entry.get("direction", [0, 0])) * float(entry.get("speed", 0)), "finite": finite, "remaining": volume})
+		introduced_volume += volume
 	for entry in stage.get("sources", []):
 		sources.append({"point": GameCatalog.vector(entry.position), "rate": float(entry.rateUnitsPerSecond), "remaining": float(entry.maxUnits), "accumulator": 0.0, "stopped": false, "stop_at": float(entry.get("stopAtStoredUnits", -1.0)), "stored_region": GameCatalog.rectangle(entry.get("storedRegion", [0, 0, 960, 540]))})
 	wave_textures = [load("res://assets/effects/water-flow-0.svg"), load("res://assets/effects/water-flow-1.svg")]
@@ -240,7 +244,7 @@ func sample(point: Vector2) -> Dictionary:
 	var key = key_for(point)
 	if cells.has(key) and float(cells[key].frozen) > 0.0:
 		return {"wet": false, "velocity": Vector2.ZERO}
-	if cells.has(key) and float(cells[key].frozen) <= 0.0 and float(cells[key].amount) > 0.02:
+	if cells.has(key) and _cell_water_rect(key, cells[key]).has_point(point):
 		return {"wet": true, "velocity": Vector2.ZERO}
 	for region in regions:
 		if Rect2(region.rect).has_point(point):
@@ -248,36 +252,34 @@ func sample(point: Vector2) -> Dictionary:
 	return {"wet": false, "velocity": Vector2.ZERO}
 
 func submerged_point(point: Vector2) -> bool:
-	var key = key_for(point)
-	if cells.has(key):
-		var cell: Dictionary = cells[key]
-		if float(cell.frozen) > 0.0:
-			return false
-		var depth = clampf(float(cell.amount), 0.0, 1.0) * CELL
-		var bottom = float(key.y + 1) * CELL
-		if depth > 0.0 and point.y >= bottom - depth:
-			return true
-	for region in regions:
-		if Rect2(region.rect).has_point(point):
-			return true
-	return false
+	return bool(sample(point).wet)
+
+func _cell_water_rect(key: Vector2i, cell: Dictionary) -> Rect2:
+	var depth = clampf(float(cell.amount), 0.0, 1.0) * CELL
+	return Rect2(float(key.x) * CELL, float(key.y + 1) * CELL - depth, CELL, depth)
 
 func submerged_fraction(actor: ThrowBody) -> float:
+	return float(_body_water_sample(actor).fraction)
+
+func _body_water_sample(actor: ThrowBody) -> Dictionary:
 	if regions.is_empty() and cells.is_empty():
-		return 0.0
+		return {"fraction": 0.0, "velocity": Vector2.ZERO}
 	# Sample the actual rotated collider, excluding empty handles/holes. Equal
 	# area samples make half-submerged shells independent of orientation/size.
 	var bounds = actor.get_world_bounds()
 	var solid_samples: int = 0
 	var wet_samples: int = 0
+	var flow = Vector2.ZERO
 	for row in range(12):
 		for column in range(12):
 			var point = bounds.position + bounds.size * Vector2((float(column) + 0.5) / 12.0, (float(row) + 0.5) / 12.0)
 			if actor.contains_world_point(point):
 				solid_samples += 1
-				if submerged_point(point):
+				var water = sample(point)
+				if water.wet:
 					wet_samples += 1
-	return float(wet_samples) / float(maxi(1, solid_samples))
+					flow += Vector2(water.velocity)
+	return {"fraction": float(wet_samples) / float(maxi(1, solid_samples)), "velocity": flow / float(maxi(1, wet_samples))}
 
 func _affect_bodies() -> void:
 	for actor in world.actors.duplicate():
@@ -286,24 +288,15 @@ func _affect_bodies() -> void:
 		var bounds: Rect2 = actor.get_world_bounds()
 		if actor.behavior == "absorb":
 			_absorb_surrounding(actor, bounds)
-		var points = [actor.global_position, Vector2(bounds.get_center().x, bounds.end.y - 2.0), bounds.position + bounds.size * 0.25, bounds.position + bounds.size * 0.75]
-		var fraction: float = 0.0
-		var flow = Vector2.ZERO
-		for point in points:
-			var result = sample(point)
-			if result.wet:
-				fraction += 0.25
-				flow += Vector2(result.velocity) * 0.25
+		var water = _body_water_sample(actor)
+		var fraction = float(water.fraction)
+		actor.set_water_state(fraction, water.velocity)
 		if fraction <= 0.0:
 			continue
 		world.hazards.wet_actor(actor, 2.0)
 		if bool(actor.spec.get("immersionBreak", false)):
 			actor.request_break("water")
 			continue
-		var response = float(actor.spec.get("flowResponse", 1.0))
-		var buoyancy = float(actor.spec.get("buoyancy", 0.45))
-		actor.apply_central_impulse((-actor.linear_velocity * 1.2 + Vector2.UP * world.gravity_value * buoyancy) * actor.mass * fraction * 0.05)
-		actor.apply_central_impulse(flow * response * actor.mass * 1.4 * 0.05)
 
 func _absorb(actor: ThrowBody, amount: float) -> float:
 	var capacity = float(actor.spec.get("capacity", 6.0))
@@ -319,13 +312,14 @@ func _absorb(actor: ThrowBody, amount: float) -> float:
 	return accepted
 
 func _absorb_surrounding(actor: ThrowBody, bounds: Rect2) -> void:
-	var budget: float = 0.25
-	var reach = bounds.grow(CELL * 0.5)
+	var available_capacity = maxf(0.0, float(actor.spec.get("capacity", 6.0)) - float(actor.get_meta("absorbed", 0.0)))
+	var budget = minf(float(actor.spec.get("absorbUnitsPerSecond", 12.0)) * 0.05, available_capacity)
 	for key in cells.keys():
 		if budget <= VOLUME_EPSILON:
 			break
 		var cell: Dictionary = cells[key]
-		if float(cell.frozen) > 0.0 or not reach.has_point(center_for(key)):
+		var water_rect = _cell_water_rect(key, cell)
+		if float(cell.frozen) > 0.0 or not bounds.grow(0.15).intersects(water_rect, true) or not actor.touches_world_rect(water_rect):
 			continue
 		var accepted = _absorb(actor, minf(budget, float(cell.amount)))
 		cell.amount -= accepted
@@ -334,13 +328,27 @@ func _absorb_surrounding(actor: ThrowBody, bounds: Rect2) -> void:
 			cells.erase(key)
 	if budget <= VOLUME_EPSILON:
 		return
-	# Regions represent persistent river water; account for the finite amount drawn
-	# into the sponge without removing the river's flow field.
+	# A finite pool loses its actual volume and lowers its surface. Only explicit
+	# river regions represent a replenishing supply; their intake is accounted.
 	for region in regions:
-		if bounds.intersects(Rect2(region.rect)):
-			var accepted = _absorb(actor, budget)
-			region_drawn_volume += accepted
-			break
+		if actor.touches_world_rect(Rect2(region.rect)) and Rect2(region.rect).has_area():
+			var available = minf(budget, float(region.remaining)) if bool(region.get("finite", false)) else budget
+			var accepted = _absorb(actor, available)
+			_draw_region_water(region, accepted)
+			budget -= accepted
+			if budget <= VOLUME_EPSILON:
+				break
+
+func _draw_region_water(region: Dictionary, amount: float) -> float:
+	if not bool(region.get("finite", false)):
+		region_drawn_volume += amount
+		return amount
+	var accepted = minf(maxf(amount, 0.0), float(region.remaining))
+	region.remaining = maxf(0.0, float(region.remaining) - accepted)
+	var rect: Rect2 = region.rect
+	var height = float(region.remaining) * CELL * CELL / maxf(rect.size.x, 1.0)
+	region.rect = Rect2(rect.position.x, rect.end.y - height, rect.size.x, height)
+	return accepted
 
 func stored_volume(region: Rect2) -> float:
 	var amount: float = 0.0
@@ -357,14 +365,18 @@ func freeze_near(point: Vector2, radius: float) -> void:
 	# Persistent rivers can also form a finite sheet on their surface.
 	for region in regions:
 		var r: Rect2 = region.rect
+		if not r.has_area():
+			continue
 		for x in range(floori(r.position.x / CELL), ceili(r.end.x / CELL)):
 			var key = Vector2i(x, floori(r.position.y / CELL))
 			if center_for(key).distance_to(point) <= radius:
 				if cells.has(key):
 					cells[key].frozen = 8.0
 				elif cells.size() < MAX_CELLS and not world.point_in_solid(center_for(key)):
-					cells[key] = {"amount": 1.0, "frozen": 8.0}
-					region_drawn_volume += 1.0
+					var drawn = _draw_region_water(region, 1.0)
+					if drawn <= VOLUME_EPSILON:
+						continue
+					cells[key] = {"amount": drawn, "frozen": 8.0}
 				else:
 					continue
 				_make_ice(key)
@@ -408,6 +420,9 @@ func _remove_ice(key: Vector2i) -> void:
 
 func current_volume() -> float:
 	var amount: float = 0.0
+	for region in regions:
+		if bool(region.get("finite", false)):
+			amount += float(region.remaining)
 	for cell in cells.values():
 		amount += float(cell.amount)
 	for drop in droplets:
@@ -420,6 +435,8 @@ func _draw() -> void:
 	var wave = wave_textures[int(clock * 6.0) % 2]
 	for region in regions:
 		var r: Rect2 = region.rect
+		if not r.has_area():
+			continue
 		draw_rect(r, Color(0.18, 0.63, 0.8, 0.48))
 		for x in range(int(r.position.x), int(r.end.x), 32):
 			draw_texture_rect(wave, Rect2(x, r.position.y - 4.0, minf(32, r.end.x - x), 22), false, Color(0.7, 0.95, 1.0, 0.8))

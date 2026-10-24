@@ -7709,11 +7709,12 @@
             75
           ],
           "direction": [
-            1,
+            0,
             0
           ],
-          "speed": 18,
-          "type": "flow"
+          "speed": 0,
+          "type": "pool",
+          "finite": true
         }
       ],
       "lesson": "ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。"

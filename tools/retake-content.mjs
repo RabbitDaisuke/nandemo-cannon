@@ -28,7 +28,29 @@ async function suppliedPixels(name){
  return svg;
 }
 const edits=[
- {id:'pancakes',name:'パンケーキ',kana:'パンケーキ',material:'food',mass:2,width:80,fixtures:[poly([20,36],[32,28],[92,24],[108,36],[116,56],[108,68],[108,108],[20,108])],art:await suppliedPixels('pancake-stack')},
+ // Four-source-pixel dark outline, like the other food sprites. Layer seams
+ // are toasted brown rather than thick black dividers; butter is not a hole.
+ {id:'pancakes',name:'パンケーキ',kana:'パンケーキ',material:'food',mass:2,width:80,fixtures:[poly([16,36],[32,28],[52,20],[80,20],[100,28],[116,40],[116,92],[104,104],[28,104],[16,96])],art:
+  p('M16 36H24V28H40V24H52V20H80V24H96V28H108V36H116V92H112V100H104V104H28V100H20V96H16Z',ink)+
+  p('M20 76H112V92H108V96H100V100H32V96H24V92H20Z','#d79e55')+r(24,80,84,8,'#f6d69a')+r(32,92,68,4,'#eabe7a')+
+  p('M20 56H112V72H108V76H100V80H32V76H24V72H20Z','#b97b40')+r(24,60,84,8,'#f4cc87')+r(32,72,68,4,'#e5ac64')+
+  p('M20 40H28V32H44V28H56V24H76V28H92V32H104V40H112V48H108V52H100V56H32V52H24V48H20Z','#dfa755')+
+  r(32,36,60,4,'#f8d68b')+r(24,44,84,4,'#efbd6c')+
+  p('M44 28H88V32H100V40H104V48H96V56H88V80H80V84H76V52H56V48H40V40H36V32H44Z','#9a542d')+
+  p('M48 28H84V32H96V40H88V44H56V40H44V32H48Z','#c57c39')+
+  r(52,20,28,20,ink)+r(56,24,20,12,'#f5d66e')+r(56,24,20,4,'#fff0ad')+r(72,28,4,8,'#e7b84f')},
+ {id:'cheesecake',name:'チーズケーキ',kana:'チーズケーキ',material:'food',mass:2,width:66,fixtures:[poly([12,56],[88,20],[116,48],[116,92],[12,108])],art:
+  p('M12 56L88 20L116 48V92L12 108Z',ink)+
+  p('M16 62L112 50V88L16 102Z','#f4db94')+
+  p('M16 64L108 54V78L16 92Z','#fff1c5')+
+  p('M92 56L112 52V88L92 92Z','#e6c780')+
+  p('M16 94L112 80V88L16 102Z','#ad713f')+
+  p('M20 94L108 82V86L20 98Z','#d39d60')+
+  p('M12 56L88 20L116 48L20 68L12 64Z',ink)+
+  p('M20 56L88 26L108 46L20 62Z','#e8b65b')+
+  p('M28 54L88 30L100 42L28 56Z','#ffe2a0')+
+  p('M32 70L84 60V64L32 74Z','#fff7d8')+
+  r(34,82,4,4,'#e5c77d')+r(66,76,4,4,'#e5c77d')},
  {id:'coffee-mill',name:'コーヒーミル',kana:'コーヒーミル',material:'wood',mass:3.5,width:62,fixtures:[rect(32,68,68,48),poly([40,40],[92,40],[84,60],[48,60]),rect(64,16,6,24),rect(64,16,44,4),rect(104,8,12,16)],art:await suppliedPixels('coffee-mill')},
  {id:'party-popper',name:'クラッカー',kana:'クラッカー',material:'paper',mass:.5,width:58,fixtures:[poly([27,113],[33,61],[47,37],[85,55],[76,82])],art:
   p('M23 117L29 59L45 33L89 53L80 85Z',ink)+p('M29 108L35 61L47 41L81 57L73 81Z','#ea9476')+
@@ -80,5 +102,5 @@ Object.assign(verification,{objects:manifest.items.length,croppedSpritesChecked:
 verification.checks=verification.checks.filter(x=>!/^\d+ item records/.test(x));
 verification.checks.push(`${manifest.items.length} item records; all ${stages.stages.length} queues reference 15 existing items`);
 await Promise.all([write('build-summary',summary),write('verification',verification)]);
-await sharp({create:{width:1000,height:200,channels:4,background:'#283b4c'}}).composite(sheet).png().toFile(path.join(root,'previews/retaken-items.png'));
+await sharp({create:{width:edits.length*200,height:200,channels:4,background:'#283b4c'}}).composite(sheet).png().toFile(path.join(root,'previews/retaken-items.png'));
 console.log(`Retakes: ${edits.map(x=>x.id).join(', ')}; ${manifest.items.length} objects`);

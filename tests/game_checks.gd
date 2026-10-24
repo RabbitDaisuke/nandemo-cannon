@@ -311,6 +311,10 @@ func _late_stage_checks() -> void:
 	game.load_stage(37)
 	await _frames(2)
 	_check(game.catalog_button.visible and game.liquid.regions.size() > 0, "Beach did not start with water and free item choice")
+	if not game.liquid.regions.is_empty():
+		var beach_pool: Dictionary = game.liquid.regions[0]
+		_check(bool(beach_pool.get("finite", false)) and float(beach_pool.get("remaining", 0.0)) > 0.0 and Vector2(beach_pool.velocity).is_zero_approx(), "Beach pool was infinite, empty or applied an artificial sideways current")
+	_check(float(game.catalog.items["sponge"].physics.capacity) == 24.0 and float(game.catalog.items["towel"].physics.capacity) == 12.0, "Absorbent item capacities do not counter a jug and a balloon respectively")
 	game._show_catalog(2)
 	game._close_modal()
 	game._show_catalog()
@@ -372,12 +376,13 @@ func _run() -> void:
 	_check(game.bgm_button != null and game.bgm_volume_slider != null and is_equal_approx(game.bgm_volume_slider.value, 2.5), "Gameplay music controls are missing or default volume is too high")
 	var trajectory = game.debug_snapshot().trajectory
 	_check(not trajectory.is_empty() and str(trajectory[0][3]) == "ff67dbff", "Trajectory does not record its distinct high-contrast color")
-	var drag_origin = game.cannon.position + Vector2(-10, -20)
+	var drag_origin = Vector2(480, 270)
 	var press = InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
 	press.position = drag_origin
 	press.pressed = true
 	root.push_input(press)
+	_check(game.cannon._grabbed and game.shots_fired == 0, "Open playfield press fired immediately instead of waiting for a drag or release")
 	var motion = InputEventMouseMotion.new()
 	motion.position = drag_origin + Vector2(-22, -20)
 	motion.button_mask = MOUSE_BUTTON_MASK_LEFT
@@ -388,6 +393,23 @@ func _run() -> void:
 	root.push_input(release)
 	await process_frame
 	_check(game.cannon.power > 0.65 and game.cannon.elevation_degrees > 35.0 and game.shots_fired == 0, "Drag did not adjust both axes without firing")
+	# Capture owns release before GUI dispatch: a tiny movement onto a button
+	# must not fire, even when it is below the normal drag slop.
+	var input_blocker = Button.new()
+	input_blocker.position = Vector2(600, 250)
+	input_blocker.size = Vector2(80, 36)
+	game.ui_root.add_child(input_blocker)
+	press.position = Vector2(598, 265)
+	root.push_input(press)
+	release.position = Vector2(602, 265)
+	root.push_input(release)
+	_check(not game.cannon._grabbed and game.shots_fired == 0, "Small release into a GUI button fired the cannon")
+	press.position = Vector2(620, 265)
+	root.push_input(press)
+	_check(not game.cannon._grabbed, "GUI button press started aiming")
+	release.position = press.position
+	root.push_input(release)
+	input_blocker.free()
 	_check(not game.tutorial_active and not game.tutorial_label.visible and game.debug_snapshot().tutorialArrows.is_empty(), "Aiming tutorial remained after an actual drag")
 	game.load_stage(0)
 	await _frames(2)

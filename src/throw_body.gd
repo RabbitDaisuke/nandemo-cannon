@@ -25,6 +25,10 @@ var sole_supported: bool = false
 var break_requested: bool = false
 var load_force: float = 0.0
 var load_seconds: float = 0.0
+var water_fraction: float = 0.0
+var water_velocity: Vector2 = Vector2.ZERO
+var _dry_gravity_scale: float = 1.0
+var _dry_linear_damp: float = 0.06
 
 var _source_pivot: Vector2 = Vector2(64.0, 64.0)
 var _source_scale: float = 1.0
@@ -171,7 +175,31 @@ func apply_wetting(seconds: float) -> void:
 		return
 	wet_seconds = maxf(wet_seconds, seconds)
 	burning = false
-	sleeping = false
+	# Wetting is a material state, not a collision. Repeated contact with still
+	# water must not keep settled bodies awake or manufacture motion.
+
+
+func set_water_state(fraction: float, velocity: Vector2) -> void:
+	var previously_wet = water_fraction > 0.0
+	water_fraction = clampf(fraction, 0.0, 1.0)
+	water_velocity = velocity
+	if water_fraction > 0.0 and not previously_wet:
+		_dry_gravity_scale = gravity_scale
+		_dry_linear_damp = linear_damp
+	if water_fraction > 0.0 or previously_wet:
+		# Native gravity/damping cooperate with the contact solver and sleeping;
+		# an apply_force every tick would continually wake a supported body.
+		var gravity = _dry_gravity_scale * (1.0 - float(spec.get("buoyancy", 0.45)) * water_fraction)
+		var damping = _dry_linear_damp + 1.2 * water_fraction
+		if not is_equal_approx(gravity_scale, gravity):
+			gravity_scale = gravity
+		if not is_equal_approx(linear_damp, damping):
+			linear_damp = damping
+	var response = maxf(0.0, float(spec.get("flowResponse", 1.0)))
+	# Actual current and buoyant lift can wake a sleeper; still water around a
+	# heavy supported object cannot. Forces themselves run at the physics rate.
+	if water_fraction > 0.0 and (velocity.length_squared() * response > 1.0 or float(spec.get("buoyancy", 0.45)) * water_fraction > 1.0):
+		sleeping = false
 
 
 func request_break(reason: String) -> void:
@@ -220,6 +248,9 @@ func _physics_process(delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if not alive or break_requested:
 		return
+	if water_fraction > 0.0 and not water_velocity.is_zero_approx():
+		var response = maxf(0.0, float(spec.get("flowResponse", 1.0)))
+		state.linear_velocity += water_velocity * response * (1.0 - exp(-1.2 * water_fraction * state.step))
 	_physics_tick += 1
 	var upper_load: float = 0.0
 	var special_friction: float = -1.0
@@ -376,4 +407,27 @@ func contains_world_point(point: Vector2) -> bool:
 				return true
 		elif Geometry2D.is_point_in_polygon(local_point, fixture["points"]):
 			return true
+	return false
+
+
+func touches_world_rect(rect: Rect2) -> bool:
+	# Contact tests use the real rotated fixtures, including holes and handles.
+	# A small numerical tolerance catches an adjoining surface without granting
+	# absorbers an invisible suction radius around their bounding box.
+	var contact_rect = rect.grow(0.15)
+	if not get_world_bounds().intersects(contact_rect, true):
+		return false
+	var corners = PackedVector2Array([contact_rect.position, Vector2(contact_rect.end.x, contact_rect.position.y), contact_rect.end, Vector2(contact_rect.position.x, contact_rect.end.y)])
+	for fixture in _fixture_shapes:
+		if fixture["kind"] == "circle":
+			var center = to_global(fixture["center"])
+			var nearest = Vector2(clampf(center.x, contact_rect.position.x, contact_rect.end.x), clampf(center.y, contact_rect.position.y, contact_rect.end.y))
+			if center.distance_squared_to(nearest) <= pow(float(fixture["radius"]), 2.0):
+				return true
+		else:
+			var polygon = PackedVector2Array()
+			for point in fixture["points"]:
+				polygon.append(to_global(point))
+			if not Geometry2D.intersect_polygons(polygon, corners).is_empty():
+				return true
 	return false

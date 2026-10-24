@@ -203,6 +203,7 @@ func load_stage(index: int) -> void:
 	cannon.fired.connect(_on_fired)
 	cannon.aim_changed.connect(_on_aim_changed)
 	cannon.aim_dragged.connect(_dismiss_tutorial)
+	cannon.pointer_blocked = _pointer_over_ui
 	# The light tutorial consumables otherwise overshoot their intended first target.
 	var initial_power = 0.22 if stage_index == 2 else (0.34 if stage_index in [3, 4] else 0.65)
 	cannon.set_aim(25.0 if stage_index == 2 else 35.0, initial_power)
@@ -938,16 +939,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		KEY_M, KEY_ESCAPE:
 			_show_maps()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if simulation_paused or result_shown or is_instance_valid(modal) or not playable or (is_instance_valid(touch_zoom) and touch_zoom.gesture_active) or not event is InputEventMouseButton:
-		return
-	var button = event as InputEventMouseButton
-	if button.pressed and button.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE]:
-		# Cannon capture and GUI controls consume their events before this fallback.
-		if button.button_index == MOUSE_BUTTON_LEFT and cannon._hit_test(cannon._screen_to_world(button.position)):
-			return
-		cannon.fire()
-		get_viewport().set_input_as_handled()
+func _pointer_over_ui(world_point: Vector2) -> bool:
+	# Starts already pass through Godot GUI handling. Check releases too, since
+	# cannon pointer capture intentionally receives them before GUI controls.
+	var screen_point = cannon.get_canvas_transform() * world_point
+	for child in ui_root.get_children():
+		if child is Control and child.is_visible_in_tree() and child.mouse_filter != Control.MOUSE_FILTER_IGNORE:
+			var local_point = child.get_global_transform_with_canvas().affine_inverse() * screen_point
+			if Rect2(Vector2.ZERO, child.size).has_point(local_point):
+				return true
+	return false
 
 func _draw() -> void:
 	if not is_instance_valid(cannon) or not playable:

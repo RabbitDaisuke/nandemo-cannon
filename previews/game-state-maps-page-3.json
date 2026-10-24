@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -0.00456212554126978,
+			"rotation": -0.00456207618117332,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -351,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": -2.74963855743408,
+			"rotation": -2.7013475894928,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -362,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 415.64404296875,
-			"y": 330.272613525391
+			"x": 416.687133789062,
+			"y": 330.267883300781
 		}
 	],
 	"angle": 38.0,
@@ -1181,7 +1181,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 15.2583333333331,
+	"elapsed": 15.3166666666664,
 	"firePatches": [],
 	"followingItem": "stool",
 	"font": "res://assets/font/arcade-generated.fnt",

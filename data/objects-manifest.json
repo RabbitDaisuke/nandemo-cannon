@@ -4013,7 +4013,7 @@
         "explosionResistance": 0.1,
         "burnSeconds": 3,
         "flowResponse": 1.1,
-        "capacity": 6,
+        "capacity": 24,
         "wetMassMultiplier": 2,
         "releasesWhenSqueezed": false
       },
@@ -4389,7 +4389,7 @@
         "explosionResistance": 0.1,
         "burnSeconds": 3,
         "flowResponse": 1.1,
-        "capacity": 6,
+        "capacity": 12,
         "wetMassMultiplier": 2,
         "releasesWhenSqueezed": false
       },
@@ -13621,7 +13621,7 @@
         {
           "polygon": [
             [
-              20,
+              16,
               36
             ],
             [
@@ -13629,28 +13629,36 @@
               28
             ],
             [
-              92,
-              24
+              52,
+              20
             ],
             [
-              108,
-              36
+              80,
+              20
+            ],
+            [
+              100,
+              28
             ],
             [
               116,
-              56
+              40
             ],
             [
-              108,
-              68
+              116,
+              92
             ],
             [
-              108,
-              108
+              104,
+              104
             ],
             [
-              20,
-              108
+              28,
+              104
+            ],
+            [
+              16,
+              96
             ]
           ]
         }
@@ -13663,7 +13671,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 7856
+      "opaquePixels": 7664
     },
     {
       "id": "pizza-cutter",
@@ -14584,22 +14592,22 @@
         128
       ],
       "viewBox": [
-        14,
-        18,
-        102,
-        96
+        12,
+        20,
+        104,
+        88
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        50,
-        46
+        52,
+        44
       ],
       "worldWidth": 66,
-      "worldHeight": 62.117647058823536,
-      "worldScale": 0.6470588235294118,
+      "worldHeight": 55.84615384615384,
+      "worldScale": 0.6346153846153846,
       "material": "food",
       "mass": 2,
       "score": 100,
@@ -14610,24 +14618,24 @@
         {
           "polygon": [
             [
-              17,
-              43
+              12,
+              56
             ],
             [
-              89,
-              21
+              88,
+              20
             ],
             [
-              113,
-              74
+              116,
+              48
             ],
             [
-              99,
-              111
+              116,
+              92
             ],
             [
-              17,
-              111
+              12,
+              108
             ]
           ]
         }
@@ -14640,7 +14648,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 7614
+      "opaquePixels": 6544
     },
     {
       "id": "candle",

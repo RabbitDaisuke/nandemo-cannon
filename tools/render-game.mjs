@@ -109,11 +109,12 @@ async function render(snapshot){
   }
   const wave=await asset(`assets/effects/water-flow-${Math.floor(snapshot.elapsed*6)%2}.svg`),ice=await asset('assets/effects/ice-tile.svg');
   for(const region of snapshot.waterRegions??[]){
+    if(region[2]<=0||region[3]<=0)continue;
     output+=rectangle(region,'#2ea1cc7a');
     for(let x=region[0];x<region[0]+region[2];x+=32)output+=nested(wave,x,region[1]-4,Math.min(32,region[0]+region[2]-x),22);
   }
   for(const cell of snapshot.waterCells??[]){
-    const h=Math.min(1,Math.max(0.08,cell.amount))*16;
+    const h=Math.min(1,Math.max(0,cell.amount))*16;
     output+=cell.frozen>0?nested(ice,cell.x,cell.y,16,16):nested(wave,cell.x,cell.y+16-h,16,h);
   }
   const drop=await asset('assets/ui/water-drop.svg');
