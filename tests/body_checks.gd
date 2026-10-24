@@ -28,6 +28,70 @@ func _initialize() -> void:
 	call_deferred("_run")
 
 
+func _queue_pool_checks(catalog: GameCatalog) -> void:
+	var pool: Array = catalog.stages[40].queue.duplicate()
+	var original = pool.duplicate()
+	var rng = RandomNumberGenerator.new()
+	rng.seed = 41
+	var first = catalog.build_queue({"queue": pool}, rng)
+	rng.seed = 41
+	_expect(first == catalog.build_queue({"queue": pool}, rng), "oversized candidate pools reproduce both chosen kinds and order from the same seed")
+	var valid = true
+	var orders: Dictionary = {}
+	var selections: Dictionary = {}
+	var hazard_counts: Dictionary = {}
+	var with_flame = false
+	var without_flame = false
+	var hazards = ["flamethrower", "campfire", "tabletop-stove", "blast-bomb", "lightning-orb", "wooden-crate", "charred-log"]
+	for seed_value in range(64):
+		rng.seed = seed_value
+		var queue = catalog.build_queue({"queue": pool}, rng)
+		var unique: Dictionary = {}
+		var hazard_count = 0
+		for id in queue:
+			unique[id] = true
+			valid = valid and id in pool
+			if id in hazards:
+				hazard_count += 1
+		valid = valid and queue.size() == 15 and unique.size() == 15
+		orders[str(queue)] = true
+		var sorted = queue.duplicate()
+		sorted.sort()
+		selections[str(sorted)] = true
+		hazard_counts[hazard_count] = true
+		with_flame = with_flame or queue.has("flamethrower")
+		without_flame = without_flame or not queue.has("flamethrower")
+	_expect(valid, "an oversized candidate list always yields fifteen distinct existing candidates")
+	_expect(orders.size() > 1 and selections.size() > 1, "different seeds vary both candidate selection and throw order")
+	_expect(with_flame and without_flame and hazard_counts.size() > 1, "village draws may omit the flamethrower and do not force a fixed hazard quota")
+	var duplicated = pool.duplicate()
+	duplicated.append_array([pool[0], pool[1], pool[0]])
+	rng.seed = 41
+	_expect(catalog.build_queue({"queue": duplicated}, rng) == first and pool == original, "duplicate pool entries neither add repeat kinds nor weighting, and the authored pool stays unchanged")
+	var fixed = pool.slice(0, 15)
+	rng.seed = 41
+	_expect(catalog.build_queue({"queue": fixed}, rng) == fixed, "ordinary fifteen-item stages retain their authored order")
+	rng.seed = 41
+	var shuffled = catalog.build_queue({"queue": fixed, "shuffleQueue": true}, rng)
+	rng.seed = 41
+	var repeated = catalog.build_queue({"queue": fixed, "shuffleQueue": true}, rng)
+	var sorted_fixed = fixed.duplicate()
+	var sorted_shuffle = shuffled.duplicate()
+	sorted_fixed.sort()
+	sorted_shuffle.sort()
+	_expect(shuffled == repeated and shuffled != fixed and sorted_shuffle == sorted_fixed, "shuffleQueue independently shuffles a fixed fifteen-item list with the stage seed")
+	var slots: Array = []
+	for id in fixed:
+		slots.append({"count": 1, "candidates": [id]})
+	rng.seed = 41
+	_expect(catalog.build_queue({"queueSlots": slots}, rng) == fixed, "unflagged slot queues preserve their tutorial positions")
+	rng.seed = 41
+	var mixed_slots = catalog.build_queue({"queueSlots": slots, "shuffleQueue": true}, rng)
+	var sorted_slots = mixed_slots.duplicate()
+	sorted_slots.sort()
+	_expect(mixed_slots != fixed and sorted_slots == sorted_fixed, "shuffleQueue also mixes already selected slot items without changing their contents")
+
+
 func _run() -> void:
 	Engine.physics_ticks_per_second = 120
 	var manifest = JSON.parse_string(FileAccess.get_file_as_string("res://data/objects-manifest.json"))
@@ -180,6 +244,7 @@ func _run() -> void:
 	laboratory_rng.seed = 91
 	var future_queue = random_catalog.build_queue({"queuePolicy": "randomCatalog", "queue": ["refrigerator"]}, laboratory_rng)
 	_expect(future_queue.size() == 15 and future_queue.count("future-catalog-item") == 15, "random laboratory samples the live catalog including later additions")
+	_queue_pool_checks(catalog)
 	await _reset(false)
 	var mover = preload("res://src/moving_terrain.gd").new()
 	fixture_world.add_child(mover)

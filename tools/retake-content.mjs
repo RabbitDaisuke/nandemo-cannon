@@ -100,7 +100,7 @@ const summary=await read('build-summary'),verification=await read('verification'
 summary.objects=manifest.items.length;
 Object.assign(verification,{objects:manifest.items.length,croppedSpritesChecked:manifest.items.length,uniqueRenderedSprites:new Set(manifest.items.map(x=>x.svg)).size});
 verification.checks=verification.checks.filter(x=>!/^\d+ item records/.test(x));
-verification.checks.push(`${manifest.items.length} item records; all ${stages.stages.length} queues reference 15 existing items`);
+verification.checks.push(`${manifest.items.length} item records; all ${stages.stages.length} queues produce 15 throws from existing item candidates`);
 await Promise.all([write('build-summary',summary),write('verification',verification)]);
 await sharp({create:{width:edits.length*200,height:200,channels:4,background:'#283b4c'}}).composite(sheet).png().toFile(path.join(root,'previews/retaken-items.png'));
 console.log(`Retakes: ${edits.map(x=>x.id).join(', ')}; ${manifest.items.length} objects`);

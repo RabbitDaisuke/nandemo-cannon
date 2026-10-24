@@ -665,7 +665,40 @@
     "nori-bento": {},
     "homemade-bento": {},
     "paper-cup": {},
-    "monitor": {}
+    "monitor": {},
+    "forest": {
+      "burnSeconds": 5
+    },
+    "wooden-house": {},
+    "concrete-house": {
+      "flammable": false,
+      "explosionResistance": 0.65
+    },
+    "farm-plot": {},
+    "carrot": {},
+    "car": {
+      "wheelFixtures": [
+        1,
+        2
+      ]
+    },
+    "mini-mountain": {},
+    "truck": {
+      "wheelFixtures": [
+        2,
+        3
+      ]
+    },
+    "house-door": {},
+    "road-segment": {},
+    "supermarket": {
+      "explosionResistance": 0.5
+    },
+    "charred-log": {
+      "flammable": false,
+      "burnSeconds": null,
+      "explosionResistance": 0.12
+    }
   },
   "stateRules": {
     "breakage": {

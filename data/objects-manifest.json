@@ -18810,6 +18810,1012 @@
         "flowResponse": 0.5
       },
       "opaquePixels": 10392
+    },
+    {
+      "id": "forest",
+      "nameJa": "森林",
+      "svg": "objects/forest.svg",
+      "png": "raster/objects/forest.png",
+      "webp": "raster/objects/forest.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        0,
+        5,
+        127,
+        121
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        64,
+        59
+      ],
+      "worldWidth": 80,
+      "worldHeight": 76.22047244094487,
+      "worldScale": 0.6299212598425197,
+      "material": "plant",
+      "mass": 4.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "forest",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              24,
+              26
+            ],
+            [
+              48,
+              105
+            ],
+            [
+              0,
+              105
+            ]
+          ]
+        },
+        {
+          "rect": [
+            19,
+            105,
+            10,
+            21
+          ]
+        },
+        {
+          "polygon": [
+            [
+              64,
+              3
+            ],
+            [
+              93,
+              105
+            ],
+            [
+              35,
+              105
+            ]
+          ]
+        },
+        {
+          "rect": [
+            59,
+            105,
+            10,
+            21
+          ]
+        },
+        {
+          "polygon": [
+            [
+              103,
+              21
+            ],
+            [
+              127,
+              105
+            ],
+            [
+              79,
+              105
+            ]
+          ]
+        },
+        {
+          "rect": [
+            98,
+            105,
+            10,
+            21
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.15,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 7183
+    },
+    {
+      "id": "wooden-house",
+      "nameJa": "木造の家",
+      "svg": "objects/wooden-house.svg",
+      "png": "raster/objects/wooden-house.png",
+      "webp": "raster/objects/wooden-house.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        9,
+        118,
+        111
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        55
+      ],
+      "worldWidth": 88,
+      "worldHeight": 82.77966101694915,
+      "worldScale": 0.7457627118644068,
+      "material": "wood",
+      "mass": 6.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wooden-house",
+      "fixtures": [
+        {
+          "rect": [
+            18,
+            54,
+            92,
+            66
+          ]
+        },
+        {
+          "polygon": [
+            [
+              4,
+              58
+            ],
+            [
+              64,
+              9
+            ],
+            [
+              124,
+              58
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 8644
+    },
+    {
+      "id": "concrete-house",
+      "nameJa": "鉄筋コンクリートの家",
+      "svg": "objects/concrete-house.svg",
+      "png": "raster/objects/concrete-house.png",
+      "webp": "raster/objects/concrete-house.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        6,
+        16,
+        116,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        58,
+        48
+      ],
+      "worldWidth": 96,
+      "worldHeight": 86.89655172413794,
+      "worldScale": 0.8275862068965517,
+      "material": "stone",
+      "mass": 12,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "concrete-house",
+      "fixtures": [
+        {
+          "rect": [
+            12,
+            25,
+            104,
+            96
+          ]
+        },
+        {
+          "rect": [
+            6,
+            16,
+            116,
+            12
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.65,
+        "burnSeconds": null,
+        "flowResponse": 0.35
+      },
+      "opaquePixels": 11064
+    },
+    {
+      "id": "farm-plot",
+      "nameJa": "畑",
+      "svg": "objects/farm-plot.svg",
+      "png": "raster/objects/farm-plot.png",
+      "webp": "raster/objects/farm-plot.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        3,
+        31,
+        119,
+        86
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        61,
+        33
+      ],
+      "worldWidth": 90,
+      "worldHeight": 65.04201680672269,
+      "worldScale": 0.7563025210084033,
+      "material": "plant",
+      "mass": 3.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "farm-plot",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              71
+            ],
+            [
+              107,
+              71
+            ],
+            [
+              122,
+              91
+            ],
+            [
+              111,
+              117
+            ],
+            [
+              14,
+              117
+            ],
+            [
+              3,
+              95
+            ]
+          ]
+        },
+        {
+          "rect": [
+            20,
+            46,
+            22,
+            31
+          ]
+        },
+        {
+          "rect": [
+            15,
+            51,
+            14,
+            12
+          ]
+        },
+        {
+          "rect": [
+            53,
+            34,
+            23,
+            40
+          ]
+        },
+        {
+          "rect": [
+            47,
+            31,
+            14,
+            15
+          ]
+        },
+        {
+          "rect": [
+            68,
+            38,
+            15,
+            14
+          ]
+        },
+        {
+          "rect": [
+            87,
+            47,
+            22,
+            29
+          ]
+        },
+        {
+          "rect": [
+            100,
+            44,
+            13,
+            13
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.15,
+        "burnSeconds": 4,
+        "flowResponse": 1
+      },
+      "opaquePixels": 7283
+    },
+    {
+      "id": "carrot",
+      "nameJa": "ニンジン",
+      "svg": "objects/carrot.svg",
+      "png": "raster/objects/carrot.png",
+      "webp": "raster/objects/carrot.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        33,
+        3,
+        61,
+        117
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        31,
+        61
+      ],
+      "worldWidth": 35,
+      "worldHeight": 67.1311475409836,
+      "worldScale": 0.5737704918032787,
+      "material": "food",
+      "mass": 1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "carrot",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              33,
+              35
+            ],
+            [
+              89,
+              35
+            ],
+            [
+              91,
+              53
+            ],
+            [
+              64,
+              121
+            ],
+            [
+              36,
+              60
+            ]
+          ]
+        },
+        {
+          "rect": [
+            47,
+            8,
+            12,
+            31
+          ]
+        },
+        {
+          "rect": [
+            66,
+            3,
+            12,
+            35
+          ]
+        },
+        {
+          "rect": [
+            80,
+            15,
+            14,
+            26
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 3994
+    },
+    {
+      "id": "car",
+      "nameJa": "くるま",
+      "svg": "objects/car.svg",
+      "png": "raster/objects/car.png",
+      "webp": "raster/objects/car.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        6,
+        34,
+        116,
+        77
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        58,
+        30
+      ],
+      "worldWidth": 86,
+      "worldHeight": 57.08620689655173,
+      "worldScale": 0.7413793103448276,
+      "material": "metal",
+      "mass": 5.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "wheeled",
+      "colliderTemplate": "car",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              6,
+              65
+            ],
+            [
+              24,
+              60
+            ],
+            [
+              39,
+              34
+            ],
+            [
+              83,
+              34
+            ],
+            [
+              103,
+              60
+            ],
+            [
+              122,
+              67
+            ],
+            [
+              122,
+              98
+            ],
+            [
+              6,
+              98
+            ]
+          ]
+        },
+        {
+          "circle": [
+            32,
+            98,
+            14
+          ]
+        },
+        {
+          "circle": [
+            97,
+            98,
+            14
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "normalMinDot": 0.55,
+        "rollingFriction": 0.025,
+        "invertedFriction": 0.6,
+        "acceleration": "gravity projected along actual contact tangent plus collision impulse; no auto drive",
+        "state": "rolling only with wheel-side contact; falling and inverted remain dynamic rigid bodies",
+        "wheelFixtures": [
+          1,
+          2
+        ]
+      },
+      "opaquePixels": 6583
+    },
+    {
+      "id": "mini-mountain",
+      "nameJa": "山",
+      "svg": "objects/mini-mountain.svg",
+      "png": "raster/objects/mini-mountain.png",
+      "webp": "raster/objects/mini-mountain.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        9,
+        118,
+        104
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        55
+      ],
+      "worldWidth": 106,
+      "worldHeight": 93.42372881355932,
+      "worldScale": 0.8983050847457628,
+      "material": "stone",
+      "mass": 11,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "mini-mountain",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              5,
+              113
+            ],
+            [
+              18,
+              88
+            ],
+            [
+              42,
+              52
+            ],
+            [
+              63,
+              8
+            ],
+            [
+              85,
+              46
+            ],
+            [
+              110,
+              83
+            ],
+            [
+              123,
+              113
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.95,
+        "burnSeconds": null,
+        "flowResponse": 0.35
+      },
+      "opaquePixels": 6236
+    },
+    {
+      "id": "truck",
+      "nameJa": "トラック",
+      "svg": "objects/truck.svg",
+      "png": "raster/objects/truck.png",
+      "webp": "raster/objects/truck.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        26,
+        119,
+        85
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        38
+      ],
+      "worldWidth": 104,
+      "worldHeight": 74.28571428571429,
+      "worldScale": 0.8739495798319328,
+      "material": "metal",
+      "mass": 7.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "wheeled",
+      "colliderTemplate": "truck",
+      "fixtures": [
+        {
+          "rect": [
+            4,
+            26,
+            71,
+            67
+          ]
+        },
+        {
+          "polygon": [
+            [
+              75,
+              45
+            ],
+            [
+              101,
+              45
+            ],
+            [
+              123,
+              70
+            ],
+            [
+              123,
+              94
+            ],
+            [
+              75,
+              94
+            ]
+          ]
+        },
+        {
+          "circle": [
+            28,
+            98,
+            14
+          ]
+        },
+        {
+          "circle": [
+            101,
+            98,
+            14
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "normalMinDot": 0.55,
+        "rollingFriction": 0.025,
+        "invertedFriction": 0.6,
+        "acceleration": "gravity projected along actual contact tangent plus collision impulse; no auto drive",
+        "state": "rolling only with wheel-side contact; falling and inverted remain dynamic rigid bodies",
+        "wheelFixtures": [
+          2,
+          3
+        ]
+      },
+      "opaquePixels": 7863
+    },
+    {
+      "id": "house-door",
+      "nameJa": "家のドア",
+      "svg": "objects/house-door.svg",
+      "png": "raster/objects/house-door.png",
+      "webp": "raster/objects/house-door.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        28,
+        5,
+        72,
+        119
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        36,
+        59
+      ],
+      "worldWidth": 44,
+      "worldHeight": 72.72222222222223,
+      "worldScale": 0.6111111111111112,
+      "material": "wood",
+      "mass": 2.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "house-door",
+      "fixtures": [
+        {
+          "rect": [
+            28,
+            5,
+            72,
+            119
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 8568
+    },
+    {
+      "id": "road-segment",
+      "nameJa": "舗装道路",
+      "svg": "objects/road-segment.svg",
+      "png": "raster/objects/road-segment.png",
+      "webp": "raster/objects/road-segment.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        45,
+        120,
+        46
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        19
+      ],
+      "worldWidth": 100,
+      "worldHeight": 38.333333333333336,
+      "worldScale": 0.8333333333333334,
+      "material": "stone",
+      "mass": 6.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "road-segment",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              15,
+              45
+            ],
+            [
+              113,
+              45
+            ],
+            [
+              124,
+              91
+            ],
+            [
+              4,
+              91
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.95,
+        "burnSeconds": null,
+        "flowResponse": 0.35
+      },
+      "opaquePixels": 5014
+    },
+    {
+      "id": "supermarket",
+      "nameJa": "スーパー",
+      "svg": "objects/supermarket.svg",
+      "png": "raster/objects/supermarket.png",
+      "webp": "raster/objects/supermarket.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        8,
+        110,
+        110
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        56
+      ],
+      "worldWidth": 106,
+      "worldHeight": 106,
+      "worldScale": 0.9636363636363636,
+      "material": "stone",
+      "mass": 10,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "supermarket",
+      "fixtures": [
+        {
+          "rect": [
+            9,
+            29,
+            110,
+            89
+          ]
+        },
+        {
+          "rect": [
+            21,
+            8,
+            86,
+            21
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.5,
+        "burnSeconds": null,
+        "flowResponse": 0.35
+      },
+      "opaquePixels": 11596
+    },
+    {
+      "id": "charred-log",
+      "nameJa": "燃えた丸太",
+      "svg": "objects/charred-log.svg",
+      "png": "raster/objects/charred-log.png",
+      "webp": "raster/objects/charred-log.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        43,
+        113,
+        47
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        21
+      ],
+      "worldWidth": 72,
+      "worldHeight": 29.946902654867255,
+      "worldScale": 0.6371681415929203,
+      "material": "wood",
+      "mass": 1.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "charred-log",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              57
+            ],
+            [
+              25,
+              43
+            ],
+            [
+              108,
+              43
+            ],
+            [
+              121,
+              56
+            ],
+            [
+              115,
+              85
+            ],
+            [
+              24,
+              90
+            ],
+            [
+              8,
+              77
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": false,
+        "explosionResistance": 0.12,
+        "burnSeconds": null,
+        "flowResponse": 1
+      },
+      "opaquePixels": 4653
     }
   ]
 }

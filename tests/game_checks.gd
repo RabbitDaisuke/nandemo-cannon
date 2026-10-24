@@ -473,6 +473,53 @@ func _office_stage_checks() -> void:
 		game.destroy_actor(monitor, "test")
 		_check(game.calculate_score() == outside_score, "Destroying office equipment failed to remove its base and height points")
 
+func _village_stage_checks() -> void:
+	game.load_stage(40)
+	var initial_overlap = false
+	for index in range(game.actors.size()):
+		for other_index in range(index + 1, game.actors.size()):
+			var overlap: Rect2 = game.actors[index].get_world_bounds().intersection(game.actors[other_index].get_world_bounds())
+			initial_overlap = initial_overlap or overlap.size.x * overlap.size.y > 0.1
+	_check(not initial_overlap, "Village props start with overlapping silhouettes before the first shot")
+	await _frames(240)
+	var source: Dictionary = game.catalog.stages[40]
+	var selected: Dictionary = {}
+	for id in game.current_stage.queue:
+		selected[id] = true
+	_check(source.queue.size() > 15 and bool(source.get("shuffleQueue", false)) and game.current_stage.queue.size() == 15 and selected.size() == 15 and game.playable, "Village failed to turn its expandable candidate pool into fifteen distinct playable throws")
+	_check(game.current_stage.queue.all(func(id): return id in source.queue), "Village selected a throw outside its authored candidates")
+	var forest_count = 0
+	var house_count = 0
+	var all_dynamic_scoring = true
+	var expected_score = 0
+	var forest: ThrowBody = null
+	for actor in game.actors:
+		forest_count += 1 if actor.item_id == "forest" else 0
+		house_count += 1 if actor.item_id == "wooden-house" else 0
+		all_dynamic_scoring = all_dynamic_scoring and actor.alive and actor.can_score and not actor.is_launched and not actor.freeze
+		var height = maxf(0.0, float(source.scoreGroundY) - actor.get_world_bounds().get_center().y)
+		expected_score += int(actor.record.score) + 10 * floori(height / 16.0)
+		if actor.item_id == "forest":
+			forest = actor
+	_check(forest_count >= 5 and house_count >= 1 and all_dynamic_scoring and game.shots_fired == 0, "Village lost its movable scoring forest or wooden homes before any throw")
+	_check(game.calculate_score() == expected_score and expected_score > 0 and game.score_value == expected_score, "A settled village prop fell outside the scoring bounds or its visible score is stale")
+	_check(bool(game.catalog.items["forest"].physics.flammable) and bool(game.catalog.items["wooden-house"].physics.flammable) and not bool(game.catalog.items["concrete-house"].physics.flammable), "Forest and wooden homes must burn while reinforced concrete remains nonflammable")
+	var ordinary_sizes = true
+	for id in ["wooden-house", "concrete-house", "mini-mountain", "road-segment", "supermarket"]:
+		var record: Dictionary = game.catalog.items[id]
+		ordinary_sizes = ordinary_sizes and float(record.worldWidth) <= 120.0 and int(record.score) == 100
+	_check(ordinary_sizes, "Village buildings and terrain objects exceed ordinary throwing size or gain inflated base scores")
+	observations.village_initial_score = expected_score
+	observations.village_initial_forests = forest_count
+	observations.village_selected_queue = game.current_stage.queue.duplicate()
+	await _snapshot("41-village")
+	if forest != null:
+		var start_position = forest.position
+		forest.sleeping = false
+		forest.apply_central_impulse(Vector2(120.0 * forest.mass, -40.0 * forest.mass))
+		await _frames(20)
+		_check(forest.alive and forest.position.distance_to(start_position) > 1.0, "A village forest prop does not move under an impulse")
+
 func _run() -> void:
 	root.size = Vector2i(960, 540)
 	game = GameScript.new()
@@ -499,6 +546,7 @@ func _run() -> void:
 	await _late_stage_checks()
 	await _preplaced_scoring_checks()
 	await _office_stage_checks()
+	await _village_stage_checks()
 	await _catalog_search_checks()
 	game.load_stage(0)
 	await _frames(2)

@@ -1789,6 +1789,28 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "41-village",
+      "stage": 41,
+      "nameJa": "ひとざと",
+      "status": "specified",
+      "svg": "maps/41-village.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }

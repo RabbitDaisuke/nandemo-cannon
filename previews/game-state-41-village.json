@@ -1,0 +1,1477 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "forest",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "forest",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								26.0
+							],
+							[
+								48.0,
+								105.0
+							],
+							[
+								0.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							19.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								64.0,
+								3.0
+							],
+							[
+								93.0,
+								105.0
+							],
+							[
+								35.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							59.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								103.0,
+								21.0
+							],
+							[
+								127.0,
+								105.0
+							],
+							[
+								79.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							98.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					}
+				],
+				"id": "forest",
+				"mass": 4.6,
+				"material": "plant",
+				"nameJa": "森林",
+				"opaquePixels": 7183.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					64.0,
+					59.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/forest.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/forest.svg",
+				"viewBox": [
+					0.0,
+					5.0,
+					127.0,
+					121.0
+				],
+				"webp": "raster/objects/forest.webp",
+				"worldHeight": 59.0708661417323,
+				"worldScale": 0.488188976377953,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.0000178118607436772,
+			"texture": "res://assets/objects/forest.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.2440948486328,
+				-28.803150177002
+			],
+			"visualScale": [
+				0.488188982009888,
+				0.488188982009888
+			],
+			"x": 76.0010299682617,
+			"y": 419.744110107422
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "forest",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "forest",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								26.0
+							],
+							[
+								48.0,
+								105.0
+							],
+							[
+								0.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							19.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								64.0,
+								3.0
+							],
+							[
+								93.0,
+								105.0
+							],
+							[
+								35.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							59.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								103.0,
+								21.0
+							],
+							[
+								127.0,
+								105.0
+							],
+							[
+								79.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							98.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					}
+				],
+				"id": "forest",
+				"mass": 4.6,
+				"material": "plant",
+				"nameJa": "森林",
+				"opaquePixels": 7183.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					64.0,
+					59.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/forest.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/forest.svg",
+				"viewBox": [
+					0.0,
+					5.0,
+					127.0,
+					121.0
+				],
+				"webp": "raster/objects/forest.webp",
+				"worldHeight": 59.0708661417323,
+				"worldScale": 0.488188976377953,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.0000178115751623409,
+			"texture": "res://assets/objects/forest.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.2440948486328,
+				-28.803150177002
+			],
+			"visualScale": [
+				0.488188982009888,
+				0.488188982009888
+			],
+			"x": 142.001022338867,
+			"y": 419.744110107422
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "forest",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "forest",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								26.0
+							],
+							[
+								48.0,
+								105.0
+							],
+							[
+								0.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							19.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								64.0,
+								3.0
+							],
+							[
+								93.0,
+								105.0
+							],
+							[
+								35.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							59.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								103.0,
+								21.0
+							],
+							[
+								127.0,
+								105.0
+							],
+							[
+								79.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							98.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					}
+				],
+				"id": "forest",
+				"mass": 4.6,
+				"material": "plant",
+				"nameJa": "森林",
+				"opaquePixels": 7183.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					64.0,
+					59.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/forest.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/forest.svg",
+				"viewBox": [
+					0.0,
+					5.0,
+					127.0,
+					121.0
+				],
+				"webp": "raster/objects/forest.webp",
+				"worldHeight": 59.0708661417323,
+				"worldScale": 0.488188976377953,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.0000178117843461223,
+			"texture": "res://assets/objects/forest.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.2440948486328,
+				-28.803150177002
+			],
+			"visualScale": [
+				0.488188982009888,
+				0.488188982009888
+			],
+			"x": 208.001022338867,
+			"y": 419.744110107422
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "forest",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "forest",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								26.0
+							],
+							[
+								48.0,
+								105.0
+							],
+							[
+								0.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							19.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								64.0,
+								3.0
+							],
+							[
+								93.0,
+								105.0
+							],
+							[
+								35.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							59.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								103.0,
+								21.0
+							],
+							[
+								127.0,
+								105.0
+							],
+							[
+								79.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							98.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					}
+				],
+				"id": "forest",
+				"mass": 4.6,
+				"material": "plant",
+				"nameJa": "森林",
+				"opaquePixels": 7183.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					64.0,
+					59.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/forest.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/forest.svg",
+				"viewBox": [
+					0.0,
+					5.0,
+					127.0,
+					121.0
+				],
+				"webp": "raster/objects/forest.webp",
+				"worldHeight": 59.0708661417323,
+				"worldScale": 0.488188976377953,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.0000178118607436772,
+			"texture": "res://assets/objects/forest.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.2440948486328,
+				-28.803150177002
+			],
+			"visualScale": [
+				0.488188982009888,
+				0.488188982009888
+			],
+			"x": 460.001037597656,
+			"y": 419.744110107422
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "forest",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "forest",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								26.0
+							],
+							[
+								48.0,
+								105.0
+							],
+							[
+								0.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							19.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								64.0,
+								3.0
+							],
+							[
+								93.0,
+								105.0
+							],
+							[
+								35.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							59.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								103.0,
+								21.0
+							],
+							[
+								127.0,
+								105.0
+							],
+							[
+								79.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							98.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					}
+				],
+				"id": "forest",
+				"mass": 4.6,
+				"material": "plant",
+				"nameJa": "森林",
+				"opaquePixels": 7183.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					64.0,
+					59.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/forest.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/forest.svg",
+				"viewBox": [
+					0.0,
+					5.0,
+					127.0,
+					121.0
+				],
+				"webp": "raster/objects/forest.webp",
+				"worldHeight": 59.0708661417323,
+				"worldScale": 0.488188976377953,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.0000178118607436772,
+			"texture": "res://assets/objects/forest.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.2440948486328,
+				-28.803150177002
+			],
+			"visualScale": [
+				0.488188982009888,
+				0.488188982009888
+			],
+			"x": 526.001037597656,
+			"y": 419.744110107422
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "forest",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "forest",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								26.0
+							],
+							[
+								48.0,
+								105.0
+							],
+							[
+								0.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							19.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								64.0,
+								3.0
+							],
+							[
+								93.0,
+								105.0
+							],
+							[
+								35.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							59.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								103.0,
+								21.0
+							],
+							[
+								127.0,
+								105.0
+							],
+							[
+								79.0,
+								105.0
+							]
+						]
+					},
+					{
+						"rect": [
+							98.0,
+							105.0,
+							10.0,
+							21.0
+						]
+					}
+				],
+				"id": "forest",
+				"mass": 4.6,
+				"material": "plant",
+				"nameJa": "森林",
+				"opaquePixels": 7183.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					64.0,
+					59.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/forest.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/forest.svg",
+				"viewBox": [
+					0.0,
+					5.0,
+					127.0,
+					121.0
+				],
+				"webp": "raster/objects/forest.webp",
+				"worldHeight": 59.0708661417323,
+				"worldScale": 0.488188976377953,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.0000178118607436772,
+			"texture": "res://assets/objects/forest.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.2440948486328,
+				-28.803150177002
+			],
+			"visualScale": [
+				0.488188982009888,
+				0.488188982009888
+			],
+			"x": 592.001037597656,
+			"y": 419.744110107422
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-house",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "wooden-house",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							54.0,
+							92.0,
+							66.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								4.0,
+								58.0
+							],
+							[
+								64.0,
+								9.0
+							],
+							[
+								124.0,
+								58.0
+							]
+						]
+					}
+				],
+				"id": "wooden-house",
+				"mass": 6.5,
+				"material": "wood",
+				"nameJa": "木造の家",
+				"opaquePixels": 8644.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.1
+				},
+				"pivotCropped": [
+					59.0,
+					55.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-house.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-house.svg",
+				"viewBox": [
+					5.0,
+					9.0,
+					118.0,
+					111.0
+				],
+				"webp": "raster/objects/wooden-house.webp",
+				"worldHeight": 77.135593220339,
+				"worldScale": 0.694915254237288,
+				"worldWidth": 82.0
+			},
+			"rotation": 0.00000656565043755108,
+			"texture": "res://assets/objects/wooden-house.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-41.0,
+				-38.2203369140625
+			],
+			"visualScale": [
+				0.694915235042572,
+				0.694915235042572
+			],
+			"x": 287.000518798828,
+			"y": 411.100616455078
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-house",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "wooden-house",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							54.0,
+							92.0,
+							66.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								4.0,
+								58.0
+							],
+							[
+								64.0,
+								9.0
+							],
+							[
+								124.0,
+								58.0
+							]
+						]
+					}
+				],
+				"id": "wooden-house",
+				"mass": 6.5,
+				"material": "wood",
+				"nameJa": "木造の家",
+				"opaquePixels": 8644.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.1
+				},
+				"pivotCropped": [
+					59.0,
+					55.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-house.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-house.svg",
+				"viewBox": [
+					5.0,
+					9.0,
+					118.0,
+					111.0
+				],
+				"webp": "raster/objects/wooden-house.webp",
+				"worldHeight": 77.135593220339,
+				"worldScale": 0.694915254237288,
+				"worldWidth": 82.0
+			},
+			"rotation": 0.00000656565043755108,
+			"texture": "res://assets/objects/wooden-house.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-41.0,
+				-38.2203369140625
+			],
+			"visualScale": [
+				0.694915235042572,
+				0.694915235042572
+			],
+			"x": 377.000518798828,
+			"y": 411.100616455078
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0900",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/wooden-house.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "もくぞうのいえ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				107.0,
+				18.75
+			],
+			"text": "41 / ひとざと",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				77.0,
+				304.0,
+				44.0
+			],
+			"text": "へいわな ひとざとに キャノンがきた！？ もりと いえを\nわくにのこそう！",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"editable": true,
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 1,
+			"color": "ffd36cff",
+			"fontSize": 14,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				746.0,
+				298.0,
+				196.0,
+				17.5
+			],
+			"text": "いえのドア",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 2.0,
+	"firePatches": [],
+	"followingItem": "wooden-house",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "house-door",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			0.611111104488373,
+			0.611111104488373
+		],
+		"texture": "res://assets/objects/house-door.svg"
+	},
+	"map": "41-village",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 900,
+	"scoreMarker": [
+		[
+			53.0,
+			436.0
+		],
+		[
+			622.0,
+			436.0
+		],
+		[
+			640.0,
+			458.0
+		],
+		[
+			35.0,
+			458.0
+		]
+	],
+	"scoreZone": [
+		35.0,
+		80.0,
+		605.0,
+		370.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 41,
+	"trajectory": [
+		[
+			664.752990722656,
+			295.060974121094,
+			0.96,
+			"ff67dbff"
+		],
+		[
+			625.176574707031,
+			272.641265869141,
+			0.92,
+			"ff67dbff"
+		],
+		[
+			585.600219726562,
+			253.749603271484,
+			0.88,
+			"ff67dbff"
+		],
+		[
+			546.023803710938,
+			238.385925292969,
+			0.84,
+			"ff67dbff"
+		],
+		[
+			506.447448730469,
+			226.550231933594,
+			0.8,
+			"ff67dbff"
+		],
+		[
+			466.871063232422,
+			218.242553710938,
+			0.76,
+			"ff67dbff"
+		],
+		[
+			427.294708251953,
+			213.462890625,
+			0.72,
+			"ff67dbff"
+		],
+		[
+			387.718322753906,
+			212.211212158203,
+			0.68,
+			"ff67dbff"
+		],
+		[
+			348.141906738281,
+			214.487533569336,
+			0.64,
+			"ff67dbff"
+		],
+		[
+			308.565521240234,
+			220.291839599609,
+			0.6,
+			"ff67dbff"
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

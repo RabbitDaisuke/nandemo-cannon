@@ -1,4 +1,4 @@
-// Authored SVG collection: stages 36–40 and their restaurant/cafe/office objects.
+// Authored SVG collection: stages 36–41 and their restaurant/cafe/office/village objects.
 // Run after the older content layers; checked-in SVG/data are the build inputs.
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -87,6 +87,79 @@ add('monitor','モニター','モニター','appliance',6,88,
  P('M20 61L43 41L59 51L78 34L108 58V69H20Z','#bad8cd')+R(83,31,15,3,'#d9efe0')+R(94,78,5,3,'#a2d6ae')+
  R(54,88,20,24,ink)+R(59,88,10,24,'#869fa7')+R(31,112,66,12,ink)+R(37,115,54,5,'#6f8794'));
 
+// Village pieces share ordinary throwable dimensions and base scores. They are
+// miniature terrain/buildings, never fixed landscape or excluded catalog entries.
+const villageItemIds=['forest','wooden-house','concrete-house','farm-plot','carrot','car','mini-mountain','truck','house-door','road-segment','supermarket','charred-log'];
+const pine=(x,y,w,h)=>{
+ const cx=x+w/2;
+ return R(cx-5,y+h-13,10,21,ink)+R(cx-2,y+h-11,4,15,'#996c43')+
+ P(`M${cx} ${y}L${x+w} ${y+h-13}H${x}Z`,ink)+
+ P(`M${cx} ${y+10}L${x+w-9} ${y+h-19}H${x+9}Z`,'#3b7354')+
+ P(`M${cx} ${y+10}L${cx+2} ${y+h-19}H${x+9}Z`,'#6b9d64')+
+ R(cx-8,y+h-32,16,4,'#8cb477');
+};
+add('forest','森林','しんりん','plant',4.6,80,
+ [poly([24,26],[48,105],[0,105]),rect(19,105,10,21),poly([64,3],[93,105],[35,105]),rect(59,105,10,21),poly([103,21],[127,105],[79,105]),rect(98,105,10,21)],
+ pine(0,26,48,92)+pine(79,21,48,97)+pine(35,3,58,115),'solid',{burnSeconds:5});
+const cottageShape=[rect(18,54,92,66),poly([4,58],[64,9],[124,58])];
+add('wooden-house','木造の家','もくぞうのいえ','wood',6.5,88,cottageShape,
+ R(18,54,92,66,ink)+R(24,59,80,55,'#cc9963')+[67,81,95,109].map(y=>R(25,y,78,3,'#a4754d')).join('')+
+ P('M4 58L64 9L124 58Z',ink)+P('M16 52L64 17L112 52Z','#a65344')+P('M27 48L64 22L98 48Z','#d88561')+
+ R(32,69,25,25,ink)+R(37,74,15,15,'#9bd5d3')+R(43,74,3,15,'#f1e6bd')+
+ R(72,72,24,42,ink)+R(77,77,14,37,'#73563f')+R(79,94,4,4,gold)+R(21,115,86,4,'#715440'));
+add('concrete-house','鉄筋コンクリートの家','コンクリートのいえ','stone',12,96,
+ [rect(12,25,104,96),rect(6,16,116,12)],
+ R(12,25,104,96,ink)+R(18,30,92,85,'#b1bbb1')+R(6,16,116,12,ink)+R(12,20,104,5,'#d7d8c3')+
+ R(22,35,84,5,'#dce0ca')+R(22,69,84,4,'#8d9b98')+
+ [28,73].map(x=>R(x,44,27,21,ink)+R(x+5,49,17,11,'#75aeba')+R(x+6,49,5,11,'#b8d7d1')).join('')+
+ R(27,81,26,25,ink)+R(32,86,16,15,'#75aeba')+R(76,80,24,35,ink)+R(81,85,14,30,'#526e7d')+R(82,98,3,3,gold),'solid',{flammable:false,explosionResistance:0.65});
+add('farm-plot','畑','はたけ','plant',3.8,90,
+ [poly([8,71],[107,71],[122,91],[111,117],[14,117],[3,95]),rect(20,46,22,31),rect(15,51,14,12),rect(53,34,23,40),rect(47,31,14,15),rect(68,38,15,14),rect(87,47,22,29),rect(100,44,13,13)],
+ P('M8 71H107L122 91L111 117H14L3 95Z',ink)+P('M14 77H103L114 93L105 110H20L11 94Z','#79563a')+
+ [25,54,83].map(x=>P(`M${x} 79L${x+15} 79L${x+28} 102H${x+13}Z`,'#ba8b55')).join('')+
+ R(20,46,22,31,ink)+R(25,51,12,21,'#5c8d53')+R(15,51,14,12,ink)+R(19,55,10,4,'#8fb96c')+
+ R(53,34,23,40,ink)+R(59,39,11,30,'#65964e')+R(47,31,14,15,ink)+R(51,35,10,6,'#a0c475')+R(68,38,15,14,ink)+R(69,43,9,4,'#8ab66b')+
+ R(87,47,22,29,ink)+R(92,52,12,19,'#5f9458')+R(100,44,13,13,ink)+R(101,48,8,5,'#a2c778'));
+add('carrot','ニンジン','ニンジン','food',1.0,35,
+ [poly([33,35],[89,35],[91,53],[64,121],[36,60]),rect(47,8,12,31),rect(66,3,12,35),rect(80,15,14,26)],
+ R(47,8,12,31,ink)+R(51,12,4,23,'#80ad63')+R(66,3,12,35,ink)+R(70,7,4,26,'#94bb6c')+R(80,15,14,26,ink)+R(84,19,6,17,'#5e945d')+
+ P('M33 35H89L91 53L64 121L36 60Z',ink)+P('M40 41H83L84 53L64 107L43 58Z','#db863e')+P('M40 41H58L65 98L43 58Z','#f3b154')+
+ R(57,51,22,4,'#a85b35')+R(47,65,14,4,'#a85b35')+R(60,79,12,4,'#a85b35'));
+const wheel=(x,y)=>P(`M${x-9} ${y-13}H${x+9}L${x+14} ${y-8}V${y+8}L${x+9} ${y+13}H${x-9}L${x-14} ${y+8}V${y-8}Z`,ink)+R(x-7,y-7,14,14,'#7a8b93')+R(x-3,y-3,6,6,'#d3d9c9');
+add('car','くるま','くるま','metal',5.2,86,
+ [poly([6,65],[24,60],[39,34],[83,34],[103,60],[122,67],[122,98],[6,98]),{circle:[32,98,14]},{circle:[97,98,14]}],
+ P('M6 65L24 60L39 34H83L103 60L122 67V98H6Z',ink)+P('M12 69L29 65L43 40H80L99 65L116 71V91H12Z','#d26a5c')+
+ P('M43 43H58V62H33Z','#afdad6')+P('M65 43H78L92 62H65Z','#83b9c2')+R(15,74,98,5,'#ef9b7b')+R(68,70,11,4,ink)+R(10,85,15,6,'#efdc98')+R(111,78,7,9,'#fff0bd')+
+ wheel(32,98)+wheel(97,98),'wheeled',{wheelFixtures:[1,2]});
+add('mini-mountain','山','やま','stone',11,106,
+ [poly([5,113],[18,88],[42,52],[63,8],[85,46],[110,83],[123,113])],
+ P('M5 113L18 88L42 52L63 8L85 46L110 83L123 113Z',ink)+P('M15 107L27 87L47 55L63 21L80 50L103 86L113 107Z','#718868')+
+ P('M63 21L80 50L103 86L113 107H66Z','#435f54')+P('M47 55L63 21L80 50L72 47L64 58L57 47Z','#e5e5ce')+
+ P('M22 94L43 70L53 79L36 103H18Z','#94a171')+R(75,84,13,5,'#678675')+R(52,99,11,4,'#b7ad7c'));
+add('truck','トラック','トラック','metal',7.5,104,
+ [rect(4,26,71,67),poly([75,45],[101,45],[123,70],[123,94],[75,94]),{circle:[28,98,14]},{circle:[101,98,14]}],
+ R(4,26,71,67,ink)+R(10,32,59,54,'#c8cbb7')+R(14,37,51,7,'#e9e6ce')+[24,43,62].map(x=>R(x,48,3,33,'#929e99')).join('')+
+ P('M75 45H101L123 70V94H75Z',ink)+P('M81 51H98L117 73V88H81Z','#558bb0')+P('M85 55H96L108 70H85Z','#b7ded7')+
+ R(83,76,10,4,ink)+R(114,77,6,9,'#f9e3a3')+R(10,88,108,7,'#485967')+wheel(28,98)+wheel(101,98),'wheeled',{wheelFixtures:[2,3]});
+add('house-door','家のドア','いえのドア','wood',2.7,44,[rect(28,5,72,119)],
+ R(28,5,72,119,ink)+R(34,11,60,107,'#936747')+R(39,16,50,48,'#d2b17c')+R(44,21,40,38,'#83b9be')+R(61,21,5,38,'#f1e2b7')+
+ R(39,76,50,34,'#6f4d3c')+R(44,81,40,24,'#a77d52')+R(81,68,9,6,ink)+R(82,69,6,3,gold));
+add('road-segment','舗装道路','ほそうどうろ','stone',6.5,100,
+ [poly([15,45],[113,45],[124,91],[4,91])],
+ P('M15 45H113L124 91H4Z',ink)+P('M20 51H108L116 85H12Z','#6d7c85')+P('M23 52H105L112 80H16Z','#485965')+
+ R(20,72,18,4,'#e8e2bd')+R(53,72,21,4,'#e8e2bd')+R(90,72,18,4,'#e8e2bd')+R(22,54,82,3,'#9aa9aa')+R(18,86,90,2,'#a0aaa2'));
+add('supermarket','スーパー','スーパー','stone',10,106,
+ [rect(9,29,110,89),rect(21,8,86,21)],
+ R(9,29,110,89,ink)+R(15,35,98,77,'#dfd2a1')+R(21,8,86,21,ink)+R(27,14,74,10,'#83a66c')+R(35,17,18,4,'#f0e6b9')+R(62,17,30,4,'#f0e6b9')+
+ R(15,38,98,20,'#d97860')+[17,43,69,95].map(x=>R(x,39,12,18,'#f8e5b6')).join('')+R(19,64,38,38,ink)+R(24,69,28,28,'#7caeb5')+
+ R(64,64,43,48,ink)+R(69,69,33,43,'#8dbdc0')+R(83,69,5,43,'#d9dcc0')+R(78,88,4,5,'#496671')+R(90,88,4,5,'#496671')+
+ R(28,89,8,6,'#89a75d')+R(39,86,9,9,'#e2ac58'),'solid',{explosionResistance:0.5});
+add('charred-log','燃えた丸太','もえたまるた','wood',1.8,72,
+ [poly([8,57],[25,43],[108,43],[121,56],[115,85],[24,90],[8,77])],
+ P('M8 57L25 43H108L121 56L115 85L24 90L8 77Z',ink)+P('M15 59L29 49H104L114 58L109 79L27 83L15 74Z','#4e4945')+
+ P('M92 53L104 49L114 58L109 79L95 81L87 70Z','#77726a')+P('M97 58L104 56L108 62L105 73L98 75L94 68Z','#353941')+
+ R(26,57,48,5,'#797168')+R(32,72,43,4,'#262c35')+P('M48 49L57 49L53 62L61 70L55 82H47L51 71L44 63Z','#222a32'),'solid',{flammable:false,burnSeconds:null,explosionResistance:0.12});
+
 // Shrink the approved title logo and convert its exact colored pixels to SVG.
 // No handwritten sign, checkerboard, margin scaling or external image reference.
 const title=await sharp(path.join(root,'assets/ui/logo.webp')).resize(120,29,{fit:'fill',kernel:'nearest'}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
@@ -125,9 +198,13 @@ beach.water=[{rect:[50,375,450,75],direction:[0,0],speed:0,type:'pool',finite:tr
 const cafe=stage(39,'喫茶店','39-cafe',['coffee-mill','parfait','counter','chair','low-table','coffee-beans','coffee-pot','water-glass','menu','call-bell','teapot','pancakes','cheesecake','lemonade-glass','canele'],[rect(0,450,960,90),rect(75,385,530,24),rect(100,409,25,41),rect(555,409,25,41)]);
 const office=stage(40,'オフィス','40-office',['shredder','banknote','ten-yen-coin','paper-bag','blast-bomb','nori-bento','keyboard','flamethrower','homemade-bento','paper-cup','blast-bomb','monitor','desktop-pc','wired-mouse','paper-bag'],[rect(0,450,960,90),rect(65,395,560,20),rect(85,415,24,35),rect(580,415,24,35)],[810,450],[55,80,580,370]);
 office.preplaced=[{id:'desktop-pc',x:145,groundY:395,scoring:true},{id:'keyboard',x:295,groundY:395,scoring:true},{id:'wired-mouse',x:415,groundY:395,scoring:true},{id:'monitor',x:535,groundY:395,scoring:true}];
-const additions=[random,restaurant,beach,cafe,office];
-const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。','さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。'];
-for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん','オフィス'][i];ui.lessons[s.id-1]=s.lesson;}
+const villagePool=[...villageItemIds,'rice-bowl','charcoal','flamethrower','campfire','tabletop-stove','blast-bomb','lightning-orb','wooden-crate','water-jug','fire-extinguisher'];
+const village=stage(41,'ひとざと','41-village',villagePool,[rect(0,450,960,90)],[810,450],[35,80,605,370]);
+village.shuffleQueue=true;
+village.preplaced=[...[76,142,208,460,526,592].map(x=>({id:'forest',x,groundY:450,width:62,scoring:true})),{id:'wooden-house',x:287,groundY:450,width:82,scoring:true},{id:'wooden-house',x:377,groundY:450,width:82,scoring:true}];
+const additions=[random,restaurant,beach,cafe,office,village];
+const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。','さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。','へいわな ひとざとに キャノンがきた！？ もりと いえを わくにのこそう！'];
+for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん','オフィス','ひとざと'][i];ui.lessons[s.id-1]=s.lesson;}
 stages.status=`Godot 4.7.2: ${stages.stages.length} authored stages, 15 throws each; current checks are in previews/*-checks.json.`;
 const terrainArt=(s,c)=>s.terrain.map(t=>t.rect?R(...t.rect,ink)+R(t.rect[0]+3,t.rect[1]+3,t.rect[2]-6,t.rect[3]-3,c):P('M'+t.polygon.map(p=>p.join(' ')).join('L')+'Z',c)).join('');
 const window=(x,y,w,h)=>R(x,y,w,h,ink)+R(x+7,y+7,w-14,h-14,'#83bbca')+R(x+w/2-4,y+7,8,h-14,cream)+R(x+7,y+h/2-4,w-14,8,cream);
@@ -149,6 +226,19 @@ artwork[40]=R(0,0,960,540,'#b9c7c4')+R(0,89,960,26,'#758e9b')+R(0,115,960,7,'#da
  R(0,290,646,105,'#94a9ad')+R(0,290,646,7,'#6b8694')+R(30,315,595,8,'#d0d9cf')+
  terrainArt(office,'#82959d')+R(68,398,554,6,'#dfd5b8')+R(70,408,550,4,'#506777')+
  [80,250,420,590,760,930].map(x=>P(`M${x} 450L${x+48} 540H${x+51}L${x+3} 450Z`,'#637a89')).join('')+R(0,481,960,3,'#637a89')+R(0,520,960,3,'#637a89');
+// Only distant hills and fields belong to the background. The foreground forest
+// and houses are spawned dynamic actors, leaving real gaps between their shapes.
+artwork[41]=R(0,0,960,540,'#b4d7d2')+R(0,0,960,118,'#bcded7')+
+ R(72,158,105,13,'#ecedcc')+R(95,145,56,13,'#ecedcc')+R(651,139,119,14,'#ecedcc')+R(676,126,65,13,'#ecedcc')+
+ P('M0 280L100 244L175 267L265 209L363 255L457 226L566 271L683 216L805 251L900 215L960 246V364H0Z','#87af8b')+
+ P('M0 317L130 289L267 310L413 277L557 318L699 279L847 307L960 288V395H0Z','#659778')+
+ R(0,343,960,107,'#a8b46b')+P('M0 363L260 343L309 401L0 419Z','#c9bc75')+
+ [0,38,76,114,152,190,228].map(x=>P(`M${x} 363L${x+11} 362L${x+45} 410L${x+34} 411Z`,'#8c9c59')).join('')+
+ P('M415 348L636 343L689 395L444 402Z','#bb9b62')+
+ [450,490,530,570,610].map(x=>P(`M${x} 350L${x+8} 350L${x+34} 393L${x+24} 394Z`,'#7d9255')).join('')+
+ P('M728 333L774 333L926 450H810Z','#d1bf8f')+P('M739 333H748L862 450H846Z','#e4d7aa')+
+ terrainArt(village,'#967651')+R(0,450,960,10,'#557b48')+R(0,460,960,6,'#91a365')+
+ [26,129,238,363,486,617,744,873].map((x,i)=>R(x,480+i%2*21,23,5,'#c4a474')+R(x+42,512-i%2*12,10,4,'#6d5b47')).join('');
 const mapSheet=[];
 for(const [i,s]of additions.entries()){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" shape-rendering="crispEdges">${artwork[s.id]}</svg>\n`;
@@ -158,10 +248,10 @@ for(const [i,s]of additions.entries()){
 }
 maps.maps=stages.stages.map(s=>({id:s.map,stage:s.id,nameJa:s.nameJa,status:s.status,svg:`maps/${s.map}.svg`,worldSize:[960,540],terrain:s.terrain,backgroundCollision:false,...(s.assignment?{assignment:s.assignment}:{})}));
 const ids=new Set(manifest.items.map(x=>x.id));
-for(const s of stages.stages)if(s.queue?.length!==15||s.queue.some(id=>!ids.has(id)))throw Error(`Invalid queue ${s.id}`);
+for(const s of stages.stages)if(!Array.isArray(s.queue)||s.queue.length<15||(s.queue.length>15&&new Set(s.queue).size<15)||s.queue.some(id=>!ids.has(id)))throw Error(`Invalid queue ${s.id}`);
 await Promise.all([write('objects-manifest',manifest),write('catalog',catalog),write('physics',physics),write('colliders',colliders),write('stages',stages),write('maps-manifest',maps),write('ui-ja',ui)]);
 const summary=await read('build-summary');Object.assign(summary,{objects:manifest.items.length,maps:stages.stages.length,specifiedStages:stages.stages.length-1,playableStages:stages.stages.length});await write('build-summary',summary);
-const verification=await read('verification');Object.assign(verification,{objects:manifest.items.length,maps:stages.stages.length,stagesWith15Shots:stages.stages.length,croppedSpritesChecked:manifest.items.length,uniqueRenderedSprites:new Set(manifest.items.map(x=>x.svg)).size});verification.checks=verification.checks.filter(x=>!/^\d+ item records/.test(x)&&!/^\d+ maps have/.test(x));verification.checks.push(`${manifest.items.length} item records; all ${stages.stages.length} queues reference 15 existing items`,`${stages.stages.length} maps have static terrain data`);await write('verification',verification);
+const verification=await read('verification');Object.assign(verification,{objects:manifest.items.length,maps:stages.stages.length,stagesWith15Shots:stages.stages.length,croppedSpritesChecked:manifest.items.length,uniqueRenderedSprites:new Set(manifest.items.map(x=>x.svg)).size});verification.checks=verification.checks.filter(x=>!/^\d+ item records/.test(x)&&!/^\d+ maps have/.test(x));verification.checks.push(`${manifest.items.length} item records; all ${stages.stages.length} queues provide 15 throws from existing items`,`${stages.stages.length} maps have static terrain data`);await write('verification',verification);
 await sharp({create:{width:1400,height:Math.ceil(items.length/7)*190,channels:4,background:'#283b4c'}}).composite(sheet).png().toFile(path.join(root,'previews/late-items.png'));
 await sharp({create:{width:960,height:Math.ceil(additions.length/2)*270,channels:4,background:'#283b4c'}}).composite(mapSheet).png().toFile(path.join(root,'previews/late-maps.png'));
 const officeSheet=await Promise.all(officeItemIds.map(async(id,i)=>{
@@ -169,4 +259,9 @@ const officeSheet=await Promise.all(officeItemIds.map(async(id,i)=>{
  return {input:thumb.data,left:i%4*200+Math.floor((200-thumb.info.width)/2),top:Math.floor(i/4)*190+Math.floor((180-thumb.info.height)/2)};
 }));
 await sharp({create:{width:800,height:380,channels:4,background:'#283b4c'}}).composite(officeSheet).png().toFile(path.join(root,'previews/office-items.png'));
+const villageSheet=await Promise.all(villageItemIds.map(async(id,i)=>{
+ const thumb=await sharp(path.join(root,`assets/raster/objects/${id}.png`)).resize({width:176,height:160,fit:'inside',kernel:'nearest'}).png().toBuffer({resolveWithObject:true});
+ return {input:thumb.data,left:i%4*200+Math.floor((200-thumb.info.width)/2),top:Math.floor(i/4)*190+Math.floor((180-thumb.info.height)/2)};
+}));
+await sharp({create:{width:800,height:570,channels:4,background:'#283b4c'}}).composite(villageSheet).png().toFile(path.join(root,'previews/village-items.png'));
 console.log(JSON.stringify({items:items.map(x=>x.id),objects:manifest.items.length,stages:stages.stages.length}));

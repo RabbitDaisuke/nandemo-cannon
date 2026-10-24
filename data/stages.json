@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Godot 4.7.2: 40 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
+  "status": "Godot 4.7.2: 41 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
   "coordinateSystem": "960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
   "shotsPerStage": 15,
   "tutorialOrder": "ordered queues; do not shuffle prerequisite fire/water/bomb slots",
@@ -7885,6 +7885,118 @@
         }
       ],
       "lesson": "さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。"
+    },
+    {
+      "id": 41,
+      "nameJa": "ひとざと",
+      "map": "41-village",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        35,
+        80,
+        605,
+        370
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        }
+      ],
+      "queue": [
+        "forest",
+        "wooden-house",
+        "concrete-house",
+        "farm-plot",
+        "carrot",
+        "car",
+        "mini-mountain",
+        "truck",
+        "house-door",
+        "road-segment",
+        "supermarket",
+        "charred-log",
+        "rice-bowl",
+        "charcoal",
+        "flamethrower",
+        "campfire",
+        "tabletop-stove",
+        "blast-bomb",
+        "lightning-orb",
+        "wooden-crate",
+        "water-jug",
+        "fire-extinguisher"
+      ],
+      "preplaced": [
+        {
+          "id": "forest",
+          "x": 76,
+          "groundY": 450,
+          "width": 62,
+          "scoring": true
+        },
+        {
+          "id": "forest",
+          "x": 142,
+          "groundY": 450,
+          "width": 62,
+          "scoring": true
+        },
+        {
+          "id": "forest",
+          "x": 208,
+          "groundY": 450,
+          "width": 62,
+          "scoring": true
+        },
+        {
+          "id": "forest",
+          "x": 460,
+          "groundY": 450,
+          "width": 62,
+          "scoring": true
+        },
+        {
+          "id": "forest",
+          "x": 526,
+          "groundY": 450,
+          "width": 62,
+          "scoring": true
+        },
+        {
+          "id": "forest",
+          "x": 592,
+          "groundY": 450,
+          "width": 62,
+          "scoring": true
+        },
+        {
+          "id": "wooden-house",
+          "x": 287,
+          "groundY": 450,
+          "width": 82,
+          "scoring": true
+        },
+        {
+          "id": "wooden-house",
+          "x": 377,
+          "groundY": 450,
+          "width": 82,
+          "scoring": true
+        }
+      ],
+      "shuffleQueue": true,
+      "lesson": "へいわな ひとざとに キャノンがきた！？ もりと いえを わくにのこそう！"
     }
   ]
 }

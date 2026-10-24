@@ -36,21 +36,41 @@ func build_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
 		for index in range(15):
 			random_queue.append(str(ordered_items[rng.randi_range(0, ordered_items.size() - 1)].id))
 		return random_queue
-	if not stage.has("queueSlots"):
-		return stage.queue.duplicate()
 	var result: Array = []
-	for slot in stage.queueSlots:
-		var available: Array = slot.candidates.duplicate()
-		var count = int(slot.get("count", 1))
-		assert(count > 0 and count <= available.size(), "Queue slot must sample without replacement")
-		for index in range(count):
-			var chosen = rng.randi_range(0, available.size() - 1)
-			var id = str(available[chosen])
-			assert(items.has(id), "Unknown queue item: " + id)
-			result.append(id)
-			available.remove_at(chosen)
+	if stage.has("queueSlots"):
+		for slot in stage.queueSlots:
+			var available: Array = slot.candidates.duplicate()
+			var count = int(slot.get("count", 1))
+			assert(count > 0 and count <= available.size(), "Queue slot must sample without replacement")
+			for index in range(count):
+				var chosen = rng.randi_range(0, available.size() - 1)
+				result.append(str(available[chosen]))
+				available.remove_at(chosen)
+	else:
+		result = stage.queue.duplicate()
+	for id in result:
+		assert(items.has(id), "Unknown queue item: " + str(id))
+	if not stage.has("queueSlots") and result.size() > 15:
+		# An oversized list is a pool of kinds, not extra shots or weighted copies.
+		var candidates: Array = []
+		for id in result:
+			if not candidates.has(id):
+				candidates.append(id)
+		assert(candidates.size() >= 15, "Candidate pools need fifteen distinct item kinds")
+		_shuffle_with_rng(candidates, rng)
+		return candidates.slice(0, 15)
 	assert(result.size() == 15, "Every stage must contain fifteen throws")
+	if bool(stage.get("shuffleQueue", false)):
+		_shuffle_with_rng(result, rng)
 	return result
+
+static func _shuffle_with_rng(values: Array, rng: RandomNumberGenerator) -> void:
+	# Array.shuffle() uses the global RNG; this keeps both choices and order seeded.
+	for index in range(values.size() - 1, 0, -1):
+		var chosen = rng.randi_range(0, index)
+		var previous = values[index]
+		values[index] = values[chosen]
+		values[chosen] = previous
 
 func make_terrain(parent: Node2D, stage: Dictionary) -> void:
 	for part in stage.get("terrain", []):

@@ -172,7 +172,7 @@ for(const id of ['16-ice-floor','17-hollow-dais-candidate','18-subway-candidate'
 maps.sourceAliases={};maps.maps=stages.stages.map(s=>({id:s.map,stage:s.id,nameJa:s.nameJa,status:s.status,svg:`maps/${s.map}.svg`,worldSize:[960,540],terrain:s.terrain,backgroundCollision:false,...(s.assignment?{assignment:s.assignment}:{})}));
 await Promise.all([write('catalog',catalog),write('physics',physics),write('colliders',colliders),write('objects-manifest',manifest),write('stages',stages),write('maps-manifest',maps)]);
 const known=new Set(manifest.items.map(e=>e.id));
-for(const s of stages.stages){if(s.queue?.length!==15||s.queue.some(id=>!known.has(id)))throw new Error(`Invalid stage queue ${s.id}`);}
+for(const s of stages.stages){if(!Array.isArray(s.queue)||s.queue.length<15||s.queue.some(id=>!known.has(id))||(s.queue.length>15&&new Set(s.queue).size<15))throw new Error(`Invalid stage queue ${s.id}`);}
 const summary=await read('build-summary');Object.assign(summary,{objects:manifest.items.length,maps:20,specifiedStages:19,playableStages:20,stage18Assignment:'implementation assumption: retained ice floor'});await write('build-summary',summary);
 const verification=await read('verification');
 Object.assign(verification,{objects:manifest.items.length,maps:20,stagesWith15Shots:20,croppedSpritesChecked:manifest.items.length,uniqueRenderedSprites:manifest.items.length});
