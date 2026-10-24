@@ -1925,7 +1925,8 @@
         "flammable": true,
         "explosionResistance": 0.65,
         "burnSeconds": 6,
-        "flowResponse": 1
+        "flowResponse": 1,
+        "coldBrittle": true
       },
       "opaquePixels": 10408
     },
@@ -1977,7 +1978,8 @@
         "flammable": true,
         "explosionResistance": 0.65,
         "burnSeconds": 6,
-        "flowResponse": 1
+        "flowResponse": 1,
+        "coldBrittle": true
       },
       "opaquePixels": 9606
     },
@@ -2789,7 +2791,8 @@
         "flammable": true,
         "explosionResistance": 0.65,
         "burnSeconds": 6,
-        "flowResponse": 1
+        "flowResponse": 1,
+        "coldBrittle": true
       },
       "opaquePixels": 8080
     },
@@ -5088,7 +5091,8 @@
         "explosionResistance": 0.65,
         "burnSeconds": 6,
         "flowResponse": 1,
-        "buoyancy": 1.3
+        "buoyancy": 1.3,
+        "coldBrittle": true
       },
       "opaquePixels": 9490
     },
@@ -7605,7 +7609,7 @@
       "mass": 5,
       "score": 200,
       "bodyKind": "dynamic",
-      "behavior": "grip_sole",
+      "behavior": "solid",
       "colliderTemplate": "boots",
       "fixtures": [
         {
@@ -7698,21 +7702,13 @@
         }
       ],
       "physics": {
-        "friction": 0.85,
-        "restitution": 0.45,
+        "friction": 0.55,
+        "restitution": 0.08,
         "flammable": true,
         "explosionResistance": 0.65,
         "burnSeconds": 6,
         "flowResponse": 1,
-        "soleNormalMinDot": 0.6,
-        "soleIceFriction": 0.95,
-        "upperFriction": 0.8,
-        "otherIceFriction": 0.025,
-        "stability": "no world anchoring; tipping and overload can move the boots",
-        "soleFixtures": [
-          2,
-          3
-        ]
+        "coldBrittle": true
       },
       "opaquePixels": 9528
     },
@@ -9732,7 +9728,8 @@
         "flammable": true,
         "explosionResistance": 0.65,
         "burnSeconds": 6,
-        "flowResponse": 1
+        "flowResponse": 1,
+        "coldBrittle": true
       },
       "opaquePixels": 7860
     },
@@ -11761,6 +11758,4216 @@
         "impulseMultiplier": 2.2
       },
       "opaquePixels": 7516
+    },
+    {
+      "id": "tabletop-stove",
+      "nameJa": "卓上ガスコンロ",
+      "svg": "objects/tabletop-stove.svg",
+      "png": "raster/objects/tabletop-stove.png",
+      "webp": "raster/objects/tabletop-stove.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        14,
+        114,
+        107
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        50
+      ],
+      "worldWidth": 100,
+      "worldHeight": 93.85964912280701,
+      "worldScale": 0.8771929824561403,
+      "material": "metal",
+      "mass": 6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "stove",
+      "colliderTemplate": "tabletop-stove",
+      "fixtures": [
+        {
+          "rect": [
+            10,
+            38,
+            108,
+            70
+          ]
+        },
+        {
+          "rect": [
+            22,
+            24,
+            84,
+            14
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "burnerSource": [
+          64,
+          24
+        ],
+        "burnerWidth": 90,
+        "immersionBreak": true,
+        "fireRadius": 24
+      },
+      "opaquePixels": 10308
+    },
+    {
+      "id": "submarine",
+      "nameJa": "潜水艦",
+      "svg": "objects/submarine.svg",
+      "png": "raster/objects/submarine.png",
+      "webp": "raster/objects/submarine.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        1,
+        3,
+        126,
+        98
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        63,
+        61
+      ],
+      "worldWidth": 142,
+      "worldHeight": 110.44444444444444,
+      "worldScale": 1.126984126984127,
+      "material": "metal",
+      "mass": 16,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "submarine",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              10,
+              51
+            ],
+            [
+              28,
+              36
+            ],
+            [
+              98,
+              36
+            ],
+            [
+              118,
+              53
+            ],
+            [
+              118,
+              82
+            ],
+            [
+              98,
+              98
+            ],
+            [
+              28,
+              98
+            ],
+            [
+              10,
+              82
+            ]
+          ]
+        },
+        {
+          "rect": [
+            52,
+            24,
+            30,
+            14
+          ]
+        },
+        {
+          "rect": [
+            65,
+            6,
+            10,
+            22
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 7943
+    },
+    {
+      "id": "charger",
+      "nameJa": "充電器",
+      "svg": "objects/charger.svg",
+      "png": "raster/objects/charger.png",
+      "webp": "raster/objects/charger.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        17,
+        7,
+        94,
+        110
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        47,
+        57
+      ],
+      "worldWidth": 54,
+      "worldHeight": 63.19148936170213,
+      "worldScale": 0.574468085106383,
+      "material": "plastic",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "charger",
+      "fixtures": [
+        {
+          "rect": [
+            20,
+            36,
+            88,
+            78
+          ]
+        },
+        {
+          "rect": [
+            34,
+            10,
+            12,
+            26
+          ]
+        },
+        {
+          "rect": [
+            80,
+            10,
+            12,
+            26
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 8376
+    },
+    {
+      "id": "ramune-bottle",
+      "nameJa": "ラムネ瓶",
+      "svg": "objects/ramune-bottle.svg",
+      "png": "raster/objects/ramune-bottle.png",
+      "webp": "raster/objects/ramune-bottle.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        29,
+        5,
+        70,
+        114
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        35,
+        59
+      ],
+      "worldWidth": 36,
+      "worldHeight": 58.62857142857142,
+      "worldScale": 0.5142857142857142,
+      "material": "glass",
+      "mass": 1.5,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "water_release",
+      "colliderTemplate": "ramune-bottle",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              46,
+              10
+            ],
+            [
+              82,
+              10
+            ],
+            [
+              82,
+              46
+            ],
+            [
+              96,
+              66
+            ],
+            [
+              96,
+              116
+            ],
+            [
+              32,
+              116
+            ],
+            [
+              32,
+              66
+            ],
+            [
+              46,
+              46
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.35,
+        "restitution": 0.03,
+        "flammable": false,
+        "explosionResistance": 0.05,
+        "burnSeconds": null,
+        "flowResponse": 0.55,
+        "impactSpeed": 120,
+        "releaseUnits": 8,
+        "destroyShell": true,
+        "waterUnits": 8,
+        "breakImpactSpeed": 120
+      },
+      "opaquePixels": 6413
+    },
+    {
+      "id": "canele",
+      "nameJa": "カヌレ",
+      "svg": "objects/canele.svg",
+      "png": "raster/objects/canele.png",
+      "webp": "raster/objects/canele.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        11,
+        98,
+        103
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        53
+      ],
+      "worldWidth": 52,
+      "worldHeight": 54.6530612244898,
+      "worldScale": 0.5306122448979592,
+      "material": "food",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "canele",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              28,
+              25
+            ],
+            [
+              40,
+              14
+            ],
+            [
+              88,
+              14
+            ],
+            [
+              100,
+              25
+            ],
+            [
+              110,
+              111
+            ],
+            [
+              18,
+              111
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 8417
+    },
+    {
+      "id": "hammer",
+      "nameJa": "ハンマー",
+      "svg": "objects/hammer.svg",
+      "png": "raster/objects/hammer.png",
+      "webp": "raster/objects/hammer.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        34,
+        0,
+        60,
+        122
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        30,
+        64
+      ],
+      "worldWidth": 60,
+      "worldHeight": 122,
+      "worldScale": 1,
+      "material": "metal",
+      "mass": 4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "hammer",
+      "fixtures": [
+        {
+          "rect": [
+            54,
+            46,
+            20,
+            72
+          ]
+        },
+        {
+          "circle": [
+            64,
+            30,
+            27
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 4220
+    },
+    {
+      "id": "mont-blanc",
+      "nameJa": "モンブラン",
+      "svg": "objects/mont-blanc.svg",
+      "png": "raster/objects/mont-blanc.png",
+      "webp": "raster/objects/mont-blanc.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        5,
+        94,
+        117
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        59
+      ],
+      "worldWidth": 64,
+      "worldHeight": 79.65957446808511,
+      "worldScale": 0.6808510638297872,
+      "material": "food",
+      "mass": 1.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "mont-blanc",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              18,
+              106
+            ],
+            [
+              26,
+              65
+            ],
+            [
+              40,
+              35
+            ],
+            [
+              56,
+              22
+            ],
+            [
+              76,
+              22
+            ],
+            [
+              94,
+              44
+            ],
+            [
+              106,
+              106
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7652
+    },
+    {
+      "id": "utility-knife",
+      "nameJa": "カッターナイフ",
+      "svg": "objects/utility-knife.svg",
+      "png": "raster/objects/utility-knife.png",
+      "webp": "raster/objects/utility-knife.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        39,
+        7,
+        50,
+        114
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        25,
+        57
+      ],
+      "worldWidth": 34,
+      "worldHeight": 77.52000000000001,
+      "worldScale": 0.68,
+      "material": "metal",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "utility-knife",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              43,
+              46
+            ],
+            [
+              68,
+              10
+            ],
+            [
+              86,
+              10
+            ],
+            [
+              80,
+              48
+            ],
+            [
+              80,
+              118
+            ],
+            [
+              43,
+              118
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 4211
+    },
+    {
+      "id": "bagel",
+      "nameJa": "ベーグル",
+      "svg": "objects/bagel.svg",
+      "png": "raster/objects/bagel.png",
+      "webp": "raster/objects/bagel.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        13,
+        13,
+        102,
+        102
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        51,
+        51
+      ],
+      "worldWidth": 58,
+      "worldHeight": 58,
+      "worldScale": 0.5686274509803921,
+      "material": "food",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "bagel",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              112,
+              64
+            ],
+            [
+              105.56921938165306,
+              88
+            ],
+            [
+              79.5884572681199,
+              73
+            ],
+            [
+              82,
+              64
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              105.56921938165306,
+              88
+            ],
+            [
+              88,
+              105.56921938165306
+            ],
+            [
+              73,
+              79.5884572681199
+            ],
+            [
+              79.5884572681199,
+              73
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              88,
+              105.56921938165306
+            ],
+            [
+              64,
+              112
+            ],
+            [
+              64,
+              82
+            ],
+            [
+              73,
+              79.5884572681199
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              64,
+              112
+            ],
+            [
+              40.000000000000014,
+              105.56921938165306
+            ],
+            [
+              55,
+              79.5884572681199
+            ],
+            [
+              64,
+              82
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              40.000000000000014,
+              105.56921938165306
+            ],
+            [
+              22.430780618346944,
+              88
+            ],
+            [
+              48.411542731880104,
+              73
+            ],
+            [
+              55,
+              79.5884572681199
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              22.430780618346944,
+              88
+            ],
+            [
+              16,
+              64
+            ],
+            [
+              46,
+              64
+            ],
+            [
+              48.411542731880104,
+              73
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              16,
+              64
+            ],
+            [
+              22.430780618346937,
+              40.000000000000014
+            ],
+            [
+              48.411542731880104,
+              55.00000000000001
+            ],
+            [
+              46,
+              64
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              22.430780618346937,
+              40.000000000000014
+            ],
+            [
+              39.99999999999998,
+              22.43078061834695
+            ],
+            [
+              54.99999999999999,
+              48.411542731880104
+            ],
+            [
+              48.411542731880104,
+              55.00000000000001
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              39.99999999999998,
+              22.43078061834695
+            ],
+            [
+              63.99999999999999,
+              16
+            ],
+            [
+              64,
+              46
+            ],
+            [
+              54.99999999999999,
+              48.411542731880104
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              63.99999999999999,
+              16
+            ],
+            [
+              88,
+              22.430780618346944
+            ],
+            [
+              73,
+              48.411542731880104
+            ],
+            [
+              64,
+              46
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              88,
+              22.430780618346944
+            ],
+            [
+              105.56921938165304,
+              39.99999999999998
+            ],
+            [
+              79.5884572681199,
+              54.99999999999999
+            ],
+            [
+              73,
+              48.411542731880104
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              105.56921938165304,
+              39.99999999999998
+            ],
+            [
+              112,
+              63.999999999999986
+            ],
+            [
+              82,
+              63.99999999999999
+            ],
+            [
+              79.5884572681199,
+              54.99999999999999
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7048
+    },
+    {
+      "id": "bunny-plush",
+      "nameJa": "うさぎぬいぐるみ",
+      "svg": "objects/bunny-plush.svg",
+      "png": "raster/objects/bunny-plush.png",
+      "webp": "raster/objects/bunny-plush.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        21,
+        2,
+        86,
+        124
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        43,
+        62
+      ],
+      "worldWidth": 57,
+      "worldHeight": 82.18604651162791,
+      "worldScale": 0.6627906976744186,
+      "material": "cloth",
+      "mass": 1.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "bunny-plush",
+      "fixtures": [
+        {
+          "rect": [
+            38,
+            5,
+            16,
+            44
+          ]
+        },
+        {
+          "rect": [
+            74,
+            5,
+            16,
+            44
+          ]
+        },
+        {
+          "circle": [
+            64,
+            61,
+            32
+          ]
+        },
+        {
+          "polygon": [
+            [
+              42,
+              82
+            ],
+            [
+              86,
+              82
+            ],
+            [
+              98,
+              115
+            ],
+            [
+              30,
+              115
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.8,
+        "restitution": 0.01,
+        "flammable": true,
+        "explosionResistance": 0.1,
+        "burnSeconds": 3,
+        "flowResponse": 1.1
+      },
+      "opaquePixels": 7052
+    },
+    {
+      "id": "cute-doll",
+      "nameJa": "かわいい人形",
+      "svg": "objects/cute-doll.svg",
+      "png": "raster/objects/cute-doll.png",
+      "webp": "raster/objects/cute-doll.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        18,
+        0,
+        92,
+        126
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        46,
+        64
+      ],
+      "worldWidth": 54,
+      "worldHeight": 73.95652173913044,
+      "worldScale": 0.5869565217391305,
+      "material": "plastic",
+      "mass": 1.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "cute-doll",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            35,
+            28
+          ]
+        },
+        {
+          "polygon": [
+            [
+              48,
+              64
+            ],
+            [
+              80,
+              64
+            ],
+            [
+              106,
+              108
+            ],
+            [
+              22,
+              108
+            ]
+          ]
+        },
+        {
+          "rect": [
+            43,
+            108,
+            14,
+            15
+          ]
+        },
+        {
+          "rect": [
+            73,
+            108,
+            14,
+            15
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 6775
+    },
+    {
+      "id": "trumpet",
+      "nameJa": "トランペット",
+      "svg": "objects/trumpet.svg",
+      "png": "raster/objects/trumpet.png",
+      "webp": "raster/objects/trumpet.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        26,
+        114,
+        78
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        38
+      ],
+      "worldWidth": 80,
+      "worldHeight": 54.73684210526316,
+      "worldScale": 0.7017543859649122,
+      "material": "metal",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "trumpet",
+      "fixtures": [
+        {
+          "rect": [
+            12,
+            51,
+            74,
+            35
+          ]
+        },
+        {
+          "polygon": [
+            [
+              82,
+              48
+            ],
+            [
+              118,
+              30
+            ],
+            [
+              118,
+              100
+            ],
+            [
+              82,
+              82
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 5342
+    },
+    {
+      "id": "toy-train",
+      "nameJa": "電車のおもちゃ",
+      "svg": "objects/toy-train.svg",
+      "png": "raster/objects/toy-train.png",
+      "webp": "raster/objects/toy-train.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        16,
+        114,
+        102
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        48
+      ],
+      "worldWidth": 84,
+      "worldHeight": 75.1578947368421,
+      "worldScale": 0.7368421052631579,
+      "material": "plastic",
+      "mass": 2.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "toy-train",
+      "fixtures": [
+        {
+          "rect": [
+            10,
+            34,
+            108,
+            64
+          ]
+        },
+        {
+          "circle": [
+            32,
+            102,
+            13
+          ]
+        },
+        {
+          "circle": [
+            96,
+            102,
+            13
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9719
+    },
+    {
+      "id": "battery",
+      "nameJa": "電池",
+      "svg": "objects/battery.svg",
+      "png": "raster/objects/battery.png",
+      "webp": "raster/objects/battery.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        32,
+        2,
+        64,
+        121
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        32,
+        62
+      ],
+      "worldWidth": 32,
+      "worldHeight": 60.5,
+      "worldScale": 0.5,
+      "material": "metal",
+      "mass": 1.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "battery",
+      "fixtures": [
+        {
+          "rect": [
+            35,
+            15,
+            58,
+            105
+          ]
+        },
+        {
+          "rect": [
+            48,
+            5,
+            32,
+            10
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 7118
+    },
+    {
+      "id": "snowman-plush",
+      "nameJa": "雪だるま",
+      "svg": "objects/snowman-plush.svg",
+      "png": "raster/objects/snowman-plush.png",
+      "webp": "raster/objects/snowman-plush.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        25,
+        5,
+        78,
+        120
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        39,
+        59
+      ],
+      "worldWidth": 61,
+      "worldHeight": 93.84615384615384,
+      "worldScale": 0.782051282051282,
+      "material": "cloth",
+      "mass": 1.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "snowman-plush",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            38,
+            27
+          ]
+        },
+        {
+          "circle": [
+            64,
+            86,
+            36
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.8,
+        "restitution": 0.01,
+        "flammable": true,
+        "explosionResistance": 0.1,
+        "burnSeconds": 3,
+        "flowResponse": 1.1
+      },
+      "opaquePixels": 6826
+    },
+    {
+      "id": "rubber-duck",
+      "nameJa": "アヒルのおもちゃ",
+      "svg": "objects/rubber-duck.svg",
+      "png": "raster/objects/rubber-duck.png",
+      "webp": "raster/objects/rubber-duck.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        3,
+        13,
+        113,
+        102
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        61,
+        51
+      ],
+      "worldWidth": 62,
+      "worldHeight": 55.9646017699115,
+      "worldScale": 0.5486725663716814,
+      "material": "rubber",
+      "mass": 0.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "rubber-duck",
+      "fixtures": [
+        {
+          "circle": [
+            43,
+            42,
+            26
+          ]
+        },
+        {
+          "polygon": [
+            [
+              17,
+              66
+            ],
+            [
+              66,
+              60
+            ],
+            [
+              90,
+              75
+            ],
+            [
+              113,
+              56
+            ],
+            [
+              112,
+              96
+            ],
+            [
+              91,
+              112
+            ],
+            [
+              37,
+              112
+            ],
+            [
+              16,
+              96
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.85,
+        "restitution": 0.45,
+        "flammable": true,
+        "explosionResistance": 0.65,
+        "burnSeconds": 6,
+        "flowResponse": 1,
+        "coldBrittle": true
+      },
+      "opaquePixels": 7178
+    },
+    {
+      "id": "toy-package",
+      "nameJa": "おもちゃパッケージ",
+      "svg": "objects/toy-package.svg",
+      "png": "raster/objects/toy-package.png",
+      "webp": "raster/objects/toy-package.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        11,
+        11,
+        106,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        53,
+        53
+      ],
+      "worldWidth": 66,
+      "worldHeight": 69.73584905660377,
+      "worldScale": 0.6226415094339622,
+      "material": "paper",
+      "mass": 1.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "toy-package",
+      "fixtures": [
+        {
+          "rect": [
+            14,
+            14,
+            100,
+            106
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 11440
+    },
+    {
+      "id": "building-blocks",
+      "nameJa": "つみき",
+      "svg": "objects/building-blocks.svg",
+      "png": "raster/objects/building-blocks.png",
+      "webp": "raster/objects/building-blocks.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        10,
+        110,
+        110
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        54
+      ],
+      "worldWidth": 62,
+      "worldHeight": 61.99999999999999,
+      "worldScale": 0.5636363636363636,
+      "material": "wood",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "building-blocks",
+      "fixtures": [
+        {
+          "rect": [
+            10,
+            71,
+            46,
+            46
+          ]
+        },
+        {
+          "rect": [
+            60,
+            71,
+            54,
+            46
+          ]
+        },
+        {
+          "polygon": [
+            [
+              29,
+              66
+            ],
+            [
+              64,
+              14
+            ],
+            [
+              99,
+              66
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 7630
+    },
+    {
+      "id": "spinning-top",
+      "nameJa": "こま",
+      "svg": "objects/spinning-top.svg",
+      "png": "raster/objects/spinning-top.png",
+      "webp": "raster/objects/spinning-top.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        3,
+        110,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        61
+      ],
+      "worldWidth": 52,
+      "worldHeight": 52.945454545454545,
+      "worldScale": 0.4727272727272727,
+      "material": "wood",
+      "mass": 1.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "spinning-top",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              14,
+              52
+            ],
+            [
+              64,
+              23
+            ],
+            [
+              114,
+              52
+            ],
+            [
+              93,
+              81
+            ],
+            [
+              64,
+              112
+            ],
+            [
+              35,
+              81
+            ]
+          ]
+        },
+        {
+          "rect": [
+            58,
+            6,
+            12,
+            20
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 5508
+    },
+    {
+      "id": "wooden-obstacle",
+      "nameJa": "木の大きな障害物",
+      "svg": "objects/wooden-obstacle.svg",
+      "png": "raster/objects/wooden-obstacle.png",
+      "webp": "raster/objects/wooden-obstacle.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        2,
+        110,
+        124
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        62
+      ],
+      "worldWidth": 148,
+      "worldHeight": 166.83636363636364,
+      "worldScale": 1.3454545454545455,
+      "material": "wood",
+      "mass": 60,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wooden-obstacle",
+      "fixtures": [
+        {
+          "rect": [
+            17,
+            5,
+            94,
+            118
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.15,
+        "burnSeconds": 5,
+        "flowResponse": 1,
+        "impactDestructible": false
+      },
+      "opaquePixels": 12316
+    },
+    {
+      "id": "gunpowder-barrel",
+      "nameJa": "火薬ダル",
+      "svg": "objects/gunpowder-barrel.svg",
+      "png": "raster/objects/gunpowder-barrel.png",
+      "webp": "raster/objects/gunpowder-barrel.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        0,
+        100,
+        122
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        64
+      ],
+      "worldWidth": 61,
+      "worldHeight": 74.42,
+      "worldScale": 0.61,
+      "material": "wood",
+      "mass": 5,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "explosion",
+      "colliderTemplate": "gunpowder-barrel",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              29,
+              11
+            ],
+            [
+              99,
+              11
+            ],
+            [
+              111,
+              29
+            ],
+            [
+              111,
+              101
+            ],
+            [
+              99,
+              119
+            ],
+            [
+              29,
+              119
+            ],
+            [
+              17,
+              101
+            ],
+            [
+              17,
+              29
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1,
+        "radius": 165,
+        "strength": 1.15,
+        "trigger": "first impact or burning fuse completes",
+        "removeSelf": true,
+        "impulseMultiplier": 1.25
+      },
+      "opaquePixels": 10576
+    },
+    {
+      "id": "pizza",
+      "nameJa": "ピザ",
+      "svg": "objects/pizza.svg",
+      "png": "raster/objects/pizza.png",
+      "webp": "raster/objects/pizza.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        9,
+        104,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        55
+      ],
+      "worldWidth": 80,
+      "worldHeight": 86.15384615384616,
+      "worldScale": 0.7692307692307693,
+      "material": "food",
+      "mass": 2.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pizza",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              13,
+              28
+            ],
+            [
+              109,
+              17
+            ],
+            [
+              68,
+              116
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 5684
+    },
+    {
+      "id": "pancakes",
+      "nameJa": "パンケーキ",
+      "svg": "objects/pancakes.svg",
+      "png": "raster/objects/pancakes.png",
+      "webp": "raster/objects/pancakes.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        10,
+        23,
+        108,
+        91
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        54,
+        41
+      ],
+      "worldWidth": 80,
+      "worldHeight": 67.4074074074074,
+      "worldScale": 0.7407407407407407,
+      "material": "food",
+      "mass": 2.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pancakes",
+      "fixtures": [
+        {
+          "rect": [
+            13,
+            46,
+            102,
+            65
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 8542
+    },
+    {
+      "id": "pizza-cutter",
+      "nameJa": "ピザカッター",
+      "svg": "objects/pizza-cutter.svg",
+      "png": "raster/objects/pizza-cutter.png",
+      "webp": "raster/objects/pizza-cutter.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        31,
+        2,
+        66,
+        122
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        33,
+        62
+      ],
+      "worldWidth": 40,
+      "worldHeight": 73.93939393939394,
+      "worldScale": 0.6060606060606061,
+      "material": "metal",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pizza-cutter",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            35,
+            30
+          ]
+        },
+        {
+          "rect": [
+            56,
+            63,
+            16,
+            58
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 4408
+    },
+    {
+      "id": "castella",
+      "nameJa": "カステラ",
+      "svg": "objects/castella.svg",
+      "png": "raster/objects/castella.png",
+      "webp": "raster/objects/castella.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        10,
+        25,
+        108,
+        82
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        54,
+        39
+      ],
+      "worldWidth": 66,
+      "worldHeight": 50.111111111111114,
+      "worldScale": 0.6111111111111112,
+      "material": "food",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "castella",
+      "fixtures": [
+        {
+          "rect": [
+            13,
+            28,
+            102,
+            76
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 8480
+    },
+    {
+      "id": "maple-popcorn",
+      "nameJa": "メープルポップコーン",
+      "svg": "objects/maple-popcorn.svg",
+      "png": "raster/objects/maple-popcorn.png",
+      "webp": "raster/objects/maple-popcorn.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        16,
+        4,
+        96,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        48,
+        60
+      ],
+      "worldWidth": 59,
+      "worldHeight": 72.52083333333334,
+      "worldScale": 0.6145833333333334,
+      "material": "paper",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "maple-popcorn",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              19,
+              20
+            ],
+            [
+              109,
+              20
+            ],
+            [
+              99,
+              119
+            ],
+            [
+              29,
+              119
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 9267
+    },
+    {
+      "id": "potato-chips",
+      "nameJa": "ポテトチップス",
+      "svg": "objects/potato-chips.svg",
+      "png": "raster/objects/potato-chips.png",
+      "webp": "raster/objects/potato-chips.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        7,
+        100,
+        115
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        57
+      ],
+      "worldWidth": 55,
+      "worldHeight": 63.25000000000001,
+      "worldScale": 0.55,
+      "material": "paper",
+      "mass": 1.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "potato-chips",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              24,
+              10
+            ],
+            [
+              104,
+              10
+            ],
+            [
+              111,
+              66
+            ],
+            [
+              100,
+              119
+            ],
+            [
+              24,
+              119
+            ],
+            [
+              17,
+              66
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 10144
+    },
+    {
+      "id": "chocolate-bar",
+      "nameJa": "板チョコ",
+      "svg": "objects/chocolate-bar.svg",
+      "png": "raster/objects/chocolate-bar.png",
+      "webp": "raster/objects/chocolate-bar.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        19,
+        5,
+        90,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        45,
+        59
+      ],
+      "worldWidth": 52,
+      "worldHeight": 68.17777777777778,
+      "worldScale": 0.5777777777777777,
+      "material": "food",
+      "mass": 1.3,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "chocolate-bar",
+      "fixtures": [
+        {
+          "rect": [
+            22,
+            8,
+            84,
+            112
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 10208
+    },
+    {
+      "id": "wrapped-butter",
+      "nameJa": "紙付きバター",
+      "svg": "objects/wrapped-butter.svg",
+      "png": "raster/objects/wrapped-butter.png",
+      "webp": "raster/objects/wrapped-butter.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        27,
+        119,
+        74
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        37
+      ],
+      "worldWidth": 62,
+      "worldHeight": 38.5546218487395,
+      "worldScale": 0.5210084033613446,
+      "material": "food",
+      "mass": 1.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wrapped-butter",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              40
+            ],
+            [
+              28,
+              49
+            ],
+            [
+              31,
+              30
+            ],
+            [
+              101,
+              30
+            ],
+            [
+              104,
+              49
+            ],
+            [
+              120,
+              40
+            ],
+            [
+              111,
+              98
+            ],
+            [
+              18,
+              98
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7229
+    },
+    {
+      "id": "cream-puff",
+      "nameJa": "シュークリーム",
+      "svg": "objects/cream-puff.svg",
+      "png": "raster/objects/cream-puff.png",
+      "webp": "raster/objects/cream-puff.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        13,
+        17,
+        103,
+        87
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        51,
+        47
+      ],
+      "worldWidth": 58,
+      "worldHeight": 48.99029126213592,
+      "worldScale": 0.5631067961165048,
+      "material": "food",
+      "mass": 1.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "cream-puff",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              16,
+              60
+            ],
+            [
+              26,
+              34
+            ],
+            [
+              47,
+              20
+            ],
+            [
+              80,
+              20
+            ],
+            [
+              102,
+              38
+            ],
+            [
+              113,
+              65
+            ],
+            [
+              107,
+              101
+            ],
+            [
+              21,
+              101
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7311
+    },
+    {
+      "id": "apple-juice-carton",
+      "nameJa": "リンゴジュース",
+      "svg": "objects/apple-juice-carton.svg",
+      "png": "raster/objects/apple-juice-carton.png",
+      "webp": "raster/objects/apple-juice-carton.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        26,
+        5,
+        76,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        38,
+        59
+      ],
+      "worldWidth": 43,
+      "worldHeight": 66.76315789473684,
+      "worldScale": 0.5657894736842105,
+      "material": "paper",
+      "mass": 1.8,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "water_release",
+      "colliderTemplate": "apple-juice-carton",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              29,
+              28
+            ],
+            [
+              44,
+              8
+            ],
+            [
+              84,
+              8
+            ],
+            [
+              99,
+              28
+            ],
+            [
+              99,
+              120
+            ],
+            [
+              29,
+              120
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25,
+        "impactSpeed": 120,
+        "releaseUnits": 6,
+        "destroyShell": true,
+        "waterUnits": 6,
+        "breakImpactSpeed": 120
+      },
+      "opaquePixels": 8244
+    },
+    {
+      "id": "tricolor-dango",
+      "nameJa": "三色だんご",
+      "svg": "objects/tricolor-dango.svg",
+      "png": "raster/objects/tricolor-dango.png",
+      "webp": "raster/objects/tricolor-dango.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        40,
+        0,
+        48,
+        128
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        24,
+        64
+      ],
+      "worldWidth": 35,
+      "worldHeight": 93.33333333333333,
+      "worldScale": 0.7291666666666666,
+      "material": "food",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "tricolor-dango",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            24,
+            21
+          ]
+        },
+        {
+          "circle": [
+            64,
+            62,
+            21
+          ]
+        },
+        {
+          "circle": [
+            64,
+            100,
+            21
+          ]
+        },
+        {
+          "rect": [
+            60,
+            111,
+            8,
+            15
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 4774
+    },
+    {
+      "id": "rubber-block",
+      "nameJa": "ゴムブロック",
+      "svg": "objects/rubber-block.svg",
+      "png": "raster/objects/rubber-block.png",
+      "webp": "raster/objects/rubber-block.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        13,
+        110,
+        106
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        51
+      ],
+      "worldWidth": 65,
+      "worldHeight": 62.63636363636364,
+      "worldScale": 0.5909090909090909,
+      "material": "rubber",
+      "mass": 3,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "rubber-block",
+      "fixtures": [
+        {
+          "rect": [
+            12,
+            16,
+            104,
+            100
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.85,
+        "restitution": 0.45,
+        "flammable": true,
+        "explosionResistance": 0.65,
+        "burnSeconds": 6,
+        "flowResponse": 1,
+        "coldBrittle": true
+      },
+      "opaquePixels": 11232
+    },
+    {
+      "id": "lightning-orb",
+      "nameJa": "かみなりまほう",
+      "svg": "objects/lightning-orb.svg",
+      "png": "raster/objects/lightning-orb.png",
+      "webp": "raster/objects/lightning-orb.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        14,
+        100,
+        100
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        50
+      ],
+      "worldWidth": 44,
+      "worldHeight": 44,
+      "worldScale": 0.44,
+      "material": "metal",
+      "mass": 2,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "lightning",
+      "colliderTemplate": "lightning-orb",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            64,
+            47
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "fuseSeconds": 1.1,
+        "radius": 110,
+        "strength": 0.7,
+        "fireRadius": 80,
+        "fireSeconds": 3,
+        "removeSelf": true
+      },
+      "opaquePixels": 7542
+    },
+    {
+      "id": "sashimi",
+      "nameJa": "さしみ",
+      "svg": "objects/sashimi.svg",
+      "png": "raster/objects/sashimi.png",
+      "webp": "raster/objects/sashimi.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        21,
+        120,
+        93
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        43
+      ],
+      "worldWidth": 84,
+      "worldHeight": 65.1,
+      "worldScale": 0.7,
+      "material": "food",
+      "mass": 2.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "sashimi",
+      "fixtures": [
+        {
+          "rect": [
+            8,
+            77,
+            112,
+            34
+          ]
+        },
+        {
+          "polygon": [
+            [
+              20,
+              72
+            ],
+            [
+              33,
+              28
+            ],
+            [
+              53,
+              28
+            ],
+            [
+              64,
+              72
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              58,
+              72
+            ],
+            [
+              73,
+              24
+            ],
+            [
+              93,
+              24
+            ],
+            [
+              105,
+              72
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7625
+    },
+    {
+      "id": "whole-cake",
+      "nameJa": "ホールケーキ",
+      "svg": "objects/whole-cake.svg",
+      "png": "raster/objects/whole-cake.png",
+      "webp": "raster/objects/whole-cake.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        5,
+        110,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        59
+      ],
+      "worldWidth": 94,
+      "worldHeight": 99.12727272727273,
+      "worldScale": 0.8545454545454545,
+      "material": "food",
+      "mass": 4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "whole-cake",
+      "fixtures": [
+        {
+          "rect": [
+            12,
+            68,
+            104,
+            50
+          ]
+        },
+        {
+          "rect": [
+            31,
+            31,
+            66,
+            37
+          ]
+        },
+        {
+          "rect": [
+            43,
+            8,
+            8,
+            23
+          ]
+        },
+        {
+          "rect": [
+            77,
+            8,
+            8,
+            23
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 8974
+    },
+    {
+      "id": "cheesecake",
+      "nameJa": "チーズケーキ",
+      "svg": "objects/cheesecake.svg",
+      "png": "raster/objects/cheesecake.png",
+      "webp": "raster/objects/cheesecake.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        18,
+        102,
+        96
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        46
+      ],
+      "worldWidth": 66,
+      "worldHeight": 62.117647058823536,
+      "worldScale": 0.6470588235294118,
+      "material": "food",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "cheesecake",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              17,
+              43
+            ],
+            [
+              89,
+              21
+            ],
+            [
+              113,
+              74
+            ],
+            [
+              99,
+              111
+            ],
+            [
+              17,
+              111
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7614
+    },
+    {
+      "id": "candle",
+      "nameJa": "ろうそく",
+      "svg": "objects/candle.svg",
+      "png": "raster/objects/candle.png",
+      "webp": "raster/objects/candle.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        39,
+        17,
+        50,
+        108
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        25,
+        47
+      ],
+      "worldWidth": 23,
+      "worldHeight": 49.68,
+      "worldScale": 0.46,
+      "material": "wax",
+      "mass": 0.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "fuel_light",
+      "colliderTemplate": "candle",
+      "fixtures": [
+        {
+          "rect": [
+            42,
+            32,
+            44,
+            90
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.03,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 6,
+        "flowResponse": 1,
+        "durationSeconds": 12,
+        "activation": "launch",
+        "fireRadius": 18,
+        "depletedSprite": "effects/fuel-lantern-off.svg"
+      },
+      "opaquePixels": 4656
+    },
+    {
+      "id": "strawberry",
+      "nameJa": "イチゴ",
+      "svg": "objects/strawberry.svg",
+      "png": "raster/objects/strawberry.png",
+      "webp": "raster/objects/strawberry.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        19,
+        2,
+        90,
+        120
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        45,
+        62
+      ],
+      "worldWidth": 39,
+      "worldHeight": 52,
+      "worldScale": 0.43333333333333335,
+      "material": "food",
+      "mass": 0.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "strawberry",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              22,
+              34
+            ],
+            [
+              41,
+              18
+            ],
+            [
+              87,
+              18
+            ],
+            [
+              106,
+              34
+            ],
+            [
+              98,
+              76
+            ],
+            [
+              64,
+              118
+            ],
+            [
+              30,
+              76
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 6495
+    },
+    {
+      "id": "blueberries",
+      "nameJa": "ブルーベリー",
+      "svg": "objects/blueberries.svg",
+      "png": "raster/objects/blueberries.png",
+      "webp": "raster/objects/blueberries.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        0,
+        98,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        64
+      ],
+      "worldWidth": 48,
+      "worldHeight": 57.795918367346935,
+      "worldScale": 0.4897959183673469,
+      "material": "food",
+      "mass": 1.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "blueberries",
+      "fixtures": [
+        {
+          "circle": [
+            43,
+            54,
+            25
+          ]
+        },
+        {
+          "circle": [
+            83,
+            52,
+            27
+          ]
+        },
+        {
+          "circle": [
+            64,
+            90,
+            25
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 6889
+    },
+    {
+      "id": "gift-box",
+      "nameJa": "プレゼント",
+      "svg": "objects/gift-box.svg",
+      "png": "raster/objects/gift-box.png",
+      "webp": "raster/objects/gift-box.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        1,
+        118,
+        119
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        63
+      ],
+      "worldWidth": 66,
+      "worldHeight": 66.5593220338983,
+      "worldScale": 0.559322033898305,
+      "material": "paper",
+      "mass": 2.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "gift-box",
+      "fixtures": [
+        {
+          "rect": [
+            14,
+            29,
+            100,
+            88
+          ]
+        },
+        {
+          "rect": [
+            8,
+            21,
+            112,
+            22
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 11802
+    },
+    {
+      "id": "drinking-glass",
+      "nameJa": "コップ",
+      "svg": "objects/drinking-glass.svg",
+      "png": "raster/objects/drinking-glass.png",
+      "webp": "raster/objects/drinking-glass.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        21,
+        13,
+        86,
+        107
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        43,
+        51
+      ],
+      "worldWidth": 43,
+      "worldHeight": 53.5,
+      "worldScale": 0.5,
+      "material": "glass",
+      "mass": 1.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "breakable",
+      "colliderTemplate": "drinking-glass",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              24,
+              16
+            ],
+            [
+              104,
+              16
+            ],
+            [
+              92,
+              117
+            ],
+            [
+              36,
+              117
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.35,
+        "restitution": 0.03,
+        "flammable": false,
+        "explosionResistance": 0.05,
+        "burnSeconds": null,
+        "flowResponse": 0.55,
+        "impactSpeed": 175,
+        "minImpactEnergy": 2,
+        "loadForceThreshold": 5000,
+        "loadHoldSeconds": 0.35,
+        "loadReleaseRatio": 0.8,
+        "breakResult": "remove body and score; non-colliding finite shards only",
+        "shatterAnimation": "shatter"
+      },
+      "opaquePixels": 7563
+    },
+    {
+      "id": "party-popper",
+      "nameJa": "クラッカー",
+      "svg": "objects/party-popper.svg",
+      "png": "raster/objects/party-popper.png",
+      "webp": "raster/objects/party-popper.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        23,
+        20,
+        100,
+        97
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        41,
+        44
+      ],
+      "worldWidth": 46,
+      "worldHeight": 44.620000000000005,
+      "worldScale": 0.46,
+      "material": "paper",
+      "mass": 0.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "party-popper",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              26,
+              24
+            ],
+            [
+              103,
+              64
+            ],
+            [
+              32,
+              113
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 4016
+    },
+    {
+      "id": "sake-bottle",
+      "nameJa": "一升瓶",
+      "svg": "objects/sake-bottle.svg",
+      "png": "raster/objects/sake-bottle.png",
+      "webp": "raster/objects/sake-bottle.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        27,
+        1,
+        74,
+        123
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        37,
+        63
+      ],
+      "worldWidth": 39,
+      "worldHeight": 64.82432432432432,
+      "worldScale": 0.527027027027027,
+      "material": "glass",
+      "mass": 3,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "water_release",
+      "colliderTemplate": "sake-bottle",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              48,
+              5
+            ],
+            [
+              80,
+              5
+            ],
+            [
+              80,
+              42
+            ],
+            [
+              98,
+              60
+            ],
+            [
+              98,
+              121
+            ],
+            [
+              30,
+              121
+            ],
+            [
+              30,
+              60
+            ],
+            [
+              48,
+              42
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.35,
+        "restitution": 0.03,
+        "flammable": false,
+        "explosionResistance": 0.05,
+        "burnSeconds": null,
+        "flowResponse": 0.55,
+        "impactSpeed": 120,
+        "releaseUnits": 16,
+        "destroyShell": true,
+        "waterUnits": 16,
+        "breakImpactSpeed": 120
+      },
+      "opaquePixels": 7074
+    },
+    {
+      "id": "fried-chicken",
+      "nameJa": "唐揚げ",
+      "svg": "objects/fried-chicken.svg",
+      "png": "raster/objects/fried-chicken.png",
+      "webp": "raster/objects/fried-chicken.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        20,
+        120,
+        96
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        44
+      ],
+      "worldWidth": 79,
+      "worldHeight": 63.2,
+      "worldScale": 0.6583333333333333,
+      "material": "food",
+      "mass": 2.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "fried-chicken",
+      "fixtures": [
+        {
+          "rect": [
+            8,
+            82,
+            112,
+            31
+          ]
+        },
+        {
+          "circle": [
+            38,
+            66,
+            26
+          ]
+        },
+        {
+          "circle": [
+            79,
+            51,
+            26
+          ]
+        },
+        {
+          "circle": [
+            91,
+            80,
+            23
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 8070
+    },
+    {
+      "id": "lemon",
+      "nameJa": "レモン",
+      "svg": "objects/lemon.svg",
+      "png": "raster/objects/lemon.png",
+      "webp": "raster/objects/lemon.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        14,
+        114,
+        99
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        50
+      ],
+      "worldWidth": 45,
+      "worldHeight": 39.078947368421055,
+      "worldScale": 0.39473684210526316,
+      "material": "food",
+      "mass": 1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "lemon",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              10,
+              48
+            ],
+            [
+              28,
+              25
+            ],
+            [
+              64,
+              17
+            ],
+            [
+              99,
+              33
+            ],
+            [
+              118,
+              60
+            ],
+            [
+              103,
+              89
+            ],
+            [
+              67,
+              110
+            ],
+            [
+              28,
+              96
+            ],
+            [
+              10,
+              74
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7701
+    },
+    {
+      "id": "yakitori-plate",
+      "nameJa": "焼き鳥と皿",
+      "svg": "objects/yakitori-plate.svg",
+      "png": "raster/objects/yakitori-plate.png",
+      "webp": "raster/objects/yakitori-plate.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        11,
+        120,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        53
+      ],
+      "worldWidth": 74,
+      "worldHeight": 69.06666666666666,
+      "worldScale": 0.6166666666666667,
+      "material": "food",
+      "mass": 2.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "yakitori-plate",
+      "fixtures": [
+        {
+          "rect": [
+            8,
+            91,
+            112,
+            29
+          ]
+        },
+        {
+          "rect": [
+            27,
+            19,
+            30,
+            72
+          ]
+        },
+        {
+          "rect": [
+            70,
+            17,
+            30,
+            74
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7827
+    },
+    {
+      "id": "cabbage-plate",
+      "nameJa": "キャベツ皿",
+      "svg": "objects/cabbage-plate.svg",
+      "png": "raster/objects/cabbage-plate.png",
+      "webp": "raster/objects/cabbage-plate.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        19,
+        118,
+        98
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        45
+      ],
+      "worldWidth": 77,
+      "worldHeight": 63.949152542372886,
+      "worldScale": 0.652542372881356,
+      "material": "food",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "cabbage-plate",
+      "fixtures": [
+        {
+          "rect": [
+            9,
+            80,
+            110,
+            34
+          ]
+        },
+        {
+          "polygon": [
+            [
+              19,
+              73
+            ],
+            [
+              29,
+              42
+            ],
+            [
+              49,
+              22
+            ],
+            [
+              84,
+              26
+            ],
+            [
+              109,
+              53
+            ],
+            [
+              113,
+              80
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 8243
+    },
+    {
+      "id": "beer-mug",
+      "nameJa": "ビール",
+      "svg": "objects/beer-mug.svg",
+      "png": "raster/objects/beer-mug.png",
+      "webp": "raster/objects/beer-mug.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        17,
+        5,
+        99,
+        119
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        47,
+        59
+      ],
+      "worldWidth": 55,
+      "worldHeight": 66.11111111111111,
+      "worldScale": 0.5555555555555556,
+      "material": "glass",
+      "mass": 2,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "water_release",
+      "colliderTemplate": "beer-mug",
+      "fixtures": [
+        {
+          "rect": [
+            23,
+            27,
+            66,
+            94
+          ]
+        },
+        {
+          "rect": [
+            89,
+            45,
+            24,
+            12
+          ]
+        },
+        {
+          "rect": [
+            103,
+            57,
+            10,
+            39
+          ]
+        },
+        {
+          "rect": [
+            89,
+            96,
+            24,
+            12
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.35,
+        "restitution": 0.03,
+        "flammable": false,
+        "explosionResistance": 0.05,
+        "burnSeconds": null,
+        "flowResponse": 0.55,
+        "impactSpeed": 120,
+        "releaseUnits": 6,
+        "destroyShell": true,
+        "waterUnits": 6,
+        "breakImpactSpeed": 120
+      },
+      "opaquePixels": 9436
+    },
+    {
+      "id": "negima",
+      "nameJa": "ねぎま",
+      "svg": "objects/negima.svg",
+      "png": "raster/objects/negima.png",
+      "webp": "raster/objects/negima.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        40,
+        7,
+        48,
+        111
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        24,
+        57
+      ],
+      "worldWidth": 33,
+      "worldHeight": 76.3125,
+      "worldScale": 0.6875,
+      "material": "food",
+      "mass": 1.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "negima",
+      "fixtures": [
+        {
+          "rect": [
+            43,
+            24,
+            42,
+            63
+          ]
+        },
+        {
+          "rect": [
+            61,
+            10,
+            6,
+            105
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 3466
+    },
+    {
+      "id": "saury",
+      "nameJa": "サンマ",
+      "svg": "objects/saury.svg",
+      "png": "raster/objects/saury.png",
+      "webp": "raster/objects/saury.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        15,
+        119,
+        89
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        49
+      ],
+      "worldWidth": 95,
+      "worldHeight": 71.05042016806723,
+      "worldScale": 0.7983193277310925,
+      "material": "food",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "saury",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              62
+            ],
+            [
+              28,
+              43
+            ],
+            [
+              85,
+              37
+            ],
+            [
+              116,
+              19
+            ],
+            [
+              111,
+              61
+            ],
+            [
+              119,
+              99
+            ],
+            [
+              88,
+              79
+            ],
+            [
+              29,
+              80
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 4974
+    },
+    {
+      "id": "beer-dispenser",
+      "nameJa": "ビールディスペンサー",
+      "svg": "objects/beer-dispenser.svg",
+      "png": "raster/objects/beer-dispenser.png",
+      "webp": "raster/objects/beer-dispenser.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        12,
+        3,
+        111,
+        119
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        52,
+        61
+      ],
+      "worldWidth": 75,
+      "worldHeight": 80.4054054054054,
+      "worldScale": 0.6756756756756757,
+      "material": "metal",
+      "mass": 8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "beer-dispenser",
+      "fixtures": [
+        {
+          "rect": [
+            15,
+            24,
+            82,
+            95
+          ]
+        },
+        {
+          "rect": [
+            54,
+            6,
+            25,
+            18
+          ]
+        },
+        {
+          "rect": [
+            95,
+            49,
+            22,
+            15
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 9935
+    },
+    {
+      "id": "charcoal",
+      "nameJa": "木炭",
+      "svg": "objects/charcoal.svg",
+      "png": "raster/objects/charcoal.png",
+      "webp": "raster/objects/charcoal.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        9,
+        100,
+        109
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        55
+      ],
+      "worldWidth": 51,
+      "worldHeight": 55.59,
+      "worldScale": 0.51,
+      "material": "wood",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "charcoal",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              18,
+              28
+            ],
+            [
+              45,
+              12
+            ],
+            [
+              101,
+              26
+            ],
+            [
+              112,
+              90
+            ],
+            [
+              88,
+              115
+            ],
+            [
+              27,
+              103
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 9,
+        "flowResponse": 1
+      },
+      "opaquePixels": 8121
+    },
+    {
+      "id": "grill-grid",
+      "nameJa": "網",
+      "svg": "objects/grill-grid.svg",
+      "png": "raster/objects/grill-grid.png",
+      "webp": "raster/objects/grill-grid.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        6,
+        19,
+        116,
+        96
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        58,
+        45
+      ],
+      "worldWidth": 82,
+      "worldHeight": 67.86206896551724,
+      "worldScale": 0.7068965517241379,
+      "material": "metal",
+      "mass": 2.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "heat_shield",
+      "colliderTemplate": "grill-grid",
+      "fixtures": [
+        {
+          "rect": [
+            9,
+            22,
+            110,
+            9
+          ]
+        },
+        {
+          "rect": [
+            9,
+            103,
+            110,
+            9
+          ]
+        },
+        {
+          "rect": [
+            9,
+            31,
+            9,
+            72
+          ]
+        },
+        {
+          "rect": [
+            110,
+            31,
+            9,
+            72
+          ]
+        },
+        {
+          "rect": [
+            44,
+            31,
+            7,
+            72
+          ]
+        },
+        {
+          "rect": [
+            78,
+            31,
+            7,
+            72
+          ]
+        },
+        {
+          "rect": [
+            18,
+            55,
+            92,
+            7
+          ]
+        },
+        {
+          "rect": [
+            18,
+            79,
+            92,
+            7
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "blocksHeatRays": true,
+        "putsOutFloor": false
+      },
+      "opaquePixels": 3710
+    },
+    {
+      "id": "call-bell",
+      "nameJa": "呼び出しベル",
+      "svg": "objects/call-bell.svg",
+      "png": "raster/objects/call-bell.png",
+      "webp": "raster/objects/call-bell.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        10,
+        110,
+        107
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        54
+      ],
+      "worldWidth": 44,
+      "worldHeight": 42.800000000000004,
+      "worldScale": 0.4,
+      "material": "metal",
+      "mass": 1.3,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "call-bell",
+      "fixtures": [
+        {
+          "rect": [
+            12,
+            95,
+            104,
+            19
+          ]
+        },
+        {
+          "polygon": [
+            [
+              24,
+              95
+            ],
+            [
+              24,
+              64
+            ],
+            [
+              36,
+              43
+            ],
+            [
+              53,
+              33
+            ],
+            [
+              75,
+              33
+            ],
+            [
+              92,
+              43
+            ],
+            [
+              104,
+              64
+            ],
+            [
+              104,
+              95
+            ]
+          ]
+        },
+        {
+          "rect": [
+            58,
+            15,
+            12,
+            19
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 7562
     }
   ]
 }

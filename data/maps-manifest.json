@@ -881,6 +881,506 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "21-random-lab",
+      "stage": 21,
+      "nameJa": "ランダム実験室",
+      "status": "specified",
+      "svg": "maps/21-random-lab.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            110,
+            384,
+            420,
+            24
+          ]
+        },
+        {
+          "rect": [
+            136,
+            408,
+            24,
+            42
+          ]
+        },
+        {
+          "rect": [
+            482,
+            408,
+            24,
+            42
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "22-toy-store",
+      "stage": 22,
+      "nameJa": "おもちゃうりば",
+      "status": "specified",
+      "svg": "maps/22-toy-store.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            90,
+            325,
+            180,
+            18
+          ]
+        },
+        {
+          "rect": [
+            315,
+            260,
+            200,
+            18
+          ]
+        },
+        {
+          "rect": [
+            375,
+            390,
+            170,
+            18
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "23-obstacle",
+      "stage": 23,
+      "nameJa": "じゃまもの",
+      "status": "specified",
+      "svg": "maps/23-obstacle.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "24-snack-time",
+      "stage": 24,
+      "nameJa": "3じのおやつ",
+      "status": "specified",
+      "svg": "maps/24-snack-time.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            95,
+            390,
+            460,
+            24
+          ]
+        },
+        {
+          "rect": [
+            120,
+            414,
+            24,
+            36
+          ]
+        },
+        {
+          "rect": [
+            510,
+            414,
+            24,
+            36
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "25-rubber-freeze",
+      "stage": 25,
+      "nameJa": "ゴムとれいとうじゅう",
+      "status": "specified",
+      "svg": "maps/25-rubber-freeze.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "26-lightning-river",
+      "stage": 26,
+      "nameJa": "かみなり実験",
+      "status": "specified",
+      "svg": "maps/26-lightning-river.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            490,
+            960,
+            50
+          ]
+        },
+        {
+          "polygon": [
+            [
+              90,
+              430
+            ],
+            [
+              160,
+              330
+            ],
+            [
+              390,
+              330
+            ],
+            [
+              460,
+              430
+            ]
+          ]
+        },
+        {
+          "rect": [
+            710,
+            420,
+            250,
+            70
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "27-freezer",
+      "stage": 27,
+      "nameJa": "れいとうこ",
+      "status": "specified",
+      "svg": "maps/27-freezer.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            90,
+            300,
+            180,
+            18
+          ]
+        },
+        {
+          "rect": [
+            320,
+            365,
+            230,
+            18
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "28-birthday",
+      "stage": 28,
+      "nameJa": "たんじょうびパーティー",
+      "status": "specified",
+      "svg": "maps/28-birthday.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            140,
+            385,
+            390,
+            65
+          ]
+        },
+        {
+          "rect": [
+            235,
+            325,
+            200,
+            60
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "29-izakaya",
+      "stage": 29,
+      "nameJa": "いざかやさん",
+      "status": "specified",
+      "svg": "maps/29-izakaya.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            90,
+            405,
+            480,
+            20
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "30-fragile",
+      "stage": 30,
+      "nameJa": "こわれものちゅうい",
+      "status": "specified",
+      "svg": "maps/30-fragile.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            100,
+            360,
+            170,
+            16
+          ]
+        },
+        {
+          "rect": [
+            340,
+            390,
+            180,
+            16
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "31-awkward",
+      "stage": 31,
+      "nameJa": "やっかいなばしょ",
+      "status": "specified",
+      "svg": "maps/31-awkward.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            160,
+            90
+          ]
+        },
+        {
+          "rect": [
+            160,
+            510,
+            470,
+            30
+          ]
+        },
+        {
+          "rect": [
+            630,
+            450,
+            330,
+            90
+          ]
+        },
+        {
+          "rect": [
+            190,
+            400,
+            80,
+            20
+          ]
+        },
+        {
+          "rect": [
+            455,
+            280,
+            90,
+            20
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "32-blast-lab",
+      "stage": 32,
+      "nameJa": "ばくはつ実験室",
+      "status": "specified",
+      "svg": "maps/32-blast-lab.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            100,
+            90
+          ]
+        },
+        {
+          "rect": [
+            100,
+            505,
+            125,
+            35
+          ]
+        },
+        {
+          "rect": [
+            225,
+            350,
+            105,
+            190
+          ]
+        },
+        {
+          "rect": [
+            330,
+            505,
+            180,
+            35
+          ]
+        },
+        {
+          "rect": [
+            510,
+            405,
+            105,
+            135
+          ]
+        },
+        {
+          "rect": [
+            615,
+            505,
+            90,
+            35
+          ]
+        },
+        {
+          "rect": [
+            705,
+            450,
+            255,
+            90
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }

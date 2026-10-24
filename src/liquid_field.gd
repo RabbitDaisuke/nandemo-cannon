@@ -234,6 +234,9 @@ func _affect_bodies() -> void:
 		if fraction <= 0.0:
 			continue
 		world.hazards.wet_actor(actor, 2.0)
+		if bool(actor.spec.get("immersionBreak", false)):
+			actor.request_break("water")
+			continue
 		var response = float(actor.spec.get("flowResponse", 1.0))
 		var buoyancy = float(actor.spec.get("buoyancy", 0.45))
 		actor.apply_central_impulse((-actor.linear_velocity * 1.2 + Vector2.UP * world.gravity_value * buoyancy) * actor.mass * fraction * 0.05)

@@ -30,6 +30,132 @@ func _click(point: Vector2, button_index: MouseButton) -> void:
 		event.pressed = pressed
 		root.push_input(event)
 
+func _touch(index: int, point: Vector2, pressed: bool) -> void:
+	var event = InputEventScreenTouch.new()
+	event.index = index
+	event.position = point
+	event.pressed = pressed
+	root.push_input(event, true)
+
+func _touch_move(index: int, point: Vector2) -> void:
+	var event = InputEventScreenDrag.new()
+	event.index = index
+	event.position = point
+	root.push_input(event, true)
+
+func _modal_motion_checks() -> void:
+	game.load_stage(19)
+	await _frames(2)
+	var actor = game._create_actor(game.catalog.items["refrigerator"], Vector2(520, 180))
+	actor.linear_velocity = Vector2(-35, -40)
+	actor.angular_velocity = 0.7
+	actor.constant_force = Vector2(8, -4)
+	actor.constant_torque = 2.0
+	var burner = game._create_actor(game.catalog.items["flamethrower"], Vector2(120, 180))
+	burner.freeze = true
+	game.hazards.on_launch(burner)
+	await _frames(3)
+	for kind in ["catalog", "maps", "seed"]:
+		var expected_velocity = actor.linear_velocity
+		var expected_spin = actor.angular_velocity
+		var at = actor.position
+		var elapsed = game.elapsed
+		var fuel = burner.fuel_seconds
+		if kind == "catalog":
+			game._show_catalog()
+		elif kind == "maps":
+			game._show_maps()
+		else:
+			game._show_seed()
+		_check(not paused and not game.simulation_paused and actor.linear_velocity.is_equal_approx(expected_velocity) and is_equal_approx(actor.angular_velocity, expected_spin), kind + " opening paused or altered momentum")
+		await _frames(12)
+		_check(actor.position != at and actor.linear_velocity.y > expected_velocity.y and game.elapsed > elapsed and burner.fuel_seconds < fuel, kind + " modal stopped flight, gravity, fuel, or the game clock")
+		_check(not game.cannon.enabled, kind + " modal allowed cannon input behind the UI")
+		var velocity = actor.linear_velocity
+		var spin = actor.angular_velocity
+		var sleeping = actor.sleeping
+		game._close_modal()
+		_check(not paused and actor.linear_velocity.is_equal_approx(velocity) and is_equal_approx(actor.angular_velocity, spin), kind + " modal erased linear or angular momentum")
+		_check(actor.constant_force == Vector2(8, -4) and is_equal_approx(actor.constant_torque, 2.0) and actor.sleeping == sleeping and not actor.freeze, kind + " modal altered force, sleep, or freeze state")
+	# Already frozen/sleeping objects retain their own state as well.
+	actor.freeze = true
+	actor.sleeping = true
+	game._show_catalog()
+	game._close_modal()
+	_check(actor.freeze and actor.sleeping, "Modal resume unconditionally woke or unfroze an object")
+	game.shots_fired = 15
+	game._update_hud()
+	game._show_catalog()
+	_check(game.catalog_button.disabled and not is_instance_valid(game.modal) and not paused, "Empty queue still opened the item picker")
+
+func _pinch_checks() -> void:
+	game.load_stage(0)
+	await _frames(2)
+	var actor = game._create_actor(game.catalog.items["soccer-ball"], Vector2(500, 180))
+	actor.linear_velocity = Vector2(-20, -30)
+	var at = actor.position
+	var elapsed = game.elapsed
+	var aim = Vector2(game.cannon.elevation_degrees, game.cannon.power)
+	var first = game.cannon.position + Vector2(-10, -20)
+	_touch(0, first, true)
+	_check(game.cannon._grabbed, "First touch did not begin cannon capture")
+	_touch(1, first - Vector2(160, 0), true)
+	var anchor = game.touch_zoom.view_transform.affine_inverse() * (first - Vector2(80, 0))
+	_touch_move(0, first + Vector2(40, 20))
+	_touch_move(1, first - Vector2(200, -20))
+	var center = first - Vector2(80, -20)
+	_check(game.touch_zoom.gesture_active and not game.cannon._grabbed and game.cannon.input_suspended, "Second touch failed to cancel the pending cannon tap")
+	_check(is_equal_approx(game.touch_zoom.zoom, 1.5) and (game.touch_zoom.view_transform * anchor).distance_to(center) < 0.01, "Pinch did not keep the touched world anchor under the moving center")
+	_check(game.ui.transform == game.touch_zoom.view_transform and root.canvas_transform == game.touch_zoom.view_transform, "HUD and world zoom transforms differ")
+	_check(Vector2(game.cannon.elevation_degrees, game.cannon.power) == aim and game.shots_fired == 0, "Pinch changed aim or fired")
+	await _frames(12)
+	_check(not paused and game.elapsed > elapsed and actor.position != at and is_equal_approx(Engine.time_scale, 1.0), "Pinch paused or changed the running physics simulation")
+	_touch(2, Vector2(500, 250), true)
+	var before_membership = game.touch_zoom.view_transform
+	_touch(2, Vector2(500, 250), false)
+	_check(game.touch_zoom.view_transform == before_membership, "Adding or removing a third finger jumped the view")
+	_touch(1, first - Vector2(200, -20), false)
+	_touch_move(0, first + Vector2(120, -90))
+	_check(game.touch_zoom.gesture_active and game.shots_fired == 0 and Vector2(game.cannon.elevation_degrees, game.cannon.power) == aim, "Remaining finger resumed gameplay before all fingers lifted")
+	_touch(0, first + Vector2(120, -90), false)
+	_check(not game.touch_zoom.gesture_active and not game.cannon.input_suspended and game.shots_fired == 0, "Final pinch release fired or retained the input lock")
+	# Fresh single-finger input is inverse-transformed through the zoom.
+	var screen_cannon = game.touch_zoom.view_transform * first
+	_touch(0, screen_cannon, true)
+	_touch(0, screen_cannon, false)
+	_check(game.shots_fired == 1, "Cannon tap after zoom used unscaled hit coordinates")
+	# Pinching from a pressed GUI button must cancel its pending action.
+	game.touch_zoom.reset_view()
+	_touch(0, Vector2(832, 26), true)
+	_touch(1, Vector2(630, 26), true)
+	_touch(1, Vector2(630, 26), false)
+	_touch(0, Vector2(832, 26), false)
+	_check(not is_instance_valid(game.modal), "Pinch release activated the initially pressed map button")
+	# Clamp both ends and return to an exact unzoomed origin.
+	_touch(0, Vector2(400, 270), true)
+	_touch(1, Vector2(560, 270), true)
+	_touch_move(0, Vector2(-400, 270))
+	_touch_move(1, Vector2(1360, 270))
+	_check(is_equal_approx(game.touch_zoom.zoom, 2.5), "Pinch exceeded the maximum zoom")
+	_touch_move(0, Vector2(479, 270))
+	_touch_move(1, Vector2(481, 270))
+	_check(game.touch_zoom.view_transform.is_equal_approx(Transform2D.IDENTITY), "Zooming below one left an offset or undersized game")
+	_touch(0, Vector2(479, 270), false)
+	_touch(1, Vector2(481, 270), false)
+	# Godot GUI hit testing follows the same CanvasLayer transform as the world.
+	_touch(0, Vector2(792, 26), true)
+	_touch(1, Vector2(872, 26), true)
+	_touch_move(0, Vector2(752, 26))
+	_touch_move(1, Vector2(912, 26))
+	_touch(0, Vector2(752, 26), false)
+	_touch(1, Vector2(912, 26), false)
+	var map_at = game.touch_zoom.view_transform * Vector2(832, 26)
+	_touch(0, map_at, true)
+	_touch(0, map_at, false)
+	_check(is_instance_valid(game.modal) and not paused, "Zoomed GUI map button did not receive its transformed touch without pausing")
+	game._close_modal()
+	game.touch_zoom.reset_view()
+
 func _score_and_wait_checks() -> void:
 	game.load_stage(0)
 	await _frames(2)
@@ -94,7 +220,9 @@ func _score_and_wait_checks() -> void:
 	await _frames(2)
 	_check(is_equal_approx(Engine.time_scale, 1.5) and Engine.physics_ticks_per_second == game._base_physics_ticks * 3 / 2, "Landed waiting flow did not preserve physics step size at 1.5x")
 	game._show_maps()
-	_check(is_equal_approx(Engine.time_scale, 1.0) and Engine.physics_ticks_per_second == game._base_physics_ticks, "Opening a modal did not reset waiting speed")
+	_check(is_equal_approx(Engine.time_scale, 1.5) and Engine.physics_ticks_per_second == game._base_physics_ticks * 3 / 2 and not paused, "Opening a manual modal changed waiting physics speed")
+	game._close_modal()
+	_check(is_equal_approx(Engine.time_scale, 1.5), "Closing a manual modal changed waiting physics speed")
 	game.load_stage(1)
 	_check(is_equal_approx(Engine.time_scale, 1.0), "Changing stage retained accelerated simulation")
 
@@ -141,6 +269,8 @@ func _run() -> void:
 		_check(game.playable and game.current_stage.queue.size() == 15, "Stage is not playable with fifteen throws")
 		_check(game.shots_fired == 0 and not game.next_item_id().is_empty(), "Playable stage has no first item")
 		_check_visible_glyphs("Stage %d HUD" % (index + 1))
+		if index >= 20:
+			await _snapshot(str(game.current_stage.map))
 	game.load_stage(0)
 	await _frames(2)
 	await _snapshot("01-initial")
@@ -227,7 +357,27 @@ func _run() -> void:
 	_check(not game.simulation_paused and game.elapsed > before_pause, "Resume did not restart the simulation")
 	# Map callbacks must capture the selected tile, not the final loop index.
 	game._show_maps()
-	_check_visible_glyphs("Map picker")
+	var reached: Dictionary = {}
+	var map_pages = ceili(game.catalog.stages.size() / float(game.MAPS_PER_PAGE))
+	for page in range(map_pages):
+		_check(game.map_page == page, "Map page navigation selected the wrong page")
+		_check_visible_glyphs("Map picker page %d" % (page + 1))
+		await _snapshot("maps-page-%d" % (page + 1))
+		for child in game.modal.get_children():
+			if child is Button and child.has_meta("stage_index"):
+				reached[child.get_meta("stage_index")] = true
+				_check(child.position.y + child.size.y < 348, "Map tile overlaps page navigation")
+		if page + 1 < map_pages:
+			var next_page = _button_with_meta("map_page", page + 1)
+			_check(next_page != null and not next_page.disabled, "Map picker has no next page action")
+			if next_page != null:
+				next_page.pressed.emit()
+	_check(reached.size() == game.catalog.stages.size() and reached.has(31), "Map pages did not expose all 32 stages")
+	var last_map = _button_with_meta("stage_index", 31)
+	if last_map != null:
+		last_map.pressed.emit()
+	_check(game.stage_index == 31 and not paused, "Last map tile did not load stage 32 and resume")
+	game._show_maps(1)
 	var map_button = _button_with_meta("stage_index", 17)
 	_check(map_button != null, "Map picker did not expose stage 18")
 	if map_button != null:
@@ -338,8 +488,11 @@ func _run() -> void:
 	last.constant_torque = 100.0
 	last.collision_layer = 0
 	last.collision_mask = 0
+	game._show_maps()
+	var waiting_modal_id = game.modal.get_instance_id()
 	await _frames(1500)
 	_check(game.result_shown and game.simulation_paused, "Fifteen shots did not enter the frozen result screen")
+	_check(is_instance_valid(game.modal) and game.modal.get_instance_id() != waiting_modal_id, "Final score did not replace the open map picker")
 	_check(game.end_clock >= 12.0 and game.end_clock < 12.1, "Perpetual motion did not finalize at the 12-second bound")
 	_check(game.score_caption.text == "とくてん" and game.score_label.text == "%04d" % game.score_value, "Result HUD does not show the final score")
 	_check(game.result_capture_status == "headless" and game.result_jpeg.is_empty() and is_instance_valid(game.modal), "Headless result capture waited for an unavailable framebuffer")
@@ -354,6 +507,8 @@ func _run() -> void:
 	game.cannon.set_enabled(true)
 	game.cannon.fire()
 	_check(game.shots_fired == 15, "Result state admitted a sixteenth shot")
+	await _modal_motion_checks()
+	await _pinch_checks()
 	await _score_and_wait_checks()
 	var report = {"suite": "game", "engine": Engine.get_version_info().string, "checks": checks, "failures": failures, "observations": observations, "status": "passed" if failures.is_empty() else "failed", "verification": "Godot headless scene integration; no browser or rendered engine screenshot"}
 	var file = FileAccess.open("res://previews/game-checks.json", FileAccess.WRITE)

@@ -59,7 +59,7 @@
 				"worldScale": 0.872340425531915,
 				"worldWidth": 82.0
 			},
-			"rotation": -1.57288527488708,
+			"rotation": -1.57305669784546,
 			"texture": "res://assets/objects/refrigerator.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -70,8 +70,8 @@
 				0.872340440750122,
 				0.872340440750122
 			],
-			"x": 330.002136230469,
-			"y": 380.070343017578
+			"x": 329.862365722656,
+			"y": 379.987457275391
 		},
 		{
 			"burning": false,
@@ -132,7 +132,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": -0.00372874620370567,
+			"rotation": -0.0000659452489344403,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -143,8 +143,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 418.093078613281,
-			"y": 394.209838867188
+			"x": 417.63232421875,
+			"y": 394.139770507812
 		},
 		{
 			"burning": false,
@@ -205,7 +205,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": 0.000207187244086526,
+			"rotation": 0.000437943934230134,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -216,8 +216,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 39.6766586303711,
-			"y": 387.478881835938
+			"x": 39.6803207397461,
+			"y": 387.47802734375
 		},
 		{
 			"burning": false,
@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": 1.57140338420868,
+			"rotation": 1.56926560401917,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -289,8 +289,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 135.299240112305,
-			"y": 390.522918701172
+			"x": 134.685195922852,
+			"y": 390.590515136719
 		},
 		{
 			"burning": false,
@@ -318,6 +318,7 @@
 				"opaquePixels": 9606.0,
 				"physics": {
 					"burnSeconds": 6.0,
+					"coldBrittle": true,
 					"explosionResistance": 0.65,
 					"flammable": true,
 					"flowResponse": 1.0,
@@ -350,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": 1.21320903301239,
+			"rotation": 1.41415023803711,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -361,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 192.214141845703,
-			"y": 398.433654785156
+			"x": 196.930572509766,
+			"y": 398.448699951172
 		},
 		{
 			"burning": false,
@@ -423,7 +424,7 @@
 				"worldScale": 0.764705882352941,
 				"worldWidth": 78.0
 			},
-			"rotation": 1.56954860687256,
+			"rotation": 1.56932485103607,
 			"texture": "res://assets/objects/washing-machine.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -434,8 +435,8 @@
 				0.764705896377563,
 				0.764705896377563
 			],
-			"x": 516.407958984375,
-			"y": 381.879821777344
+			"x": 516.411315917969,
+			"y": 381.873687744141
 		},
 		{
 			"burning": false,
@@ -544,7 +545,7 @@
 				"worldScale": 0.549019607843137,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.000502684444654733,
+			"rotation": -0.00000426456517743645,
 			"texture": "res://assets/objects/stool.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -555,8 +556,8 @@
 				0.549019634723663,
 				0.549019634723663
 			],
-			"x": 120.960556030273,
-			"y": 334.696838378906
+			"x": 126.711563110352,
+			"y": 334.892395019531
 		},
 		{
 			"burning": false,
@@ -617,7 +618,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": -0.592800617218018,
+			"rotation": -0.63484913110733,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -628,8 +629,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 241.878387451172,
-			"y": 378.764465332031
+			"x": 241.25163269043,
+			"y": 378.703887939453
 		},
 		{
 			"burning": false,
@@ -690,7 +691,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": -0.00879851914942265,
+			"rotation": -0.00636644149199128,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -701,8 +702,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 411.034118652344,
-			"y": 343.46923828125
+			"x": 411.766540527344,
+			"y": 343.461669921875
 		},
 		{
 			"burning": false,
@@ -763,7 +764,7 @@
 				"worldScale": 0.720930232558139,
 				"worldWidth": 62.0
 			},
-			"rotation": -1.56983733177185,
+			"rotation": -1.57501661777496,
 			"texture": "res://assets/objects/suitcase.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -774,8 +775,8 @@
 				0.720930218696594,
 				0.720930218696594
 			],
-			"x": 310.363861083984,
-			"y": 308.156921386719
+			"x": 310.445129394531,
+			"y": 308.387817382812
 		},
 		{
 			"burning": false,
@@ -853,7 +854,7 @@
 				"worldScale": 0.796610169491525,
 				"worldWidth": 94.0
 			},
-			"rotation": 0.721845626831055,
+			"rotation": 0.723664939403534,
 			"texture": "res://assets/objects/low-table.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -864,8 +865,8 @@
 				0.796610176563263,
 				0.796610176563263
 			],
-			"x": 444.687530517578,
-			"y": 310.704772949219
+			"x": 445.695220947266,
+			"y": 310.721954345703
 		},
 		{
 			"burning": false,
@@ -926,7 +927,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -0.7951500415802,
+			"rotation": -3.10064744949341,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -937,8 +938,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 378.185546875,
-			"y": 266.640533447266
+			"x": 183.801834106445,
+			"y": 328.763153076172
 		},
 		{
 			"burning": false,
@@ -966,6 +967,7 @@
 				"opaquePixels": 9606.0,
 				"physics": {
 					"burnSeconds": 6.0,
+					"coldBrittle": true,
 					"explosionResistance": 0.65,
 					"flammable": true,
 					"flowResponse": 1.0,
@@ -998,7 +1000,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": -2.32711338996887,
+			"rotation": -0.0947533473372459,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -1009,8 +1011,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 189.421234130859,
-			"y": 352.721008300781
+			"x": 233.031585693359,
+			"y": 321.329772949219
 		},
 		{
 			"burning": false,
@@ -1071,7 +1073,7 @@
 				"worldScale": 0.545454545454545,
 				"worldWidth": 60.0
 			},
-			"rotation": -0.00026950630126521,
+			"rotation": -3.01433348655701,
 			"texture": "res://assets/objects/cushion.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -1082,8 +1084,8 @@
 				0.545454561710358,
 				0.545454561710358
 			],
-			"x": 614.111328125,
-			"y": 396.292053222656
+			"x": 231.643127441406,
+			"y": 277.400512695312
 		},
 		{
 			"burning": false,
@@ -1241,7 +1243,7 @@
 				121.0,
 				45.0
 			],
-			"text": "1540",
+			"text": "1700",
 			"type": "label"
 		},
 		{
@@ -1454,11 +1456,12 @@
 	"font": "res://assets/font/arcade-generated.fnt",
 	"loadedItem": {},
 	"map": "01-poc",
+	"movingTerrain": [],
 	"playable": true,
 	"power": 0.45,
 	"recoil": 0.0,
 	"result": true,
-	"score": 1540,
+	"score": 1700,
 	"scoreMarker": [
 		[
 			88.0,

@@ -86,6 +86,11 @@ async function render(snapshot){
   definitions=[];colorFilters.clear();
   font=await loadFont(snapshot.font??'assets/font/fuhotoki-pixel.fnt');
   let output=nested(await asset(`assets/maps/${snapshot.map}.png`),0,0,960,540);
+  for(const body of snapshot.movingTerrain??[]){
+    const item=await asset(`assets/effects/${body.hanging?'pendant-lamp':'moving-platform'}.svg`),[w,h]=body.size;
+    const cable=body.hanging?`<path d="M0 ${-body.length}V${-h/2}" stroke="#182733" stroke-width="4"/>`:'';
+    output+=`<g transform="translate(${body.position.join(' ')}) rotate(${body.rotation*180/Math.PI})">${cable}${nested(item,-w/2,-h/2,w,h)}</g>`;
+  }
   if(snapshot.playable){
     const r=snapshot.scoreZone;
     const points=snapshot.scoreMarker??[[r[0]+18,r[1]+r[3]-14],[r[0]+r[2]-18,r[1]+r[3]-14],[r[0]+r[2],r[1]+r[3]+8],[r[0],r[1]+r[3]+8]];
@@ -139,10 +144,12 @@ async function render(snapshot){
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges"><defs>${definitions.join('')}</defs>${output}</svg>`;
 }
 const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result'];
+for(let page=1;page<=3;page++)names.push(`maps-page-${page}`);
+const stages=JSON.parse(await read('data/stages.json')).stages;
+for(const stage of stages)if(stage.id>=21)names.push(stage.map);
 for(const name of names){
   const snapshot=JSON.parse(await read(`previews/game-state-${name}.json`));
   const svg=await render(snapshot);
-  await fs.writeFile(path.join(root,`previews/game-${name}.svg`),svg);
   await sharp(Buffer.from(svg)).png().toFile(path.join(root,`previews/game-${name}.png`));
 }
 await fs.writeFile(path.join(root,'previews/game-preview-info.json'),JSON.stringify({source:'Godot 4.7.2 headless debug_snapshot from real physics and gameplay',renderer:'Node.js sharp: actual sprite assets and custom FNT glyph atlas composed at recorded positions',browserUsed:false,engineFramebuffer:false,files:names.map(n=>`game-${n}.png`)},null,2));

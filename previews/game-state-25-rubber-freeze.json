@@ -1,0 +1,645 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "rubber-block",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "rubber-block",
+				"fixtures": [
+					{
+						"rect": [
+							12.0,
+							16.0,
+							104.0,
+							100.0
+						]
+					}
+				],
+				"id": "rubber-block",
+				"mass": 3.0,
+				"material": "rubber",
+				"nameJa": "ゴムブロック",
+				"opaquePixels": 11232.0,
+				"physics": {
+					"burnSeconds": 6.0,
+					"coldBrittle": true,
+					"explosionResistance": 0.65,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.85,
+					"restitution": 0.45
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/rubber-block.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/rubber-block.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					106.0
+				],
+				"webp": "raster/objects/rubber-block.webp",
+				"worldHeight": 62.6363636363636,
+				"worldScale": 0.590909090909091,
+				"worldWidth": 65.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/rubber-block.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-32.5,
+				-30.1363620758057
+			],
+			"visualScale": [
+				0.590909063816071,
+				0.590909063816071
+			],
+			"x": 190.0,
+			"y": 418.340789794922
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "rubber-block",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "rubber-block",
+				"fixtures": [
+					{
+						"rect": [
+							12.0,
+							16.0,
+							104.0,
+							100.0
+						]
+					}
+				],
+				"id": "rubber-block",
+				"mass": 3.0,
+				"material": "rubber",
+				"nameJa": "ゴムブロック",
+				"opaquePixels": 11232.0,
+				"physics": {
+					"burnSeconds": 6.0,
+					"coldBrittle": true,
+					"explosionResistance": 0.65,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.85,
+					"restitution": 0.45
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/rubber-block.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/rubber-block.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					106.0
+				],
+				"webp": "raster/objects/rubber-block.webp",
+				"worldHeight": 62.6363636363636,
+				"worldScale": 0.590909090909091,
+				"worldWidth": 65.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/rubber-block.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-32.5,
+				-30.1363620758057
+			],
+			"visualScale": [
+				0.590909063816071,
+				0.590909063816071
+			],
+			"x": 260.0,
+			"y": 418.340789794922
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "rubber-block",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "rubber-block",
+				"fixtures": [
+					{
+						"rect": [
+							12.0,
+							16.0,
+							104.0,
+							100.0
+						]
+					}
+				],
+				"id": "rubber-block",
+				"mass": 3.0,
+				"material": "rubber",
+				"nameJa": "ゴムブロック",
+				"opaquePixels": 11232.0,
+				"physics": {
+					"burnSeconds": 6.0,
+					"coldBrittle": true,
+					"explosionResistance": 0.65,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.85,
+					"restitution": 0.45
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/rubber-block.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/rubber-block.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					106.0
+				],
+				"webp": "raster/objects/rubber-block.webp",
+				"worldHeight": 62.6363636363636,
+				"worldScale": 0.590909090909091,
+				"worldWidth": 65.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/rubber-block.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-32.5,
+				-30.1363620758057
+			],
+			"visualScale": [
+				0.590909063816071,
+				0.590909063816071
+			],
+			"x": 225.0,
+			"y": 353.340789794922
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/freeze-sprayer.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "れいきゃくスプレー",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				192.0,
+				18.75
+			],
+			"text": "25 / ゴムとれいとうじゅう",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				451.0,
+				246.0,
+				15.0
+			],
+			"text": "ゴムは はねる。こおらせると われやすくなる。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				852.0,
+				307.0,
+				24.0,
+				15.0
+			],
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.0166666666666667,
+	"firePatches": [],
+	"followingItem": "freeze-sprayer",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "rubber-block",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			0.590909063816071,
+			0.590909063816071
+		],
+		"texture": "res://assets/objects/rubber-block.svg"
+	},
+	"map": "25-rubber-freeze",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			83.0,
+			436.0
+		],
+		[
+			577.0,
+			436.0
+		],
+		[
+			595.0,
+			458.0
+		],
+		[
+			65.0,
+			458.0
+		]
+	],
+	"scoreZone": [
+		65.0,
+		70.0,
+		530.0,
+		380.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 25,
+	"trajectory": [
+		[
+			656.977111816406,
+			289.616241455078,
+			0.94
+		],
+		[
+			618.225952148438,
+			267.774383544922,
+			0.88
+		],
+		[
+			579.474853515625,
+			249.460556030273,
+			0.82
+		],
+		[
+			540.723693847656,
+			234.674713134766,
+			0.76
+		],
+		[
+			501.972534179688,
+			223.416870117188,
+			0.7
+		],
+		[
+			463.221374511719,
+			215.68701171875,
+			0.64
+		],
+		[
+			424.470275878906,
+			211.485198974609,
+			0.58
+		],
+		[
+			385.719116210938,
+			210.811340332031,
+			0.52
+		],
+		[
+			346.967956542969,
+			213.665496826172,
+			0.46
+		],
+		[
+			308.216796875,
+			220.047637939453,
+			0.4
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

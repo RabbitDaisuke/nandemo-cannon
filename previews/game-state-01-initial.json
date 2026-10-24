@@ -329,7 +329,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 0.025,
+	"elapsed": 0.0166666666666667,
 	"firePatches": [],
 	"followingItem": "toolbox",
 	"font": "res://assets/font/arcade-generated.fnt",
@@ -346,6 +346,7 @@
 		"texture": "res://assets/objects/refrigerator.svg"
 	},
 	"map": "01-poc",
+	"movingTerrain": [],
 	"playable": true,
 	"power": 0.65,
 	"recoil": 0.0,

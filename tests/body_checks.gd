@@ -63,7 +63,8 @@ func _run() -> void:
 	await _reset(true)
 	var boots = _spawn("grip-boots", Vector2(200.0, 345.0))
 	await _steps(300)
-	_expect(boots.sole_supported, "upright boots recognize sole support")
+	_expect(not boots.sole_supported and boots.behavior == "solid", "boots use an ordinary rigid body without sole braking")
+	_expect(is_equal_approx(boots._base_friction, float(records.refrigerator.physics.friction)) and is_equal_approx(boots.physics_material_override.bounce, float(records.refrigerator.physics.restitution)), "boots use refrigerator friction and low restitution")
 	boots.linear_velocity = Vector2(180.0, 0.0)
 	boots.sleeping = false
 	start_x = boots.position.x
@@ -78,8 +79,30 @@ func _run() -> void:
 	start_x = upside_down.position.x
 	await _steps(90)
 	var no_grip_distance = upside_down.position.x - start_x
-	_expect(no_grip_distance > grip_distance + 20.0, "sole friction limits sliding on ice without fixing the body")
+	_expect(grip_distance > 80.0 and no_grip_distance > 80.0, "both boot orientations slide on ice without hidden extra braking")
 	print("Boot displacement: sole=", grip_distance, " upside-down=", no_grip_distance)
+	await _reset(false)
+	var rubber_records: Array[Dictionary] = []
+	for id in ["rubber-warm", "rubber-cold", "rubber-thawed"]:
+		var rubber: Dictionary = records.basketball.duplicate(true)
+		rubber.id = id
+		rubber_records.append(rubber)
+	var warm = _spawn_record(rubber_records[0], Vector2(100, 150))
+	var cold = _spawn_record(rubber_records[1], Vector2(350, 150))
+	var thawed = _spawn_record(rubber_records[2], Vector2(600, 150))
+	for rubber in [warm, cold, thawed]:
+		rubber.age = 1.0
+		rubber.linear_velocity = Vector2(0, 450)
+	cold.apply_cooling(8.0)
+	thawed.apply_cooling(8.0)
+	thawed.frozen_seconds = 0.0
+	var bounced = false
+	for frame in range(100):
+		await physics_frame
+		bounced = bounced or warm.linear_velocity.y < -100.0
+	_expect(warm.alive and bounced, "warm rubber survives a hard floor impact and rebounds")
+	_expect(_has_break("rubber-cold", "frozen-impact"), "the same floor impact shatters frozen rubber")
+	_expect(thawed.alive and not thawed.is_frozen_rubber(), "thawing rubber restores its normal impact durability")
 	await _reset(false)
 	var impact_record: Dictionary = _block_record("impact-test", 2.0)
 	impact_record.behavior = "breakable"
@@ -149,6 +172,27 @@ func _run() -> void:
 		if int(stage.id) == 11:
 			_expect(first_queue.count("sponge") == 2, "river queue always keeps two sponges")
 	_expect(varied, "different seeds change ordinary queue selections")
+	var future_item: Dictionary = records.refrigerator.duplicate(true)
+	future_item.id = "future-catalog-item"
+	var random_catalog = GameCatalog.new()
+	random_catalog.ordered_items = [future_item]
+	var laboratory_rng = RandomNumberGenerator.new()
+	laboratory_rng.seed = 91
+	var future_queue = random_catalog.build_queue({"queuePolicy": "randomCatalog", "queue": ["refrigerator"]}, laboratory_rng)
+	_expect(future_queue.size() == 15 and future_queue.count("future-catalog-item") == 15, "random laboratory samples the live catalog including later additions")
+	await _reset(false)
+	var mover = preload("res://src/moving_terrain.gd").new()
+	fixture_world.add_child(mover)
+	mover.configure({"center": [300, 250], "size": [120, 20], "axis": [1, 0], "travel": 80, "period": 4}, false)
+	await _steps(120)
+	_expect(mover.position.x > 370.0 and is_equal_approx(mover.position.y, 250.0), "moving terrain advances its physical collider along its configured path")
+	point_query.position = mover.global_position
+	_expect(not fixture_world.get_world_2d().direct_space_state.intersect_point(point_query).is_empty(), "moving platform remains a solid collision surface at its current location")
+	var lamp = preload("res://src/moving_terrain.gd").new()
+	fixture_world.add_child(lamp)
+	lamp.configure({"anchor": [600, 80], "length": 170, "size": [64, 34], "amplitude": 16, "period": 4}, true)
+	await _steps(120)
+	_expect(absf(lamp.rotation) > 0.2 and absf(lamp.position.distance_to(Vector2(600, 80)) - 170.0) < 0.01, "hanging lamp swings around its anchor with constant cable length")
 	await _reset(false)
 	for child in fixture_world.get_children():
 		if child is StaticBody2D:

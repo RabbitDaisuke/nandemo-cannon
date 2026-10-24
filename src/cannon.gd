@@ -17,6 +17,7 @@ const SHOT_INTERVAL = 0.45
 var elevation_degrees: float = 35.0
 var power: float = 0.65
 var enabled: bool = true
+var input_suspended: bool = false
 var _joint: Node2D
 var _barrel: Sprite2D
 var _parts: Array[Sprite2D] = []
@@ -99,11 +100,24 @@ void fragment() {
 func set_enabled(value: bool) -> void:
 	enabled = value
 	if not value:
-		_grabbed = false
-		_dragged = false
-		_pointer_id = -1
-		_hovered = false
+		cancel_pointer()
 	_update_highlight()
+
+func cancel_pointer() -> void:
+	_grabbed = false
+	_dragged = false
+	_pointer_id = -1
+	_hovered = false
+	_update_highlight()
+
+func set_input_suspended(value: bool) -> void:
+	if input_suspended == value:
+		return
+	input_suspended = value
+	if value:
+		cancel_pointer()
+	else:
+		_last_touch_msec = Time.get_ticks_msec()
 
 
 func set_aim(new_elevation: float, new_power: float) -> void:
@@ -144,7 +158,7 @@ func get_muzzle() -> Vector2:
 
 
 func fire() -> void:
-	if not enabled or _cooldown > 0.0:
+	if not enabled or input_suspended or _cooldown > 0.0:
 		return
 	# Resolve the origin before recoil: it is the same visible muzzle as this frame.
 	var origin = get_muzzle()
@@ -160,7 +174,7 @@ func _process(delta: float) -> void:
 	_recoil = move_toward(_recoil, 0.0, delta * 45.0)
 	_update_pose()
 	if not _grabbed:
-		_hovered = enabled and _hit_test(get_global_mouse_position())
+		_hovered = enabled and not input_suspended and _hit_test(get_global_mouse_position())
 	_update_highlight()
 
 
@@ -176,7 +190,7 @@ func _hit_test(world_position: Vector2) -> bool:
 
 func _update_highlight() -> void:
 	if _hover_material != null:
-		_hover_material.set_shader_parameter("selected", enabled and (_hovered or _grabbed))
+		_hover_material.set_shader_parameter("selected", enabled and not input_suspended and (_hovered or _grabbed))
 
 
 func _screen_to_world(screen_position: Vector2) -> Vector2:
@@ -184,7 +198,7 @@ func _screen_to_world(screen_position: Vector2) -> Vector2:
 
 
 func _begin_pointer(point: Vector2, pointer: int) -> bool:
-	if not enabled or _grabbed or not _hit_test(point):
+	if not enabled or input_suspended or _grabbed or not _hit_test(point):
 		return false
 	_grabbed = true
 	_dragged = false
@@ -219,7 +233,7 @@ func _end_pointer(point: Vector2) -> void:
 func _input(event: InputEvent) -> void:
 	# Start capture only in _unhandled_input, but finish an existing drag even
 	# when the pointer moves over a HUD Control that consumes GUI events.
-	if not enabled or not _grabbed:
+	if not enabled or input_suspended or not _grabbed:
 		return
 	if event is InputEventScreenDrag:
 		var drag = event as InputEventScreenDrag
@@ -229,7 +243,10 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventScreenTouch:
 		var touch = event as InputEventScreenTouch
 		if _pointer_id == touch.index and not touch.pressed:
-			_end_pointer(_screen_to_world(touch.position))
+			if touch.canceled:
+				cancel_pointer()
+			else:
+				_end_pointer(_screen_to_world(touch.position))
 			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseMotion and _pointer_id == -2:
 		_move_pointer(_screen_to_world((event as InputEventMouseMotion).position))
@@ -242,11 +259,15 @@ func _input(event: InputEvent) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not enabled:
+	if not enabled or input_suspended:
 		return
 	if event is InputEventScreenTouch:
 		_last_touch_msec = Time.get_ticks_msec()
 		var touch = event as InputEventScreenTouch
+		if touch.canceled:
+			if _pointer_id == touch.index:
+				cancel_pointer()
+			return
 		var point = _screen_to_world(touch.position)
 		if touch.pressed:
 			if _begin_pointer(point, touch.index):

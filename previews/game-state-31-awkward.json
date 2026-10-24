@@ -1,0 +1,449 @@
+{
+	"actors": [],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/plank.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "きのいた",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				160.0,
+				18.75
+			],
+			"text": "31 / やっかいなばしょ",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				451.0,
+				258.0,
+				15.0
+			],
+			"text": "うごくあしばに あわせて タイミングをねらおう。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				852.0,
+				307.0,
+				24.0,
+				15.0
+			],
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.0166666666666667,
+	"firePatches": [],
+	"followingItem": "plank",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "submarine",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			1.12698411941528,
+			1.12698411941528
+		],
+		"texture": "res://assets/objects/submarine.svg"
+	},
+	"map": "31-awkward",
+	"movingTerrain": [
+		{
+			"hanging": false,
+			"length": 0.0,
+			"position": [
+				310.910583496094,
+				330.0
+			],
+			"rotation": 0.0,
+			"size": [
+				150.0,
+				20.0
+			]
+		},
+		{
+			"hanging": false,
+			"length": 0.0,
+			"position": [
+				515.0,
+				452.011413574219
+			],
+			"rotation": 0.0,
+			"size": [
+				130.0,
+				20.0
+			]
+		}
+	],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			78.0,
+			496.0
+		],
+		[
+			582.0,
+			496.0
+		],
+		[
+			600.0,
+			518.0
+		],
+		[
+			60.0,
+			518.0
+		]
+	],
+	"scoreZone": [
+		60.0,
+		70.0,
+		540.0,
+		440.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 31,
+	"trajectory": [
+		[
+			636.465087890625,
+			275.253540039062,
+			0.94
+		],
+		[
+			608.7392578125,
+			261.131683349609,
+			0.88
+		],
+		[
+			581.013366699219,
+			250.537841796875,
+			0.82
+		],
+		[
+			553.287536621094,
+			243.47200012207,
+			0.76
+		],
+		[
+			525.561706542969,
+			239.934143066406,
+			0.7
+		],
+		[
+			497.835845947266,
+			239.924301147461,
+			0.64
+		],
+		[
+			470.110015869141,
+			243.442474365234,
+			0.58
+		],
+		[
+			442.384155273438,
+			250.488616943359,
+			0.52
+		],
+		[
+			414.658325195312,
+			261.062774658203,
+			0.46
+		],
+		[
+			386.932464599609,
+			275.164916992188,
+			0.4
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

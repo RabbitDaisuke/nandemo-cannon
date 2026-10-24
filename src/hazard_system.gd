@@ -10,6 +10,8 @@ var fire_frames: Array[Texture2D] = []
 var jet_frames: Array[Texture2D] = []
 var ice_frames: Array[Texture2D] = []
 var explosion_serial: int = 0
+var lightning_frames: Array[Texture2D] = []
+var lightning_bolts: Array[Dictionary] = []
 
 func configure(owner_world: Node2D, stage: Dictionary) -> void:
 	world = owner_world
@@ -19,11 +21,15 @@ func configure(owner_world: Node2D, stage: Dictionary) -> void:
 	fire_frames.clear()
 	jet_frames.clear()
 	ice_frames.clear()
+	lightning_frames.clear()
+	lightning_bolts.clear()
 	for frame in range(6):
 		fire_frames.append(load("res://assets/effects/fire-%d.svg" % frame))
 		jet_frames.append(load("res://assets/effects/flame-jet-%d.svg" % frame))
 	for frame in range(4):
 		ice_frames.append(load("res://assets/effects/ice-burst-%d.svg" % frame))
+	for frame in range(3):
+		lightning_frames.append(load("res://assets/effects/lightning-%d.svg" % frame))
 	for entry in stage.get("surfaceZones", []):
 		var zone: Dictionary = entry.duplicate(true)
 		zone["bounds"] = GameCatalog.rectangle(zone.rect)
@@ -44,7 +50,7 @@ func on_launch(actor: ThrowBody) -> void:
 				actor.set_texture_path("res://assets/effects/campfire-charred.svg")
 		"explosion":
 			actor.set_meta("fuse", 2.8)
-		"firework":
+		"firework", "lightning":
 			# The shell remains a normal colliding RigidBody2D until this fuse ends.
 			actor.set_meta("fuse", float(actor.spec.get("fuseSeconds", 2.2)))
 
@@ -85,6 +91,10 @@ func _release_water(actor: ThrowBody, point: Vector2) -> void:
 
 func tick(delta: float) -> void:
 	visual_clock += delta
+	for i in range(lightning_bolts.size() - 1, -1, -1):
+		lightning_bolts[i].time -= delta
+		if float(lightning_bolts[i].time) <= 0.0:
+			lightning_bolts.remove_at(i)
 	for zone in surface_zones:
 		zone.wet_seconds = maxf(0.0, float(zone.wet_seconds) - delta)
 	for i in range(patches.size() - 1, -1, -1):
@@ -147,6 +157,20 @@ func _heat_contacts() -> void:
 					ignite_area(actor.global_position, float(actor.spec.get("fireRadius", 40)), actor, 0.1)
 		if actor.behavior == "ice_mass":
 			cool_area(actor.global_position, float(actor.spec.get("coldRadius", 30)), actor, false)
+		if _stove_active(actor):
+			var emitter = _stove_emitter(actor)
+			var half_span = float(actor.spec.get("burnerWidth", 90.0)) * float(actor.record.worldScale) * 0.35
+			for offset in [-half_span, 0.0, half_span]:
+				var point = emitter + Vector2(offset, -8.0).rotated(actor.rotation)
+				ignite_area(point, float(actor.spec.get("fireRadius", 24.0)), actor, 0.25)
+
+func _stove_active(actor: ThrowBody) -> bool:
+	return actor.behavior == "stove" and actor.alive and not actor.break_requested and actor.wet_seconds <= 0.0 and actor.frozen_seconds <= 0.0
+
+func _stove_emitter(actor: ThrowBody) -> Vector2:
+	var source = GameCatalog.vector(actor.spec.get("burnerSource", [64, 24]))
+	var pivot = GameCatalog.vector(actor.record.get("pivotSource", [64, 64]))
+	return actor.to_global((source - pivot) * float(actor.record.worldScale))
 
 func _line_clear(start: Vector2, end: Vector2, source: ThrowBody, target: ThrowBody = null, mask: int = 3) -> bool:
 	var exclude: Array[RID] = []
@@ -282,6 +306,18 @@ func detonate(actor: ThrowBody) -> void:
 		return
 	actor.release_triggered = true
 	var origin = actor.global_position
+	if actor.behavior == "lightning":
+		var strike_exclusions: Array[RID] = [actor.get_rid()]
+		var ground = world.cast_solid(origin, Vector2(origin.x, 1000.0), strike_exclusions, 1)
+		if not ground.is_empty():
+			origin = Vector2(ground.position) + Vector2.UP * 3.0
+		lightning_bolts.append({"point": origin, "variant": world.rng.randi_range(0, 2), "time": 0.24})
+		ignite_area(origin, float(actor.spec.get("fireRadius", 80.0)), actor, 0.4)
+		for dx in [-30.0, 0.0, 30.0]:
+			var ray_start = origin + Vector2(dx, -8.0)
+			var floor_hit = world.cast_solid(ray_start, ray_start + Vector2(0, 120), strike_exclusions, 1)
+			if not floor_hit.is_empty():
+				add_fire(Vector2(floor_hit.position) + Vector2.UP * 3.0, 26.0, float(actor.spec.get("fireSeconds", 3.0)))
 	var radius = float(actor.spec.get("radius", 130.0))
 	var strength = float(actor.spec.get("strength", 1.0))
 	explosion_serial += 1
@@ -309,6 +345,8 @@ func detonate(actor: ThrowBody) -> void:
 				target.request_break("explosion")
 		else:
 			var resistance = clampf(float(target.spec.get("explosionResistance", 0.0)), 0.0, 1.0)
+			if target.is_frozen_rubber():
+				resistance = minf(resistance, 0.1)
 			var probability = clampf(strength * (1.0 - resistance) * attenuation, 0.0, 1.0)
 			if world.rng.randf() < probability:
 				target.request_break("explosion")
@@ -321,6 +359,10 @@ func _draw() -> void:
 	if fire_frames.is_empty() or world == null:
 		return
 	var frame = int(visual_clock * 12.0) % 6
+	for bolt in lightning_bolts:
+		var end: Vector2 = bolt.point
+		var top = minf(80.0, end.y - 12.0)
+		draw_texture_rect(lightning_frames[int(bolt.variant)], Rect2(end.x - 30, top, 60, end.y - top), false)
 	for patch in patches:
 		draw_texture_rect(fire_frames[frame], Rect2(Vector2(patch.point) - Vector2(24, 48), Vector2(48, 52)), false)
 	for actor in world.actors:
@@ -329,6 +371,13 @@ func _draw() -> void:
 		if actor.behavior == "firework" and actor.has_meta("fuse") and not actor.release_triggered:
 			var fuse_point = actor.to_global(Vector2(0.0, -actor.get_world_bounds().size.y * 0.45))
 			draw_texture_rect(fire_frames[frame], Rect2(fuse_point - Vector2(5, 14), Vector2(10, 16)), false)
+		if _stove_active(actor):
+			var emitter = _stove_emitter(actor)
+			var span = float(actor.spec.get("burnerWidth", 90.0)) * float(actor.record.worldScale)
+			draw_set_transform(emitter, actor.rotation)
+			for offset in [-span * 0.3, 0.0, span * 0.3]:
+				draw_texture_rect(fire_frames[frame], Rect2(offset - 12, -30, 24, 32), false)
+			draw_set_transform(Vector2.ZERO)
 		if actor.burning or (actor.fuel_seconds > 0.0 and actor.behavior in ["campfire", "fuel_light"]):
 			var width = clampf(actor.get_world_bounds().size.x * 0.9, 30.0, 92.0)
 			draw_texture_rect(fire_frames[frame], Rect2(actor.global_position - Vector2(width * 0.5, width), Vector2(width, width)), false)

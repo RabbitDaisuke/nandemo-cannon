@@ -1,0 +1,872 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "vase",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "vase",
+				"fixtures": [
+					{
+						"rect": [
+							40.0,
+							10.0,
+							48.0,
+							14.0
+						]
+					},
+					{
+						"rect": [
+							50.0,
+							24.0,
+							28.0,
+							28.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								50.0,
+								52.0
+							],
+							[
+								78.0,
+								52.0
+							],
+							[
+								94.0,
+								72.0
+							],
+							[
+								94.0,
+								100.0
+							],
+							[
+								82.0,
+								118.0
+							],
+							[
+								46.0,
+								118.0
+							],
+							[
+								34.0,
+								100.0
+							],
+							[
+								34.0,
+								72.0
+							]
+						]
+					}
+				],
+				"id": "vase",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "花瓶",
+				"opaquePixels": 5642.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 140.0,
+					"loadForceThreshold": 4900.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 6.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					33.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/vase.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/vase.svg",
+				"viewBox": [
+					31.0,
+					7.0,
+					66.0,
+					114.0
+				],
+				"webp": "raster/objects/vase.webp",
+				"worldHeight": 65.6363636363636,
+				"worldScale": 0.575757575757576,
+				"worldWidth": 38.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/vase.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-19.0,
+				-32.8181800842285
+			],
+			"visualScale": [
+				0.575757563114166,
+				0.575757563114166
+			],
+			"x": 145.0,
+			"y": 327.977142333984
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "teapot",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "teapot",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								42.0,
+								44.0
+							],
+							[
+								82.0,
+								44.0
+							],
+							[
+								94.0,
+								62.0
+							],
+							[
+								94.0,
+								92.0
+							],
+							[
+								82.0,
+								112.0
+							],
+							[
+								42.0,
+								112.0
+							],
+							[
+								28.0,
+								94.0
+							],
+							[
+								28.0,
+								76.0
+							]
+						]
+					},
+					{
+						"polygon": [
+							[
+								6.0,
+								40.0
+							],
+							[
+								18.0,
+								40.0
+							],
+							[
+								34.0,
+								60.0
+							],
+							[
+								36.0,
+								78.0
+							],
+							[
+								10.0,
+								54.0
+							]
+						]
+					},
+					{
+						"rect": [
+							38.0,
+							36.0,
+							48.0,
+							12.0
+						]
+					},
+					{
+						"rect": [
+							54.0,
+							24.0,
+							18.0,
+							12.0
+						]
+					},
+					{
+						"rect": [
+							88.0,
+							44.0,
+							28.0,
+							10.0
+						]
+					},
+					{
+						"rect": [
+							106.0,
+							50.0,
+							12.0,
+							34.0
+						]
+					},
+					{
+						"rect": [
+							90.0,
+							80.0,
+							24.0,
+							10.0
+						]
+					}
+				],
+				"id": "teapot",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "ティーポット",
+				"opaquePixels": 6606.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 150.0,
+					"loadForceThreshold": 5880.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 8.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					62.0,
+					43.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/teapot.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/teapot.svg",
+				"viewBox": [
+					2.0,
+					21.0,
+					117.0,
+					94.0
+				],
+				"webp": "raster/objects/teapot.webp",
+				"worldHeight": 46.5982905982906,
+				"worldScale": 0.495726495726496,
+				"worldWidth": 58.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/teapot.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-30.7350425720215,
+				-21.3162384033203
+			],
+			"visualScale": [
+				0.495726495981216,
+				0.495726495981216
+			],
+			"x": 225.0,
+			"y": 335.273193359375
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.9818181818182,
+				"worldScale": 0.509090909090909,
+				"worldWidth": 56.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-28.0,
+				-25.9636363983154
+			],
+			"visualScale": [
+				0.509090900421143,
+				0.509090900421143
+			],
+			"x": 385.0,
+			"y": 360.558959960938
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "trash-bag",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							14.0,
+							8.0,
+							100.0,
+							112.0
+						]
+					}
+				],
+				"id": "trash-bag",
+				"mass": 2.0,
+				"material": "paper",
+				"nameJa": "ごみ袋",
+				"opaquePixels": 8101.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					51.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/trash-bag.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/trash-bag.svg",
+				"viewBox": [
+					13.0,
+					7.0,
+					102.0,
+					114.0
+				],
+				"webp": "raster/objects/trash-bag.webp",
+				"worldHeight": 53.6470588235294,
+				"worldScale": 0.470588235294118,
+				"worldWidth": 48.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/trash-bag.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-24.0,
+				-26.8235301971436
+			],
+			"visualScale": [
+				0.470588237047195,
+				0.470588237047195
+			],
+			"x": 455.0,
+			"y": 362.715118408203
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/vase.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "かびん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				180.0,
+				18.75
+			],
+			"text": "30 / こわれものちゅうい",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				451.0,
+				272.0,
+				15.0
+			],
+			"text": "こわれものが いっぱい。つよくぶつけると われる。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				852.0,
+				307.0,
+				24.0,
+				15.0
+			],
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.0166666666666667,
+	"firePatches": [],
+	"followingItem": "vase",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "bomb",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			0.403846144676208,
+			0.403846144676208
+		],
+		"texture": "res://assets/objects/bomb.svg"
+	},
+	"map": "30-fragile",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			83.0,
+			436.0
+		],
+		[
+			577.0,
+			436.0
+		],
+		[
+			595.0,
+			458.0
+		],
+		[
+			65.0,
+			458.0
+		]
+	],
+	"scoreZone": [
+		65.0,
+		70.0,
+		530.0,
+		380.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 30,
+	"trajectory": [
+		[
+			666.397338867188,
+			296.212371826172,
+			0.94
+		],
+		[
+			627.646240234375,
+			274.370513916016,
+			0.88
+		],
+		[
+			588.895080566406,
+			256.056671142578,
+			0.82
+		],
+		[
+			550.143920898438,
+			241.270843505859,
+			0.76
+		],
+		[
+			511.392761230469,
+			230.013000488281,
+			0.7
+		],
+		[
+			472.6416015625,
+			222.283142089844,
+			0.64
+		],
+		[
+			433.890502929688,
+			218.081329345703,
+			0.58
+		],
+		[
+			395.139343261719,
+			217.407470703125,
+			0.52
+		],
+		[
+			356.38818359375,
+			220.261627197266,
+			0.46
+		],
+		[
+			317.637023925781,
+			226.643768310547,
+			0.4
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

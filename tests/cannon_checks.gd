@@ -128,6 +128,33 @@ func _run() -> void:
 	_check(shots.size() == 3, "Release over HUD fired an aiming drag")
 	_check(cannon.power > adjusted_power, "Leftward drag over the HUD did not finish adjusting power")
 	blocker.queue_free()
+	# A pinch or touch-cancel must discard a pending tap without changing aim.
+	var previous_shots = shots.size()
+	var before_cancel = Vector2(cannon.elevation_degrees, cannon.power)
+	_touch(point, true)
+	cannon.set_input_suspended(true)
+	cannon.set_enabled(true)
+	cannon.fire()
+	_touch(point, false)
+	_check(not cannon._grabbed and shots.size() == previous_shots, "Suspended cannon retained a tap or fired after its cooldown was re-enabled")
+	cannon.set_input_suspended(false)
+	_check(Vector2(cannon.elevation_degrees, cannon.power) == before_cancel, "Canceling an input changed cannon aim")
+	_touch(point, true)
+	var canceled = InputEventScreenTouch.new()
+	canceled.position = point
+	canceled.index = 0
+	canceled.canceled = true
+	root.push_input(canceled)
+	_check(not cannon._grabbed and shots.size() == previous_shots, "Canceled touch fired on release")
+	# A view transform must alter only input mapping, never world launch geometry.
+	root.canvas_transform = Transform2D(Vector2(2, 0), Vector2(0, 2), Vector2(-720, -300))
+	var transformed_point = root.canvas_transform * point
+	_check(cannon._screen_to_world(transformed_point).is_equal_approx(point), "Zoomed input was not inverse-transformed into world coordinates")
+	_touch(transformed_point, true)
+	_check(cannon._grabbed, "Zoomed cannon did not capture a correctly transformed tap")
+	cannon.cancel_pointer()
+	_touch(transformed_point, false)
+	root.canvas_transform = Transform2D.IDENTITY
 	var result = {"suite": "cannon", "checks": checks, "failures": failures, "status": "passed" if failures.is_empty() else "failed"}
 	result["engine"] = Engine.get_version_info().string
 	var output = FileAccess.open("res://previews/cannon-checks.json", FileAccess.WRITE)

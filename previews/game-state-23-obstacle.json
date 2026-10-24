@@ -1,0 +1,497 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-obstacle",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "wooden-obstacle",
+				"fixtures": [
+					{
+						"rect": [
+							17.0,
+							5.0,
+							94.0,
+							118.0
+						]
+					}
+				],
+				"id": "wooden-obstacle",
+				"mass": 60.0,
+				"material": "wood",
+				"nameJa": "木の大きな障害物",
+				"opaquePixels": 12316.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactDestructible": false,
+					"restitution": 0.1
+				},
+				"pivotCropped": [
+					55.0,
+					62.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-obstacle.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-obstacle.svg",
+				"viewBox": [
+					9.0,
+					2.0,
+					110.0,
+					124.0
+				],
+				"webp": "raster/objects/wooden-obstacle.webp",
+				"worldHeight": 166.836363636364,
+				"worldScale": 1.34545454545455,
+				"worldWidth": 148.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-obstacle.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-74.0,
+				-83.4181823730469
+			],
+			"visualScale": [
+				1.34545457363129,
+				1.34545457363129
+			],
+			"x": 525.0,
+			"y": 369.686218261719
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		450.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				372.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				314.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				382.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/submarine.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "せんすいかん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				121.0,
+				18.75
+			],
+			"text": "23 / じゃまもの",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				451.0,
+				300.0,
+				15.0
+			],
+			"text": "おおきなきのかべ。ほのおと ばくだんで かたづけよう。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				852.0,
+				307.0,
+				24.0,
+				15.0
+			],
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.0166666666666667,
+	"firePatches": [],
+	"followingItem": "submarine",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "hammer",
+		"position": [
+			875.0,
+			356.0
+		],
+		"scale": [
+			1.0,
+			1.0
+		],
+		"texture": "res://assets/objects/hammer.svg"
+	},
+	"map": "23-obstacle",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			83.0,
+			436.0
+		],
+		[
+			577.0,
+			436.0
+		],
+		[
+			595.0,
+			458.0
+		],
+		[
+			65.0,
+			458.0
+		]
+	],
+	"scoreZone": [
+		65.0,
+		70.0,
+		530.0,
+		380.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 23,
+	"trajectory": [
+		[
+			661.191650390625,
+			292.567321777344,
+			0.94
+		],
+		[
+			624.607177734375,
+			272.242584228516,
+			0.88
+		],
+		[
+			588.022705078125,
+			255.445877075195,
+			0.82
+		],
+		[
+			551.438232421875,
+			242.177154541016,
+			0.76
+		],
+		[
+			514.853759765625,
+			232.436431884766,
+			0.7
+		],
+		[
+			478.269287109375,
+			226.223693847656,
+			0.64
+		],
+		[
+			441.684844970703,
+			223.539001464844,
+			0.58
+		],
+		[
+			405.100372314453,
+			224.382263183594,
+			0.52
+		],
+		[
+			368.515899658203,
+			228.753540039062,
+			0.46
+		],
+		[
+			331.931427001953,
+			236.652801513672,
+			0.4
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

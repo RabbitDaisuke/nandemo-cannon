@@ -72,3 +72,5 @@ for(const id of ['07-home','09-ninja','10-bowling'])await editMap(id,svg=>{
 });
 for(let i=0;i<2;i++)await fs.writeFile(path.join(root,`assets/effects/water-flow-${i}.svg`),`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" shape-rendering="crispEdges"><path fill="#62a9c4" d="M0 12H64V64H0Z"/><path fill="none" stroke="#c1e6dd" stroke-width="4" d="M0 ${12+i*2}H16V${16-i*2}H36V${12+i*2}H64"/><path fill="none" stroke="#97d6d6" stroke-width="4" d="M${4+i*10} 32H${22+i*10}M${36-i*8} 48H${58-i*8}"/></svg>\n`);
 console.log(JSON.stringify({objects:manifest.items.length,randomSlots:stages.stages.map(s=>({stage:s.id,variable:s.queueSlots?.filter(x=>x.candidates.length>1).length||0}))}));
+// Reapply later authored stages and material corrections after the original feedback layer.
+await import('./extend-extra-content.mjs');

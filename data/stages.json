@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Godot 4.7.2: 20 playable stages, 15 throws each. Stage18 ice-floor reassignment is an implementation assumption; browser playtesting pending.",
+  "status": "Godot 4.7.2: 32 authored stages, 15 throws each; current checks are in previews/*-checks.json.",
   "coordinateSystem": "960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
   "shotsPerStage": 15,
   "tutorialOrder": "ordered queues; do not shuffle prerequisite fire/water/bomb slots",
@@ -5858,6 +5858,960 @@
       ],
       "selectAnyCatalogItem": true,
       "selectionPolicy": "optional free choice; otherwise preserve the authored fifteen-item queue"
+    },
+    {
+      "id": 21,
+      "nameJa": "ランダム実験室",
+      "map": "21-random-lab",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            110,
+            384,
+            420,
+            24
+          ]
+        },
+        {
+          "rect": [
+            136,
+            408,
+            24,
+            42
+          ]
+        },
+        {
+          "rect": [
+            482,
+            408,
+            24,
+            42
+          ]
+        }
+      ],
+      "queue": [
+        "refrigerator",
+        "washing-machine",
+        "crt-tv",
+        "flat-tv",
+        "microwave",
+        "toaster",
+        "rice-cooker",
+        "vacuum",
+        "fan",
+        "heater",
+        "chair",
+        "stool",
+        "desk",
+        "low-table",
+        "bookshelf"
+      ],
+      "preplaced": [],
+      "queuePolicy": "randomCatalog",
+      "selectionPolicy": "fifteen seeded draws from every current catalog item, including future additions",
+      "lesson": "なにがでるかな。すべてのものから ランダムで15こ。"
+    },
+    {
+      "id": 22,
+      "nameJa": "おもちゃうりば",
+      "map": "22-toy-store",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            90,
+            325,
+            180,
+            18
+          ]
+        },
+        {
+          "rect": [
+            315,
+            260,
+            200,
+            18
+          ]
+        },
+        {
+          "rect": [
+            375,
+            390,
+            170,
+            18
+          ]
+        }
+      ],
+      "queue": [
+        "toy-car",
+        "bunny-plush",
+        "cute-doll",
+        "trumpet",
+        "daruma",
+        "toy-train",
+        "battery",
+        "snowman-plush",
+        "rubber-duck",
+        "toy-package",
+        "teddy-bear",
+        "building-blocks",
+        "spinning-top",
+        "soccer-ball",
+        "basketball"
+      ],
+      "preplaced": [],
+      "lesson": "ういている たなに おもちゃをのせよう。"
+    },
+    {
+      "id": 23,
+      "nameJa": "じゃまもの",
+      "map": "23-obstacle",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        }
+      ],
+      "queue": [
+        "hammer",
+        "submarine",
+        "wooden-crate",
+        "flamethrower",
+        "charger",
+        "refrigerator",
+        "gunpowder-barrel",
+        "water-jug",
+        "flamethrower",
+        "bomb",
+        "water-balloon",
+        "low-table",
+        "toolbox",
+        "cushion",
+        "bagel"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-obstacle",
+          "x": 525,
+          "groundY": 450,
+          "scoring": false
+        }
+      ],
+      "lesson": "おおきなきのかべ。ほのおと ばくだんで かたづけよう。"
+    },
+    {
+      "id": 24,
+      "nameJa": "3じのおやつ",
+      "map": "24-snack-time",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            95,
+            390,
+            460,
+            24
+          ]
+        },
+        {
+          "rect": [
+            120,
+            414,
+            24,
+            36
+          ]
+        },
+        {
+          "rect": [
+            510,
+            414,
+            24,
+            36
+          ]
+        }
+      ],
+      "queue": [
+        "pizza",
+        "pancakes",
+        "pizza-cutter",
+        "castella",
+        "maple-popcorn",
+        "potato-chips",
+        "chocolate-bar",
+        "wrapped-butter",
+        "donut",
+        "cream-puff",
+        "apple-juice-carton",
+        "tricolor-dango",
+        "ice-cream-cup",
+        "canele",
+        "mont-blanc"
+      ],
+      "preplaced": [],
+      "lesson": "おやつを じょうずに つみあげよう。"
+    },
+    {
+      "id": 25,
+      "nameJa": "ゴムとれいとうじゅう",
+      "map": "25-rubber-freeze",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        }
+      ],
+      "queue": [
+        "rubber-block",
+        "freeze-sprayer",
+        "rubber-duck",
+        "soccer-ball",
+        "basketball",
+        "tire",
+        "freeze-sprayer",
+        "rubber-block",
+        "cold-pack",
+        "rubber-duck",
+        "ice-bomb",
+        "freeze-sprayer",
+        "hammer",
+        "bowling-ball",
+        "platform-cart"
+      ],
+      "preplaced": [
+        {
+          "id": "rubber-block",
+          "x": 190,
+          "groundY": 450
+        },
+        {
+          "id": "rubber-block",
+          "x": 260,
+          "groundY": 450
+        },
+        {
+          "id": "rubber-block",
+          "x": 225,
+          "groundY": 385
+        }
+      ],
+      "lesson": "ゴムは はねる。こおらせると われやすくなる。"
+    },
+    {
+      "id": 26,
+      "nameJa": "かみなり実験",
+      "map": "26-lightning-river",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        420
+      ],
+      "scoreZone": [
+        65,
+        70,
+        440,
+        360
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            490,
+            960,
+            50
+          ]
+        },
+        {
+          "polygon": [
+            [
+              90,
+              430
+            ],
+            [
+              160,
+              330
+            ],
+            [
+              390,
+              330
+            ],
+            [
+              460,
+              430
+            ]
+          ]
+        },
+        {
+          "rect": [
+            710,
+            420,
+            250,
+            70
+          ]
+        }
+      ],
+      "queue": [
+        "lightning-orb",
+        "water-jug",
+        "umbrella",
+        "lightning-orb",
+        "rubber-duck",
+        "tabletop-stove",
+        "bucket",
+        "water-balloon",
+        "submarine",
+        "lightning-orb",
+        "wooden-crate",
+        "fire-extinguisher",
+        "rubber-block",
+        "sponge",
+        "ramune-bottle"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 215,
+          "groundY": 330
+        },
+        {
+          "id": "trash-bag",
+          "x": 320,
+          "groundY": 330
+        }
+      ],
+      "water": [
+        {
+          "rect": [
+            460,
+            430,
+            250,
+            60
+          ],
+          "direction": [
+            -1,
+            0
+          ],
+          "speed": 55,
+          "type": "flow",
+          "volumeCap": 96
+        }
+      ],
+      "surfaceZones": [
+        {
+          "rect": [
+            155,
+            324,
+            240,
+            12
+          ],
+          "flammable": true,
+          "burnSeconds": 3
+        }
+      ],
+      "lesson": "かみなりは しばらくして はじける。みずとほのおに きをつけよう。"
+    },
+    {
+      "id": 27,
+      "nameJa": "れいとうこ",
+      "map": "27-freezer",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            90,
+            300,
+            180,
+            18
+          ]
+        },
+        {
+          "rect": [
+            320,
+            365,
+            230,
+            18
+          ]
+        }
+      ],
+      "queue": [
+        "sashimi",
+        "ice-cream-cup",
+        "freeze-sprayer",
+        "steak",
+        "cold-pack",
+        "ice-block",
+        "watermelon",
+        "ramune-bottle",
+        "frost-bottle",
+        "fried-shrimp",
+        "rubber-duck",
+        "freeze-sprayer",
+        "apple",
+        "saury",
+        "refrigerator"
+      ],
+      "preplaced": [],
+      "iceFloor": true,
+      "lesson": "ゆかも たなも こおっている。すべるものを つもう。"
+    },
+    {
+      "id": 28,
+      "nameJa": "たんじょうびパーティー",
+      "map": "28-birthday",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            140,
+            385,
+            390,
+            65
+          ]
+        },
+        {
+          "rect": [
+            235,
+            325,
+            200,
+            60
+          ]
+        }
+      ],
+      "queue": [
+        "whole-cake",
+        "cheesecake",
+        "steak-knife",
+        "candle",
+        "strawberry",
+        "blueberries",
+        "gift-box",
+        "drinking-glass",
+        "steak",
+        "party-popper",
+        "bunny-plush",
+        "pancakes",
+        "mont-blanc",
+        "canele",
+        "ramune-bottle"
+      ],
+      "preplaced": [],
+      "lesson": "ケーキをかざって パーティーのじゅんび。"
+    },
+    {
+      "id": 29,
+      "nameJa": "いざかやさん",
+      "map": "29-izakaya",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            90,
+            405,
+            480,
+            20
+          ]
+        }
+      ],
+      "queue": [
+        "sake-bottle",
+        "fried-chicken",
+        "lemon",
+        "yakitori-plate",
+        "cabbage-plate",
+        "flamethrower",
+        "fork",
+        "crossed-chopsticks",
+        "steak-knife",
+        "beer-mug",
+        "negima",
+        "saury",
+        "beer-dispenser",
+        "charcoal",
+        "tabletop-stove"
+      ],
+      "preplaced": [],
+      "hangingObstacles": [
+        {
+          "anchor": [
+            240,
+            84
+          ],
+          "length": 190,
+          "size": [
+            64,
+            34
+          ],
+          "amplitude": 12,
+          "period": 4.8,
+          "phase": 0
+        },
+        {
+          "anchor": [
+            500,
+            84
+          ],
+          "length": 235,
+          "size": [
+            64,
+            34
+          ],
+          "amplitude": -10,
+          "period": 5.4,
+          "phase": 1.3
+        }
+      ],
+      "lesson": "ゆれるライトを よけて テーブルにのせよう。"
+    },
+    {
+      "id": 30,
+      "nameJa": "こわれものちゅうい",
+      "map": "30-fragile",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        65,
+        70,
+        530,
+        380
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            100,
+            360,
+            170,
+            16
+          ]
+        },
+        {
+          "rect": [
+            340,
+            390,
+            180,
+            16
+          ]
+        }
+      ],
+      "queue": [
+        "bomb",
+        "vase",
+        "teapot",
+        "drinking-glass",
+        "ramune-bottle",
+        "sake-bottle",
+        "camera",
+        "pocket-watch",
+        "hourglass",
+        "standing-mirror",
+        "flamethrower",
+        "water-balloon",
+        "bomb",
+        "flower-pot",
+        "empty-pot"
+      ],
+      "preplaced": [
+        {
+          "id": "vase",
+          "x": 145,
+          "groundY": 360
+        },
+        {
+          "id": "teapot",
+          "x": 225,
+          "groundY": 360
+        },
+        {
+          "id": "wooden-crate",
+          "x": 385,
+          "groundY": 390
+        },
+        {
+          "id": "trash-bag",
+          "x": 455,
+          "groundY": 390
+        }
+      ],
+      "lesson": "こわれものが いっぱい。つよくぶつけると われる。"
+    },
+    {
+      "id": 31,
+      "nameJa": "やっかいなばしょ",
+      "map": "31-awkward",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        60,
+        70,
+        540,
+        440
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            160,
+            90
+          ]
+        },
+        {
+          "rect": [
+            160,
+            510,
+            470,
+            30
+          ]
+        },
+        {
+          "rect": [
+            630,
+            450,
+            330,
+            90
+          ]
+        },
+        {
+          "rect": [
+            190,
+            400,
+            80,
+            20
+          ]
+        },
+        {
+          "rect": [
+            455,
+            280,
+            90,
+            20
+          ]
+        }
+      ],
+      "queue": [
+        "submarine",
+        "plank",
+        "skateboard",
+        "wheelbarrow",
+        "umbrella",
+        "low-table",
+        "rubber-duck",
+        "wooden-crate",
+        "bagel",
+        "toolbox",
+        "hammer",
+        "platform-cart",
+        "cushion",
+        "refrigerator",
+        "water-balloon"
+      ],
+      "preplaced": [],
+      "movingPlatforms": [
+        {
+          "center": [
+            310,
+            330
+          ],
+          "size": [
+            150,
+            20
+          ],
+          "axis": [
+            1,
+            0
+          ],
+          "travel": 80,
+          "period": 4.6,
+          "phase": 0
+        },
+        {
+          "center": [
+            515,
+            410
+          ],
+          "size": [
+            130,
+            20
+          ],
+          "axis": [
+            0,
+            1
+          ],
+          "travel": 58,
+          "period": 5.2,
+          "phase": 0.8
+        }
+      ],
+      "lesson": "うごくあしばに あわせて タイミングをねらおう。"
+    },
+    {
+      "id": 32,
+      "nameJa": "ばくはつ実験室",
+      "map": "32-blast-lab",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        100,
+        70,
+        515,
+        435
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            100,
+            90
+          ]
+        },
+        {
+          "rect": [
+            100,
+            505,
+            125,
+            35
+          ]
+        },
+        {
+          "rect": [
+            225,
+            350,
+            105,
+            190
+          ]
+        },
+        {
+          "rect": [
+            330,
+            505,
+            180,
+            35
+          ]
+        },
+        {
+          "rect": [
+            510,
+            405,
+            105,
+            135
+          ]
+        },
+        {
+          "rect": [
+            615,
+            505,
+            90,
+            35
+          ]
+        },
+        {
+          "rect": [
+            705,
+            450,
+            255,
+            90
+          ]
+        }
+      ],
+      "queue": [
+        "blast-bomb",
+        "gunpowder-barrel",
+        "bomb",
+        "blast-bomb",
+        "wooden-crate",
+        "plank",
+        "bomb",
+        "metal-drum",
+        "gunpowder-barrel",
+        "blast-bomb",
+        "water-jug",
+        "submarine",
+        "cannonball",
+        "toolbox",
+        "refrigerator"
+      ],
+      "preplaced": [
+        {
+          "id": "wooden-crate",
+          "x": 275,
+          "groundY": 350
+        },
+        {
+          "id": "wooden-obstacle",
+          "x": 558,
+          "groundY": 405,
+          "width": 76,
+          "scoring": false
+        }
+      ],
+      "lesson": "せまいあしばと みぞ。ばくふうで ものをうごかそう。"
     }
   ]
 }

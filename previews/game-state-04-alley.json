@@ -66,7 +66,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": 0.0000215403706533834,
+			"rotation": -0.0000866738773765974,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -77,8 +77,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 149.980422973633,
-			"y": 395.509399414062
+			"x": 149.980972290039,
+			"y": 395.510284423828
 		},
 		{
 			"burning": false,
@@ -146,7 +146,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": 0.00181740568950772,
+			"rotation": 0.00193500774912536,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -157,8 +157,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 208.168838500977,
-			"y": 395.577880859375
+			"x": 208.170516967773,
+			"y": 395.578674316406
 		},
 		{
 			"burning": false,
@@ -226,7 +226,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.00625182595103979,
+			"rotation": -0.00617385562509298,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -237,8 +237,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 266.426300048828,
-			"y": 395.617980957031
+			"x": 266.427215576172,
+			"y": 395.619506835938
 		},
 		{
 			"burning": true,
@@ -299,7 +299,7 @@
 				"worldScale": 0.470588235294118,
 				"worldWidth": 48.0
 			},
-			"rotation": -0.000708351144567132,
+			"rotation": -0.000691486289724708,
 			"texture": "res://assets/objects/trash-bag.svg",
 			"tint": "ffc291ff",
 			"visualPosition": [
@@ -310,8 +310,8 @@
 				0.470588237047195,
 				0.470588237047195
 			],
-			"x": 330.538269042969,
-			"y": 397.681579589844
+			"x": 330.538299560547,
+			"y": 397.681701660156
 		},
 		{
 			"burning": false,
@@ -372,7 +372,7 @@
 				"worldScale": 0.659574468085106,
 				"worldWidth": 62.0
 			},
-			"rotation": -0.00000831315264804289,
+			"rotation": -0.00000831247598398477,
 			"texture": "res://assets/objects/trash-bin.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -445,7 +445,7 @@
 				"worldScale": 0.444444444444444,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.00347373331896961,
+			"rotation": -0.00154696078971028,
 			"texture": "res://assets/objects/cardboard-box.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -456,8 +456,8 @@
 				0.444444447755814,
 				0.444444447755814
 			],
-			"x": 178.802383422852,
-			"y": 346.213836669922
+			"x": 178.83674621582,
+			"y": 346.221801757812
 		},
 		{
 			"burning": false,
@@ -525,7 +525,7 @@
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.000828074349556118,
+			"rotation": -0.000896469282452017,
 			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -536,8 +536,8 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 240.023681640625,
-			"y": 341.813354492188
+			"x": 240.025375366211,
+			"y": 341.815765380859
 		},
 		{
 			"burning": true,
@@ -598,7 +598,7 @@
 				"worldScale": 0.470588235294118,
 				"worldWidth": 48.0
 			},
-			"rotation": 0.00252122944220901,
+			"rotation": 0.00255739875137806,
 			"texture": "res://assets/objects/trash-bag.svg",
 			"tint": "ffc291ff",
 			"visualPosition": [
@@ -609,8 +609,8 @@
 				0.470588237047195,
 				0.470588237047195
 			],
-			"x": 317.062774658203,
-			"y": 344.917449951172
+			"x": 317.064880371094,
+			"y": 344.918548583984
 		},
 		{
 			"burning": false,
@@ -671,7 +671,7 @@
 				"worldScale": 0.377358490566038,
 				"worldWidth": 40.0
 			},
-			"rotation": -1.56934297084808,
+			"rotation": -1.57191073894501,
 			"texture": "res://assets/objects/newspaper.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -682,8 +682,8 @@
 				0.377358496189117,
 				0.377358496189117
 			],
-			"x": 181.649078369141,
-			"y": 307.357299804688
+			"x": 181.784774780273,
+			"y": 307.221160888672
 		}
 	],
 	"angle": 35.0,
@@ -1025,7 +1025,7 @@
 		{
 			"radius": 26.0,
 			"source": false,
-			"x": 330.538269042969,
+			"x": 330.538299560547,
 			"y": 417.0
 		}
 	],
@@ -1044,6 +1044,7 @@
 		"texture": "res://assets/objects/flamethrower.svg"
 	},
 	"map": "04-alley",
+	"movingTerrain": [],
 	"playable": true,
 	"power": 0.34,
 	"recoil": 0.0,

@@ -56,7 +56,15 @@
 		"river immersion stops a flamethrower and changes it to its empty texture",
 		"an extinguished flamethrower cannot restart from heat or another launch callback",
 		"finite pooled water also extinguishes the flame jet",
-		"droplet wetting uses the same permanent flame-jet shutdown path"
+		"droplet wetting uses the same permanent flame-jet shutdown path",
+		"tabletop stove heats its upper burner surface rather than its underside",
+		"tabletop stove keeps its burner active beyond a flamethrower fuel lifetime",
+		"a splash suppresses stove heat without falsely treating it as submerged",
+		"submerging a tabletop stove permanently destroys it",
+		"lightning magic remains a colliding object before its fuse ends",
+		"lightning creates one localized bolt and one explosion",
+		"lightning fire is placed on real terrain below the projectile",
+		"lightning visuals and ground fire expire without a permanent heat source"
 	],
 	"engine": "4.7.2-stable (official)",
 	"failures": [],

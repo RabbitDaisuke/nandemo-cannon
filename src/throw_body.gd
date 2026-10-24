@@ -194,7 +194,10 @@ func _complete_break(reason: String) -> void:
 
 
 func _supports_load_break() -> bool:
-	return behavior in ["breakable", "water_release"]
+	return behavior in ["breakable", "water_release"] or is_frozen_rubber()
+
+func is_frozen_rubber() -> bool:
+	return frozen_seconds > 0.0 and bool(spec.get("coldBrittle", str(record.get("material", "")) == "rubber"))
 
 
 func _physics_process(delta: float) -> void:
@@ -251,7 +254,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			_impact_times[key] = age
 			if is_instance_valid(world) and world.has_method("on_actor_impact"):
 				world.call_deferred("on_actor_impact", self, point, normal_speed, impact_energy)
-			if behavior == "breakable" and normal_speed >= float(spec.get("impactSpeed", 180.0)) and impact_energy >= float(spec.get("minImpactEnergy", 12.0)):
+			if is_frozen_rubber():
+				if normal_speed >= float(spec.get("frozenImpactSpeed", 100.0)) and impact_energy >= float(spec.get("frozenImpactEnergy", 2.0)):
+					request_break("frozen-impact")
+			elif behavior == "breakable" and normal_speed >= float(spec.get("impactSpeed", 180.0)) and impact_energy >= float(spec.get("minImpactEnergy", 12.0)):
 				request_break("impact")
 		# Only pressure from above is counted; the floor's opposing support is excluded.
 		upper_load += normal_impulse * maxf(0.0, normal.dot(gravity_dir)) / maxf(state.step, 0.0001)
@@ -275,12 +281,13 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if frozen_seconds > 0.0 or (behavior == "slippery" and wet_seconds > 0.0):
 		friction = minf(friction, 0.025)
 	_material.friction = friction
+	_material.bounce = 0.0 if is_frozen_rubber() else float(spec.get("restitution", 0.08))
 	for grip in grip_contacts:
 		_apply_sole_grip(state, grip)
 	var smoothing = 1.0 - exp(-state.step / 0.055)
 	load_force = lerpf(load_force, upper_load, smoothing)
 	if _supports_load_break() and age >= 0.15:
-		var threshold = float(spec.get("loadForceThreshold", 7840.0))
+		var threshold = float(spec.get("frozenLoadThreshold", 3000.0)) if is_frozen_rubber() else float(spec.get("loadForceThreshold", 7840.0))
 		if load_force >= threshold:
 			load_seconds += state.step
 		elif load_force < threshold * float(spec.get("loadReleaseRatio", 0.8)):

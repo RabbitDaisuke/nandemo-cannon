@@ -2,6 +2,7 @@ extends Node2D
 ## Game orchestration; physics, cannon, hazards and liquid have separate owners.
 
 const SCORE_FLOOR_SLOP = 1.5
+const MAPS_PER_PAGE = 15
 
 var catalog = GameCatalog.new()
 var ui_text: Dictionary = {}
@@ -64,6 +65,8 @@ var tutorial_completed: bool = false
 var _base_physics_ticks: int = int(ProjectSettings.get_setting("physics/common/physics_ticks_per_second", 120))
 var _launched_count: int = 0
 var _landed_count: int = 0
+var touch_zoom: GameTouchZoom
+var map_page: int = 0
 
 func _ready() -> void:
 	var localized = JSON.parse_string(FileAccess.get_file_as_string("res://data/ui-ja.json"))
@@ -85,6 +88,9 @@ func _ready() -> void:
 		shot_audio.stream = load("res://assets/audio/Onoma-Impact01-1.mp3")
 	add_child(shot_audio)
 	load_stage(0)
+	touch_zoom = GameTouchZoom.new()
+	touch_zoom.game = self
+	add_child(touch_zoom)
 	if OS.has_feature("web"):
 		_web_document = JavaScriptBridge.get_interface("document")
 		_visibility_callback = JavaScriptBridge.create_callback(_on_web_visibility_changed)
@@ -92,6 +98,7 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	_set_wait_speed(1.0)
+	get_tree().paused = false
 	if _web_document != null and _visibility_callback != null:
 		_web_document.removeEventListener("visibilitychange", _visibility_callback)
 
@@ -102,7 +109,7 @@ func _on_web_visibility_changed(_arguments: Array) -> void:
 func _pause_for_visibility() -> void:
 	if simulation_paused or result_shown or not playable:
 		return
-	_open_modal("いちじていし", Vector2(440, 202))
+	_open_modal("いちじていし", Vector2(440, 202), true)
 	_label("がめんを はなれたので とめています。", Vector2(35, 68), 14, Color("b3dbea"), modal)
 	_button("つづける", Vector2(130, 130), Vector2(180, 44), func(): _close_modal(), modal)
 
@@ -134,6 +141,7 @@ func load_stage(index: int) -> void:
 	hud_clock = 0.0
 	result_shown = false
 	simulation_paused = false
+	_resume_tree_at_idle()
 	selected_catalog_id = ""
 	destroyed_counts.clear()
 	score_zone = GameCatalog.rectangle(current_stage.get("scoreZone", [70, 70, 400, 350]))
@@ -163,6 +171,11 @@ func load_stage(index: int) -> void:
 	stage_root.add_child(cannon)
 	var ground = GameCatalog.vector(current_stage.get("cannon", [810, 420]))
 	cannon.configure(ground)
+	if is_instance_valid(touch_zoom):
+		# Input is dispatched in reverse tree order: pinch cancellation must run first.
+		move_child(touch_zoom, -1)
+		touch_zoom.reset_view()
+		cannon.set_input_suspended(touch_zoom.gesture_active)
 	loaded_icon = Sprite2D.new()
 	loaded_icon.name = "LoadedItemPreview"
 	loaded_icon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
@@ -253,7 +266,7 @@ func launch_speed(record: Dictionary, power: float) -> float:
 	return (180.0 + power * 720.0) * mass_factor
 
 func _on_fired(direction: Vector2, power: float, origin: Vector2) -> void:
-	if simulation_paused or result_shown or cooldown > 0.0 or next_item_id().is_empty():
+	if simulation_paused or result_shown or is_instance_valid(modal) or (is_instance_valid(touch_zoom) and touch_zoom.gesture_active) or cooldown > 0.0 or next_item_id().is_empty():
 		return
 	_dismiss_tutorial()
 	var record: Dictionary = catalog.items[next_item_id()]
@@ -267,7 +280,7 @@ func _on_fired(direction: Vector2, power: float, origin: Vector2) -> void:
 	_launched_count += 1
 	actor.linear_velocity = direction * launch_speed(record, power)
 	actor.angular_velocity = rng.randf_range(-0.35, 0.35)
-	actor.can_score = not actor.behavior in ["water_release", "ignite_on_break", "explosion", "cold_release", "firework"]
+	actor.can_score = not actor.behavior in ["water_release", "ignite_on_break", "explosion", "cold_release", "firework", "lightning"]
 	hazards.on_launch(actor)
 	shots_fired += 1
 	if shot_audio.stream != null:
@@ -283,7 +296,7 @@ func _physics_process(delta: float) -> void:
 		return
 	elapsed += delta
 	cooldown = maxf(0.0, cooldown - delta)
-	cannon.set_enabled(playable and shots_fired < 15 and cooldown <= 0.0)
+	cannon.set_enabled(playable and not is_instance_valid(modal) and shots_fired < 15 and cooldown <= 0.0)
 	liquid.tick(delta)
 	hazards.tick(delta)
 	for effect in effects_root.get_children():
@@ -325,7 +338,7 @@ func destroy_actor(actor: ThrowBody, reason: String) -> void:
 	actor.collision_layer = 0
 	actor.collision_mask = 0
 	actor.set_deferred("freeze", true)
-	if reason in ["impact", "load", "explosion", "broken"]:
+	if reason in ["impact", "load", "explosion", "broken", "frozen-impact", "water"]:
 		spawn_effect("shatter", actor.global_position, maxf(0.6, actor.get_world_bounds().size.length() / 80.0))
 	elif reason == "burned":
 		spawn_effect("shatter", actor.global_position, 0.6, Color(0.25, 0.25, 0.25))
@@ -393,6 +406,7 @@ func calculate_score() -> int:
 
 func _update_hud() -> void:
 	score_caption.text = "とくてん"
+	catalog_button.disabled = shots_fired >= 15 or result_shown
 	score_label.text = "%04d" % score_value
 	remaining_label.text = "%02d/15" % maxi(0, 15 - shots_fired)
 	var next = following_item_id()
@@ -425,6 +439,10 @@ func _on_aim_changed(angle: float, power: float) -> void:
 func _finish_stage(timed_out: bool) -> void:
 	if result_shown:
 		return
+	# A running stage may finish while a picker is open. Remove it before the
+	# final game frame is captured, and include the entire field and score.
+	_close_modal(false)
+	touch_zoom.reset_view()
 	score_value = calculate_score()
 	result_shown = true
 	_pause(true)
@@ -495,21 +513,35 @@ func _finish_stage(timed_out: bool) -> void:
 func _pause(value: bool) -> void:
 	_set_wait_speed(1.0)
 	simulation_paused = value
+	# Only hidden-tab suspension and the completed result stop the simulation.
+	# Hand-opened menus never call this or mutate rigid-body motion.
+	if value:
+		get_tree().paused = true
+	else:
+		_resume_tree_at_idle()
 	if is_instance_valid(tutorial_label):
 		tutorial_label.visible = tutorial_active and not value
-	for actor in actors:
-		if is_instance_valid(actor) and actor.alive:
-			actor.freeze = value
 	if is_instance_valid(cannon):
-		cannon.set_enabled(not value and playable and not result_shown and shots_fired < 15)
+		cannon.set_enabled(not value and playable and not result_shown and not is_instance_valid(modal) and shots_fired < 15 and cooldown <= 0.0)
+
+func _resume_tree_at_idle() -> void:
+	if not get_tree().paused:
+		return
+	# Resume between complete physics ticks, never from a deferred/physics callback.
+	# Godot issue #122378: otherwise a step can run before pending queries flush.
+	await get_tree().process_frame
+	if is_inside_tree() and not simulation_paused:
+		get_tree().paused = false
 
 func _set_wait_speed(multiplier: float) -> void:
 	Engine.time_scale = multiplier
 	Engine.physics_ticks_per_second = roundi(_base_physics_ticks * multiplier)
 
-func _open_modal(title: String, size_value: Vector2 = Vector2(864, 430)) -> void:
+func _open_modal(title: String, size_value: Vector2 = Vector2(864, 430), pause_simulation: bool = false) -> void:
 	_close_modal(false)
-	_pause(true)
+	if pause_simulation:
+		_pause(true)
+	cannon.set_enabled(false)
 	var shade = ColorRect.new()
 	shade.name = "Shade"
 	shade.color = Color(0.025, 0.055, 0.08, 0.82)
@@ -539,13 +571,21 @@ func _close_modal(resume: bool = true) -> void:
 		shade.queue_free()
 		modal = null
 	if resume and not result_shown:
-		_pause(false)
+		if simulation_paused:
+			_pause(false)
+		else:
+			cannon.set_enabled(playable and shots_fired < 15 and cooldown <= 0.0)
 
-func _show_maps() -> void:
+func _show_maps(page: int = -1) -> void:
+	var pages = ceili(catalog.stages.size() / float(MAPS_PER_PAGE))
+	map_page = clampi(stage_index / MAPS_PER_PAGE if page < 0 else page, 0, pages - 1)
 	_open_modal("ステージをえらぶ / %d" % catalog.stages.size())
-	for index in range(catalog.stages.size()):
-		var col = index % 5
-		var row = index / 5
+	for slot in range(MAPS_PER_PAGE):
+		var index = map_page * MAPS_PER_PAGE + slot
+		if index >= catalog.stages.size():
+			break
+		var col = slot % 5
+		var row = slot / 5
 		var at = Vector2(22 + col * 166, 54 + row * 86)
 		var button = _button("", at, Vector2(156, 78), func(): load_stage(index), modal)
 		button.set_meta("stage_index", index)
@@ -560,10 +600,17 @@ func _show_maps() -> void:
 		var text = "%02d %s" % [index + 1, _stage_display_name(index)]
 		var caption = _label(text, Vector2(5, 55), 10, Color("fff0b5"), button)
 		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var previous = _button("まえのページ", Vector2(22, 348), Vector2(200, 40), func(): _show_maps(map_page - 1), modal)
+	previous.disabled = map_page == 0
+	previous.set_meta("map_page", map_page - 1)
+	_label("%d / %d ページ" % [map_page + 1, pages], Vector2(346, 360), 17, Color("fff0b5"), modal)
+	var next = _button("つぎのページ", Vector2(642, 348), Vector2(200, 40), func(): _show_maps(map_page + 1), modal)
+	next.disabled = map_page == pages - 1
+	next.set_meta("map_page", map_page + 1)
 	_label("1ステージに なげられるのは15こ。", Vector2(23, 403), 12, Color("b5cad2"), modal)
 
 func _show_catalog(page: int = 0) -> void:
-	if not bool(current_stage.get("selectAnyCatalogItem", false)):
+	if shots_fired >= 15 or result_shown or not bool(current_stage.get("selectAnyCatalogItem", false)):
 		return
 	var pages = ceili(catalog.ordered_items.size() / 24.0)
 	page = clampi(page, 0, pages - 1)
@@ -649,6 +696,7 @@ func _build_ui() -> void:
 	for kind in ["grabber", "grabber_highlight", "grabber_disabled"]:
 		theme.set_icon(kind, "HSlider", knob)
 	ui = CanvasLayer.new()
+	ui.process_mode = Node.PROCESS_MODE_ALWAYS
 	add_child(ui)
 	ui_root = Control.new()
 	ui_root.size = Vector2(960, 540)
@@ -743,6 +791,8 @@ func _button(text_value: String, at: Vector2, size_value: Vector2, callback: Cal
 	return button
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	if is_instance_valid(touch_zoom) and touch_zoom.gesture_active:
+		return
 	if not event is InputEventKey or not event.pressed:
 		return
 	if is_instance_valid(modal):
@@ -768,7 +818,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_show_maps()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if simulation_paused or result_shown or not playable or not event is InputEventMouseButton:
+	if simulation_paused or result_shown or is_instance_valid(modal) or not playable or (is_instance_valid(touch_zoom) and touch_zoom.gesture_active) or not event is InputEventMouseButton:
 		return
 	var button = event as InputEventMouseButton
 	if button.pressed and button.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_MIDDLE]:
@@ -856,6 +906,10 @@ func debug_snapshot(include_modal: bool = true) -> Dictionary:
 		entries.append({"id": actor.item_id, "x": actor.position.x, "y": actor.position.y, "rotation": actor.rotation, "record": actor.record, "burning": actor.burning, "frozen": actor.frozen_seconds, "fuel": actor.fuel_seconds, "texture": actor.visual.texture.resource_path, "visualPosition": [actor.visual.position.x, actor.visual.position.y], "visualScale": [actor.visual.scale.x, actor.visual.scale.y], "tint": actor.visual.modulate.to_html(), "canScore": actor.can_score})
 	var controls: Array = []
 	_snapshot_controls(ui_root, controls, include_modal)
+	var moving_terrain: Array = []
+	for body in stage_root.get_node("StaticTerrain").get_children():
+		if body is MovingTerrain:
+			moving_terrain.append({"position": [body.position.x, body.position.y], "rotation": body.rotation, "size": [body.body_size.x, body.body_size.y], "hanging": body.hanging, "length": float(body.settings.get("length", 0.0))})
 	var patches: Array = []
 	for patch in hazards.patches:
 		patches.append({"x": patch.point.x, "y": patch.point.y, "radius": patch.radius, "source": patch.source})
@@ -882,7 +936,7 @@ func debug_snapshot(include_modal: bool = true) -> Dictionary:
 			if point.y > 500 or point.x < 0:
 				break
 			trajectory.append([point.x, point.y, 1.0 - step * 0.06])
-	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "scoreMarker": marker, "score": score_value, "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "cannonVisuals": cannon.visual_snapshot(), "cannonSelected": cannon.enabled and (cannon._hovered or cannon._grabbed), "loadedItem": loaded, "followingItem": following_item_id(), "font": theme.default_font.resource_path, "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "tutorialArrows": tutorial_arrows, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate()}
+	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "scoreMarker": marker, "score": score_value, "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "cannonVisuals": cannon.visual_snapshot(), "cannonSelected": cannon.enabled and (cannon._hovered or cannon._grabbed), "loadedItem": loaded, "followingItem": following_item_id(), "font": theme.default_font.resource_path, "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "tutorialArrows": tutorial_arrows, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate(), "movingTerrain": moving_terrain}
 
 func _snapshot_controls(node: Node, output: Array, include_modal: bool = true) -> void:
 	if not include_modal and is_instance_valid(modal) and node == modal.get_parent():

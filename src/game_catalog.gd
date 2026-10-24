@@ -30,6 +30,12 @@ static func rectangle(value: Array) -> Rect2:
 	return Rect2(float(value[0]), float(value[1]), float(value[2]), float(value[3]))
 
 func build_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
+	if str(stage.get("queuePolicy", "")) == "randomCatalog":
+		var random_queue: Array = []
+		assert(not ordered_items.is_empty(), "Random laboratory needs catalog items")
+		for index in range(15):
+			random_queue.append(str(ordered_items[rng.randi_range(0, ordered_items.size() - 1)].id))
+		return random_queue
 	if not stage.has("queueSlots"):
 		return stage.queue.duplicate()
 	var result: Array = []
@@ -76,3 +82,12 @@ func make_terrain(parent: Node2D, stage: Dictionary) -> void:
 				var collision = CollisionShape2D.new()
 				collision.shape = shape
 				body.add_child(collision)
+	for entry in stage.get("movingPlatforms", []):
+		_add_moving_terrain(parent, entry, false)
+	for entry in stage.get("hangingObstacles", []):
+		_add_moving_terrain(parent, entry, true)
+
+func _add_moving_terrain(parent: Node2D, entry: Dictionary, hanging: bool) -> void:
+	var body = preload("res://src/moving_terrain.gd").new()
+	parent.add_child(body)
+	body.configure(entry, hanging)

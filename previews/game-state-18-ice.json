@@ -7,7 +7,7 @@
 			"fuel": -1.0,
 			"id": "grip-boots",
 			"record": {
-				"behavior": "grip_sole",
+				"behavior": "solid",
 				"bodyKind": "dynamic",
 				"colliderTemplate": "boots",
 				"fixtures": [
@@ -107,20 +107,12 @@
 				"opaquePixels": 9528.0,
 				"physics": {
 					"burnSeconds": 6.0,
+					"coldBrittle": true,
 					"explosionResistance": 0.65,
 					"flammable": true,
 					"flowResponse": 1.0,
-					"friction": 0.85,
-					"otherIceFriction": 0.025,
-					"restitution": 0.45,
-					"soleFixtures": [
-						2.0,
-						3.0
-					],
-					"soleIceFriction": 0.95,
-					"soleNormalMinDot": 0.6,
-					"stability": "no world anchoring; tipping and overload can move the boots",
-					"upperFriction": 0.8
+					"friction": 0.55,
+					"restitution": 0.08
 				},
 				"pivotCropped": [
 					57.0,
@@ -148,7 +140,7 @@
 				"worldScale": 0.45,
 				"worldWidth": 54.0
 			},
-			"rotation": -3.02100539207458,
+			"rotation": 0.0000000138146241113191,
 			"texture": "res://assets/objects/grip-boots.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -159,8 +151,8 @@
 				0.449999988079071,
 				0.449999988079071
 			],
-			"x": 616.945495605469,
-			"y": 398.117736816406
+			"x": 547.104309082031,
+			"y": 394.200012207031
 		},
 		{
 			"burning": false,
@@ -169,7 +161,7 @@
 			"fuel": -1.0,
 			"id": "grip-boots",
 			"record": {
-				"behavior": "grip_sole",
+				"behavior": "solid",
 				"bodyKind": "dynamic",
 				"colliderTemplate": "boots",
 				"fixtures": [
@@ -269,20 +261,12 @@
 				"opaquePixels": 9528.0,
 				"physics": {
 					"burnSeconds": 6.0,
+					"coldBrittle": true,
 					"explosionResistance": 0.65,
 					"flammable": true,
 					"flowResponse": 1.0,
-					"friction": 0.85,
-					"otherIceFriction": 0.025,
-					"restitution": 0.45,
-					"soleFixtures": [
-						2.0,
-						3.0
-					],
-					"soleIceFriction": 0.95,
-					"soleNormalMinDot": 0.6,
-					"stability": "no world anchoring; tipping and overload can move the boots",
-					"upperFriction": 0.8
+					"friction": 0.55,
+					"restitution": 0.08
 				},
 				"pivotCropped": [
 					57.0,
@@ -310,7 +294,7 @@
 				"worldScale": 0.45,
 				"worldWidth": 54.0
 			},
-			"rotation": 0.00075571407796815,
+			"rotation": 1.80172121524811,
 			"texture": "res://assets/objects/grip-boots.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -321,8 +305,8 @@
 				0.449999988079071,
 				0.449999988079071
 			],
-			"x": 475.461669921875,
-			"y": 393.95703125
+			"x": 384.175598144531,
+			"y": 396.537994384766
 		}
 	],
 	"angle": 38.0,
@@ -404,10 +388,10 @@
 			"rect": [
 				302.0,
 				30.0,
-				121.0,
+				126.0,
 				45.0
 			],
-			"text": "0210",
+			"text": "0420",
 			"type": "label"
 		},
 		{
@@ -656,11 +640,12 @@
 		"texture": "res://assets/objects/plank.svg"
 	},
 	"map": "18-ice-floor",
+	"movingTerrain": [],
 	"playable": true,
 	"power": 0.42,
 	"recoil": 0.0,
 	"result": false,
-	"score": 210,
+	"score": 420,
 	"scoreMarker": [
 		[
 			83.0,

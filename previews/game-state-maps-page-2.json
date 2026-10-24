@@ -1,0 +1,1479 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "refrigerator",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							8.0,
+							92.0,
+							114.0
+						]
+					}
+				],
+				"id": "refrigerator",
+				"mass": 24.0,
+				"material": "metal",
+				"nameJa": "冷蔵庫",
+				"opaquePixels": 10021.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					47.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/refrigerator.png",
+				"score": 300.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/refrigerator.svg",
+				"viewBox": [
+					17.0,
+					7.0,
+					94.0,
+					116.0
+				],
+				"webp": "raster/objects/refrigerator.webp",
+				"worldHeight": 101.191489361702,
+				"worldScale": 0.872340425531915,
+				"worldWidth": 82.0
+			},
+			"rotation": -1.57132017612457,
+			"texture": "res://assets/objects/refrigerator.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-41.0,
+				-49.7234039306641
+			],
+			"visualScale": [
+				0.872340440750122,
+				0.872340440750122
+			],
+			"x": 237.023422241211,
+			"y": 379.938232421875
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "toolbox",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							20.0,
+							108.0,
+							90.0
+						]
+					}
+				],
+				"id": "toolbox",
+				"mass": 8.0,
+				"material": "metal",
+				"nameJa": "工具箱",
+				"opaquePixels": 8506.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					55.0,
+					45.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/toolbox.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/toolbox.svg",
+				"viewBox": [
+					9.0,
+					19.0,
+					110.0,
+					92.0
+				],
+				"webp": "raster/objects/toolbox.webp",
+				"worldHeight": 51.8545454545455,
+				"worldScale": 0.563636363636364,
+				"worldWidth": 62.0
+			},
+			"rotation": 0.000580025720410049,
+			"texture": "res://assets/objects/toolbox.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-31.0,
+				-25.3636360168457
+			],
+			"visualScale": [
+				0.563636362552643,
+				0.563636362552643
+			],
+			"x": 319.915252685547,
+			"y": 394.122406005859
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "bucket",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							22.0,
+							15.0,
+							84.0,
+							103.0
+						]
+					}
+				],
+				"id": "bucket",
+				"mass": 2.0,
+				"material": "plastic",
+				"nameJa": "バケツ",
+				"opaquePixels": 6384.0,
+				"physics": {
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.3,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.5,
+					"restitution": 0.15
+				},
+				"pivotCropped": [
+					43.0,
+					50.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/bucket.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/bucket.svg",
+				"viewBox": [
+					21.0,
+					14.0,
+					86.0,
+					105.0
+				],
+				"webp": "raster/objects/bucket.webp",
+				"worldHeight": 63.4883720930233,
+				"worldScale": 0.604651162790698,
+				"worldWidth": 52.0
+			},
+			"rotation": 0.000686805346049368,
+			"texture": "res://assets/objects/bucket.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-26.0,
+				-30.2325572967529
+			],
+			"visualScale": [
+				0.604651153087616,
+				0.604651153087616
+			],
+			"x": 317.846893310547,
+			"y": 336.751373291016
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "flower-pot",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							16.0,
+							2.0,
+							100.0,
+							120.0
+						]
+					}
+				],
+				"id": "flower-pot",
+				"mass": 3.0,
+				"material": "plant",
+				"nameJa": "花の鉢植え",
+				"opaquePixels": 7238.0,
+				"physics": {
+					"burnSeconds": 4.0,
+					"explosionResistance": 0.15,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					49.0,
+					63.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/flower-pot.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/flower-pot.svg",
+				"viewBox": [
+					15.0,
+					1.0,
+					102.0,
+					122.0
+				],
+				"webp": "raster/objects/flower-pot.webp",
+				"worldHeight": 69.3725490196078,
+				"worldScale": 0.568627450980392,
+				"worldWidth": 58.0
+			},
+			"rotation": -0.00412085140123963,
+			"texture": "res://assets/objects/flower-pot.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-27.8627471923828,
+				-35.8235321044922
+			],
+			"visualScale": [
+				0.5686274766922,
+				0.5686274766922
+			],
+			"x": 396.469085693359,
+			"y": 387.185882568359
+		},
+		{
+			"burning": false,
+			"canScore": true,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "basketball",
+			"record": {
+				"behavior": "bouncy",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "circle",
+				"fixtures": [
+					{
+						"circle": [
+							64.0,
+							64.0,
+							54.0
+						]
+					}
+				],
+				"id": "basketball",
+				"mass": 1.2,
+				"material": "rubber",
+				"nameJa": "バスケットボール",
+				"opaquePixels": 9606.0,
+				"physics": {
+					"burnSeconds": 6.0,
+					"coldBrittle": true,
+					"explosionResistance": 0.65,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.85,
+					"restitution": 0.65
+				},
+				"pivotCropped": [
+					55.0,
+					55.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/basketball.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/basketball.svg",
+				"viewBox": [
+					9.0,
+					9.0,
+					110.0,
+					110.0
+				],
+				"webp": "raster/objects/basketball.webp",
+				"worldHeight": 44.0,
+				"worldScale": 0.4,
+				"worldWidth": 44.0
+			},
+			"rotation": 3.02864933013916,
+			"texture": "res://assets/objects/basketball.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-22.0,
+				-22.0
+			],
+			"visualScale": [
+				0.400000005960464,
+				0.400000005960464
+			],
+			"x": 404.883941650391,
+			"y": 330.319152832031
+		}
+	],
+	"angle": 38.0,
+	"cannon": [
+		810.0,
+		420.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				342.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				743.438415527344,
+				281.270935058594
+			],
+			"rotation": 0.663225114345551,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				352.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				125.0,
+				45.0
+			],
+			"text": "0850",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "10/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/stool.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "まるいす",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				159.0,
+				18.75
+			],
+			"text": "01 / なんでもキャノン",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				451.0,
+				288.0,
+				15.0
+			],
+			"text": "わくの なかに ものを つもう。15かい なげられるよ。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 38°",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 38.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				79.0,
+				20.0
+			],
+			"text": "火力 32%",
+			"type": "label"
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 32.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				852.0,
+				277.0,
+				24.0,
+				15.0
+			],
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		},
+		{
+			"color": "060e14d1",
+			"rect": [
+				0.0,
+				0.0,
+				960.0,
+				540.0
+			],
+			"type": "rect"
+		},
+		{
+			"rect": [
+				48.0,
+				55.0,
+				864.0,
+				430.0
+			],
+			"type": "panel"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 22,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				70.0,
+				69.0,
+				236.0,
+				27.5
+			],
+			"text": "ステージをえらぶ / 32",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				820.0,
+				64.0,
+				76.0,
+				32.0
+			],
+			"text": "とじる",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				70.0,
+				109.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				74.0,
+				113.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/16-restaurant.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				75.0,
+				164.0,
+				63.0,
+				12.5
+			],
+			"text": "16 レストラン",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				236.0,
+				109.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				240.0,
+				113.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/17-garage.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				241.0,
+				164.0,
+				95.0,
+				12.5
+			],
+			"text": "17 せいびこうじょう",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				402.0,
+				109.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				406.0,
+				113.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/18-ice-floor.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				407.0,
+				164.0,
+				79.0,
+				12.5
+			],
+			"text": "18 こおりのゆか",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				568.0,
+				109.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				572.0,
+				113.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/19-festival.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				573.0,
+				164.0,
+				59.0,
+				12.5
+			],
+			"text": "19 おまつり",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				734.0,
+				109.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				738.0,
+				113.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/20-laboratory.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				739.0,
+				164.0,
+				119.0,
+				12.5
+			],
+			"text": "20 なんでもじっけんしつ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				70.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				74.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/21-random-lab.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				75.0,
+				250.0,
+				114.0,
+				12.5
+			],
+			"text": "21 ランダムじっけんしつ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				236.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				240.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/22-toy-store.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				241.0,
+				250.0,
+				89.0,
+				12.5
+			],
+			"text": "22 おもちゃうりば",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				402.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				406.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/23-obstacle.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				407.0,
+				250.0,
+				69.0,
+				12.5
+			],
+			"text": "23 じゃまもの",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				568.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				572.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/24-snack-time.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				573.0,
+				250.0,
+				80.0,
+				12.5
+			],
+			"text": "24 3じのおやつ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				734.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				738.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/25-rubber-freeze.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				739.0,
+				250.0,
+				116.0,
+				12.5
+			],
+			"text": "25 ゴムとれいとうじゅう",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				70.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				74.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/26-lightning-river.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				75.0,
+				336.0,
+				100.0,
+				12.5
+			],
+			"text": "26 かみなりじっけん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				236.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				240.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/27-freezer.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				241.0,
+				336.0,
+				70.0,
+				12.5
+			],
+			"text": "27 れいとうこ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				402.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				406.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/28-birthday.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				407.0,
+				336.0,
+				120.0,
+				12.5
+			],
+			"text": "28 たんじょうびパーティー",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				568.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				572.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/29-izakaya.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				573.0,
+				336.0,
+				82.0,
+				12.5
+			],
+			"text": "29 いざかやさん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				734.0,
+				281.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				738.0,
+				285.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/30-fragile.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				739.0,
+				336.0,
+				109.0,
+				12.5
+			],
+			"text": "30 こわれものちゅうい",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				70.0,
+				403.0,
+				200.0,
+				40.0
+			],
+			"text": "まえのページ",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 17,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				394.0,
+				415.0,
+				109.0,
+				21.25
+			],
+			"text": "2 / 3 ページ",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				690.0,
+				403.0,
+				200.0,
+				40.0
+			],
+			"text": "つぎのページ",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "b5cad2ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				71.0,
+				458.0,
+				191.0,
+				15.0
+			],
+			"text": "1ステージに なげられるのは15こ。",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 15.1833333333331,
+	"firePatches": [],
+	"followingItem": "stool",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "washing-machine",
+		"position": [
+			875.0,
+			326.0
+		],
+		"scale": [
+			0.764705896377563,
+			0.764705896377563
+		],
+		"texture": "res://assets/objects/washing-machine.svg"
+	},
+	"map": "01-poc",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.32,
+	"recoil": 0.0,
+	"result": false,
+	"score": 850,
+	"scoreMarker": [
+		[
+			88.0,
+			406.0
+		],
+		[
+			442.0,
+			406.0
+		],
+		[
+			460.0,
+			428.0
+		],
+		[
+			70.0,
+			428.0
+		]
+	],
+	"scoreZone": [
+		70.0,
+		70.0,
+		390.0,
+		350.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 5,
+	"stage": 1,
+	"trajectory": [
+		[
+			679.100646972656,
+			264.494171142578,
+			0.94
+		],
+		[
+			663.250793457031,
+			257.402954101562,
+			0.88
+		],
+		[
+			647.401000976562,
+			253.839706420898,
+			0.82
+		],
+		[
+			631.551208496094,
+			253.804473876953,
+			0.76
+		],
+		[
+			615.701354980469,
+			257.297241210938,
+			0.7
+		],
+		[
+			599.8515625,
+			264.317993164062,
+			0.64
+		],
+		[
+			584.001708984375,
+			274.866760253906,
+			0.58
+		],
+		[
+			568.151916503906,
+			288.943542480469,
+			0.52
+		],
+		[
+			552.302124023438,
+			306.548309326172,
+			0.46
+		],
+		[
+			536.452270507812,
+			327.681060791016,
+			0.4
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": []
+}

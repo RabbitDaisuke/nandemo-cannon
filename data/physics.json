@@ -81,7 +81,8 @@
       "flammable": true,
       "explosionResistance": 0.65,
       "burnSeconds": 6,
-      "flowResponse": 1
+      "flowResponse": 1,
+      "coldBrittle": true
     },
     "glass": {
       "friction": 0.35,
@@ -138,6 +139,14 @@
       "explosionResistance": 0.12,
       "burnSeconds": 3.5,
       "flowResponse": 1.15
+    },
+    "wax": {
+      "friction": 0.55,
+      "restitution": 0.03,
+      "flammable": true,
+      "explosionResistance": 0.3,
+      "burnSeconds": 6,
+      "flowResponse": 1
     }
   },
   "behaviors": {
@@ -269,6 +278,23 @@
       "fireSeconds": 1.4,
       "trigger": "launch fuse; physical impacts do not detonate",
       "removeSelf": true
+    },
+    "stove": {
+      "burnerSource": [
+        64,
+        24
+      ],
+      "burnerWidth": 90,
+      "immersionBreak": true,
+      "fireRadius": 24
+    },
+    "lightning": {
+      "fuseSeconds": 1.1,
+      "radius": 110,
+      "strength": 0.7,
+      "fireRadius": 80,
+      "fireSeconds": 3,
+      "removeSelf": true
     }
   },
   "overrides": {
@@ -336,11 +362,13 @@
       "explosionResistance": 0.25
     },
     "grip-boots": {
+      "friction": 0.55,
+      "restitution": 0.08,
+      "flammable": true,
+      "explosionResistance": 0.65,
       "burnSeconds": 6,
-      "soleFixtures": [
-        2,
-        3
-      ]
+      "flowResponse": 1,
+      "coldBrittle": true
     },
     "skateboard": {
       "wheelFixtures": [
@@ -449,7 +477,100 @@
       "trigger": "first impact or burning fuse completes",
       "removeSelf": true,
       "impulseMultiplier": 2.2
-    }
+    },
+    "tabletop-stove": {},
+    "submarine": {},
+    "charger": {},
+    "ramune-bottle": {
+      "waterUnits": 8,
+      "releaseUnits": 8,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120
+    },
+    "canele": {},
+    "hammer": {},
+    "mont-blanc": {},
+    "utility-knife": {},
+    "bagel": {},
+    "bunny-plush": {},
+    "cute-doll": {},
+    "trumpet": {},
+    "toy-train": {},
+    "battery": {},
+    "snowman-plush": {},
+    "rubber-duck": {},
+    "toy-package": {},
+    "building-blocks": {},
+    "spinning-top": {},
+    "wooden-obstacle": {
+      "burnSeconds": 5,
+      "explosionResistance": 0.15,
+      "impactDestructible": false
+    },
+    "gunpowder-barrel": {
+      "radius": 165,
+      "strength": 1.15,
+      "impulseMultiplier": 1.25
+    },
+    "pizza": {},
+    "pancakes": {},
+    "pizza-cutter": {},
+    "castella": {},
+    "maple-popcorn": {},
+    "potato-chips": {},
+    "chocolate-bar": {},
+    "wrapped-butter": {},
+    "cream-puff": {},
+    "apple-juice-carton": {
+      "waterUnits": 6,
+      "releaseUnits": 6,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120
+    },
+    "tricolor-dango": {},
+    "rubber-block": {},
+    "lightning-orb": {},
+    "sashimi": {},
+    "whole-cake": {},
+    "cheesecake": {},
+    "candle": {
+      "durationSeconds": 12,
+      "fireRadius": 18
+    },
+    "strawberry": {},
+    "blueberries": {},
+    "gift-box": {},
+    "drinking-glass": {
+      "impactSpeed": 175,
+      "minImpactEnergy": 2,
+      "loadForceThreshold": 5000,
+      "loadHoldSeconds": 0.35
+    },
+    "party-popper": {},
+    "sake-bottle": {
+      "waterUnits": 16,
+      "releaseUnits": 16,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120
+    },
+    "fried-chicken": {},
+    "lemon": {},
+    "yakitori-plate": {},
+    "cabbage-plate": {},
+    "beer-mug": {
+      "waterUnits": 6,
+      "releaseUnits": 6,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120
+    },
+    "negima": {},
+    "saury": {},
+    "beer-dispenser": {},
+    "charcoal": {
+      "burnSeconds": 9
+    },
+    "grill-grid": {},
+    "call-bell": {}
   },
   "stateRules": {
     "breakage": {

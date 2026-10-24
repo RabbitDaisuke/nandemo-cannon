@@ -1,0 +1,583 @@
+{
+	"actors": [
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.9818181818182,
+				"worldScale": 0.509090909090909,
+				"worldWidth": 56.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-28.0,
+				-25.9636363983154
+			],
+			"visualScale": [
+				0.509090900421143,
+				0.509090900421143
+			],
+			"x": 215.0,
+			"y": 300.558959960938
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "trash-bag",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							14.0,
+							8.0,
+							100.0,
+							112.0
+						]
+					}
+				],
+				"id": "trash-bag",
+				"mass": 2.0,
+				"material": "paper",
+				"nameJa": "ごみ袋",
+				"opaquePixels": 8101.0,
+				"physics": {
+					"burnSeconds": 2.0,
+					"explosionResistance": 0.05,
+					"flammable": true,
+					"flowResponse": 1.25,
+					"friction": 0.65,
+					"restitution": 0.02
+				},
+				"pivotCropped": [
+					51.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/trash-bag.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/trash-bag.svg",
+				"viewBox": [
+					13.0,
+					7.0,
+					102.0,
+					114.0
+				],
+				"webp": "raster/objects/trash-bag.webp",
+				"worldHeight": 53.6470588235294,
+				"worldScale": 0.470588235294118,
+				"worldWidth": 48.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/trash-bag.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-24.0,
+				-26.8235301971436
+			],
+			"visualScale": [
+				0.470588237047195,
+				0.470588237047195
+			],
+			"x": 320.0,
+			"y": 302.715118408203
+		}
+	],
+	"angle": 35.0,
+	"cannon": [
+		810.0,
+		420.0
+	],
+	"cannonSelected": false,
+	"cannonVisuals": [
+		{
+			"position": [
+				759.0,
+				342.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/base.webp"
+		},
+		{
+			"position": [
+				739.147583007812,
+				284.869262695312
+			],
+			"rotation": 0.610865235328674,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/barrel.webp"
+		},
+		{
+			"position": [
+				797.0,
+				352.0
+			],
+			"rotation": 0.0,
+			"scale": [
+				1.0,
+				1.0
+			],
+			"texture": "res://assets/cannon/trunnion.webp"
+		}
+	],
+	"controls": [
+		{
+			"rect": [
+				14.0,
+				10.0,
+				260.0,
+				60.0
+			],
+			"texture": "res://assets/ui/logo.webp",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				8.0,
+				74.0,
+				25.0
+			],
+			"text": "とくてん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 36,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				302.0,
+				30.0,
+				126.0,
+				45.0
+			],
+			"text": "0000",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				8.0,
+				38.0,
+				25.0
+			],
+			"text": "残り",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 32,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				462.0,
+				33.0,
+				128.0,
+				40.0
+			],
+			"text": "15/15",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 20,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				624.0,
+				12.0,
+				41.0,
+				25.0
+			],
+			"text": "つぎ",
+			"type": "label"
+		},
+		{
+			"rect": [
+				704.0,
+				7.0,
+				62.0,
+				62.0
+			],
+			"texture": "res://assets/objects/water-jug.svg",
+			"type": "texture"
+		},
+		{
+			"align": 1,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				620.0,
+				75.0,
+				172.0,
+				13.0
+			],
+			"text": "みずタンク",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				10.0,
+				64.0,
+				32.0
+			],
+			"text": "マップ",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				876.0,
+				10.0,
+				72.0,
+				32.0
+			],
+			"text": "シード",
+			"type": "button"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				804.0,
+				50.0,
+				144.0,
+				32.0
+			],
+			"text": "やりなおす",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 15,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				77.0,
+				167.0,
+				18.75
+			],
+			"text": "26 / かみなりじっけん",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				451.0,
+				355.0,
+				15.0
+			],
+			"text": "かみなりは しばらくして はじける。みずとほのおに きをつけよう。",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				506.0,
+				476.0,
+				74.0,
+				20.0
+			],
+			"text": "角度 35°",
+			"type": "label"
+		},
+		{
+			"maximum": 85.0,
+			"minimum": 5.0,
+			"rect": [
+				506.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 35.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				738.0,
+				476.0,
+				80.0,
+				20.0
+			],
+			"text": "火力 65%",
+			"type": "label"
+		},
+		{
+			"maximum": 100.0,
+			"minimum": 15.0,
+			"rect": [
+				738.0,
+				501.0,
+				204.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 65.0
+		},
+		{
+			"align": 0,
+			"color": "ffd36cff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				852.0,
+				277.0,
+				24.0,
+				15.0
+			],
+			"text": "いま",
+			"type": "label"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 16,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				18.0,
+				477.0,
+				215.0,
+				20.0
+			],
+			"text": "ドラッグで調整・クリックで発射",
+			"type": "label"
+		}
+	],
+	"destroyedCounts": {},
+	"droplets": [],
+	"elapsed": 0.0166666666666667,
+	"firePatches": [],
+	"followingItem": "water-jug",
+	"font": "res://assets/font/arcade-generated.fnt",
+	"loadedItem": {
+		"id": "lightning-orb",
+		"position": [
+			875.0,
+			326.0
+		],
+		"scale": [
+			0.439999997615814,
+			0.439999997615814
+		],
+		"texture": "res://assets/objects/lightning-orb.svg"
+	},
+	"map": "26-lightning-river",
+	"movingTerrain": [],
+	"playable": true,
+	"power": 0.65,
+	"recoil": 0.0,
+	"result": false,
+	"score": 0,
+	"scoreMarker": [
+		[
+			83.0,
+			416.0
+		],
+		[
+			487.0,
+			416.0
+		],
+		[
+			505.0,
+			438.0
+		],
+		[
+			65.0,
+			438.0
+		]
+	],
+	"scoreZone": [
+		65.0,
+		70.0,
+		440.0,
+		360.0
+	],
+	"seed": "0123456789ABCDEF",
+	"shots": 0,
+	"stage": 26,
+	"trajectory": [
+		[
+			662.304809570312,
+			263.346771240234,
+			0.94
+		],
+		[
+			620.2802734375,
+			239.212860107422,
+			0.88
+		],
+		[
+			578.255798339844,
+			218.606979370117,
+			0.82
+		],
+		[
+			536.231262207031,
+			201.529083251953,
+			0.76
+		],
+		[
+			494.206726074219,
+			187.979187011719,
+			0.7
+		],
+		[
+			452.182189941406,
+			177.957305908203,
+			0.64
+		],
+		[
+			410.15771484375,
+			171.463439941406,
+			0.58
+		],
+		[
+			368.133178710938,
+			168.49755859375,
+			0.52
+		],
+		[
+			326.108642578125,
+			169.059631347656,
+			0.46
+		],
+		[
+			284.084106445312,
+			173.149749755859,
+			0.4
+		]
+	],
+	"tutorialArrows": [],
+	"waterCells": [],
+	"waterRegions": [
+		[
+			460.0,
+			430.0,
+			250.0,
+			60.0
+		]
+	]
+}

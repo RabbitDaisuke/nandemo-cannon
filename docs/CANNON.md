@@ -13,6 +13,7 @@
 マウスが大砲上にあるときとドラッグ中は、架台・砲身・軸受を合成した外周だけを黄色にする。部品同士の継ぎ目を輪郭として強調せず、砲身の角度へ追従する。装填物は投射後と同じ実寸で大砲へ重ね、次の物体のプレビューとは区別する。残弾切れや画面切り替え時の発射可否はゲーム側が`set_enabled()`で制御する。モジュール内にも0.45秒の発射間隔を設け、クリック連打による同一フレームの多重発射を防ぐ。
 ## 実装API
 `AimCannon.configure(ground_position)`で設置する。`set_aim(elevation_degrees,power)`で角度と火力を変更する。火力の範囲は0.15〜1.0。`fire()`で発射を要求する。`get_muzzle()`、`get_launch_direction()`、`pivot_global()`が現在のワールド座標系を返す。
+`cancel_pointer()`は保留中のドラッグ／タップを発射せずに取り消す。`set_input_suspended(true)`はピンチ中の入力を遮断し、通常の発射可否更新では解除されない。`src/touch_zoom.gd`が2本指開始で設定し、全指解放後に解除する。表示は1〜2.5倍に拡大するが大砲のワールド座標は変えず、画面入力をCanvas変換の逆行列で戻して判定する。手動メニュー中は入力だけ無効にし、進行中の物理演算を止めない。
 `fired(direction,power,origin)`をゲーム本体が受けて物体を生成し、質量に応じたインパルスを与える。大砲側は次に出る物体の質量や弾数を決めない。`aim_changed(elevation,power)`で照準UIを更新できる。UIのスライダーからは`set_aim()`を呼ぶ。
 ## 画像確認
 `./build.sh preview`が`tools/render-cannon.mjs`を呼び、実際に使うWebPパーツを配置してsharpで確認画像を作る。`previews/cannon-candidates.png`が2案比較、`previews/cannon-angles.png`が15度・35度・75度の首振り比較。Nodeは大砲自体を描かず、生成した絵の配置・回転・形式変換を担当する。
