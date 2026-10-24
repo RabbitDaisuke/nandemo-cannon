@@ -657,7 +657,15 @@
     },
     "towel": {
       "capacity": 12
-    }
+    },
+    "shredder": {},
+    "banknote": {},
+    "ten-yen-coin": {},
+    "paper-bag": {},
+    "nori-bento": {},
+    "homemade-bento": {},
+    "paper-cup": {},
+    "monitor": {}
   },
   "stateRules": {
     "breakage": {

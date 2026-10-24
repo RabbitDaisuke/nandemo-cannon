@@ -1,4 +1,4 @@
-// Authored SVG collection: stages 36–39 and their restaurant/cafe objects.
+// Authored SVG collection: stages 36–40 and their restaurant/cafe/office objects.
 // Run after the older content layers; checked-in SVG/data are the build inputs.
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -41,6 +41,52 @@ add('coffee-beans','コーヒー豆','コーヒーまめ','paper',1.8,55,[poly([
 add('coffee-pot','コーヒーポット','コーヒーポット','metal',3.4,66,[rect(19,30,65,88),rect(84,45,30,10),rect(104,55,10,38),rect(84,93,30,10),rect(39,16,25,14)],R(80,41,38,66,ink)+R(88,49,22,50,steel)+R(88,58,14,32,ink)+R(19,30,65,88,ink)+R(25,36,53,76,'#9dafb5')+R(31,42,9,62,'#edf1da')+R(44,44,13,63,'#c6d4ca')+R(69,37,8,71,'#627c8b')+P('M19 30L9 21L30 21L37 30Z',ink)+R(33,22,38,8,'#dbe3d1')+R(39,14,25,10,ink)+R(44,17,15,4,'#a4bfc0'));
 add('menu','メニュー','メニュー','paper',1.6,55,[poly([17,18],[97,7],[113,112],[35,123])],P('M17 18L97 7L113 112L35 123Z',ink)+P('M24 24L91 15L105 106L40 115Z','#8e4e4d')+P('M33 32L84 25L94 91L44 98Z',cream)+R(44,39,34,6,'#714c45')+R(47,52,29,4,'#714c45')+R(49,63,31,4,'#714c45')+R(52,75,25,4,'#714c45')+R(49,103,40,4,gold));
 
+// Office objects are individually drawn silhouettes, with matching physical pieces.
+// Search tags are deliberately authored separately in item-search-index.json.
+const officeItemIds=['shredder','banknote','ten-yen-coin','paper-bag','nori-bento','homemade-bento','paper-cup','monitor'];
+add('shredder','シュレッダー','シュレッダー','appliance',11,69,
+ [rect(17,29,94,24),poly([22,53],[106,53],[99,120],[29,120]),rect(43,7,45,22)],
+ R(43,7,45,34,ink)+R(48,12,35,23,'#f5ebd3')+R(54,17,23,3,'#88949b')+R(54,24,18,3,'#88949b')+
+ R(17,29,94,24,ink)+R(22,34,84,14,'#667d8e')+R(31,38,61,6,ink)+R(98,37,5,5,'#a2d2ad')+
+ P('M22 53H106L99 120H29Z',ink)+P('M28 53H100L94 114H34Z','#aebfc2')+R(38,64,52,38,ink)+R(43,69,42,28,'#34495a')+
+ [48,58,70,79].map((x,i)=>R(x,74+i%2*8,4,15,'#ded8bd')).join('')+R(37,108,53,4,'#758d9b'));
+add('banknote','銀行券','ぎんこうけん','paper',0.35,68,[rect(5,31,118,65)],
+ R(5,31,118,65,ink)+R(10,36,108,55,'#a5b99c')+R(14,40,100,47,'#e3dfb4')+R(18,44,92,39,'#8caa91')+
+ R(22,48,50,31,'#c9d2a7')+R(27,53,38,5,'#668e7e')+R(27,64,29,4,'#668e7e')+R(27,72,40,3,'#668e7e')+
+ P('M83 47H99L105 53V72L99 79H83L77 72V53Z','#d6d9ad')+R(86,50,12,8,'#6f8f7b')+R(83,58,15,11,'#b2b68e')+P('M80 77L84 69H98L103 77Z','#6f8f7b')+R(15,38,6,3,'#f4e9be')+R(102,85,10,3,'#f4e9be'));
+const coinEdge=[[43,9],[85,9],[107,31],[119,52],[119,77],[99,105],[77,119],[49,119],[21,100],[9,77],[9,50],[23,27]];
+add('ten-yen-coin','10円玉','10えんだま','metal',1.1,29,[poly(...coinEdge)],
+ P('M'+coinEdge.map(p=>p.join(' ')).join('L')+'Z',ink)+P('M45 15H82L101 35L112 54V75L95 99L75 112H51L27 95L16 75V52L28 32Z','#9e633e')+
+ P('M47 21H80L97 38L106 56V73L91 94L74 105H53L33 91L23 73V54L33 37Z','#d9a365')+P('M48 29H77L92 43L99 58V70L86 88L72 98H55L40 86L30 71V57L39 42Z','#b97d48')+
+ R(39,44,6,6,'#f5cf8b')+R(45,38,7,45,'#f5cf8b')+R(38,80,21,6,'#f5cf8b')+R(68,39,20,7,'#f5cf8b')+R(63,46,7,33,'#f5cf8b')+R(86,46,7,33,'#f5cf8b')+R(68,79,20,7,'#f5cf8b'));
+add('paper-bag','紙ぶくろ','かみぶくろ','paper',0.8,60,
+ [poly([19,40],[109,40],[117,121],[11,121]),rect(35,11,14,29),rect(42,5,43,12),rect(78,11,14,29)],
+ R(35,11,7,36,ink)+R(42,5,43,7,ink)+R(85,11,7,36,ink)+R(42,12,7,28,'#b98d58')+R(49,12,29,5,'#b98d58')+R(78,12,7,28,'#b98d58')+
+ P('M19 40H109L117 121H11Z',ink)+P('M25 46H103L110 115H18Z','#be8c55')+P('M25 46H90L94 115H18Z','#dfb575')+P('M93 50L103 46L110 115H97Z','#9e7048')+
+ R(33,64,46,23,'#efe0ae')+R(42,70,29,5,'#96734f')+R(47,79,19,3,'#96734f')+R(27,105,57,4,'#edc98c'));
+const bentoShape=[poly([15,30],[113,30],[122,41],[116,108],[105,119],[22,119],[10,108],[5,41])];
+add('nori-bento','のり弁当','のりべんとう','plastic',2.4,78,bentoShape,
+ P('M15 30H113L122 41L116 108L105 119H22L10 108L5 41Z',ink)+P('M17 36H110L116 44L110 105L102 113H26L16 103L11 44Z','#3f4b54')+
+ P('M22 41H106L110 47L105 100L99 107H28L22 99L17 48Z','#f3e9ce')+P('M26 61H86L91 99H29Z','#223b32')+
+ R(31,65,14,4,'#4c6650')+R(53,71,23,4,'#4c6650')+R(36,87,36,4,'#365645')+
+ P('M26 43H83L90 49L83 64H27L21 56Z','#9b612e')+P('M29 44H80L84 50L78 57H27Z','#e8b85c')+R(32,47,7,5,'#f7d88a')+R(54,50,9,4,'#c18c3a')+
+ P('M89 68L96 61L105 67L104 78L95 84L87 78Z','#ccad57')+R(91,69,8,6,'#f7d67e')+R(89,88,13,8,'#d79d49')+R(93,91,6,3,'#f3cb6e')+R(15,111,93,4,'#71838b'));
+add('homemade-bento','てづくり弁当','てづくりべんとう','plastic',2.4,76,bentoShape,
+ P('M15 30H113L122 41L116 108L105 119H22L10 108L5 41Z',ink)+P('M18 36H109L116 44L110 104L102 112H25L16 104L11 44Z','#d77971')+
+ P('M23 42H105L110 48L104 99L98 105H30L22 98L18 48Z','#f3c7a4')+P('M25 46H63V100H31L27 95L22 50Z','#fff1d3')+R(32,53,9,4,'#e0d4b5')+R(46,76,10,4,'#e0d4b5')+R(34,92,9,4,'#e0d4b5')+
+ P('M38 64L46 59L54 65L53 74L45 79L37 73Z','#ba5159')+R(40,64,7,4,'#ef9b82')+R(63,44,5,58,'#a75c59')+
+ R(75,49,26,19,'#ba8b3b')+R(77,50,21,12,'#f3d879')+R(80,53,5,5,'#fff0a3')+R(92,53,4,7,'#e4b958')+
+ P('M72 79L77 72H87L92 79V89L86 95H77L71 90Z','#6c9a5e')+R(77,77,6,7,'#a8c77c')+R(94,76,9,17,'#b85952')+R(95,78,5,7,'#df8c70')+R(18,108,87,5,'#edaaa0'));
+add('paper-cup','紙コップ','かみコップ','paper',0.45,37,
+ [poly([23,24],[105,24],[90,120],[38,120])],
+ P('M23 24H105L90 120H38Z',ink)+P('M29 30H99L85 114H43Z','#e9e4d1')+P('M29 30H45L53 114H43Z','#fff3d8')+P('M85 30H99L85 114H76Z','#c1c3b8')+
+ P('M34 58H94L90 82H38Z','#7699a9')+R(48,63,30,4,'#c9dbe0')+R(51,73,24,4,'#c9dbe0')+R(23,24,82,10,ink)+R(29,28,70,3,'#fff4dd'));
+add('monitor','モニター','モニター','appliance',6,88,
+ [rect(4,12,120,76),rect(54,88,20,24),rect(31,112,66,12)],
+ R(4,12,120,76,ink)+R(10,18,108,64,'#4e6575')+R(15,23,98,51,ink)+R(20,28,88,41,'#76b8c2')+
+ P('M20 61L43 41L59 51L78 34L108 58V69H20Z','#bad8cd')+R(83,31,15,3,'#d9efe0')+R(94,78,5,3,'#a2d6ae')+
+ R(54,88,20,24,ink)+R(59,88,10,24,'#869fa7')+R(31,112,66,12,ink)+R(37,115,54,5,'#6f8794'));
+
 // Shrink the approved title logo and convert its exact colored pixels to SVG.
 // No handwritten sign, checkerboard, margin scaling or external image reference.
 const title=await sharp(path.join(root,'assets/ui/logo.webp')).resize(120,29,{fit:'fill',kernel:'nearest'}).ensureAlpha().raw().toBuffer({resolveWithObject:true});
@@ -77,9 +123,11 @@ const beach=stage(38,'ビーチ','38-beach',['sand-bucket','shovel','water-yoyo'
 beach.selectAnyCatalogItem=true;
 beach.water=[{rect:[50,375,450,75],direction:[0,0],speed:0,type:'pool',finite:true}];
 const cafe=stage(39,'喫茶店','39-cafe',['coffee-mill','parfait','counter','chair','low-table','coffee-beans','coffee-pot','water-glass','menu','call-bell','teapot','pancakes','cheesecake','lemonade-glass','canele'],[rect(0,450,960,90),rect(75,385,530,24),rect(100,409,25,41),rect(555,409,25,41)]);
-const additions=[random,restaurant,beach,cafe];
-const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。'];
-for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん'][i];ui.lessons[s.id-1]=s.lesson;}
+const office=stage(40,'オフィス','40-office',['shredder','banknote','ten-yen-coin','paper-bag','blast-bomb','nori-bento','keyboard','flamethrower','homemade-bento','paper-cup','blast-bomb','monitor','desktop-pc','wired-mouse','paper-bag'],[rect(0,450,960,90),rect(65,395,560,20),rect(85,415,24,35),rect(580,415,24,35)],[810,450],[55,80,580,370]);
+office.preplaced=[{id:'desktop-pc',x:145,groundY:395,scoring:true},{id:'keyboard',x:295,groundY:395,scoring:true},{id:'wired-mouse',x:415,groundY:395,scoring:true},{id:'monitor',x:535,groundY:395,scoring:true}];
+const additions=[random,restaurant,beach,cafe,office];
+const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。','さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。'];
+for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん','オフィス'][i];ui.lessons[s.id-1]=s.lesson;}
 stages.status=`Godot 4.7.2: ${stages.stages.length} authored stages, 15 throws each; current checks are in previews/*-checks.json.`;
 const terrainArt=(s,c)=>s.terrain.map(t=>t.rect?R(...t.rect,ink)+R(t.rect[0]+3,t.rect[1]+3,t.rect[2]-6,t.rect[3]-3,c):P('M'+t.polygon.map(p=>p.join(' ')).join('L')+'Z',c)).join('');
 const window=(x,y,w,h)=>R(x,y,w,h,ink)+R(x+7,y+7,w-14,h-14,'#83bbca')+R(x+w/2-4,y+7,8,h-14,cream)+R(x+7,y+h/2-4,w-14,8,cream);
@@ -90,6 +138,17 @@ artwork[37]=R(0,0,960,540,'#dcc5a5')+R(0,84,960,32,'#8e5e4a')+window(125,130,270
 // Foreground water is drawn by LiquidField, so an absorbed pool exposes sand.
 artwork[38]=R(0,0,960,540,'#9bd7df')+R(0,244,960,132,'#4c9eaf')+R(0,281,960,10,'#79c4cd')+R(0,331,960,8,'#87d0d4')+P('M0 355L240 367L430 352L610 364L780 350L960 360V540H0Z','#e1c68a')+P('M689 260L710 211L728 134L743 138L730 221L709 264Z','#876448')+P('M734 142L683 113L639 122L680 90L725 114L726 81L759 63L751 114L789 94L840 115L784 119L753 140L791 167L817 205L770 179Z','#4b9172')+terrainArt(beach,'#d9b97b')+R(80,434,24,4,'#edd49b')+R(270,422,18,4,'#c9a46a')+R(673,462,28,5,'#edd49b')+R(726,486,36,5,'#edd49b');
 artwork[39]=R(0,0,960,540,'#9b785c')+R(0,93,960,32,'#493d39')+window(82,139,259,145)+R(405,143,194,146,'#463f38')+R(416,154,172,124,'#5a6852')+[178,203,228,252].map(y=>R(437,y,125,4,'#e4dfb9')).join('')+R(657,142,238,18,'#503c36')+R(657,230,238,18,'#503c36')+[680,736,792,848].map(x=>R(x,172,33,44,'#cfba88')+R(x+4,179,25,24,'#8a6346')).join('')+R(0,313,960,137,'#72533f')+R(0,325,960,6,'#c3a077')+terrainArt(cafe,'#b18359')+tableLines(75,385,530)+[100,250,400,550,700,850].map(x=>P(`M${x} 450L${x+70} 540H${x+74}L${x+4} 450Z`,'#77543e')).join('');
+// Desks are static terrain. The computer, keyboard, mouse and monitor are real
+// preplaced actors, not painted into this background, and can earn/lose points.
+artwork[40]=R(0,0,960,540,'#b9c7c4')+R(0,89,960,26,'#758e9b')+R(0,115,960,7,'#dae1d3')+
+ [104,406,711].map(x=>R(x,92,154,14,ink)+R(x+5,96,144,6,'#f3efd2')).join('')+
+ window(76,144,270,133)+window(377,144,238,133)+
+ [88,389].map(x=>[162,181,200,219,238,257].map(y=>R(x,y,246-(x===389?32:0),3,'#7a9da7')).join('')).join('')+
+ R(675,163,210,236,'#536e80')+R(681,169,198,224,'#839ba5')+
+ [177,245,313].map(y=>R(690,y,180,60,'#c0ccc5')+R(700,y+8,160,3,'#e0e6d8')+R(759,y+20,45,7,'#5c7483')+R(769,y+32,23,8,'#e3ddbe')).join('')+
+ R(0,290,646,105,'#94a9ad')+R(0,290,646,7,'#6b8694')+R(30,315,595,8,'#d0d9cf')+
+ terrainArt(office,'#82959d')+R(68,398,554,6,'#dfd5b8')+R(70,408,550,4,'#506777')+
+ [80,250,420,590,760,930].map(x=>P(`M${x} 450L${x+48} 540H${x+51}L${x+3} 450Z`,'#637a89')).join('')+R(0,481,960,3,'#637a89')+R(0,520,960,3,'#637a89');
 const mapSheet=[];
 for(const [i,s]of additions.entries()){
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" shape-rendering="crispEdges">${artwork[s.id]}</svg>\n`;
@@ -103,6 +162,11 @@ for(const s of stages.stages)if(s.queue?.length!==15||s.queue.some(id=>!ids.has(
 await Promise.all([write('objects-manifest',manifest),write('catalog',catalog),write('physics',physics),write('colliders',colliders),write('stages',stages),write('maps-manifest',maps),write('ui-ja',ui)]);
 const summary=await read('build-summary');Object.assign(summary,{objects:manifest.items.length,maps:stages.stages.length,specifiedStages:stages.stages.length-1,playableStages:stages.stages.length});await write('build-summary',summary);
 const verification=await read('verification');Object.assign(verification,{objects:manifest.items.length,maps:stages.stages.length,stagesWith15Shots:stages.stages.length,croppedSpritesChecked:manifest.items.length,uniqueRenderedSprites:new Set(manifest.items.map(x=>x.svg)).size});verification.checks=verification.checks.filter(x=>!/^\d+ item records/.test(x)&&!/^\d+ maps have/.test(x));verification.checks.push(`${manifest.items.length} item records; all ${stages.stages.length} queues reference 15 existing items`,`${stages.stages.length} maps have static terrain data`);await write('verification',verification);
-await sharp({create:{width:1400,height:380,channels:4,background:'#283b4c'}}).composite(sheet).png().toFile(path.join(root,'previews/late-items.png'));
-await sharp({create:{width:960,height:540,channels:4,background:'#283b4c'}}).composite(mapSheet).png().toFile(path.join(root,'previews/late-maps.png'));
+await sharp({create:{width:1400,height:Math.ceil(items.length/7)*190,channels:4,background:'#283b4c'}}).composite(sheet).png().toFile(path.join(root,'previews/late-items.png'));
+await sharp({create:{width:960,height:Math.ceil(additions.length/2)*270,channels:4,background:'#283b4c'}}).composite(mapSheet).png().toFile(path.join(root,'previews/late-maps.png'));
+const officeSheet=await Promise.all(officeItemIds.map(async(id,i)=>{
+ const thumb=await sharp(path.join(root,`assets/raster/objects/${id}.png`)).resize({width:176,height:160,fit:'inside',kernel:'nearest'}).png().toBuffer({resolveWithObject:true});
+ return {input:thumb.data,left:i%4*200+Math.floor((200-thumb.info.width)/2),top:Math.floor(i/4)*190+Math.floor((180-thumb.info.height)/2)};
+}));
+await sharp({create:{width:800,height:380,channels:4,background:'#283b4c'}}).composite(officeSheet).png().toFile(path.join(root,'previews/office-items.png'));
 console.log(JSON.stringify({items:items.map(x=>x.id),objects:manifest.items.length,stages:stages.stages.length}));

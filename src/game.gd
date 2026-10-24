@@ -220,23 +220,7 @@ func load_stage(index: int) -> void:
 	cannon.set_enabled(playable)
 	_add_cannon_base_collider(ground)
 	for entry in current_stage.get("preplaced", []):
-		var record: Dictionary = catalog.items[entry.id].duplicate(true)
-		if entry.has("width"):
-			var factor = float(entry.width) / float(record.worldWidth)
-			record.worldWidth = float(entry.width)
-			record.worldHeight *= factor
-			record.worldScale *= factor
-		var actor = _create_actor(record, Vector2(float(entry.x), 0.0))
-		actor.position.y = float(entry.groundY) - actor.get_world_bounds().end.y - 1.0
-		actor.can_score = bool(entry.get("scoring", false))
-		if entry.has("scorePenalty"):
-			actor.can_score = true
-			actor.set_meta("score_penalty", -absi(int(entry.scorePenalty)))
-		if entry.has("tutorialFractureHits"):
-			actor.set_meta("tutorial_required", int(entry.tutorialFractureHits))
-			# Ordinary contact cannot bypass the three-explosion tutorial rule.
-			actor.spec["impactSpeed"] = 100000.0
-			actor.spec["loadForceThreshold"] = 100000000.0
+		_create_preplaced_actor(entry)
 	stage_label.text = "%02d / %s" % [stage_index + 1, _stage_display_name(stage_index)]
 	var lessons: Array = ui_text.get("lessons", [])
 	lesson_label.text = _wrap_hud_text(str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。", 304.0, 12)
@@ -247,6 +231,28 @@ func load_stage(index: int) -> void:
 	score_value = calculate_score()
 	_update_hud()
 	queue_redraw()
+
+func _create_preplaced_actor(entry: Dictionary) -> ThrowBody:
+	var record: Dictionary = catalog.items[entry.id].duplicate(true)
+	if entry.has("width"):
+		var factor = float(entry.width) / float(record.worldWidth)
+		record.worldWidth = float(entry.width)
+		record.worldHeight *= factor
+		record.worldScale *= factor
+	var actor = _create_actor(record, Vector2(float(entry.x), 0.0))
+	actor.position.y = float(entry.groundY) - actor.get_world_bounds().end.y - 1.0
+	# Any stage may opt a placed prop into the same containment/height scoring
+	# used by thrown objects. Unmarked scenery stays neutral; penalties stay fixed.
+	actor.can_score = bool(entry.get("scoring", false))
+	if entry.has("scorePenalty"):
+		actor.can_score = true
+		actor.set_meta("score_penalty", -absi(int(entry.scorePenalty)))
+	if entry.has("tutorialFractureHits"):
+		actor.set_meta("tutorial_required", int(entry.tutorialFractureHits))
+		# Ordinary contact cannot bypass the three-explosion tutorial rule.
+		actor.spec["impactSpeed"] = 100000.0
+		actor.spec["loadForceThreshold"] = 100000000.0
+	return actor
 
 func _add_cannon_base_collider(ground: Vector2) -> void:
 	var base = StaticBody2D.new()

@@ -59,7 +59,7 @@
 				"worldScale": 0.872340425531915,
 				"worldWidth": 82.0
 			},
-			"rotation": -1.57166755199432,
+			"rotation": -1.57166802883148,
 			"texture": "res://assets/objects/refrigerator.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -70,8 +70,8 @@
 				0.872340440750122,
 				0.872340440750122
 			],
-			"x": 237.000457763672,
-			"y": 379.921234130859
+			"x": 237.000244140625,
+			"y": 379.921264648438
 		},
 		{
 			"burning": false,
@@ -132,7 +132,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": 0.000513911945745349,
+			"rotation": 0.000477037130622193,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -143,8 +143,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 319.898773193359,
-			"y": 394.124633789062
+			"x": 319.898620605469,
+			"y": 394.1240234375
 		},
 		{
 			"burning": false,
@@ -205,7 +205,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": 0.000185682016308419,
+			"rotation": 0.000364000821718946,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -216,8 +216,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 318.333526611328,
-			"y": 336.717071533203
+			"x": 318.332122802734,
+			"y": 336.717834472656
 		},
 		{
 			"burning": false,
@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -0.00106425699777901,
+			"rotation": -0.00107906409539282,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -289,8 +289,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 396.230773925781,
-			"y": 387.25732421875
+			"x": 396.227844238281,
+			"y": 387.257019042969
 		},
 		{
 			"burning": false,
@@ -351,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": 0.273681730031967,
+			"rotation": 0.202138379216194,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -362,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 468.516906738281,
-			"y": 397.164611816406
+			"x": 468.412017822266,
+			"y": 396.947021484375
 		}
 	],
 	"angle": 38.0,
@@ -749,10 +749,10 @@
 			"rect": [
 				70.0,
 				69.0,
-				236.0,
+				237.0,
 				27.5
 			],
-			"text": "ステージをえらぶ / 39",
+			"text": "ステージをえらぶ / 40",
 			"type": "label"
 		},
 		{
@@ -1118,6 +1118,45 @@
 				12.5
 			],
 			"text": "39 きっさてん",
+			"type": "label"
+		},
+		{
+			"background": "193346ff",
+			"border": "080f18ff",
+			"disabled": false,
+			"fontSize": 16,
+			"rect": [
+				734.0,
+				195.0,
+				156.0,
+				78.0
+			],
+			"text": "",
+			"type": "button"
+		},
+		{
+			"rect": [
+				738.0,
+				199.0,
+				148.0,
+				48.0
+			],
+			"texture": "res://assets/maps/40-office.png",
+			"type": "texture"
+		},
+		{
+			"align": 0,
+			"color": "fff0b5ff",
+			"fontSize": 10,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				739.0,
+				250.0,
+				55.0,
+				12.5
+			],
+			"text": "40 オフィス",
 			"type": "label"
 		},
 		{

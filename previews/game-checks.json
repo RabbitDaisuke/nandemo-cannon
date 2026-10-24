@@ -1,9 +1,9 @@
 {
-	"checks": 513,
+	"checks": 538,
 	"engine": "4.7.2-stable (official)",
 	"failures": [],
 	"observations": {
-		"final_score": 1730,
+		"final_score": 1520,
 		"finalize_seconds": 12.0083333333333,
 		"first_shot_bodies": 1,
 		"first_shot_floor_overlap": 0.154449462890625,
@@ -12,7 +12,14 @@
 		"home_scoring_floor_overlaps": [
 			0.01214599609375,
 			0.02960205078125
-		]
+		],
+		"office_initial_items": [
+			"desktop-pc",
+			"keyboard",
+			"wired-mouse",
+			"monitor"
+		],
+		"office_initial_score": 620
 	},
 	"status": "passed",
 	"suite": "game",

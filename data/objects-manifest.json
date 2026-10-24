@@ -18194,6 +18194,622 @@
         "flowResponse": 1.25
       },
       "opaquePixels": 8482
+    },
+    {
+      "id": "shredder",
+      "nameJa": "シュレッダー",
+      "svg": "objects/shredder.svg",
+      "png": "raster/objects/shredder.png",
+      "webp": "raster/objects/shredder.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        17,
+        7,
+        94,
+        113
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        47,
+        57
+      ],
+      "worldWidth": 69,
+      "worldHeight": 82.94680851063829,
+      "worldScale": 0.7340425531914894,
+      "material": "appliance",
+      "mass": 11,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "shredder",
+      "fixtures": [
+        {
+          "rect": [
+            17,
+            29,
+            94,
+            24
+          ]
+        },
+        {
+          "polygon": [
+            [
+              22,
+              53
+            ],
+            [
+              106,
+              53
+            ],
+            [
+              99,
+              120
+            ],
+            [
+              29,
+              120
+            ]
+          ]
+        },
+        {
+          "rect": [
+            43,
+            7,
+            45,
+            22
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 8405
+    },
+    {
+      "id": "banknote",
+      "nameJa": "銀行券",
+      "svg": "objects/banknote.svg",
+      "png": "raster/objects/banknote.png",
+      "webp": "raster/objects/banknote.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        31,
+        118,
+        65
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        33
+      ],
+      "worldWidth": 68,
+      "worldHeight": 37.45762711864407,
+      "worldScale": 0.576271186440678,
+      "material": "paper",
+      "mass": 0.35,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "banknote",
+      "fixtures": [
+        {
+          "rect": [
+            5,
+            31,
+            118,
+            65
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 7670
+    },
+    {
+      "id": "ten-yen-coin",
+      "nameJa": "10円玉",
+      "svg": "objects/ten-yen-coin.svg",
+      "png": "raster/objects/ten-yen-coin.png",
+      "webp": "raster/objects/ten-yen-coin.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        9,
+        110,
+        110
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        55
+      ],
+      "worldWidth": 29,
+      "worldHeight": 28.999999999999996,
+      "worldScale": 0.2636363636363636,
+      "material": "metal",
+      "mass": 1.1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "ten-yen-coin",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              43,
+              9
+            ],
+            [
+              85,
+              9
+            ],
+            [
+              107,
+              31
+            ],
+            [
+              119,
+              52
+            ],
+            [
+              119,
+              77
+            ],
+            [
+              99,
+              105
+            ],
+            [
+              77,
+              119
+            ],
+            [
+              49,
+              119
+            ],
+            [
+              21,
+              100
+            ],
+            [
+              9,
+              77
+            ],
+            [
+              9,
+              50
+            ],
+            [
+              23,
+              27
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 9517
+    },
+    {
+      "id": "paper-bag",
+      "nameJa": "紙ぶくろ",
+      "svg": "objects/paper-bag.svg",
+      "png": "raster/objects/paper-bag.png",
+      "webp": "raster/objects/paper-bag.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        11,
+        5,
+        106,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        53,
+        59
+      ],
+      "worldWidth": 60,
+      "worldHeight": 65.66037735849056,
+      "worldScale": 0.5660377358490566,
+      "material": "paper",
+      "mass": 0.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "paper-bag",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              19,
+              40
+            ],
+            [
+              109,
+              40
+            ],
+            [
+              117,
+              121
+            ],
+            [
+              11,
+              121
+            ]
+          ]
+        },
+        {
+          "rect": [
+            35,
+            11,
+            14,
+            29
+          ]
+        },
+        {
+          "rect": [
+            42,
+            5,
+            43,
+            12
+          ]
+        },
+        {
+          "rect": [
+            78,
+            11,
+            14,
+            29
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 9182
+    },
+    {
+      "id": "nori-bento",
+      "nameJa": "のり弁当",
+      "svg": "objects/nori-bento.svg",
+      "png": "raster/objects/nori-bento.png",
+      "webp": "raster/objects/nori-bento.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        30,
+        117,
+        89
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        34
+      ],
+      "worldWidth": 78,
+      "worldHeight": 59.33333333333333,
+      "worldScale": 0.6666666666666666,
+      "material": "plastic",
+      "mass": 2.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "nori-bento",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              15,
+              30
+            ],
+            [
+              113,
+              30
+            ],
+            [
+              122,
+              41
+            ],
+            [
+              116,
+              108
+            ],
+            [
+              105,
+              119
+            ],
+            [
+              22,
+              119
+            ],
+            [
+              10,
+              108
+            ],
+            [
+              5,
+              41
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9701
+    },
+    {
+      "id": "homemade-bento",
+      "nameJa": "てづくり弁当",
+      "svg": "objects/homemade-bento.svg",
+      "png": "raster/objects/homemade-bento.png",
+      "webp": "raster/objects/homemade-bento.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        30,
+        117,
+        89
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        34
+      ],
+      "worldWidth": 76,
+      "worldHeight": 57.81196581196581,
+      "worldScale": 0.6495726495726496,
+      "material": "plastic",
+      "mass": 2.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "homemade-bento",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              15,
+              30
+            ],
+            [
+              113,
+              30
+            ],
+            [
+              122,
+              41
+            ],
+            [
+              116,
+              108
+            ],
+            [
+              105,
+              119
+            ],
+            [
+              22,
+              119
+            ],
+            [
+              10,
+              108
+            ],
+            [
+              5,
+              41
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9698
+    },
+    {
+      "id": "paper-cup",
+      "nameJa": "紙コップ",
+      "svg": "objects/paper-cup.svg",
+      "png": "raster/objects/paper-cup.png",
+      "webp": "raster/objects/paper-cup.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        23,
+        24,
+        82,
+        96
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        41,
+        40
+      ],
+      "worldWidth": 37,
+      "worldHeight": 43.31707317073171,
+      "worldScale": 0.45121951219512196,
+      "material": "paper",
+      "mass": 0.45,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "paper-cup",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              23,
+              24
+            ],
+            [
+              105,
+              24
+            ],
+            [
+              90,
+              120
+            ],
+            [
+              38,
+              120
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.65,
+        "restitution": 0.02,
+        "flammable": true,
+        "explosionResistance": 0.05,
+        "burnSeconds": 2,
+        "flowResponse": 1.25
+      },
+      "opaquePixels": 6446
+    },
+    {
+      "id": "monitor",
+      "nameJa": "モニター",
+      "svg": "objects/monitor.svg",
+      "png": "raster/objects/monitor.png",
+      "webp": "raster/objects/monitor.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        12,
+        120,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        52
+      ],
+      "worldWidth": 88,
+      "worldHeight": 82.13333333333333,
+      "worldScale": 0.7333333333333333,
+      "material": "appliance",
+      "mass": 6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "monitor",
+      "fixtures": [
+        {
+          "rect": [
+            4,
+            12,
+            120,
+            76
+          ]
+        },
+        {
+          "rect": [
+            54,
+            88,
+            20,
+            24
+          ]
+        },
+        {
+          "rect": [
+            31,
+            112,
+            66,
+            12
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 10392
     }
   ]
 }

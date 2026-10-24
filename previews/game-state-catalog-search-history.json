@@ -440,10 +440,10 @@
 			"rect": [
 				70.0,
 				98.0,
-				101.0,
+				105.0,
 				12.5
 			],
-			"text": "241 / 241しゅるい",
+			"text": "249 / 249しゅるい",
 			"type": "label"
 		},
 		{
@@ -1486,7 +1486,7 @@
 	],
 	"destroyedCounts": {},
 	"droplets": [],
-	"elapsed": 0.241666666666667,
+	"elapsed": 0.15,
 	"firePatches": [],
 	"followingItem": "shovel",
 	"font": "res://assets/font/arcade-generated.fnt",

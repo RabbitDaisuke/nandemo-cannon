@@ -1743,6 +1743,52 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "40-office",
+      "stage": 40,
+      "nameJa": "オフィス",
+      "status": "specified",
+      "svg": "maps/40-office.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            65,
+            395,
+            560,
+            20
+          ]
+        },
+        {
+          "rect": [
+            85,
+            415,
+            24,
+            35
+          ]
+        },
+        {
+          "rect": [
+            580,
+            415,
+            24,
+            35
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }

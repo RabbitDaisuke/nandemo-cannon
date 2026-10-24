@@ -405,6 +405,74 @@ func _late_stage_checks() -> void:
 	await _frames(2)
 	_check(game.current_stage.queue.size() == 15 and game.playable, "Cafe failed to load a playable fifteen-shot queue")
 
+func _preplaced_scoring_checks() -> void:
+	# The same data contract applies to every stage, including future additions.
+	game.load_stage(0)
+	await _frames(2)
+	var neutral = game._create_preplaced_actor({"id": "desktop-pc", "x": 200, "groundY": 380})
+	neutral.freeze = true
+	_check(not neutral.can_score and game.calculate_score() == 0, "A placement without scoring opted neutral scenery into points")
+	game.destroy_actor(neutral, "test")
+	var disabled = game._create_preplaced_actor({"id": "desktop-pc", "x": 200, "groundY": 380, "scoring": false})
+	disabled.freeze = true
+	_check(not disabled.can_score and game.calculate_score() == 0, "Explicitly neutral placement still awarded points")
+	game.destroy_actor(disabled, "test")
+	var scored = game._create_preplaced_actor({"id": "desktop-pc", "x": 200, "groundY": 380, "scoring": true})
+	scored.freeze = true
+	var initial = game.calculate_score()
+	_check(scored.can_score and not scored.is_launched and initial > int(scored.record.score), "Scoring placement did not receive ordinary base and vertical height points without a shot")
+	scored.position.y -= 32.0
+	_check(game.calculate_score() == initial + 20, "Placed scoring object does not share the 16px height-bonus rule")
+	scored.position.x += 24.0
+	_check(game.calculate_score() == initial + 20, "Horizontal movement changed a placed object's height bonus")
+	var valid_position = scored.position
+	scored.position.x = game.score_zone.end.x + 100.0
+	_check(game.calculate_score() == 0, "Placed scoring object retained points outside the target")
+	scored.position = valid_position
+	game.destroy_actor(scored, "test")
+	_check(game.calculate_score() == 0, "Destroyed placed scoring object retained its points")
+	var penalty = game._create_preplaced_actor({"id": "bowling-pin", "x": 200, "groundY": 380, "scoring": true, "scorePenalty": 90})
+	penalty.freeze = true
+	_check(penalty.can_score and game.calculate_score() == -90, "Placement penalty did not override ordinary positive scoring")
+	penalty.position.y -= 32.0
+	_check(game.calculate_score() == -90, "Placement penalty incorrectly gained a height bonus")
+	game.destroy_actor(penalty, "test")
+
+func _office_stage_checks() -> void:
+	game.load_stage(39)
+	await _frames(240)
+	var office_queue: Array = game.current_stage.queue
+	_check(game.stage_index == 39 and game.playable and office_queue.size() == 15, "Office did not load as stage 40 with fifteen throws")
+	_check(office_queue.count("blast-bomb") == 2 and office_queue.count("flamethrower") == 1 and office_queue[4] == "blast-bomb" and office_queue[7] == "flamethrower" and office_queue[10] == "blast-bomb", "Office lost its two interleaved strong bombs or one flamethrower")
+	var initial_ids: Array[String] = []
+	var monitor: ThrowBody = null
+	var all_scoring = true
+	for actor in game.actors:
+		initial_ids.append(actor.item_id)
+		all_scoring = all_scoring and actor.can_score and not actor.is_launched and not actor.freeze
+		if actor.item_id == "monitor":
+			monitor = actor
+	_check(initial_ids.has("desktop-pc") and initial_ids.has("keyboard") and initial_ids.has("wired-mouse") and initial_ids.has("monitor"), "Office is missing physical default computer equipment")
+	_check(all_scoring and game.shots_fired == 0, "Office default equipment is neutral, frozen, or consumes a throw")
+	var initial_score = game.calculate_score()
+	observations.office_initial_score = initial_score
+	observations.office_initial_items = initial_ids
+	_check(initial_score >= initial_ids.size() * 100 and game.score_value == initial_score, "Office equipment did not begin with a visible positive score after settling")
+	await _snapshot("40-office")
+	# Physically moving or destroying a default prop must remove its contribution.
+	# Freeze only in this isolated test so unrelated falling bodies cannot mask it.
+	for actor in game.actors:
+		actor.freeze = true
+	if monitor != null:
+		var valid_position = monitor.position
+		monitor.position.x = game.score_zone.end.x + 100.0
+		var outside_score = game.calculate_score()
+		_check(outside_score <= initial_score - int(monitor.record.score), "An office monitor outside the target kept its initial points")
+		monitor.position = valid_position
+		_check(game.calculate_score() == initial_score, "Returning the office monitor did not restore its ordinary score")
+		game.destroy_actor(monitor, "test")
+		_check(game.calculate_score() == outside_score, "Destroying office equipment failed to remove its base and height points")
+
 func _run() -> void:
 	root.size = Vector2i(960, 540)
 	game = GameScript.new()
@@ -429,6 +497,8 @@ func _run() -> void:
 		if index >= 20:
 			await _snapshot(str(game.current_stage.map))
 	await _late_stage_checks()
+	await _preplaced_scoring_checks()
+	await _office_stage_checks()
 	await _catalog_search_checks()
 	game.load_stage(0)
 	await _frames(2)
@@ -718,6 +788,7 @@ func _run() -> void:
 	var report = {"suite": "game", "engine": Engine.get_version_info().string, "checks": checks, "failures": failures, "observations": observations, "status": "passed" if failures.is_empty() else "failed", "verification": "Godot headless scene integration; no browser or rendered engine screenshot"}
 	var file = FileAccess.open("res://previews/game-checks.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(report, "\t"))
+	file.close()
 	print(JSON.stringify(report))
 	# The final waiting-speed check fires a shot immediately before shutdown.
 	# Let the audio thread consume its queued stop before releasing the scene.
