@@ -41,6 +41,8 @@ func configure(owner_world: Node2D, stage: Dictionary) -> void:
 				add_fire(Vector2(x, r.position.y - 3), 23.0, float(zone.get("burnSeconds", 4.0)), bool(zone.get("heatSource", false)), true)
 
 func on_launch(actor: ThrowBody) -> void:
+	if bool(actor.get_meta("water_dud", false)):
+		return
 	match actor.behavior:
 		"flame_jet", "cold_jet", "fuel_light", "campfire":
 			if bool(actor.get_meta("fuel_depleted", false)):
@@ -108,12 +110,15 @@ func tick(delta: float) -> void:
 			continue
 		actor.wet_seconds = maxf(0.0, actor.wet_seconds - delta)
 		actor.frozen_seconds = maxf(0.0, actor.frozen_seconds - delta)
+		_disarm_if_submerged(actor)
 		if actor.frozen_seconds > 0.0:
 			actor.visual.modulate = Color(0.65, 0.9, 1.0)
 		elif actor.wet_seconds > 0.0:
 			actor.visual.modulate = Color(0.73, 0.85, 0.92)
 		elif actor.burning:
 			actor.visual.modulate = Color(1.0, 0.65, 0.35)
+		elif bool(actor.get_meta("water_dud", false)):
+			actor.visual.modulate = Color(0.58, 0.72, 0.80)
 		else:
 			actor.visual.modulate = Color.WHITE
 		if actor.fuel_seconds > 0.0:
@@ -200,7 +205,7 @@ func heat_actor(actor: ThrowBody, heat: float) -> void:
 	if actor.behavior in ["campfire", "fuel_light"]:
 		# These use a single finite fuel supply, not a second independent burn clock.
 		return
-	if actor.behavior in ["explosion", "firework"]:
+	if actor.behavior in ["explosion", "firework"] and not bool(actor.get_meta("water_dud", false)):
 		actor.set_meta("fuse", minf(float(actor.get_meta("fuse", 0.8)), 0.8))
 	if not bool(actor.spec.get("flammable", false)) or actor.burning:
 		return
@@ -301,8 +306,27 @@ func _jet(actor: ThrowBody, cold: bool) -> void:
 			ignite_area(end, 18.0, actor, 0.15)
 	actor.set_meta("jet_length", maxf(8.0, center_length))
 
+func _disarm_if_submerged(actor: ThrowBody) -> bool:
+	if bool(actor.get_meta("water_dud", false)):
+		return true
+	if actor.behavior not in ["explosion", "firework", "lightning"] or bool(actor.spec.get("waterproofExplosive", false)):
+		return false
+	if world.liquid.submerged_fraction(actor) < 0.5:
+		return false
+	actor.set_meta("water_dud", true)
+	if actor.has_meta("fuse"):
+		actor.remove_meta("fuse")
+	actor.burning = false
+	actor.can_score = true
+	actor.record.score = maxi(100, int(actor.record.get("score", 0)))
+	actor.visual.modulate = Color(0.58, 0.72, 0.80)
+	return true
+
 func detonate(actor: ThrowBody) -> void:
 	if not actor.alive or actor.release_triggered:
+		return
+	# Check at the actual trigger too: an impact may precede the water tick.
+	if _disarm_if_submerged(actor):
 		return
 	actor.release_triggered = true
 	var origin = actor.global_position

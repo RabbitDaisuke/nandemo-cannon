@@ -40,10 +40,12 @@
 |`out/standalone/`|自己完結版・Actionsの結合先|ゲーム、起動HTML、圧縮ランタイム、復号ローダー、元のライセンス|
 |`out/runtime/godot/4.7.2/`|bundleが作るランタイム|公式JS3ファイル、gzip化WASM、manifest、原本ライセンス|
 |`out/engine/` / `out/game/`|並列jobの成果物|`web-runtime` / `web-game`としてupload-artifactへ渡す|
-|`out/packages/nandemo-cannon-web-4.7.2.zip`|自己完結Web版の配布ZIP|Web全体と元のライセンス。ZIP32のstore方式で作成し、`unzip -t`で確認|
+|`out/packages/nandemo-cannon-web-4.7.2.zip`|起動時取得兼ゲーム配布ZIP|ゲーム・エンジン・元のライセンス。BGM音源を除外して初回通信量を維持。ZIP32のstore方式で作成し、`unzip -t`で確認|
 |`dist/`|Pages公開対象|ゲームPCK、画像、起動設定、復号ローダー、公式JS・音声worklet、ライセンス、`downloads/`の完全版ZIP|
 
 `bundle`は公開を行わない。`out/standalone/`はHTTPサーバーで配信して使い、`file://`直開きは対象外。公開用の出力には生WASMや分割ファイルを置かない。`out/export/`の生WASMは公式exportの検証用中間生成物であり、配布対象ではない。
+
+BGMer音源は`web/audio/.gdignore`でGodotから除外する。buildは`audio/bgm/`を出力へコピーし、Pagesでは個別のMP3を必要時にストリーム再生する。ZIP単体には音源を入れない。全音源付きのローカル配布には`out/standalone/`全体を使う。Safariの音量はHTMLMediaElement.volumeに依存せずGainNodeで制御し、最初の開始操作でAudioContextだけを解除する。音声要素はゲーム開始後に生成する。
 
 ## GitHub Actionsから公開する
 

@@ -1,9 +1,9 @@
 {
-  "objects": 213,
-  "maps": 32,
-  "stagesWith15Shots": 32,
-  "croppedSpritesChecked": 213,
-  "uniqueRenderedSprites": 212,
+  "objects": 228,
+  "maps": 35,
+  "stagesWith15Shots": 35,
+  "croppedSpritesChecked": 228,
+  "uniqueRenderedSprites": 227,
   "animationFrames": 34,
   "checks": [
     "UTF-8 catalog and SVG reads",
@@ -20,8 +20,8 @@
     "40 new SVG silhouettes cropped from alpha bounds, with compound collision fixtures",
     "Stage 18 retains permanent ice and sole-grip boots; numbering is an implementation assumption",
     "Stage 16 plate uses an open concave terrain polygon; timed fireworks are physical bodies",
-    "213 item records; all 32 queues reference 15 existing items",
-    "32 maps have static terrain data"
+    "35 maps have static terrain data",
+    "228 item records; all 35 queues reference 15 existing items"
   ],
   "limits": [
     "This report records original SVG asset checks; current runtime checks are in previews/*-checks.json",

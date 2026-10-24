@@ -62,6 +62,486 @@
 					108.0
 				],
 				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 29.4545454545455,
+				"worldScale": 0.272727272727273,
+				"worldWidth": 30.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-15.0,
+				-13.9090909957886
+			],
+			"visualScale": [
+				0.272727280855179,
+				0.272727280855179
+			],
+			"x": 244.0,
+			"y": 333.795318603516
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 29.4545454545455,
+				"worldScale": 0.272727272727273,
+				"worldWidth": 30.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-15.0,
+				-13.9090909957886
+			],
+			"visualScale": [
+				0.272727280855179,
+				0.272727280855179
+			],
+			"x": 277.0,
+			"y": 333.795318603516
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 29.4545454545455,
+				"worldScale": 0.272727272727273,
+				"worldWidth": 30.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-15.0,
+				-13.9090909957886
+			],
+			"visualScale": [
+				0.272727280855179,
+				0.272727280855179
+			],
+			"x": 310.0,
+			"y": 333.795318603516
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 29.4545454545455,
+				"worldScale": 0.272727272727273,
+				"worldWidth": 30.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-15.0,
+				-13.9090909957886
+			],
+			"visualScale": [
+				0.272727280855179,
+				0.272727280855179
+			],
+			"x": 260.0,
+			"y": 303.795318603516
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 29.4545454545455,
+				"worldScale": 0.272727272727273,
+				"worldWidth": 30.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-15.0,
+				-13.9090909957886
+			],
+			"visualScale": [
+				0.272727280855179,
+				0.272727280855179
+			],
+			"x": 294.0,
+			"y": 303.795318603516
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 29.4545454545455,
+				"worldScale": 0.272727272727273,
+				"worldWidth": 30.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-15.0,
+				-13.9090909957886
+			],
+			"visualScale": [
+				0.272727280855179,
+				0.272727280855179
+			],
+			"x": 277.0,
+			"y": 273.795318603516
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
 				"worldHeight": 54.9818181818182,
 				"worldScale": 0.509090909090909,
 				"worldWidth": 56.0
@@ -77,82 +557,991 @@
 				0.509090900421143,
 				0.509090900421143
 			],
-			"x": 275.0,
-			"y": 320.558959960938
+			"x": 130.0,
+			"y": 475.558959960938
 		},
 		{
 			"burning": false,
 			"canScore": false,
 			"frozen": 0.0,
 			"fuel": -1.0,
-			"id": "wooden-obstacle",
+			"id": "wooden-crate",
 			"record": {
-				"behavior": "solid",
+				"behavior": "breakable",
 				"bodyKind": "dynamic",
-				"colliderTemplate": "wooden-obstacle",
+				"colliderTemplate": "box",
 				"fixtures": [
 					{
 						"rect": [
-							17.0,
-							5.0,
-							94.0,
-							118.0
+							10.0,
+							14.0,
+							108.0,
+							106.0
 						]
 					}
 				],
-				"id": "wooden-obstacle",
-				"mass": 60.0,
+				"id": "wooden-crate",
+				"mass": 5.0,
 				"material": "wood",
-				"nameJa": "木の大きな障害物",
-				"opaquePixels": 12316.0,
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
 				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
 					"burnSeconds": 5.0,
-					"explosionResistance": 0.15,
+					"explosionResistance": 0.25,
 					"flammable": true,
 					"flowResponse": 1.0,
 					"friction": 0.6,
-					"impactDestructible": false,
-					"restitution": 0.1
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
 				},
 				"pivotCropped": [
 					55.0,
-					62.0
+					51.0
 				],
 				"pivotSource": [
 					64.0,
 					64.0
 				],
-				"png": "raster/objects/wooden-obstacle.png",
+				"png": "raster/objects/wooden-crate.png",
 				"score": 100.0,
 				"sourceGrid": [
 					128.0,
 					128.0
 				],
-				"svg": "objects/wooden-obstacle.svg",
+				"svg": "objects/wooden-crate.svg",
 				"viewBox": [
 					9.0,
-					2.0,
+					13.0,
 					110.0,
-					124.0
+					108.0
 				],
-				"webp": "raster/objects/wooden-obstacle.webp",
-				"worldHeight": 85.6727272727273,
-				"worldScale": 0.690909090909091,
-				"worldWidth": 76.0
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.9818181818182,
+				"worldScale": 0.509090909090909,
+				"worldWidth": 56.0
 			},
 			"rotation": 0.0,
-			"texture": "res://assets/objects/wooden-obstacle.svg",
+			"texture": "res://assets/objects/wooden-crate.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
-				-38.0,
-				-42.8363647460938
+				-28.0,
+				-25.9636363983154
 			],
 			"visualScale": [
-				0.690909087657928,
-				0.690909087657928
+				0.509090900421143,
+				0.509090900421143
 			],
-			"x": 558.0,
-			"y": 363.304412841797
+			"x": 185.0,
+			"y": 475.558959960938
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "wooden-crate",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							10.0,
+							14.0,
+							108.0,
+							106.0
+						]
+					}
+				],
+				"id": "wooden-crate",
+				"mass": 5.0,
+				"material": "wood",
+				"nameJa": "木箱",
+				"opaquePixels": 11165.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": 5.0,
+					"explosionResistance": 0.25,
+					"flammable": true,
+					"flowResponse": 1.0,
+					"friction": 0.6,
+					"impactSpeed": 180.0,
+					"loadForceThreshold": 7840.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 12.0,
+					"restitution": 0.1,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					55.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/wooden-crate.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/wooden-crate.svg",
+				"viewBox": [
+					9.0,
+					13.0,
+					110.0,
+					108.0
+				],
+				"webp": "raster/objects/wooden-crate.webp",
+				"worldHeight": 54.9818181818182,
+				"worldScale": 0.509090909090909,
+				"worldWidth": 56.0
+			},
+			"rotation": -0.0617909580469131,
+			"texture": "res://assets/objects/wooden-crate.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-28.0,
+				-25.9636363983154
+			],
+			"visualScale": [
+				0.509090900421143,
+				0.509090900421143
+			],
+			"x": 159.883071899414,
+			"y": 420.558959960938
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "vase",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "vase",
+				"fixtures": [
+					{
+						"rect": [
+							40.0,
+							10.0,
+							48.0,
+							14.0
+						]
+					},
+					{
+						"rect": [
+							50.0,
+							24.0,
+							28.0,
+							28.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								50.0,
+								52.0
+							],
+							[
+								78.0,
+								52.0
+							],
+							[
+								94.0,
+								72.0
+							],
+							[
+								94.0,
+								100.0
+							],
+							[
+								82.0,
+								118.0
+							],
+							[
+								46.0,
+								118.0
+							],
+							[
+								34.0,
+								100.0
+							],
+							[
+								34.0,
+								72.0
+							]
+						]
+					}
+				],
+				"id": "vase",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "花瓶",
+				"opaquePixels": 5642.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 140.0,
+					"loadForceThreshold": 4900.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 6.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					33.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/vase.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/vase.svg",
+				"viewBox": [
+					31.0,
+					7.0,
+					66.0,
+					114.0
+				],
+				"webp": "raster/objects/vase.webp",
+				"worldHeight": 65.6363636363636,
+				"worldScale": 0.575757575757576,
+				"worldWidth": 38.0
+			},
+			"rotation": -0.0494563207030296,
+			"texture": "res://assets/objects/vase.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-19.0,
+				-32.8181800842285
+			],
+			"visualScale": [
+				0.575757563114166,
+				0.575757563114166
+			],
+			"x": 119.008293151855,
+			"y": 417.977142333984
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "drinking-glass",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "drinking-glass",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								16.0
+							],
+							[
+								104.0,
+								16.0
+							],
+							[
+								92.0,
+								117.0
+							],
+							[
+								36.0,
+								117.0
+							]
+						]
+					}
+				],
+				"id": "drinking-glass",
+				"mass": 1.2,
+				"material": "glass",
+				"nameJa": "コップ",
+				"opaquePixels": 7563.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.05,
+					"flammable": false,
+					"flowResponse": 0.55,
+					"friction": 0.35,
+					"impactSpeed": 175.0,
+					"loadForceThreshold": 5000.0,
+					"loadHoldSeconds": 0.35,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 2.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					43.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/drinking-glass.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/drinking-glass.svg",
+				"viewBox": [
+					21.0,
+					13.0,
+					86.0,
+					107.0
+				],
+				"webp": "raster/objects/drinking-glass.webp",
+				"worldHeight": 53.5,
+				"worldScale": 0.5,
+				"worldWidth": 43.0
+			},
+			"rotation": 0.437644481658936,
+			"texture": "res://assets/objects/drinking-glass.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-21.5,
+				-25.5
+			],
+			"visualScale": [
+				0.5,
+				0.5
+			],
+			"x": 191.306716918945,
+			"y": 422.568054199219
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "refrigerator",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							8.0,
+							92.0,
+							114.0
+						]
+					}
+				],
+				"id": "refrigerator",
+				"mass": 24.0,
+				"material": "metal",
+				"nameJa": "冷蔵庫",
+				"opaquePixels": 10021.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					47.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/refrigerator.png",
+				"score": 300.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/refrigerator.svg",
+				"viewBox": [
+					17.0,
+					7.0,
+					94.0,
+					116.0
+				],
+				"webp": "raster/objects/refrigerator.webp",
+				"worldHeight": 101.191489361702,
+				"worldScale": 0.872340425531915,
+				"worldWidth": 82.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/refrigerator.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-41.0,
+				-49.7234039306641
+			],
+			"visualScale": [
+				0.872340440750122,
+				0.872340440750122
+			],
+			"x": 375.0,
+			"y": 453.472320556641
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "refrigerator",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							8.0,
+							92.0,
+							114.0
+						]
+					}
+				],
+				"id": "refrigerator",
+				"mass": 24.0,
+				"material": "metal",
+				"nameJa": "冷蔵庫",
+				"opaquePixels": 10021.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					47.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/refrigerator.png",
+				"score": 300.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/refrigerator.svg",
+				"viewBox": [
+					17.0,
+					7.0,
+					94.0,
+					116.0
+				],
+				"webp": "raster/objects/refrigerator.webp",
+				"worldHeight": 101.191489361702,
+				"worldScale": 0.872340425531915,
+				"worldWidth": 82.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/refrigerator.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-41.0,
+				-49.7234039306641
+			],
+			"visualScale": [
+				0.872340440750122,
+				0.872340440750122
+			],
+			"x": 455.0,
+			"y": 453.472320556641
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "refrigerator",
+			"record": {
+				"behavior": "solid",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "box",
+				"fixtures": [
+					{
+						"rect": [
+							18.0,
+							8.0,
+							92.0,
+							114.0
+						]
+					}
+				],
+				"id": "refrigerator",
+				"mass": 24.0,
+				"material": "metal",
+				"nameJa": "冷蔵庫",
+				"opaquePixels": 10021.0,
+				"physics": {
+					"burnSeconds": null,
+					"explosionResistance": 0.85,
+					"flammable": false,
+					"flowResponse": 0.45,
+					"friction": 0.55,
+					"restitution": 0.08
+				},
+				"pivotCropped": [
+					47.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/refrigerator.png",
+				"score": 300.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/refrigerator.svg",
+				"viewBox": [
+					17.0,
+					7.0,
+					94.0,
+					116.0
+				],
+				"webp": "raster/objects/refrigerator.webp",
+				"worldHeight": 101.191489361702,
+				"worldScale": 0.872340425531915,
+				"worldWidth": 82.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/refrigerator.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-41.0,
+				-49.7234039306641
+			],
+			"visualScale": [
+				0.872340440750122,
+				0.872340440750122
+			],
+			"x": 562.0,
+			"y": 353.472320556641
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "teapot",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "teapot",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								42.0,
+								44.0
+							],
+							[
+								82.0,
+								44.0
+							],
+							[
+								94.0,
+								62.0
+							],
+							[
+								94.0,
+								92.0
+							],
+							[
+								82.0,
+								112.0
+							],
+							[
+								42.0,
+								112.0
+							],
+							[
+								28.0,
+								94.0
+							],
+							[
+								28.0,
+								76.0
+							]
+						]
+					},
+					{
+						"polygon": [
+							[
+								6.0,
+								40.0
+							],
+							[
+								18.0,
+								40.0
+							],
+							[
+								34.0,
+								60.0
+							],
+							[
+								36.0,
+								78.0
+							],
+							[
+								10.0,
+								54.0
+							]
+						]
+					},
+					{
+						"rect": [
+							38.0,
+							36.0,
+							48.0,
+							12.0
+						]
+					},
+					{
+						"rect": [
+							54.0,
+							24.0,
+							18.0,
+							12.0
+						]
+					},
+					{
+						"rect": [
+							88.0,
+							44.0,
+							28.0,
+							10.0
+						]
+					},
+					{
+						"rect": [
+							106.0,
+							50.0,
+							12.0,
+							34.0
+						]
+					},
+					{
+						"rect": [
+							90.0,
+							80.0,
+							24.0,
+							10.0
+						]
+					}
+				],
+				"id": "teapot",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "ティーポット",
+				"opaquePixels": 6606.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 150.0,
+					"loadForceThreshold": 5880.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 8.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					62.0,
+					43.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/teapot.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/teapot.svg",
+				"viewBox": [
+					2.0,
+					21.0,
+					117.0,
+					94.0
+				],
+				"webp": "raster/objects/teapot.webp",
+				"worldHeight": 46.5982905982906,
+				"worldScale": 0.495726495726496,
+				"worldWidth": 58.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/teapot.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-30.7350425720215,
+				-21.3162384033203
+			],
+			"visualScale": [
+				0.495726495981216,
+				0.495726495981216
+			],
+			"x": 375.0,
+			"y": 378.273193359375
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "drinking-glass",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "drinking-glass",
+				"fixtures": [
+					{
+						"polygon": [
+							[
+								24.0,
+								16.0
+							],
+							[
+								104.0,
+								16.0
+							],
+							[
+								92.0,
+								117.0
+							],
+							[
+								36.0,
+								117.0
+							]
+						]
+					}
+				],
+				"id": "drinking-glass",
+				"mass": 1.2,
+				"material": "glass",
+				"nameJa": "コップ",
+				"opaquePixels": 7563.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.05,
+					"flammable": false,
+					"flowResponse": 0.55,
+					"friction": 0.35,
+					"impactSpeed": 175.0,
+					"loadForceThreshold": 5000.0,
+					"loadHoldSeconds": 0.35,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 2.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					43.0,
+					51.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/drinking-glass.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/drinking-glass.svg",
+				"viewBox": [
+					21.0,
+					13.0,
+					86.0,
+					107.0
+				],
+				"webp": "raster/objects/drinking-glass.webp",
+				"worldHeight": 53.5,
+				"worldScale": 0.5,
+				"worldWidth": 43.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/drinking-glass.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-21.5,
+				-25.5
+			],
+			"visualScale": [
+				0.5,
+				0.5
+			],
+			"x": 455.0,
+			"y": 375.568054199219
+		},
+		{
+			"burning": false,
+			"canScore": false,
+			"frozen": 0.0,
+			"fuel": -1.0,
+			"id": "vase",
+			"record": {
+				"behavior": "breakable",
+				"bodyKind": "dynamic",
+				"colliderTemplate": "vase",
+				"fixtures": [
+					{
+						"rect": [
+							40.0,
+							10.0,
+							48.0,
+							14.0
+						]
+					},
+					{
+						"rect": [
+							50.0,
+							24.0,
+							28.0,
+							28.0
+						]
+					},
+					{
+						"polygon": [
+							[
+								50.0,
+								52.0
+							],
+							[
+								78.0,
+								52.0
+							],
+							[
+								94.0,
+								72.0
+							],
+							[
+								94.0,
+								100.0
+							],
+							[
+								82.0,
+								118.0
+							],
+							[
+								46.0,
+								118.0
+							],
+							[
+								34.0,
+								100.0
+							],
+							[
+								34.0,
+								72.0
+							]
+						]
+					}
+				],
+				"id": "vase",
+				"mass": 2.0,
+				"material": "ceramic",
+				"nameJa": "花瓶",
+				"opaquePixels": 5642.0,
+				"physics": {
+					"breakResult": "remove body and score; non-colliding finite shards only",
+					"burnSeconds": null,
+					"explosionResistance": 0.15,
+					"flammable": false,
+					"flowResponse": 0.5,
+					"friction": 0.55,
+					"impactSpeed": 140.0,
+					"loadForceThreshold": 4900.0,
+					"loadHoldSeconds": 0.4,
+					"loadReleaseRatio": 0.8,
+					"minImpactEnergy": 6.0,
+					"restitution": 0.03,
+					"shatterAnimation": "shatter"
+				},
+				"pivotCropped": [
+					33.0,
+					57.0
+				],
+				"pivotSource": [
+					64.0,
+					64.0
+				],
+				"png": "raster/objects/vase.png",
+				"score": 100.0,
+				"sourceGrid": [
+					128.0,
+					128.0
+				],
+				"svg": "objects/vase.svg",
+				"viewBox": [
+					31.0,
+					7.0,
+					66.0,
+					114.0
+				],
+				"webp": "raster/objects/vase.webp",
+				"worldHeight": 65.6363636363636,
+				"worldScale": 0.575757575757576,
+				"worldWidth": 38.0
+			},
+			"rotation": 0.0,
+			"texture": "res://assets/objects/vase.svg",
+			"tint": "ffffffff",
+			"visualPosition": [
+				-19.0,
+				-32.8181800842285
+			],
+			"visualScale": [
+				0.575757563114166,
+				0.575757563114166
+			],
+			"x": 277.0,
+			"y": 227.977142333984
 		}
 	],
 	"angle": 35.0,
@@ -374,10 +1763,10 @@
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				18.0,
-				451.0,
-				285.0,
-				15.0
+				302.0,
+				77.0,
+				304.0,
+				44.0
 			],
 			"text": "せまいあしばと みぞ。ばくふうで ものをうごかそう。",
 			"type": "label"
@@ -398,6 +1787,7 @@
 			"type": "label"
 		},
 		{
+			"editable": true,
 			"maximum": 85.0,
 			"minimum": 5.0,
 			"rect": [
@@ -425,6 +1815,7 @@
 			"type": "label"
 		},
 		{
+			"editable": true,
 			"maximum": 100.0,
 			"minimum": 15.0,
 			"rect": [
@@ -437,18 +1828,18 @@
 			"value": 65.0
 		},
 		{
-			"align": 0,
+			"align": 1,
 			"color": "ffd36cff",
-			"fontSize": 12,
+			"fontSize": 14,
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				852.0,
-				307.0,
-				24.0,
-				15.0
+				746.0,
+				298.0,
+				196.0,
+				17.5
 			],
-			"text": "いま",
+			"text": "つよいばくだん",
 			"type": "label"
 		},
 		{
@@ -465,6 +1856,48 @@
 			],
 			"text": "ドラッグで調整・クリックで発射",
 			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
 		}
 	],
 	"destroyedCounts": {},
@@ -523,52 +1956,62 @@
 		[
 			666.397338867188,
 			296.212371826172,
-			0.94
+			0.96,
+			"ff67dbff"
 		],
 		[
 			627.646240234375,
 			274.370513916016,
-			0.88
+			0.92,
+			"ff67dbff"
 		],
 		[
 			588.895080566406,
 			256.056671142578,
-			0.82
+			0.88,
+			"ff67dbff"
 		],
 		[
 			550.143920898438,
 			241.270843505859,
-			0.76
+			0.84,
+			"ff67dbff"
 		],
 		[
 			511.392761230469,
 			230.013000488281,
-			0.7
+			0.8,
+			"ff67dbff"
 		],
 		[
 			472.6416015625,
 			222.283142089844,
-			0.64
+			0.76,
+			"ff67dbff"
 		],
 		[
 			433.890502929688,
 			218.081329345703,
-			0.58
+			0.72,
+			"ff67dbff"
 		],
 		[
 			395.139343261719,
 			217.407470703125,
-			0.52
+			0.68,
+			"ff67dbff"
 		],
 		[
 			356.38818359375,
 			220.261627197266,
-			0.46
+			0.64,
+			"ff67dbff"
 		],
 		[
 			317.637023925781,
 			226.643768310547,
-			0.4
+			0.6,
+			"ff67dbff"
 		]
 	],
 	"tutorialArrows": [],

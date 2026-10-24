@@ -96,7 +96,11 @@ async function render(snapshot){
     const points=snapshot.scoreMarker??[[r[0]+18,r[1]+r[3]-14],[r[0]+r[2]-18,r[1]+r[3]-14],[r[0]+r[2],r[1]+r[3]+8],[r[0],r[1]+r[3]+8]];
     output+=`<polygon points="${points.map(p=>p.join(',')).join(' ')}" fill="#19f2e624" stroke="#44f4e9" stroke-width="3" stroke-dasharray="10 8"/>`;
   }
-  for(const point of snapshot.trajectory??[])output+=rectangle([point[0]-2,point[1]-2,4,4],`rgba(255,235,166,${point[2]})`);
+  for(const point of snapshot.trajectory??[]){
+    const alpha=Math.round(point[2]*255).toString(16).padStart(2,'0');
+    output+=rectangle([point[0]-4,point[1]-4,8,8],`#060a14${alpha}`);
+    output+=rectangle([point[0]-2,point[1]-2,4,4],`#${(point[3]??'ff67db').slice(0,6)}${alpha}`);
+  }
   for(const points of snapshot.tutorialArrows??[])output+=`<polygon points="${points.map(p=>p.join(',')).join(' ')}" fill="#ffd36c" stroke="#080d14" stroke-width="3"/>`;
   output+=await cannon(snapshot);
   for(const actor of snapshot.actors){
@@ -135,22 +139,24 @@ async function render(snapshot){
       const f=(c.value-c.minimum)/(c.maximum-c.minimum),cy=r[1]+r[3]/2;
       const knobX=r[0]+8+(r[2]-16)*f;
       output+=rectangle([r[0],cy-5,r[2],10],'#273944','#080d14',3);
-      output+=rectangle([r[0],cy-5,knobX-r[0],10],'#e8af45','#080d14',3);
+      output+=rectangle([r[0],cy-5,knobX-r[0],10],c.editable===false?'#668091':'#e8af45','#080d14',3);
       output+=rectangle([knobX-8,cy-13,16,26],'#080d14');
-      output+=rectangle([knobX-5,cy-10,10,20],'#ffe09a');
+      output+=rectangle([knobX-5,cy-10,10,20],c.editable===false?'#668091':'#ffe09a');
     }else if(c.type==='rect')output+=rectangle(r,'#'+c.color);
     else if(c.type==='panel')output+=rectangle(r,'#142c3e','#080f18',4);
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges"><defs>${definitions.join('')}</defs>${output}</svg>`;
 }
 const names=['01-initial','01-after-five','04-alley','18-ice','01-final-score','01-result'];
-for(let page=1;page<=3;page++)names.push(`maps-page-${page}`);
 const stages=JSON.parse(await read('data/stages.json')).stages;
+for(let page=1;page<=Math.ceil(stages.length/15);page++)names.push(`maps-page-${page}`);
 for(const stage of stages)if(stage.id>=21)names.push(stage.map);
 for(const name of names){
   const snapshot=JSON.parse(await read(`previews/game-state-${name}.json`));
   const svg=await render(snapshot);
   await sharp(Buffer.from(svg)).png().toFile(path.join(root,`previews/game-${name}.png`));
 }
-await fs.writeFile(path.join(root,'previews/game-preview-info.json'),JSON.stringify({source:'Godot 4.7.2 headless debug_snapshot from real physics and gameplay',renderer:'Node.js sharp: actual sprite assets and custom FNT glyph atlas composed at recorded positions',browserUsed:false,engineFramebuffer:false,files:names.map(n=>`game-${n}.png`)},null,2));
+const extraStages=stages.filter(stage=>stage.id>=21&&stage.id<=35);
+await sharp({create:{width:1440,height:1350,channels:4,background:'#080f18'}}).composite(await Promise.all(extraStages.map(async(stage,index)=>({input:await sharp(path.join(root,`previews/game-${stage.map}.png`)).resize(480,270,{kernel:'nearest'}).png().toBuffer(),left:(index%3)*480,top:Math.floor(index/3)*270})))).png().toFile(path.join(root,'previews/extra-game-stages.png'));
+await fs.writeFile(path.join(root,'previews/game-preview-info.json'),JSON.stringify({source:'Godot 4.7.2 headless debug_snapshot from real physics and gameplay',renderer:'Node.js sharp: actual sprite assets and custom FNT glyph atlas composed at recorded positions',browserUsed:false,engineFramebuffer:false,files:[...names.map(n=>`game-${n}.png`),'extra-game-stages.png']},null,2));
 console.log(`Rendered ${names.length} game-state previews from real Godot physics snapshots, not browser screenshots or captured JPEGs.`);

@@ -147,6 +147,9 @@ await fs.copyFile(path.join(root, 'web/third-party-licenses.txt'), path.join(sta
 await fs.copyFile(path.join(root, 'LICENSE'), path.join(standalone, 'LICENSE'));
 await writeRuntimeLicenses(root, standalone);
 await fs.copyFile(path.join(root, 'web/licenses/otologic.txt'), path.join(standalone, 'licenses/otologic.txt'));
+await fs.copyFile(path.join(root, 'web/licenses/bgmer.txt'), path.join(standalone, 'licenses/bgmer.txt'));
+await fs.cp(path.join(root, 'web/audio'), path.join(standalone, 'audio'), {recursive: true, filter: source => !source.endsWith('.gdignore')});
+await fs.copyFile(path.join(root, 'web/bgmer-player.mjs'), path.join(standalone, 'bgmer-player.mjs'));
 await fs.copyFile(path.join(root, 'web/wasm-loader.mjs'), path.join(standalone, 'wasm-loader.mjs'));
 await fs.copyFile(path.join(root, 'web/share.mjs'), path.join(standalone, 'share.mjs'));
 await fs.writeFile(path.join(standalone, 'runtime.json'), JSON.stringify(runtimeSettings));
@@ -158,6 +161,9 @@ if (!html.includes("config.mainPack = 'index.pck'")) throw new Error('Missing se
 const gameFiles = (await fs.readdir(standalone)).filter(name => name !== 'runtime');
 async function sizeOf(name) { const info = await fs.stat(name); return info.isDirectory() ? (await Promise.all((await fs.readdir(name)).map(child => sizeOf(path.join(name, child))))).reduce((a, b) => a + b, 0) : info.size; }
 const gameBytes = (await Promise.all(gameFiles.map(name => sizeOf(path.join(standalone, name))))).reduce((a, b) => a + b, 0);
+const lazyMusicBytes = await sizeOf(path.join(standalone, 'audio/bgm'));
 const report = {engine: version, renderer: 'Compatibility / WebGL 2', threads: false, sourcePatched: false, wasmBytes: raw.length, wasmSHA256: hash(raw), gzipBytes: gzip.length, compressedTransportChecks: 3, cdnProvider: 'GitHub Pages mirrors', gameBytes, wasmCompilation: 'passed', officialJSCDNRouting: 'passed', exportedPCKSmoke: 'passed', remoteVerification: null, browserTests: 'not run', pagesProduced: false, output: {standalone: path.relative(root, standalone), runtime: 'out/runtime/godot/4.7.2', pages: null}};
+report.lazyMusicBytes = lazyMusicBytes;
+report.initialGameBytes = gameBytes - lazyMusicBytes;
 await fs.writeFile(path.join(root, 'previews/web-build.json'), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report, null, 2));

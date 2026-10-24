@@ -10,6 +10,7 @@
 </style>
 <style>
 #sound-credit{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:.4em;font-size:clamp(16px,2vw,22px);color:#d6dbe3;line-height:1.5}#sound-credit a{color:#ffe098;text-underline-offset:4px}#sound-credit .creator{font-size:1.3em;font-weight:800}#sound-credit a:focus-visible{outline:2px solid #75e8e4}@media(max-height:550px){#sound-credit{font-size:14px}}
+#music-credit{font-size:clamp(18px,2vw,24px);line-height:1.4;color:#d6dbe3}#music-credit a{color:#ffe098;text-underline-offset:4px}#music-credit .creator{font-size:1.3em;font-weight:800}#music-credit .details{font-size:.7em;margin-left:.8em}#cover{gap:14px;overflow:auto}@media(max-height:550px){#cover{gap:8px}.scene{max-height:23vh}#music-credit{font-size:16px}}
 </style>
 $GODOT_HEAD_INCLUDE
 </head>
@@ -21,6 +22,7 @@ $GODOT_HEAD_INCLUDE
   <img class="scene" src="opening.png" alt="大砲で物を投げ、青いエリアに積み上げる">
   <button id="start" type="button" aria-label="ゲームを開始"><img src="start.webp" alt="はじめる"></button>
   <div id="sound-credit" aria-label="効果音クレジット">効果音：<a class="creator" href="https://otologic.jp/" target="_blank" rel="noopener noreferrer">OtoLogic</a> — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a><span> / </span><a href="licenses/otologic.txt" target="_blank" rel="noopener noreferrer">素材情報</a></div>
+  <div id="music-credit" aria-label="音楽クレジット">音楽：<a class="creator" href="https://bgmer.net/" target="_blank" rel="noopener noreferrer">BGMer</a><a class="details" href="licenses/bgmer.txt" target="_blank" rel="noopener noreferrer">楽曲・素材情報</a></div>
   <progress id="progress" hidden aria-label="読み込み"></progress>
   <p id="message" role="status"></p>
 </section>
@@ -28,7 +30,9 @@ $GODOT_HEAD_INCLUDE
 <script type="module">
 import {installCompressedWasm} from './wasm-loader.mjs';
 import {installResultSharing} from './share.mjs';
+import {installBGM} from './bgmer-player.mjs';
 installResultSharing();
+const bgm = installBGM(window);
 const config = $GODOT_CONFIG;
 // Attribution belongs to the start screen. Gameplay uses the full canvas.
 config.canvasResizePolicy = 2;
@@ -39,6 +43,7 @@ let failed = false;
 let restore = () => {};
 start.addEventListener('click', async () => {
   if (failed) { location.reload(); return; }
+  bgm.unlock(); // Unlock the gain node in the gesture; the title stays silent.
   start.disabled = true;
   progress.hidden = false;
   message.textContent = '読み込み中…';
@@ -66,8 +71,10 @@ start.addEventListener('click', async () => {
       else progress.removeAttribute('value');
     }});
     document.querySelector('#cover').hidden = true;
+    bgm.startGameplay();
     document.querySelector('#canvas').focus();
   } catch (error) {
+    bgm.stopGameplay();
     console.error(error);
     failed = true;
     message.textContent = error.message.startsWith('WebGL') || error.message.startsWith('このブラウザ') ? error.message : '読み込めませんでした。通信を確認して、もう一度タップしてください。';

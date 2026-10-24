@@ -45,7 +45,11 @@ func _touch_move(index: int, point: Vector2) -> void:
 
 func _modal_motion_checks() -> void:
 	game.load_stage(19)
+	# This helper follows a frozen result. Stage load resumes at the next idle
+	# boundary; physics_frame can emit several catch-up ticks before that boundary.
+	await process_frame
 	await _frames(2)
+	_check(not paused and not game.simulation_paused, "A loaded stage did not resume after leaving the frozen result")
 	var actor = game._create_actor(game.catalog.items["refrigerator"], Vector2(520, 180))
 	actor.linear_velocity = Vector2(-35, -40)
 	actor.angular_velocity = 0.7
@@ -155,6 +159,12 @@ func _pinch_checks() -> void:
 	_check(is_instance_valid(game.modal) and not paused, "Zoomed GUI map button did not receive its transformed touch without pausing")
 	game._close_modal()
 	game.touch_zoom.reset_view()
+	# Sliders receive native touch because mouse emulation is disabled for pinch.
+	var slider_at = game.power_slider.get_global_rect().position
+	_touch(0, slider_at + Vector2(game.power_slider.size.x * 0.5, 10), true)
+	_touch_move(0, slider_at + Vector2(game.power_slider.size.x * 0.6, 10))
+	_touch(0, slider_at + Vector2(game.power_slider.size.x * 0.6, 10), false)
+	_check(is_equal_approx(game.cannon.power, 0.66), "Native single-finger slider drag did not update power without mouse emulation")
 
 func _score_and_wait_checks() -> void:
 	game.load_stage(0)
@@ -219,12 +229,35 @@ func _score_and_wait_checks() -> void:
 	game.on_actor_impact(waiting, waiting.position, 0.0, 0.0)
 	await _frames(2)
 	_check(is_equal_approx(Engine.time_scale, 1.5) and Engine.physics_ticks_per_second == game._base_physics_ticks * 3 / 2, "Landed waiting flow did not preserve physics step size at 1.5x")
+	game._update_hud()
 	game._show_maps()
+	_check(game.map_button.disabled and not is_instance_valid(game.modal), "Empty queue admitted a gameplay map picker")
+	game._show_seed()
 	_check(is_equal_approx(Engine.time_scale, 1.5) and Engine.physics_ticks_per_second == game._base_physics_ticks * 3 / 2 and not paused, "Opening a manual modal changed waiting physics speed")
 	game._close_modal()
 	_check(is_equal_approx(Engine.time_scale, 1.5), "Closing a manual modal changed waiting physics speed")
 	game.load_stage(1)
 	_check(is_equal_approx(Engine.time_scale, 1.0), "Changing stage retained accelerated simulation")
+
+
+func _water_dud_score_checks() -> void:
+	game.load_stage(14)
+	await _frames(2)
+	game.selected_catalog_id = "bomb"
+	game._update_hud()
+	game.cannon.fire()
+	var bomb = game.actors.back()
+	bomb.freeze = true
+	bomb.position = game.score_zone.get_center()
+	_check(bomb.item_id == "bomb" and not bomb.can_score and game.calculate_score() == 0, "A live ordinary bomb scored before submersion")
+	game.liquid.regions = [{"rect": bomb.get_world_bounds().grow(12.0), "velocity": Vector2.ZERO}]
+	_check(game.liquid.submerged_fraction(bomb) >= 0.5, "Wet-bomb scoring fixture does not submerge half of the actual collider")
+	game.hazards.tick(0.01)
+	var ground_y = float(game.current_stage.get("scoreGroundY", game.score_zone.end.y))
+	var expected = 100 + 10 * int(floor(maxf(0.0, ground_y - bomb.get_world_bounds().get_center().y) / 16.0))
+	_check(bool(bomb.get_meta("water_dud", false)) and bomb.can_score and int(bomb.record.score) == 100 and game.calculate_score() == expected, "A submerged ordinary bomb did not become a 100-point object with the normal height bonus")
+	bomb.position.x = game.score_zone.end.x + 100.0
+	_check(game.calculate_score() == 0, "A disarmed bomb outside the score zone still scored")
 
 
 func _snapshot(name: String, include_modal: bool = true) -> void:
@@ -268,6 +301,12 @@ func _run() -> void:
 		_check(is_instance_valid(game.stage_root) and game.stage_root.get_child_count() > 3, "Stage %d failed to instantiate its scene" % (index + 1))
 		_check(game.playable and game.current_stage.queue.size() == 15, "Stage is not playable with fifteen throws")
 		_check(game.shots_fired == 0 and not game.next_item_id().is_empty(), "Playable stage has no first item")
+		_check(game.loaded_label.text == game._item_display_name(game.next_item_id()) and game.loaded_label.get_global_rect().end.x <= 948, "Loaded item name is missing or extends outside the HUD")
+		_check(game.lesson_label.position.x == game.score_label.position.x and game.lesson_label.position.y >= game.score_label.get_global_rect().end.y and game.lesson_label.get_global_rect().end.x < game.next_name.position.x, "Lesson is not below the score or overlaps the NEXT label")
+		_check(game.lesson_label.get_line_count() <= 3 and game.lesson_label.get_global_rect().end.y <= 127.0, "Lesson extends beyond the upper HUD")
+		if index in [32, 34]:
+			var lesson_lines = game.lesson_label.text.split("\n")
+			_check(lesson_lines[-1].length() > 2 and not game.lesson_label.text.contains("えらんで\nも") and not game.lesson_label.text.contains("かた\nち"), "Lesson split a short phrase or left an isolated ending")
 		_check_visible_glyphs("Stage %d HUD" % (index + 1))
 		if index >= 20:
 			await _snapshot(str(game.current_stage.map))
@@ -283,6 +322,9 @@ func _run() -> void:
 	preview_probe.free()
 	_check(game.next_item_id() == game.current_stage.queue[0] and game.following_item_id() == game.current_stage.queue[1], "Loaded and NEXT previews do not represent successive items")
 	_check(game.loaded_icon.visible and game.next_icon.texture.resource_path.ends_with(str(game.catalog.items[game.following_item_id()].svg)), "NEXT icon displays the loaded item instead of the following object")
+	_check(game.bgm_button != null and game.bgm_volume_slider != null and is_equal_approx(game.bgm_volume_slider.value, 2.5), "Gameplay music controls are missing or default volume is too high")
+	var trajectory = game.debug_snapshot().trajectory
+	_check(not trajectory.is_empty() and str(trajectory[0][3]) == "ff67dbff", "Trajectory does not record its distinct high-contrast color")
 	var drag_origin = game.cannon.position + Vector2(-10, -20)
 	var press = InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
@@ -372,11 +414,12 @@ func _run() -> void:
 			_check(next_page != null and not next_page.disabled, "Map picker has no next page action")
 			if next_page != null:
 				next_page.pressed.emit()
-	_check(reached.size() == game.catalog.stages.size() and reached.has(31), "Map pages did not expose all 32 stages")
-	var last_map = _button_with_meta("stage_index", 31)
+	var last_stage = game.catalog.stages.size() - 1
+	_check(reached.size() == game.catalog.stages.size() and reached.has(last_stage), "Map pages did not expose every stage")
+	var last_map = _button_with_meta("stage_index", last_stage)
 	if last_map != null:
 		last_map.pressed.emit()
-	_check(game.stage_index == 31 and not paused, "Last map tile did not load stage 32 and resume")
+	_check(game.stage_index == last_stage and not paused, "Last map tile did not load the final stage and resume")
 	game._show_maps(1)
 	var map_button = _button_with_meta("stage_index", 17)
 	_check(map_button != null, "Map picker did not expose stage 18")
@@ -428,6 +471,7 @@ func _run() -> void:
 	if camera_button != null:
 		camera_button.pressed.emit()
 	_check(game.next_item_id() == "camera", "Catalog callback chose a different item")
+	_check(game.loaded_label.text == game._item_display_name("camera"), "Selecting an item did not update its loaded name")
 	game.cannon.fire()
 	_check(game.shots_fired == 1 and game.actors[0].item_id == "camera", "Selected sandbox item was not actually fired")
 	game.load_stage(19)
@@ -439,6 +483,18 @@ func _run() -> void:
 		camera_button.pressed.emit()
 	game.cannon.fire()
 	_check(camera_button != null and game.next_item_id() == "camera" and game.actors.back().item_id == "camera", "Laboratory did not launch its freely selected item")
+	for index in range(20, game.catalog.stages.size()):
+		if not bool(game.catalog.stages[index].get("selectAnyCatalogItem", false)):
+			continue
+		game.load_stage(index)
+		await _frames(2)
+		_check(game.next_item_id() == str(game.current_stage.queue[0]) and game.current_stage.queue.size() == 15, "New free-choice stage lost its default fifteen-item queue")
+		game._show_catalog(camera_page)
+		var extra_choice = _button_with_meta("item_id", "camera")
+		if extra_choice != null:
+			extra_choice.pressed.emit()
+		game.cannon.fire()
+		_check(extra_choice != null and game.shots_fired == 1 and game.actors.back().item_id == "camera", "New free-choice stage did not use the catalog flag")
 	# Visual samples come from the actual physical scene, not hand-placed mockups.
 	game.load_stage(3)
 	await _frames(180)
@@ -488,11 +544,16 @@ func _run() -> void:
 	last.constant_torque = 100.0
 	last.collision_layer = 0
 	last.collision_mask = 0
+	var velocity_before_map = last.linear_velocity
+	var spin_before_map = last.angular_velocity
+	_click(game.map_button.position + Vector2(12, 12), MOUSE_BUTTON_LEFT)
 	game._show_maps()
+	_check(game.map_button.disabled and not is_instance_valid(game.modal) and last.linear_velocity == velocity_before_map and last.angular_velocity == spin_before_map, "Empty gameplay map action was not a disabled no-op")
+	game._show_seed()
 	var waiting_modal_id = game.modal.get_instance_id()
 	await _frames(1500)
 	_check(game.result_shown and game.simulation_paused, "Fifteen shots did not enter the frozen result screen")
-	_check(is_instance_valid(game.modal) and game.modal.get_instance_id() != waiting_modal_id, "Final score did not replace the open map picker")
+	_check(is_instance_valid(game.modal) and game.modal.get_instance_id() != waiting_modal_id, "Final score did not replace the open seed picker")
 	_check(game.end_clock >= 12.0 and game.end_clock < 12.1, "Perpetual motion did not finalize at the 12-second bound")
 	_check(game.score_caption.text == "とくてん" and game.score_label.text == "%04d" % game.score_value, "Result HUD does not show the final score")
 	_check(game.result_capture_status == "headless" and game.result_jpeg.is_empty() and is_instance_valid(game.modal), "Headless result capture waited for an unavailable framebuffer")
@@ -507,8 +568,14 @@ func _run() -> void:
 	game.cannon.set_enabled(true)
 	game.cannon.fire()
 	_check(game.shots_fired == 15, "Result state admitted a sixteenth shot")
+	var result_maps = _button_with_meta("result_navigation", "maps")
+	_check(result_maps != null and not result_maps.disabled, "Result map navigation was disabled with the empty gameplay map button")
+	if result_maps != null:
+		result_maps.pressed.emit()
+	_check(_button_with_meta("stage_index", 0) != null, "Result map navigation did not open the map picker")
 	await _modal_motion_checks()
 	await _pinch_checks()
+	await _water_dud_score_checks()
 	await _score_and_wait_checks()
 	var report = {"suite": "game", "engine": Engine.get_version_info().string, "checks": checks, "failures": failures, "observations": observations, "status": "passed" if failures.is_empty() else "failed", "verification": "Godot headless scene integration; no browser or rendered engine screenshot"}
 	var file = FileAccess.open("res://previews/game-checks.json", FileAccess.WRITE)

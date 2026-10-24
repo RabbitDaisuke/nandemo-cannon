@@ -13595,35 +13595,63 @@
         128
       ],
       "viewBox": [
-        10,
-        23,
-        108,
-        91
+        16,
+        20,
+        100,
+        84
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        54,
-        41
+        48,
+        44
       ],
       "worldWidth": 80,
-      "worldHeight": 67.4074074074074,
-      "worldScale": 0.7407407407407407,
+      "worldHeight": 67.2,
+      "worldScale": 0.8,
       "material": "food",
-      "mass": 2.7,
+      "mass": 2,
       "score": 100,
       "bodyKind": "dynamic",
       "behavior": "solid",
       "colliderTemplate": "pancakes",
       "fixtures": [
         {
-          "rect": [
-            13,
-            46,
-            102,
-            65
+          "polygon": [
+            [
+              20,
+              36
+            ],
+            [
+              32,
+              28
+            ],
+            [
+              92,
+              24
+            ],
+            [
+              108,
+              36
+            ],
+            [
+              116,
+              56
+            ],
+            [
+              108,
+              68
+            ],
+            [
+              108,
+              108
+            ],
+            [
+              20,
+              108
+            ]
           ]
         }
       ],
@@ -13635,7 +13663,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 8542
+      "opaquePixels": 7856
     },
     {
       "id": "pizza-cutter",
@@ -14369,7 +14397,7 @@
     },
     {
       "id": "sashimi",
-      "nameJa": "さしみ",
+      "nameJa": "すし",
       "svg": "objects/sashimi.svg",
       "png": "raster/objects/sashimi.png",
       "webp": "raster/objects/sashimi.webp",
@@ -14378,74 +14406,82 @@
         128
       ],
       "viewBox": [
-        4,
-        21,
-        120,
-        93
+        10,
+        26,
+        113,
+        68
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        60,
-        43
+        54,
+        38
       ],
-      "worldWidth": 84,
-      "worldHeight": 65.1,
-      "worldScale": 0.7,
+      "worldWidth": 67,
+      "worldHeight": 40.31858407079646,
+      "worldScale": 0.5929203539823009,
       "material": "food",
-      "mass": 2.5,
+      "mass": 1.8,
       "score": 100,
       "bodyKind": "dynamic",
       "behavior": "solid",
       "colliderTemplate": "sashimi",
       "fixtures": [
         {
-          "rect": [
-            8,
-            77,
-            112,
-            34
-          ]
-        },
-        {
           "polygon": [
             [
-              20,
-              72
+              14,
+              56
             ],
             [
-              33,
-              28
-            ],
-            [
-              53,
-              28
+              24,
+              42
             ],
             [
               64,
-              72
+              42
+            ],
+            [
+              76,
+              60
+            ],
+            [
+              72,
+              89
+            ],
+            [
+              18,
+              89
             ]
           ]
         },
         {
           "polygon": [
             [
-              58,
-              72
+              60,
+              39
             ],
             [
-              73,
-              24
-            ],
-            [
-              93,
-              24
+              72,
+              29
             ],
             [
               105,
-              72
+              32
+            ],
+            [
+              119,
+              48
+            ],
+            [
+              116,
+              73
+            ],
+            [
+              78,
+              76
             ]
           ]
         }
@@ -14458,7 +14494,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 7625
+      "opaquePixels": 5782
     },
     {
       "id": "whole-cake",
@@ -14950,24 +14986,24 @@
         128
       ],
       "viewBox": [
-        23,
         20,
-        100,
-        97
+        7,
+        93,
+        110
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        41,
-        44
+        44,
+        57
       ],
-      "worldWidth": 46,
-      "worldHeight": 44.620000000000005,
-      "worldScale": 0.46,
+      "worldWidth": 58,
+      "worldHeight": 68.60215053763442,
+      "worldScale": 0.6236559139784946,
       "material": "paper",
-      "mass": 0.7,
+      "mass": 0.5,
       "score": 100,
       "bodyKind": "dynamic",
       "behavior": "solid",
@@ -14976,16 +15012,24 @@
         {
           "polygon": [
             [
-              26,
-              24
-            ],
-            [
-              103,
-              64
-            ],
-            [
-              32,
+              27,
               113
+            ],
+            [
+              33,
+              61
+            ],
+            [
+              47,
+              37
+            ],
+            [
+              85,
+              55
+            ],
+            [
+              76,
+              82
             ]
           ]
         }
@@ -14998,7 +15042,7 @@
         "burnSeconds": 2,
         "flowResponse": 1.25
       },
-      "opaquePixels": 4016
+      "opaquePixels": 3898
     },
     {
       "id": "sake-bottle",
@@ -15549,22 +15593,22 @@
         128
       ],
       "viewBox": [
-        4,
-        15,
-        119,
-        89
+        2,
+        36,
+        125,
+        52
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        60,
-        49
+        62,
+        28
       ],
-      "worldWidth": 95,
-      "worldHeight": 71.05042016806723,
-      "worldScale": 0.7983193277310925,
+      "worldWidth": 106,
+      "worldHeight": 44.096,
+      "worldScale": 0.848,
       "material": "food",
       "mass": 2,
       "score": 100,
@@ -15575,36 +15619,40 @@
         {
           "polygon": [
             [
-              8,
-              62
+              5,
+              65
             ],
             [
-              28,
-              43
+              21,
+              53
             ],
             [
-              85,
-              37
+              83,
+              49
             ],
             [
-              116,
-              19
+              103,
+              56
             ],
             [
-              111,
-              61
+              122,
+              44
             ],
             [
-              119,
-              99
+              117,
+              65
             ],
             [
-              88,
-              79
+              124,
+              82
             ],
             [
-              29,
-              80
+              103,
+              73
+            ],
+            [
+              26,
+              76
             ]
           ]
         }
@@ -15617,7 +15665,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 4974
+      "opaquePixels": 3731
     },
     {
       "id": "beer-dispenser",
@@ -15968,6 +16016,1191 @@
         "flowResponse": 0.45
       },
       "opaquePixels": 7562
+    },
+    {
+      "id": "game-cartridge",
+      "nameJa": "ゲームカセット",
+      "svg": "objects/game-cartridge.svg",
+      "png": "raster/objects/game-cartridge.png",
+      "webp": "raster/objects/game-cartridge.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        12,
+        98,
+        106
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        52
+      ],
+      "worldWidth": 54,
+      "worldHeight": 58.408163265306115,
+      "worldScale": 0.5510204081632653,
+      "material": "plastic",
+      "mass": 1.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "game-cartridge",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              18,
+              15
+            ],
+            [
+              110,
+              15
+            ],
+            [
+              110,
+              115
+            ],
+            [
+              18,
+              115
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9984
+    },
+    {
+      "id": "game-console",
+      "nameJa": "ゲーム機",
+      "svg": "objects/game-console.svg",
+      "png": "raster/objects/game-console.png",
+      "webp": "raster/objects/game-console.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        10,
+        15,
+        109,
+        100
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        54,
+        49
+      ],
+      "worldWidth": 88,
+      "worldHeight": 80.73394495412845,
+      "worldScale": 0.8073394495412844,
+      "material": "plastic",
+      "mass": 5.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "game-console",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              13,
+              35
+            ],
+            [
+              28,
+              18
+            ],
+            [
+              103,
+              18
+            ],
+            [
+              116,
+              35
+            ],
+            [
+              116,
+              112
+            ],
+            [
+              13,
+              112
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 10210
+    },
+    {
+      "id": "desktop-pc",
+      "nameJa": "パソコン",
+      "svg": "objects/desktop-pc.svg",
+      "png": "raster/objects/desktop-pc.png",
+      "webp": "raster/objects/desktop-pc.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        13,
+        120,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        51
+      ],
+      "worldWidth": 112,
+      "worldHeight": 98,
+      "worldScale": 0.9333333333333333,
+      "material": "appliance",
+      "mass": 9,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "desktop-pc",
+      "fixtures": [
+        {
+          "rect": [
+            7,
+            16,
+            78,
+            64
+          ]
+        },
+        {
+          "rect": [
+            39,
+            80,
+            14,
+            22
+          ]
+        },
+        {
+          "rect": [
+            25,
+            102,
+            43,
+            12
+          ]
+        },
+        {
+          "rect": [
+            91,
+            25,
+            30,
+            90
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 9848
+    },
+    {
+      "id": "keyboard",
+      "nameJa": "キーボード",
+      "svg": "objects/keyboard.svg",
+      "png": "raster/objects/keyboard.png",
+      "webp": "raster/objects/keyboard.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        1,
+        25,
+        125,
+        77
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        63,
+        39
+      ],
+      "worldWidth": 106,
+      "worldHeight": 65.29599999999999,
+      "worldScale": 0.848,
+      "material": "plastic",
+      "mass": 2.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "keyboard",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              13,
+              28
+            ],
+            [
+              113,
+              28
+            ],
+            [
+              123,
+              99
+            ],
+            [
+              4,
+              99
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 8515
+    },
+    {
+      "id": "game-controller",
+      "nameJa": "ゲームコントローラー",
+      "svg": "objects/game-controller.svg",
+      "png": "raster/objects/game-controller.png",
+      "webp": "raster/objects/game-controller.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        3,
+        12,
+        122,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        61,
+        52
+      ],
+      "worldWidth": 76,
+      "worldHeight": 65.40983606557377,
+      "worldScale": 0.6229508196721312,
+      "material": "plastic",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "game-controller",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              26,
+              24
+            ],
+            [
+              102,
+              24
+            ],
+            [
+              113,
+              42
+            ],
+            [
+              122,
+              98
+            ],
+            [
+              109,
+              114
+            ],
+            [
+              94,
+              114
+            ],
+            [
+              76,
+              88
+            ],
+            [
+              52,
+              88
+            ],
+            [
+              34,
+              114
+            ],
+            [
+              19,
+              114
+            ],
+            [
+              6,
+              98
+            ],
+            [
+              15,
+              42
+            ]
+          ]
+        },
+        {
+          "rect": [
+            26,
+            15,
+            26,
+            10
+          ]
+        },
+        {
+          "rect": [
+            76,
+            15,
+            26,
+            10
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9456
+    },
+    {
+      "id": "pro-controller",
+      "nameJa": "プロコントローラー",
+      "svg": "objects/pro-controller.svg",
+      "png": "raster/objects/pro-controller.png",
+      "webp": "raster/objects/pro-controller.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        3,
+        12,
+        122,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        61,
+        52
+      ],
+      "worldWidth": 74,
+      "worldHeight": 63.68852459016394,
+      "worldScale": 0.6065573770491803,
+      "material": "plastic",
+      "mass": 2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pro-controller",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              26,
+              24
+            ],
+            [
+              102,
+              24
+            ],
+            [
+              113,
+              42
+            ],
+            [
+              122,
+              98
+            ],
+            [
+              109,
+              114
+            ],
+            [
+              94,
+              114
+            ],
+            [
+              76,
+              88
+            ],
+            [
+              52,
+              88
+            ],
+            [
+              34,
+              114
+            ],
+            [
+              19,
+              114
+            ],
+            [
+              6,
+              98
+            ],
+            [
+              15,
+              42
+            ]
+          ]
+        },
+        {
+          "rect": [
+            26,
+            15,
+            26,
+            10
+          ]
+        },
+        {
+          "rect": [
+            76,
+            15,
+            26,
+            10
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9448
+    },
+    {
+      "id": "wired-mouse",
+      "nameJa": "有線マウス",
+      "svg": "objects/wired-mouse.svg",
+      "png": "raster/objects/wired-mouse.png",
+      "webp": "raster/objects/wired-mouse.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        0,
+        104,
+        122
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        64
+      ],
+      "worldWidth": 62,
+      "worldHeight": 72.73076923076923,
+      "worldScale": 0.5961538461538461,
+      "material": "plastic",
+      "mass": 1.3,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wired-mouse",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              42,
+              53
+            ],
+            [
+              52,
+              42
+            ],
+            [
+              79,
+              42
+            ],
+            [
+              90,
+              53
+            ],
+            [
+              94,
+              102
+            ],
+            [
+              83,
+              119
+            ],
+            [
+              49,
+              119
+            ],
+            [
+              38,
+              102
+            ]
+          ]
+        },
+        {
+          "rect": [
+            61,
+            23,
+            7,
+            22
+          ]
+        },
+        {
+          "rect": [
+            64,
+            20,
+            45,
+            7
+          ]
+        },
+        {
+          "rect": [
+            105,
+            6,
+            7,
+            21
+          ]
+        },
+        {
+          "rect": [
+            21,
+            3,
+            91,
+            7
+          ]
+        },
+        {
+          "rect": [
+            12,
+            1,
+            15,
+            14
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1,
+        "rigidCable": true
+      },
+      "opaquePixels": 5623
+    },
+    {
+      "id": "sd-card",
+      "nameJa": "SDカード",
+      "svg": "objects/sd-card.svg",
+      "png": "raster/objects/sd-card.png",
+      "webp": "raster/objects/sd-card.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        20,
+        3,
+        90,
+        122
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        44,
+        61
+      ],
+      "worldWidth": 27,
+      "worldHeight": 36.6,
+      "worldScale": 0.3,
+      "material": "plastic",
+      "mass": 0.35,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "sd-card",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              23,
+              6
+            ],
+            [
+              83,
+              6
+            ],
+            [
+              107,
+              30
+            ],
+            [
+              107,
+              122
+            ],
+            [
+              23,
+              122
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 10235
+    },
+    {
+      "id": "game-logo",
+      "nameJa": "なんでもキャノンのロゴ",
+      "svg": "objects/game-logo.svg",
+      "png": "raster/objects/game-logo.png",
+      "webp": "raster/objects/game-logo.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        2,
+        10,
+        122,
+        97
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        62,
+        54
+      ],
+      "worldWidth": 72,
+      "worldHeight": 57.24590163934426,
+      "worldScale": 0.5901639344262295,
+      "material": "plastic",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "game-logo",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              11,
+              20
+            ],
+            [
+              115,
+              13
+            ],
+            [
+              121,
+              92
+            ],
+            [
+              18,
+              104
+            ],
+            [
+              5,
+              89
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 9757
+    },
+    {
+      "id": "tablet",
+      "nameJa": "タブレット",
+      "svg": "objects/tablet.svg",
+      "png": "raster/objects/tablet.png",
+      "webp": "raster/objects/tablet.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        16,
+        3,
+        96,
+        122
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        48,
+        61
+      ],
+      "worldWidth": 65,
+      "worldHeight": 82.60416666666667,
+      "worldScale": 0.6770833333333334,
+      "material": "appliance",
+      "mass": 2.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "tablet",
+      "fixtures": [
+        {
+          "rect": [
+            19,
+            6,
+            90,
+            116
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 11280
+    },
+    {
+      "id": "utility-pole",
+      "nameJa": "電柱",
+      "svg": "objects/utility-pole.svg",
+      "png": "raster/objects/utility-pole.png",
+      "webp": "raster/objects/utility-pole.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        12,
+        4,
+        104,
+        123
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        52,
+        60
+      ],
+      "worldWidth": 65,
+      "worldHeight": 76.875,
+      "worldScale": 0.625,
+      "material": "wood",
+      "mass": 5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "utility-pole",
+      "fixtures": [
+        {
+          "rect": [
+            55,
+            7,
+            18,
+            117
+          ]
+        },
+        {
+          "rect": [
+            15,
+            26,
+            98,
+            11
+          ]
+        },
+        {
+          "rect": [
+            25,
+            52,
+            78,
+            10
+          ]
+        },
+        {
+          "rect": [
+            21,
+            15,
+            12,
+            12
+          ]
+        },
+        {
+          "rect": [
+            91,
+            15,
+            12,
+            12
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 5120
+    },
+    {
+      "id": "smartphone",
+      "nameJa": "スマートフォン",
+      "svg": "objects/smartphone.svg",
+      "png": "raster/objects/smartphone.png",
+      "webp": "raster/objects/smartphone.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        26,
+        1,
+        76,
+        126
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        38,
+        63
+      ],
+      "worldWidth": 33,
+      "worldHeight": 54.71052631578947,
+      "worldScale": 0.4342105263157895,
+      "material": "appliance",
+      "mass": 1,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "smartphone",
+      "fixtures": [
+        {
+          "rect": [
+            29,
+            4,
+            70,
+            120
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 9176
+    },
+    {
+      "id": "waterproof-bomb",
+      "nameJa": "耐水ばくだん",
+      "svg": "objects/waterproof-bomb.svg",
+      "png": "raster/objects/waterproof-bomb.png",
+      "webp": "raster/objects/waterproof-bomb.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        6,
+        100,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        58
+      ],
+      "worldWidth": 42,
+      "worldHeight": 48.72,
+      "worldScale": 0.42,
+      "material": "metal",
+      "mass": 3,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "explosion",
+      "colliderTemplate": "waterproof-bomb",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            72,
+            47
+          ]
+        },
+        {
+          "rect": [
+            48,
+            9,
+            32,
+            17
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "radius": 130,
+        "strength": 1,
+        "trigger": "first impact or burning fuse completes",
+        "removeSelf": true,
+        "waterproofExplosive": true
+      },
+      "opaquePixels": 8158
+    },
+    {
+      "id": "strong-waterproof-bomb",
+      "nameJa": "つよい耐水ばくだん",
+      "svg": "objects/strong-waterproof-bomb.svg",
+      "png": "raster/objects/strong-waterproof-bomb.png",
+      "webp": "raster/objects/strong-waterproof-bomb.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        6,
+        100,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        58
+      ],
+      "worldWidth": 42,
+      "worldHeight": 48.72,
+      "worldScale": 0.42,
+      "material": "metal",
+      "mass": 3,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "explosion",
+      "colliderTemplate": "strong-waterproof-bomb",
+      "fixtures": [
+        {
+          "circle": [
+            64,
+            72,
+            47
+          ]
+        },
+        {
+          "rect": [
+            48,
+            9,
+            32,
+            17
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "radius": 220,
+        "strength": 1.5,
+        "trigger": "first impact or burning fuse completes",
+        "removeSelf": true,
+        "impulseMultiplier": 2.2,
+        "waterproofExplosive": true
+      },
+      "opaquePixels": 8158
+    },
+    {
+      "id": "coffee-mill",
+      "nameJa": "コーヒーミル",
+      "svg": "objects/coffee-mill.svg",
+      "png": "raster/objects/coffee-mill.png",
+      "webp": "raster/objects/coffee-mill.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        28,
+        4,
+        92,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        36,
+        60
+      ],
+      "worldWidth": 62,
+      "worldHeight": 78.17391304347827,
+      "worldScale": 0.6739130434782609,
+      "material": "wood",
+      "mass": 3.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "coffee-mill",
+      "fixtures": [
+        {
+          "rect": [
+            32,
+            68,
+            68,
+            48
+          ]
+        },
+        {
+          "polygon": [
+            [
+              40,
+              40
+            ],
+            [
+              92,
+              40
+            ],
+            [
+              84,
+              60
+            ],
+            [
+              48,
+              60
+            ]
+          ]
+        },
+        {
+          "rect": [
+            64,
+            16,
+            6,
+            24
+          ]
+        },
+        {
+          "rect": [
+            64,
+            16,
+            44,
+            4
+          ]
+        },
+        {
+          "rect": [
+            104,
+            8,
+            12,
+            16
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 6688
     }
   ]
 }

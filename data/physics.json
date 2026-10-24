@@ -570,7 +570,49 @@
       "burnSeconds": 9
     },
     "grill-grid": {},
-    "call-bell": {}
+    "call-bell": {},
+    "game-cartridge": {},
+    "game-console": {},
+    "desktop-pc": {},
+    "keyboard": {},
+    "game-controller": {},
+    "pro-controller": {},
+    "wired-mouse": {
+      "rigidCable": true
+    },
+    "sd-card": {},
+    "game-logo": {},
+    "tablet": {},
+    "utility-pole": {},
+    "smartphone": {},
+    "waterproof-bomb": {
+      "friction": 0.55,
+      "restitution": 0.08,
+      "flammable": false,
+      "explosionResistance": 0.85,
+      "burnSeconds": null,
+      "flowResponse": 0.45,
+      "radius": 130,
+      "strength": 1,
+      "trigger": "first impact or burning fuse completes",
+      "removeSelf": true,
+      "waterproofExplosive": true
+    },
+    "strong-waterproof-bomb": {
+      "friction": 0.55,
+      "restitution": 0.08,
+      "flammable": false,
+      "explosionResistance": 0.85,
+      "burnSeconds": null,
+      "flowResponse": 0.45,
+      "radius": 220,
+      "strength": 1.5,
+      "trigger": "first impact or burning fuse completes",
+      "removeSelf": true,
+      "impulseMultiplier": 2.2,
+      "waterproofExplosive": true
+    },
+    "coffee-mill": {}
   },
   "stateRules": {
     "breakage": {

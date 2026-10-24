@@ -167,7 +167,7 @@ func _run() -> void:
 	_expect(is_equal_approx(accepted, 9.75) and is_equal_approx(fixture_world.liquid.current_volume(), 9.75), "cell overflow is distributed without silently deleting water")
 	for i in range(45):
 		fixture_world.liquid._step_cells(0.05)
-	_expect(absf(fixture_world.liquid.current_volume() + fixture_world.liquid.drained_volume - 9.75) < 0.0001, "flow preserves volume including explicitly drained boundary water")
+	_expect(absf(fixture_world.liquid.current_volume() + fixture_world.liquid.drained_volume + fixture_world.liquid.evaporated_volume - 9.75) < 0.0001, "flow accounts for volume including explicit drainage and evaporation")
 	await _reset({"sources": [{"position": [100, 100], "rateUnitsPerSecond": 1000, "maxUnits": 3}]})
 	fixture_world.liquid.tick(1.0)
 	_expect(fixture_world.liquid.sources[0].remaining == 0.0 and fixture_world.liquid.introduced_volume == 3.0, "a source never emits beyond its remaining budget")
@@ -177,7 +177,7 @@ func _run() -> void:
 			fixture_world.liquid.cells[Vector2i(x, y)] = {"amount": 4.0, "frozen": 0.0}
 	fixture_world.liquid.release(Vector2(400, 300), 512)
 	_expect(fixture_world.liquid.cells.size() <= 256 and fixture_world.liquid.droplets.size() <= 96, "liquid allocations stay within both finite caps")
-	_expect(is_equal_approx(fixture_world.liquid.current_volume() + fixture_world.liquid.rejected_volume, 1536.0), "capacity overflow is reported as rejection rather than hidden loss")
+	_expect(is_equal_approx(fixture_world.liquid.current_volume() + fixture_world.liquid.rejected_volume + fixture_world.liquid.evaporated_volume, 1536.0), "capacity overflow is reported as rejection rather than hidden loss")
 	await _reset({"water": [{"rect": [160, 160, 160, 100], "direction": [1, 0], "speed": 40}]})
 	var frozen_key = Vector2i(10, 10)
 	var frozen_point = fixture_world.liquid.center_for(frozen_key)
@@ -359,6 +359,107 @@ func _run() -> void:
 	_expect(fixture_world.hazards.patches.size() > 0 and absf(float(fixture_world.hazards.patches[0].point.y) - 397.0) < 1.0, "lightning fire is placed on real terrain below the projectile")
 	fixture_world.hazards.tick(3.5)
 	_expect(fixture_world.hazards.patches.is_empty() and fixture_world.hazards.lightning_bolts.is_empty(), "lightning visuals and ground fire expire without a permanent heat source")
+	await _reset()
+	var film_shell = _spawn("bomb", Vector2(400, 250))
+	fixture_world.hazards.on_launch(film_shell)
+	var shell_bounds = film_shell.get_world_bounds()
+	for y in range(floori(shell_bounds.position.y / 16.0), ceili(shell_bounds.end.y / 16.0)):
+		for x in range(floori(shell_bounds.position.x / 16.0), ceili(shell_bounds.end.x / 16.0)):
+			fixture_world.liquid.cells[Vector2i(x, y)] = {"amount": 1.0 / 16.0, "frozen": 0.0}
+	_expect(fixture_world.liquid.submerged_fraction(film_shell) < 0.2, "one-pixel films intersecting a shell occupy only their visible depth, not entire grid cells")
+	fixture_world.hazards.tick(0.01)
+	_expect(not bool(film_shell.get_meta("water_dud", false)), "thin cell films do not falsely disarm a shell as half submerged")
+	fixture_world.liquid.cells.clear()
+	var water_surface = shell_bounds.get_center().y - 2.0
+	for y in range(floori(water_surface / 16.0), ceili(shell_bounds.end.y / 16.0)):
+		for x in range(floori(shell_bounds.position.x / 16.0), ceili(shell_bounds.end.x / 16.0)):
+			fixture_world.liquid.cells[Vector2i(x, y)] = {"amount": clampf((float(y + 1) * 16.0 - water_surface) / 16.0, 0.0, 1.0), "frozen": 0.0}
+	var half_depth = fixture_world.liquid.submerged_fraction(film_shell)
+	_expect(half_depth >= 0.5 and half_depth < 0.7, "a finite-cell water surface just above the shell center covers approximately half its real collider")
+	fixture_world.hazards.tick(0.01)
+	_expect(bool(film_shell.get_meta("water_dud", false)), "real half-depth cell immersion disarms the ordinary bomb")
+	await _reset({"water": [{"rect": [0, 200, 960, 340], "direction": [0, 0], "speed": 0}]})
+	fixture_world.liquid.cells[Vector2i(25, 16)] = {"amount": 1.0, "frozen": 2.0}
+	_expect(not fixture_world.liquid.submerged_point(Vector2(408, 264)), "frozen cell water overrides the underlying river for immersion coverage")
+	var partial = _spawn("bomb", Vector2(150, 178))
+	fixture_world.hazards.on_launch(partial)
+	_expect(fixture_world.liquid.submerged_fraction(partial) < 0.5, "less than half immersion stays below the dud threshold")
+	fixture_world.hazards.tick(0.01)
+	_expect(not bool(partial.get_meta("water_dud", false)) and partial.has_meta("fuse"), "a light splash or shallow immersion does not disarm a bomb")
+	for id in ["bomb", "blast-bomb", "gunpowder-barrel", "firework-rocket"]:
+		var submerged = _spawn(id, Vector2(300, 260))
+		fixture_world.hazards.on_launch(submerged)
+		fixture_world.hazards.impact(submerged, submerged.position, 150.0, 100.0)
+		fixture_world.hazards.tick(0.01)
+		_expect(submerged.alive and bool(submerged.get_meta("water_dud", false)) and not submerged.has_meta("fuse"), "%s becomes an intact dud underwater before impact/fuse detonation" % id)
+		_expect(submerged.can_score and int(submerged.record.score) >= 100, "%s dud becomes a scoring object" % id)
+		submerged.position = Vector2(300, 80)
+		submerged.wet_seconds = 0.0
+		fixture_world.hazards.heat_actor(submerged, 1.0)
+		fixture_world.hazards.on_launch(submerged)
+		fixture_world.hazards.detonate(submerged)
+		_expect(submerged.alive and not submerged.has_meta("fuse"), "%s stays disarmed after drying, heat and re-launch" % id)
+	_expect(fixture_world.hazards.explosion_serial == 0, "ordinary submerged explosives produce no blast")
+	for id in ["waterproof-bomb", "strong-waterproof-bomb"]:
+		await _reset({"water": [{"rect": [0, 150, 960, 390], "direction": [0, 0], "speed": 0}]})
+		var waterproof = _spawn(id, Vector2(300, 260))
+		fixture_world.hazards.on_launch(waterproof)
+		fixture_world.hazards.tick(0.01)
+		_expect(not bool(waterproof.get_meta("water_dud", false)) and not waterproof.can_score, "%s keeps its fuse and does not become a scoring dud" % id)
+		fixture_world.hazards.detonate(waterproof)
+		_expect(not waterproof.alive and fixture_world.hazards.explosion_serial == 1, "%s explodes underwater" % id)
+	await _reset()
+	_add_static_rect(Rect2(0, 400, 960, 140))
+	await _physics_steps(2)
+	var film_key = Vector2i(25, 24)
+	fixture_world.liquid.cells[film_key] = {"amount": 0.05, "frozen": 0.0}
+	for i in range(13):
+		fixture_world.liquid._step_cells(0.05)
+	_expect(fixture_world.liquid.current_volume() > 0.049 and is_zero_approx(fixture_world.liquid.evaporated_volume), "a subpixel floor film remains for its short grace period")
+	for i in range(7):
+		fixture_world.liquid._step_cells(0.05)
+	_expect(fixture_world.liquid.current_volume() < 0.0001 and fixture_world.liquid.evaporated_volume > 0.049, "thin water spread across newly created floor cells evaporates without resetting its age")
+	_expect(absf(fixture_world.liquid.current_volume() + fixture_world.liquid.evaporated_volume + fixture_world.liquid.drained_volume - 0.05) < 0.0001, "evaporated film volume remains in the water balance")
+	await _reset()
+	_add_static_rect(Rect2(0, 400, 960, 140))
+	_add_static_rect(Rect2(384, 360, 16, 40))
+	_add_static_rect(Rect2(416, 360, 16, 40))
+	await _physics_steps(2)
+	fixture_world.liquid.cells[film_key] = {"amount": 0.5, "frozen": 0.0}
+	for i in range(20):
+		fixture_world.liquid._step_cells(0.05)
+	_expect(is_equal_approx(fixture_world.liquid.current_volume(), 0.5) and is_zero_approx(fixture_world.liquid.evaporated_volume), "thick supported water does not evaporate under the thin-film rule")
+	fixture_world.liquid.cells[film_key] = {"amount": 0.05, "frozen": 2.0}
+	for i in range(20):
+		fixture_world.liquid._step_cells(0.05)
+	_expect(is_equal_approx(fixture_world.liquid.current_volume(), 0.05) and is_zero_approx(fixture_world.liquid.evaporated_volume), "a frozen thin cell keeps its water volume")
+	fixture_world.liquid.cells[film_key] = {"amount": 0.04, "frozen": 0.0}
+	for i in range(13):
+		fixture_world.liquid._step_cells(0.05)
+	fixture_world.liquid.add_cell(fixture_world.liquid.center_for(film_key), 0.1)
+	fixture_world.liquid._step_cells(0.2)
+	fixture_world.liquid.cells[film_key].amount = 0.04
+	fixture_world.liquid._step_cells(0.2)
+	_expect(is_equal_approx(fixture_world.liquid.current_volume(), 0.04) and is_zero_approx(fixture_world.liquid.evaporated_volume), "fresh supply that thickens a film resets its evaporation delay")
+	fixture_world.liquid._step_cells(0.6)
+	_expect(is_zero_approx(fixture_world.liquid.current_volume()) and is_equal_approx(fixture_world.liquid.evaporated_volume, 0.04), "the renewed film evaporates only after its new thin interval")
+	await _reset()
+	fixture_world.liquid.cells[Vector2i(25, 4)] = {"amount": 0.05, "frozen": 0.0}
+	var falling_film = _drop(Vector2(550, 60), Vector2(0, 90))
+	falling_film.volume = 0.03
+	fixture_world.liquid.droplets.append(falling_film)
+	for i in range(20):
+		fixture_world.liquid.tick(0.05)
+	_expect(is_equal_approx(fixture_world.liquid.current_volume(), 0.08) and is_zero_approx(fixture_world.liquid.evaporated_volume) and fixture_world.liquid.droplets.size() == 1, "falling thin cells and airborne droplets are retained")
+	await _reset({"water": [{"rect": [300, 350, 200, 50], "direction": [1, 0], "speed": 40}]})
+	_add_static_rect(Rect2(0, 400, 960, 140))
+	_add_static_rect(Rect2(384, 360, 16, 40))
+	_add_static_rect(Rect2(416, 360, 16, 40))
+	await _physics_steps(2)
+	fixture_world.liquid.cells[film_key] = {"amount": 0.05, "frozen": 0.0}
+	for i in range(20):
+		fixture_world.liquid._step_cells(0.05)
+	_expect(is_equal_approx(fixture_world.liquid.current_volume(), 0.05) and fixture_world.liquid.sample(Vector2(408, 392)).wet and is_zero_approx(fixture_world.liquid.evaporated_volume), "river water is excluded from thin-film evaporation")
 	var result = {"engine": Engine.get_version_info().string, "passed": failures.is_empty(), "checks": checks, "failures": failures}
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://previews"))
 	var report = FileAccess.open("res://previews/hazard-checks.json", FileAccess.WRITE)
@@ -398,6 +499,17 @@ func _spawn(id: String, point: Vector2, frozen: bool = true) -> ThrowBody:
 
 func _drop(point: Vector2, velocity: Vector2) -> Dictionary:
 	return {"point": point, "velocity": velocity, "age": 0.0, "volume": 1.0}
+
+func _add_static_rect(bounds: Rect2) -> void:
+	var body = StaticBody2D.new()
+	body.collision_layer = 1
+	body.position = bounds.get_center()
+	var shape = RectangleShape2D.new()
+	shape.size = bounds.size
+	var collider = CollisionShape2D.new()
+	collider.shape = shape
+	body.add_child(collider)
+	fixture_world.add_child(body)
 
 func _physics_steps(count: int) -> void:
 	for i in range(count):

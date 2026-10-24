@@ -26,7 +26,9 @@ fi
 if [[ "$build_mode" == deploy ]]; then
   mkdir -p out/packages
   rm -f out/packages/nandemo-cannon-web-4.7.2.partial.zip
-  (cd out/standalone && zip -0 -X -q -r ../packages/nandemo-cannon-web-4.7.2.partial.zip .)
+  # Music streams separately after play starts; never add it to the engine ZIP
+  # that every browser downloads at boot.
+  (cd out/standalone && zip -0 -X -q -r ../packages/nandemo-cannon-web-4.7.2.partial.zip . -x 'audio/bgm/*')
   unzip -t out/packages/nandemo-cannon-web-4.7.2.partial.zip
   mv out/packages/nandemo-cannon-web-4.7.2.partial.zip out/packages/nandemo-cannon-web-4.7.2.zip
   exec node tools/build-web.mjs deploy
@@ -89,6 +91,7 @@ if [[ "$build_mode" == runtime ]]; then
 fi
 node tests/web-mirrors.mjs
 node tests/web-share.mjs
+node tests/web-bgm.mjs
 node tools/check-game.mjs
 [[ "$build_mode" != check ]] || exit 0
 node tools/render-cannon.mjs

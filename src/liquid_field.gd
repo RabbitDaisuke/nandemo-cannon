@@ -6,6 +6,8 @@ const MAX_CELLS: int = 256
 const MAX_DROPS: int = 96
 const CELL_CAPACITY: float = 4.0
 const VOLUME_EPSILON: float = 0.000001
+const THIN_FILM_UNITS: float = 1.0 / CELL
+const THIN_FILM_SECONDS: float = 0.75
 var world: Node2D
 var regions: Array = []
 var sources: Array = []
@@ -21,6 +23,7 @@ var introduced_volume: float = 0.0
 var rejected_volume: float = 0.0
 var drained_volume: float = 0.0
 var absorbed_volume: float = 0.0
+var evaporated_volume: float = 0.0
 var region_drawn_volume: float = 0.0
 
 func configure(owner_world: Node2D, stage: Dictionary) -> void:
@@ -154,6 +157,8 @@ func add_cell(point: Vector2, amount: float) -> float:
 			cells[key] = {"amount": 0.0, "frozen": 0.0}
 		var accepted = minf(remaining, maxf(0.0, CELL_CAPACITY - float(cells[key].amount)))
 		cells[key].amount += accepted
+		if float(cells[key].amount) > THIN_FILM_UNITS:
+			cells[key].thin_age = 0.0
 		remaining -= accepted
 	return maxf(0.0, amount) - remaining
 
@@ -173,6 +178,7 @@ func _step_cells(delta: float) -> void:
 			continue
 		var cell: Dictionary = cells[key]
 		if float(cell.frozen) > 0.0:
+			cell.thin_age = 0.0
 			cell.frozen -= delta
 			if float(cell.frozen) <= 0.0:
 				_remove_ice(key)
@@ -181,6 +187,8 @@ func _step_cells(delta: float) -> void:
 			drained_volume += float(cell.amount)
 			cells.erase(key)
 			continue
+		if float(cell.amount) > THIN_FILM_UNITS:
+			cell.thin_age = 0.0
 		var neighbors: Array[Vector2i] = [key + Vector2i.DOWN]
 		if (key.x + int(clock * 20.0)) % 2 == 0:
 			neighbors.append_array([key + Vector2i.LEFT, key + Vector2i.RIGHT])
@@ -198,12 +206,35 @@ func _step_cells(delta: float) -> void:
 			if not cells.has(destination):
 				cells[destination] = {"amount": 0.0, "frozen": 0.0}
 			cells[destination].amount += transfer
+			# Carry the film's age with lateral transport, including newly created
+			# cells; otherwise redistribution would keep tiny puddles alive forever.
+			if float(cells[destination].amount) <= THIN_FILM_UNITS:
+				cells[destination].thin_age = maxf(float(cells[destination].get("thin_age", 0.0)), float(cell.get("thin_age", 0.0)))
+			else:
+				cells[destination].thin_age = 0.0
 			cell.amount -= transfer
 		if float(cell.amount) <= VOLUME_EPSILON:
 			drained_volume += maxf(0.0, float(cell.amount))
 			cells.erase(key)
 		else:
 			world.hazards.extinguish_at(center_for(key), 18.0)
+	_evaporate_thin_films(delta)
+
+func _evaporate_thin_films(delta: float) -> void:
+	for key in cells.keys():
+		var cell: Dictionary = cells[key]
+		var in_river: bool = false
+		for region in regions:
+			if Rect2(region.rect).has_point(center_for(key)):
+				in_river = true
+				break
+		if float(cell.frozen) > 0.0 or float(cell.amount) > THIN_FILM_UNITS or in_river or _can_flow(key, key + Vector2i.DOWN):
+			cell.thin_age = 0.0
+			continue
+		cell.thin_age = float(cell.get("thin_age", 0.0)) + delta
+		if float(cell.thin_age) + VOLUME_EPSILON >= THIN_FILM_SECONDS:
+			evaporated_volume += maxf(0.0, float(cell.amount))
+			cells.erase(key)
 
 func sample(point: Vector2) -> Dictionary:
 	var key = key_for(point)
@@ -215,6 +246,38 @@ func sample(point: Vector2) -> Dictionary:
 		if Rect2(region.rect).has_point(point):
 			return {"wet": true, "velocity": region.velocity}
 	return {"wet": false, "velocity": Vector2.ZERO}
+
+func submerged_point(point: Vector2) -> bool:
+	var key = key_for(point)
+	if cells.has(key):
+		var cell: Dictionary = cells[key]
+		if float(cell.frozen) > 0.0:
+			return false
+		var depth = clampf(float(cell.amount), 0.0, 1.0) * CELL
+		var bottom = float(key.y + 1) * CELL
+		if depth > 0.0 and point.y >= bottom - depth:
+			return true
+	for region in regions:
+		if Rect2(region.rect).has_point(point):
+			return true
+	return false
+
+func submerged_fraction(actor: ThrowBody) -> float:
+	if regions.is_empty() and cells.is_empty():
+		return 0.0
+	# Sample the actual rotated collider, excluding empty handles/holes. Equal
+	# area samples make half-submerged shells independent of orientation/size.
+	var bounds = actor.get_world_bounds()
+	var solid_samples: int = 0
+	var wet_samples: int = 0
+	for row in range(12):
+		for column in range(12):
+			var point = bounds.position + bounds.size * Vector2((float(column) + 0.5) / 12.0, (float(row) + 0.5) / 12.0)
+			if actor.contains_world_point(point):
+				solid_samples += 1
+				if submerged_point(point):
+					wet_samples += 1
+	return float(wet_samples) / float(maxi(1, solid_samples))
 
 func _affect_bodies() -> void:
 	for actor in world.actors.duplicate():
@@ -363,7 +426,7 @@ func _draw() -> void:
 	for key in cells:
 		var cell: Dictionary = cells[key]
 		var p = Vector2(key) * CELL
-		var height = clampf(float(cell.amount), 0.08, 1.0) * CELL
+		var height = clampf(float(cell.amount), 0.0, 1.0) * CELL
 		if float(cell.frozen) > 0.0:
 			draw_texture_rect(ice_texture, Rect2(p, Vector2.ONE * CELL), false)
 		else:

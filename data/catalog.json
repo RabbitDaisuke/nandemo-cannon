@@ -1816,7 +1816,7 @@
       "pancakes",
       "パンケーキ",
       "food",
-      2.7,
+      2,
       100,
       80,
       "pancakes",
@@ -1934,11 +1934,11 @@
     ],
     [
       "sashimi",
-      "さしみ",
+      "すし",
       "food",
-      2.5,
+      1.8,
       100,
-      84,
+      67,
       "sashimi",
       "solid"
     ],
@@ -2016,9 +2016,9 @@
       "party-popper",
       "クラッカー",
       "paper",
-      0.7,
+      0.5,
       100,
-      46,
+      58,
       "party-popper",
       "solid"
     ],
@@ -2098,7 +2098,7 @@
       "food",
       2,
       100,
-      95,
+      106,
       "saury",
       "solid"
     ],
@@ -2140,6 +2140,156 @@
       100,
       44,
       "call-bell",
+      "solid"
+    ],
+    [
+      "game-cartridge",
+      "ゲームカセット",
+      "plastic",
+      1.2,
+      100,
+      54,
+      "game-cartridge",
+      "solid"
+    ],
+    [
+      "game-console",
+      "ゲーム機",
+      "plastic",
+      5.5,
+      100,
+      88,
+      "game-console",
+      "solid"
+    ],
+    [
+      "desktop-pc",
+      "パソコン",
+      "appliance",
+      9,
+      100,
+      112,
+      "desktop-pc",
+      "solid"
+    ],
+    [
+      "keyboard",
+      "キーボード",
+      "plastic",
+      2.5,
+      100,
+      106,
+      "keyboard",
+      "solid"
+    ],
+    [
+      "game-controller",
+      "ゲームコントローラー",
+      "plastic",
+      2,
+      100,
+      76,
+      "game-controller",
+      "solid"
+    ],
+    [
+      "pro-controller",
+      "プロコントローラー",
+      "plastic",
+      2,
+      100,
+      74,
+      "pro-controller",
+      "solid"
+    ],
+    [
+      "wired-mouse",
+      "有線マウス",
+      "plastic",
+      1.3,
+      100,
+      62,
+      "wired-mouse",
+      "solid"
+    ],
+    [
+      "sd-card",
+      "SDカード",
+      "plastic",
+      0.35,
+      100,
+      27,
+      "sd-card",
+      "solid"
+    ],
+    [
+      "game-logo",
+      "なんでもキャノンのロゴ",
+      "plastic",
+      1.5,
+      100,
+      72,
+      "game-logo",
+      "solid"
+    ],
+    [
+      "tablet",
+      "タブレット",
+      "appliance",
+      2.5,
+      100,
+      65,
+      "tablet",
+      "solid"
+    ],
+    [
+      "utility-pole",
+      "電柱",
+      "wood",
+      5,
+      100,
+      65,
+      "utility-pole",
+      "solid"
+    ],
+    [
+      "smartphone",
+      "スマートフォン",
+      "appliance",
+      1,
+      100,
+      33,
+      "smartphone",
+      "solid"
+    ],
+    [
+      "waterproof-bomb",
+      "耐水ばくだん",
+      "metal",
+      3,
+      0,
+      42,
+      "waterproof-bomb",
+      "explosion"
+    ],
+    [
+      "strong-waterproof-bomb",
+      "つよい耐水ばくだん",
+      "metal",
+      3,
+      0,
+      42,
+      "strong-waterproof-bomb",
+      "explosion"
+    ],
+    [
+      "coffee-mill",
+      "コーヒーミル",
+      "wood",
+      3.5,
+      100,
+      62,
+      "coffee-mill",
       "solid"
     ]
   ]

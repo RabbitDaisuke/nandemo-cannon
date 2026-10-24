@@ -59,7 +59,7 @@
 				"worldScale": 0.872340425531915,
 				"worldWidth": 82.0
 			},
-			"rotation": -1.57305669784546,
+			"rotation": -1.57299566268921,
 			"texture": "res://assets/objects/refrigerator.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -70,8 +70,8 @@
 				0.872340440750122,
 				0.872340440750122
 			],
-			"x": 329.862365722656,
-			"y": 379.987457275391
+			"x": 328.526458740234,
+			"y": 380.064758300781
 		},
 		{
 			"burning": false,
@@ -132,7 +132,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": -0.0000659452489344403,
+			"rotation": -0.00202792091295123,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -143,8 +143,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 417.63232421875,
-			"y": 394.139770507812
+			"x": 417.950073242188,
+			"y": 394.162414550781
 		},
 		{
 			"burning": false,
@@ -205,7 +205,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": 0.000437943934230134,
+			"rotation": 0.0000982337442110293,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -216,8 +216,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 39.6803207397461,
-			"y": 387.47802734375
+			"x": 39.673583984375,
+			"y": 387.479675292969
 		},
 		{
 			"burning": false,
@@ -278,7 +278,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": 1.56926560401917,
+			"rotation": 1.57185482978821,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -289,8 +289,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 134.685195922852,
-			"y": 390.590515136719
+			"x": 133.960556030273,
+			"y": 390.49267578125
 		},
 		{
 			"burning": false,
@@ -351,7 +351,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": 1.41415023803711,
+			"rotation": 0.885602533817291,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -362,8 +362,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 196.930572509766,
-			"y": 398.448699951172
+			"x": 190.802749633789,
+			"y": 398.484588623047
 		},
 		{
 			"burning": false,
@@ -424,7 +424,7 @@
 				"worldScale": 0.764705882352941,
 				"worldWidth": 78.0
 			},
-			"rotation": 1.56932485103607,
+			"rotation": 1.56953990459442,
 			"texture": "res://assets/objects/washing-machine.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -435,8 +435,8 @@
 				0.764705896377563,
 				0.764705896377563
 			],
-			"x": 516.411315917969,
-			"y": 381.873687744141
+			"x": 516.411560058594,
+			"y": 381.878112792969
 		},
 		{
 			"burning": false,
@@ -545,7 +545,7 @@
 				"worldScale": 0.549019607843137,
 				"worldWidth": 56.0
 			},
-			"rotation": -0.00000426456517743645,
+			"rotation": 0.000830844743177295,
 			"texture": "res://assets/objects/stool.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -556,8 +556,8 @@
 				0.549019634723663,
 				0.549019634723663
 			],
-			"x": 126.711563110352,
-			"y": 334.892395019531
+			"x": 133.75129699707,
+			"y": 334.673675537109
 		},
 		{
 			"burning": false,
@@ -618,7 +618,7 @@
 				"worldScale": 0.604651162790698,
 				"worldWidth": 52.0
 			},
-			"rotation": -0.63484913110733,
+			"rotation": 0.00225314032286406,
 			"texture": "res://assets/objects/bucket.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -629,8 +629,8 @@
 				0.604651153087616,
 				0.604651153087616
 			],
-			"x": 241.25163269043,
-			"y": 378.703887939453
+			"x": 251.046875,
+			"y": 387.407135009766
 		},
 		{
 			"burning": false,
@@ -691,7 +691,7 @@
 				"worldScale": 0.563636363636364,
 				"worldWidth": 62.0
 			},
-			"rotation": -0.00636644149199128,
+			"rotation": -0.00091686996165663,
 			"texture": "res://assets/objects/toolbox.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -702,8 +702,8 @@
 				0.563636362552643,
 				0.563636362552643
 			],
-			"x": 411.766540527344,
-			"y": 343.461669921875
+			"x": 411.009399414062,
+			"y": 343.610443115234
 		},
 		{
 			"burning": false,
@@ -764,7 +764,7 @@
 				"worldScale": 0.720930232558139,
 				"worldWidth": 62.0
 			},
-			"rotation": -1.57501661777496,
+			"rotation": -1.57809734344482,
 			"texture": "res://assets/objects/suitcase.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -775,8 +775,8 @@
 				0.720930218696594,
 				0.720930218696594
 			],
-			"x": 310.445129394531,
-			"y": 308.387817382812
+			"x": 310.085968017578,
+			"y": 308.128845214844
 		},
 		{
 			"burning": false,
@@ -854,7 +854,7 @@
 				"worldScale": 0.796610169491525,
 				"worldWidth": 94.0
 			},
-			"rotation": 0.723664939403534,
+			"rotation": 0.722295880317688,
 			"texture": "res://assets/objects/low-table.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -865,8 +865,8 @@
 				0.796610176563263,
 				0.796610176563263
 			],
-			"x": 445.695220947266,
-			"y": 310.721954345703
+			"x": 444.587005615234,
+			"y": 310.792724609375
 		},
 		{
 			"burning": false,
@@ -927,7 +927,7 @@
 				"worldScale": 0.568627450980392,
 				"worldWidth": 58.0
 			},
-			"rotation": -3.10064744949341,
+			"rotation": -0.77035117149353,
 			"texture": "res://assets/objects/flower-pot.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -938,8 +938,8 @@
 				0.5686274766922,
 				0.5686274766922
 			],
-			"x": 183.801834106445,
-			"y": 328.763153076172
+			"x": 377.386993408203,
+			"y": 266.519592285156
 		},
 		{
 			"burning": false,
@@ -1000,7 +1000,7 @@
 				"worldScale": 0.4,
 				"worldWidth": 44.0
 			},
-			"rotation": -0.0947533473372459,
+			"rotation": 2.19452023506165,
 			"texture": "res://assets/objects/basketball.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -1011,8 +1011,8 @@
 				0.400000005960464,
 				0.400000005960464
 			],
-			"x": 233.031585693359,
-			"y": 321.329772949219
+			"x": 204.125183105469,
+			"y": 357.393524169922
 		},
 		{
 			"burning": false,
@@ -1073,7 +1073,7 @@
 				"worldScale": 0.545454545454545,
 				"worldWidth": 60.0
 			},
-			"rotation": -3.01433348655701,
+			"rotation": -3.14148569107056,
 			"texture": "res://assets/objects/cushion.svg",
 			"tint": "ffffffff",
 			"visualPosition": [
@@ -1084,8 +1084,8 @@
 				0.545454561710358,
 				0.545454561710358
 			],
-			"x": 231.643127441406,
-			"y": 277.400512695312
+			"x": 544.480224609375,
+			"y": 321.910369873047
 		},
 		{
 			"burning": false,
@@ -1243,7 +1243,7 @@
 				121.0,
 				45.0
 			],
-			"text": "1700",
+			"text": "1520",
 			"type": "label"
 		},
 		{
@@ -1307,9 +1307,9 @@
 			"type": "label"
 		},
 		{
-			"background": "193346ff",
+			"background": "293039ff",
 			"border": "080f18ff",
-			"disabled": false,
+			"disabled": true,
 			"fontSize": 16,
 			"rect": [
 				804.0,
@@ -1370,10 +1370,10 @@
 			"outline": "081421ff",
 			"outlineSize": 0,
 			"rect": [
-				18.0,
-				451.0,
-				288.0,
-				15.0
+				302.0,
+				77.0,
+				304.0,
+				44.0
 			],
 			"text": "わくの なかに ものを つもう。15かい なげられるよ。",
 			"type": "label"
@@ -1394,6 +1394,7 @@
 			"type": "label"
 		},
 		{
+			"editable": true,
 			"maximum": 85.0,
 			"minimum": 5.0,
 			"rect": [
@@ -1421,6 +1422,7 @@
 			"type": "label"
 		},
 		{
+			"editable": true,
 			"maximum": 100.0,
 			"minimum": 15.0,
 			"rect": [
@@ -1446,6 +1448,48 @@
 			],
 			"text": "ドラッグで調整・クリックで発射",
 			"type": "label"
+		},
+		{
+			"background": "293039ff",
+			"border": "080f18ff",
+			"disabled": true,
+			"fontSize": 14,
+			"rect": [
+				18.0,
+				502.0,
+				144.0,
+				31.0
+			],
+			"text": "BGM オン",
+			"type": "button"
+		},
+		{
+			"align": 0,
+			"color": "fff0c8ff",
+			"fontSize": 12,
+			"outline": "081421ff",
+			"outlineSize": 0,
+			"rect": [
+				176.0,
+				510.0,
+				77.0,
+				15.0
+			],
+			"text": "おと 02.5%",
+			"type": "label"
+		},
+		{
+			"editable": false,
+			"maximum": 100.0,
+			"minimum": 0.0,
+			"rect": [
+				268.0,
+				508.0,
+				180.0,
+				26.0
+			],
+			"type": "slider",
+			"value": 2.5
 		}
 	],
 	"destroyedCounts": {},
@@ -1461,7 +1505,7 @@
 	"power": 0.45,
 	"recoil": 0.0,
 	"result": true,
-	"score": 1700,
+	"score": 1520,
 	"scoreMarker": [
 		[
 			88.0,

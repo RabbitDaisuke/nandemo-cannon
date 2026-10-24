@@ -1,4 +1,4 @@
-// Additional authored SVG items and stages 21–32. Regenerates only this collection.
+// Additional authored SVG items and stages 21–35. Regenerates only this collection.
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -88,8 +88,38 @@ add('charcoal','木炭','もくたん','wood',1.5,51,[poly([18,28],[45,12],[101,
 add('grill-grid','網','あみ','metal',2.1,82,[rect(9,22,110,9),rect(9,103,110,9),rect(9,31,9,72),rect(110,31,9,72),rect(44,31,7,72),rect(78,31,7,72),rect(18,55,92,7),rect(18,79,92,7)],R(9,22,110,90,'none')+L('M16 57H111M16 82H111M47 29V105M81 29V105',steel,6)+L('M14 25H115','#d9e5d9',3),'heat_shield');
 add('call-bell','呼び出しベル','よびだしベル','metal',1.3,44,[rect(12,95,104,19),poly([24,95],[24,64],[36,43],[53,33],[75,33],[92,43],[104,64],[104,95]),rect(58,15,12,19)],R(12,95,104,19,ink)+P('M24 95V64L36 43L53 33H75L92 43L104 64V95Z',gold)+R(48,13,32,10,steel)+R(58,23,12,10,steel)+L('M37 69L43 53L55 46','#ffe4a0',6));
 
+// Game-store props use distinct generic designs and no manufacturer emblems.
+add('game-cartridge','ゲームカセット','ゲームカセット','plastic',1.2,54,[poly([18,15],[110,15],[110,115],[18,115])],R(18,15,92,100,'#8ba5b5')+R(28,27,72,48,'#405b78')+R(39,38,50,26,gold)+P('M45 58V44H56V52H66V44H80V58Z',blue,'none')+R(33,90,62,25,'#5f768d')+L('M42 96V108M53 96V108M64 96V108M75 96V108M86 96V108',gold,4)+L('M23 22H104','#c5d7d5',3));
+add('game-console','ゲーム機','ゲームき','plastic',5.5,88,[poly([13,35],[28,18],[103,18],[116,35],[116,112],[13,112])],P('M13 35L28 18H103L116 35V112H13Z','#d5d6c6')+R(25,35,78,21,'#788e9e')+R(34,40,61,7,ink)+R(18,75,94,31,'#73899a')+R(28,85,19,12,ink)+R(55,85,19,12,ink)+C(96,88,7,red)+L('M29 24H101',cream,5));
+add('desktop-pc','パソコン','パソコン','appliance',9,112,[rect(7,16,78,64),rect(39,80,14,22),rect(25,102,43,12),rect(91,25,30,90)],R(7,16,78,64,'#354c68')+R(16,25,60,44,'#7ec6c8')+P('M23 57L37 39L46 49L58 33L70 57Z','#b8e3ce','none')+R(39,80,14,22,steel)+R(25,102,43,12,'#526e83')+R(91,25,30,90,'#e2dfce')+R(97,36,18,6,ink)+R(97,49,18,6,ink)+C(106,71,5,blue)+L('M98 91H114M98 100H114','#7f97a4',3));
+const keycaps=Array.from({length:28},(_,i)=>R(17+i%7*14,39+Math.floor(i/7)*13,10,8,i<7?'#829eb7':'#dce0cd',ink,2)).join('');
+add('keyboard','キーボード','キーボード','plastic',2.5,106,[poly([13,28],[113,28],[123,99],[4,99])],P('M13 28H113L123 99H4Z','#4d647f')+keycaps+R(39,91,50,5,cream,'none')+L('M17 33H110','#94b2c3',3));
+const gamepad=(leftHigh)=>P('M26 24H102L113 42L122 98L109 114H94L76 88H52L34 114H19L6 98L15 42Z',leftHigh?'#486478':'#5d6779')+R(26,15,26,10,'#a2b8c1')+R(76,15,26,10,'#a2b8c1')+C(leftHigh?36:48,leftHigh?46:77,13,'#243747')+C(leftHigh?76:82,77,13,'#243747')+P(leftHigh?'M28 71H36V63H45V71H53V80H45V88H36V80H28Z':'M25 41H34V32H43V41H52V50H43V59H34V50H25Z','#c7d6cc')+[[93,36,blue],[104,47,red],[82,47,gold],[93,58,mint]].map(([x,y,c])=>C(x,y,5,c,ink,2)).join('')+R(58,44,12,6,cream,'none')+L('M22 91L27 100M100 91L105 100','#8eabb8',4);
+const padFixtures=[poly([26,24],[102,24],[113,42],[122,98],[109,114],[94,114],[76,88],[52,88],[34,114],[19,114],[6,98],[15,42]),rect(26,15,26,10),rect(76,15,26,10)];
+add('game-controller','ゲームコントローラー','ゲームコントローラー','plastic',2,76,padFixtures,gamepad(true));
+add('pro-controller','プロコントローラー','プロコントローラー','plastic',2,74,padFixtures,gamepad(false));
+add('wired-mouse','有線マウス','ゆうせんマウス','plastic',1.3,62,[poly([42,53],[52,42],[79,42],[90,53],[94,102],[83,119],[49,119],[38,102]),rect(61,23,7,22),rect(64,20,45,7),rect(105,6,7,21),rect(21,3,91,7),rect(12,1,15,14)],L('M64 45V24H109V7H21',ink,7)+R(12,1,15,14,steel)+P('M42 53L52 42H79L90 53L94 102L83 119H49L38 102Z','#d6d7cb')+L('M66 45V75M41 76H91','#637d91',3)+R(61,51,10,20,blue)+L('M48 86V104',cream,5),'solid',{rigidCable:true});
+add('sd-card','SDカード','エスディーカード','plastic',0.35,27,[poly([23,6],[83,6],[107,30],[107,122],[23,122])],P('M23 6H83L107 30V122H23Z','#2e414e')+R(31,46,68,40,blue)+R(37,53,56,11,cream,'none')+L('M34 12V33M48 12V33M62 12V33M76 12V33',gold,7)+L('M33 103H96','#657a86',4));
+let logoGlyphs='';
+for(const [row,text]of ['なんでも','キャノン'].entries())for(const [column,char]of [...text].entries()){
+ const source=await fs.readFile(path.join(root,`assets/font/U${char.codePointAt(0).toString(16).toUpperCase().padStart(4,'0')}.svg`),'utf8');
+ const inner=source.replace(/^.*?<svg[^>]*>/s,'').replace(/<\/svg>\s*$/,'').replaceAll('#ffffff',row?cream:gold);
+ logoGlyphs+=`<g transform="translate(${18+column*24} ${26+row*28}) scale(1.25)">${inner}</g>`;
+}
+add('game-logo','なんでもキャノンのロゴ','なんでもキャノンのロゴ','plastic',1.5,72,[poly([11,20],[115,13],[121,92],[18,104],[5,89])],P('M11 20L115 13L121 92L18 104L5 89Z','#33506d')+P('M13 25L112 19L115 86L19 97L11 86Z','#456987',ink,3)+logoGlyphs+L('M23 93L110 84',blue,3));
+add('tablet','タブレット','タブレット','appliance',2.5,65,[rect(19,6,90,116)],R(19,6,90,116,'#3e526c')+R(27,17,74,89,'#84bec8')+R(34,27,26,25,pink)+R(68,27,25,25,gold)+R(34,61,26,25,mint)+R(68,61,25,25,blue)+C(64,114,4,cream,ink,2)+L('M30 97H98','#d9eee1',4));
+add('utility-pole','電柱','でんちゅう','wood',5,65,[rect(55,7,18,117),rect(15,26,98,11),rect(25,52,78,10),rect(21,15,12,12),rect(91,15,12,12)],R(55,7,18,117,'#999c92')+R(15,26,98,11,wood)+R(25,52,78,10,wood)+[21,91].map(x=>R(x,15,12,12,'#b8d7d1')).join('')+L('M61 67V114','#c9d4c4',4)+R(52,91,24,7,ink));
+add('smartphone','スマートフォン','スマートフォン','appliance',1,33,[rect(29,4,70,120)],R(29,4,70,120,'#384558')+R(36,17,56,91,'#89c3c8')+R(45,9,38,5,ink)+R(44,29,16,16,pink)+R(68,29,16,16,gold)+R(44,53,16,16,blue)+R(68,53,16,16,mint)+L('M45 92H83M55 115H73',cream,4));
+const sealedBomb=(strong)=>R(48,9,32,17,steel)+C(64,72,47,strong?'#3f5b9d':'#5e9cb6')+P('M37 53L64 42L91 53V76L80 91L64 102L48 91L37 76Z',strong?'#adc5db':'#c9e3df')+P('M64 54L78 76L76 85L64 91L52 85L50 76Z',blue)+L('M25 49L21 64','#b9e6ed',5)+(strong?P('M64 13L69 21L79 23L72 31L73 42L64 37L55 42L56 31L49 23L59 21Z',gold):L('M54 15H74',cream,3));
+for(const [id,name,kana,base,strong]of [['waterproof-bomb','耐水ばくだん','たいすいばくだん','bomb',false],['strong-waterproof-bomb','つよい耐水ばくだん','つよいたいすいばくだん','blast-bomb',true]]){
+ const original=manifest.items.find(x=>x.id===base);
+ add(id,name,kana,'metal',original.mass,original.worldWidth,[circle(64,72,47),rect(48,9,32,17)],sealedBomb(strong),'explosion',{...original.physics,waterproofExplosive:true});
+}
+
 await fs.mkdir(path.join(root,'assets/raster/objects'),{recursive:true});
 for(const e of items){
+ // Root owns these later retakes in tools/retake-content.mjs; never overwrite them here.
+ if(['pancakes','party-popper','saury','sashimi'].includes(e.id))continue;
  const raw=`<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" shape-rendering="crispEdges">${e.svg}</svg>`;
  const {data,info}=await sharp(Buffer.from(raw)).ensureAlpha().raw().toBuffer({resolveWithObject:true});
  let minX=128,minY=128,maxX=-1,maxY=-1,pixels=0;
@@ -107,7 +137,7 @@ for(const e of items){
  const row=[e.id,e.name,e.material,e.mass,score,e.width,e.id,e.behavior],j=catalog.items.findIndex(x=>x[0]===e.id);if(j<0)catalog.items.push(row);else catalog.items[j]=row;
  colliders.templates[e.id]=e.fixtures;physics.overrides[e.id]=e.extra;ui.items[e.id]=e.kana;
 }
-await fs.writeFile(path.join(root,'assets/source/extra-items.svg'),`<svg xmlns="http://www.w3.org/2000/svg">\n${items.map(e=>`<symbol id="${e.id}" viewBox="0 0 128 128">${e.svg}</symbol>`).join('\n')}\n</svg>\n`);
+await fs.writeFile(path.join(root,'assets/source/extra-items.svg'),`<svg xmlns="http://www.w3.org/2000/svg">\n${items.filter(e=>!['pancakes','party-popper','saury','sashimi'].includes(e.id)).map(e=>`<symbol id="${e.id}" viewBox="0 0 128 128">${e.svg}</symbol>`).join('\n')}\n</svg>\n`);
 const fridge=manifest.items.find(x=>x.id==='refrigerator');
 for(const r of manifest.items){
  if(r.material==='rubber')r.physics.coldBrittle=true;
@@ -128,7 +158,7 @@ obstacle.preplaced=[{id:'wooden-obstacle',x:525,groundY:450,scoring:false}];
 const snack=standard(24,'3じのおやつ','24-snack-time',['pizza','pancakes','pizza-cutter','castella','maple-popcorn','potato-chips','chocolate-bar','wrapped-butter','donut','cream-puff','apple-juice-carton','tricolor-dango','ice-cream-cup','canele','mont-blanc'],[...ground,rect(95,390,460,24),rect(120,414,24,36),rect(510,414,24,36)]);
 const rubber=standard(25,'ゴムとれいとうじゅう','25-rubber-freeze',['rubber-block','freeze-sprayer','rubber-duck','soccer-ball','basketball','tire','freeze-sprayer','rubber-block','cold-pack','rubber-duck','ice-bomb','freeze-sprayer','hammer','bowling-ball','platform-cart'],ground);
 rubber.preplaced=[{id:'rubber-block',x:190,groundY:450},{id:'rubber-block',x:260,groundY:450},{id:'rubber-block',x:225,groundY:385}];
-const thunder=standard(26,'かみなり実験','26-lightning-river',['lightning-orb','water-jug','umbrella','lightning-orb','rubber-duck','tabletop-stove','bucket','water-balloon','submarine','lightning-orb','wooden-crate','fire-extinguisher','rubber-block','sponge','ramune-bottle'],[rect(0,490,960,50),poly([90,430],[160,330],[390,330],[460,430]),rect(710,420,250,70)],[810,420],[65,70,440,360]);
+const thunder=standard(26,'かみなり実験','26-lightning-river',['lightning-orb','water-jug','umbrella','lightning-orb','rubber-duck','tabletop-stove','bucket','water-balloon','submarine','lightning-orb','wooden-crate','fire-extinguisher','rubber-block','sponge','ramune-bottle'],[rect(0,490,960,50),poly([90,430],[160,330],[390,330],[460,430],[460,490],[90,490]),rect(710,420,250,70)],[810,420],[65,70,440,360]);
 thunder.water=[{rect:[460,430,250,60],direction:[-1,0],speed:55,type:'flow',volumeCap:96}];thunder.preplaced=[{id:'wooden-crate',x:215,groundY:330},{id:'trash-bag',x:320,groundY:330}];thunder.surfaceZones=[{rect:[155,324,240,12],flammable:true,burnSeconds:3}];
 const freezer=standard(27,'れいとうこ','27-freezer',['sashimi','ice-cream-cup','freeze-sprayer','steak','cold-pack','ice-block','watermelon','ramune-bottle','frost-bottle','fried-shrimp','rubber-duck','freeze-sprayer','apple','saury','refrigerator'],[...ground,rect(90,300,180,18),rect(320,365,230,18)]);freezer.iceFloor=true;
 const birthday=standard(28,'たんじょうびパーティー','28-birthday',['whole-cake','cheesecake','steak-knife','candle','strawberry','blueberries','gift-box','drinking-glass','steak','party-popper','bunny-plush','pancakes','mont-blanc','canele','ramune-bottle'],[...ground,rect(140,385,390,65),rect(235,325,200,60)]);
@@ -136,15 +166,21 @@ const tavern=standard(29,'いざかやさん','29-izakaya',['sake-bottle','fried
 tavern.hangingObstacles=[{anchor:[240,84],length:190,size:[64,34],amplitude:12,period:4.8,phase:0},{anchor:[500,84],length:235,size:[64,34],amplitude:-10,period:5.4,phase:1.3}];
 const fragileStage=standard(30,'こわれものちゅうい','30-fragile',['bomb','vase','teapot','drinking-glass','ramune-bottle','sake-bottle','camera','pocket-watch','hourglass','standing-mirror','flamethrower','water-balloon','bomb','flower-pot','empty-pot'],[...ground,rect(100,360,170,16),rect(340,390,180,16)]);
 fragileStage.preplaced=[{id:'vase',x:145,groundY:360},{id:'teapot',x:225,groundY:360},{id:'wooden-crate',x:385,groundY:390},{id:'trash-bag',x:455,groundY:390}];
-const awkward=standard(31,'やっかいなばしょ','31-awkward',['submarine','plank','skateboard','wheelbarrow','umbrella','low-table','rubber-duck','wooden-crate','bagel','toolbox','hammer','platform-cart','cushion','refrigerator','water-balloon'],[rect(0,450,160,90),rect(160,510,470,30),rect(630,450,330,90),rect(190,400,80,20),rect(455,280,90,20)],[810,450],[60,70,540,440]);
+const awkward=standard(31,'やっかいなばしょ','31-awkward',['submarine','plank','skateboard','wheelbarrow','umbrella','low-table','rubber-duck','wooden-crate','bagel','toolbox','hammer','platform-cart','cushion','refrigerator','water-balloon'],[rect(0,450,160,90),rect(630,450,330,90)],[810,450],[60,70,540,440]);
 awkward.movingPlatforms=[{center:[310,330],size:[150,20],axis:[1,0],travel:80,period:4.6,phase:0},{center:[515,410],size:[130,20],axis:[0,1],travel:58,period:5.2,phase:0.8}];
-const blasts=standard(32,'ばくはつ実験室','32-blast-lab',['blast-bomb','gunpowder-barrel','bomb','blast-bomb','wooden-crate','plank','bomb','metal-drum','gunpowder-barrel','blast-bomb','water-jug','submarine','cannonball','toolbox','refrigerator'],[rect(0,450,100,90),rect(100,505,125,35),rect(225,350,105,190),rect(330,505,180,35),rect(510,405,105,135),rect(615,505,90,35),rect(705,450,255,90)],[810,450],[100,70,515,435]);
-blasts.preplaced=[{id:'wooden-crate',x:275,groundY:350},{id:'wooden-obstacle',x:558,groundY:405,width:76,scoring:false}];
-const additions=[lab,toy,obstacle,snack,rubber,thunder,freezer,birthday,tavern,fragileStage,awkward,blasts];
+const blasts=standard(32,'ばくはつ実験室','32-blast-lab',['blast-bomb','gunpowder-barrel','waterproof-bomb','strong-waterproof-bomb','refrigerator','plank','bomb','refrigerator','gunpowder-barrel','blast-bomb','water-jug','submarine','cannonball','toolbox','refrigerator'],[rect(0,450,100,90),rect(100,505,125,35),rect(225,350,105,190),rect(330,505,180,35),rect(510,405,105,135),rect(615,505,90,35),rect(705,450,255,90)],[810,450],[100,70,515,435]);
+blasts.preplaced=[...[244,277,310].map(x=>({id:'wooden-crate',x,groundY:350,width:30})),...[260,294].map(x=>({id:'wooden-crate',x,groundY:320,width:30})),{id:'wooden-crate',x:277,groundY:290,width:30},...[130,185].map(x=>({id:'wooden-crate',x,groundY:505})),{id:'wooden-crate',x:157,groundY:450},{id:'vase',x:130,groundY:450},{id:'drinking-glass',x:185,groundY:450},{id:'refrigerator',x:375,groundY:505},{id:'refrigerator',x:455,groundY:505},{id:'refrigerator',x:562,groundY:405},{id:'teapot',x:375,groundY:403},{id:'drinking-glass',x:455,groundY:403},{id:'vase',x:277,groundY:260}];
+const ultimate=standard(33,'きゅうきょくじっけんしつ','33-ultimate-lab',['lightning-orb','strong-waterproof-bomb','tabletop-stove','water-jug','freeze-sprayer','submarine','game-console','refrigerator','rubber-duck','waterproof-bomb','whole-cake','hammer','umbrella','toy-train','game-logo'],[rect(0,420,320,120),rect(320,515,280,25),rect(600,420,360,120),rect(928,150,32,270)],[810,420],[55,70,580,445]);
+ultimate.queuePolicy='randomCatalog';ultimate.selectAnyCatalogItem=true;ultimate.selectionPolicy='seeded whole-catalog queue; optional free selection overrides the current and following throws';
+const pitfalls=standard(34,'おとしあな','34-pitfalls',['plank','skateboard','refrigerator','submarine','umbrella','wheelbarrow','cushion','toy-train','low-table','platform-cart','bagel','wooden-crate','rubber-duck','bowling-ball','toolbox'],[rect(0,450,100,90),rect(210,450,100,90),rect(420,450,100,90),rect(630,450,330,90),rect(65,230,150,18),rect(270,165,145,18),rect(440,280,135,18),rect(555,365,120,18),rect(220,350,105,18)],[810,450],[55,70,565,380]);
+pitfalls.abyss=[[100,520,110,120],[310,520,110,120],[520,520,110,120]];
+const gaming=standard(35,'ゲーム','35-gaming',['game-cartridge','game-console','desktop-pc','keyboard','game-controller','wired-mouse','sd-card','camera','game-logo','tablet','battery','utility-pole','pro-controller','smartphone','charger'],[...ground,rect(90,390,475,22),rect(110,412,24,38),rect(515,412,24,38)]);
+const additions=[lab,toy,obstacle,snack,rubber,thunder,freezer,birthday,tavern,fragileStage,awkward,blasts,ultimate,pitfalls,gaming];
 const lessons=['なにがでるかな。すべてのものから ランダムで15こ。','ういている たなに おもちゃをのせよう。','おおきなきのかべ。ほのおと ばくだんで かたづけよう。','おやつを じょうずに つみあげよう。','ゴムは はねる。こおらせると われやすくなる。','かみなりは しばらくして はじける。みずとほのおに きをつけよう。','ゆかも たなも こおっている。すべるものを つもう。','ケーキをかざって パーティーのじゅんび。','ゆれるライトを よけて テーブルにのせよう。','こわれものが いっぱい。つよくぶつけると われる。','うごくあしばに あわせて タイミングをねらおう。','せまいあしばと みぞ。ばくふうで ものをうごかそう。'];
-const stageKana=['ランダムじっけんしつ','おもちゃうりば','じゃまもの','3じのおやつ','ゴムとれいとうじゅう','かみなりじっけん','れいとうこ','たんじょうびパーティー','いざかやさん','こわれものちゅうい','やっかいなばしょ','ばくはつじっけんしつ'];
+lessons.push('なんでもためせる ちかのじっけんしつ。ものをえらんでもいい。','あなに おちると こわれる。うえのあしばを つかおう。','ゲームのどうぐを つみあげよう。コードも ひとつのかたち。');
+const stageKana=['ランダムじっけんしつ','おもちゃうりば','じゃまもの','3じのおやつ','ゴムとれいとうじゅう','かみなりじっけん','れいとうこ','たんじょうびパーティー','いざかやさん','こわれものちゅうい','やっかいなばしょ','ばくはつじっけんしつ','きゅうきょくじっけんしつ','おとしあな','ゲーム'];
 for(const [i,s] of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=stageKana[i];ui.lessons[s.id-1]=lessons[i];}
-stages.status='Godot 4.7.2: 32 authored stages, 15 throws each; current checks are in previews/*-checks.json.';
+stages.status='Godot 4.7.2: 35 authored stages, 15 throws each; current checks are in previews/*-checks.json.';
 
 // Fixed scenery is drawn from the same terrain polygons used by physics.
 const svgMap=body=>`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none" shape-rendering="crispEdges">${body}</svg>\n`;
@@ -163,7 +199,10 @@ art[28]=wall('#f1d3bf','#e1b0ab')+L('M0 108L160 145L320 110L480 150L640 110L800 
 art[29]=wall('#71564e','#5b4544')+R(38,120,550,150,'#413c45')+L('M52 161H575M52 222H575',wood,8)+[70,135,200,265,330,395,460,525].map((x,i)=>R(x,174,26,43,['#789a70','#c2aa73','#8a9d9c'][i%3])+R(x+6,160,14,14,steel)).join('')+R(650,115,235,175,'#ad8c67')+L('M675 145H860M675 181H860M675 217H860','#6c554a',5)+terrainArt(tavern,'#9e7555');
 art[30]=wall('#c9c2b5','#a9a396')+R(53,108,530,171,'#718c9c')+R(70,125,496,136,'#a9c6c7')+L('M235 125V261M401 125V261',cream,7)+R(680,140,170,120,'#d4b36b')+P('M765 160L820 240H710Z','#e8ce85')+L('M765 180V211M765 222V230',ink,8)+terrainArt(fragileStage,'#a7a08a');
 art[31]=wall('#a4b9be','#7c9aab')+R(30,120,130,210,'#718c9d')+R(730,110,170,210,'#718c9d')+L('M160 178L340 115L520 178L730 125',cream,5)+terrainArt(awkward,'#7e9c9f')+L('M230 330H390M515 352V468','#d9b362',4);
-art[32]=wall('#65747f','#4f5d6c')+R(45,100,540,145,'#394b5d')+L('M70 130H560M70 178H560','#7b9ca6',6)+R(715,110,170,130,'#d0b778')+P('M800 130L850 216H750Z',gold)+C(800,185,15,ink)+terrainArt(blasts,'#a99a78')+L('M227 352H328M512 407H613','#e8ca78',7);
+art[32]=wall('#65747f','#4f5d6c')+R(45,100,540,145,'#394b5d')+L('M70 130H560M70 178H560','#7b9ca6',6)+R(715,110,170,130,'#d0b778')+P('M800 130L850 216H750Z',gold)+R(795,157,10,28,ink,'none')+R(795,195,10,10,ink,'none')+terrainArt(blasts,'#a99a78')+L('M227 352H328M512 407H613','#e8ca78',7);
+art[33]=R(0,0,960,540,'#122d43','none')+R(0,0,960,72,'#0c1f34','none')+R(28,92,860,285,'#244b62')+L('M48 120H210V190H350V110H530V190H700V120H868M48 325H180V260H310M548 280H720V332H867','#418485',7)+L('M110 122H202M358 112H522M728 333H856','#8de5cc',3)+[96,395,720].map(x=>R(x,174,144,88,'#173348')+R(x+12,186,120,62,'#5cbbba')+L(`M${x+22} 219H${x+43}L${x+58} 201L${x+77} 233L${x+93} 210H${x+121}`,'#ccf8da',4)).join('')+terrainArt(ultimate,'#315d73')+L('M0 420H320V515H600V420H928V150','#93e9d6',5)+L('M345 530H575','#5db9ba',3);
+art[34]=wall('#627b8b','#456477')+R(30,96,870,265,'#334f64')+L('M48 123H882M48 335H882M100 124V334M820 124V334','#638e99',5)+terrainArt(pitfalls,'#9a9a7e')+L('M2 450H98M212 450H308M422 450H518M632 450H958','#e6c96d',5)+[100,310,520].map(x=>P(`M${x+10} 470H${x+100}L${x+55} 506Z`,'#1c354c','none')).join('');
+art[35]=wall('#383a64','#272c4e')+R(50,104,525,200,'#1c2c46')+R(66,120,493,166,'#658db2')+P('M88 256V210H120V178H155V210H188V256ZM223 256V190H260V159H295V190H329V256Z','#90c4c6','none')+R(365,157,151,97,'#273c5b')+R(383,175,116,62,'#d0e5d4')+R(653,110,224,220,'#b69988')+[0,1,2].map(row=>R(665,133+row*63,200,10,'#5c5870')+[0,1,2,3,4].map(col=>R(674+col*37,148+row*63,25,42,[red,blue,gold,mint,pink][col])).join('')).join('')+terrainArt(gaming,'#7c7290')+R(96,382,463,10,'#b1bacb');
 for(const s of additions){const svg=svgMap(art[s.id]);await fs.writeFile(path.join(root,`assets/maps/${s.map}.svg`),svg);await sharp(Buffer.from(svg)).png().toFile(path.join(root,`assets/maps/${s.map}.png`));}
 maps.maps=stages.stages.map(s=>({id:s.map,stage:s.id,nameJa:s.nameJa,status:s.status,svg:`maps/${s.map}.svg`,worldSize:[960,540],terrain:s.terrain,backgroundCollision:false,...(s.assignment?{assignment:s.assignment}:{})}));
 const ids=new Set(manifest.items.map(x=>x.id));
@@ -176,5 +215,7 @@ await fs.mkdir(path.join(root,'previews'),{recursive:true});
 const itemSheet=[];for(const [i,e]of items.entries()){const im=await sharp(path.join(root,`assets/raster/objects/${e.id}.png`)).resize({width:104,height:104,fit:'inside',kernel:'nearest'}).png().toBuffer({resolveWithObject:true});itemSheet.push({input:im.data,left:i%8*128+Math.floor((128-im.info.width)/2),top:Math.floor(i/8)*128+Math.floor((128-im.info.height)/2)});}
 await sharp({create:{width:1024,height:Math.ceil(items.length/8)*128,channels:4,background:'#283b4c'}}).composite(itemSheet).png().toFile(path.join(root,'previews/extra-items.png'));
 const mapSheet=[];for(const [i,s]of additions.entries())mapSheet.push({input:await sharp(Buffer.from(svgMap(art[s.id]))).resize(320,180,{kernel:'nearest'}).png().toBuffer(),left:i%3*320,top:Math.floor(i/3)*180});
-await sharp({create:{width:960,height:720,channels:4,background:'#283b4c'}}).composite(mapSheet).png().toFile(path.join(root,'previews/extra-maps.png'));
+await sharp({create:{width:960,height:Math.ceil(additions.length/3)*180,channels:4,background:'#283b4c'}}).composite(mapSheet).png().toFile(path.join(root,'previews/extra-maps.png'));
 console.log(JSON.stringify({added:items.length,objects:manifest.items.length,stages:stages.stages.length,ids:items.map(x=>x.id)}));
+// Keep the independent latest retakes last so older source layers cannot restore them.
+await import('./retake-content.mjs');

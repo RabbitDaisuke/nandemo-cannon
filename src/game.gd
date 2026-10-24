@@ -3,6 +3,7 @@ extends Node2D
 
 const SCORE_FLOOR_SLOP = 1.5
 const MAPS_PER_PAGE = 15
+const TRAJECTORY_COLOR = Color("ff67db")
 
 var catalog = GameCatalog.new()
 var ui_text: Dictionary = {}
@@ -46,6 +47,10 @@ var next_icon: TextureRect
 var loaded_icon: Sprite2D
 var loaded_label: Label
 var catalog_button: Button
+var map_button: Button
+var bgm_button: Button
+var bgm_volume_slider: HSlider
+var bgm_volume_label: Label
 var power_slider: HSlider
 var angle_slider: HSlider
 var updating_sliders: bool = false
@@ -59,6 +64,9 @@ var result_stage_name: String = ""
 var result_capture_status: String = "none"
 var _capture_generation: int = 0
 var _share_bridge: JavaScriptObject
+var _bgm_bridge: JavaScriptObject
+var _bgm_state: Dictionary = {"enabled": true, "volume": 0.025, "blocked": false, "unavailable": false}
+var _updating_bgm: bool = false
 var tutorial_label: Label
 var tutorial_active: bool = false
 var tutorial_completed: bool = false
@@ -74,6 +82,7 @@ func _ready() -> void:
 		ui_text = localized
 	if OS.has_feature("web"):
 		_share_bridge = JavaScriptBridge.get_interface("NandemoShare")
+		_bgm_bridge = JavaScriptBridge.get_interface("NandemoBGM")
 	seed_text = "%08X%08X" % [randi(), randi()]
 	if FileAccess.file_exists("user://progress.json"):
 		var data = JSON.parse_string(FileAccess.get_file_as_string("user://progress.json"))
@@ -99,6 +108,8 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	_set_wait_speed(1.0)
 	get_tree().paused = false
+	if _bgm_bridge != null:
+		_bgm_bridge.stopGameplay()
 	if _web_document != null and _visibility_callback != null:
 		_web_document.removeEventListener("visibilitychange", _visibility_callback)
 
@@ -182,7 +193,7 @@ func load_stage(index: int) -> void:
 	loaded_icon.position = ground + Vector2(65, -94)
 	loaded_icon.z_index = 1
 	stage_root.add_child(loaded_icon)
-	loaded_label.position = ground + Vector2(42, -143)
+	loaded_label.position = Vector2(clampf(ground.x + 65.0 - 98.0, 18.0, 746.0), maxf(126.0, ground.y - 152.0))
 	cannon.fired.connect(_on_fired)
 	cannon.aim_changed.connect(_on_aim_changed)
 	cannon.aim_dragged.connect(_dismiss_tutorial)
@@ -211,7 +222,7 @@ func load_stage(index: int) -> void:
 			actor.spec["loadForceThreshold"] = 100000000.0
 	stage_label.text = "%02d / %s" % [stage_index + 1, _stage_display_name(stage_index)]
 	var lessons: Array = ui_text.get("lessons", [])
-	lesson_label.text = str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。"
+	lesson_label.text = _wrap_hud_text(str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。", 304.0, 12)
 	catalog_button.visible = bool(current_stage.get("selectAnyCatalogItem", false))
 	tutorial_active = stage_index == 0 and not tutorial_completed
 	tutorial_label.position = ground + Vector2(-300, -72)
@@ -407,6 +418,7 @@ func calculate_score() -> int:
 func _update_hud() -> void:
 	score_caption.text = "とくてん"
 	catalog_button.disabled = shots_fired >= 15 or result_shown
+	map_button.disabled = shots_fired >= 15
 	score_label.text = "%04d" % score_value
 	remaining_label.text = "%02d/15" % maxi(0, 15 - shots_fired)
 	var next = following_item_id()
@@ -416,6 +428,8 @@ func _update_hud() -> void:
 	loaded_icon.visible = not loaded.is_empty()
 	loaded_label.visible = loaded_icon.visible
 	if loaded_icon.visible:
+		loaded_label.text = _item_display_name(loaded)
+		_fit_label_width(loaded_label, 196.0, 14, 9)
 		var record: Dictionary = catalog.items[loaded]
 		loaded_icon.texture = load("res://assets/" + str(record.svg))
 		var texture_size = loaded_icon.texture.get_size()
@@ -424,6 +438,71 @@ func _update_hud() -> void:
 			viewbox = [0, 0, 128, 128]
 		loaded_icon.scale = Vector2(float(viewbox[2]), float(viewbox[3])) * float(record.worldScale) / texture_size
 	_on_aim_changed(cannon.elevation_degrees, cannon.power)
+	_refresh_bgm_ui()
+
+func _fit_label_width(label: Label, width: float, initial_size: int, minimum_size: int) -> void:
+	var font_size = initial_size
+	while font_size > minimum_size and theme.default_font.get_string_size(label.text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x > width:
+		font_size -= 1
+	label.add_theme_font_size_override("font_size", font_size)
+	label.size = Vector2(width, theme.default_font.get_height(font_size))
+
+func _wrap_hud_text(value: String, width: float, font_size: int) -> String:
+	var lines: Array[String] = []
+	var words: Array[String] = []
+	var word = ""
+	for character in value:
+		word += character
+		if character in [" ", "。", "、", "\n"]:
+			words.append(word)
+			word = ""
+	if not word.is_empty():
+		words.append(word)
+	var line = ""
+	for chunk in words:
+		if not line.is_empty() and theme.default_font.get_string_size((line + chunk).strip_edges(), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x > width:
+			lines.append(line.strip_edges())
+			line = ""
+		# Only hard-wrap a single phrase longer than the available column.
+		for character in chunk:
+			if character == "\n":
+				lines.append(line.strip_edges())
+				line = ""
+				continue
+			if not line.is_empty() and theme.default_font.get_string_size(line + character, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x > width:
+				lines.append(line.strip_edges())
+				line = ""
+			line += character
+	lines.append(line.strip_edges())
+	return "\n".join(lines)
+
+func _refresh_bgm_ui() -> void:
+	if not is_instance_valid(bgm_button):
+		return
+	if _bgm_bridge != null:
+		var state = JSON.parse_string(str(_bgm_bridge.getStateJSON()))
+		if state is Dictionary:
+			_bgm_state = state
+	bgm_button.disabled = _bgm_bridge == null or bool(_bgm_state.get("unavailable", false))
+	bgm_button.text = "BGM さいせい" if bool(_bgm_state.get("blocked", false)) else ("BGM オン" if bool(_bgm_state.get("enabled", true)) else "BGM オフ")
+	var percent = clampf(float(_bgm_state.get("volume", 0.025)), 0.0, 1.0) * 100.0
+	bgm_volume_label.text = "おと %04.1f%%" % percent
+	_updating_bgm = true
+	bgm_volume_slider.value = percent
+	bgm_volume_slider.editable = not bgm_button.disabled
+	_updating_bgm = false
+
+func _toggle_bgm() -> void:
+	if _bgm_bridge != null:
+		_bgm_bridge.toggle()
+	_refresh_bgm_ui()
+
+func _set_bgm_volume(percent: float) -> void:
+	if _updating_bgm:
+		return
+	if _bgm_bridge != null:
+		_bgm_bridge.setVolume(clampf(percent / 100.0, 0.0, 1.0))
+	_refresh_bgm_ui()
 
 func _on_aim_changed(angle: float, power: float) -> void:
 	if not is_instance_valid(aim_label):
@@ -506,7 +585,7 @@ func _finish_stage(timed_out: bool) -> void:
 		_button("がぞうつきでシェア", Vector2(340, 278), Vector2(270, 36), func(): _share_bridge.shareImage(), modal)
 	_label("がぞうは ほぞんして X にそえてください。", Vector2(50, 326), 13, Color("b3dbea"), modal)
 	_button("やりなおす", Vector2(45, 385), Vector2(180, 42), func(): load_stage(stage_index), modal)
-	_button("マップ", Vector2(240, 385), Vector2(180, 42), _show_maps, modal)
+	_button("マップ", Vector2(240, 385), Vector2(180, 42), _show_maps, modal).set_meta("result_navigation", "maps")
 	var next = _button("つぎへ", Vector2(435, 385), Vector2(180, 42), func(): load_stage(mini(catalog.stages.size() - 1, stage_index + 1)), modal)
 	next.disabled = stage_index >= catalog.stages.size() - 1
 
@@ -577,6 +656,8 @@ func _close_modal(resume: bool = true) -> void:
 			cannon.set_enabled(playable and shots_fired < 15 and cooldown <= 0.0)
 
 func _show_maps(page: int = -1) -> void:
+	if shots_fired >= 15 and not result_shown:
+		return
 	var pages = ceili(catalog.stages.size() / float(MAPS_PER_PAGE))
 	map_page = clampi(stage_index / MAPS_PER_PAGE if page < 0 else page, 0, pages - 1)
 	_open_modal("ステージをえらぶ / %d" % catalog.stages.size())
@@ -667,7 +748,7 @@ func _build_ui() -> void:
 	theme.default_font_size = 16
 	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
 		var style = StyleBoxFlat.new()
-		style.bg_color = Color("193346") if state != "pressed" else Color("6a5631")
+		style.bg_color = Color("293039") if state == "disabled" else (Color("193346") if state != "pressed" else Color("6a5631"))
 		style.border_color = Color("ffd36c") if state in ["hover", "focus"] else Color("080f18")
 		style.set_border_width_all(2)
 		style.content_margin_left = 7
@@ -731,11 +812,12 @@ func _build_ui() -> void:
 	next_name = _label("", Vector2(620, 75), 10, Color("fff0b5"))
 	next_name.size.x = 172
 	next_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_button("マップ", Vector2(804, 10), Vector2(64, 32), _show_maps)
+	map_button = _button("マップ", Vector2(804, 10), Vector2(64, 32), _show_maps)
 	_button("シード", Vector2(876, 10), Vector2(72, 32), _show_seed)
 	_button("やりなおす", Vector2(804, 50), Vector2(144, 32), func(): load_stage(stage_index))
 	stage_label = _label("", Vector2(18, 77), 15, Color("fff0b5"))
-	lesson_label = _label("", Vector2(18, 451), 12, Color("fff0b5"))
+	lesson_label = _label("", Vector2(302, 77), 12, Color("fff0b5"))
+	lesson_label.size = Vector2(304, 44)
 	aim_label = _label("", Vector2(506, 476), 16)
 	angle_slider = _slider(Vector2(506, 501), 5.0, 85.0, 35.0, func(value):
 		if not updating_sliders and is_instance_valid(cannon):
@@ -746,8 +828,21 @@ func _build_ui() -> void:
 		if not updating_sliders and is_instance_valid(cannon):
 			_dismiss_tutorial()
 			cannon.set_aim(cannon.elevation_degrees, value / 100.0))
-	loaded_label = _label("いま", Vector2.ZERO, 12, Color("ffd36c"))
+	loaded_label = _label("", Vector2.ZERO, 14, Color("ffd36c"))
+	loaded_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_label("ドラッグで調整・クリックで発射", Vector2(18, 477), 16)
+	bgm_button = _button("BGM オン", Vector2(18, 502), Vector2(144, 30), _toggle_bgm)
+	bgm_button.add_theme_font_size_override("font_size", 14)
+	bgm_volume_label = _label("おと 02.5%", Vector2(176, 510), 12)
+	bgm_volume_slider = _slider(Vector2(268, 508), 0.0, 100.0, 2.5, _set_bgm_volume)
+	bgm_volume_slider.size = Vector2(180, 18)
+	bgm_volume_slider.step = 0.5
+	var bgm_refresh = Timer.new()
+	bgm_refresh.wait_time = 0.5
+	bgm_refresh.ignore_time_scale = true
+	bgm_refresh.timeout.connect(_refresh_bgm_ui)
+	ui.add_child(bgm_refresh)
+	bgm_refresh.start()
 	catalog_button = _button("もの", Vector2(846, 435), Vector2(94, 34), func(): _show_catalog())
 	tutorial_label = _label("たてドラッグで角度\nよこドラッグで火力\nクリックで発射", Vector2.ZERO, 16, Color("ffd36c"))
 	tutorial_label.visible = false
@@ -762,8 +857,19 @@ func _slider(at: Vector2, minimum: float, maximum: float, initial: float, callba
 	slider.step = 1.0
 	slider.theme = theme
 	slider.value_changed.connect(callback)
+	# Mouse emulation is disabled for pinch gestures; native Slider only handles
+	# mouse input. GUI touch events already carry this control's local position.
+	slider.gui_input.connect(_slider_touch.bind(slider))
 	ui_root.add_child(slider)
 	return slider
+
+func _slider_touch(event: InputEvent, slider: HSlider) -> void:
+	if not slider.editable or (is_instance_valid(touch_zoom) and touch_zoom.gesture_active):
+		return
+	if event is InputEventScreenDrag or (event is InputEventScreenTouch and event.pressed and not event.canceled):
+		var ratio = clampf(event.position.x / maxf(1.0, slider.size.x), 0.0, 1.0)
+		slider.value = lerpf(slider.min_value, slider.max_value, ratio)
+		slider.accept_event()
 
 func _label(text_value: String, at: Vector2, font_size: int, color_value: Color = Color("fff0c8"), parent: Node = null) -> Label:
 	var label = Label.new()
@@ -857,7 +963,9 @@ func _draw() -> void:
 		var point = position_start + velocity * t + Vector2(0, gravity_value * t * t * 0.5)
 		if point.y > 500.0 or point.x < 0.0:
 			break
-		draw_rect(Rect2(point - Vector2(2, 2), Vector2(4, 4)), Color(1.0, 0.92, 0.65, 1.0 - float(step) * 0.06))
+		var alpha = 1.0 - float(step) * 0.04
+		draw_rect(Rect2(point - Vector2(4, 4), Vector2(8, 8)), Color(0.025, 0.04, 0.08, alpha))
+		draw_rect(Rect2(point - Vector2(2, 2), Vector2(4, 4)), Color(TRAJECTORY_COLOR, alpha))
 
 func _score_marker() -> PackedVector2Array:
 	var left = score_zone.position.x
@@ -935,7 +1043,7 @@ func debug_snapshot(include_modal: bool = true) -> Dictionary:
 			var point = origin + velocity * t + Vector2(0, gravity_value * t * t * 0.5)
 			if point.y > 500 or point.x < 0:
 				break
-			trajectory.append([point.x, point.y, 1.0 - step * 0.06])
+			trajectory.append([point.x, point.y, 1.0 - step * 0.04, TRAJECTORY_COLOR.to_html()])
 	return {"stage": stage_index + 1, "map": current_stage.map, "scoreZone": [score_zone.position.x, score_zone.position.y, score_zone.size.x, score_zone.size.y], "scoreMarker": marker, "score": score_value, "shots": shots_fired, "actors": entries, "seed": seed_text, "angle": cannon.elevation_degrees, "power": cannon.power, "cannon": current_stage.get("cannon", [810, 420]), "cannonVisuals": cannon.visual_snapshot(), "cannonSelected": cannon.enabled and (cannon._hovered or cannon._grabbed), "loadedItem": loaded, "followingItem": following_item_id(), "font": theme.default_font.resource_path, "recoil": cannon._recoil, "playable": playable, "elapsed": elapsed, "controls": controls, "tutorialArrows": tutorial_arrows, "firePatches": patches, "waterRegions": water_regions, "waterCells": water_cells, "droplets": drops, "trajectory": trajectory, "result": result_shown, "destroyedCounts": destroyed_counts.duplicate(), "movingTerrain": moving_terrain}
 
 func _snapshot_controls(node: Node, output: Array, include_modal: bool = true) -> void:
@@ -952,7 +1060,7 @@ func _snapshot_controls(node: Node, output: Array, include_modal: bool = true) -
 			var style = node.get_theme_stylebox("disabled" if node.disabled else "normal") as StyleBoxFlat
 			entry.merge({"type": "button", "text": node.text, "fontSize": node.get_theme_font_size("font_size"), "disabled": node.disabled, "background": style.bg_color.to_html() if style != null else "193346ff", "border": style.border_color.to_html() if style != null else "080f18ff"})
 		elif node is HSlider:
-			entry.merge({"type": "slider", "value": node.value, "minimum": node.min_value, "maximum": node.max_value})
+			entry.merge({"type": "slider", "value": node.value, "minimum": node.min_value, "maximum": node.max_value, "editable": node.editable})
 		elif node is TextureRect and node.texture != null:
 			entry.merge({"type": "texture", "texture": node.texture.resource_path})
 		elif node is ColorRect:
