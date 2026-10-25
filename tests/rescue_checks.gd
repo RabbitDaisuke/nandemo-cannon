@@ -79,7 +79,7 @@ func _run() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 func _navigation_checks() -> void:
-	_expect(catalog.items.size() == 365 and catalog.stages.size() == 48, "the complete expansion loads 365 objects and 48 stable-ID stages")
+	_expect(catalog.items.size() == 377 and catalog.stages.size() == 48, "the complete expansion loads 377 objects and 48 stable-ID stages")
 	var order = catalog.stage_order()
 	var ids = order.map(func(index): return int(catalog.stages[index].id))
 	_expect(order.size() == catalog.stages.size() and ids.slice(-5) == [46, 47, 48, 44, 45], "the rescue, crane and school stages precede the review and cannon finale without renumbering saved IDs")

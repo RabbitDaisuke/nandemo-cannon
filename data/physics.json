@@ -879,7 +879,35 @@
     "drafting-compass": {},
     "pencil": {},
     "school-desk": {},
-    "randoseru": {}
+    "randoseru": {},
+    "karinto-manju": {},
+    "cutlet-sandwich": {},
+    "soft-serve": {},
+    "bottled-coffee": {
+      "waterUnits": 8,
+      "releaseUnits": 8,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120,
+      "minImpactEnergy": 2,
+      "loadForceThreshold": 5000,
+      "loadHoldSeconds": 0.35
+    },
+    "pickle-crock": {},
+    "hojicha-latte": {
+      "waterUnits": 8,
+      "releaseUnits": 8,
+      "breakImpactSpeed": 120,
+      "impactSpeed": 120,
+      "minImpactEnergy": 2,
+      "loadForceThreshold": 5000,
+      "loadHoldSeconds": 0.35
+    },
+    "lollipop": {},
+    "rice-bale": {},
+    "straw": {},
+    "tv-station": {},
+    "car-navigation": {},
+    "green-peeler": {}
   },
   "stateRules": {
     "breakage": {

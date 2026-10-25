@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 88, "the reviewed expansions contain eighty-eight selection-only objects")
+	_expect(additions.size() == 100, "the reviewed expansions contain one hundred selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
@@ -100,10 +100,14 @@ func _run() -> void:
 		["drafting-compass", Vector2(64, 79), Vector2(42, 70)],
 		["school-desk", Vector2(64, 53), Vector2(64, 67)],
 		["school-desk", Vector2(64, 100), Vector2(26, 90)],
-		["randoseru", Vector2(25, 70), Vector2(11, 70)],
-		["randoseru", Vector2(112, 70), Vector2(121, 70)],
-		["randoseru", Vector2(65, 21), Vector2(54, 21)],
-		["bandage-roll", Vector2(45, 64), Vector2(14, 64)],
+		["randoseru", Vector2(22, 75), Vector2(8, 75)],
+		["randoseru", Vector2(117, 75), Vector2(124, 75)],
+		["randoseru", Vector2(60, 17), Vector2(57, 8)],
+		["bandage-roll", Vector2(40, 74), Vector2(13, 74)],
+		["green-peeler", Vector2(64, 47), Vector2(64, 26)],
+		["green-peeler", Vector2(64, 108), Vector2(53, 108)],
+		["hojicha-latte", Vector2(90, 25), Vector2(77, 30)],
+		["lollipop", Vector2(50, 110), Vector2(30, 96)],
 		["fire-hose", Vector2(57, 62), Vector2(13, 62)],
 		["first-aid-box", Vector2(64, 23), Vector2(44, 23)],
 		["steel-ladder", Vector2(64, 42), Vector2(64, 31)],
@@ -147,21 +151,24 @@ func _run() -> void:
 	game.queue_free()
 	await process_frame
 	await process_frame
-	var bed_measurements = await _care_bed_wheel_checks(catalog.items["care-bed"])
-	var result = {"suite": "selection", "checks": checks, "failures": failures, "measurements": {"care_bed": bed_measurements}, "status": "passed" if failures.is_empty() else "failed"}
+	var wheel_measurements: Dictionary = {}
+	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck"]:
+		wheel_measurements[id] = await _wheel_checks(catalog.items[id])
+	var result = {"suite": "selection", "checks": checks, "failures": failures, "measurements": wheel_measurements, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/selection-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")
 	print(JSON.stringify({"suite": "selection", "checks": checks.size(), "failures": failures, "status": result.status}))
 	quit(0 if failures.is_empty() else 1)
 
-func _care_bed_wheel_checks(record: Dictionary) -> Dictionary:
+func _wheel_checks(record: Dictionary) -> Dictionary:
 	var upright = await _care_bed_trial(record, 0.0)
 	var inverted = await _care_bed_trial(record, PI)
-	_expect(upright.grounded and upright.wheel_supported, "the upright care bed rests on its two caster fixtures")
-	_expect(inverted.grounded and not inverted.wheel_supported, "the inverted care bed rests on its frame without activating caster support")
-	_expect(upright.friction < inverted.friction, "only actual caster support enables the existing low rolling friction")
-	_expect(upright.distance > inverted.distance + 30.0, "the upright care bed rolls farther than its inverted frame under the same horizontal impulse")
-	_expect(upright.dynamic and inverted.dynamic, "care bed rolling keeps gravity and rotation active instead of fixing the body")
-	print("Care bed displacement: upright=", upright.distance, " inverted=", inverted.distance)
+	var id = str(record.id)
+	_expect(upright.grounded and upright.wheel_supported, id + " rests on its wheel fixtures when upright")
+	_expect(inverted.grounded and not inverted.wheel_supported, id + " uses its solid body surface when inverted")
+	_expect(upright.friction < inverted.friction, id + " activates skateboard rolling friction only on its wheels")
+	_expect(upright.distance > inverted.distance + 30.0, id + " rolls farther upright under equal horizontal velocity")
+	_expect(upright.dynamic and inverted.dynamic, id + " retains gravity and rotation in either orientation")
+	print(id, " displacement: upright=", upright.distance, " inverted=", inverted.distance)
 	return {"upright_px": upright.distance, "inverted_px": inverted.distance, "upright_friction": upright.friction, "inverted_friction": inverted.friction}
 
 func _care_bed_trial(record: Dictionary, rotation_value: float) -> Dictionary:

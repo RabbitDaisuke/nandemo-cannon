@@ -22,13 +22,13 @@ const fire = {
 };
 const claw = {
   id: 47, nameJa: 'クレーンゲーム', map: '47-claw-machine', status: 'specified', gravity: 980,
-  cannon: [860, 450], scoreZone: [35, 105, 585, 335], scoreGroundY: 440,
-  terrain: [rect(20, 440, 600, 100), rect(20, 110, 12, 330), rect(608, 396, 12, 44), rect(810, 450, 150, 90)],
+  cannon: [860, 450], scoreZone: [150, 105, 470, 335], scoreGroundY: 440,
+  terrain: [rect(150, 440, 470, 100), rect(20, 110, 12, 330), rect(150, 396, 12, 44), rect(608, 396, 12, 44), rect(810, 450, 150, 90)],
   queue: ['teddy-bear', 'rubber-duck', 'toy-car', 'soccer-ball', 'pillow', 'wooden-crate', 'barrel', 'hamburger', 'towel', 'bowling-pin', 'skateboard', 'spaghetti', 'napolitan', 'coffee-beans-pouch', 'school-uniform'],
   queuePolicy: 'randomCatalog', randomCatalogScope: 'selectable',
   queueOverrides: [{shot: 6, item: 'strong-blast-wave-bomb'}, {shot: 11, item: 'strong-blast-wave-bomb'}],
-  abyss: [[620, 452, 190, 150]], preplaced: [],
-  lesson: 'クレーンゲームの なかにきちゃった！\nみぎのあなに おとすと ものは おきゃくさんのものになっちゃうぞ！'
+  abyss: [[20, 452, 130, 150], [620, 452, 190, 150]], preplaced: [],
+  lesson: 'クレーンゲームの なかにきちゃった！\nさゆうのあなに おとすと ものは おきゃくさんのものになっちゃうぞ！'
 };
 const school = {
   id: 48, nameJa: 'がっこう', map: '48-school', status: 'specified', gravity: 980,
@@ -74,24 +74,30 @@ const fireArt = R(0,0,960,540,'#c4c9c3')+R(0,86,960,28,red)+R(0,114,960,8,'#803c
   [650,745,840].map(x=>P(`M${x} 451L${x+38} 540H${x+44}L${x+6} 451Z`,'#c2b999')).join('')+
   R(33,517,572,6,'#556a73')+[44,80,116,152,188,224,260,296,332,368,404,440,476,512,548,584].map(x=>R(x,517,4,12,'#313f4d')).join('');
 
-// A side cutaway: the pit is visibly open, with no painted or physical floor.
-// The 44px lip catches low objects; piles can overflow over its top at y=396.
+// Side cutaway: both collection holes remain visibly and physically open.
+// The 44px lips catch low objects; piles can overflow above y=396.
 const clawArt = R(0,0,960,540,'#252d49')+R(14,87,932,437,ink)+R(23,96,914,424,'#426a84')+
   R(40,116,891,313,'#719eac')+R(48,124,875,297,'#8bb3bd')+
   P('M49 125H95L307 420H261Z','#a2c4c6')+P('M590 125H612L824 420H802Z','#a2c4c6')+
   [72,221,370,519,668,817].map((x,i)=>R(x,146+(i%2)*24,8,8,'#d2dfcf')+R(x-5,149+(i%2)*24,18,2,'#d2dfcf')).join('')+
   R(33,111,884,12,ink)+R(36,113,878,4,'#d7d3be')+
-  R(166,115,74,20,ink)+R(170,119,66,12,'#d59c70')+R(200,135,6,48,ink)+R(202,136,2,46,'#dce1cb')+
-  R(179,180,47,20,ink)+R(183,184,39,12,cream)+
-  P('M181 199H190L170 224L178 247L188 249V256H171L158 225Z',ink)+
-  P('M215 199H224L247 225L234 256H217V249L227 247L235 224Z',ink)+
-  P('M182 201H186L164 225L174 250H179L171 224Z','#cbd8ce')+
-  P('M218 201H222L241 225L231 250H226L234 224Z','#cbd8ce')+
+  R(169,115,84,22,ink)+R(174,120,74,11,'#d59c70')+R(200,137,21,30,ink)+R(205,137,11,30,'#c4d4d2')+R(207,137,4,29,cream)+
+  P('M164 177L181 160H243L260 174L260 210L245 222H179L164 209Z',ink)+
+  P('M171 178L184 166H240L252 176L241 184H181Z','#faf0d4')+
+  P('M171 181L182 188H240V215H182L171 205Z','#bbc9c9')+P('M244 187L254 178V207L244 215Z','#6e8999')+
+  R(185,190,49,20,'#4b748d')+P('M192 197L199 192V196H220V192L227 197L220 202V199H199V202Z','#e8b86a')+
+  P('M171 199L181 211L150 241L164 269L187 275L183 284L156 279L136 240Z',ink)+
+  P('M172 207L175 212L143 241L160 273L182 278L181 280L158 275L140 240Z','#e6e7d5')+
+  P('M247 205L257 199L290 240L271 279L244 284L240 275L263 269L278 241Z',ink)+
+  P('M253 207L285 240L268 275L246 280L245 278L267 273L282 241L250 211Z','#c7d6d3')+
+  R(166,198,13,13,ink)+R(170,202,5,5,'#e4d2a6')+R(247,198,13,13,ink)+R(251,202,5,5,'#e4d2a6')+
+  R(20,429,130,111,'#161c30')+P('M29 457H141L123 540H47Z','#30314c')+
+  R(35,462,100,5,'#854a69')+P('M51 477H119L108 495H101V508H70V495H62Z','#a76081')+
   R(620,429,190,111,'#161c30')+P('M628 457H801L774 540H652Z','#30314c')+
   R(635,462,160,5,'#854a69')+P('M665 477H766L753 495H740V508H698V495H684Z','#a76081')+
-  terrain(claw,'#b68daa')+R(23,443,582,8,'#ebcee0')+R(23,462,582,6,'#84617e')+
-  [55,145,235,325,415,505].map(x=>R(x,489,46,21,'#8d6887')+R(x+5,494,36,11,'#654f70')).join('')+
-  R(611,399,6,38,'#f7d47e')+R(612,407,4,11,'#bd8657')+
+  terrain(claw,'#b68daa')+R(153,443,452,8,'#ebcee0')+R(153,462,452,6,'#84617e')+
+  [185,285,385,485].map(x=>R(x,489,46,21,'#8d6887')+R(x+5,494,36,11,'#654f70')).join('')+
+  [153,611].map(x=>R(x,399,6,38,'#f7d47e')+R(x+1,407,4,11,'#bd8657')).join('')+
   R(813,453,144,8,'#ebcee0')+R(824,478,120,7,'#83637f')+
   R(0,88,20,452,'#783d61')+R(3,94,10,436,'#cc7c96')+R(936,88,24,362,'#783d61')+R(940,94,12,350,'#cc7c96');
 const schoolArt = R(0,0,960,540,'#d5d2b9')+R(0,88,960,20,'#9eac9d')+R(0,108,960,6,'#708b89')+

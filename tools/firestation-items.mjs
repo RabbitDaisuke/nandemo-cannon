@@ -59,15 +59,25 @@ add('fire-engine','しょうぼうしゃ','metal',8,103,
  R(74,64,5,30,redDark)+R(115,69,6,10,gold)+R(6,94,116,5,shade)+wheel(29,102)+wheel(101,102),
  'wheeled',{wheelFixtures:[2,3]});
 
-const bandageOuter=oct(45,64,36,43),bandageInner=oct(45,64,12,18);
+// The roll has an elliptical front and a long, diagonally receding cylindrical
+// side. Side geometry stops at the front rim, keeping its center genuinely open.
+const bandageOuter=oct(40,74,32,39),bandageInner=oct(40,74,10,16);
+const bandageSide=[[24,35],[64,13],[96,13],[112,32.5],[112,71.5],[96,91],[56,113],[72,93.5],[72,54.5],[56,35]];
 add('bandage-roll','ほうたい','cloth',0.8,54,
- [...ringShapes(bandageOuter,bandageInner),poly([71,45],[119,68],[119,108],[78,93],[70,81])],
- P('M71 45L119 68V108L78 93L70 81Z',ink)+P('M77 53L113 72V100L82 88L76 79Z','#d8d8c4')+
- P('M82 62L108 75V82L82 70Z',cream)+P('M82 77L108 89V93L82 83Z','#abbab2')+
- ringArt(bandageOuter,bandageInner,ink)+ringArt(oct(45,64,30,37),oct(45,64,16,23),'#e5e1c9')+
- ringArt(oct(45,64,25,31),oct(45,64,21,27),'#bac6bb')+
- P('M30 30L40 27H52L61 33L58 37L50 33H40L33 36Z',cream)+
- P('M28 87L35 96H53L62 87L66 90L55 101H33L24 90Z','#a1b5af'));
+ [poly(...bandageSide),...ringShapes(bandageOuter,bandageInner)],
+ P(pathOf(bandageSide),ink)+P('M36 33L65 18H94L107 35V69L92 87L65 102L77 93V54L60 34Z','#bbc7b8')+
+ P('M37 32L66 17H94L103 29L73 46L60 34Z',cream)+P('M76 49L106 33V49L77 65Z','#e3e3ca')+
+ P('M77 66L107 50V69L94 85L73 97L77 91Z','#9bafa6')+
+ P('M64 26L70 23L100 23L102 27H71L68 29Z','#d2d8bd')+
+ P('M80 43L85 40L87 43L82 46Z','#9fb5a8')+P('M92 36L97 33L99 36L94 39Z','#9fb5a8')+
+ P('M80 58L85 55L87 58L82 61Z','#a0b4a7')+P('M93 51L98 48L100 51L95 54Z','#a0b4a7')+
+ P('M80 75L85 72L87 75L82 78Z','#d4ddc5')+P('M94 68L99 65L101 68L96 71Z','#d4ddc5')+
+ ringArt(bandageOuter,bandageInner,ink)+ringArt(oct(40,74,27,34),oct(40,74,13,20),'#e7e5cd')+
+ ringArt(oct(40,74,23,29),oct(40,74,20,25),'#afc0b3')+
+ P('M28 42H51L57 48L55 52L49 47H30L23 57L19 55Z',cream)+
+ P('M18 76H22V88L31 99H49L57 87L60 89L51 105H29L18 91Z','#cad5bf')+
+ P('M26 63L33 53H47L54 63L51 65L45 58H35L30 66Z','#849d94')+
+ P('M30 82L35 90H45L50 82L53 85L47 95H33L27 86Z','#d6dac0'));
 
 const hoseOuter=oct(57,62,49,48),hoseInner=oct(57,62,17,17);
 add('fire-hose','しょうぼうホース','cloth',2.5,77,

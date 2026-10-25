@@ -58,21 +58,34 @@ add('school-desk','がっこうのつくえ','wood',6.5,100,
  R(10,27,108,3,'#edc581')+R(10,36,108,2,woodDark)+R(18,22,40,2,'#f4d395')+
  R(77,24,24,2,'#b78b52')+R(18,32,18,2,'#d4a064')+R(93,31,18,2,woodDark));
 
-// A boxy leather school backpack with an arched flap, side gusset, clasp and
-// separate shoulder straps. Both visible strap interiors are empty geometry.
-const bagLeft=[[35,30],[20,27],[8,39],[5,57],[7,91],[17,106],[35,110],[38,99],[23,95],[18,85],[16,58],[18,45],[25,39],[35,43]];
-const bagRight=[[104,35],[114,32],[122,42],[125,56],[124,93],[117,108],[105,112],[105,100],[110,98],[115,89],[116,57],[114,48],[110,45],[104,48]];
-const bagFront=[[35,30],[87,30],[96,40],[96,119],[35,119]];
-const bagSide=[[87,30],[106,39],[106,108],[96,119],[96,40]];
+// Three-quarter box construction from the supplied sketch: the top, narrow
+// left gusset and broad sloping flap have separate planes and stitched edges.
+// Shoulder loops and the raised handle remain real open collision spaces.
+const bagLeft=[[31,43],[18,39],[8,49],[3,69],[6,96],[16,112],[30,117],[33,105],[22,102],[16,92],[13,69],[17,54],[23,50],[31,55]];
+const bagRight=[[102,27],[116,34],[126,56],[127,91],[123,112],[108,123],[102,116],[116,104],[121,89],[120,60],[112,41],[100,37]];
+const bagHandle=[[43,33],[41,18],[45,9],[63,2],[72,5],[78,13],[78,18],[72,21],[70,13],[65,10],[50,16],[49,30]];
+const bagTop=[[28,38],[75,14],[108,33],[62,54]];
+const bagFront=[[62,54],[108,33],[118,104],[68,124]];
+const bagSide=[[28,38],[62,54],[68,124],[31,111]];
 add('randoseru','ランドセル','cloth',2.4,71,
- [poly(...bagLeft),poly(...bagRight),poly(...bagFront),poly(...bagSide),rect(51,7,30,7),rect(51,14,7,16),rect(74,14,7,16)],
- P(pathOf(bagLeft),ink)+P('M31 33L21 32L12 41L9 58L11 90L20 102L32 105L33 102L21 99L14 86L12 58L14 43L24 35L32 38Z',redDark)+
- P('M13 43L15 42L12 58L14 86L20 97L18 96L11 88L9 58Z',redLight)+
- P(pathOf(bagRight),ink)+P('M108 38L113 37L118 44L121 57L120 92L114 104L109 106V103L113 101L119 90L120 57L117 45L111 40L108 42Z',redDark)+
- R(51,7,30,7,ink)+R(51,14,7,16,ink)+R(74,14,7,16,ink)+R(56,10,20,2,redLight)+R(54,14,2,16,red)+R(77,14,2,16,red)+
- P(pathOf(bagSide),ink)+P('M94 36L102 41V106L100 109V42Z',redDark)+P('M99 45L102 46V77L99 79Z','#94515a')+
- P(pathOf(bagFront),ink)+P('M40 35H85L91 42V114H40Z',red)+R(43,91,45,20,'#91414a')+
- P('M40 35H85L91 42V77L84 88H47L40 79Z',redDark)+P('M43 38H83L88 44V75L82 83H49L43 76Z',red)+
- P('M43 38H82L86 42H48V73L43 70Z',redLight)+P('M83 47H87V74L81 81H76L82 74Z','#813842')+
- R(44,91,3,17,redLight)+R(50,107,31,2,'#bd6060')+R(58,78,14,23,ink)+R(61,81,8,16,gold)+
- R(63,83,4,4,'#f0d490')+R(62,90,6,5,'#80714d')+R(101,85,4,10,ink)+R(102,87,2,5,steel));
+ [poly(...bagLeft),poly(...bagRight),poly(...bagHandle),poly(...bagTop),poly(...bagFront),poly(...bagSide)],
+ P(pathOf(bagLeft),ink)+P('M27 45L19 44L12 51L7 70L10 95L19 108L27 111L28 108L20 106L12 93L9 69L14 52L23 46L28 50Z',redDark)+
+ P('M12 53L14 53L10 70L13 93L21 105L19 106L10 94L7 70Z',redLight)+
+ P(pathOf(bagRight),ink)+P('M107 32L113 38L123 58L125 90L121 109L109 119L106 116L118 106L123 89L122 59L115 39L104 35Z',redDark)+
+ P('M121 49L124 58L126 89L123 105L122 103L124 88L122 58L119 48Z',redLight)+
+ P(pathOf(bagHandle),ink)+P('M45 26L45 18L49 12L63 6L69 9L74 15L74 17L72 17L68 11L64 8L48 15L47 27Z',redDark)+
+ P('M48 12L63 6L68 8L67 10L63 8L49 14Z',redLight)+
+ P(pathOf(bagSide),ink)+P('M33 46L57 57L63 116L36 107Z',redDark)+
+ P('M35 49L40 51L43 101L38 103Z','#a65757')+P('M42 54L54 59L57 97L45 92Z','#89434b')+
+ P('M35 94L59 104L60 110L36 101Z',ink)+P('M38 96L56 104V106L38 99Z',redLight)+
+ P('M44 64L50 66L51 79L45 77Z',ink)+P('M46 67L48 68L49 75L47 74Z',steel)+
+ P(pathOf(bagFront),ink)+P('M68 58L104 41L112 101L72 117Z',redDark)+
+ P('M69 61L104 44L110 88L104 100L80 111L73 107Z',ink)+
+ P('M71 60L103 45L108 87L101 97L81 107L76 103Z',red)+
+ P('M72 60L102 46L103 51L77 63L80 98L77 101Z',redLight)+
+ P('M102 56L104 55L108 86L101 96L98 97L104 86Z','#7f3945')+
+ P('M81 109L103 98L107 100L82 112Z','#cf7364')+P('M86 95L95 91L97 108L88 112Z',ink)+
+ P('M89 97L93 95L94 105L91 107Z',gold)+P('M90 98L92 97L93 101L91 102Z','#eed08e')+
+ P(pathOf(bagTop),ink)+P('M38 37L75 20L99 33L62 49Z',redLight)+
+ P('M43 36L75 23L91 31L61 43Z','#d99078')+P('M62 43L91 31L99 34L63 49Z',red)+
+ P('M43 34L73 21L78 23L47 37Z','#f0ad86')+P('M61 48L99 32L102 34L64 52Z',redDark));
