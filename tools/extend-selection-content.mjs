@@ -96,9 +96,9 @@ function fixtureArt(fixture) {
 }
 await fs.mkdir(path.join(root, 'previews'), {recursive: true});
 const retakeIds = ['bench-grinder', 'blood-pressure-monitor', 'mini-soccer-goal', 'baseball-bat', 'fishing-rod-tip', 'boxed-butter', 'gratin', 'bread-loaf', 'telescope', 'oscilloscope', 'roasted-sweet-potato', 'robot-vacuum'];
-const reviewGroups = [...groups, ['retakes', retakeIds.map(id => entries.find(item => item.id === id)).filter(Boolean)]];
+const reviewGroups = [...groups, ['retakes', retakeIds.map(id => entries.find(item => item.id === id)).filter(Boolean)], ['optics-printer', ['telescope', 'white-printer', 'pancake-pair', 'blood-pressure-monitor', 'care-bed'].map(id => entries.find(item => item.id === id))]];
 for (const [group, items] of reviewGroups) for (const collision of [false, true]) {
-  const columns = 6, cellWidth = 200, cellHeight = 200, layers = [];
+  const columns = Math.min(6, items.length), cellWidth = 200, cellHeight = 200, layers = [];
   for (const [index, item] of items.entries()) {
     const cellX = index % columns * cellWidth, cellY = Math.floor(index / columns) * cellHeight;
     const {svg} = sprites.get(item.id);

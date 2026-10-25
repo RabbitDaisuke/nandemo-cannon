@@ -803,7 +803,12 @@
     "blood-pressure-monitor": {},
     "electric-screwdriver": {},
     "flathead-screwdriver": {},
-    "care-bed": {},
+    "care-bed": {
+      "wheelFixtures": [
+        11,
+        12
+      ]
+    },
     "glass-lens": {},
     "soldering-iron": {},
     "scissors": {},
@@ -821,7 +826,8 @@
     "roasted-sweet-potato": {},
     "telescope": {},
     "oscilloscope": {},
-    "robot-vacuum": {}
+    "robot-vacuum": {},
+    "white-printer": {}
   },
   "stateRules": {
     "breakage": {

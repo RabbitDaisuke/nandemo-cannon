@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 65, "the reviewed expansion contains sixty-five selection-only objects")
+	_expect(additions.size() == 66, "the reviewed expansion contains sixty-six selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
@@ -39,6 +39,7 @@ func _run() -> void:
 	for entry in [["ぎょうむようバター", "boxed-butter"], ["はこのバター", "boxed-butter"], ["つりばり", "fishing-rod-tip"], ["カフ", "blood-pressure-monitor"], ["といし", "bench-grinder"], ["てんたい", "telescope"], ["はけい", "oscilloscope"], ["さつまいも", "roasted-sweet-potato"], ["ロボットそうじき", "robot-vacuum"]]:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "retaken and new items match their reviewed name or manual alias: " + entry[0])
 	_expect(catalog.items["boxed-butter"].nameJa == "ぎょうむようバター", "the butter keeps its stable ID and uses the requested new name")
+	_expect(search.find_items("いんさつ").any(func(item): return item.id == "white-printer"), "the small white printer is searchable by its handwritten printing alias")
 	_expect(search.find_items("りょうり").map(func(item): return item.id) == search.find_items("ごはん").map(func(item): return item.id), "meal and gohan aliases remain identical after the expansion")
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
@@ -86,6 +87,9 @@ func _run() -> void:
 		["mini-soccer-goal", Vector2(55, 76), Vector2(65, 76)],
 		["fishing-rod-tip", Vector2(60, 80), Vector2(98, 30)],
 		["blood-pressure-monitor", Vector2(35, 60), Vector2(12, 60)],
+		["blood-pressure-monitor", Vector2(35, 60), Vector2(56, 25)],
+		["blood-pressure-monitor", Vector2(35, 60), Vector2(55, 112)],
+		["pancake-pair", Vector2(12, 60), Vector2(14, 92)],
 		["stethoscope", Vector2(57, 42), Vector2(31, 36)],
 		["scissors", Vector2(23, 98), Vector2(11, 97)],
 		["eight-bit-cpu", Vector2(20.5, 23), Vector2(18, 23)]
@@ -109,7 +113,7 @@ func _run() -> void:
 	game._catalog_search_changed("いりょう")
 	FileAccess.open("res://previews/game-state-selection-search.json", FileAccess.WRITE).store_string(JSON.stringify(game.debug_snapshot(), "\t") + "\n")
 	game._close_modal()
-	for id in ["tiramisu", "fishing-rod", "torpedo", "iceberg", "telescope", "oscilloscope", "roasted-sweet-potato", "robot-vacuum"]:
+	for id in ["tiramisu", "fishing-rod", "torpedo", "iceberg", "telescope", "oscilloscope", "roasted-sweet-potato", "robot-vacuum", "white-printer"]:
 		game.load_stage(14)
 		await process_frame
 		game._show_catalog()
@@ -126,7 +130,55 @@ func _run() -> void:
 	game.queue_free()
 	await process_frame
 	await process_frame
-	var result = {"suite": "selection", "checks": checks, "failures": failures, "status": "passed" if failures.is_empty() else "failed"}
+	var bed_measurements = await _care_bed_wheel_checks(catalog.items["care-bed"])
+	var result = {"suite": "selection", "checks": checks, "failures": failures, "measurements": {"care_bed": bed_measurements}, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/selection-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")
 	print(JSON.stringify({"suite": "selection", "checks": checks.size(), "failures": failures, "status": result.status}))
 	quit(0 if failures.is_empty() else 1)
+
+func _care_bed_wheel_checks(record: Dictionary) -> Dictionary:
+	var upright = await _care_bed_trial(record, 0.0)
+	var inverted = await _care_bed_trial(record, PI)
+	_expect(upright.grounded and upright.wheel_supported, "the upright care bed rests on its two caster fixtures")
+	_expect(inverted.grounded and not inverted.wheel_supported, "the inverted care bed rests on its frame without activating caster support")
+	_expect(upright.friction < inverted.friction, "only actual caster support enables the existing low rolling friction")
+	_expect(upright.distance > inverted.distance + 30.0, "the upright care bed rolls farther than its inverted frame under the same horizontal impulse")
+	_expect(upright.dynamic and inverted.dynamic, "care bed rolling keeps gravity and rotation active instead of fixing the body")
+	print("Care bed displacement: upright=", upright.distance, " inverted=", inverted.distance)
+	return {"upright_px": upright.distance, "inverted_px": inverted.distance, "upright_friction": upright.friction, "inverted_friction": inverted.friction}
+
+func _care_bed_trial(record: Dictionary, rotation_value: float) -> Dictionary:
+	# Isolated ordinary floor: no hazards, water or stage geometry can influence
+	# the upright/inverted comparison. The real ThrowBody contact path is used.
+	var fixture_world = Node2D.new()
+	root.add_child(fixture_world)
+	var ground = StaticBody2D.new()
+	ground.position = Vector2(480.0, 440.0)
+	ground.collision_layer = 1
+	ground.collision_mask = 2
+	var floor_material = PhysicsMaterial.new()
+	floor_material.friction = 0.6
+	ground.physics_material_override = floor_material
+	var floor_shape = RectangleShape2D.new()
+	floor_shape.size = Vector2(3000.0, 80.0)
+	var floor_collider = CollisionShape2D.new()
+	floor_collider.shape = floor_shape
+	ground.add_child(floor_collider)
+	fixture_world.add_child(ground)
+	var bed = ThrowBody.new()
+	bed.configure(record, fixture_world)
+	bed.position = Vector2(200.0, 345.0)
+	bed.rotation = rotation_value
+	bed.can_sleep = false
+	fixture_world.add_child(bed)
+	for step in range(180):
+		await physics_frame
+	var observed = {"grounded": bed.get_contact_count() > 0, "wheel_supported": bed.wheel_supported, "friction": bed.physics_material_override.friction, "dynamic": not bed.freeze and not bed.lock_rotation and bed.gravity_scale > 0.0}
+	bed.linear_velocity = Vector2(220.0, 0.0)
+	var start_x = bed.position.x
+	for step in range(90):
+		await physics_frame
+	observed.distance = bed.position.x - start_x
+	fixture_world.queue_free()
+	await process_frame
+	return observed
