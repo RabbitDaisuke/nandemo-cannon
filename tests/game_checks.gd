@@ -701,7 +701,8 @@ func _rescue_stage_checks() -> void:
 	_check(not left_guard.is_empty() and is_equal_approx(left_guard.position.y, 396.0), "The left collection hole has a matching low guard")
 	_check(game.cast_solid(Vector2(210, 380), Vector2(260, 380), excluded, 1).is_empty(), "Stacks can overflow above the left guard")
 	_check(game.cast_solid(Vector2(510, 380), Vector2(580, 380), excluded, 1).is_empty(), "Stacks can overflow above the low guard into the hole")
-	_check(game.current_stage.scoreZone == [230, 105, 310, 335] and game.current_stage.get("abyss", []).is_empty(), "Narrow crane platform uses the common off-screen fall rule")
+	_check(game.score_zone.is_equal_approx(Rect2(230, 105, 310, 335)), "Narrow crane platform matches the expected scoring rectangle")
+	_check(game.current_stage.get("abyss", []).is_empty(), "Crane holes use the common off-screen fall rule without in-view destruction volumes")
 	var kept = game._create_actor(game.catalog.items["wooden-crate"], Vector2(400, 360))
 	kept.can_score = true
 	var fallen = game._create_actor(game.catalog.items["wooden-crate"], Vector2(710, 475))
