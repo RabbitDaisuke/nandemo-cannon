@@ -98,6 +98,7 @@ try {
     },
     installResultSharing(_host, options) {
       assert.equal(options.gameURL, 'https://rabbitdaisuke.github.io/nandemo-cannon/');
+      assert.equal(options.nativeTweetLink, true, 'Standalone must use a real X anchor');
     },
     document:{baseURI:base,querySelector:id=>nodes.get(id),createElement:()=>({}),head:{appendChild(scriptNode){
       void (async () => {

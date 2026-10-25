@@ -65,7 +65,7 @@ replaceOnce('  } finally { restore(); }', '  }');
 replaceOnce('const bgm = installBGM(window);', 'const bgm = installBGM(window, {mirrorBase: null});');
 // Embedded CDN URLs are not public game pages. share.js resolves PLiCy's game
 // ID locally; other upload hosts fall back to the established public game URL.
-replaceOnce('installResultSharing();', "installResultSharing(window, {gameURL: 'https://rabbitdaisuke.github.io/nandemo-cannon/'});");
+replaceOnce('installResultSharing();', "installResultSharing(window, {gameURL: 'https://rabbitdaisuke.github.io/nandemo-cannon/', nativeTweetLink: true});");
 // Use universally served JavaScript extensions on upload hosts.
 for (const name of ['share', 'bgmer-player', 'input-hint', 'progress-store']) {
   replaceOnce(`'./${name}.mjs'`, `'./${name}.js'`);

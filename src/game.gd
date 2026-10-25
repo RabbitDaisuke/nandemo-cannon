@@ -650,6 +650,20 @@ func _finish_stage(timed_out: bool) -> void:
 	post.set_meta("share_action", "tweet")
 	post.add_theme_font_size_override("font_size", 24)
 	post.disabled = _share_bridge == null
+	if _share_bridge != null and bool(_share_bridge.usesTweetLink()):
+		# Keep the real HTML anchor over this button, including resize and pinch.
+		# process_frame runs while the result pauses the game tree.
+		var sync_link = func():
+			if not is_instance_valid(post) or not post.is_visible_in_tree():
+				return
+			var bounds = post.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, post.size)
+			var viewport_size = get_viewport().get_visible_rect().size
+			_share_bridge.setTweetBounds(bounds.position.x, bounds.position.y, bounds.size.x, bounds.size.y, viewport_size.x, viewport_size.y)
+		var frame_signal = get_tree().process_frame
+		frame_signal.connect(sync_link)
+		post.tree_exiting.connect(func():
+			if frame_signal.is_connected(sync_link):
+				frame_signal.disconnect(sync_link))
 	for state in ["normal", "hover", "pressed", "disabled", "focus"]:
 		var black = StyleBoxFlat.new()
 		black.bg_color = Color("181818") if state in ["hover", "pressed"] else Color("080808")

@@ -84,4 +84,50 @@ for (const href of [
   'https://html5.plicy.net/uploads/game/index.html?game=/239777/#246810',
   embeddedHost.location.href
 ]) assert.equal(resolveGameURL(href, publicURL), publicURL, `Unexpected PLiCy mapping: ${href}`);
-console.log('Result sharing: exact Japanese text, JPEG lifecycle, download, public URL override, local PLiCy URL mapping and optional native sharing passed.');
+// Standalone X sharing exposes a real href, without click() or window.open().
+const elements = [], appended = [];
+let canvasRect = {left:10,top:20,width:1280,height:720};
+const linkHost = {...host,
+  location:{href:'https://html5.plicy.net/uploads/game/246810/index.html'},
+  open(){throw Error('Standalone must not open windows through script');},
+  document:{
+    querySelector: selector => selector === '#canvas' ? {getBoundingClientRect:()=>canvasRect} : status,
+    createElement(tag){
+      const element = {tag,style:{},children:[],appendChild(child){this.children.push(child);},removeAttribute(key){delete this[key];},click(){throw Error('No synthetic anchor clicks');}};
+      elements.push(element); return element;
+    },
+    body:{appendChild(element){appended.push(element);}}
+  }
+};
+const native = installResultSharing(linkHost,{gameURL:publicURL,nativeTweetLink:true});
+assert.equal(native.usesTweetLink(),true);
+assert.equal(api.usesTweetLink(),false);
+const [layer,anchor] = elements;
+assert.equal(anchor.tag,'a');
+assert.equal(anchor.target,'_blank');
+assert.equal(anchor.rel,'noopener noreferrer');
+assert.equal(layer.hidden,true);
+assert.deepEqual(appended,[layer]);
+assert.deepEqual(layer.children,[anchor]);
+native.setResult(stage,score,jpeg);
+assert.equal(anchor.href,tweetURL(stage,score,'https://plicy.net/GamePlay/246810'));
+assert.equal(native.tweet(),false);
+assert.equal(native.setTweetBounds(200,266,560,44,960,540),true);
+assert.equal(layer.hidden,false);
+assert.equal(anchor.style.width,`${560*1280/960}px`);
+assert.equal(layer.style.left,'10px');
+// Portrait canvas letterboxing and updated zoomed coordinates.
+canvasRect={left:0,top:0,width:540,height:960};
+native.setTweetBounds(100,200,700,55,960,540);
+assert.equal(anchor.style.left,'56.25px');
+assert.equal(anchor.style.top,'440.625px');
+assert.equal(anchor.style.width,'393.75px');
+native.hideResult();
+assert.equal(layer.hidden,true);
+assert.equal(anchor.href,undefined);
+assert.equal(native.setTweetBounds(0,0,1,1,960,540),false);
+native.setResult('月面',42,'');
+assert.equal(anchor.href,tweetURL('月面',42,'https://plicy.net/GamePlay/246810'));
+assert.equal(layer.hidden,true);
+assert.equal(native.hasImage(),false);
+console.log('Result sharing: composer URLs, JPEG lifecycle, PLiCy mapping, standalone real anchor and resize positioning passed.');

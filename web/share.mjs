@@ -20,15 +20,42 @@ export function resolveGameURL(locationHref, fallback = new URL('.', locationHre
   }
   return fallback;
 }
-export function installResultSharing(host = window, {gameURL = new URL('.', host.location.href).href} = {}) {
+export function installResultSharing(host = window, {gameURL = new URL('.', host.location.href).href, nativeTweetLink = false} = {}) {
   let result = null;
   let active = false;
   const resolvedGameURL = resolveGameURL(host.location.href, gameURL);
   const status = host.document.querySelector('#share-status');
+  const linkLayer = nativeTweetLink ? host.document.createElement('div') : null;
+  const tweetLink = nativeTweetLink ? host.document.createElement('a') : null;
+  if (tweetLink) {
+    linkLayer.style.cssText = 'position:fixed;overflow:hidden;pointer-events:none;z-index:20';
+    tweetLink.textContent = 'X でポスト';
+    tweetLink.target = '_blank';
+    tweetLink.rel = 'noopener noreferrer';
+    tweetLink.style.cssText = 'position:absolute;display:block;pointer-events:auto;color:transparent;background:transparent;text-decoration:none;touch-action:manipulation';
+    linkLayer.hidden = true;
+    linkLayer.appendChild(tweetLink);
+    host.document.body.appendChild(linkLayer);
+  }
   function message(value = '') {
     if (status) { status.textContent = value; status.hidden = !value; }
   }
   const api = {
+    usesTweetLink() { return nativeTweetLink; },
+    setTweetBounds(x, y, width, height, viewportWidth, viewportHeight) {
+      if (!tweetLink || !active || !result) return false;
+      const canvas = host.document.querySelector('#canvas').getBoundingClientRect();
+      const scale = Math.min(canvas.width / viewportWidth, canvas.height / viewportHeight);
+      if (!(scale > 0)) { linkLayer.hidden = true; return false; }
+      Object.assign(linkLayer.style, {left:`${canvas.left}px`,top:`${canvas.top}px`,width:`${canvas.width}px`,height:`${canvas.height}px`});
+      Object.assign(tweetLink.style, {
+        left:`${(canvas.width - viewportWidth * scale) / 2 + x * scale}px`,
+        top:`${(canvas.height - viewportHeight * scale) / 2 + y * scale}px`,
+        width:`${width * scale}px`,height:`${height * scale}px`
+      });
+      linkLayer.hidden = false;
+      return true;
+    },
     setResult(stage, score, jpegBase64) {
       // Replace atomically so a failed capture cannot attach an older score.
       const next = {stage:String(stage),score:Math.trunc(Number(score) || 0),file:null};
@@ -41,15 +68,23 @@ export function installResultSharing(host = window, {gameURL = new URL('.', host
       }
       result = next;
       active = true;
+      if (tweetLink) {
+        tweetLink.href = tweetURL(next.stage, next.score, resolvedGameURL);
+        linkLayer.hidden = true;
+      }
       if (next.file) message();
       return !!next.file;
     },
-    hideResult() { active = false; message(); },
+    hideResult() {
+      active = false; message();
+      if (tweetLink) { linkLayer.hidden = true; tweetLink.removeAttribute('href'); }
+    },
     hasImage() { return !!result?.file; },
     canShareImage() {
       return !!(result?.file && host.navigator.share && host.navigator.canShare?.({files:[result.file]}));
     },
     tweet() {
+      if (nativeTweetLink) return false; // Navigation belongs to the user's real anchor activation.
       if (!active || !result) return false;
       host.open(tweetURL(result.stage,result.score,resolvedGameURL),'_blank','noopener,noreferrer');
       return true;
