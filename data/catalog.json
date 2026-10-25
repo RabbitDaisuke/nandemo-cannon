@@ -2958,7 +2958,7 @@
       "food",
       2.8,
       100,
-      76,
+      94,
       "bread-loaf",
       "solid"
     ],
@@ -2978,7 +2978,7 @@
       "ceramic",
       3,
       100,
-      83,
+      86,
       "gratin",
       "solid"
     ],
@@ -3014,7 +3014,7 @@
     ],
     [
       "boxed-butter",
-      "はこのバター",
+      "ぎょうむようバター",
       "paper",
       1.5,
       100,
@@ -3068,7 +3068,7 @@
       "metal",
       0.65,
       100,
-      98,
+      59,
       "fishing-rod-tip",
       "solid"
     ],
@@ -3098,7 +3098,7 @@
       "wood",
       2.4,
       100,
-      102,
+      24,
       "baseball-bat",
       "solid"
     ],
@@ -3248,7 +3248,7 @@
       "appliance",
       3.1,
       100,
-      79,
+      74,
       "blood-pressure-monitor",
       "solid"
     ],
@@ -3345,10 +3345,10 @@
     [
       "bench-grinder",
       "けんまだい",
-      "appliance",
-      10,
+      "stone",
+      5,
       100,
-      94,
+      93,
       "bench-grinder",
       "solid"
     ],
@@ -3390,6 +3390,46 @@
       100,
       83,
       "eight-bit-cpu",
+      "solid"
+    ],
+    [
+      "roasted-sweet-potato",
+      "やきいも",
+      "food",
+      1.8,
+      100,
+      88,
+      "roasted-sweet-potato",
+      "solid"
+    ],
+    [
+      "telescope",
+      "ぼうえんきょう",
+      "metal",
+      3.2,
+      100,
+      91,
+      "telescope",
+      "solid"
+    ],
+    [
+      "oscilloscope",
+      "オシロスコープ",
+      "appliance",
+      7.5,
+      100,
+      104,
+      "oscilloscope",
+      "solid"
+    ],
+    [
+      "robot-vacuum",
+      "ロボットそうじき",
+      "appliance",
+      6,
+      100,
+      86,
+      "robot-vacuum",
       "solid"
     ]
   ]

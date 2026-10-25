@@ -22840,22 +22840,22 @@
         128
       ],
       "viewBox": [
-        12,
-        12,
-        104,
-        105
+        4,
+        30,
+        120,
+        78
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        52,
-        52
+        60,
+        34
       ],
-      "worldWidth": 76,
-      "worldHeight": 76.73076923076923,
-      "worldScale": 0.7307692307692307,
+      "worldWidth": 94,
+      "worldHeight": 61.1,
+      "worldScale": 0.7833333333333333,
       "material": "food",
       "mass": 2.8,
       "score": 100,
@@ -22866,41 +22866,77 @@
         {
           "polygon": [
             [
-              12,
-              42
+              4,
+              53
             ],
             [
-              24,
-              18
-            ],
-            [
-              45,
-              13
-            ],
-            [
-              58,
-              18
-            ],
-            [
-              76,
-              12
-            ],
-            [
-              98,
-              17
-            ],
-            [
-              116,
+              8,
               41
             ],
             [
-              111,
-              113
+              18,
+              34
             ],
             [
-              20,
-              117
+              30,
+              34
+            ],
+            [
+              40,
+              43
+            ],
+            [
+              44,
+              35
+            ],
+            [
+              55,
+              30
+            ],
+            [
+              69,
+              30
+            ],
+            [
+              80,
+              40
+            ],
+            [
+              86,
+              33
+            ],
+            [
+              100,
+              33
+            ],
+            [
+              114,
+              43
+            ],
+            [
+              124,
+              59
+            ],
+            [
+              124,
+              96
+            ],
+            [
+              108,
+              108
+            ],
+            [
+              8,
+              104
             ]
+          ]
+        },
+        {
+          "rect": [
+            4,
+            53,
+            4,
+            43
           ]
         }
       ],
@@ -22912,7 +22948,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 9532,
+      "opaquePixels": 8308,
       "selectionOnly": true
     },
     {
@@ -23004,22 +23040,22 @@
         128
       ],
       "viewBox": [
-        11,
-        27,
-        109,
-        83
+        0,
+        29,
+        128,
+        76
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        53,
-        37
+        64,
+        35
       ],
-      "worldWidth": 83,
-      "worldHeight": 63.20183486238532,
-      "worldScale": 0.7614678899082569,
+      "worldWidth": 86,
+      "worldHeight": 51.0625,
+      "worldScale": 0.671875,
       "material": "ceramic",
       "mass": 3,
       "score": 100,
@@ -23030,45 +23066,93 @@
         {
           "polygon": [
             [
-              11,
-              58
+              22,
+              59
             ],
             [
-              20,
-              37
+              28,
+              40
             ],
             [
               43,
-              27
+              29
+            ],
+            [
+              85,
+              29
+            ],
+            [
+              100,
+              40
+            ],
+            [
+              106,
+              59
+            ],
+            [
+              100,
+              91
             ],
             [
               88,
-              27
+              105
             ],
             [
-              110,
-              39
+              38,
+              105
             ],
             [
-              120,
-              61
-            ],
-            [
-              112,
-              95
-            ],
-            [
-              95,
-              110
-            ],
-            [
-              32,
-              110
-            ],
-            [
-              16,
-              93
+              27,
+              91
             ]
+          ]
+        },
+        {
+          "rect": [
+            0,
+            54,
+            25,
+            7
+          ]
+        },
+        {
+          "rect": [
+            0,
+            61,
+            7,
+            19
+          ]
+        },
+        {
+          "rect": [
+            0,
+            80,
+            26,
+            7
+          ]
+        },
+        {
+          "rect": [
+            102,
+            54,
+            26,
+            7
+          ]
+        },
+        {
+          "rect": [
+            121,
+            61,
+            7,
+            19
+          ]
+        },
+        {
+          "rect": [
+            102,
+            80,
+            26,
+            7
           ]
         }
       ],
@@ -23080,7 +23164,7 @@
         "burnSeconds": null,
         "flowResponse": 0.5
       },
-      "opaquePixels": 7697,
+      "opaquePixels": 6428,
       "selectionOnly": true
     },
     {
@@ -23339,7 +23423,7 @@
     },
     {
       "id": "boxed-butter",
-      "nameJa": "はこのバター",
+      "nameJa": "ぎょうむようバター",
       "svg": "objects/boxed-butter.svg",
       "png": "raster/objects/boxed-butter.png",
       "webp": "raster/objects/boxed-butter.webp",
@@ -23914,22 +23998,22 @@
         128
       ],
       "viewBox": [
-        9,
-        7,
-        109,
-        105
+        0,
+        8,
+        104,
+        117
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        55,
-        57
+        64,
+        56
       ],
-      "worldWidth": 98,
-      "worldHeight": 94.40366972477065,
-      "worldScale": 0.8990825688073395,
+      "worldWidth": 59,
+      "worldHeight": 66.375,
+      "worldScale": 0.5673076923076923,
       "material": "metal",
       "mass": 0.65,
       "score": 100,
@@ -23940,69 +24024,113 @@
         {
           "polygon": [
             [
-              8,
-              105
+              93,
+              8
             ],
             [
-              16,
-              112
+              104,
+              8
             ],
             [
-              118,
-              12
+              104,
+              49
             ],
             [
-              114,
-              7
+              98,
+              78
+            ],
+            [
+              87,
+              104
+            ],
+            [
+              76,
+              119
+            ],
+            [
+              61,
+              125
+            ],
+            [
+              39,
+              125
+            ],
+            [
+              22,
+              117
+            ],
+            [
+              12,
+              102
+            ],
+            [
+              12,
+              77
+            ],
+            [
+              5,
+              83
+            ],
+            [
+              0,
+              76
+            ],
+            [
+              25,
+              54
+            ],
+            [
+              32,
+              53
+            ],
+            [
+              43,
+              84
+            ],
+            [
+              33,
+              88
+            ],
+            [
+              27,
+              70
+            ],
+            [
+              23,
+              78
+            ],
+            [
+              23,
+              99
+            ],
+            [
+              29,
+              107
+            ],
+            [
+              42,
+              114
+            ],
+            [
+              59,
+              114
+            ],
+            [
+              69,
+              110
+            ],
+            [
+              78,
+              98
+            ],
+            [
+              88,
+              74
+            ],
+            [
+              93,
+              47
             ]
-          ]
-        },
-        {
-          "rect": [
-            36,
-            75,
-            14,
-            6
-          ]
-        },
-        {
-          "rect": [
-            44,
-            75,
-            6,
-            14
-          ]
-        },
-        {
-          "rect": [
-            69,
-            42,
-            13,
-            6
-          ]
-        },
-        {
-          "rect": [
-            76,
-            42,
-            6,
-            13
-          ]
-        },
-        {
-          "rect": [
-            101,
-            10,
-            12,
-            6
-          ]
-        },
-        {
-          "rect": [
-            107,
-            10,
-            6,
-            12
           ]
         }
       ],
@@ -24014,7 +24142,7 @@
         "burnSeconds": null,
         "flowResponse": 0.45
       },
-      "opaquePixels": 1376,
+      "opaquePixels": 2880,
       "selectionOnly": true
     },
     {
@@ -24291,22 +24419,22 @@
         128
       ],
       "viewBox": [
-        12,
-        5,
-        103,
-        113
+        51,
+        4,
+        26,
+        118
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        52,
-        59
+        13,
+        60
       ],
-      "worldWidth": 102,
-      "worldHeight": 111.90291262135922,
-      "worldScale": 0.9902912621359223,
+      "worldWidth": 24,
+      "worldHeight": 108.92307692307693,
+      "worldScale": 0.9230769230769231,
       "material": "wood",
       "mass": 2.4,
       "score": 100,
@@ -24317,60 +24445,76 @@
         {
           "polygon": [
             [
-              12,
-              105
+              58.5,
+              4
             ],
             [
-              29,
-              118
+              69.5,
+              4
             ],
             [
-              38,
-              109
+              75,
+              10
             ],
             [
-              32,
-              99
+              77.2,
+              20
             ],
             [
-              51,
-              77
-            ],
-            [
-              71,
-              62
-            ],
-            [
-              109,
-              27
-            ],
-            [
-              115,
-              13
-            ],
-            [
-              108,
-              5
-            ],
-            [
-              94,
-              8
-            ],
-            [
-              59,
+              77.2,
               44
             ],
             [
-              44,
-              66
+              73.9,
+              64
             ],
             [
-              25,
-              91
+              68.4,
+              90
             ],
             [
-              17,
-              93
+              68.4,
+              111
+            ],
+            [
+              71.15,
+              111
+            ],
+            [
+              71.15,
+              122
+            ],
+            [
+              56.85,
+              122
+            ],
+            [
+              56.85,
+              111
+            ],
+            [
+              59.6,
+              111
+            ],
+            [
+              59.6,
+              90
+            ],
+            [
+              54.1,
+              64
+            ],
+            [
+              50.8,
+              44
+            ],
+            [
+              50.8,
+              20
+            ],
+            [
+              53,
+              10
             ]
           ]
         }
@@ -24383,7 +24527,7 @@
         "burnSeconds": 5,
         "flowResponse": 1
       },
-      "opaquePixels": 2558,
+      "opaquePixels": 2124,
       "selectionOnly": true
     },
     {
@@ -24491,6 +24635,70 @@
               125
             ]
           ]
+        },
+        {
+          "rect": [
+            28,
+            35,
+            3,
+            76
+          ]
+        },
+        {
+          "rect": [
+            46,
+            35,
+            3,
+            76
+          ]
+        },
+        {
+          "rect": [
+            64,
+            35,
+            3,
+            76
+          ]
+        },
+        {
+          "rect": [
+            82,
+            35,
+            3,
+            76
+          ]
+        },
+        {
+          "rect": [
+            18,
+            49,
+            77,
+            3
+          ]
+        },
+        {
+          "rect": [
+            18,
+            67,
+            77,
+            3
+          ]
+        },
+        {
+          "rect": [
+            18,
+            85,
+            77,
+            3
+          ]
+        },
+        {
+          "rect": [
+            18,
+            103,
+            77,
+            3
+          ]
         }
       ],
       "physics": {
@@ -24501,7 +24709,7 @@
         "burnSeconds": null,
         "flowResponse": 0.45
       },
-      "opaquePixels": 8843,
+      "opaquePixels": 5154,
       "selectionOnly": true
     },
     {
@@ -25921,22 +26129,22 @@
         128
       ],
       "viewBox": [
-        9,
-        25,
-        115,
-        87
+        7,
+        19,
+        109,
+        101
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        55,
-        39
+        57,
+        45
       ],
-      "worldWidth": 79,
-      "worldHeight": 59.76521739130435,
-      "worldScale": 0.6869565217391305,
+      "worldWidth": 74,
+      "worldHeight": 68.56880733944955,
+      "worldScale": 0.6788990825688074,
       "material": "appliance",
       "mass": 3.1,
       "score": 100,
@@ -25947,64 +26155,196 @@
         {
           "polygon": [
             [
-              9,
-              47
+              22,
+              19
             ],
             [
-              25,
-              25
+              48,
+              19
             ],
             [
-              79,
-              25
+              43,
+              31
             ],
             [
-              92,
-              49
-            ],
-            [
-              92,
-              112
-            ],
-            [
-              9,
-              112
+              27,
+              31
             ]
-          ]
-        },
-        {
-          "rect": [
-            88,
-            72,
-            15,
-            8
           ]
         },
         {
           "polygon": [
             [
-              95,
+              48,
+              19
+            ],
+            [
+              63,
+              36
+            ],
+            [
+              51,
+              41
+            ],
+            [
+              43,
+              31
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              63,
+              36
+            ],
+            [
+              63,
+              89
+            ],
+            [
+              51,
+              83
+            ],
+            [
+              51,
+              41
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              63,
+              89
+            ],
+            [
+              48,
+              105
+            ],
+            [
+              43,
+              93
+            ],
+            [
+              51,
+              83
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              48,
+              105
+            ],
+            [
+              22,
+              105
+            ],
+            [
+              27,
+              93
+            ],
+            [
+              43,
+              93
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              22,
+              105
+            ],
+            [
+              7,
+              89
+            ],
+            [
+              19,
+              83
+            ],
+            [
+              27,
+              93
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              7,
+              89
+            ],
+            [
+              7,
+              36
+            ],
+            [
+              19,
+              41
+            ],
+            [
+              19,
+              83
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              7,
+              36
+            ],
+            [
+              22,
+              19
+            ],
+            [
+              27,
+              31
+            ],
+            [
+              19,
+              41
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              48,
+              19
+            ],
+            [
+              102,
+              34
+            ],
+            [
+              116,
               48
             ],
             [
-              106,
-              39
+              116,
+              103
             ],
             [
-              121,
-              48
+              100,
+              120
             ],
             [
-              124,
-              88
+              48,
+              105
             ],
             [
-              113,
-              98
+              63,
+              89
             ],
             [
-              98,
-              90
+              63,
+              36
             ]
           ]
         }
@@ -26017,7 +26357,7 @@
         "burnSeconds": null,
         "flowResponse": 0.5
       },
-      "opaquePixels": 8232,
+      "opaquePixels": 7077,
       "selectionOnly": true
     },
     {
@@ -27067,175 +27407,67 @@
         128
       ],
       "viewBox": [
-        3,
-        29,
-        122,
-        92
+        8,
+        26,
+        113,
+        85
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        61,
-        35
+        56,
+        38
       ],
-      "worldWidth": 94,
-      "worldHeight": 70.88524590163934,
-      "worldScale": 0.7704918032786885,
-      "material": "appliance",
-      "mass": 10,
+      "worldWidth": 93,
+      "worldHeight": 69.95575221238937,
+      "worldScale": 0.8230088495575221,
+      "material": "stone",
+      "mass": 5,
       "score": 100,
       "bodyKind": "dynamic",
       "behavior": "solid",
       "colliderTemplate": "bench-grinder",
       "fixtures": [
         {
-          "rect": [
-            33,
-            49,
-            62,
-            39
-          ]
-        },
-        {
-          "rect": [
-            52,
-            88,
-            24,
-            20
-          ]
-        },
-        {
-          "rect": [
-            27,
-            105,
-            75,
-            16
-          ]
-        },
-        {
           "polygon": [
             [
-              12,
-              37
+              8,
+              62
             ],
             [
-              30,
-              37
+              92,
+              26
             ],
             [
-              39,
-              50.5
+              121,
+              48
             ],
             [
-              39,
-              77.5
+              121,
+              75
             ],
             [
-              30,
-              91
+              37,
+              111
             ],
             [
-              12,
-              91
-            ],
-            [
-              3,
-              77.5
-            ],
-            [
-              3,
-              50.5
+              8,
+              89
             ]
-          ]
-        },
-        {
-          "polygon": [
-            [
-              98,
-              37
-            ],
-            [
-              116,
-              37
-            ],
-            [
-              125,
-              50.5
-            ],
-            [
-              125,
-              77.5
-            ],
-            [
-              116,
-              91
-            ],
-            [
-              98,
-              91
-            ],
-            [
-              89,
-              77.5
-            ],
-            [
-              89,
-              50.5
-            ]
-          ]
-        },
-        {
-          "rect": [
-            8,
-            88,
-            21,
-            7
-          ]
-        },
-        {
-          "rect": [
-            96,
-            88,
-            21,
-            7
-          ]
-        },
-        {
-          "rect": [
-            43,
-            35,
-            7,
-            17
-          ]
-        },
-        {
-          "rect": [
-            78,
-            35,
-            7,
-            17
-          ]
-        },
-        {
-          "rect": [
-            42,
-            29,
-            44,
-            11
           ]
         }
       ],
       "physics": {
-        "friction": 0.5,
-        "restitution": 0.07,
+        "friction": 0.6,
+        "restitution": 0.08,
         "flammable": false,
-        "explosionResistance": 0.55,
+        "explosionResistance": 0.95,
         "burnSeconds": null,
-        "flowResponse": 0.5
+        "flowResponse": 0.35
       },
-      "opaquePixels": 7823,
+      "opaquePixels": 5943,
       "selectionOnly": true
     },
     {
@@ -27942,6 +28174,478 @@
         "flowResponse": 0.45
       },
       "opaquePixels": 9553,
+      "selectionOnly": true
+    },
+    {
+      "id": "roasted-sweet-potato",
+      "nameJa": "やきいも",
+      "svg": "objects/roasted-sweet-potato.svg",
+      "png": "raster/objects/roasted-sweet-potato.png",
+      "webp": "raster/objects/roasted-sweet-potato.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        6,
+        17,
+        116,
+        98
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        58,
+        47
+      ],
+      "worldWidth": 88,
+      "worldHeight": 74.34482758620689,
+      "worldScale": 0.7586206896551724,
+      "material": "food",
+      "mass": 1.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "roasted-sweet-potato",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              64,
+              56
+            ],
+            [
+              83,
+              45
+            ],
+            [
+              104,
+              50
+            ],
+            [
+              122,
+              69
+            ],
+            [
+              116,
+              94
+            ],
+            [
+              102,
+              108
+            ],
+            [
+              80,
+              103
+            ],
+            [
+              67,
+              84
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              6,
+              92
+            ],
+            [
+              17,
+              75
+            ],
+            [
+              47,
+              56
+            ],
+            [
+              62,
+              48
+            ],
+            [
+              79,
+              56
+            ],
+            [
+              84,
+              72
+            ],
+            [
+              76,
+              87
+            ],
+            [
+              33,
+              115
+            ],
+            [
+              15,
+              115
+            ],
+            [
+              6,
+              105
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 5486,
+      "selectionOnly": true
+    },
+    {
+      "id": "telescope",
+      "nameJa": "ぼうえんきょう",
+      "svg": "objects/telescope.svg",
+      "png": "raster/objects/telescope.png",
+      "webp": "raster/objects/telescope.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        4,
+        112,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        60
+      ],
+      "worldWidth": 91,
+      "worldHeight": 94.25,
+      "worldScale": 0.8125,
+      "material": "metal",
+      "mass": 3.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "telescope",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              25,
+              87
+            ],
+            [
+              70,
+              24
+            ],
+            [
+              105,
+              44
+            ],
+            [
+              52,
+              107
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              19,
+              97
+            ],
+            [
+              29,
+              84
+            ],
+            [
+              48,
+              101
+            ],
+            [
+              35,
+              115
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              80.5,
+              4
+            ],
+            [
+              107.5,
+              4
+            ],
+            [
+              121,
+              17.5
+            ],
+            [
+              121,
+              44.5
+            ],
+            [
+              107.5,
+              58
+            ],
+            [
+              80.5,
+              58
+            ],
+            [
+              67,
+              44.5
+            ],
+            [
+              67,
+              17.5
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              15,
+              96
+            ],
+            [
+              27,
+              96
+            ],
+            [
+              33,
+              102
+            ],
+            [
+              33,
+              114
+            ],
+            [
+              27,
+              120
+            ],
+            [
+              15,
+              120
+            ],
+            [
+              9,
+              114
+            ],
+            [
+              9,
+              102
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 5471,
+      "selectionOnly": true
+    },
+    {
+      "id": "oscilloscope",
+      "nameJa": "オシロスコープ",
+      "svg": "objects/oscilloscope.svg",
+      "png": "raster/objects/oscilloscope.png",
+      "webp": "raster/objects/oscilloscope.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        9,
+        15,
+        110,
+        106
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        55,
+        49
+      ],
+      "worldWidth": 104,
+      "worldHeight": 100.21818181818182,
+      "worldScale": 0.9454545454545454,
+      "material": "appliance",
+      "mass": 7.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "oscilloscope",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              9,
+              29
+            ],
+            [
+              23,
+              15
+            ],
+            [
+              108,
+              15
+            ],
+            [
+              119,
+              29
+            ],
+            [
+              119,
+              111
+            ],
+            [
+              9,
+              111
+            ]
+          ]
+        },
+        {
+          "rect": [
+            18,
+            111,
+            19,
+            10
+          ]
+        },
+        {
+          "rect": [
+            92,
+            111,
+            19,
+            10
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 10758,
+      "selectionOnly": true
+    },
+    {
+      "id": "robot-vacuum",
+      "nameJa": "ロボットそうじき",
+      "svg": "objects/robot-vacuum.svg",
+      "png": "raster/objects/robot-vacuum.png",
+      "webp": "raster/objects/robot-vacuum.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        22,
+        120,
+        90
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        42
+      ],
+      "worldWidth": 86,
+      "worldHeight": 64.5,
+      "worldScale": 0.7166666666666667,
+      "material": "appliance",
+      "mass": 6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "robot-vacuum",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              4,
+              44
+            ],
+            [
+              20,
+              30
+            ],
+            [
+              44,
+              22
+            ],
+            [
+              84,
+              22
+            ],
+            [
+              108,
+              30
+            ],
+            [
+              124,
+              44
+            ],
+            [
+              124,
+              88
+            ],
+            [
+              108,
+              104
+            ],
+            [
+              84,
+              112
+            ],
+            [
+              44,
+              112
+            ],
+            [
+              20,
+              104
+            ],
+            [
+              4,
+              88
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 9440,
       "selectionOnly": true
     }
   ]

@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 61, "the reviewed expansion contains sixty-one new selection-only objects")
+	_expect(additions.size() == 65, "the reviewed expansion contains sixty-five selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
@@ -36,6 +36,9 @@ func _run() -> void:
 		_expect(not search.find_items(query).is_empty(), "new names and independent manual aliases match: " + query)
 	_expect(search.find_items("カミナリ").map(func(item): return item.id) == ["lightning-orb"], "electrical additions do not pollute the lightning alias")
 	_expect(search.find_items("はちビット").map(func(item): return item.id) == ["eight-bit-cpu"], "the clarified vintage processor is searchable separately from the existing CPU")
+	for entry in [["ぎょうむようバター", "boxed-butter"], ["はこのバター", "boxed-butter"], ["つりばり", "fishing-rod-tip"], ["カフ", "blood-pressure-monitor"], ["といし", "bench-grinder"], ["てんたい", "telescope"], ["はけい", "oscilloscope"], ["さつまいも", "roasted-sweet-potato"], ["ロボットそうじき", "robot-vacuum"]]:
+		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "retaken and new items match their reviewed name or manual alias: " + entry[0])
+	_expect(catalog.items["boxed-butter"].nameJa == "ぎょうむようバター", "the butter keeps its stable ID and uses the requested new name")
 	_expect(search.find_items("りょうり").map(func(item): return item.id) == search.find_items("ごはん").map(func(item): return item.id), "meal and gohan aliases remain identical after the expansion")
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
@@ -77,7 +80,12 @@ func _run() -> void:
 		["barrel-mug", Vector2(97, 68), Vector2(112, 68)],
 		["doria", Vector2(12, 72), Vector2(4, 72)],
 		["doria", Vector2(115, 72), Vector2(124, 72)],
-		["mini-soccer-goal", Vector2(64, 70), Vector2(12, 70)],
+		["gratin", Vector2(13, 70), Vector2(3, 70)],
+		["gratin", Vector2(115, 70), Vector2(124, 70)],
+		["roasted-sweet-potato", Vector2(58, 23), Vector2(63, 68)],
+		["mini-soccer-goal", Vector2(55, 76), Vector2(65, 76)],
+		["fishing-rod-tip", Vector2(60, 80), Vector2(98, 30)],
+		["blood-pressure-monitor", Vector2(35, 60), Vector2(12, 60)],
 		["stethoscope", Vector2(57, 42), Vector2(31, 36)],
 		["scissors", Vector2(23, 98), Vector2(11, 97)],
 		["eight-bit-cpu", Vector2(20.5, 23), Vector2(18, 23)]
@@ -92,16 +100,16 @@ func _run() -> void:
 		query.collision_mask = 2
 		query.position = empty
 		var space = actor.get_world_2d().direct_space_state
-		_expect(not actor.contains_world_point(empty) and space.intersect_point(query).is_empty(), str(probe[0]) + " leaves the visible opening empty in actual physics")
+		_expect(not actor.contains_world_point(empty) and space.intersect_point(query).is_empty(), str(probe[0]) + " leaves the intended non-solid area empty in actual physics")
 		query.position = solid
-		_expect(actor.contains_world_point(solid) and not space.intersect_point(query).is_empty(), str(probe[0]) + " keeps its handle or frame physically solid")
+		_expect(actor.contains_world_point(solid) and not space.intersect_point(query).is_empty(), str(probe[0]) + " keeps its modeled surface physically solid")
 		game.destroy_actor(actor, "test")
 		await process_frame
 	game._show_catalog()
 	game._catalog_search_changed("いりょう")
 	FileAccess.open("res://previews/game-state-selection-search.json", FileAccess.WRITE).store_string(JSON.stringify(game.debug_snapshot(), "\t") + "\n")
 	game._close_modal()
-	for id in ["tiramisu", "fishing-rod", "torpedo", "iceberg"]:
+	for id in ["tiramisu", "fishing-rod", "torpedo", "iceberg", "telescope", "oscilloscope", "roasted-sweet-potato", "robot-vacuum"]:
 		game.load_stage(14)
 		await process_frame
 		game._show_catalog()

@@ -817,7 +817,11 @@
       "coldRadius": 38
     },
     "pencil-sharpener": {},
-    "eight-bit-cpu": {}
+    "eight-bit-cpu": {},
+    "roasted-sweet-potato": {},
+    "telescope": {},
+    "oscilloscope": {},
+    "robot-vacuum": {}
   },
   "stateRules": {
     "breakage": {

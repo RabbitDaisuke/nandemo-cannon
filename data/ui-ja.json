@@ -301,7 +301,7 @@
     "takeaway-coffee": "かみコップのコーヒー",
     "milk-carton": "ぎゅうにゅうパック",
     "eggs-and-bacon": "エッグベーコン",
-    "boxed-butter": "はこのバター",
+    "boxed-butter": "ぎょうむようバター",
     "sugar-cubes": "かくざとう",
     "green-pepper": "ピーマン",
     "eggplant": "ナス",
@@ -338,7 +338,11 @@
     "saw": "のこぎり",
     "iceberg": "ひょうざん",
     "pencil-sharpener": "えんぴつけずり",
-    "eight-bit-cpu": "はちビットシーピーユー"
+    "eight-bit-cpu": "はちビットシーピーユー",
+    "roasted-sweet-potato": "やきいも",
+    "telescope": "ぼうえんきょう",
+    "oscilloscope": "オシロスコープ",
+    "robot-vacuum": "ロボットそうじき"
   },
   "stages": [
     "なんでもキャノン",
