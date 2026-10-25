@@ -666,7 +666,7 @@ func _cannon_two_checks() -> void:
 	await _frames(2)
 	var story = "なんでもキャノン、いままではっしゃしていなかったものがあった。\nそれは、なんでもキャノンでなんでもキャノンをとばすことだった！"
 	_check(game.current_stage.queue.back() == "cannon-object" and game.current_stage.queue.count("cannon-object") == 1 and game.current_stage.queue.size() == 15, "Cannon2 does not reserve the original-size cannon for its fifteenth throw")
-	_check(game.lesson_label.text == story and game.lesson_label.get_line_count() == 2 and game.lesson_label.get_theme_font_size("font_size") == 12, "Cannon2 story changed, was truncated, or was squeezed into unreadable type")
+	_check(game.lesson_label.text == story and game.lesson_label.get_line_count() == 2 and game.lesson_label.get_theme_font_size("font_size") == 18, "Cannon2 story changed, was truncated, or was squeezed into unreadable type")
 	var record: Dictionary = game.catalog.items["cannon-object"]
 	_check(is_equal_approx(float(record.worldScale), 1.0) and float(record.worldWidth) > 140.0 and int(record.score) == 100 and str(record.behavior) == "solid", "Throwable cannon was shrunk, given inflated points, or activated as another launcher")
 	var original_position: Vector2 = game.cannon.position

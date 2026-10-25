@@ -548,9 +548,15 @@ func _layout_lesson(value: String) -> void:
 	var narrow = _wrap_hud_text(value, 304.0, 18)
 	var wide = narrow.split("\n").size() > 3 or (value.contains("\n") and narrow != value)
 	lesson_label.text = _wrap_hud_text(value, 924.0, 18) if wide else narrow
+	# Labels retain their previous minimum-driven extent across stage changes.
+	# Recompute text bounds before placing the next row.
+	stage_label.reset_size()
+	next_name.reset_size()
+	lesson_label.reset_size()
 	# Longer stories use the row below the stage name and NEXT caption. Font
 	# size stays readable and the central aiming region still begins at y=128.
-	lesson_label.position = Vector2(18, 103) if wide else Vector2(302, 77)
+	var caption_bottom = maxf(stage_label.position.y + stage_label.get_minimum_size().y, next_name.position.y + next_name.get_minimum_size().y)
+	lesson_label.position = Vector2(18, caption_bottom + 2.0) if wide else Vector2(302, 77)
 	if wide:
 		lesson_label.add_theme_constant_override("line_spacing", 0)
 	else:
