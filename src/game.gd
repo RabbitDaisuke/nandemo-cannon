@@ -797,7 +797,7 @@ func _show_maps(page: int = -1) -> void:
 		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(preview)
 		var text = "%02d %s" % [position + 1, _stage_display_name(index)]
-		var caption = _label(text, Vector2(5, 55), 10, Color("fff0b5"), button)
+		var caption = _label(text, Vector2(5, 55), 25, Color("fff0b5"), button)
 		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var previous = _button("まえのページ", Vector2(22, 348), Vector2(200, 40), func(): _show_maps(map_page - 1), modal)
 	previous.disabled = map_page == 0
@@ -951,7 +951,7 @@ func _render_catalog_page(page: int) -> void:
 		icon.size = Vector2(46, 43)
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(icon)
-		var caption = _label(_item_display_name(str(item.id)), Vector2(3, 50), 10, Color("f7e9ba"), button)
+		var caption = _label(_item_display_name(str(item.id)), Vector2(3, 50), 15, Color("f7e9ba"), button)
 		caption.size = Vector2(124, 18)
 		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var previous = _button("まえへ", Vector2(22, 374), Vector2(104, 34), func(): _show_catalog(maxi(0, page - 1)), modal)
