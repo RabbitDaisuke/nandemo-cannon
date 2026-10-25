@@ -36,6 +36,8 @@ func _run() -> void:
 		_expect(not search.find_items(query).is_empty(), "new names and independent manual aliases match: " + query)
 	_expect(search.find_items("カミナリ").map(func(item): return item.id) == ["lightning-orb"], "electrical additions do not pollute the lightning alias")
 	_expect(search.find_items("りょうり").map(func(item): return item.id) == search.find_items("ごはん").map(func(item): return item.id), "meal and gohan aliases remain identical after the expansion")
+	var water_ids = search.find_items("みず").map(func(item): return item.id)
+	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
 	_expect(search.find_items("ちゅうしゃき").is_empty() and search.find_items("ちゅうしきゃき").is_empty(), "the withdrawn syringe was not added")
 	var baseline = GameCatalog.new()
 	baseline.ordered_items = originals
@@ -108,7 +110,11 @@ func _run() -> void:
 		_expect(game.next_item_id() == id and not is_instance_valid(game.modal), id + " can be loaded by the selection callback")
 		game._on_fired(Vector2.LEFT, 0.5, Vector2(800, 180))
 		_expect(game.shots_fired == shots_before + 1 and game.actors.any(func(actor): return is_instance_valid(actor) and actor.item_id == id and actor.is_launched), id + " launches as a real physical shot")
+	# Match the game integration suite: drain the final shot's audio before exit.
+	game.shot_audio.stop()
+	await create_timer(0.25, true, false, true).timeout
 	game.queue_free()
+	await process_frame
 	await process_frame
 	var result = {"suite": "selection", "checks": checks, "failures": failures, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/selection-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")
