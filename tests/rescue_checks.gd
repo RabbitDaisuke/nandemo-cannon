@@ -70,6 +70,8 @@ func _run() -> void:
 	await _blast_trial("bomb", true)
 	await _ordinary_bomb_checks()
 	await _submerged_blast_checks()
+	for charge in ["blast-wave-bomb", "strong-blast-wave-bomb"]:
+		await _blast_collision_checks(charge)
 	if is_instance_valid(fixture_world):
 		fixture_world.queue_free()
 		await process_frame
@@ -250,6 +252,35 @@ func _ordinary_bomb_checks() -> void:
 	fixture_world.hazards.detonate(bomb)
 	_expect(fragile.break_requested and tutorial.break_requested and tutorial.tutorial_hits == 1 and fixture_world.rng.state != rng_before, "ordinary bombs retain probabilistic destruction and tutorial damage")
 	await process_frame
+
+func _blast_collision_checks(id: String) -> void:
+	# Exercise actual moving bodies against an eight-pixel barrier, including
+	# the game's accelerated settling rate. Do not replace the body with a ray
+	# or freeze it: both shape CCD and the contact solver must handle the blast.
+	for direction in [Vector2.RIGHT, Vector2.DOWN]:
+		await _reset()
+		Engine.time_scale = 2.0
+		var start = Vector2(400, 200)
+		var wall_rect = Rect2(480, 80, 8, 240) if direction == Vector2.RIGHT else Rect2(280, 280, 240, 8)
+		_wall(wall_rect)
+		var target = _spawn("bowling-ball", start)
+		var bomb = _spawn(id, start - direction * 80.0)
+		await _steps(2)
+		fixture_world.hazards.detonate(bomb)
+		var reached_barrier = false
+		var penetrated = false
+		var crossed = false
+		for tick in range(120):
+			await physics_frame
+			var progress = (target.global_position - start).dot(direction)
+			reached_barrier = reached_barrier or progress > 30.0
+			crossed = crossed or progress > 80.0
+			# Two pixels are reserved for the solver's contact tolerance; any
+			# fixture entering the inner four-pixel core is a real penetration.
+			penetrated = penetrated or target.touches_world_rect(wall_rect.grow(-2.0))
+		_expect(reached_barrier and target.alive, id + " accelerates a surviving body into the thin barrier along " + str(direction))
+		_expect(not crossed and not penetrated, id + " never tunnels through or embeds in the thin barrier at double-speed settling along " + str(direction))
+		Engine.time_scale = 1.0
 
 func _submerged_blast_checks() -> void:
 	await _reset({"water": [{"rect": [280, 180, 80, 80], "type": "pool", "direction": [0, 0], "speed": 0}]})

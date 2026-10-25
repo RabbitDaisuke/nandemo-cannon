@@ -691,16 +691,17 @@ func _rescue_stage_checks() -> void:
 	game.load_stage(claw_index)
 	await _frames(2)
 	var excluded: Array[RID] = []
-	var guard = game.cast_solid(Vector2(614, 360), Vector2(614, 450), excluded, 1)
+	var guard = game.cast_solid(Vector2(534, 360), Vector2(534, 450), excluded, 1)
 	var platform = game.cast_solid(Vector2(400, 400), Vector2(400, 510), excluded, 1)
 	_check(not guard.is_empty() and is_equal_approx(guard.position.y, 396.0), "The crane mercy guard has its real low collision top")
 	_check(not platform.is_empty() and is_equal_approx(platform.position.y, 440.0), "The crane prize platform matches the visible floor")
 	_check(game.cast_solid(Vector2(710, 400), Vector2(710, 575), excluded, 1).is_empty(), "No hidden floor blocks the crane's right-side collection hole")
 	_check(game.cast_solid(Vector2(85, 400), Vector2(85, 575), excluded, 1).is_empty(), "No hidden floor blocks the crane's left-side collection hole")
-	var left_guard = game.cast_solid(Vector2(156, 360), Vector2(156, 450), excluded, 1)
+	var left_guard = game.cast_solid(Vector2(236, 360), Vector2(236, 450), excluded, 1)
 	_check(not left_guard.is_empty() and is_equal_approx(left_guard.position.y, 396.0), "The left collection hole has a matching low guard")
-	_check(game.cast_solid(Vector2(130, 380), Vector2(180, 380), excluded, 1).is_empty(), "Stacks can overflow above the left guard")
-	_check(game.cast_solid(Vector2(590, 380), Vector2(660, 380), excluded, 1).is_empty(), "Stacks can overflow above the low guard into the hole")
+	_check(game.cast_solid(Vector2(210, 380), Vector2(260, 380), excluded, 1).is_empty(), "Stacks can overflow above the left guard")
+	_check(game.cast_solid(Vector2(510, 380), Vector2(580, 380), excluded, 1).is_empty(), "Stacks can overflow above the low guard into the hole")
+	_check(game.current_stage.scoreZone == [230, 105, 310, 335] and game.current_stage.get("abyss", []).is_empty(), "Narrow crane platform uses the common off-screen fall rule")
 	var kept = game._create_actor(game.catalog.items["wooden-crate"], Vector2(400, 360))
 	kept.can_score = true
 	var fallen = game._create_actor(game.catalog.items["wooden-crate"], Vector2(710, 475))
@@ -708,7 +709,9 @@ func _rescue_stage_checks() -> void:
 	var fallen_left = game._create_actor(game.catalog.items["wooden-crate"], Vector2(85, 475))
 	fallen_left.can_score = true
 	await _frames(3)
-	_check((not is_instance_valid(fallen) or not fallen.alive) and (not is_instance_valid(fallen_left) or not fallen_left.alive) and int(game.destroyed_counts.get("abyss", 0)) == 2, "Prizes inside either collection hole are confiscated by the real game loop")
+	_check(is_instance_valid(fallen) and fallen.alive and is_instance_valid(fallen_left) and fallen_left.alive, "Prizes remain physical while visible in either collection hole")
+	await _frames(90)
+	_check((not is_instance_valid(fallen) or not fallen.alive) and (not is_instance_valid(fallen_left) or not fallen_left.alive) and int(game.destroyed_counts.get("abyss", 0)) == 2, "Prizes disappear only after falling past the common off-screen boundary")
 	_check(is_instance_valid(kept) and kept.alive and game.calculate_score() > 0, "Prizes retained over the platform remain eligible for score")
 	await _snapshot("47-claw-prizes")
 

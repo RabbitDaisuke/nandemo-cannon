@@ -70,7 +70,7 @@ add('blast-wave-bomb','ばくふうばくだん','metal',3,55,tankFixtures,
  P('M48 40H77V45H90V51H95V60H98V72H92L84 60H47L36 72H29V62H33V53H41V47H48Z','#83bbc2')+
  P('M97 87H104V94H98V101H89V108H79V113H50V109H39V102H34V95H42L51 102H77L89 96Z','#2c6179')+
  R(38,51,6,9,'#c5e2d9')+windMark,
- 'explosion',{blastOnly:true,radius:145,strength:0,impulseMultiplier:1.5});
+ 'explosion',{blastOnly:true,radius:145,strength:0,impulseMultiplier:2.25});
 
 // Heavier armor, warm warning bands and two outward chevrons distinguish the
 // strong airflow charge even when the name is not visible.
@@ -82,7 +82,7 @@ add('strong-blast-wave-bomb','つよいばくふうばくだん','metal',4.5,65,
  P('M26 91H35L46 103V111H37L28 102Z','#b88b46')+P('M91 103L102 90H107L103 102L91 113H82V107Z','#b88b46')+
  R(47,112,34,5,'#293e63')+windMark+
  P('M93 66L103 76L93 86V79L97 76L93 73Z','#f1cb6a')+P('M21 70L30 61V68L26 71L30 74V81Z','#f1cb6a'),
- 'explosion',{blastOnly:true,radius:205,strength:0,impulseMultiplier:2.6});
+ 'explosion',{blastOnly:true,radius:205,strength:0,impulseMultiplier:3.9});
 
 // A heat-sealed glossy plastic pouch, unlike the older folded paper coffee bag.
 add('coffee-beans-pouch','コーヒーまめのふくろ','plastic',1.8,56,

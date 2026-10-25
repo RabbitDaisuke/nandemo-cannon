@@ -72,6 +72,10 @@ func _run() -> void:
 	await process_frame
 	game.load_stage(14)
 	await process_frame
+	var plastic_coffee: ThrowBody = game._create_actor(catalog.items["bottled-coffee"], Vector2(400, 160))
+	_expect(plastic_coffee.behavior == "solid" and not plastic_coffee._supports_load_break() and not plastic_coffee.spec.has("waterUnits") and not plastic_coffee.spec.has("releaseUnits"), "the plastic coffee bottle neither cracks under load nor releases water")
+	game.destroy_actor(plastic_coffee, "test")
+	await process_frame
 	for item in additions:
 		var actor: ThrowBody = game._create_actor(item, Vector2(400, 160))
 		actor.freeze = true
@@ -101,7 +105,8 @@ func _run() -> void:
 		["school-desk", Vector2(64, 53), Vector2(64, 67)],
 		["school-desk", Vector2(64, 100), Vector2(26, 90)],
 		["randoseru", Vector2(22, 75), Vector2(8, 75)],
-		["randoseru", Vector2(117, 75), Vector2(124, 75)],
+		["randoseru", Vector2(124, 75), Vector2(105, 75)],
+		["car-navigation", Vector2(63, 114), Vector2(63, 90)],
 		["randoseru", Vector2(60, 17), Vector2(57, 8)],
 		["bandage-roll", Vector2(40, 74), Vector2(13, 74)],
 		["green-peeler", Vector2(64, 47), Vector2(64, 26)],

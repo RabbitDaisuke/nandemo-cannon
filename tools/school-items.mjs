@@ -61,18 +61,17 @@ add('school-desk','がっこうのつくえ','wood',6.5,100,
 // Three-quarter box construction from the supplied sketch: the top, narrow
 // left gusset and broad sloping flap have separate planes and stitched edges.
 // Shoulder loops and the raised handle remain real open collision spaces.
-const bagLeft=[[31,43],[18,39],[8,49],[3,69],[6,96],[16,112],[30,117],[33,105],[22,102],[16,92],[13,69],[17,54],[23,50],[31,55]];
-const bagRight=[[102,27],[116,34],[126,56],[127,91],[123,112],[108,123],[102,116],[116,104],[121,89],[120,60],[112,41],[100,37]];
+// Only the near shoulder strap is visible; the far strap is behind the box.
+// Short curved-outline segments keep the loop rounded in the pixel palette.
+const bagLeft=[[31,43],[24,39],[18,40],[12,44],[7,52],[4,62],[3,73],[5,88],[9,100],[15,109],[22,114],[30,117],[33,105],[25,103],[20,99],[16,91],[14,81],[13,70],[15,59],[18,53],[23,50],[31,55]];
 const bagHandle=[[43,33],[41,18],[45,9],[63,2],[72,5],[78,13],[78,18],[72,21],[70,13],[65,10],[50,16],[49,30]];
 const bagTop=[[28,38],[75,14],[108,33],[62,54]];
 const bagFront=[[62,54],[108,33],[118,104],[68,124]];
 const bagSide=[[28,38],[62,54],[68,124],[31,111]];
 add('randoseru','ランドセル','cloth',2.4,71,
- [poly(...bagLeft),poly(...bagRight),poly(...bagHandle),poly(...bagTop),poly(...bagFront),poly(...bagSide)],
- P(pathOf(bagLeft),ink)+P('M27 45L19 44L12 51L7 70L10 95L19 108L27 111L28 108L20 106L12 93L9 69L14 52L23 46L28 50Z',redDark)+
- P('M12 53L14 53L10 70L13 93L21 105L19 106L10 94L7 70Z',redLight)+
- P(pathOf(bagRight),ink)+P('M107 32L113 38L123 58L125 90L121 109L109 119L106 116L118 106L123 89L122 59L115 39L104 35Z',redDark)+
- P('M121 49L124 58L126 89L123 105L122 103L124 88L122 58L119 48Z',redLight)+
+ [poly(...bagLeft),poly(...bagHandle),poly(...bagTop),poly(...bagFront),poly(...bagSide)],
+ P(pathOf(bagLeft),ink)+P('M28 46L23 43L19 44L15 47L11 54L8 63L7 74L9 87L13 98L18 105L24 109L28 111L29 108L23 106L17 100L12 90L10 80L9 70L12 57L16 50L22 46L28 50Z',redDark)+
+ P('M15 49L17 50L13 58L10 70L11 81L14 92L19 101L24 105L23 107L17 102L12 93L9 81L8 71L10 59Z',redLight)+
  P(pathOf(bagHandle),ink)+P('M45 26L45 18L49 12L63 6L69 9L74 15L74 17L72 17L68 11L64 8L48 15L47 27Z',redDark)+
  P('M48 12L63 6L68 8L67 10L63 8L49 14Z',redLight)+
  P(pathOf(bagSide),ink)+P('M33 46L57 57L63 116L36 107Z',redDark)+

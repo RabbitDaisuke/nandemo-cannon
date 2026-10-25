@@ -29399,7 +29399,7 @@
         "trigger": "first impact or burning fuse completes",
         "removeSelf": true,
         "blastOnly": true,
-        "impulseMultiplier": 1.5
+        "impulseMultiplier": 2.25
       },
       "opaquePixels": 8193,
       "selectionOnly": true
@@ -29474,7 +29474,7 @@
         "trigger": "first impact or burning fuse completes",
         "removeSelf": true,
         "blastOnly": true,
-        "impulseMultiplier": 2.6
+        "impulseMultiplier": 3.9
       },
       "opaquePixels": 8206,
       "selectionOnly": true
@@ -31719,7 +31719,7 @@
       "viewBox": [
         3,
         2,
-        124,
+        115,
         122
       ],
       "pivotSource": [
@@ -31731,8 +31731,8 @@
         62
       ],
       "worldWidth": 71,
-      "worldHeight": 69.85483870967742,
-      "worldScale": 0.5725806451612904,
+      "worldHeight": 75.32173913043478,
+      "worldScale": 0.6173913043478261,
       "material": "cloth",
       "mass": 2.4,
       "score": 100,
@@ -31747,24 +31747,44 @@
               43
             ],
             [
-              18,
+              24,
               39
             ],
             [
-              8,
-              49
+              18,
+              40
+            ],
+            [
+              12,
+              44
+            ],
+            [
+              7,
+              52
+            ],
+            [
+              4,
+              62
             ],
             [
               3,
-              69
+              73
             ],
             [
-              6,
-              96
+              5,
+              88
             ],
             [
-              16,
-              112
+              9,
+              100
+            ],
+            [
+              15,
+              109
+            ],
+            [
+              22,
+              114
             ],
             [
               30,
@@ -31775,20 +31795,32 @@
               105
             ],
             [
-              22,
-              102
+              25,
+              103
+            ],
+            [
+              20,
+              99
             ],
             [
               16,
-              92
+              91
+            ],
+            [
+              14,
+              81
             ],
             [
               13,
-              69
+              70
             ],
             [
-              17,
-              54
+              15,
+              59
+            ],
+            [
+              18,
+              53
             ],
             [
               23,
@@ -31797,58 +31829,6 @@
             [
               31,
               55
-            ]
-          ]
-        },
-        {
-          "polygon": [
-            [
-              102,
-              27
-            ],
-            [
-              116,
-              34
-            ],
-            [
-              126,
-              56
-            ],
-            [
-              127,
-              91
-            ],
-            [
-              123,
-              112
-            ],
-            [
-              108,
-              123
-            ],
-            [
-              102,
-              116
-            ],
-            [
-              116,
-              104
-            ],
-            [
-              121,
-              89
-            ],
-            [
-              120,
-              60
-            ],
-            [
-              112,
-              41
-            ],
-            [
-              100,
-              37
             ]
           ]
         },
@@ -31973,7 +31953,7 @@
         "burnSeconds": 3,
         "flowResponse": 1.1
       },
-      "opaquePixels": 9628,
+      "opaquePixels": 8888,
       "selectionOnly": true
     },
     {
@@ -32347,9 +32327,9 @@
       "worldScale": 0.5945945945945946,
       "material": "plastic",
       "mass": 1.6,
-      "score": 0,
+      "score": 100,
       "bodyKind": "dynamic",
-      "behavior": "water_release",
+      "behavior": "solid",
       "colliderTemplate": "bottled-coffee",
       "fixtures": [
         {
@@ -32411,15 +32391,7 @@
         "flammable": true,
         "explosionResistance": 0.3,
         "burnSeconds": 5,
-        "flowResponse": 1,
-        "impactSpeed": 120,
-        "releaseUnits": 8,
-        "destroyShell": true,
-        "waterUnits": 8,
-        "breakImpactSpeed": 120,
-        "minImpactEnergy": 2,
-        "loadForceThreshold": 5000,
-        "loadHoldSeconds": 0.35
+        "flowResponse": 1
       },
       "opaquePixels": 6808,
       "selectionOnly": true
@@ -33044,7 +33016,7 @@
         8,
         17,
         116,
-        102
+        81
       ],
       "pivotSource": [
         64,
@@ -33055,7 +33027,7 @@
         47
       ],
       "worldWidth": 65,
-      "worldHeight": 57.155172413793096,
+      "worldHeight": 45.387931034482754,
       "worldScale": 0.5603448275862069,
       "material": "appliance",
       "mass": 2.2,
@@ -33135,22 +33107,6 @@
               28
             ]
           ]
-        },
-        {
-          "rect": [
-            48,
-            98,
-            30,
-            12
-          ]
-        },
-        {
-          "rect": [
-            33,
-            110,
-            62,
-            9
-          ]
         }
       ],
       "physics": {
@@ -33161,7 +33117,7 @@
         "burnSeconds": null,
         "flowResponse": 0.5
       },
-      "opaquePixels": 9912,
+      "opaquePixels": 8994,
       "selectionOnly": true
     },
     {

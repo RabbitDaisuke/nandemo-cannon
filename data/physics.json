@@ -835,13 +835,13 @@
       "blastOnly": true,
       "radius": 145,
       "strength": 0,
-      "impulseMultiplier": 1.5
+      "impulseMultiplier": 2.25
     },
     "strong-blast-wave-bomb": {
       "blastOnly": true,
       "radius": 205,
       "strength": 0,
-      "impulseMultiplier": 2.6
+      "impulseMultiplier": 3.9
     },
     "coffee-beans-pouch": {},
     "school-uniform": {},
@@ -883,15 +883,7 @@
     "karinto-manju": {},
     "cutlet-sandwich": {},
     "soft-serve": {},
-    "bottled-coffee": {
-      "waterUnits": 8,
-      "releaseUnits": 8,
-      "breakImpactSpeed": 120,
-      "impactSpeed": 120,
-      "minImpactEnergy": 2,
-      "loadForceThreshold": 5000,
-      "loadHoldSeconds": 0.35
-    },
+    "bottled-coffee": {},
     "pickle-crock": {},
     "hojicha-latte": {
       "waterUnits": 8,

@@ -22,12 +22,14 @@ const fire = {
 };
 const claw = {
   id: 47, nameJa: 'クレーンゲーム', map: '47-claw-machine', status: 'specified', gravity: 980,
-  cannon: [860, 450], scoreZone: [150, 105, 470, 335], scoreGroundY: 440,
-  terrain: [rect(150, 440, 470, 100), rect(20, 110, 12, 330), rect(150, 396, 12, 44), rect(608, 396, 12, 44), rect(810, 450, 150, 90)],
+  cannon: [860, 450], scoreZone: [230, 105, 310, 335], scoreGroundY: 440,
+  terrain: [rect(230, 440, 310, 100), rect(20, 110, 12, 330), rect(230, 396, 12, 44), rect(528, 396, 12, 44), rect(810, 450, 150, 90)],
   queue: ['teddy-bear', 'rubber-duck', 'toy-car', 'soccer-ball', 'pillow', 'wooden-crate', 'barrel', 'hamburger', 'towel', 'bowling-pin', 'skateboard', 'spaghetti', 'napolitan', 'coffee-beans-pouch', 'school-uniform'],
   queuePolicy: 'randomCatalog', randomCatalogScope: 'selectable',
   queueOverrides: [{shot: 6, item: 'strong-blast-wave-bomb'}, {shot: 11, item: 'strong-blast-wave-bomb'}],
-  abyss: [[20, 452, 130, 150], [620, 452, 190, 150]], preplaced: [],
+  // Open holes use the common off-screen fall boundary in game.gd.
+  // No in-view destruction volumes: prizes remain physical while falling.
+  preplaced: [],
   lesson: 'クレーンゲームの なかにきちゃった！\nさゆうのあなに おとすと ものは おきゃくさんのものになっちゃうぞ！'
 };
 const school = {
@@ -35,7 +37,7 @@ const school = {
   cannon: [810, 450], scoreZone: [40, 90, 580, 360], scoreGroundY: 450,
   terrain: [rect(0, 450, 960, 90), rect(55, 395, 550, 20), rect(80, 415, 22, 35), rect(558, 415, 22, 35)],
   queue: ['drafting-compass', 'pencil', 'school-desk', 'randoseru', 'hardcover-book', 'open-book', 'book-stack', 'counter', 'school-uniform', 'bookshelf', 'pencil-sharpener', 'scissors', 'backpack', 'stool', 'alarm-clock'],
-  preplaced: [], lesson: 'きょうしつに キャノンがきた！\nぶんぼうぐと ランドセルを つくえに つみあげよう。'
+  preplaced: [], lesson: 'きょうしつに なんでもキャノンがきた！\nぶんぼうぐと ランドセルを つくえに つみあげよう。'
 };
 const additions = [fire, claw, school];
 // IDs remain permanent. Navigation uses metadata, so future normal stages precede
@@ -91,13 +93,13 @@ const clawArt = R(0,0,960,540,'#252d49')+R(14,87,932,437,ink)+R(23,96,914,424,'#
   P('M247 205L257 199L290 240L271 279L244 284L240 275L263 269L278 241Z',ink)+
   P('M253 207L285 240L268 275L246 280L245 278L267 273L282 241L250 211Z','#c7d6d3')+
   R(166,198,13,13,ink)+R(170,202,5,5,'#e4d2a6')+R(247,198,13,13,ink)+R(251,202,5,5,'#e4d2a6')+
-  R(20,429,130,111,'#161c30')+P('M29 457H141L123 540H47Z','#30314c')+
+  R(20,429,210,111,'#161c30')+P('M29 457H221L203 540H47Z','#30314c')+
   R(35,462,100,5,'#854a69')+P('M51 477H119L108 495H101V508H70V495H62Z','#a76081')+
-  R(620,429,190,111,'#161c30')+P('M628 457H801L774 540H652Z','#30314c')+
+  R(540,429,270,111,'#161c30')+P('M548 457H801L774 540H572Z','#30314c')+
   R(635,462,160,5,'#854a69')+P('M665 477H766L753 495H740V508H698V495H684Z','#a76081')+
-  terrain(claw,'#b68daa')+R(153,443,452,8,'#ebcee0')+R(153,462,452,6,'#84617e')+
-  [185,285,385,485].map(x=>R(x,489,46,21,'#8d6887')+R(x+5,494,36,11,'#654f70')).join('')+
-  [153,611].map(x=>R(x,399,6,38,'#f7d47e')+R(x+1,407,4,11,'#bd8657')).join('')+
+  terrain(claw,'#b68daa')+R(233,443,304,8,'#ebcee0')+R(233,462,304,6,'#84617e')+
+  [265,365,465].map(x=>R(x,489,46,21,'#8d6887')+R(x+5,494,36,11,'#654f70')).join('')+
+  [233,531].map(x=>R(x,399,6,38,'#f7d47e')+R(x+1,407,4,11,'#bd8657')).join('')+
   R(813,453,144,8,'#ebcee0')+R(824,478,120,7,'#83637f')+
   R(0,88,20,452,'#783d61')+R(3,94,10,436,'#cc7c96')+R(936,88,24,362,'#783d61')+R(940,94,12,350,'#cc7c96');
 const schoolArt = R(0,0,960,540,'#d5d2b9')+R(0,88,960,20,'#9eac9d')+R(0,108,960,6,'#708b89')+

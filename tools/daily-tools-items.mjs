@@ -59,8 +59,7 @@ add('tv-station','てれびきょく','stone',8.5,101,
 const navigationFront=[[8,35],[14,28],[102,28],[109,35],[109,90],[102,98],[15,98],[8,90]];
 const navigationBack=[[14,28],[27,17],[115,17],[124,27],[124,82],[109,95],[109,35],[102,28]];
 add('car-navigation','カーナビ','appliance',2.2,65,
- [poly(...navigationFront),poly(...navigationBack),rect(48,98,30,12),rect(33,110,62,9)],
- R(48,98,30,12,ink)+R(53,100,20,8,shade)+R(33,110,62,9,ink)+R(39,113,50,3,steel)+
+ [poly(...navigationFront),poly(...navigationBack)],
  P(pathOf(navigationBack),ink)+P('M29 21H113L118 27L109 33L104 24H25Z','#738791')+
  P('M114 35L120 30V80L114 86Z','#314654')+R(117,42,2,20,steel)+
  P(pathOf(navigationFront),ink)+P('M17 33H99L104 38V87L99 93H18L13 87V39Z','#3f5260')+

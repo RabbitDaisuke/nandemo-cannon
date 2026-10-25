@@ -68,8 +68,7 @@ add('bottled-coffee','ボトルコーヒー','plastic',1.6,44,
  R(34,66,60,34,'#e1d0a5')+R(40,71,48,4,'#a08056')+
  P('M54 79H69L77 85V91L69 97H55L47 91V85Z','#664331')+
  P('M61 81L58 85L67 94L64 96L53 88L57 82Z','#c69a67')+
- R(39,58,4,49,'#e6d6ac')+R(43,105,37,3,'#a27e51')+R(40,111,46,3,'#b69b6b'),
- 'water_release',water);
+ R(39,58,4,49,'#e6d6ac')+R(43,105,37,3,'#a27e51')+R(40,111,46,3,'#b69b6b'));
 
 // An open glazed crock full of pickles. Its contents occupy the mouth, so the
 // visible food surface is intentionally solid rather than an invisible hole.

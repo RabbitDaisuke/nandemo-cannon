@@ -3697,10 +3697,10 @@
       "ボトルコーヒー",
       "plastic",
       1.6,
-      0,
+      100,
       44,
       "bottled-coffee",
-      "water_release"
+      "solid"
     ],
     [
       "pickle-crock",
