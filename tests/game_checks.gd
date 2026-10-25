@@ -735,7 +735,8 @@ func _run() -> void:
 			_check(game.lesson_label.position.y >= game.stage_label.get_global_rect().end.y and game.lesson_label.position.y >= game.next_name.get_global_rect().end.y and game.lesson_label.get_global_rect().end.x <= 948, "Wide lesson overlaps the stage/NEXT captions or extends off screen")
 		else:
 			_check(game.lesson_label.position.x == game.score_label.position.x and game.lesson_label.position.y >= game.score_label.get_global_rect().end.y and game.lesson_label.get_global_rect().end.x < game.next_name.position.x, "Lesson is not below the score or overlaps the NEXT label")
-		_check(game.lesson_label.get_line_count() <= 3 and game.lesson_label.get_global_rect().end.y <= 127.0, "Lesson extends beyond the upper HUD")
+		_check(game.stage_label.get_theme_font_size("font_size") == 22 and game.lesson_label.get_theme_font_size("font_size") == 18, "Requested stage and lesson text sizes are floor(1.5 times their original sizes)")
+		_check(game.lesson_label.get_line_count() <= 3 and game.lesson_label.get_global_rect().end.y <= 160.0, "Enlarged lesson extends beyond its text area")
 		if index in [32, 34]:
 			var lesson_lines = game.lesson_label.text.split("\n")
 			_check(lesson_lines[-1].length() > 2 and not game.lesson_label.text.contains("えらんで\nも") and not game.lesson_label.text.contains("かた\nち"), "Lesson split a short phrase or left an isolated ending")

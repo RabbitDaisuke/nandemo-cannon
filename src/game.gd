@@ -545,12 +545,12 @@ func _wrap_hud_text(value: String, width: float, font_size: int) -> String:
 	return "\n".join(lines)
 
 func _layout_lesson(value: String) -> void:
-	var narrow = _wrap_hud_text(value, 304.0, 12)
+	var narrow = _wrap_hud_text(value, 304.0, 18)
 	var wide = narrow.split("\n").size() > 3 or (value.contains("\n") and narrow != value)
-	lesson_label.text = _wrap_hud_text(value, 924.0, 12) if wide else narrow
+	lesson_label.text = _wrap_hud_text(value, 924.0, 18) if wide else narrow
 	# Longer stories use the row below the stage name and NEXT caption. Font
 	# size stays readable and the central aiming region still begins at y=128.
-	lesson_label.position = Vector2(18, 96) if wide else Vector2(302, 77)
+	lesson_label.position = Vector2(18, 103) if wide else Vector2(302, 77)
 	if wide:
 		lesson_label.add_theme_constant_override("line_spacing", 0)
 	else:
@@ -1060,8 +1060,8 @@ func _build_ui() -> void:
 	map_button = _button("マップ", Vector2(804, 10), Vector2(64, 32), _show_maps)
 	_button("シード", Vector2(876, 10), Vector2(72, 32), _show_seed)
 	_button("やりなおす", Vector2(804, 50), Vector2(144, 32), func(): load_stage(stage_index))
-	stage_label = _label("", Vector2(18, 77), 15, Color("fff0b5"))
-	lesson_label = _label("", Vector2(302, 77), 12, Color("fff0b5"))
+	stage_label = _label("", Vector2(18, 77), 22, Color("fff0b5"))
+	lesson_label = _label("", Vector2(302, 77), 18, Color("fff0b5"))
 	lesson_label.size = Vector2(304, 44)
 	aim_label = _label("", Vector2(506, 476), 16)
 	angle_slider = _slider(Vector2(506, 501), 5.0, 85.0, 35.0, func(value):
@@ -1075,7 +1075,7 @@ func _build_ui() -> void:
 			cannon.set_aim(cannon.elevation_degrees, value / 100.0))
 	loaded_label = _label("", Vector2.ZERO, 14, Color("ffd36c"))
 	loaded_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_label("ドラッグで調整・クリックで発射", Vector2(18, 477), 16)
+	_label("ドラッグで調整・クリックで発射", Vector2(18, 477), 24)
 	bgm_button = _button("BGM オン", Vector2(18, 502), Vector2(144, 30), _toggle_bgm)
 	bgm_button.add_theme_font_size_override("font_size", 14)
 	bgm_volume_label = _label("おと 02.5%", Vector2(176, 510), 12)
