@@ -796,8 +796,9 @@ func _show_maps(page: int = -1) -> void:
 		preview.size = Vector2(148, 48)
 		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(preview)
-		var text = "%02d %s" % [position + 1, _stage_display_name(index)]
-		var caption = _label(text, Vector2(5, 55), 15, Color("fff0b5"), button)
+		var stage_name = _stage_display_name(index)
+		var text = "%02d %s" % [position + 1, stage_name]
+		var caption = _label(text, Vector2(5, 55), 13 if stage_name.length() >= 9 else 15, Color("fff0b5"), button)
 		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var previous = _button("まえのページ", Vector2(22, 348), Vector2(200, 40), func(): _show_maps(map_page - 1), modal)
 	previous.disabled = map_page == 0
