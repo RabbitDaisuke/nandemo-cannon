@@ -1081,7 +1081,7 @@ func _build_ui() -> void:
 			cannon.set_aim(cannon.elevation_degrees, value / 100.0))
 	loaded_label = _label("", Vector2.ZERO, 14, Color("ffd36c"))
 	loaded_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_label("ドラッグで調整・クリックで発射", Vector2(18, 477), 24)
+	_label("ドラッグで調整・クリックで発射", Vector2(18, 473), 24)
 	bgm_button = _button("BGM オン", Vector2(18, 502), Vector2(144, 30), _toggle_bgm)
 	bgm_button.add_theme_font_size_override("font_size", 14)
 	bgm_volume_label = _label("おと 02.5%", Vector2(176, 510), 12)
