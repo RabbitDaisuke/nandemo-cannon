@@ -816,7 +816,8 @@
       "meltToWaterUnits": 12,
       "coldRadius": 38
     },
-    "pencil-sharpener": {}
+    "pencil-sharpener": {},
+    "eight-bit-cpu": {}
   },
   "stateRules": {
     "breakage": {

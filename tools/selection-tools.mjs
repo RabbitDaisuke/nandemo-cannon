@@ -281,3 +281,20 @@ add('pencil-sharpener','えんぴつけずり','metal',3,59,
  P('M39 22H83L92 31H28Z','#99bbc5')+R(31,35,57,40,'#84acba')+O(59,53,18,16,ink)+O(59,53,12,10,'#b8c8c5')+O(59,53,6,6,'#374d60')+
  R(33,80,53,23,ink)+R(38,85,43,13,'#a5bdbe')+R(51,86,18,5,'#607f91')+R(31,104,59,4,'#b4c9c7')+
  R(96,51,21,9,ink)+R(100,54,13,3,steel)+R(109,51,9,32,ink)+R(112,55,3,23,steel)+R(106,76,16,16,ink)+R(110,80,8,8,'#ab7954'));
+
+// Generic vintage processor: gold legs, black substrate and a white top package.
+// Each leg is a real fixture; the transparent gaps between them stay empty.
+const cpuPins=Array.from({length:20},(_,index)=>16+index*5);
+add('eight-bit-cpu','はちビットシーピーユー','metal',1.8,83,
+ [poly([10,34],[14,30],[114,30],[118,34],[118,94],[114,98],[14,98],[10,94]),
+  ...cpuPins.flatMap(x=>[rect(x,16,4,18),rect(x,94,4,18)])],
+ cpuPins.map(x=>R(x,16,4,20,ink)+R(x+1,17,2,17,gold)+R(x+1,17,2,4,'#fff0a1')+
+  R(x,92,4,20,ink)+R(x+1,94,2,16,gold)+R(x+1,106,2,4,'#996731')).join('')+
+ P('M10 34L14 30H114L118 34V94L114 98H14L10 94Z',ink)+
+ R(15,35,98,58,'#30333e')+R(20,40,88,5,'#555b64')+R(20,45,88,42,'#222630')+
+ R(20,86,88,4,'#141b26')+R(15,55,7,18,ink)+R(15,59,4,10,'#8f704a')+
+ R(29,75,4,4,gold)+R(95,52,7,3,'#8d784c')+R(95,62,7,3,'#8d784c')+
+ P('M46 41H82L88 47V81L82 87H46L40 81V47Z','#acb6b5')+
+ P('M47 41H81L85 45V77L80 82H47L43 78V46Z','#f1f3e9')+
+ R(48,46,31,5,'#ffffff')+R(48,51,5,22,'#ffffff')+R(79,51,3,25,'#d0d8d4')+
+ R(53,74,23,4,'#e0e5dc'));

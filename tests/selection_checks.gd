@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 60, "the reviewed expansion contains sixty new selection-only objects")
+	_expect(additions.size() == 61, "the reviewed expansion contains sixty-one new selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
@@ -35,6 +35,7 @@ func _run() -> void:
 	for query in ["ティラミス", "てぃらみす", "タピオカ", "つりざお", "いりょう", "でんしぶひん", "ちょうみりょう"]:
 		_expect(not search.find_items(query).is_empty(), "new names and independent manual aliases match: " + query)
 	_expect(search.find_items("カミナリ").map(func(item): return item.id) == ["lightning-orb"], "electrical additions do not pollute the lightning alias")
+	_expect(search.find_items("はちビット").map(func(item): return item.id) == ["eight-bit-cpu"], "the clarified vintage processor is searchable separately from the existing CPU")
 	_expect(search.find_items("りょうり").map(func(item): return item.id) == search.find_items("ごはん").map(func(item): return item.id), "meal and gohan aliases remain identical after the expansion")
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
@@ -78,7 +79,8 @@ func _run() -> void:
 		["doria", Vector2(115, 72), Vector2(124, 72)],
 		["mini-soccer-goal", Vector2(64, 70), Vector2(12, 70)],
 		["stethoscope", Vector2(57, 42), Vector2(31, 36)],
-		["scissors", Vector2(23, 98), Vector2(11, 97)]
+		["scissors", Vector2(23, 98), Vector2(11, 97)],
+		["eight-bit-cpu", Vector2(20.5, 23), Vector2(18, 23)]
 	]:
 		var actor: ThrowBody = game._create_actor(catalog.items[probe[0]], Vector2(400, 180))
 		actor.freeze = true

@@ -4,7 +4,7 @@
 
 ## 収録内容
 
-- 337種類の小物。食品、おもちゃ、家電、森や家の模型、パソコン部品、本、大砲に加え、自由選択専用の食品・飲料・道具・実験器具など60種類を収録。100種類は上限にしない。
+- 338種類の小物。食品、おもちゃ、家電、森や家の模型、パソコン部品、本、大砲に加え、自由選択専用の食品・飲料・道具・実験器具など61種類を収録。100種類は上限にしない。
 - 45種類のマップで各15投。42はコンピューター、43はほんやさん、44はなんでもおさらい、45はなんでもキャノン2。
 - 独立した砲身の回転軸、砲口に追従する射出位置、反動、選択輪郭。台座は回転しない。
 - 発射音「オノマトペ 衝撃01」は[OtoLogic](https://otologic.jp/) / [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。原本MP3を再生音量25%で使用し、起動画面にクレジットを大きく表示。プレイ中は表示しない。詳細は`web/licenses/otologic.txt`。
@@ -101,7 +101,7 @@
 |`./build.sh` または `./build.sh bundle`|検証とWeb export。`out/standalone/`と`out/runtime/godot/4.7.2/`を作る|
 |`./build.sh check`|Godot headlessで検索・body・cannon・hazard・gameの検証を実行する|
 |`./build.sh preview`|NodeだけでSVG素材と保存済みゲーム状態から確認画像を生成する|
-|`./build.sh selection-items`|自由選択専用60種類のSVG・画像・物理データと確認シートを再生成する|
+|`./build.sh selection-items`|自由選択専用61種類のSVG・画像・物理データと確認シートを再生成する|
 |`./build.sh bgm`|ミラー配置用の音源3曲・クレジット・配置説明を`out/packages/nandemo-cannon-bgm.zip`へまとめる|
 |`./build.sh runtime`|公式テンプレートからランタイムを抽出し、`out/engine/`を作る|
 |`./build.sh source`|検証と公式Web exportを行い、エンジンを除いた`out/game/`を作る|
