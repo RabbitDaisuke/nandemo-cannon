@@ -953,7 +953,7 @@ func _render_catalog_page(page: int) -> void:
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(icon)
 		var item_name = _item_display_name(str(item.id))
-		var caption = _label(item_name, Vector2(3, 50), 13 if item_name.length() >= 10 else 15, Color("f7e9ba"), button)
+		var caption = _label(item_name, Vector2(3, 50), 12 if item_name.length() >= 9 else 15, Color("f7e9ba"), button)
 		caption.size = Vector2(124, 18)
 		caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	var previous = _button("まえへ", Vector2(22, 374), Vector2(104, 34), func(): _show_catalog(maxi(0, page - 1)), modal)
