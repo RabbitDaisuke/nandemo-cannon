@@ -2027,6 +2027,128 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "46-firestation",
+      "stage": 46,
+      "nameJa": "しょうぼうしょ",
+      "status": "specified",
+      "svg": "maps/46-firestation.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            40,
+            430,
+            580,
+            20
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "47-claw-machine",
+      "stage": 47,
+      "nameJa": "クレーンゲーム",
+      "status": "specified",
+      "svg": "maps/47-claw-machine.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            20,
+            440,
+            600,
+            100
+          ]
+        },
+        {
+          "rect": [
+            20,
+            110,
+            12,
+            330
+          ]
+        },
+        {
+          "rect": [
+            608,
+            396,
+            12,
+            44
+          ]
+        },
+        {
+          "rect": [
+            810,
+            450,
+            150,
+            90
+          ]
+        }
+      ],
+      "backgroundCollision": false
+    },
+    {
+      "id": "48-school",
+      "stage": 48,
+      "nameJa": "がっこう",
+      "status": "specified",
+      "svg": "maps/48-school.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            55,
+            395,
+            550,
+            20
+          ]
+        },
+        {
+          "rect": [
+            80,
+            415,
+            22,
+            35
+          ]
+        },
+        {
+          "rect": [
+            558,
+            415,
+            22,
+            35
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }

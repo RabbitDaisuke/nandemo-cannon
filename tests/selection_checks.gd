@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 66, "the reviewed expansion contains sixty-six selection-only objects")
+	_expect(additions.size() == 88, "the reviewed expansions contain eighty-eight selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
@@ -47,6 +47,8 @@ func _run() -> void:
 	var baseline = GameCatalog.new()
 	baseline.ordered_items = originals
 	for stage in catalog.stages:
+		if int(stage.id) > 45:
+			continue
 		for seed_value in [1, 51, 1039]:
 			var rng = RandomNumberGenerator.new()
 			rng.seed = seed_value
@@ -92,6 +94,21 @@ func _run() -> void:
 		["pancake-pair", Vector2(12, 60), Vector2(14, 92)],
 		["stethoscope", Vector2(57, 42), Vector2(31, 36)],
 		["scissors", Vector2(23, 98), Vector2(11, 97)],
+		["chainsaw", Vector2(27, 48), Vector2(12, 48)],
+		["school-uniform", Vector2(33, 100), Vector2(64, 95)],
+		["school-uniform", Vector2(97, 100), Vector2(110, 95)],
+		["drafting-compass", Vector2(64, 79), Vector2(42, 70)],
+		["school-desk", Vector2(64, 53), Vector2(64, 67)],
+		["school-desk", Vector2(64, 100), Vector2(26, 90)],
+		["randoseru", Vector2(25, 70), Vector2(11, 70)],
+		["randoseru", Vector2(112, 70), Vector2(121, 70)],
+		["randoseru", Vector2(65, 21), Vector2(54, 21)],
+		["bandage-roll", Vector2(45, 64), Vector2(14, 64)],
+		["fire-hose", Vector2(57, 62), Vector2(13, 62)],
+		["first-aid-box", Vector2(64, 23), Vector2(44, 23)],
+		["steel-ladder", Vector2(64, 42), Vector2(64, 31)],
+		["rescue-ring", Vector2(64, 64), Vector2(15, 64)],
+		["ladder-truck", Vector2(27, 28), Vector2(16, 28)],
 		["eight-bit-cpu", Vector2(20.5, 23), Vector2(18, 23)]
 	]:
 		var actor: ThrowBody = game._create_actor(catalog.items[probe[0]], Vector2(400, 180))

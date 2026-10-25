@@ -827,7 +827,59 @@
     "telescope": {},
     "oscilloscope": {},
     "robot-vacuum": {},
-    "white-printer": {}
+    "white-printer": {},
+    "spaghetti": {},
+    "napolitan": {},
+    "chainsaw": {},
+    "blast-wave-bomb": {
+      "blastOnly": true,
+      "radius": 145,
+      "strength": 0,
+      "impulseMultiplier": 1.5
+    },
+    "strong-blast-wave-bomb": {
+      "blastOnly": true,
+      "radius": 205,
+      "strength": 0,
+      "impulseMultiplier": 2.6
+    },
+    "coffee-beans-pouch": {},
+    "school-uniform": {},
+    "ambulance": {
+      "wheelFixtures": [
+        2,
+        3
+      ]
+    },
+    "mini-hospital": {},
+    "ladder-truck": {
+      "wheelFixtures": [
+        1,
+        2
+      ]
+    },
+    "fire-engine": {
+      "wheelFixtures": [
+        2,
+        3
+      ]
+    },
+    "bandage-roll": {},
+    "fire-hose": {},
+    "first-aid-box": {},
+    "fireproof-jacket": {
+      "flammable": false,
+      "burnSeconds": null
+    },
+    "steel-ladder": {
+      "flammable": false
+    },
+    "oxygen-cylinder": {},
+    "rescue-ring": {},
+    "drafting-compass": {},
+    "pencil": {},
+    "school-desk": {},
+    "randoseru": {}
   },
   "stateRules": {
     "breakage": {

@@ -686,6 +686,25 @@ func _cannon_two_checks() -> void:
 	_check(is_instance_valid(actor) and actor.alive and actor.position.distance_to(at) > 10.0 and game.cannon.position == original_position and game.actors.size() == 1, "Launching the cannon moved the fixed launcher, created extra projectiles, or failed to move the item")
 	await _snapshot("45-cannon-flight")
 
+func _rescue_stage_checks() -> void:
+	var claw_index = game.catalog.stages.map(func(stage): return str(stage.map)).find("47-claw-machine")
+	game.load_stage(claw_index)
+	await _frames(2)
+	var guard = game.cast_solid(Vector2(614, 360), Vector2(614, 450), [], 1)
+	var platform = game.cast_solid(Vector2(400, 400), Vector2(400, 510), [], 1)
+	_check(not guard.is_empty() and is_equal_approx(guard.position.y, 396.0), "The crane mercy guard has its real low collision top")
+	_check(not platform.is_empty() and is_equal_approx(platform.position.y, 440.0), "The crane prize platform matches the visible floor")
+	_check(game.cast_solid(Vector2(710, 400), Vector2(710, 575), [], 1).is_empty(), "No hidden floor blocks the crane's right-side collection hole")
+	_check(game.cast_solid(Vector2(590, 380), Vector2(660, 380), [], 1).is_empty(), "Stacks can overflow above the low guard into the hole")
+	var kept = game._create_actor(game.catalog.items["wooden-crate"], Vector2(400, 360))
+	kept.can_score = true
+	var fallen = game._create_actor(game.catalog.items["wooden-crate"], Vector2(710, 475))
+	fallen.can_score = true
+	await _frames(3)
+	_check((not is_instance_valid(fallen) or not fallen.alive) and int(game.destroyed_counts.get("abyss", 0)) == 1, "A prize inside the collection hole is confiscated by the real game loop")
+	_check(is_instance_valid(kept) and kept.alive and game.calculate_score() > 0, "Prizes retained over the platform remain eligible for score")
+	await _snapshot("47-claw-prizes")
+
 func _run() -> void:
 	root.size = Vector2i(960, 540)
 	game = GameScript.new()
@@ -719,6 +738,7 @@ func _run() -> void:
 	await _computer_and_bookstore_checks()
 	await _review_stage_checks()
 	await _cannon_two_checks()
+	await _rescue_stage_checks()
 	await _catalog_search_checks()
 	await _catalog_visibility_checks()
 	await _seed_menu_checks()
@@ -844,7 +864,7 @@ func _run() -> void:
 			_check(next_page != null and not next_page.disabled, "Map picker has no next page action")
 			if next_page != null:
 				next_page.pressed.emit()
-	var last_stage = game.catalog.stages.size() - 1
+	var last_stage = int(game.catalog.stage_order().back())
 	_check(reached.size() == game.catalog.stages.size() and reached.has(last_stage), "Map pages did not expose every stage")
 	var last_map = _button_with_meta("stage_index", last_stage)
 	if last_map != null:

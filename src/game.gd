@@ -253,7 +253,7 @@ func load_stage(index: int) -> void:
 	_add_cannon_base_collider(ground)
 	for entry in current_stage.get("preplaced", []):
 		_create_preplaced_actor(entry)
-	stage_label.text = "%02d / %s" % [stage_index + 1, _stage_display_name(stage_index)]
+	stage_label.text = "%02d / %s" % [catalog.stage_position(stage_index) + 1, _stage_display_name(stage_index)]
 	var lessons: Array = ui_text.get("lessons", [])
 	_layout_lesson(str(lessons[stage_index]) if stage_index < lessons.size() else "わくのなかに ものをなげよう。")
 	catalog_button.visible = bool(current_stage.get("selectAnyCatalogItem", false))
@@ -681,8 +681,9 @@ func _finish_stage(timed_out: bool) -> void:
 	_label("がぞうは ほぞんして X にそえてください。", Vector2(50, 326), 13, Color("b3dbea"), modal)
 	_button("やりなおす", Vector2(45, 385), Vector2(180, 42), func(): load_stage(stage_index), modal)
 	_button("マップ", Vector2(240, 385), Vector2(180, 42), _show_maps, modal).set_meta("result_navigation", "maps")
-	var next = _button("つぎへ", Vector2(435, 385), Vector2(180, 42), func(): load_stage(mini(catalog.stages.size() - 1, stage_index + 1)), modal)
-	next.disabled = stage_index >= catalog.stages.size() - 1
+	var next_index = catalog.next_stage_index(stage_index)
+	var next = _button("つぎへ", Vector2(435, 385), Vector2(180, 42), func(): load_stage(next_index), modal)
+	next.disabled = next_index < 0
 
 func _pause(value: bool) -> void:
 	_set_wait_speed(1.0)
@@ -768,12 +769,14 @@ func _show_maps(page: int = -1) -> void:
 	if shots_fired >= 15 and not result_shown:
 		return
 	var pages = ceili(catalog.stages.size() / float(MAPS_PER_PAGE))
-	map_page = clampi(stage_index / MAPS_PER_PAGE if page < 0 else page, 0, pages - 1)
+	var order = catalog.stage_order()
+	map_page = clampi(catalog.stage_position(stage_index) / MAPS_PER_PAGE if page < 0 else page, 0, pages - 1)
 	_open_modal("ステージをえらぶ / %d" % catalog.stages.size())
 	for slot in range(MAPS_PER_PAGE):
-		var index = map_page * MAPS_PER_PAGE + slot
-		if index >= catalog.stages.size():
+		var position = map_page * MAPS_PER_PAGE + slot
+		if position >= order.size():
 			break
+		var index = int(order[position])
 		var col = slot % 5
 		var row = slot / 5
 		var at = Vector2(22 + col * 166, 54 + row * 86)
@@ -787,7 +790,7 @@ func _show_maps(page: int = -1) -> void:
 		preview.size = Vector2(148, 48)
 		preview.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		button.add_child(preview)
-		var text = "%02d %s" % [index + 1, _stage_display_name(index)]
+		var text = "%02d %s" % [position + 1, _stage_display_name(index)]
 		var caption = _label(text, Vector2(5, 55), 10, Color("fff0b5"), button)
 		caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var previous = _button("まえのページ", Vector2(22, 348), Vector2(200, 40), func(): _show_maps(map_page - 1), modal)

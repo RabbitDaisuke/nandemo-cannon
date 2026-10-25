@@ -311,6 +311,7 @@ const review=stage(44,'なんでもおさらい','44-review',reviewPool,
  [rect(0,490,960,50),rect(0,420,200,70),rect(500,390,100,100),rect(680,450,280,40),rect(55,310,160,18)],
  [810,450],[35,80,610,410]);
 review.shuffleQueue=true;
+review.sequenceGroup=100;
 review.water=[{rect:[205,430,290,60],type:'flow',direction:[1,0],speed:28,finite:true}];
 review.surfaceZones=[{rect:[0,414,200,12],state:'ice',friction:0.025,permanent:true},{rect:[500,384,100,12],initialState:'burning',burnSeconds:5,reignite:false}];
 review.preplaced=[{id:'wooden-crate',x:78,groundY:420,width:48,scorePenalty:50},{id:'wooden-crate',x:132,groundY:420,width:48,scorePenalty:50},{id:'wooden-crate',x:105,groundY:372,width:44,scorePenalty:50},{id:'trash-bag',x:180,groundY:420,width:36,scorePenalty:30},{id:'vase',x:90,groundY:310,scoring:true},{id:'teapot',x:165,groundY:310,scoring:true},{id:'refrigerator',x:274,groundY:490},{id:'wooden-crate',x:390,groundY:490,width:55,scorePenalty:50},{id:'metal-drum',x:630,groundY:490},{id:'log',x:545,groundY:390,width:75}];
@@ -318,6 +319,7 @@ const sequel=stage(45,'なんでもキャノン2','45-cannon-two',
  ['refrigerator','wooden-crate','water-jug','flamethrower','fire-extinguisher','grip-boots','skateboard','freeze-sprayer','rubber-block','bomb','umbrella','low-table','plank','game-logo','cannon-object'],
  [rect(0,450,960,90),rect(65,420,245,30),rect(330,390,220,60)],
  [810,450],[40,75,605,375]);
+sequel.sequenceGroup=200;
 const additions=[random,restaurant,beach,cafe,office,village,computer,bookstore,review,sequel];
 const lessons=['なんでもキャノンが ぼうそう！？ なげるものと つよさが ランダムになっちゃった！？','テーブルのうえに つみあげよう。そとは ならく！','ものを じゆうにえらべる ビーチ。さいしょから みずがいっぱい。','コーヒーのどうぐと おやつを カウンターにのせよう。','さいしょのパソコンも とくてん！ ばくだんと ほのおに きをつけよう。','へいわな ひとざとに キャノンがきた！？ もりと いえを わくにのこそう！','コンピューターの なかにきちゃった！？ デコボコのきばんに ぶひんをのせよう。','うごくたなに ほんをのせよう。たなのしたは おとしあな！','みず・ほのお・こおり・ばくはつ！ マイナスのじゃまものを かたづけよう。','なんでもキャノン、いままではっしゃしていなかったものがあった。\nそれは、なんでもキャノンでなんでもキャノンをとばすことだった！'];
 for(const [i,s]of additions.entries()){s.lesson=lessons[i];stages.stages[s.id-1]=s;ui.stages[s.id-1]=['ランダムはっしゃほう','レストラン2','ビーチ','きっさてん','オフィス','ひとざと','コンピューター','ほんやさん','なんでもおさらい','なんでもキャノン2'][i];ui.lessons[s.id-1]=s.lesson;}

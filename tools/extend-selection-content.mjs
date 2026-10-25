@@ -6,6 +6,9 @@ import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
 import {items as food} from './selection-food.mjs';
 import {items as tools} from './selection-tools.mjs';
+import {items as misc} from './misc-expansion-items.mjs';
+import {items as firestation} from './firestation-items.mjs';
+import {items as school} from './school-items.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -15,7 +18,7 @@ catch { sharp = require(path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
 const read = async name => new TextDecoder('utf-8', {fatal: true}).decode(await fs.readFile(path.join(root, name)));
 const json = async name => JSON.parse(await read(`data/${name}.json`));
 const [manifest, catalog, physics, colliders, ui] = await Promise.all(['objects-manifest', 'catalog', 'physics', 'colliders', 'ui-ja'].map(json));
-const groups = [['food', food], ['tools', tools]];
+const groups = [['food', food], ['tools', tools], ['misc', misc], ['firestation', firestation], ['school', school]];
 const entries = groups.flatMap(([, items]) => items);
 if (new Set(entries.map(item => item.id)).size !== entries.length) throw Error('Duplicate selection item ID');
 const coverage = JSON.parse(await read('assets/font/generated-coverage.json')).chars;

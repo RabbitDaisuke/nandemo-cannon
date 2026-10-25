@@ -49,7 +49,8 @@ if [[ "$build_mode" != check && "$build_mode" != runtime ]]; then
     touch node_modules/.gdignore
   fi
   if [[ "$build_mode" == selection-items ]]; then
-    exec node tools/extend-selection-content.mjs
+    node tools/extend-selection-content.mjs
+    exec node tools/extend-rescue-stages.mjs
   fi
   node tools/rasterize-assets.mjs
   node tools/prepare-generated-art.mjs

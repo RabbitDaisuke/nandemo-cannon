@@ -1,7 +1,7 @@
 {
-  "objects": 277,
-  "maps": 45,
-  "specifiedStages": 44,
+  "objects": 365,
+  "maps": 48,
+  "specifiedStages": 47,
   "fontGlyphs": 246,
   "animationFamilies": 8,
   "assetRenderer": "Node.js + sharp/librsvg",
@@ -9,6 +9,6 @@
   "browserUsed": false,
   "originalArtwork": "SVG objects/maps; image-generated cannon, logo and Japanese bitmap font",
   "gameRuntimeIncluded": true,
-  "playableStages": 45,
+  "playableStages": 48,
   "stage18Assignment": "implementation assumption: retained ice floor"
 }

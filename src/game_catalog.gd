@@ -41,10 +41,45 @@ func random_items() -> Array:
 	# catalogSelectable is a separate visibility rule: hidden items may still roll.
 	return ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
 
+func stage_order() -> Array:
+	# Ordering metadata affects navigation only. Stable IDs, saves and seeds stay put.
+	var indices: Array = range(stages.size())
+	indices.sort_custom(func(a, b):
+		var group_a = int(stages[a].get("sequenceGroup", 0))
+		var group_b = int(stages[b].get("sequenceGroup", 0))
+		if group_a != group_b:
+			return group_a < group_b
+		var rank_a = int(stages[a].get("sequenceOrder", stages[a].id))
+		var rank_b = int(stages[b].get("sequenceOrder", stages[b].id))
+		return rank_a < rank_b if rank_a != rank_b else a < b
+	)
+	return indices
+
+func stage_position(index: int) -> int:
+	return stage_order().find(index)
+
+func next_stage_index(index: int) -> int:
+	var order = stage_order()
+	var position = order.find(index)
+	return int(order[position + 1]) if position >= 0 and position + 1 < order.size() else -1
+
 func build_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
+	var result = _build_base_queue(stage, rng)
+	# Authored interruptions replace slots after random sampling, never add throws.
+	var occupied: Array = []
+	for entry in stage.get("queueOverrides", []):
+		var shot = int(entry.shot) - 1
+		var id = str(entry.item)
+		assert(shot >= 0 and shot < result.size() and not occupied.has(shot), "Invalid or repeated queue override slot")
+		assert(items.has(id), "Unknown forced item: " + id)
+		occupied.append(shot)
+		result[shot] = id
+	return result
+
+func _build_base_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
 	if str(stage.get("queuePolicy", "")) == "randomCatalog":
 		var random_queue: Array = []
-		var candidates = random_items()
+		var candidates = selectable_items() if str(stage.get("randomCatalogScope", "")) == "selectable" else random_items()
 		assert(not candidates.is_empty(), "Random laboratory needs eligible catalog items")
 		for index in range(15):
 			random_queue.append(str(candidates[rng.randi_range(0, candidates.size() - 1)].id))

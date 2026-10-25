@@ -361,7 +361,10 @@ func detonate(actor: ThrowBody) -> void:
 			continue
 		var attenuation = clampf(1.0 - distance / radius, 0.0, 1.0)
 		var tutorial_required = int(target.get_meta("tutorial_required", 0))
-		if tutorial_required > 0:
+		if bool(actor.spec.get("blastOnly", false)):
+			# Pressure-only charges push bodies without consuming destruction RNG.
+			pass
+		elif tutorial_required > 0:
 			# The explicitly documented tutorial exception: three received blasts.
 			target.tutorial_hits += 1
 			target.visual.modulate = Color(1.0, 1.0 - float(target.tutorial_hits) * 0.2, 0.65)
@@ -375,7 +378,7 @@ func detonate(actor: ThrowBody) -> void:
 			if world.rng.randf() < probability:
 				target.request_break("explosion")
 		# Explosions push all survivors. Tutorial barriers receive a smaller kick so repeated hits remain possible.
-		var impulse_scale = 75.0 if tutorial_required > 0 else 300.0 * float(actor.spec.get("impulseMultiplier", 1.0))
+		var impulse_scale = 75.0 if tutorial_required > 0 and not bool(actor.spec.get("blastOnly", false)) else 300.0 * float(actor.spec.get("impulseMultiplier", 1.0))
 		target.apply_central_impulse(offset.normalized() * (impulse_scale * attenuation * minf(target.mass, 8.0)))
 	world.destroy_actor(actor, "exploded")
 
