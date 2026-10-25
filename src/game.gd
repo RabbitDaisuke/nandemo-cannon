@@ -1062,7 +1062,7 @@ func _build_ui() -> void:
 	next_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	next_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ui_root.add_child(next_icon)
-	next_name = _label("", Vector2(620, 75), 10, Color("fff0b5"))
+	next_name = _label("", Vector2(620, 75), 12, Color("fff0b5"))
 	next_name.size.x = 172
 	next_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	map_button = _button("マップ", Vector2(804, 10), Vector2(64, 32), _show_maps)
