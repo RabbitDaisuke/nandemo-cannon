@@ -690,12 +690,13 @@ func _rescue_stage_checks() -> void:
 	var claw_index = game.catalog.stages.map(func(stage): return str(stage.map)).find("47-claw-machine")
 	game.load_stage(claw_index)
 	await _frames(2)
-	var guard = game.cast_solid(Vector2(614, 360), Vector2(614, 450), [], 1)
-	var platform = game.cast_solid(Vector2(400, 400), Vector2(400, 510), [], 1)
+	var excluded: Array[RID] = []
+	var guard = game.cast_solid(Vector2(614, 360), Vector2(614, 450), excluded, 1)
+	var platform = game.cast_solid(Vector2(400, 400), Vector2(400, 510), excluded, 1)
 	_check(not guard.is_empty() and is_equal_approx(guard.position.y, 396.0), "The crane mercy guard has its real low collision top")
 	_check(not platform.is_empty() and is_equal_approx(platform.position.y, 440.0), "The crane prize platform matches the visible floor")
-	_check(game.cast_solid(Vector2(710, 400), Vector2(710, 575), [], 1).is_empty(), "No hidden floor blocks the crane's right-side collection hole")
-	_check(game.cast_solid(Vector2(590, 380), Vector2(660, 380), [], 1).is_empty(), "Stacks can overflow above the low guard into the hole")
+	_check(game.cast_solid(Vector2(710, 400), Vector2(710, 575), excluded, 1).is_empty(), "No hidden floor blocks the crane's right-side collection hole")
+	_check(game.cast_solid(Vector2(590, 380), Vector2(660, 380), excluded, 1).is_empty(), "Stacks can overflow above the low guard into the hole")
 	var kept = game._create_actor(game.catalog.items["wooden-crate"], Vector2(400, 360))
 	kept.can_score = true
 	var fallen = game._create_actor(game.catalog.items["wooden-crate"], Vector2(710, 475))
