@@ -5,9 +5,9 @@ project_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 cd "$project_root"
 build_mode="${1:-bundle}"
 case "$build_mode" in
-  bundle|check|preview|pages|runtime|source|deploy|standalone|bgm) ;;
+  bundle|check|preview|pages|runtime|source|deploy|standalone|bgm|selection-items) ;;
   -h|--help)
-    printf '%s\n' './build.sh [bundle|check|preview|pages|runtime|source|deploy|standalone|bgm]' 'runtime/source: produce the two Actions artifacts' 'deploy: merge artifacts, package ZIP, push cdn-assets and prepare Pages' 'standalone: package merged output for PLiCy/itch.io with local engine and music' 'pages: bundle then deploy' 'bgm: package the three music files and credits for mirror upload'
+    printf '%s\n' './build.sh [bundle|check|preview|pages|runtime|source|deploy|standalone|bgm|selection-items]' 'runtime/source: produce the two Actions artifacts' 'deploy: merge artifacts, package ZIP, push cdn-assets and prepare Pages' 'standalone: package merged output for PLiCy/itch.io with local engine and music' 'pages: bundle then deploy' 'bgm: package the three music files and credits for mirror upload' 'selection-items: regenerate authored free-choice items and their review sheets'
     exit 0 ;;
   *) printf 'Unknown build mode: %s\n' "$build_mode" >&2; exit 2 ;;
 esac
@@ -47,6 +47,9 @@ if [[ "$build_mode" != check && "$build_mode" != runtime ]]; then
   if ! node -e 'const p=require("node:path");try{require("sharp")}catch{require(p.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES||"", "sharp"))}' >/dev/null 2>&1; then
     npm ci --no-audit --no-fund
     touch node_modules/.gdignore
+  fi
+  if [[ "$build_mode" == selection-items ]]; then
+    exec node tools/extend-selection-content.mjs
   fi
   node tools/rasterize-assets.mjs
   node tools/prepare-generated-art.mjs

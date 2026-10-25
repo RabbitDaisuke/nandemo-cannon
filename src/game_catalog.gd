@@ -36,12 +36,18 @@ func selectable_items() -> Array:
 	# Picker visibility is independent of search tags and authored/random queues.
 	return ordered_items.filter(func(item): return is_catalog_selectable(str(item.id)))
 
+func random_items() -> Array:
+	# Selection-only additions must not change existing seeded score attacks.
+	# catalogSelectable is a separate visibility rule: hidden items may still roll.
+	return ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
+
 func build_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
 	if str(stage.get("queuePolicy", "")) == "randomCatalog":
 		var random_queue: Array = []
-		assert(not ordered_items.is_empty(), "Random laboratory needs catalog items")
+		var candidates = random_items()
+		assert(not candidates.is_empty(), "Random laboratory needs eligible catalog items")
 		for index in range(15):
-			random_queue.append(str(ordered_items[rng.randi_range(0, ordered_items.size() - 1)].id))
+			random_queue.append(str(candidates[rng.randi_range(0, candidates.size() - 1)].id))
 		return random_queue
 	var result: Array = []
 	if stage.has("queueSlots"):

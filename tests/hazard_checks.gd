@@ -193,6 +193,11 @@ func _run() -> void:
 	fixture_world.hazards.heat_actor(ice, 1.0)
 	_expect(not ice.alive and is_equal_approx(fixture_world.liquid.current_volume(), 5.0), "even wet ice melts into its configured water amount")
 	await _reset()
+	var iceberg = _spawn("iceberg", Vector2(300, 200))
+	iceberg.wet_seconds = 100.0
+	fixture_world.hazards.heat_actor(iceberg, 1.0)
+	_expect(not iceberg.alive and is_equal_approx(fixture_world.liquid.current_volume(), 12.0), "the selection-only iceberg melts once into twelve water units")
+	await _reset()
 	var launcher = _spawn("flamethrower", Vector2(800, 250))
 	_spawn("metal-drum", Vector2(690, 250))
 	var shielded_log = _spawn("log", Vector2(600, 250))
@@ -402,7 +407,7 @@ func _run() -> void:
 		fixture_world.hazards.detonate(submerged)
 		_expect(submerged.alive and not submerged.has_meta("fuse"), "%s stays disarmed after drying, heat and re-launch" % id)
 	_expect(fixture_world.hazards.explosion_serial == 0, "ordinary submerged explosives produce no blast")
-	for id in ["waterproof-bomb", "strong-waterproof-bomb"]:
+	for id in ["waterproof-bomb", "strong-waterproof-bomb", "torpedo"]:
 		await _reset({"water": [{"rect": [0, 150, 960, 390], "direction": [0, 0], "speed": 0}]})
 		var waterproof = _spawn(id, Vector2(300, 260))
 		fixture_world.hazards.on_launch(waterproof)
