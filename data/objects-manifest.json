@@ -34074,9 +34074,9 @@
       ],
       "viewBox": [
         10,
-        8,
+        16,
         110,
-        103
+        95
       ],
       "pivotSource": [
         64,
@@ -34084,10 +34084,10 @@
       ],
       "pivotCropped": [
         54,
-        56
+        48
       ],
       "worldWidth": 77,
-      "worldHeight": 72.1,
+      "worldHeight": 66.5,
       "worldScale": 0.7,
       "material": "food",
       "mass": 2.1,
@@ -34124,27 +34124,27 @@
           "polygon": [
             [
               62,
-              34
+              42
             ],
             [
               65,
-              18
+              26
             ],
             [
               78,
-              12
-            ],
-            [
-              90,
               20
             ],
             [
+              90,
+              28
+            ],
+            [
               89,
-              34
+              42
             ],
             [
               78,
-              48
+              56
             ]
           ]
         }
@@ -34157,7 +34157,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 7319,
+      "opaquePixels": 7116,
       "selectionOnly": true
     },
     {
