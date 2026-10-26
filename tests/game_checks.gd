@@ -601,7 +601,7 @@ func _computer_and_bookstore_checks() -> void:
 	for child in terrain.get_children():
 		if child.has_meta("moving_terrain"):
 			moving = child
-	_check(moving != null and game.current_stage.get("abyss", []).size() > 0, "Bookstore is missing its moving physical shelf or the pit below it")
+	_check(moving != null, "Bookstore is missing its moving physical shelf")
 	if moving != null:
 		var at = moving.position
 		await _frames(60)
@@ -609,10 +609,24 @@ func _computer_and_bookstore_checks() -> void:
 		_check(game.cast_solid(Vector2(315, 462), Vector2(315, 540), no_exclusions, 1).is_empty(), "A fixed floor underneath the bookstore lift can trap objects")
 	_check(game.actors.size() == 3 and game.actors.all(func(actor): return actor.alive and actor.can_score and not actor.freeze) and game.calculate_score() > 0, "Bookstore's initially placed books are not movable scoring objects")
 	await _snapshot("43-bookstore")
-	var falling = game._create_actor(game.catalog.items["hardcover-book"], Vector2(315, 505))
+	var falling = game._create_actor(game.catalog.items["hardcover-book"], Vector2(315, 530))
 	falling.linear_velocity = Vector2(0, 100)
+	await _frames(2)
+	_check(is_instance_valid(falling) and falling.alive, "Bookstore books remain physical while passing the old in-view destruction boundary")
 	await _frames(45)
 	_check(not is_instance_valid(falling) or not falling.alive, "A book dropped below the moving shelf survived its pit")
+	# Every authored pit uses the same runtime fall boundary, without changing its terrain.
+	for stage_index in [5, 33, 36, 42, 46]:
+		game.load_stage(stage_index)
+		await _frames(2)
+		var probe = game._create_actor(game.catalog.items["hardcover-book"], Vector2(315, 565))
+		probe.freeze = true
+		await _frames(2)
+		_check(is_instance_valid(probe) and probe.alive, "Stage %d uses the common lower fall boundary" % (stage_index + 1))
+		if is_instance_valid(probe):
+			probe.position.y = 585.0
+		await _frames(2)
+		_check(not is_instance_valid(probe) or not probe.alive, "Stage %d removes objects past the common off-screen boundary" % (stage_index + 1))
 
 func _review_stage_checks() -> void:
 	game.load_stage(43)

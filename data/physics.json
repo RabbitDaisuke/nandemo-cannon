@@ -899,7 +899,116 @@
     "straw": {},
     "tv-station": {},
     "car-navigation": {},
-    "green-peeler": {}
+    "green-peeler": {},
+    "banana-bunch": {},
+    "tomato-pot": {},
+    "honey-bottle": {},
+    "empty-burlap-sack": {},
+    "strawberry-shortcake": {},
+    "almonds": {},
+    "coconut-milk-carton": {},
+    "red-bean-toast": {},
+    "soy-milk-carton": {},
+    "lemon-juice-bottle": {},
+    "baked-cheesecake": {},
+    "coffee-milk-carton": {},
+    "raw-corn": {},
+    "soy-sauce-tofu": {},
+    "dried-fruit-mix": {},
+    "paint-palette": {},
+    "calligraphy-brush": {},
+    "inkstone": {},
+    "yellow-ink-bottle": {},
+    "metal-spatula": {},
+    "paper-plate": {},
+    "open-toolbox": {},
+    "microscope": {},
+    "burning-matchbox": {
+      "durationSeconds": 4,
+      "fireRadius": 27,
+      "depletedSprite": "objects/burning-matchbox-depleted.svg"
+    },
+    "table-saw": {},
+    "sewing-machine": {},
+    "three-d-printer": {},
+    "mini-ferris-wheel": {},
+    "manhole-cover": {},
+    "stopwatch": {},
+    "pizza-oven": {},
+    "stone-fountain": {
+      "waterSource": {
+        "position": [
+          64,
+          6
+        ],
+        "rateUnitsPerSecond": 2,
+        "maxUnits": 16,
+        "speed": 160
+      }
+    },
+    "red-hair-comb": {},
+    "flatbed-dolly": {
+      "wheelFixtures": [
+        1,
+        2
+      ]
+    },
+    "mini-excavator": {},
+    "solar-panel": {},
+    "breadboard": {},
+    "mini-forklift": {
+      "wheelFixtures": [
+        7,
+        8
+      ]
+    },
+    "offertory-box": {},
+    "winners-podium": {},
+    "film-roll": {},
+    "mini-smelter": {
+      "burnerSource": [
+        65,
+        87
+      ],
+      "burnerWidth": 33,
+      "fireRadius": 18
+    },
+    "garbage-truck": {
+      "wheelFixtures": [
+        2,
+        3
+      ]
+    },
+    "numeric-keypad": {},
+    "one-ton-weight": {},
+    "bellows-air-pump": {},
+    "lidded-saucepan": {},
+    "fuel-meter": {},
+    "insect-spray": {
+      "emissionAnchor": [
+        49,
+        18
+      ],
+      "durationSeconds": 4,
+      "range": 130,
+      "leavesWater": false
+    },
+    "rose": {},
+    "omelet-rice": {},
+    "chunky-red-bean-bun": {},
+    "kabosu": {},
+    "cherry-trio": {},
+    "black-sesame-bun": {},
+    "pound-cake": {},
+    "croissant": {},
+    "asian-pear": {},
+    "danish-pastry": {},
+    "chocolate-bread": {},
+    "melon-bread": {},
+    "leafy-turnip": {},
+    "persimmon": {},
+    "chocolate-chip-cookie": {},
+    "matsutake": {}
   },
   "stateRules": {
     "breakage": {

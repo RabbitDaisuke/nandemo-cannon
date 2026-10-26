@@ -30,7 +30,7 @@ const claw = {
   // Open holes use the common off-screen fall boundary in game.gd.
   // No in-view destruction volumes: prizes remain physical while falling.
   preplaced: [],
-  lesson: 'クレーンゲームの なかにきちゃった！\nさゆうのあなに おとすと ものは おきゃくさんのものになっちゃうぞ！'
+  lesson: 'クレーンゲームの なかにきちゃった！\nさゆうのあなに おとすと モノは おきゃくさんのものになっちゃうぞ！'
 };
 const school = {
   id: 48, nameJa: 'がっこう', map: '48-school', status: 'specified', gravity: 980,

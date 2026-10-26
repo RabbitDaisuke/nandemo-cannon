@@ -56,6 +56,7 @@ func _run() -> void:
 	var data = JSON.parse_string(FileAccess.get_file_as_string("res://data/objects-manifest.json"))
 	for record in data.items:
 		records[record.id] = record
+	await _mobile_source_checks()
 	await _reset()
 	var jet = _spawn("flamethrower", Vector2(800, 250))
 	fixture_world.hazards.on_launch(jet)
@@ -552,6 +553,40 @@ func _check_water_balance() -> void:
 	fixture_world.liquid._affect_bodies()
 	_expect(is_zero_approx(resting.water_fraction) and resting.water_velocity == Vector2.ZERO, "leaving the water clears its drag and flow state")
 	_expect(is_equal_approx(resting.gravity_scale, 1.0) and is_equal_approx(resting.linear_damp, 0.06), "leaving water restores the original gravity and damping without wet paralysis")
+
+func _mobile_source_checks() -> void:
+	await _reset()
+	var fountain = _spawn("stone-fountain", Vector2(400, 240))
+	var source: Dictionary = fountain.spec.waterSource
+	var interval = 1.0 / float(source.rateUnitsPerSecond)
+	var liquid = fixture_world.liquid
+	liquid._tick_actor_sources(interval + 0.001)
+	var outlet = fountain.to_global(fountain._source_point(GameCatalog.vector(source.position)))
+	_expect(liquid.droplets.size() == 1 and Vector2(liquid.droplets[0].point).is_equal_approx(outlet) and not fountain.contains_world_point(outlet), "the fountain emits real water outside its solid nozzle")
+	var remaining = float(fountain.get_meta("source_remaining"))
+	fountain.frozen_seconds = 2.0
+	liquid._tick_actor_sources(interval * 2.0)
+	_expect(float(fountain.get_meta("source_remaining")) == remaining and liquid.droplets.size() == 1, "freezing the fountain stops its finite supply without consuming or refilling it")
+	fountain.frozen_seconds = 0.0
+	fountain.position += Vector2(60, 0)
+	fountain.rotation = PI / 2.0
+	liquid._tick_actor_sources(interval)
+	var moved_outlet = fountain.to_global(fountain._source_point(GameCatalog.vector(source.position)))
+	_expect(liquid.droplets.size() == 2 and Vector2(liquid.droplets[-1].point).is_equal_approx(moved_outlet) and Vector2(liquid.droplets[-1].velocity).x > 0.0, "the source follows the moving and rotating body's actual outlet")
+	liquid._tick_actor_sources(float(source.maxUnits) * interval)
+	liquid._tick_actor_sources(10.0)
+	_expect(is_equal_approx(liquid.introduced_volume, float(source.maxUnits)) and is_zero_approx(float(fountain.get_meta("source_remaining"))), "the fountain stops at its reservoir cap and cannot create unlimited water")
+	var removed = _spawn("stone-fountain", Vector2(600, 240))
+	fixture_world.destroy_actor(removed, "test")
+	liquid._tick_actor_sources(10.0)
+	_expect(is_equal_approx(liquid.introduced_volume, float(source.maxUnits)), "a destroyed fountain cannot continue producing water")
+	var matches = _spawn("burning-matchbox", Vector2(200, 200))
+	fixture_world.hazards.on_launch(matches)
+	_expect(matches.fuel_seconds > 0.0, "the burning matchbox uses the existing animated finite flame")
+	fixture_world.hazards.wet_actor(matches, 3.0)
+	_expect(matches.alive and matches.fuel_seconds == 0.0 and matches.visual.texture.resource_path.ends_with("burning-matchbox-depleted.svg"), "water leaves an extinguished matchbox with its own depleted texture")
+	fixture_world.hazards.on_launch(matches)
+	_expect(matches.fuel_seconds == 0.0, "extinguished matches cannot regain fuel")
 
 func _reset(stage: Dictionary = {}) -> void:
 	if is_instance_valid(fixture_world):

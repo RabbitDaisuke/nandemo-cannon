@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 100, "the reviewed expansions contain one hundred selection-only objects")
+	_expect(additions.size() == 165, "the reviewed expansions contain 165 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
@@ -84,6 +84,12 @@ func _run() -> void:
 		game.destroy_actor(actor, "test")
 	await process_frame
 	for probe in [
+		["paint-palette", Vector2(91, 77), Vector2(64, 65)],
+		["film-roll", Vector2(41, 42), Vector2(64, 42)],
+		["microscope", Vector2(64, 60), Vector2(64, 44)],
+		["three-d-printer", Vector2(90, 45), Vector2(110, 45)],
+		["lidded-saucepan", Vector2(15, 69), Vector2(8, 69)],
+		["mini-ferris-wheel", Vector2(48, 30), Vector2(64, 30)],
 		["barrel-mug", Vector2(97, 68), Vector2(112, 68)],
 		["doria", Vector2(12, 72), Vector2(4, 72)],
 		["doria", Vector2(115, 72), Vector2(124, 72)],
@@ -157,7 +163,7 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var wheel_measurements: Dictionary = {}
-	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck"]:
+	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck", "flatbed-dolly", "mini-forklift", "garbage-truck"]:
 		wheel_measurements[id] = await _wheel_checks(catalog.items[id])
 	var result = {"suite": "selection", "checks": checks, "failures": failures, "measurements": wheel_measurements, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/selection-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")

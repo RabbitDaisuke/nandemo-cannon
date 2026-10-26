@@ -11,6 +11,8 @@ import {items as firestation} from './firestation-items.mjs';
 import {items as school} from './school-items.mjs';
 import {items as dailyFood} from './daily-food-items.mjs';
 import {items as dailyTools} from './daily-tools-items.mjs';
+import {items as oct26Food} from './oct26-food-items.mjs';
+import {items as oct26Tools} from './oct26-tool-items.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -20,7 +22,7 @@ catch { sharp = require(path.join(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES
 const read = async name => new TextDecoder('utf-8', {fatal: true}).decode(await fs.readFile(path.join(root, name)));
 const json = async name => JSON.parse(await read(`data/${name}.json`));
 const [manifest, catalog, physics, colliders, ui] = await Promise.all(['objects-manifest', 'catalog', 'physics', 'colliders', 'ui-ja'].map(json));
-const groups = [['food', food], ['tools', tools], ['misc', misc], ['firestation', firestation], ['school', school], ['daily-food', dailyFood], ['daily-tools', dailyTools]];
+const groups = [['food', food], ['tools', tools], ['misc', misc], ['firestation', firestation], ['school', school], ['daily-food', dailyFood], ['daily-tools', dailyTools], ['oct26-food', oct26Food], ['oct26-tools', oct26Tools]];
 const entries = groups.flatMap(([, items]) => items);
 if (new Set(entries.map(item => item.id)).size !== entries.length) throw Error('Duplicate selection item ID');
 const coverage = JSON.parse(await read('assets/font/generated-coverage.json')).chars;
@@ -45,6 +47,11 @@ for (const item of entries) {
   const svg = raw.replace(`width="${grid}" height="${grid}" viewBox="0 0 ${grid} ${grid}"`, `width="${box[2]}" height="${box[3]}" viewBox="${box.join(' ')}"`);
   await fs.writeFile(path.join(root, `assets/objects/${item.id}.svg`), svg + '\n', 'utf8');
   for (const ext of ['png', 'webp']) await sharp(Buffer.from(svg)).toFormat(ext, ext === 'webp' ? {lossless: true} : {}).toFile(path.join(root, `assets/raster/objects/${item.id}.${ext}`));
+  if (item.depletedArt) {
+    // Keep the original canvas and pivot when swapping the exhausted texture.
+    const depleted = svg.replace(item.art, item.depletedArt);
+    await fs.writeFile(path.join(root, `assets/objects/${item.id}-depleted.svg`), depleted + '\n', 'utf8');
+  }
   const score = ['explosion', 'water_release'].includes(item.behavior) ? 0 : 100;
   const record = {
     id: item.id, nameJa: item.name, svg: `objects/${item.id}.svg`, png: `raster/objects/${item.id}.png`, webp: `raster/objects/${item.id}.webp`,

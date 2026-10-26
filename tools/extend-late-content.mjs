@@ -282,7 +282,6 @@ const random=stage(36,'ランダムはっしゃほう','36-random-cannon',pool,[
 random.queueSlots=Array.from({length:15},()=>({count:1,candidates:pool}));
 random.cannonControls={powerMode:'random',minPower:0.15,maxPower:1.0,trajectoryFraction:0.5};
 const restaurant=stage(37,'レストラン2','37-restaurant-two',['call-bell','lemonade-glass','water-glass','coffee-mill','orange-juice','ironplate-hamburg','rice-bowl','sashimi','chicken-steak','bill-holder','cash-reader','frying-pan','oven','fork','crossed-chopsticks'],[rect(90,380,520,24),rect(90,340,14,40),rect(596,340,14,40),rect(114,404,28,136),rect(558,404,28,136),rect(720,410,220,24),rect(744,434,24,106),rect(892,434,24,106)],[820,410],[90,80,520,300]);
-restaurant.abyss=[[0,525,960,100]];
 restaurant.preplaced=[{id:'call-bell',x:545,groundY:380,scoring:false}];
 const beach=stage(38,'ビーチ','38-beach',['sand-bucket','shovel','water-yoyo','lifebuoy','umbrella','watermelon','rubber-duck','water-balloon','submarine','barrel','towel','sponge','freeze-sprayer','flamethrower','soccer-ball'],[rect(0,450,600,90),poly([600,450],[700,410],[960,410],[960,540],[600,540])],[810,410],[50,80,550,370]);
 beach.selectAnyCatalogItem=true;
@@ -304,7 +303,6 @@ const bookstore=stage(43,'ほんやさん','43-bookstore',
  [810,450],[25,80,615,430]);
 bookstore.scoreGroundY=450;
 bookstore.movingPlatforms=[{center:[315,380],size:[150,20],axis:[0,1],travel:60,period:5.8,phase:0}];
-bookstore.abyss=[[190,525,250,100]];
 bookstore.preplaced=[{id:'book-stack',x:82,groundY:320,width:63,scoring:true},{id:'hardcover-book',x:143,groundY:320,width:37,scoring:true},{id:'open-book',x:510,groundY:350,width:70,scoring:true}];
 const reviewPool=['flamethrower','water-jug','water-balloon','fire-extinguisher','freeze-sprayer','ice-bomb','bomb','blast-bomb','waterproof-bomb','strong-waterproof-bomb','gunpowder-barrel','lightning-orb','sponge','towel','umbrella','grip-boots','rubber-block','skateboard','wheelbarrow','platform-cart','refrigerator','washing-machine','plank','low-table','wooden-crate','log','barrel','bowling-ball','teapot','vase'];
 const review=stage(44,'なんでもおさらい','44-review',reviewPool,

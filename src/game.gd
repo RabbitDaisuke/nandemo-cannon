@@ -378,10 +378,6 @@ func _physics_process(delta: float) -> void:
 		if actor.position.y > 580.0 or actor.position.x < -180.0 or actor.position.x > 1140.0:
 			destroy_actor(actor, "abyss")
 			continue
-		for rect in current_stage.get("abyss", []):
-			if GameCatalog.rectangle(rect).has_point(actor.global_position):
-				destroy_actor(actor, "abyss")
-				break
 	hud_clock += delta / Engine.time_scale
 	if hud_clock >= 0.5:
 		hud_clock = fmod(hud_clock, 0.5)
@@ -1062,7 +1058,7 @@ func _build_ui() -> void:
 	next_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	next_icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	ui_root.add_child(next_icon)
-	next_name = _label("", Vector2(620, 75), 12, Color("fff0b5"))
+	next_name = _label("", Vector2(620, 75), 14, Color("fff0b5"))
 	next_name.size.x = 172
 	next_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	map_button = _button("マップ", Vector2(804, 10), Vector2(64, 32), _show_maps)

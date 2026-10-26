@@ -56,6 +56,7 @@ func release(at: Vector2, units: int, spread: float = 1.0) -> void:
 
 func tick(delta: float) -> void:
 	clock += delta
+	_tick_actor_sources(delta)
 	for source in sources:
 		if float(source.stop_at) >= 0.0 and stored_volume(source.stored_region) >= float(source.stop_at):
 			source.stopped = true
@@ -116,6 +117,27 @@ func tick(delta: float) -> void:
 		_step_cells(0.05)
 		_affect_bodies()
 	queue_redraw()
+
+func _tick_actor_sources(delta: float) -> void:
+	# A mobile source keeps its finite reservoir on the body; moving, freezing
+	# or reopening a menu cannot refill it. All output uses the normal water pool.
+	for actor in world.actors:
+		if not is_instance_valid(actor) or not actor.alive or not actor.spec.has("waterSource"):
+			continue
+		if actor.frozen_seconds > 0.0:
+			continue
+		var config: Dictionary = actor.spec.waterSource
+		var remaining = float(actor.get_meta("source_remaining", config.get("maxUnits", 0.0)))
+		var accumulator = minf(remaining, float(actor.get_meta("source_accumulator", 0.0)) + delta * maxf(0.0, float(config.get("rateUnitsPerSecond", 1.0))))
+		while accumulator >= 1.0 and remaining >= 1.0 and droplets.size() < MAX_DROPS:
+			var outlet = actor.to_global(actor._source_point(GameCatalog.vector(config.get("position", [64, 16]))))
+			var velocity = Vector2(0, -float(config.get("speed", 160.0))).rotated(actor.rotation) + actor.linear_velocity
+			droplets.append({"point": outlet, "velocity": velocity, "age": 0.0, "volume": 1.0})
+			introduced_volume += 1.0
+			remaining -= 1.0
+			accumulator -= 1.0
+		actor.set_meta("source_remaining", remaining)
+		actor.set_meta("source_accumulator", accumulator)
 
 func key_for(point: Vector2) -> Vector2i:
 	return Vector2i(floori(point.x / CELL), floori(point.y / CELL))
