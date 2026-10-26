@@ -1,5 +1,5 @@
-// Nine individually authored 16-bit SVG props. Search tags are edited by hand.
-const ink='#080c12',cream='#f6ebcf',white='#fff4dc',silver='#a6bcc0',steel='#637e8e',dark='#354f60';
+// Eight individually authored 16-bit SVG props. Search tags are edited by hand.
+const ink='#080c12',cream='#f6ebcf',white='#fff4dc',silver='#a6bcc0';
 const R=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`;
 const P=(d,c)=>`<path d="${d}" fill="${c}"/>`;
 const E=(d,c)=>`<path d="${d}" fill="${c}" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/>`;
@@ -160,27 +160,3 @@ add('oyakodon','おやこどん','food',2.0,83,
  E('M69 30L60 29L55 34L58 41L66 39L73 33Z','#7aa965')+
  line([[66,17],[70,27],[83,24]],1,'#bfcd8b')+line([[61,35],[68,32]],1,'#bfcd8b')+
  P('M14 57L24 63L39 70L58 72H79L99 66L114 57L112 63L100 71L80 77H56L35 73L20 65Z',white));
-
-// Stylized arch lever and low tray; no branding or copied product silhouette.
-// The open arch and the sheet slot below it remain real empty collision space.
-add('desktop-hole-punch','あなあけパンチ','metal',1.5,65,
- [poly([12,101],[24,89],[106,89],[118,101],[118,107],[106,119],[12,119]),
-  rect(23,76,11,24),rect(91,76,11,24),
-  poly([16,45],[24,34],[42,16],[50,56],[44,65],[40,84],[20,84]),
-  poly([24,34],[42,16],[101,16],[111,24],[101,34],[77,56],[50,56]),
-  poly([77,56],[101,34],[111,24],[121,35],[113,74],[103,84],[84,84],[83,65])],
- cabinet(14,101,90,16,12,'#527d89','#d1ddd2','#354f60')+
- P('M25 97L29 93H103L110 99H25Z','#a0b6b2')+
- line([[38,98],[82,98]],3,ink)+line([[47,104],[75,104]],2,'#91b1b5')+
- R(23,110,71,3,'#85a4a5')+
- E('M23 76H34V98H23Z',steel)+E('M91 76H102V98H91Z',steel)+
- R(26,87,5,8,silver)+R(94,87,5,8,silver)+
- E('M16 45L24 34L42 16H101L111 24L121 35L113 74L103 84H84L83 65L77 56H50L44 65L40 84H20Z','#a6bab9')+
- E('M24 34L42 16H101L111 24L101 34Z','#f7f3df')+
- E('M101 34L111 24L121 35L113 74L103 84L111 45Z','#7e9a9f')+
- E('M16 45L24 34H101L111 45L103 84H84L83 65L77 56H50L44 65L40 84H20Z','#dce4d8')+
- P('M23 47L29 39H98L102 44H48L38 53L32 74H25Z','#fff8e4')+
- P('M93 51L103 48L98 77H91L90 63Z','#b5c9c6')+
- E('M48 23H84L88 27H44Z','#527d89')+R(51,24,30,1,'#91c0bf')+
- O(30,78,5,5,ink)+O(30,78,3,3,silver)+R(29,76,2,2,white)+
- O(94,78,5,5,ink)+O(94,78,3,3,silver)+R(93,76,2,2,white));

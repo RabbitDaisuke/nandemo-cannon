@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 206, "the reviewed expansions contain 206 selection-only objects")
+	_expect(additions.size() == 205, "the reviewed expansions contain 205 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
@@ -42,7 +42,7 @@ func _run() -> void:
 	_expect(catalog.items["boxed-butter"].nameJa == "ぎょうむようバター", "the butter keeps its stable ID and uses the requested new name")
 	_expect(search.find_items("いんさつ").any(func(item): return item.id == "white-printer"), "the small white printer is searchable by its handwritten printing alias")
 	_expect(search.find_items("りょうり").map(func(item): return item.id) == search.find_items("ごはん").map(func(item): return item.id), "meal and gohan aliases remain identical after the expansion")
-	for entry in [["レコード", "hand-cranked-gramophone"], ["もりつけ", "rice-paddle"], ["てぼ", "noodle-strainer"], ["ゆきり", "noodle-strainer"], ["めん", "ramen-bowl"], ["いたかまぼこ", "kamaboko-board"], ["かんきつ", "yuzu"], ["ようかん", "chestnut-yokan"], ["みつば", "oyakodon"], ["パンチ", "desktop-hole-punch"]]:
+	for entry in [["レコード", "hand-cranked-gramophone"], ["もりつけ", "rice-paddle"], ["てぼ", "noodle-strainer"], ["ゆきり", "noodle-strainer"], ["めん", "ramen-bowl"], ["いたかまぼこ", "kamaboko-board"], ["かんきつ", "yuzu"], ["ようかん", "chestnut-yokan"], ["みつば", "oyakodon"]]:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "evening additions match their independent manual alias: " + entry[0])
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
@@ -128,8 +128,6 @@ func _run() -> void:
 		["wooden-washbowl", Vector2(64, 64), Vector2(64, 102)],
 		["noodle-strainer", Vector2(75, 58), Vector2(75, 72)],
 		["noodle-strainer", Vector2(75, 90), Vector2(80, 90)],
-		["desktop-hole-punch", Vector2(59, 70), Vector2(28, 78)],
-		["desktop-hole-punch", Vector2(59, 86), Vector2(96, 86)],
 		["hand-cranked-gramophone", Vector2(104, 93), Vector2(111, 93)],
 		["coffee-maker", Vector2(101, 78), Vector2(117, 78)],
 		["leaf-blower", Vector2(44, 29), Vector2(45, 20)],

@@ -1,5 +1,5 @@
 {
-  "objects": 483,
+  "objects": 482,
   "stages": 51,
   "added": [
     {
@@ -33,15 +33,11 @@
     {
       "id": "oyakodon",
       "name": "おやこどん"
-    },
-    {
-      "id": "desktop-hole-punch",
-      "name": "あなあけパンチ"
     }
   ],
   "engine": "Godot 4.7.2.stable.official.ed1daf0bf",
   "godotSuites": 11,
-  "godotChecks": 3186,
+  "godotChecks": 3173,
   "webSuites": [
     "mirrors",
     "share",
@@ -66,13 +62,11 @@
     "buildShGitMode": "100755"
   },
   "retake": {
-    "items": ["desktop-hole-punch", "kamaboko-board", "ramen-bowl"],
+    "items": ["kamaboko-board", "ramen-bowl"],
     "changes": [
-      "Hole punch: stylized pale arch lever, teal low tray, visible side thickness; both opening and sheet slot remain physically empty.",
       "Kamaboko: wooden board extends underneath the rear of the loaf; collision follows the enlarged board.",
       "Ramen: noodles cover the soup surface beneath toppings, bowl has a repeating red key pattern, visible black rim and body outlines are restored."
     ],
-    "comparison": "evening-retakes.png (before above, after below)",
     "unchangedObjects": 480
   },
   "actionsChecked": false

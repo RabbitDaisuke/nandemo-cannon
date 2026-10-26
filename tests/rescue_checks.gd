@@ -81,7 +81,7 @@ func _run() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 func _navigation_checks() -> void:
-	_expect(catalog.items.size() == 483 and catalog.stages.size() == 51, "the complete expansion loads 483 objects and 51 stable-ID stages")
+	_expect(catalog.items.size() == 482 and catalog.stages.size() == 51, "the complete expansion loads 482 objects and 51 stable-ID stages")
 	var order = catalog.stage_order()
 	var ids = order.map(func(index): return int(catalog.stages[index].id))
 	var saved_order: Array = GameCatalog.read_json("res://data/stage-order.json").order.map(func(id): return int(id))
