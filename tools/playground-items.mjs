@@ -46,7 +46,7 @@ add('trampoline','トランポリン','metal',14,162,
  [38,49,60,71,82,93].map(x=>R(x,48,2,5,steel)).join('')+
  R(12,57,104,4,blue)+R(16,57,96,2,'#94cfc8')+
  [14,109].map(x=>R(x,48,6,2,silver)+R(x+1,51,5,2,white)).join(''),
- {springSurface:{fixture:0,minImpactSpeed:130,restitution:2.3,maxSpeed:1300,normalMinDot:.75},restitution:0,friction:.8});
+ {springSurface:{fixture:0,minImpactSpeed:130,restitution:.9,maxSpeed:1300,normalMinDot:.75},restitution:0,friction:.8});
 
 add('horizontal-bar','てつぼう','metal',5,105,
  [rect(9,18,111,9),rect(17,27,9,86),rect(104,27,9,86),rect(4,111,35,9),rect(91,111,33,9)],

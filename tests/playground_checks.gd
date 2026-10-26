@@ -39,23 +39,25 @@ func _run() -> void:
 	game.queue_free()
 	await process_frame
 	var strong = await _trial(400.0, true)
-	var previous = await _trial(400.0, true, false, true)
-	var capped = await _trial(1000.0, true)
+	var capped = await _trial(2000.0, true)
 	var weak = await _trial(50.0, true)
 	var underside = await _trial(400.0, true, true)
 	var floating = await _trial(400.0, false)
 	_expect(float(strong.up) > 300.0, "a strong impact rebounds from the upper trampoline surface")
-	_expect(absf(float(strong.up) - float(previous.up) * 2.0) < 5.0, "the same real collision rebounds at twice the previous speed")
+	_expect(float(strong.up) < 400.0, "a passive rebound does not amplify the incoming speed")
 	var maximum = float(catalog.items["trampoline"].physics.springSurface.maxSpeed)
 	_expect(float(capped.up) <= maximum + 1.0 and float(capped.up) >= maximum * 0.95, "high-speed impacts reach the configured rebound ceiling without exceeding it")
 	_expect(float(weak.up) < 10.0, "an impact below the threshold receives no spring impulse")
 	_expect(float(underside.down) < 10.0, "the same deck hit from underneath gives no spring impulse")
 	_expect(float(floating.up) > 150.0 and float(floating.recoil) > 10.0, "a free trampoline transfers an equal opposite impulse and the projectile rebounds")
+	_expect(float(floating.energy) <= 80000.0 * 1.02, "an unanchored trampoline collision does not create kinetic energy")
+	var repeated = await _repeated_bounces()
 	await _resting_check()
+	await _stacked_resting_check()
 	if is_instance_valid(fixture):
 		fixture.queue_free()
 		await process_frame
-	var result = {"suite": "playground", "checks": checks, "failures": failures, "measurements": {"strong": strong, "previous": previous, "capped": capped, "weak": weak, "underside": underside, "floating": floating}, "status": "passed" if failures.is_empty() else "failed"}
+	var result = {"suite": "playground", "checks": checks, "failures": failures, "measurements": {"strong": strong, "capped": capped, "weak": weak, "underside": underside, "floating": floating, "repeated": repeated}, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/playground-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")
 	print(JSON.stringify(result))
 	quit(0 if failures.is_empty() else 1)
@@ -68,13 +70,10 @@ func _reset() -> void:
 	root.add_child(fixture)
 	await physics_frame
 
-func _trampoline(fixed: bool, previous_response: bool = false) -> ThrowBody:
+func _trampoline(fixed: bool, point: Vector2 = Vector2(400, 300)) -> ThrowBody:
 	var actor = BodyScript.new()
 	actor.configure(catalog.items["trampoline"], fixture)
-	if previous_response:
-		actor.spec.springSurface.restitution = 1.15
-		actor.spec.springSurface.maxSpeed = 650.0
-	actor.position = Vector2(400, 300)
+	actor.position = point
 	actor.gravity_scale = 0.0
 	actor.freeze = fixed
 	fixture.add_child(actor)
@@ -91,9 +90,9 @@ func _ball(point: Vector2, velocity: Vector2) -> ThrowBody:
 	fixture.add_child(actor)
 	return actor
 
-func _trial(speed: float, fixed: bool, underside: bool = false, previous_response: bool = false) -> Dictionary:
+func _trial(speed: float, fixed: bool, underside: bool = false) -> Dictionary:
 	await _reset()
-	var pad = _trampoline(fixed, previous_response)
+	var pad = _trampoline(fixed)
 	var upper = pad.to_global(Vector2(0, -26) * pad._source_scale).y
 	var lower = pad.position.y
 	var point = Vector2(400, lower + 12 if underside else upper - 12)
@@ -104,12 +103,42 @@ func _trial(speed: float, fixed: bool, underside: bool = false, previous_respons
 	var up = 0.0
 	var down = 0.0
 	var recoil = 0.0
+	var energy = 0.0
 	for tick in range(100):
 		await physics_frame
 		up = maxf(up, -ball.linear_velocity.y)
 		down = maxf(down, ball.linear_velocity.y) if underside else down
 		recoil = maxf(recoil, pad.linear_velocity.y)
-	return {"up": up, "down": down, "recoil": recoil}
+		energy = maxf(energy, _kinetic_energy(ball) + _kinetic_energy(pad))
+	return {"up": up, "down": down, "recoil": recoil, "energy": energy}
+
+func _kinetic_energy(body: ThrowBody) -> float:
+	if body.freeze:
+		return 0.0
+	var state = PhysicsServer2D.body_get_direct_state(body.get_rid())
+	var spin = 0.5 * body.angular_velocity * body.angular_velocity / state.inverse_inertia if state != null and state.inverse_inertia > 0.0 else 0.0
+	return 0.5 * body.mass * body.linear_velocity.length_squared() + spin
+
+func _repeated_bounces() -> Array[float]:
+	await _reset()
+	var pad = _trampoline(true)
+	var upper = pad.to_global(Vector2(0, -26) * pad._source_scale).y
+	var ball = _ball(Vector2(400, upper - 12), Vector2(0, 400))
+	ball.gravity_scale = 1.0
+	var rebounds: Array[float] = []
+	var previous_y = ball.linear_velocity.y
+	for tick in range(1000):
+		await physics_frame
+		var current_y = ball.linear_velocity.y
+		if previous_y > 20.0 and current_y < -100.0:
+			rebounds.append(-current_y)
+		previous_y = current_y
+	var decreasing = rebounds.size() >= 3
+	for i in range(1, rebounds.size()):
+		decreasing = decreasing and rebounds[i] < rebounds[i - 1] + 2.0
+	_expect(decreasing, "successive real rebounds lose speed instead of feeding energy into the body")
+	_expect(absf(ball.linear_velocity.y) < 30.0, "the repeated bounce sequence eventually settles")
+	return rebounds
 
 func _resting_check() -> void:
 	await _reset()
@@ -122,3 +151,23 @@ func _resting_check() -> void:
 		await physics_frame
 		up = maxf(up, -ball.linear_velocity.y)
 	_expect(up < 30.0 and absf(ball.position.y - (upper - 8.0)) < 4.0, "resting weight does not repeatedly trigger the spring or create jitter launches")
+
+func _stacked_resting_check() -> void:
+	await _reset()
+	var base = _trampoline(true)
+	var upper = base.to_global(Vector2(0, -26) * base._source_scale).y
+	# Register the second CCD body at its actual start, not overlapping the
+	# first and then teleported away before the first physics step.
+	var top = _trampoline(false, Vector2(400, upper - (100.0 - 64.0) * base._source_scale - 0.1))
+	top.gravity_scale = 1.0
+	var speed = 0.0
+	var initial_y = top.position.y
+	var highest_y = top.position.y
+	var highest_spin = 0.0
+	for tick in range(480):
+		await physics_frame
+		speed = maxf(speed, top.linear_velocity.length())
+		highest_y = minf(highest_y, top.position.y)
+		highest_spin = maxf(highest_spin, absf(top.angular_velocity))
+	print("Stacked trampoline diagnostic: ", {"maxSpeed": speed, "finalSpeed": top.linear_velocity.length(), "initialY": initial_y, "highestY": highest_y, "finalPosition": top.position, "maxSpin": highest_spin, "angle": top.rotation})
+	_expect(speed < 50.0 and top.linear_velocity.length() < 10.0, "two resting trampoline bodies cannot act as a self-powered spring motor")

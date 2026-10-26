@@ -1016,7 +1016,7 @@
       "springSurface": {
         "fixture": 0,
         "minImpactSpeed": 130,
-        "restitution": 2.3,
+        "restitution": 0.9,
         "maxSpeed": 1300,
         "normalMinDot": 0.75
       },
@@ -1026,7 +1026,31 @@
     "horizontal-bar": {},
     "jump-rope": {},
     "sliding-window": {},
-    "sandbox-box": {}
+    "sandbox-box": {},
+    "bench-seat": {},
+    "vending-machine": {},
+    "suit-jacket": {},
+    "necktie": {},
+    "onion": {},
+    "fly-swatter": {},
+    "coffee-maker": {},
+    "chicken-lemon": {},
+    "leaf-blower": {},
+    "push-mower": {
+      "wheelFixtures": [
+        3,
+        4
+      ]
+    },
+    "timed-bomb": {
+      "fuseRangeSeconds": [
+        4,
+        6
+      ],
+      "detonateOnImpact": false
+    },
+    "wood-stamp": {},
+    "ventilation-fan": {}
   },
   "stateRules": {
     "breakage": {

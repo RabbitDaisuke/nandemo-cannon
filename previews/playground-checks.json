@@ -21,45 +21,57 @@
 		"side contacts and legs do not become spring surfaces",
 		"spring threshold and maximum are read from the physical surface data",
 		"side contacts and legs do not become spring surfaces",
-		"spring threshold and maximum are read from the physical surface data",
-		"side contacts and legs do not become spring surfaces",
 		"a strong impact rebounds from the upper trampoline surface",
-		"the same real collision rebounds at twice the previous speed",
+		"a passive rebound does not amplify the incoming speed",
 		"high-speed impacts reach the configured rebound ceiling without exceeding it",
 		"an impact below the threshold receives no spring impulse",
 		"the same deck hit from underneath gives no spring impulse",
 		"a free trampoline transfers an equal opposite impulse and the projectile rebounds",
-		"resting weight does not repeatedly trigger the spring or create jitter launches"
+		"an unanchored trampoline collision does not create kinetic energy",
+		"successive real rebounds lose speed instead of feeding energy into the body",
+		"the repeated bounce sequence eventually settles",
+		"resting weight does not repeatedly trigger the spring or create jitter launches",
+		"two resting trampoline bodies cannot act as a self-powered spring motor"
 	],
 	"failures": [],
 	"measurements": {
 		"capped": {
 			"down": 0.0,
+			"energy": 1994004.5,
 			"recoil": 0.0,
 			"up": 1300.0
 		},
 		"floating": {
 			"down": 0.0,
-			"recoil": 89.3319091796875,
-			"up": 854.322875976562
+			"energy": 79760.1796875,
+			"recoil": 52.166316986084,
+			"up": 333.222961425781
 		},
-		"previous": {
-			"down": 0.0,
-			"recoil": 0.0,
-			"up": 458.621032714844
-		},
+		"repeated": [
+			373.609741210938,
+			318.597595214844,
+			272.487976074219,
+			233.083190917969,
+			202.209625244141,
+			171.308181762695,
+			147.508865356445,
+			124.834045410156
+		],
 		"strong": {
 			"down": 0.0,
+			"energy": 79760.1796875,
 			"recoil": 0.0,
-			"up": 917.242065429688
+			"up": 358.920806884766
 		},
 		"underside": {
 			"down": 0.0,
+			"energy": 79760.1796875,
 			"recoil": 0.0,
 			"up": 399.399993896484
 		},
 		"weak": {
 			"down": 0.0,
+			"energy": 1246.25280761719,
 			"recoil": 0.0,
 			"up": 0.0
 		}

@@ -51,7 +51,14 @@ func on_launch(actor: ThrowBody) -> void:
 			if actor.behavior == "campfire":
 				actor.set_texture_path("res://assets/effects/campfire-charred.svg")
 		"explosion":
-			actor.set_meta("fuse", 2.8)
+			if not actor.has_meta("fuse"):
+				var fuse_range: Array = actor.spec.get("fuseRangeSeconds", [])
+				if fuse_range.size() == 2:
+					var minimum = maxf(0.0, float(fuse_range[0]))
+					var maximum = maxf(minimum, float(fuse_range[1]))
+					actor.set_meta("fuse", world.rng.randf_range(minimum, maximum))
+				else:
+					actor.set_meta("fuse", float(actor.spec.get("fuseSeconds", 2.8)))
 		"firework", "lightning":
 			# The shell remains a normal colliding RigidBody2D until this fuse ends.
 			actor.set_meta("fuse", float(actor.spec.get("fuseSeconds", 2.2)))
@@ -60,7 +67,7 @@ func impact(actor: ThrowBody, point: Vector2, speed: float, _energy: float) -> v
 	if not is_instance_valid(actor) or not actor.alive or actor.release_triggered:
 		return
 	var threshold = float(actor.spec.get("breakImpactSpeed", actor.spec.get("impactSpeed", 95.0)))
-	if actor.behavior == "explosion" and speed >= 35.0:
+	if actor.behavior == "explosion" and speed >= 35.0 and bool(actor.spec.get("detonateOnImpact", true)):
 		detonate(actor)
 	elif actor.behavior == "water_release" and speed >= threshold:
 		_release_water(actor, point)
@@ -205,7 +212,7 @@ func heat_actor(actor: ThrowBody, heat: float) -> void:
 	if actor.behavior in ["campfire", "fuel_light"]:
 		# These use a single finite fuel supply, not a second independent burn clock.
 		return
-	if actor.behavior in ["explosion", "firework"] and not bool(actor.get_meta("water_dud", false)):
+	if actor.behavior in ["explosion", "firework"] and not bool(actor.get_meta("water_dud", false)) and not actor.spec.has("fuseRangeSeconds"):
 		actor.set_meta("fuse", minf(float(actor.get_meta("fuse", 0.8)), 0.8))
 	if not bool(actor.spec.get("flammable", false)) or actor.burning:
 		return

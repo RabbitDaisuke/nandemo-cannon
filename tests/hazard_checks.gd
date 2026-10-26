@@ -4,6 +4,7 @@ extends SceneTree
 const BodyScript = preload("res://src/throw_body.gd")
 const HazardsScript = preload("res://src/hazard_system.gd")
 const LiquidScript = preload("res://src/liquid_field.gd")
+const GameScript = preload("res://src/game.gd")
 var records: Dictionary = {}
 var checks: Array[String] = []
 var failures: Array[String] = []
@@ -56,6 +57,7 @@ func _run() -> void:
 	var data = JSON.parse_string(FileAccess.get_file_as_string("res://data/objects-manifest.json"))
 	for record in data.items:
 		records[record.id] = record
+	await _timed_bomb_checks()
 	await _mobile_source_checks()
 	await _reset()
 	var jet = _spawn("flamethrower", Vector2(800, 250))
@@ -587,6 +589,64 @@ func _mobile_source_checks() -> void:
 	_expect(matches.alive and matches.fuel_seconds == 0.0 and matches.visual.texture.resource_path.ends_with("burning-matchbox-depleted.svg"), "water leaves an extinguished matchbox with its own depleted texture")
 	fixture_world.hazards.on_launch(matches)
 	_expect(matches.fuel_seconds == 0.0, "extinguished matches cannot regain fuel")
+
+func _timed_bomb_checks() -> void:
+	await _reset()
+	_add_static_rect(Rect2(100, 330, 600, 30))
+	var bomb = _spawn("timed-bomb", Vector2(400, 240), false)
+	fixture_world.hazards.heat_actor(bomb, 0.1)
+	fixture_world.hazards.tick(8.0)
+	_expect(bomb.alive and not bomb.has_meta("fuse"), "a timed bomb is not armed by waiting or heat before launch")
+	bomb.age = 1.0
+	bomb.is_launched = true
+	bomb.linear_velocity = Vector2(0, 300)
+	fixture_world.hazards.on_launch(bomb)
+	var duration = float(bomb.get_meta("fuse"))
+	_expect(duration >= 4.0 and duration <= 6.0, "launch chooses the timed bomb's delay between four and six seconds")
+	fixture_world.hazards.on_launch(bomb)
+	fixture_world.hazards.heat_actor(bomb, 0.1)
+	_expect(float(bomb.get_meta("fuse")) == duration, "repeat launch notification and heat do not reroll or shorten the timer")
+	for tick in range(60):
+		await physics_frame
+		fixture_world.hazards.tick(1.0 / 120.0)
+	_expect(bomb.alive and fixture_world.impacts.any(func(entry): return entry.id == "timed-bomb"), "the timed bomb physically collides and stays intact before its deadline")
+	fixture_world.hazards.tick(float(bomb.get_meta("fuse")) - 0.01)
+	_expect(bomb.alive and fixture_world.hazards.explosion_serial == 0, "the timer cannot detonate just before its chosen deadline")
+	fixture_world.hazards.tick(0.02)
+	fixture_world.hazards.detonate(bomb)
+	_expect(not bomb.alive and fixture_world.hazards.explosion_serial == 1, "the timed bomb detonates exactly once when simulated time reaches its deadline")
+	await _reset({"water": [{"rect": [0, 0, 960, 540], "direction": [0, 0], "speed": 0}]})
+	var wet_bomb = _spawn("timed-bomb", Vector2(400, 250))
+	fixture_world.hazards.on_launch(wet_bomb)
+	fixture_world.hazards.tick(0.1)
+	fixture_world.hazards.tick(10.0)
+	_expect(wet_bomb.alive and bool(wet_bomb.get_meta("water_dud", false)) and wet_bomb.can_score and not wet_bomb.has_meta("fuse") and fixture_world.hazards.explosion_serial == 0, "submersion cancels a timed bomb and leaves the existing scoring dud")
+	await _reset()
+	var delays: Array[float] = []
+	for i in range(12):
+		var sample = _spawn("timed-bomb", Vector2(400, 250))
+		fixture_world.hazards.on_launch(sample)
+		delays.append(float(sample.get_meta("fuse")))
+		fixture_world.destroy_actor(sample, "test")
+	_expect(delays.all(func(value): return value >= 4.0 and value <= 6.0) and delays.min() != delays.max(), "different launches use different delays within the authored interval")
+	fixture_world.queue_free()
+	await process_frame
+	var game = GameScript.new()
+	root.add_child(game)
+	await process_frame
+	game.load_stage(0)
+	game.set_physics_process(false)
+	game.current_stage.queue[0] = "timed-bomb"
+	game._on_fired(Vector2.LEFT, 0.5, Vector2(500, 250))
+	for actor in game.actors:
+		actor.freeze = true
+		actor.linear_velocity = Vector2.ZERO
+		actor.angular_velocity = 0.0
+	game.shots_fired = 15
+	game._physics_process(2.0)
+	_expect(not game.result_shown and game.settle_clock == 0.0, "a resting final timed bomb keeps the result open until its fuse resolves")
+	game.queue_free()
+	await process_frame
 
 func _reset(stage: Dictionary = {}) -> void:
 	if is_instance_valid(fixture_world):

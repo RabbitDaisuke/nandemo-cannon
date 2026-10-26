@@ -42,9 +42,15 @@ var _previous_velocity: Vector2 = Vector2.ZERO
 var _previous_angular_velocity: float = 0.0
 var _previous_position: Vector2 = Vector2.ZERO
 var _previous_valid: bool = false
+var _previous_frame: int = -1
+var _older_velocity: Vector2 = Vector2.ZERO
+var _older_angular_velocity: float = 0.0
+var _older_position: Vector2 = Vector2.ZERO
+var _older_valid: bool = false
 var _impact_times: Dictionary = {}
 var _contact_last_seen: Dictionary = {}
 var _spring_contact_ticks: Dictionary = {}
+var _spring_last_seen: Dictionary = {}
 var _physics_tick: int = 0
 
 
@@ -256,6 +262,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var upper_load: float = 0.0
 	var special_friction: float = -1.0
 	var grip_contacts: Array[Dictionary] = []
+	var spring_contacts: Dictionary = {}
 	var local_up = -state.transform.y.normalized()
 	var gravity_dir = Vector2.DOWN
 	if state.total_gravity.length_squared() > 0.01:
@@ -283,8 +290,18 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		var inverse_effective_mass = _inverse_effective_mass(state, point, normal, collider)
 		if new_contact and collider is ThrowBody:
 			var spring_id: int = collider.get_instance_id()
-			if _physics_tick - int(_spring_contact_ticks.get(spring_id, -1000)) > 24:
-				var launch_speed: float = collider.spring_launch_speed(state.get_contact_collider_shape(i), normal, normal_speed)
+			# Several convex pieces or contact points are one impact, not separate
+			# springs. A genuine separation must precede the next rebound.
+			var separated = int(_spring_last_seen.get(spring_id, -100)) < _physics_tick - 2
+			if separated and _physics_tick - int(_spring_contact_ticks.get(spring_id, -1000)) > 24:
+				var incoming = maxf(0.0, -(own_velocity - other_velocity).dot(normal))
+				if _previous_valid:
+					var own_before = _previous_contact_velocity(point)
+					var other_before = collider._previous_contact_velocity(point, other_velocity) if not collider.freeze else other_velocity
+					# Do not mix a projectile's old velocity with the trampoline's
+					# solver-altered velocity: that manufactures closing speed.
+					incoming = maxf(0.0, -(own_before - other_before).dot(normal))
+				var launch_speed: float = collider.spring_launch_speed(state.get_contact_collider_shape(i), normal, incoming)
 				if launch_speed > 0.0 and inverse_effective_mass > 0.0:
 					# Add only the separation missing after the ordinary contact solver.
 					# The opposite impulse keeps an unanchored trampoline a real body.
@@ -296,6 +313,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 					if not collider.freeze:
 						collider.apply_impulse(-impulse, point - collider.global_position)
 					_spring_contact_ticks[spring_id] = _physics_tick
+		if collider is ThrowBody:
+			spring_contacts[collider.get_instance_id()] = true
 		var impact_energy = 0.5 * pow(normal_speed / 100.0, 2.0) / maxf(inverse_effective_mass, 0.0001)
 		if age >= 0.15 and normal_speed >= 35.0 and age - float(_impact_times.get(key, -10.0)) > 0.16:
 			_impact_times[key] = age
@@ -320,6 +339,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 				sole_supported = true
 				if surface_friction >= 0.0 and surface_friction <= 0.05:
 					grip_contacts.append({"point": point, "normal": normal, "impulse": normal_impulse, "other": collider, "other_velocity": other_velocity, "surface_friction": surface_friction})
+	for id in spring_contacts:
+		_spring_last_seen[id] = _physics_tick
 	var friction = _base_friction
 	if behavior == "wheeled":
 		friction = float(spec.get("rollingFriction", 0.025)) if wheel_supported else float(spec.get("invertedFriction", _base_friction))
@@ -341,19 +362,41 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			load_seconds = 0.0
 		if load_seconds >= float(spec.get("loadHoldSeconds", 0.4)):
 			request_break("load")
+	_older_velocity = _previous_velocity
+	_older_angular_velocity = _previous_angular_velocity
+	_older_position = _previous_position
+	_older_valid = _previous_valid
 	_previous_velocity = state.linear_velocity
 	_previous_angular_velocity = state.angular_velocity
 	_previous_position = state.transform.origin
 	_previous_valid = true
+	_previous_frame = Engine.get_physics_frames()
 	# Remove expired keys so repeated stage play cannot grow contact bookkeeping.
 	if _physics_tick % 120 == 0:
 		for id in _spring_contact_ticks.keys():
 			if _physics_tick - int(_spring_contact_ticks[id]) > 120:
 				_spring_contact_ticks.erase(id)
+		for id in _spring_last_seen.keys():
+			if _physics_tick - int(_spring_last_seen[id]) > 120:
+				_spring_last_seen.erase(id)
 		for key in _contact_last_seen.keys():
 			if _physics_tick - int(_contact_last_seen[key]) > 120:
 				_contact_last_seen.erase(key)
 				_impact_times.erase(key)
+
+
+func _previous_contact_velocity(point: Vector2, fallback: Vector2 = Vector2.ZERO) -> Vector2:
+	# Body integration order is unspecified. If this body already ran during
+	# this step, use its older sample so both sides precede the same collision.
+	if _previous_frame == Engine.get_physics_frames():
+		if not _older_valid:
+			return fallback
+		var older_offset = point - _older_position
+		return _older_velocity + Vector2(-older_offset.y, older_offset.x) * _older_angular_velocity
+	if not _previous_valid:
+		return fallback
+	var offset = point - _previous_position
+	return _previous_velocity + Vector2(-offset.y, offset.x) * _previous_angular_velocity
 
 
 func spring_launch_speed(shape_index: int, outward_normal: Vector2, incoming_speed: float) -> float:
@@ -366,7 +409,9 @@ func spring_launch_speed(shape_index: int, outward_normal: Vector2, incoming_spe
 		return 0.0
 	if incoming_speed < float(spring.get("minImpactSpeed", 130.0)):
 		return 0.0
-	return minf(incoming_speed * float(spring.get("restitution", 1.15)), float(spring.get("maxSpeed", 650.0)))
+	# A passive surface can return impact energy, but cannot multiply it.
+	var restitution = clampf(float(spring.get("restitution", 0.9)), 0.0, 1.0)
+	return minf(incoming_speed * restitution, maxf(0.0, float(spring.get("maxSpeed", 650.0))))
 
 
 func _inverse_effective_mass(state: PhysicsDirectBodyState2D, point: Vector2, axis: Vector2, collider: Object) -> float:

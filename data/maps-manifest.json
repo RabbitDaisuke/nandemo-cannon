@@ -2187,6 +2187,36 @@
         }
       ],
       "backgroundCollision": false
+    },
+    {
+      "id": "50-breakroom",
+      "stage": 50,
+      "nameJa": "きゅうけいじょ",
+      "status": "specified",
+      "svg": "maps/50-breakroom.svg",
+      "worldSize": [
+        960,
+        540
+      ],
+      "terrain": [
+        {
+          "rect": [
+            0,
+            450,
+            960,
+            90
+          ]
+        },
+        {
+          "rect": [
+            0,
+            100,
+            18,
+            350
+          ]
+        }
+      ],
+      "backgroundCollision": false
     }
   ]
 }

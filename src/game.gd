@@ -388,7 +388,7 @@ func _physics_process(delta: float) -> void:
 		end_clock += delta
 		var resting = true
 		for actor in actors:
-			if actor.alive and (actor.linear_velocity.length() > 5.0 or absf(actor.angular_velocity) > 0.08 or actor.burning or actor.fuel_seconds > 0.0):
+			if actor.alive and (actor.linear_velocity.length() > 5.0 or absf(actor.angular_velocity) > 0.08 or actor.burning or actor.fuel_seconds > 0.0 or (actor.has_meta("fuse") and not actor.release_triggered)):
 				resting = false
 				break
 		settle_clock = settle_clock + delta if resting else 0.0

@@ -42427,7 +42427,7 @@
         "springSurface": {
           "fixture": 0,
           "minImpactSpeed": 130,
-          "restitution": 2.3,
+          "restitution": 0.9,
           "maxSpeed": 1300,
           "normalMinDot": 0.75
         }
@@ -43266,6 +43266,1808 @@
         "flowResponse": 1
       },
       "opaquePixels": 5146,
+      "selectionOnly": true
+    },
+    {
+      "id": "bench-seat",
+      "nameJa": "ながいす",
+      "svg": "objects/bench-seat.svg",
+      "png": "raster/objects/bench-seat.png",
+      "webp": "raster/objects/bench-seat.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        32,
+        120,
+        86
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        32
+      ],
+      "worldWidth": 112,
+      "worldHeight": 80.26666666666667,
+      "worldScale": 0.9333333333333333,
+      "material": "wood",
+      "mass": 6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "bench-seat",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              41
+            ],
+            [
+              104,
+              32
+            ],
+            [
+              116,
+              39
+            ],
+            [
+              116,
+              69
+            ],
+            [
+              8,
+              77
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              4,
+              76
+            ],
+            [
+              104,
+              66
+            ],
+            [
+              124,
+              79
+            ],
+            [
+              124,
+              92
+            ],
+            [
+              22,
+              104
+            ],
+            [
+              4,
+              91
+            ]
+          ]
+        },
+        {
+          "rect": [
+            16,
+            95,
+            9,
+            23
+          ]
+        },
+        {
+          "rect": [
+            104,
+            91,
+            9,
+            25
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 7227,
+      "selectionOnly": true
+    },
+    {
+      "id": "vending-machine",
+      "nameJa": "じどうはんばいき",
+      "svg": "objects/vending-machine.svg",
+      "png": "raster/objects/vending-machine.png",
+      "webp": "raster/objects/vending-machine.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        7,
+        103,
+        117
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        57
+      ],
+      "worldWidth": 82,
+      "worldHeight": 93.14563106796116,
+      "worldScale": 0.7961165048543689,
+      "material": "appliance",
+      "mass": 12,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "vending-machine",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              15,
+              15
+            ],
+            [
+              99,
+              7
+            ],
+            [
+              118,
+              20
+            ],
+            [
+              118,
+              116
+            ],
+            [
+              98,
+              124
+            ],
+            [
+              15,
+              124
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 11511,
+      "selectionOnly": true
+    },
+    {
+      "id": "suit-jacket",
+      "nameJa": "スーツ",
+      "svg": "objects/suit-jacket.svg",
+      "png": "raster/objects/suit-jacket.png",
+      "webp": "raster/objects/suit-jacket.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        10,
+        112,
+        111
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        54
+      ],
+      "worldWidth": 75,
+      "worldHeight": 74.33035714285714,
+      "worldScale": 0.6696428571428571,
+      "material": "cloth",
+      "mass": 1.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "suit-jacket",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              41,
+              14
+            ],
+            [
+              54,
+              10
+            ],
+            [
+              74,
+              10
+            ],
+            [
+              88,
+              15
+            ],
+            [
+              105,
+              28
+            ],
+            [
+              120,
+              77
+            ],
+            [
+              103,
+              86
+            ],
+            [
+              92,
+              57
+            ],
+            [
+              96,
+              116
+            ],
+            [
+              67,
+              121
+            ],
+            [
+              62,
+              116
+            ],
+            [
+              36,
+              120
+            ],
+            [
+              37,
+              58
+            ],
+            [
+              26,
+              85
+            ],
+            [
+              8,
+              77
+            ],
+            [
+              24,
+              28
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.8,
+        "restitution": 0.01,
+        "flammable": true,
+        "explosionResistance": 0.1,
+        "burnSeconds": 3,
+        "flowResponse": 1.1
+      },
+      "opaquePixels": 8206,
+      "selectionOnly": true
+    },
+    {
+      "id": "necktie",
+      "nameJa": "ネクタイ",
+      "svg": "objects/necktie.svg",
+      "png": "raster/objects/necktie.png",
+      "webp": "raster/objects/necktie.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        44,
+        7,
+        36,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        20,
+        57
+      ],
+      "worldWidth": 32,
+      "worldHeight": 103.1111111111111,
+      "worldScale": 0.8888888888888888,
+      "material": "cloth",
+      "mass": 0.3,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "necktie",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              48,
+              7
+            ],
+            [
+              75,
+              12
+            ],
+            [
+              80,
+              25
+            ],
+            [
+              68,
+              37
+            ],
+            [
+              79,
+              106
+            ],
+            [
+              61,
+              123
+            ],
+            [
+              44,
+              104
+            ],
+            [
+              55,
+              35
+            ],
+            [
+              44,
+              23
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.8,
+        "restitution": 0.01,
+        "flammable": true,
+        "explosionResistance": 0.1,
+        "burnSeconds": 3,
+        "flowResponse": 1.1
+      },
+      "opaquePixels": 2727,
+      "selectionOnly": true
+    },
+    {
+      "id": "onion",
+      "nameJa": "たまねぎ",
+      "svg": "objects/onion.svg",
+      "png": "raster/objects/onion.png",
+      "webp": "raster/objects/onion.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        19,
+        6,
+        88,
+        118
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        45,
+        58
+      ],
+      "worldWidth": 49,
+      "worldHeight": 65.70454545454545,
+      "worldScale": 0.5568181818181818,
+      "material": "food",
+      "mass": 0.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "onion",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              52,
+              9
+            ],
+            [
+              64,
+              6
+            ],
+            [
+              72,
+              16
+            ],
+            [
+              72,
+              27
+            ],
+            [
+              93,
+              38
+            ],
+            [
+              106,
+              58
+            ],
+            [
+              107,
+              83
+            ],
+            [
+              96,
+              103
+            ],
+            [
+              76,
+              116
+            ],
+            [
+              52,
+              116
+            ],
+            [
+              30,
+              105
+            ],
+            [
+              19,
+              86
+            ],
+            [
+              19,
+              62
+            ],
+            [
+              30,
+              43
+            ],
+            [
+              49,
+              28
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 6730,
+      "selectionOnly": true
+    },
+    {
+      "id": "fly-swatter",
+      "nameJa": "むしたたき",
+      "svg": "objects/fly-swatter.svg",
+      "png": "raster/objects/fly-swatter.png",
+      "webp": "raster/objects/fly-swatter.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        16,
+        10,
+        96,
+        113
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        48,
+        54
+      ],
+      "worldWidth": 59,
+      "worldHeight": 69.44791666666667,
+      "worldScale": 0.6145833333333334,
+      "material": "plastic",
+      "mass": 0.35,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "fly-swatter",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              28,
+              10
+            ],
+            [
+              112,
+              20
+            ],
+            [
+              111.16,
+              23.92
+            ],
+            [
+              27.16,
+              13.92
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              16.84,
+              62.080000000000005
+            ],
+            [
+              100.84,
+              72.08000000000001
+            ],
+            [
+              100,
+              76
+            ],
+            [
+              16,
+              66
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              28,
+              10
+            ],
+            [
+              33.46,
+              10.65
+            ],
+            [
+              21.46,
+              66.65
+            ],
+            [
+              16,
+              66
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              106.54,
+              19.35
+            ],
+            [
+              112,
+              20
+            ],
+            [
+              100,
+              76
+            ],
+            [
+              94.54,
+              75.35
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              46.372,
+              15.920000000000002
+            ],
+            [
+              50.068,
+              16.36
+            ],
+            [
+              39.628,
+              65.08
+            ],
+            [
+              35.932,
+              64.64
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              67.372,
+              18.419999999999998
+            ],
+            [
+              71.068,
+              18.86
+            ],
+            [
+              60.628,
+              67.58
+            ],
+            [
+              56.932,
+              67.14
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              88.372,
+              20.92
+            ],
+            [
+              92.068,
+              21.36
+            ],
+            [
+              81.628,
+              70.08
+            ],
+            [
+              77.932,
+              69.64
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              30.772000000000002,
+              23.194000000000003
+            ],
+            [
+              103.852,
+              31.894000000000002
+            ],
+            [
+              103.22800000000001,
+              34.806000000000004
+            ],
+            [
+              30.148,
+              26.106
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              27.772000000000002,
+              37.193999999999996
+            ],
+            [
+              100.852,
+              45.894
+            ],
+            [
+              100.22800000000001,
+              48.806000000000004
+            ],
+            [
+              27.148,
+              40.106
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              24.772000000000002,
+              51.193999999999996
+            ],
+            [
+              97.852,
+              59.894
+            ],
+            [
+              97.22800000000001,
+              62.806000000000004
+            ],
+            [
+              24.148,
+              54.106
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              55,
+              69
+            ],
+            [
+              65,
+              70
+            ],
+            [
+              46,
+              123
+            ],
+            [
+              33,
+              119
+            ],
+            [
+              33,
+              112
+            ],
+            [
+              40,
+              113
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 2853,
+      "selectionOnly": true
+    },
+    {
+      "id": "coffee-maker",
+      "nameJa": "コーヒーメーカー",
+      "svg": "objects/coffee-maker.svg",
+      "png": "raster/objects/coffee-maker.png",
+      "webp": "raster/objects/coffee-maker.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        13,
+        13,
+        107,
+        107
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        51,
+        51
+      ],
+      "worldWidth": 76,
+      "worldHeight": 76,
+      "worldScale": 0.7102803738317757,
+      "material": "appliance",
+      "mass": 4.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "coffee-maker",
+      "fixtures": [
+        {
+          "rect": [
+            18,
+            13,
+            69,
+            25
+          ]
+        },
+        {
+          "rect": [
+            18,
+            38,
+            16,
+            69
+          ]
+        },
+        {
+          "rect": [
+            13,
+            107,
+            95,
+            13
+          ]
+        },
+        {
+          "polygon": [
+            [
+              38,
+              37
+            ],
+            [
+              87,
+              37
+            ],
+            [
+              82,
+              54
+            ],
+            [
+              43,
+              54
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              43,
+              63
+            ],
+            [
+              83,
+              63
+            ],
+            [
+              91,
+              94
+            ],
+            [
+              83,
+              104
+            ],
+            [
+              40,
+              104
+            ],
+            [
+              34,
+              95
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              91.5,
+              54
+            ],
+            [
+              110.5,
+              54
+            ],
+            [
+              106,
+              64
+            ],
+            [
+              96,
+              64
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              110.5,
+              54
+            ],
+            [
+              120,
+              66
+            ],
+            [
+              111,
+              71
+            ],
+            [
+              106,
+              64
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              120,
+              66
+            ],
+            [
+              120,
+              90
+            ],
+            [
+              111,
+              85
+            ],
+            [
+              111,
+              71
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              120,
+              90
+            ],
+            [
+              110.5,
+              102
+            ],
+            [
+              106,
+              92
+            ],
+            [
+              111,
+              85
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              110.5,
+              102
+            ],
+            [
+              91.5,
+              102
+            ],
+            [
+              96,
+              92
+            ],
+            [
+              106,
+              92
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              91.5,
+              102
+            ],
+            [
+              82,
+              90
+            ],
+            [
+              91,
+              85
+            ],
+            [
+              96,
+              92
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              82,
+              90
+            ],
+            [
+              82,
+              66
+            ],
+            [
+              91,
+              71
+            ],
+            [
+              91,
+              85
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              82,
+              66
+            ],
+            [
+              91.5,
+              54
+            ],
+            [
+              96,
+              64
+            ],
+            [
+              91,
+              71
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 7662,
+      "selectionOnly": true
+    },
+    {
+      "id": "chicken-lemon",
+      "nameJa": "からあげレモン",
+      "svg": "objects/chicken-lemon.svg",
+      "png": "raster/objects/chicken-lemon.png",
+      "webp": "raster/objects/chicken-lemon.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        5,
+        32,
+        118,
+        84
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        59,
+        32
+      ],
+      "worldWidth": 83,
+      "worldHeight": 59.08474576271187,
+      "worldScale": 0.7033898305084746,
+      "material": "food",
+      "mass": 1.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "chicken-lemon",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              34.5,
+              60
+            ],
+            [
+              93.5,
+              60
+            ],
+            [
+              123,
+              74
+            ],
+            [
+              123,
+              102
+            ],
+            [
+              93.5,
+              116
+            ],
+            [
+              34.5,
+              116
+            ],
+            [
+              5,
+              102
+            ],
+            [
+              5,
+              74
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              14,
+              68
+            ],
+            [
+              23,
+              45
+            ],
+            [
+              49,
+              40
+            ],
+            [
+              69,
+              34
+            ],
+            [
+              93,
+              42
+            ],
+            [
+              108,
+              65
+            ],
+            [
+              107,
+              87
+            ],
+            [
+              24,
+              97
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7554,
+      "selectionOnly": true
+    },
+    {
+      "id": "leaf-blower",
+      "nameJa": "ブロワー",
+      "svg": "objects/leaf-blower.svg",
+      "png": "raster/objects/leaf-blower.png",
+      "webp": "raster/objects/leaf-blower.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        12,
+        117,
+        104
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        52
+      ],
+      "worldWidth": 96,
+      "worldHeight": 85.33333333333333,
+      "worldScale": 0.8205128205128205,
+      "material": "appliance",
+      "mass": 3.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "leaf-blower",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              21,
+              22
+            ],
+            [
+              37,
+              12
+            ],
+            [
+              64,
+              18
+            ],
+            [
+              72,
+              33
+            ],
+            [
+              65,
+              45
+            ],
+            [
+              53,
+              40
+            ],
+            [
+              58,
+              32
+            ],
+            [
+              56,
+              28
+            ],
+            [
+              39,
+              23
+            ],
+            [
+              29,
+              31
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              11,
+              47
+            ],
+            [
+              27,
+              32
+            ],
+            [
+              56,
+              38
+            ],
+            [
+              75,
+              61
+            ],
+            [
+              74,
+              84
+            ],
+            [
+              50,
+              101
+            ],
+            [
+              22,
+              94
+            ],
+            [
+              7,
+              72
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              68,
+              63
+            ],
+            [
+              85,
+              67
+            ],
+            [
+              124,
+              102
+            ],
+            [
+              118,
+              116
+            ],
+            [
+              75,
+              88
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 5225,
+      "selectionOnly": true
+    },
+    {
+      "id": "push-mower",
+      "nameJa": "しばかりき",
+      "svg": "objects/push-mower.svg",
+      "png": "raster/objects/push-mower.png",
+      "webp": "raster/objects/push-mower.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        9,
+        111,
+        111
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        55
+      ],
+      "worldWidth": 103,
+      "worldHeight": 103,
+      "worldScale": 0.9279279279279279,
+      "material": "metal",
+      "mass": 8.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "wheeled",
+      "colliderTemplate": "push-mower",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              31,
+              77
+            ],
+            [
+              91,
+              66
+            ],
+            [
+              118,
+              80
+            ],
+            [
+              115,
+              99
+            ],
+            [
+              33,
+              107
+            ],
+            [
+              22,
+              95
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              7,
+              9
+            ],
+            [
+              20,
+              9
+            ],
+            [
+              59,
+              78
+            ],
+            [
+              51,
+              84
+            ],
+            [
+              15,
+              19
+            ],
+            [
+              7,
+              19
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              58,
+              70
+            ],
+            [
+              58,
+              40
+            ],
+            [
+              89,
+              36
+            ],
+            [
+              104,
+              47
+            ],
+            [
+              103,
+              74
+            ]
+          ]
+        },
+        {
+          "circle": [
+            39,
+            104,
+            16
+          ]
+        },
+        {
+          "circle": [
+            105,
+            95,
+            13
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "normalMinDot": 0.55,
+        "rollingFriction": 0.025,
+        "invertedFriction": 0.6,
+        "acceleration": "gravity projected along actual contact tangent plus collision impulse; no auto drive",
+        "state": "rolling only with wheel-side contact; falling and inverted remain dynamic rigid bodies",
+        "wheelFixtures": [
+          3,
+          4
+        ]
+      },
+      "opaquePixels": 5588,
+      "selectionOnly": true
+    },
+    {
+      "id": "timed-bomb",
+      "nameJa": "じげんばくだん",
+      "svg": "objects/timed-bomb.svg",
+      "png": "raster/objects/timed-bomb.png",
+      "webp": "raster/objects/timed-bomb.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        15,
+        12,
+        101,
+        106
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        49,
+        52
+      ],
+      "worldWidth": 65,
+      "worldHeight": 68.21782178217822,
+      "worldScale": 0.6435643564356436,
+      "material": "metal",
+      "mass": 3.4,
+      "score": 0,
+      "bodyKind": "dynamic",
+      "behavior": "explosion",
+      "colliderTemplate": "timed-bomb",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              15,
+              34
+            ],
+            [
+              97,
+              26
+            ],
+            [
+              116,
+              41
+            ],
+            [
+              116,
+              106
+            ],
+            [
+              95,
+              118
+            ],
+            [
+              15,
+              118
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              33,
+              34
+            ],
+            [
+              31,
+              20
+            ],
+            [
+              39,
+              12
+            ],
+            [
+              78,
+              12
+            ],
+            [
+              88,
+              21
+            ],
+            [
+              88,
+              30
+            ],
+            [
+              81,
+              30
+            ],
+            [
+              81,
+              23
+            ],
+            [
+              76,
+              19
+            ],
+            [
+              42,
+              19
+            ],
+            [
+              38,
+              23
+            ],
+            [
+              40,
+              34
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "radius": 130,
+        "strength": 1,
+        "trigger": "first impact or burning fuse completes",
+        "removeSelf": true,
+        "fuseRangeSeconds": [
+          4,
+          6
+        ],
+        "detonateOnImpact": false
+      },
+      "opaquePixels": 9179,
+      "selectionOnly": true
+    },
+    {
+      "id": "wood-stamp",
+      "nameJa": "ハンコ",
+      "svg": "objects/wood-stamp.svg",
+      "png": "raster/objects/wood-stamp.png",
+      "webp": "raster/objects/wood-stamp.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        26,
+        8,
+        81,
+        112
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        38,
+        56
+      ],
+      "worldWidth": 43,
+      "worldHeight": 59.45679012345679,
+      "worldScale": 0.5308641975308642,
+      "material": "wood",
+      "mass": 0.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wood-stamp",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              46,
+              8
+            ],
+            [
+              77,
+              8
+            ],
+            [
+              86,
+              17
+            ],
+            [
+              86,
+              32
+            ],
+            [
+              75,
+              43
+            ],
+            [
+              74,
+              72
+            ],
+            [
+              85,
+              84
+            ],
+            [
+              44,
+              84
+            ],
+            [
+              55,
+              72
+            ],
+            [
+              54,
+              43
+            ],
+            [
+              39,
+              32
+            ],
+            [
+              39,
+              17
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              26,
+              83
+            ],
+            [
+              87,
+              77
+            ],
+            [
+              107,
+              91
+            ],
+            [
+              107,
+              108
+            ],
+            [
+              45,
+              120
+            ],
+            [
+              26,
+              107
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 4862,
+      "selectionOnly": true
+    },
+    {
+      "id": "ventilation-fan",
+      "nameJa": "かんきせん",
+      "svg": "objects/ventilation-fan.svg",
+      "png": "raster/objects/ventilation-fan.png",
+      "webp": "raster/objects/ventilation-fan.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        12,
+        14,
+        107,
+        107
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        52,
+        50
+      ],
+      "worldWidth": 77,
+      "worldHeight": 77,
+      "worldScale": 0.719626168224299,
+      "material": "appliance",
+      "mass": 4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "ventilation-fan",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              12,
+              22
+            ],
+            [
+              105,
+              14
+            ],
+            [
+              119,
+              26
+            ],
+            [
+              119,
+              109
+            ],
+            [
+              103,
+              121
+            ],
+            [
+              12,
+              121
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 10897,
       "selectionOnly": true
     }
   ]

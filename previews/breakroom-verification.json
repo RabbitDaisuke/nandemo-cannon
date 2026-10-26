@@ -1,0 +1,32 @@
+{
+  "engine": "Godot 4.7.2 stable, headless",
+  "objects": 462,
+  "stages": 50,
+  "newObjects": 13,
+  "stage": {"id": 50, "name": "きゅうけいじょ", "candidates": 20, "throws": 15},
+  "suites": [
+    {"suite": "search", "checks": 22, "status": "passed"},
+    {"suite": "selection", "checks": 1687, "status": "passed"},
+    {"suite": "progress", "checks": 16, "status": "passed"},
+    {"suite": "body", "checks": 96, "status": "passed"},
+    {"suite": "cannon", "checks": 68, "status": "passed"},
+    {"suite": "hazard", "checks": 139, "status": "passed"},
+    {"suite": "rescue", "checks": 120, "status": "passed"},
+    {"suite": "playground", "checks": 32, "status": "passed"},
+    {"suite": "breakroom", "checks": 17, "status": "passed"},
+    {"suite": "game", "checks": 753, "status": "passed"}
+  ],
+  "visual": {
+    "source": "Godot debug_snapshot for stage 50, composed with actual SVG and bitmap-font assets by Node.js sharp; item and collider sheets rendered from their SVG originals",
+    "images": ["game-50-breakroom.png", "selection-breakroom.png", "selection-breakroom-colliders.png"],
+    "browserUsed": false,
+    "engineFramebuffer": false
+  },
+  "notes": [
+    "Timed bomb arms once on launch, survives impacts, explodes after 4–6 simulation seconds, and becomes a scoring dud in water.",
+    "Mower rolls on actual wheel contacts and uses body friction when inverted.",
+    "The repeated rebound loses energy and settles; the stationary stack does not launch itself.",
+    "The initial stack test registered overlapping CCD bodies and then teleported one. The fixture was corrected to spawn at the intended position before registration; stability bounds were not relaxed."
+  ],
+  "scope": "All ten headless suites passed across the full check invocation and focused reruns. Node web fixtures passed. GitHub Actions and browser QA were not observed."
+}

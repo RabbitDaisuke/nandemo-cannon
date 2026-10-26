@@ -51,6 +51,7 @@ if [[ "$build_mode" != check && "$build_mode" != runtime ]]; then
   if [[ "$build_mode" == selection-items ]]; then
     node tools/extend-selection-content.mjs
     node tools/extend-playground-stage.mjs
+    node tools/extend-breakroom-stage.mjs
     exec node tools/extend-rescue-stages.mjs
   fi
   node tools/rasterize-assets.mjs

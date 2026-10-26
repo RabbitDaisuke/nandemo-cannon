@@ -1,40 +1,16 @@
 {
   "engine": "Godot 4.7.2 stable, headless",
-  "suites": [
-    {
-      "suite": "selection",
-      "checks": 1583,
-      "status": "passed"
-    },
-    {
-      "suite": "playground",
-      "checks": 30,
-      "status": "passed"
-    },
-    {
-      "suite": "game",
-      "checks": 743,
-      "status": "passed"
-    }
-  ],
-  "visual": {
-    "source": "Godot debug_snapshot for stage 49, composed with actual SVG/bitmap font assets by tools/render-game.mjs in Node.js sharp",
-    "image": "game-49-playground.png",
-    "browserUsed": false,
-    "engineFramebuffer": false
+  "suite": "playground",
+  "checks": 32,
+  "status": "passed",
+  "springResponse": {
+    "restitution": 0.9,
+    "incomingSpeed": 400,
+    "reboundSpeed": 358.920806884766,
+    "repeatedReboundSpeeds": [373.609741210938, 318.597595214844, 272.487976074219, 233.083190917969, 202.209625244141, 171.308181762695, 147.508865356445, 124.834045410156],
+    "freePairInitialKineticEnergy": 80000,
+    "freePairPeakKineticEnergy": 79760.1796875,
+    "restingStackSettles": true
   },
-  "changes": {
-    "newObjects": 0,
-    "retakes": [
-      "air-conditioner",
-      "jump-rope",
-      "sandbox-box"
-    ],
-    "stageId": 49,
-    "displayName": "ほいくえん",
-    "firstThrow": "trampoline",
-    "reboundMultiplier": 2,
-    "reboundMeasurements": {"previousSpeed": 458.621032714844, "currentSpeed": 917.242065429688, "cappedSpeed": 1300}
-  },
-  "scope": "Local checks only; GitHub Actions and browser QA not observed."
+  "verification": "Real collision, repeated bounce, kinetic energy, resting contact and stacked-body tests. Browser and GitHub Actions were not observed."
 }

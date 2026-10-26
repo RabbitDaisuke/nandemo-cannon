@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 172, "the reviewed expansions contain 172 selection-only objects")
+	_expect(additions.size() == 185, "the reviewed expansions contain 185 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
@@ -117,6 +117,10 @@ func _run() -> void:
 		["microscope", Vector2(78, 61), Vector2(72, 38)],
 		["red-hair-comb", Vector2(19.5, 70), Vector2(15, 70)],
 		["horizontal-bar", Vector2(64, 65), Vector2(20, 65)],
+		["fly-swatter", Vector2(37, 18), Vector2(67, 29)],
+		["coffee-maker", Vector2(101, 78), Vector2(117, 78)],
+		["leaf-blower", Vector2(44, 29), Vector2(45, 20)],
+		["timed-bomb", Vector2(56, 24), Vector2(56, 15)],
 		["three-d-printer", Vector2(90, 45), Vector2(110, 45)],
 		["lidded-saucepan", Vector2(15, 69), Vector2(8, 69)],
 		["mini-ferris-wheel", Vector2(48, 30), Vector2(64, 30)],
@@ -193,7 +197,7 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var wheel_measurements: Dictionary = {}
-	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck", "flatbed-dolly", "mini-forklift", "garbage-truck"]:
+	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck", "flatbed-dolly", "mini-forklift", "garbage-truck", "push-mower"]:
 		wheel_measurements[id] = await _wheel_checks(catalog.items[id])
 	var result = {"suite": "selection", "checks": checks, "failures": failures, "measurements": wheel_measurements, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/selection-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")

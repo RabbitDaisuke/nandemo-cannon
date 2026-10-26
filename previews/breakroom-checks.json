@@ -1,0 +1,24 @@
+{
+	"checks": [
+		"the office lounge has twenty available authored candidates",
+		"the office queue reproduces seed 1",
+		"seed 1 draws fifteen different office candidates",
+		"the office queue reproduces seed 50",
+		"seed 50 draws fifteen different office candidates",
+		"the office queue reproduces seed 123",
+		"seed 123 draws fifteen different office candidates",
+		"the office queue reproduces seed 410",
+		"seed 410 draws fifteen different office candidates",
+		"the office queue reproduces seed 997",
+		"seed 997 draws fifteen different office candidates",
+		"the sampled office queues include all authored candidates",
+		"office floor at x=40 meets the visible surface",
+		"office floor at x=330 meets the visible surface",
+		"office floor at x=620 meets the visible surface",
+		"office floor at x=810 meets the visible surface",
+		"the office left wall is physical"
+	],
+	"failures": [],
+	"status": "passed",
+	"suite": "breakroom"
+}
