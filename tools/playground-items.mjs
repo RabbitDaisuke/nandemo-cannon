@@ -14,8 +14,12 @@ const add=(id,name,material,mass,width,fixtures,art,extra={})=>items.push({id,na
 add('air-conditioner','エアコン','appliance',6,105,
  [poly([7,41],[104,33],[122,44],[122,76],[109,87],[15,87],[7,77])],
  P('M7 41L104 33L122 44V76L109 87H15L7 77Z',ink)+
- P('M12 44L103 38L114 45L22 51Z',white)+P('M12 49L22 56H109V70H15L12 66Z','#dae2d8')+
- P('M112 52L118 47V74L112 80Z','#879eaa')+R(17,59,87,3,white)+R(88,65,8,3,'#80b695')+
+ // The top and front share a filled shell; their seam is not an open black gap.
+ P('M11 44L103 37L118 46V74L107 83H18L11 75Z','#dae2d8')+
+ P('M11 44L103 37L118 46L108 51H19Z',white)+
+ P('M108 51L118 46V74L110 81Z','#9aafba')+
+ P('M19 50H108L118 45V47L109 53H19Z','#b7c6c2')+
+ R(17,58,87,3,white)+R(88,65,8,3,'#80b695')+
  P('M16 73H108V81H21Z',dark)+P('M22 75H104L99 78H25Z',steel)+R(26,80,75,3,silver)+
  [34,54,74,94].map(x=>R(x,74,2,7,ink)).join('')+R(30,83,68,2,white));
 
@@ -42,7 +46,7 @@ add('trampoline','トランポリン','metal',14,162,
  [38,49,60,71,82,93].map(x=>R(x,48,2,5,steel)).join('')+
  R(12,57,104,4,blue)+R(16,57,96,2,'#94cfc8')+
  [14,109].map(x=>R(x,48,6,2,silver)+R(x+1,51,5,2,white)).join(''),
- {springSurface:{fixture:0,minImpactSpeed:130,restitution:1.15,maxSpeed:650,normalMinDot:.75},restitution:0,friction:.8});
+ {springSurface:{fixture:0,minImpactSpeed:130,restitution:2.3,maxSpeed:1300,normalMinDot:.75},restitution:0,friction:.8});
 
 add('horizontal-bar','てつぼう','metal',5,105,
  [rect(9,18,111,9),rect(17,27,9,86),rect(104,27,9,86),rect(4,111,35,9),rect(91,111,33,9)],
@@ -50,16 +54,25 @@ add('horizontal-bar','てつぼう','metal',5,105,
  R(9,18,111,9,ink)+R(12,21,105,3,silver)+R(20,32,3,70,'#e78c68')+R(107,32,3,70,'#e78c68')+
  R(8,114,27,2,steel)+R(95,114,25,2,steel)+R(14,19,100,2,white));
 
-// A rope loop with a real hollow center, plus two separate solid handles.
-const ropeOuter=[[25,26],[58,15],[93,30],[110,58],[107,84],[86,100],[63,97],[47,83],[42,60],[53,41],[75,41],[89,55],[92,75],[84,90]];
-const ropeInner=[[29,31],[58,21],[89,34],[104,60],[102,80],[85,94],[66,92],[52,80],[48,61],[56,47],[72,47],[84,58],[86,73],[79,86]];
-const ropeFixtures=ropeOuter.slice(0,-1).map((p,i)=>poly(p,ropeOuter[i+1],ropeInner[i+1],ropeInner[i]));
+// Coiled for storage and tied across the middle. Visible loop holes stay empty.
+const ropeOuter=[[35,16],[52,16],[65,30],[72,51],[66,75],[53,89],[36,86],[25,70],[22,46],[26,27]];
+const ropeInner=[[38,23],[49,23],[58,34],[64,52],[59,70],[50,81],[40,79],[32,66],[30,47],[33,30]];
+const ropeLoops=[0,18].map(dx=>({outer:ropeOuter.map(([x,y])=>[x+dx,y]),inner:ropeInner.map(([x,y])=>[x+dx,y])}));
+const ropeFixtures=ropeLoops.flatMap(({outer,inner})=>outer.map((p,i)=>poly(p,outer[(i+1)%outer.length],inner[(i+1)%inner.length],inner[i])));
+const ropeRing=(outer,inner,color)=>`<path d="${path(outer)} ${path(inner)}" fill="${color}" fill-rule="evenodd"/>`;
 add('jump-rope','なわとび','rubber',.7,70,
- [...ropeFixtures,poly([16,27],[28,23],[44,63],[30,68]),poly([75,86],[87,82],[104,114],[90,121])],
- ropeFixtures.map(f=>P(path(f.polygon),ink)).join('')+
- `<path d="M27 29L58 18L91 32L107 59L105 82L85 97L65 95L50 81L45 61L55 44H74L87 56L89 74L82 88" fill="none" stroke="#d2c38b" stroke-width="2"/>`+
- P('M16 27L28 23L44 63L30 68Z',ink)+P('M21 30L26 28L38 60L32 62Z',red)+
- P('M75 86L87 82L104 114L90 121Z',ink)+P('M81 89L85 87L98 112L92 115Z',red)+P('M23 32L25 31L35 57L33 58Z','#f29a70'));
+ [...ropeFixtures,poly([25,48],[83,42],[91,49],[85,61],[30,66],[23,58]),
+  poly([50,59],[56,62],[45,92],[39,102],[33,98],[39,88]),poly([65,60],[72,57],[82,83],[96,94],[91,101],[76,88]),
+  poly([25,93],[39,97],[31,126],[17,122]),poly([87,93],[100,87],[113,115],[100,121])],
+ ropeLoops.map(({outer,inner})=>ropeRing(outer,inner,ink)+
+  `<path d="M${outer.map((p,i)=>[(p[0]+inner[i][0])/2,(p[1]+inner[i][1])/2]).map(p=>p.join(' ')).join('L')}Z" fill="none" stroke="#c8ad71" stroke-width="3"/>`).join('')+
+ P('M50 59L56 62L45 92L39 102L33 98L39 88Z',ink)+P('M51 64L53 65L42 91L37 98L36 97L41 89Z','#e3cc8e')+
+ P('M65 60L72 57L82 83L96 94L91 101L76 88Z',ink)+P('M69 64L71 63L80 85L92 96L91 98L78 86Z','#d2b77b')+
+ P('M25 48L83 42L91 49L85 61L30 66L23 58Z',ink)+P('M29 52L82 47L86 50L81 56L30 61L27 57Z','#b8955c')+
+ P('M30 53L81 48L83 50L31 57Z','#efdba1')+P('M48 44L58 43L70 58L63 66L53 59Z',ink)+
+ P('M53 47H56L65 58L62 61L56 56Z','#e2c78b')+P('M48 60L59 50L64 53L53 64Z',ink)+P('M51 60L59 54L60 55L53 61Z','#f0dba0')+
+ P('M25 93L39 97L31 126L17 122Z',ink)+P('M28 98L34 100L28 121L22 119Z',red)+P('M28 99L30 100L25 116L23 116Z','#efa17a')+
+ P('M87 93L100 87L113 115L100 121Z',ink)+P('M93 96L98 93L107 113L102 116Z',red)+P('M94 96L96 95L104 110L102 111Z','#efa17a'));
 
 add('sliding-window','ひきまど','glass',4.2,102,
  [rect(7,15,115,8),rect(7,111,115,9),rect(7,23,8,88),rect(114,23,8,88),rect(59,23,9,88),rect(15,23,44,88),rect(68,23,46,88)],
@@ -69,10 +82,16 @@ add('sliding-window','ひきまど','glass',4.2,102,
  box(51,65,7,17,silver)+box(69,65,7,17,silver)+R(12,114,105,3,white)+R(10,18,108,2,white));
 
 add('sandbox-box','すなば','wood',7,112,
- [poly([8,68],[30,49],[106,49],[122,65],[119,105],[24,116],[8,99])],
- P('M8 68L30 49H106L122 65L119 105L24 116L8 99Z',ink)+
- P('M14 69L32 54H103L115 65L25 78Z',wood)+P('M27 65L39 57H98L104 63L33 73Z','#e0bd7e')+
- P('M14 75L22 83V108L14 96Z','#946043')+P('M28 84L116 71L113 100L28 110Z',wood)+
- P('M32 88L110 77V83L32 95Z','#e0ad70')+P('M32 102L110 91V96L32 107Z','#a26e48')+
- R(34,62,5,3,'#f5d99e')+R(62,60,4,3,'#bd955a')+R(82,63,6,3,'#f5d99e')+
- R(35,90,3,3,ink)+R(103,80,3,3,ink)+R(35,102,3,3,ink)+R(103,93,3,3,ink));
+ [poly([5,65],[36,31],[122,45],[122,57],[95,96],[5,78])],
+ // A broad sand surface and low timber edging, not tall box walls.
+ P('M5 65L36 31L122 45V57L95 96L5 78Z',ink)+
+ P('M10 68L94 85V91L10 75Z','#ad764c')+P('M97 83L118 52V56L97 87Z','#865b43')+
+ P('M10 64L38 36L116 48L92 80Z','#d5a369')+
+ P('M19 62L41 42L105 52L88 72Z','#ad814d')+
+ P('M20 63L42 45L105 54L88 75Z','#e3c488')+
+ P('M25 62L43 48L101 56L89 62L57 57L39 67Z','#eed39a')+
+ P('M43 68L51 60L64 60L73 68L66 71Z','#f5dda4')+
+ P('M14 67L90 82L88 85L12 70Z','#efc58a')+P('M39 36L115 48L111 51L38 39Z','#ebc286')+
+ R(27,62,3,2,'#c29b60')+R(43,54,4,2,'#f8e5b6')+R(78,62,3,2,'#ba9258')+R(80,70,3,2,'#c39b60')+R(61,70,3,2,'#c39b60')+
+ P('M69 47L73 44L84 46L87 50L83 62L72 60Z',ink)+P('M73 50L82 51L80 58L74 57Z',red)+P('M72 47L75 46L82 48L82 50L74 49Z','#eca478')+
+ P('M39 60L43 56L46 58L44 62L51 68L49 71L41 64L37 64Z',ink)+P('M40 60L43 59L42 62L49 68L48 69L40 63L39 63Z','#8eae83'));

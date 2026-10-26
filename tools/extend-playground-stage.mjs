@@ -9,10 +9,10 @@ let sharp; try {sharp=require('sharp');} catch {sharp=require(path.join(process.
 const read=async name=>JSON.parse(await fs.readFile(path.join(root,`data/${name}.json`),'utf8'));
 const [stages,ui,manifest]=await Promise.all(['stages','ui-ja','objects-manifest'].map(read));
 const stage={
- id:49,nameJa:'あそびば ほいくえん',map:'49-playground',status:'specified',gravity:980,
+ id:49,nameJa:'ほいくえん',map:'49-playground',status:'specified',gravity:980,
  cannon:[810,450],scoreZone:[28,100,592,350],scoreGroundY:450,
  terrain:[{rect:[0,450,960,90]},{rect:[0,100,18,350]}],
- queue:['building-blocks','teddy-bear','jump-rope','school-desk','stool','horizontal-bar','bunny-plush','sliding-window','sandbox-box','toy-car','rubber-duck','soccer-ball','snowman-plush','pillow','trampoline'],
+ queue:['trampoline','building-blocks','teddy-bear','jump-rope','school-desk','stool','horizontal-bar','bunny-plush','sliding-window','sandbox-box','toy-car','rubber-duck','soccer-ball','snowman-plush','pillow'],
  preplaced:[{id:'trampoline',x:330,groundY:450}],
  lesson:'ほいくえんの あそびばにきた！\nつよくあたると トランポリンでぴょーん！ じゅうごこのモノをのこそう。'
 };

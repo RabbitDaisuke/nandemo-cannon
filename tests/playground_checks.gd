@@ -23,6 +23,7 @@ func _run() -> void:
 	var stage: Dictionary = catalog.stages.filter(func(s): return int(s.id) == 49)[0]
 	var rng = RandomNumberGenerator.new()
 	_expect(catalog.build_queue(stage, rng).size() == 15, "the playground provides fifteen throws")
+	_expect(str(stage.nameJa) == "ほいくえん" and str(catalog.build_queue(stage, rng)[0]) == "trampoline", "the nursery is named hoikuen and starts by throwing a trampoline")
 	var search = Search.new(catalog.items.values())
 	for id in ["air-conditioner", "outdoor-ac-unit", "trampoline", "horizontal-bar", "jump-rope", "sliding-window", "sandbox-box"]:
 		_expect(catalog.is_catalog_selectable(id) and search.find_items(str(catalog.items[id].nameJa)).any(func(item): return item.id == id), id + " is selectable and searchable by its displayed kana name")
@@ -38,10 +39,15 @@ func _run() -> void:
 	game.queue_free()
 	await process_frame
 	var strong = await _trial(400.0, true)
+	var previous = await _trial(400.0, true, false, true)
+	var capped = await _trial(1000.0, true)
 	var weak = await _trial(50.0, true)
 	var underside = await _trial(400.0, true, true)
 	var floating = await _trial(400.0, false)
 	_expect(float(strong.up) > 300.0, "a strong impact rebounds from the upper trampoline surface")
+	_expect(absf(float(strong.up) - float(previous.up) * 2.0) < 5.0, "the same real collision rebounds at twice the previous speed")
+	var maximum = float(catalog.items["trampoline"].physics.springSurface.maxSpeed)
+	_expect(float(capped.up) <= maximum + 1.0 and float(capped.up) >= maximum * 0.95, "high-speed impacts reach the configured rebound ceiling without exceeding it")
 	_expect(float(weak.up) < 10.0, "an impact below the threshold receives no spring impulse")
 	_expect(float(underside.down) < 10.0, "the same deck hit from underneath gives no spring impulse")
 	_expect(float(floating.up) > 150.0 and float(floating.recoil) > 10.0, "a free trampoline transfers an equal opposite impulse and the projectile rebounds")
@@ -49,7 +55,7 @@ func _run() -> void:
 	if is_instance_valid(fixture):
 		fixture.queue_free()
 		await process_frame
-	var result = {"suite": "playground", "checks": checks, "failures": failures, "measurements": {"strong": strong, "weak": weak, "underside": underside, "floating": floating}, "status": "passed" if failures.is_empty() else "failed"}
+	var result = {"suite": "playground", "checks": checks, "failures": failures, "measurements": {"strong": strong, "previous": previous, "capped": capped, "weak": weak, "underside": underside, "floating": floating}, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/playground-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")
 	print(JSON.stringify(result))
 	quit(0 if failures.is_empty() else 1)
@@ -62,9 +68,12 @@ func _reset() -> void:
 	root.add_child(fixture)
 	await physics_frame
 
-func _trampoline(fixed: bool) -> ThrowBody:
+func _trampoline(fixed: bool, previous_response: bool = false) -> ThrowBody:
 	var actor = BodyScript.new()
 	actor.configure(catalog.items["trampoline"], fixture)
+	if previous_response:
+		actor.spec.springSurface.restitution = 1.15
+		actor.spec.springSurface.maxSpeed = 650.0
 	actor.position = Vector2(400, 300)
 	actor.gravity_scale = 0.0
 	actor.freeze = fixed
@@ -82,15 +91,15 @@ func _ball(point: Vector2, velocity: Vector2) -> ThrowBody:
 	fixture.add_child(actor)
 	return actor
 
-func _trial(speed: float, fixed: bool, underside: bool = false) -> Dictionary:
+func _trial(speed: float, fixed: bool, underside: bool = false, previous_response: bool = false) -> Dictionary:
 	await _reset()
-	var pad = _trampoline(fixed)
+	var pad = _trampoline(fixed, previous_response)
 	var upper = pad.to_global(Vector2(0, -26) * pad._source_scale).y
 	var lower = pad.position.y
 	var point = Vector2(400, lower + 12 if underside else upper - 12)
 	var ball = _ball(point, Vector2(0, -speed if underside else speed))
 	# Fixture 0 is the deck; the source can be reused without hardcoding an item ID.
-	_expect(pad.spring_launch_speed(0, Vector2.UP, 100.0) == 0.0 and pad.spring_launch_speed(0, Vector2.UP, 10000.0) == 650.0, "spring threshold and maximum are read from the physical surface data")
+	_expect(pad.spring_launch_speed(0, Vector2.UP, 100.0) == 0.0 and pad.spring_launch_speed(0, Vector2.UP, 10000.0) == float(pad.spec.springSurface.maxSpeed), "spring threshold and maximum are read from the physical surface data")
 	_expect(pad.spring_launch_speed(0, Vector2.RIGHT, 400.0) == 0.0 and pad.spring_launch_speed(1, Vector2.UP, 400.0) == 0.0, "side contacts and legs do not become spring surfaces")
 	var up = 0.0
 	var down = 0.0

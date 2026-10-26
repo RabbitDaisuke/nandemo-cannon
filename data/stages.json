@@ -8650,7 +8650,7 @@
     },
     {
       "id": 49,
-      "nameJa": "あそびば ほいくえん",
+      "nameJa": "ほいくえん",
       "map": "49-playground",
       "status": "specified",
       "gravity": 980,
@@ -8684,6 +8684,7 @@
         }
       ],
       "queue": [
+        "trampoline",
         "building-blocks",
         "teddy-bear",
         "jump-rope",
@@ -8697,8 +8698,7 @@
         "rubber-duck",
         "soccer-ball",
         "snowman-plush",
-        "pillow",
-        "trampoline"
+        "pillow"
       ],
       "preplaced": [
         {

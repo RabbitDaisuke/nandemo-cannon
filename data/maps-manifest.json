@@ -2161,7 +2161,7 @@
     {
       "id": "49-playground",
       "stage": 49,
-      "nameJa": "あそびば ほいくえん",
+      "nameJa": "ほいくえん",
       "status": "specified",
       "svg": "maps/49-playground.svg",
       "worldSize": [
