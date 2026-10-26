@@ -21,6 +21,7 @@ func _run() -> void:
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
 	_expect(additions.size() == 165, "the reviewed expansions contain 165 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
+	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
 	kana.compile("^[ぁ-ゖァ-ヺー]+$")
 	var ui = GameCatalog.read_json("res://data/ui-ja.json").items
@@ -85,7 +86,8 @@ func _run() -> void:
 	await process_frame
 	for probe in [
 		["paint-palette", Vector2(91, 77), Vector2(64, 65)],
-		["film-roll", Vector2(41, 42), Vector2(64, 42)],
+		["film-roll", Vector2(98, 61), Vector2(118, 61)],
+		["metal-spatula", Vector2(37.47, 87.94), Vector2(44.40, 91.94)],
 		["microscope", Vector2(64, 60), Vector2(64, 44)],
 		["three-d-printer", Vector2(90, 45), Vector2(110, 45)],
 		["lidded-saucepan", Vector2(15, 69), Vector2(8, 69)],

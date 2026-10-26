@@ -950,7 +950,8 @@
     "flatbed-dolly": {
       "wheelFixtures": [
         1,
-        2
+        2,
+        3
       ]
     },
     "mini-excavator": {},
@@ -967,10 +968,10 @@
     "film-roll": {},
     "mini-smelter": {
       "burnerSource": [
-        65,
-        87
+        112,
+        94
       ],
-      "burnerWidth": 33,
+      "burnerWidth": 18,
       "fireRadius": 18
     },
     "garbage-truck": {
@@ -998,7 +999,6 @@
     "chunky-red-bean-bun": {},
     "kabosu": {},
     "cherry-trio": {},
-    "black-sesame-bun": {},
     "pound-cake": {},
     "croissant": {},
     "asian-pear": {},
@@ -1008,7 +1008,8 @@
     "leafy-turnip": {},
     "persimmon": {},
     "chocolate-chip-cookie": {},
-    "matsutake": {}
+    "matsutake": {},
+    "thinking-face": {}
   },
   "stateRules": {
     "breakage": {
