@@ -73,11 +73,13 @@ add('onion','たまねぎ','food',.6,49,
 const project=(u,v)=>[28+84*u-12*v,10+10*u+56*v];
 const panel=(u,v,w,h)=>[project(u,v),project(u+w,v),project(u+w,v+h),project(u,v+h)];
 const swatterGrid=[panel(0,0,1,.07),panel(0,.93,1,.07),panel(0,0,.065,1),panel(.935,0,.065,1),
- ...[.25,.5,.75].map(u=>panel(u-.022,.065,.044,.87)),...[.25,.5,.75].map(v=>panel(.065,v-.026,.87,.052))];
+ ...[.25,.5,.75].map(u=>panel(u-.032,.065,.064,.87)),...[.25,.5,.75].map(v=>panel(.065,v-.04,.87,.08))];
 add('fly-swatter','むしたたき','plastic',.35,59,
  [...swatterGrid.map(p=>poly(...p)),poly([55,69],[65,70],[46,123],[33,119],[33,112],[40,113])],
  P('M55 69L65 70L46 123L33 119V112L40 113Z',ink)+P('M57 73L60 74L43 118L38 116L42 116Z','#9d9db4')+
- swatterGrid.map((p,i)=>P(path(p),i<4?ink:'#f0e9d8')).join('')+
+ swatterGrid.map(p=>P(path(p),'#080c12')).join('')+
+ [.25,.5,.75].map(u=>P(path(panel(u-.009,.08,.018,.84)),'#f0e9d8')).join('')+
+ [.25,.5,.75].map(v=>P(path(panel(.08,v-.012,.84,.024)),'#f0e9d8')).join('')+
  P(path(panel(.016,.018,.965,.025)),'#b4bec5')+P(path(panel(.955,.08,.025,.82)),'#718da0')+
  P(path(panel(.08,.955,.81,.025)),'#9cb5be')+
  P('M55 76L58 77L46 109L43 108Z','#d1d2d0'));

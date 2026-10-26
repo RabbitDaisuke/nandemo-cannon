@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "Godot 4.7.2: 50 authored stages, 15 throws each; navigation order is independent of stable IDs.",
+  "status": "Godot 4.7.2: 51 authored stages, 15 throws each; navigation order is independent of stable IDs.",
   "coordinateSystem": "960x540. Collider rect = [x,y,width,height]. Placed item x = center, groundY = bottom; optional width = world width.",
   "shotsPerStage": 15,
   "tutorialOrder": "ordered queues; do not shuffle prerequisite fire/water/bomb slots",
@@ -8768,6 +8768,256 @@
       ],
       "preplaced": [],
       "lesson": "オフィスの きゅうけいじょで ひとやすみ！\nにじゅっしゅるいから じゅうごこ！ おべんとうも かぐも つみあげよう。"
+    },
+    {
+      "id": 51,
+      "nameJa": "おふろば",
+      "map": "51-bathroom",
+      "status": "specified",
+      "gravity": 980,
+      "cannon": [
+        810,
+        450
+      ],
+      "scoreZone": [
+        30,
+        125,
+        610,
+        365
+      ],
+      "scoreGroundY": 450,
+      "terrain": [
+        {
+          "rect": [
+            0,
+            500,
+            960,
+            40
+          ]
+        },
+        {
+          "rect": [
+            0,
+            100,
+            18,
+            400
+          ]
+        },
+        {
+          "rect": [
+            18,
+            450,
+            12,
+            50
+          ]
+        },
+        {
+          "rect": [
+            30,
+            390,
+            24,
+            110
+          ]
+        },
+        {
+          "rect": [
+            54,
+            486,
+            240,
+            14
+          ]
+        },
+        {
+          "rect": [
+            294,
+            390,
+            24,
+            110
+          ]
+        },
+        {
+          "rect": [
+            318,
+            450,
+            312,
+            50
+          ],
+          "slipFactor": 1.3
+        },
+        {
+          "rect": [
+            630,
+            450,
+            330,
+            50
+          ]
+        },
+        {
+          "polygon": [
+            [
+              366,
+              414
+            ],
+            [
+              378,
+              402
+            ],
+            [
+              442,
+              402
+            ],
+            [
+              454,
+              414
+            ],
+            [
+              454,
+              426
+            ],
+            [
+              366,
+              426
+            ]
+          ]
+        },
+        {
+          "rect": [
+            376,
+            426,
+            14,
+            24
+          ]
+        },
+        {
+          "rect": [
+            430,
+            426,
+            14,
+            24
+          ]
+        },
+        {
+          "polygon": [
+            [
+              520,
+              394
+            ],
+            [
+              532,
+              382
+            ],
+            [
+              596,
+              382
+            ],
+            [
+              608,
+              394
+            ],
+            [
+              608,
+              406
+            ],
+            [
+              520,
+              406
+            ]
+          ]
+        },
+        {
+          "rect": [
+            530,
+            406,
+            14,
+            44
+          ]
+        },
+        {
+          "rect": [
+            584,
+            406,
+            14,
+            44
+          ]
+        }
+      ],
+      "queue": [
+        "yellow-washbowl",
+        "wooden-washbowl",
+        "shower-head",
+        "mini-bathtub",
+        "rubber-duck",
+        "shampoo-bottle",
+        "shampoo-hat",
+        "soap",
+        "water-heater-panel",
+        "water-heater",
+        "ventilation-fan",
+        "sliding-window",
+        "bath-hose",
+        "bath-mat",
+        "sponge",
+        "sponge",
+        "towel",
+        "toothbrush",
+        "toothpaste",
+        "bath-stool"
+      ],
+      "queueSlots": [
+        {
+          "candidates": [
+            "yellow-washbowl",
+            "wooden-washbowl",
+            "shower-head",
+            "mini-bathtub",
+            "rubber-duck",
+            "shampoo-bottle",
+            "shampoo-hat",
+            "soap",
+            "water-heater-panel",
+            "water-heater",
+            "ventilation-fan",
+            "sliding-window",
+            "bath-hose",
+            "bath-mat",
+            "towel",
+            "toothbrush",
+            "toothpaste",
+            "bath-stool"
+          ],
+          "count": 13
+        },
+        {
+          "candidates": [
+            "sponge"
+          ]
+        },
+        {
+          "candidates": [
+            "sponge"
+          ]
+        }
+      ],
+      "shuffleQueue": true,
+      "preplaced": [],
+      "water": [
+        {
+          "rect": [
+            54,
+            418,
+            240,
+            68
+          ],
+          "direction": [
+            0,
+            0
+          ],
+          "speed": 0,
+          "type": "pool",
+          "finite": true
+        }
+      ],
+      "lesson": "おふろばは ツルツル！ でこぼこの ゆかに きをつけよう。\nスポンジふたつで みずをすいとって つみあげよう！"
     }
   ]
 }

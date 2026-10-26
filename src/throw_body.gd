@@ -261,6 +261,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_physics_tick += 1
 	var upper_load: float = 0.0
 	var special_friction: float = -1.0
+	var support_slip_factor: float = 1.0
 	var grip_contacts: Array[Dictionary] = []
 	var spring_contacts: Dictionary = {}
 	var local_up = -state.transform.y.normalized()
@@ -331,6 +332,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		if is_instance_valid(world) and world.has_method("surface_friction_at"):
 			surface_friction = float(world.call("surface_friction_at", point))
 		if normal.dot(-gravity_dir) > 0.1:
+			if is_instance_valid(collider) and collider.get_meta("terrain", false):
+				support_slip_factor = maxf(support_slip_factor, float(collider.get_meta("surface_slip_factor", 1.0)))
 			if surface_friction >= 0.0:
 				special_friction = surface_friction if special_friction < 0.0 else minf(special_friction, surface_friction)
 			if behavior == "wheeled" and _wheel_fixtures.has(fixture_index) and normal.dot(local_up) >= float(spec.get("normalMinDot", 0.55)):
@@ -344,6 +347,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var friction = _base_friction
 	if behavior == "wheeled":
 		friction = float(spec.get("rollingFriction", 0.025)) if wheel_supported else float(spec.get("invertedFriction", _base_friction))
+	friction /= support_slip_factor
 	if special_friction >= 0.0:
 		friction = minf(friction, special_friction)
 	if frozen_seconds > 0.0 or (behavior == "slippery" and wet_seconds > 0.0):

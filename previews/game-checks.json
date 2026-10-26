@@ -1,12 +1,12 @@
 {
-	"checks": 753,
+	"checks": 762,
 	"engine": "4.7.2-stable (official)",
 	"failures": [],
 	"observations": {
-		"final_score": 1390,
+		"final_score": 1520,
 		"finalize_seconds": 12.0083333333333,
 		"first_shot_bodies": 1,
-		"first_shot_floor_overlap": 0.154449462890625,
+		"first_shot_floor_overlap": 0.13226318359375,
 		"first_shot_score": 320,
 		"home_initial_score": 230,
 		"home_scoring_floor_overlaps": [

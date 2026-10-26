@@ -16,6 +16,7 @@ import {items as oct26Tools} from './oct26-tool-items.mjs';
 import {items as oct26Retakes} from './oct26-retake-items.mjs';
 import {items as playground} from './playground-items.mjs';
 import {items as breakroom} from './breakroom-items.mjs';
+import {items as bathroom} from './bathroom-items.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -28,6 +29,7 @@ const [manifest, catalog, physics, colliders, ui] = await Promise.all(['objects-
 const groups = [['food', food], ['tools', tools], ['misc', misc], ['firestation', firestation], ['school', school], ['daily-food', dailyFood], ['daily-tools', dailyTools], ['oct26-food', oct26Food], ['oct26-tools', oct26Tools], ['oct26-retakes', oct26Retakes]];
 groups.push(['playground', playground]);
 groups.push(['breakroom', breakroom]);
+groups.push(['bathroom', bathroom]);
 const entries = groups.flatMap(([, items]) => items);
 if (new Set(entries.map(item => item.id)).size !== entries.length) throw Error('Duplicate selection item ID');
 const coverage = JSON.parse(await read('assets/font/generated-coverage.json')).chars;

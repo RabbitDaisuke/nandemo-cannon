@@ -1,0 +1,48 @@
+{
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "objects": 474,
+  "stages": 51,
+  "newObjects": 12,
+  "checks": {
+    "search": 22,
+    "selection": 1783,
+    "progress": 16,
+    "body": 97,
+    "cannon": 68,
+    "hazard": 139,
+    "rescue": 121,
+    "playground": 32,
+    "breakroom": 17,
+    "bathroom": 45,
+    "game": 762
+  },
+  "totalGodotChecks": 3102,
+  "webSuites": [
+    "mirrors",
+    "share",
+    "bgm",
+    "input-hint",
+    "progress"
+  ],
+  "status": "passed",
+  "notes": [
+    "Existing rescue total-count expectation updated for the new catalog; rescue and all remaining suites rerun successfully.",
+    "Washing-machine artwork and data unchanged.",
+    "Art and scene visuals reviewed with Node sharp; scene image reconstructs Godot debug_snapshot, not an engine framebuffer.",
+    "No browser session or GitHub Actions wait."
+  ],
+  "measurements": {
+    "dry": {
+      "distance": 36.2770690917969,
+      "end_speed": 0,
+      "friction": 0.550000011920929,
+      "max_speed": 195.508331298828
+    },
+    "glossy": {
+      "distance": 47.4056854248047,
+      "end_speed": 0,
+      "friction": 0.423076927661896,
+      "max_speed": 196.544876098633
+    }
+  }
+}

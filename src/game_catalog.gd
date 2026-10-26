@@ -133,7 +133,11 @@ func make_terrain(parent: Node2D, stage: Dictionary) -> void:
 		body.collision_mask = 2
 		body.set_meta("terrain", true)
 		var material = PhysicsMaterial.new()
-		material.friction = 0.6
+		# A local floor treatment scales contact friction, not body velocity.
+		# Keep the factor on this actual collider so nearby props are unaffected.
+		var slip_factor = maxf(1.0, float(part.get("slipFactor", 1.0)))
+		body.set_meta("surface_slip_factor", slip_factor)
+		material.friction = 0.6 / slip_factor
 		if bool(stage.get("iceFloor", false)):
 			material.friction = 0.025
 		body.physics_material_override = material

@@ -1052,7 +1052,33 @@
       "detonateOnImpact": false
     },
     "wood-stamp": {},
-    "ventilation-fan": {}
+    "ventilation-fan": {},
+    "yellow-washbowl": {},
+    "wooden-washbowl": {},
+    "shower-head": {
+      "waterSource": {
+        "position": [
+          99,
+          48
+        ],
+        "rateUnitsPerSecond": 1.5,
+        "maxUnits": 12,
+        "speed": -90
+      }
+    },
+    "mini-bathtub": {},
+    "shampoo-bottle": {},
+    "shampoo-hat": {},
+    "water-heater-panel": {},
+    "water-heater": {},
+    "bath-hose": {},
+    "bath-mat": {
+      "capacity": 16,
+      "wetMassMultiplier": 2,
+      "releasesWhenSqueezed": false
+    },
+    "bath-stool": {},
+    "long-yam": {}
   },
   "stateRules": {
     "breakage": {

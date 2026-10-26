@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 185, "the reviewed expansions contain 185 selection-only objects")
+	_expect(additions.size() == 197, "the reviewed expansions contain 197 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
@@ -118,6 +118,12 @@ func _run() -> void:
 		["red-hair-comb", Vector2(19.5, 70), Vector2(15, 70)],
 		["horizontal-bar", Vector2(64, 65), Vector2(20, 65)],
 		["fly-swatter", Vector2(37, 18), Vector2(67, 29)],
+		["shampoo-hat", Vector2(64, 60), Vector2(64, 92)],
+		["bath-hose", Vector2(62, 66), Vector2(18, 66)],
+		["bath-stool", Vector2(64, 90), Vector2(24, 90)],
+		["mini-bathtub", Vector2(64, 64), Vector2(64, 93)],
+		["yellow-washbowl", Vector2(64, 64), Vector2(64, 102)],
+		["wooden-washbowl", Vector2(64, 64), Vector2(64, 102)],
 		["coffee-maker", Vector2(101, 78), Vector2(117, 78)],
 		["leaf-blower", Vector2(44, 29), Vector2(45, 20)],
 		["timed-bomb", Vector2(56, 24), Vector2(56, 15)],
