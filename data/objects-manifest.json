@@ -36152,22 +36152,22 @@
         128
       ],
       "viewBox": [
-        13,
-        5,
-        102,
-        114
+        16,
+        4,
+        100,
+        118
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        51,
-        59
+        48,
+        60
       ],
       "worldWidth": 75,
-      "worldHeight": 83.82352941176471,
-      "worldScale": 0.7352941176470589,
+      "worldHeight": 88.5,
+      "worldScale": 0.75,
       "material": "metal",
       "mass": 4.5,
       "score": 100,
@@ -36178,121 +36178,168 @@
         {
           "polygon": [
             [
-              13,
-              107
-            ],
-            [
-              84,
-              94
-            ],
-            [
-              115,
-              103
-            ],
-            [
-              115,
-              119
-            ],
-            [
-              13,
-              119
-            ]
-          ]
-        },
-        {
-          "polygon": [
-            [
-              81,
-              36
-            ],
-            [
-              100,
-              31
-            ],
-            [
-              113,
-              47
-            ],
-            [
-              111,
-              88
-            ],
-            [
-              91,
-              110
-            ],
-            [
-              70,
+              16,
               104
             ],
             [
+              85,
+              98
+            ],
+            [
+              116,
+              107
+            ],
+            [
+              116,
+              120
+            ],
+            [
+              16,
+              120
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              58,
+              30
+            ],
+            [
+              87,
+              27
+            ],
+            [
+              107,
+              42
+            ],
+            [
+              111,
+              85
+            ],
+            [
+              91,
+              108
+            ],
+            [
+              69,
+              107
+            ],
+            [
+              87,
+              83
+            ],
+            [
               88,
-              84
-            ],
-            [
-              94,
-              51
-            ]
-          ]
-        },
-        {
-          "polygon": [
-            [
-              46,
-              9
-            ],
-            [
-              64,
-              17
-            ],
-            [
-              43,
-              64
-            ],
-            [
-              25,
-              55
-            ]
-          ]
-        },
-        {
-          "polygon": [
-            [
-              18,
-              72
-            ],
-            [
-              77,
-              63
-            ],
-            [
-              84,
-              75
-            ],
-            [
-              25,
-              86
-            ]
-          ]
-        },
-        {
-          "polygon": [
-            [
-              48,
-              39
-            ],
-            [
-              90,
-              38
-            ],
-            [
-              92,
               49
             ],
             [
-              43,
-              51
+              57,
+              50
             ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              35,
+              7
+            ],
+            [
+              53,
+              16
+            ],
+            [
+              43,
+              37
+            ],
+            [
+              26,
+              28
+            ]
+          ]
+        },
+        {
+          "rect": [
+            37,
+            30,
+            27,
+            19
+          ]
+        },
+        {
+          "rect": [
+            34,
+            47,
+            19,
+            10
+          ]
+        },
+        {
+          "rect": [
+            39,
+            55,
+            10,
+            12
+          ]
+        },
+        {
+          "polygon": [
+            [
+              52,
+              52
+            ],
+            [
+              61,
+              48
+            ],
+            [
+              70,
+              61
+            ],
+            [
+              62,
+              66
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              21,
+              73
+            ],
+            [
+              74,
+              67
+            ],
+            [
+              91,
+              75
+            ],
+            [
+              91,
+              84
+            ],
+            [
+              21,
+              84
+            ]
+          ]
+        },
+        {
+          "circle": [
+            101,
+            64,
+            13
+          ]
+        },
+        {
+          "rect": [
+            43,
+            91,
+            26,
+            13
           ]
         }
       ],
@@ -36304,7 +36351,7 @@
         "burnSeconds": null,
         "flowResponse": 0.45
       },
-      "opaquePixels": 6070,
+      "opaquePixels": 6500,
       "selectionOnly": true
     },
     {
@@ -37530,22 +37577,22 @@
         128
       ],
       "viewBox": [
-        8,
-        28,
-        112,
-        57
+        5,
+        39,
+        118,
+        49
       ],
       "pivotSource": [
         64,
         64
       ],
       "pivotCropped": [
-        56,
-        36
+        59,
+        25
       ],
       "worldWidth": 66,
-      "worldHeight": 33.589285714285715,
-      "worldScale": 0.5892857142857143,
+      "worldHeight": 27.406779661016948,
+      "worldScale": 0.559322033898305,
       "material": "plastic",
       "mass": 0.45,
       "score": 100,
@@ -37554,99 +37601,403 @@
       "colliderTemplate": "red-hair-comb",
       "fixtures": [
         {
-          "rect": [
-            8,
-            28,
-            112,
-            21
+          "polygon": [
+            [
+              5,
+              52
+            ],
+            [
+              14,
+              43
+            ],
+            [
+              37,
+              39
+            ],
+            [
+              91,
+              39
+            ],
+            [
+              114,
+              43
+            ],
+            [
+              123,
+              52
+            ],
+            [
+              121,
+              61
+            ],
+            [
+              7,
+              61
+            ]
           ]
         },
         {
-          "rect": [
-            13,
-            47,
-            5,
-            38
+          "polygon": [
+            [
+              13,
+              58
+            ],
+            [
+              18,
+              58
+            ],
+            [
+              18,
+              79
+            ],
+            [
+              16,
+              81
+            ],
+            [
+              14,
+              81
+            ],
+            [
+              13,
+              79
+            ]
           ]
         },
         {
-          "rect": [
-            22,
-            47,
-            5,
-            34
+          "polygon": [
+            [
+              21,
+              57
+            ],
+            [
+              26,
+              57
+            ],
+            [
+              26,
+              80
+            ],
+            [
+              24,
+              82
+            ],
+            [
+              22,
+              82
+            ],
+            [
+              21,
+              80
+            ]
           ]
         },
         {
-          "rect": [
-            31,
-            47,
-            5,
-            30
+          "polygon": [
+            [
+              29,
+              56
+            ],
+            [
+              34,
+              56
+            ],
+            [
+              34,
+              81
+            ],
+            [
+              32,
+              83
+            ],
+            [
+              30,
+              83
+            ],
+            [
+              29,
+              81
+            ]
           ]
         },
         {
-          "rect": [
-            40,
-            47,
-            5,
-            38
+          "polygon": [
+            [
+              37,
+              56
+            ],
+            [
+              42,
+              56
+            ],
+            [
+              42,
+              82
+            ],
+            [
+              40,
+              84
+            ],
+            [
+              38,
+              84
+            ],
+            [
+              37,
+              82
+            ]
           ]
         },
         {
-          "rect": [
-            49,
-            47,
-            5,
-            34
+          "polygon": [
+            [
+              45,
+              55
+            ],
+            [
+              50,
+              55
+            ],
+            [
+              50,
+              84
+            ],
+            [
+              48,
+              86
+            ],
+            [
+              46,
+              86
+            ],
+            [
+              45,
+              84
+            ]
           ]
         },
         {
-          "rect": [
-            58,
-            47,
-            5,
-            30
+          "polygon": [
+            [
+              53,
+              55
+            ],
+            [
+              58,
+              55
+            ],
+            [
+              58,
+              85
+            ],
+            [
+              56,
+              87
+            ],
+            [
+              54,
+              87
+            ],
+            [
+              53,
+              85
+            ]
           ]
         },
         {
-          "rect": [
-            67,
-            47,
-            5,
-            38
+          "polygon": [
+            [
+              61,
+              54
+            ],
+            [
+              66,
+              54
+            ],
+            [
+              66,
+              86
+            ],
+            [
+              64,
+              88
+            ],
+            [
+              62,
+              88
+            ],
+            [
+              61,
+              86
+            ]
           ]
         },
         {
-          "rect": [
-            76,
-            47,
-            5,
-            34
+          "polygon": [
+            [
+              69,
+              55
+            ],
+            [
+              74,
+              55
+            ],
+            [
+              74,
+              85
+            ],
+            [
+              72,
+              87
+            ],
+            [
+              70,
+              87
+            ],
+            [
+              69,
+              85
+            ]
           ]
         },
         {
-          "rect": [
-            85,
-            47,
-            5,
-            30
+          "polygon": [
+            [
+              77,
+              55
+            ],
+            [
+              82,
+              55
+            ],
+            [
+              82,
+              84
+            ],
+            [
+              80,
+              86
+            ],
+            [
+              78,
+              86
+            ],
+            [
+              77,
+              84
+            ]
           ]
         },
         {
-          "rect": [
-            94,
-            47,
-            5,
-            38
+          "polygon": [
+            [
+              85,
+              56
+            ],
+            [
+              90,
+              56
+            ],
+            [
+              90,
+              82
+            ],
+            [
+              88,
+              84
+            ],
+            [
+              86,
+              84
+            ],
+            [
+              85,
+              82
+            ]
           ]
         },
         {
-          "rect": [
-            103,
-            47,
-            5,
-            34
+          "polygon": [
+            [
+              93,
+              56
+            ],
+            [
+              98,
+              56
+            ],
+            [
+              98,
+              81
+            ],
+            [
+              96,
+              83
+            ],
+            [
+              94,
+              83
+            ],
+            [
+              93,
+              81
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              101,
+              57
+            ],
+            [
+              106,
+              57
+            ],
+            [
+              106,
+              80
+            ],
+            [
+              104,
+              82
+            ],
+            [
+              102,
+              82
+            ],
+            [
+              101,
+              80
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              109,
+              58
+            ],
+            [
+              114,
+              58
+            ],
+            [
+              114,
+              79
+            ],
+            [
+              112,
+              81
+            ],
+            [
+              110,
+              81
+            ],
+            [
+              109,
+              79
+            ]
           ]
         }
       ],
@@ -37658,7 +38009,7 @@
         "burnSeconds": 5,
         "flowResponse": 1
       },
-      "opaquePixels": 4132,
+      "opaquePixels": 3803,
       "selectionOnly": true
     },
     {
@@ -41801,6 +42152,900 @@
         "flowResponse": 1
       },
       "opaquePixels": 9810,
+      "selectionOnly": true
+    },
+    {
+      "id": "air-conditioner",
+      "nameJa": "エアコン",
+      "svg": "objects/air-conditioner.svg",
+      "png": "raster/objects/air-conditioner.png",
+      "webp": "raster/objects/air-conditioner.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        33,
+        115,
+        54
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        31
+      ],
+      "worldWidth": 105,
+      "worldHeight": 49.30434782608695,
+      "worldScale": 0.9130434782608695,
+      "material": "appliance",
+      "mass": 6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "air-conditioner",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              7,
+              41
+            ],
+            [
+              104,
+              33
+            ],
+            [
+              122,
+              44
+            ],
+            [
+              122,
+              76
+            ],
+            [
+              109,
+              87
+            ],
+            [
+              15,
+              87
+            ],
+            [
+              7,
+              77
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 5612,
+      "selectionOnly": true
+    },
+    {
+      "id": "outdoor-ac-unit",
+      "nameJa": "しつがいき",
+      "svg": "objects/outdoor-ac-unit.svg",
+      "png": "raster/objects/outdoor-ac-unit.png",
+      "webp": "raster/objects/outdoor-ac-unit.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        21,
+        114,
+        100
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        43
+      ],
+      "worldWidth": 94,
+      "worldHeight": 82.45614035087719,
+      "worldScale": 0.8245614035087719,
+      "material": "appliance",
+      "mass": 12,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "outdoor-ac-unit",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              30
+            ],
+            [
+              99,
+              21
+            ],
+            [
+              122,
+              34
+            ],
+            [
+              122,
+              105
+            ],
+            [
+              31,
+              115
+            ],
+            [
+              8,
+              100
+            ]
+          ]
+        },
+        {
+          "rect": [
+            18,
+            102,
+            12,
+            19
+          ]
+        },
+        {
+          "rect": [
+            98,
+            105,
+            13,
+            16
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.07,
+        "flammable": false,
+        "explosionResistance": 0.55,
+        "burnSeconds": null,
+        "flowResponse": 0.5
+      },
+      "opaquePixels": 9840,
+      "selectionOnly": true
+    },
+    {
+      "id": "trampoline",
+      "nameJa": "トランポリン",
+      "svg": "objects/trampoline.svg",
+      "png": "raster/objects/trampoline.png",
+      "webp": "raster/objects/trampoline.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        38,
+        120,
+        62
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        26
+      ],
+      "worldWidth": 162,
+      "worldHeight": 83.7,
+      "worldScale": 1.35,
+      "material": "metal",
+      "mass": 14,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "trampoline",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              4,
+              48
+            ],
+            [
+              19,
+              38
+            ],
+            [
+              109,
+              38
+            ],
+            [
+              124,
+              48
+            ],
+            [
+              124,
+              64
+            ],
+            [
+              4,
+              64
+            ]
+          ]
+        },
+        {
+          "rect": [
+            15,
+            64,
+            9,
+            32
+          ]
+        },
+        {
+          "rect": [
+            104,
+            64,
+            9,
+            32
+          ]
+        },
+        {
+          "rect": [
+            12,
+            94,
+            16,
+            6
+          ]
+        },
+        {
+          "rect": [
+            100,
+            94,
+            16,
+            6
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.8,
+        "restitution": 0,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45,
+        "springSurface": {
+          "fixture": 0,
+          "minImpactSpeed": 130,
+          "restitution": 1.15,
+          "maxSpeed": 650,
+          "normalMinDot": 0.75
+        }
+      },
+      "opaquePixels": 3702,
+      "selectionOnly": true
+    },
+    {
+      "id": "horizontal-bar",
+      "nameJa": "てつぼう",
+      "svg": "objects/horizontal-bar.svg",
+      "png": "raster/objects/horizontal-bar.png",
+      "webp": "raster/objects/horizontal-bar.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        4,
+        18,
+        120,
+        102
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        60,
+        46
+      ],
+      "worldWidth": 105,
+      "worldHeight": 89.25,
+      "worldScale": 0.875,
+      "material": "metal",
+      "mass": 5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "horizontal-bar",
+      "fixtures": [
+        {
+          "rect": [
+            9,
+            18,
+            111,
+            9
+          ]
+        },
+        {
+          "rect": [
+            17,
+            27,
+            9,
+            86
+          ]
+        },
+        {
+          "rect": [
+            104,
+            27,
+            9,
+            86
+          ]
+        },
+        {
+          "rect": [
+            4,
+            111,
+            35,
+            9
+          ]
+        },
+        {
+          "rect": [
+            91,
+            111,
+            33,
+            9
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.08,
+        "flammable": false,
+        "explosionResistance": 0.85,
+        "burnSeconds": null,
+        "flowResponse": 0.45
+      },
+      "opaquePixels": 3123,
+      "selectionOnly": true
+    },
+    {
+      "id": "jump-rope",
+      "nameJa": "なわとび",
+      "svg": "objects/jump-rope.svg",
+      "png": "raster/objects/jump-rope.png",
+      "webp": "raster/objects/jump-rope.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        16,
+        15,
+        94,
+        106
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        48,
+        49
+      ],
+      "worldWidth": 70,
+      "worldHeight": 78.93617021276596,
+      "worldScale": 0.7446808510638298,
+      "material": "rubber",
+      "mass": 0.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "jump-rope",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              25,
+              26
+            ],
+            [
+              58,
+              15
+            ],
+            [
+              58,
+              21
+            ],
+            [
+              29,
+              31
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              58,
+              15
+            ],
+            [
+              93,
+              30
+            ],
+            [
+              89,
+              34
+            ],
+            [
+              58,
+              21
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              93,
+              30
+            ],
+            [
+              110,
+              58
+            ],
+            [
+              104,
+              60
+            ],
+            [
+              89,
+              34
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              110,
+              58
+            ],
+            [
+              107,
+              84
+            ],
+            [
+              102,
+              80
+            ],
+            [
+              104,
+              60
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              107,
+              84
+            ],
+            [
+              86,
+              100
+            ],
+            [
+              85,
+              94
+            ],
+            [
+              102,
+              80
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              86,
+              100
+            ],
+            [
+              63,
+              97
+            ],
+            [
+              66,
+              92
+            ],
+            [
+              85,
+              94
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              63,
+              97
+            ],
+            [
+              47,
+              83
+            ],
+            [
+              52,
+              80
+            ],
+            [
+              66,
+              92
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              47,
+              83
+            ],
+            [
+              42,
+              60
+            ],
+            [
+              48,
+              61
+            ],
+            [
+              52,
+              80
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              42,
+              60
+            ],
+            [
+              53,
+              41
+            ],
+            [
+              56,
+              47
+            ],
+            [
+              48,
+              61
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              53,
+              41
+            ],
+            [
+              75,
+              41
+            ],
+            [
+              72,
+              47
+            ],
+            [
+              56,
+              47
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              75,
+              41
+            ],
+            [
+              89,
+              55
+            ],
+            [
+              84,
+              58
+            ],
+            [
+              72,
+              47
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              89,
+              55
+            ],
+            [
+              92,
+              75
+            ],
+            [
+              86,
+              73
+            ],
+            [
+              84,
+              58
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              92,
+              75
+            ],
+            [
+              84,
+              90
+            ],
+            [
+              79,
+              86
+            ],
+            [
+              86,
+              73
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              16,
+              27
+            ],
+            [
+              28,
+              23
+            ],
+            [
+              44,
+              63
+            ],
+            [
+              30,
+              68
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              75,
+              86
+            ],
+            [
+              87,
+              82
+            ],
+            [
+              104,
+              114
+            ],
+            [
+              90,
+              121
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.85,
+        "restitution": 0.45,
+        "flammable": true,
+        "explosionResistance": 0.65,
+        "burnSeconds": 6,
+        "flowResponse": 1,
+        "coldBrittle": true
+      },
+      "opaquePixels": 2679,
+      "selectionOnly": true
+    },
+    {
+      "id": "sliding-window",
+      "nameJa": "ひきまど",
+      "svg": "objects/sliding-window.svg",
+      "png": "raster/objects/sliding-window.png",
+      "webp": "raster/objects/sliding-window.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        7,
+        15,
+        115,
+        105
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        57,
+        49
+      ],
+      "worldWidth": 102,
+      "worldHeight": 93.13043478260869,
+      "worldScale": 0.8869565217391304,
+      "material": "glass",
+      "mass": 4.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "sliding-window",
+      "fixtures": [
+        {
+          "rect": [
+            7,
+            15,
+            115,
+            8
+          ]
+        },
+        {
+          "rect": [
+            7,
+            111,
+            115,
+            9
+          ]
+        },
+        {
+          "rect": [
+            7,
+            23,
+            8,
+            88
+          ]
+        },
+        {
+          "rect": [
+            114,
+            23,
+            8,
+            88
+          ]
+        },
+        {
+          "rect": [
+            59,
+            23,
+            9,
+            88
+          ]
+        },
+        {
+          "rect": [
+            15,
+            23,
+            44,
+            88
+          ]
+        },
+        {
+          "rect": [
+            68,
+            23,
+            46,
+            88
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.35,
+        "restitution": 0.03,
+        "flammable": false,
+        "explosionResistance": 0.05,
+        "burnSeconds": null,
+        "flowResponse": 0.55
+      },
+      "opaquePixels": 12075,
+      "selectionOnly": true
+    },
+    {
+      "id": "sandbox-box",
+      "nameJa": "すなば",
+      "svg": "objects/sandbox-box.svg",
+      "png": "raster/objects/sandbox-box.png",
+      "webp": "raster/objects/sandbox-box.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        49,
+        114,
+        67
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        15
+      ],
+      "worldWidth": 112,
+      "worldHeight": 65.82456140350877,
+      "worldScale": 0.9824561403508771,
+      "material": "wood",
+      "mass": 7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "sandbox-box",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              8,
+              68
+            ],
+            [
+              30,
+              49
+            ],
+            [
+              106,
+              49
+            ],
+            [
+              122,
+              65
+            ],
+            [
+              119,
+              105
+            ],
+            [
+              24,
+              116
+            ],
+            [
+              8,
+              99
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.6,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.25,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 6542,
       "selectionOnly": true
     }
   ]

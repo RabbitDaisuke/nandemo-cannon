@@ -1,0 +1,52 @@
+{
+	"checks": [
+		"the playground provides fifteen throws",
+		"air-conditioner is selectable and searchable by its displayed kana name",
+		"outdoor-ac-unit is selectable and searchable by its displayed kana name",
+		"trampoline is selectable and searchable by its displayed kana name",
+		"horizontal-bar is selectable and searchable by its displayed kana name",
+		"jump-rope is selectable and searchable by its displayed kana name",
+		"sliding-window is selectable and searchable by its displayed kana name",
+		"sandbox-box is selectable and searchable by its displayed kana name",
+		"the trampoline starts as an unfrozen physical prop",
+		"the indoor left wall has a real terrain collider",
+		"spring threshold and maximum are read from the physical surface data",
+		"side contacts and legs do not become spring surfaces",
+		"spring threshold and maximum are read from the physical surface data",
+		"side contacts and legs do not become spring surfaces",
+		"spring threshold and maximum are read from the physical surface data",
+		"side contacts and legs do not become spring surfaces",
+		"spring threshold and maximum are read from the physical surface data",
+		"side contacts and legs do not become spring surfaces",
+		"a strong impact rebounds from the upper trampoline surface",
+		"an impact below the threshold receives no spring impulse",
+		"the same deck hit from underneath gives no spring impulse",
+		"a free trampoline transfers an equal opposite impulse and the projectile rebounds",
+		"resting weight does not repeatedly trigger the spring or create jitter launches"
+	],
+	"failures": [],
+	"measurements": {
+		"floating": {
+			"down": 0.0,
+			"recoil": 58.803035736084,
+			"up": 426.276519775391
+		},
+		"strong": {
+			"down": 0.0,
+			"recoil": 0.0,
+			"up": 458.621032714844
+		},
+		"underside": {
+			"down": 0.0,
+			"recoil": 0.0,
+			"up": 399.399993896484
+		},
+		"weak": {
+			"down": 0.0,
+			"recoil": 0.0,
+			"up": 0.0
+		}
+	},
+	"status": "passed",
+	"suite": "playground"
+}

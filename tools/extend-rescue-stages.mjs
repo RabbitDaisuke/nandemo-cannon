@@ -40,9 +40,7 @@ const school = {
   preplaced: [], lesson: 'きょうしつに なんでもキャノンがきた！\nぶんぼうぐと ランドセルを つくえに つみあげよう。'
 };
 const additions = [fire, claw, school];
-// IDs remain permanent. Navigation uses metadata, so future normal stages precede
-// the recap and finale without renumbering saved scores or seed identities.
-for (const [id, group] of [[44, 100], [45, 200]]) stages.stages.find(s => s.id === id).sequenceGroup = group;
+// Existing stages keep their manually authored navigation metadata.
 for (const stage of additions) {
   const index = stages.stages.findIndex(s => s.id === stage.id);
   if (index < 0) stages.stages.push(stage); else stages.stages[index] = stage;

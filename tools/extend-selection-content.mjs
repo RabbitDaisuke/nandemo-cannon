@@ -14,6 +14,7 @@ import {items as dailyTools} from './daily-tools-items.mjs';
 import {items as oct26Food} from './oct26-food-items.mjs';
 import {items as oct26Tools} from './oct26-tool-items.mjs';
 import {items as oct26Retakes} from './oct26-retake-items.mjs';
+import {items as playground} from './playground-items.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -24,6 +25,7 @@ const read = async name => new TextDecoder('utf-8', {fatal: true}).decode(await 
 const json = async name => JSON.parse(await read(`data/${name}.json`));
 const [manifest, catalog, physics, colliders, ui] = await Promise.all(['objects-manifest', 'catalog', 'physics', 'colliders', 'ui-ja'].map(json));
 const groups = [['food', food], ['tools', tools], ['misc', misc], ['firestation', firestation], ['school', school], ['daily-food', dailyFood], ['daily-tools', dailyTools], ['oct26-food', oct26Food], ['oct26-tools', oct26Tools], ['oct26-retakes', oct26Retakes]];
+groups.push(['playground', playground]);
 const entries = groups.flatMap(([, items]) => items);
 if (new Set(entries.map(item => item.id)).size !== entries.length) throw Error('Duplicate selection item ID');
 const coverage = JSON.parse(await read('assets/font/generated-coverage.json')).chars;
@@ -111,6 +113,7 @@ await fs.mkdir(path.join(root, 'previews'), {recursive: true});
 const retakeIds = ['bench-grinder', 'blood-pressure-monitor', 'mini-soccer-goal', 'baseball-bat', 'fishing-rod-tip', 'boxed-butter', 'gratin', 'bread-loaf', 'telescope', 'oscilloscope', 'roasted-sweet-potato', 'robot-vacuum'];
 const reviewGroups = [...groups, ['retakes', retakeIds.map(id => entries.find(item => item.id === id)).filter(Boolean)], ['optics-printer', ['telescope', 'white-printer', 'pancake-pair', 'blood-pressure-monitor', 'care-bed'].map(id => entries.find(item => item.id === id))]];
 reviewGroups.push(['rescue-retakes', ['randoseru', 'bandage-roll', 'ambulance', 'fire-engine', 'ladder-truck'].map(id => entries.find(item => item.id === id))]);
+reviewGroups.push(['playground-retakes', ['microscope', 'red-hair-comb'].map(id => entries.find(item => item.id === id))]);
 for (const [group, items] of reviewGroups) for (const collision of [false, true]) {
   const columns = Math.min(6, items.length), cellWidth = 200, cellHeight = 200, layers = [];
   for (const [index, item] of items.entries()) {

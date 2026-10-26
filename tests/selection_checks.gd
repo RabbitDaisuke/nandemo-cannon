@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 165, "the reviewed expansions contain 165 selection-only objects")
+	_expect(additions.size() == 172, "the reviewed expansions contain 172 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
@@ -32,7 +32,7 @@ func _run() -> void:
 		_expect(kana.search(item.nameJa) != null and ui[id] == item.nameJa and Search.sanitize_input(item.nameJa) == item.nameJa, id + " has a supported kana name in both catalogs")
 		_expect(catalog.is_catalog_selectable(id) and search.find_items(item.nameJa).any(func(found): return found.id == id), id + " is selectable and searchable by its displayed name")
 		_expect(rows.any(func(row): return row[0] == id and row[1] == item.nameJa) and shapes[id] == item.fixtures, id + " keeps catalog and physical shape sources synchronized")
-		_expect(item.worldWidth > 0 and item.worldWidth <= 115 and item.worldHeight > 0 and item.worldHeight <= 180, id + " uses a bounded throwable size without transparent-margin scaling")
+		_expect(item.worldWidth > 0 and item.worldHeight > 0 and is_equal_approx(float(item.worldWidth), float(item.viewBox[2]) * float(item.worldScale)) and is_equal_approx(float(item.worldHeight), float(item.viewBox[3]) * float(item.worldScale)), id + " keeps its physical dimensions proportional to the cropped source artwork")
 	for query in ["ティラミス", "てぃらみす", "タピオカ", "つりざお", "いりょう", "でんしぶひん", "ちょうみりょう"]:
 		_expect(not search.find_items(query).is_empty(), "new names and independent manual aliases match: " + query)
 	_expect(search.find_items("カミナリ").map(func(item): return item.id) == ["lightning-orb"], "electrical additions do not pollute the lightning alias")
@@ -114,7 +114,9 @@ func _run() -> void:
 		["paint-palette", Vector2(91, 77), Vector2(64, 65)],
 		["film-roll", Vector2(98, 61), Vector2(118, 61)],
 		["metal-spatula", Vector2(37.47, 87.94), Vector2(44.40, 91.94)],
-		["microscope", Vector2(64, 60), Vector2(64, 44)],
+		["microscope", Vector2(78, 61), Vector2(72, 38)],
+		["red-hair-comb", Vector2(19.5, 70), Vector2(15, 70)],
+		["horizontal-bar", Vector2(64, 65), Vector2(20, 65)],
 		["three-d-printer", Vector2(90, 45), Vector2(110, 45)],
 		["lidded-saucepan", Vector2(15, 69), Vector2(8, 69)],
 		["mini-ferris-wheel", Vector2(48, 30), Vector2(64, 30)],

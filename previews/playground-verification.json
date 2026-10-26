@@ -1,0 +1,69 @@
+{
+  "engine": "Godot 4.7.2 stable, headless",
+  "suites": [
+    {
+      "suite": "search",
+      "checks": 22,
+      "status": "passed"
+    },
+    {
+      "suite": "selection",
+      "checks": 1583,
+      "status": "passed"
+    },
+    {
+      "suite": "body",
+      "checks": 95,
+      "status": "passed"
+    },
+    {
+      "suite": "cannon",
+      "checks": 68,
+      "status": "passed"
+    },
+    {
+      "suite": "hazard",
+      "checks": 130,
+      "status": "passed"
+    },
+    {
+      "suite": "progress",
+      "checks": 16,
+      "status": "passed"
+    },
+    {
+      "suite": "rescue",
+      "checks": 119,
+      "status": "passed"
+    },
+    {
+      "suite": "playground",
+      "checks": 23,
+      "status": "passed"
+    },
+    {
+      "suite": "game",
+      "checks": 743,
+      "status": "passed"
+    }
+  ],
+  "visual": {
+    "source": "Godot debug_snapshot for stage 49, composed with actual SVG/bitmap font assets by tools/render-game.mjs in Node.js sharp",
+    "image": "game-49-playground.png",
+    "browserUsed": false,
+    "engineFramebuffer": false
+  },
+  "changes": {
+    "newObjects": 7,
+    "retakes": [
+      "microscope",
+      "red-hair-comb"
+    ],
+    "newStageId": 49,
+    "exchangedDisplayPositions": [
+      10,
+      13
+    ]
+  },
+  "scope": "Local checks only; GitHub Actions and browser QA not observed."
+}

@@ -50,15 +50,25 @@ add('paper-plate','かみざら','paper',0.35,60,
 
 
 add('microscope','けんびきょう','metal',4.5,75,
- [poly([13,107],[84,94],[115,103],[115,119],[13,119]),poly([81,36],[100,31],[113,47],[111,88],[91,110],[70,104],[88,84],[94,51]),poly([46,9],[64,17],[43,64],[25,55]),poly([18,72],[77,63],[84,75],[25,86]),poly([48,39],[90,38],[92,49],[43,51])],
- P('M81 36L100 31L113 47L111 88L91 110L70 104L88 84L94 51Z',ink)+P('M86 41L98 37L107 49L105 85L89 103L80 102L93 86L100 50Z',ivory)+
- P('M48 39L90 38L92 49L43 51Z',ink)+P('M49 43L86 42L87 45L47 47Z',steel)+
- P('M46 9L64 17L43 64L25 55Z',ink)+P('M47 16L56 20L38 57L32 54Z',silver)+P('M46 14L53 17L50 23L43 20Z',white)+
- P('M42 5L64 15L59 25L37 15Z',ink)+P('M42 9L59 17L56 20L41 14Z',shade)+
- P('M18 72L77 63L84 75L25 86Z',ink)+P('M24 74L74 68L76 72L27 80Z',steel)+R(33,72,23,4,blueLight)+
- O(99,60,12,12,ink)+O(99,60,7,7,shade)+O(99,60,3,3,silver)+
- P('M13 107L84 94L115 103V119H13Z',ink)+P('M20 109L83 100L109 107V113H20Z',ivory)+R(23,114,81,3,steel)+
- O(58,94,13,7,ink)+O(58,92,8,4,silver));
+ [poly([16,104],[85,98],[116,107],[116,120],[16,120]),
+  poly([58,30],[87,27],[107,42],[111,85],[91,108],[69,107],[87,83],[88,49],[57,50]),
+  poly([35,7],[53,16],[43,37],[26,28]),rect(37,30,27,19),rect(34,47,19,10),rect(39,55,10,12),
+  poly([52,52],[61,48],[70,61],[62,66]),poly([21,73],[74,67],[91,75],[91,84],[21,84]),circle(101,64,13),rect(43,91,26,13)],
+ // Continuous C-shaped cast arm, with clear space between stage and objectives.
+ P('M58 30L87 27L107 42L111 85L91 108L69 107L87 83L88 49L57 50Z',ink)+
+ P('M64 35L85 33L101 45L105 83L88 102H81L94 85L94 44H63Z',ivory)+
+ P('M87 36L99 46L103 82L88 99H83L97 82L96 47Z',silver)+R(66,35,18,4,white)+
+ P('M35 7L53 16L43 37L26 28Z',ink)+P('M35 14L46 19L39 32L32 28Z',silver)+
+ P('M32 4L54 14L51 22L28 11Z',ink)+P('M33 8L48 15L47 17L32 10Z',shade)+
+ P('M37 30H60L66 37V48L59 52H37Z',ink)+P('M42 34H58L61 39V45H42Z',ivory)+R(44,35,13,3,white)+
+ P('M52 52L61 48L70 61L62 66Z',ink)+P('M57 54L60 53L66 60L63 62Z',silver)+
+ R(34,47,19,10,ink)+R(38,50,11,4,steel)+R(39,55,10,12,ink)+R(42,57,4,8,silver)+R(42,62,4,2,gold)+
+ P('M21 73L74 67L91 75V84H21Z',ink)+P('M28 74L73 71L83 75L32 79Z',shade)+R(26,80,60,2,steel)+
+ P('M38 73L58 72L64 75L43 77Z',blueLight)+R(34,73,4,5,silver)+R(64,71,4,5,silver)+
+ O(101,64,13,13,ink)+O(101,64,9,9,shade)+O(101,64,5,5,silver)+O(101,64,2,2,ink)+
+ P('M16 104L85 98L116 107V120H16Z',ink)+P('M22 107L84 103L108 109L29 114L22 112Z',ivory)+
+ P('M29 114L110 109V116H29Z',silver)+R(26,118,12,4,ink)+R(99,118,12,4,ink)+
+ O(56,99,16,7,ink)+O(56,97,11,4,steel)+O(56,96,7,2,blueLight));
 
 const matchBoxArt=P('M14 69L80 54L113 70V111L47 125L14 108Z',ink)+P('M20 72L78 60L103 71L47 84Z',ivory)+
  P('M20 80L43 91V117L20 104Z','#8c5b48')+P('M49 90L107 77V106L49 119Z',red)+P('M54 92L101 82V88L54 99Z','#e49b6a')+
@@ -139,11 +149,16 @@ add('stone-fountain','ふんすい','stone',7.8,86,
  P('M16 77H112L105 84H24Z','#71bfd0')+R(29,89,70,4,ivory)+edge(46,102,36,15,steel)+edge(30,117,68,9,silver),
  'solid',{waterSource:{position:[64,6],rateUnitsPerSecond:2,maxUnits:16,speed:160}});
 
-const combTeeth=Array.from({length:11},(_,i)=>rect(13+i*9,47,5,38-(i%3)*4));
+const combTeeth=Array.from({length:13},(_,i)=>{
+ const x=13+i*8,y=54+Math.round(Math.abs(i-6)*.6),end=88-Math.round(Math.abs(i-6)*1.2);
+ return poly([x,y],[x+5,y],[x+5,end-2],[x+3,end],[x+1,end],[x,end-2]);
+});
 add('red-hair-comb','あかいくし','plastic',0.45,66,
- [rect(8,28,112,21),...combTeeth],
- edge(8,28,112,21,red)+R(15,32,97,5,'#ee9773')+combTeeth.map(f=>R(...f.rect,ink)+R(f.rect[0]+1,f.rect[1],2,f.rect[3]-4,red)).join('')+
- R(17,40,90,3,'#983c45'));
+ [poly([5,52],[14,43],[37,39],[91,39],[114,43],[123,52],[121,61],[7,61]),...combTeeth],
+ combTeeth.map(f=>P(path(f.polygon),ink)+R(f.polygon[0][0]+2,f.polygon[0][1],2,f.polygon[3][1]-f.polygon[0][1]-3,'#d84d59')).join('')+
+ P('M5 52L14 43L37 39H91L114 43L123 52L121 61H7Z',ink)+
+ P('M10 52L16 47L38 43H90L112 47L118 52V57H10Z','#c3374e')+
+ P('M16 48L39 44H90L111 48V51L90 48H39L16 52Z','#f27a7a')+R(13,54,103,3,'#8c283e'));
 
 
 add('mini-excavator','ミニショベル','metal',8,105,

@@ -44,6 +44,7 @@ var _previous_position: Vector2 = Vector2.ZERO
 var _previous_valid: bool = false
 var _impact_times: Dictionary = {}
 var _contact_last_seen: Dictionary = {}
+var _spring_contact_ticks: Dictionary = {}
 var _physics_tick: int = 0
 
 
@@ -280,6 +281,21 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			var own_before = _previous_velocity + Vector2(-offset_before.y, offset_before.x) * _previous_angular_velocity
 			normal_speed = maxf(normal_speed, -(own_before - other_velocity).dot(normal))
 		var inverse_effective_mass = _inverse_effective_mass(state, point, normal, collider)
+		if new_contact and collider is ThrowBody:
+			var spring_id: int = collider.get_instance_id()
+			if _physics_tick - int(_spring_contact_ticks.get(spring_id, -1000)) > 24:
+				var launch_speed: float = collider.spring_launch_speed(state.get_contact_collider_shape(i), normal, normal_speed)
+				if launch_speed > 0.0 and inverse_effective_mass > 0.0:
+					# Add only the separation missing after the ordinary contact solver.
+					# The opposite impulse keeps an unanchored trampoline a real body.
+					var offset = point - state.transform.origin
+					var velocity_at_point = state.linear_velocity + Vector2(-offset.y, offset.x) * state.angular_velocity
+					var separation_speed = (velocity_at_point - other_velocity).dot(normal)
+					var impulse = normal * maxf(0.0, launch_speed - separation_speed) / inverse_effective_mass
+					state.apply_impulse(impulse, offset)
+					if not collider.freeze:
+						collider.apply_impulse(-impulse, point - collider.global_position)
+					_spring_contact_ticks[spring_id] = _physics_tick
 		var impact_energy = 0.5 * pow(normal_speed / 100.0, 2.0) / maxf(inverse_effective_mass, 0.0001)
 		if age >= 0.15 and normal_speed >= 35.0 and age - float(_impact_times.get(key, -10.0)) > 0.16:
 			_impact_times[key] = age
@@ -331,10 +347,26 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	_previous_valid = true
 	# Remove expired keys so repeated stage play cannot grow contact bookkeeping.
 	if _physics_tick % 120 == 0:
+		for id in _spring_contact_ticks.keys():
+			if _physics_tick - int(_spring_contact_ticks[id]) > 120:
+				_spring_contact_ticks.erase(id)
 		for key in _contact_last_seen.keys():
 			if _physics_tick - int(_contact_last_seen[key]) > 120:
 				_contact_last_seen.erase(key)
 				_impact_times.erase(key)
+
+
+func spring_launch_speed(shape_index: int, outward_normal: Vector2, incoming_speed: float) -> float:
+	var spring: Dictionary = spec.get("springSurface", {})
+	if spring.is_empty() or not alive or break_requested or shape_index < 0 or shape_index >= _shape_to_fixture.size():
+		return 0.0
+	if _shape_to_fixture[shape_index] != int(spring.get("fixture", -1)):
+		return 0.0
+	if outward_normal.dot(-global_transform.y.normalized()) < float(spring.get("normalMinDot", 0.75)):
+		return 0.0
+	if incoming_speed < float(spring.get("minImpactSpeed", 130.0)):
+		return 0.0
+	return minf(incoming_speed * float(spring.get("restitution", 1.15)), float(spring.get("maxSpeed", 650.0)))
 
 
 func _inverse_effective_mass(state: PhysicsDirectBodyState2D, point: Vector2, axis: Vector2, collider: Object) -> float:

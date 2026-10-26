@@ -1009,7 +1009,24 @@
     "persimmon": {},
     "chocolate-chip-cookie": {},
     "matsutake": {},
-    "thinking-face": {}
+    "thinking-face": {},
+    "air-conditioner": {},
+    "outdoor-ac-unit": {},
+    "trampoline": {
+      "springSurface": {
+        "fixture": 0,
+        "minImpactSpeed": 130,
+        "restitution": 1.15,
+        "maxSpeed": 650,
+        "normalMinDot": 0.75
+      },
+      "restitution": 0,
+      "friction": 0.8
+    },
+    "horizontal-bar": {},
+    "jump-rope": {},
+    "sliding-window": {},
+    "sandbox-box": {}
   },
   "stateRules": {
     "breakage": {

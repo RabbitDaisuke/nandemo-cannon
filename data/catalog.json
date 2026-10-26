@@ -4431,6 +4431,76 @@
       66,
       "thinking-face",
       "solid"
+    ],
+    [
+      "air-conditioner",
+      "エアコン",
+      "appliance",
+      6,
+      100,
+      105,
+      "air-conditioner",
+      "solid"
+    ],
+    [
+      "outdoor-ac-unit",
+      "しつがいき",
+      "appliance",
+      12,
+      100,
+      94,
+      "outdoor-ac-unit",
+      "solid"
+    ],
+    [
+      "trampoline",
+      "トランポリン",
+      "metal",
+      14,
+      100,
+      162,
+      "trampoline",
+      "solid"
+    ],
+    [
+      "horizontal-bar",
+      "てつぼう",
+      "metal",
+      5,
+      100,
+      105,
+      "horizontal-bar",
+      "solid"
+    ],
+    [
+      "jump-rope",
+      "なわとび",
+      "rubber",
+      0.7,
+      100,
+      70,
+      "jump-rope",
+      "solid"
+    ],
+    [
+      "sliding-window",
+      "ひきまど",
+      "glass",
+      4.2,
+      100,
+      102,
+      "sliding-window",
+      "solid"
+    ],
+    [
+      "sandbox-box",
+      "すなば",
+      "wood",
+      7,
+      100,
+      112,
+      "sandbox-box",
+      "solid"
     ]
   ]
 }
