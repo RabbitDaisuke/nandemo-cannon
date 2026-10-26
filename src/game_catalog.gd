@@ -14,6 +14,12 @@ func _init() -> void:
 		items[item.id] = item
 		ordered_items.append(item)
 	stages = read_json("res://data/stages.json").stages
+	# Persisted presentation ranks; never shuffle at boot or change saved IDs.
+	var presentation_order: Array = read_json("res://data/stage-order.json").order
+	for stage in stages:
+		var rank = presentation_order.find(int(stage.id))
+		if rank >= 0:
+			stage.sequenceOrder = rank + 1
 	rules = read_json("res://data/physics.json")
 	animations = read_json("res://data/animations.json")
 

@@ -84,7 +84,15 @@ func _navigation_checks() -> void:
 	_expect(catalog.items.size() == 442 and catalog.stages.size() == 48, "the complete expansion loads 442 objects and 48 stable-ID stages")
 	var order = catalog.stage_order()
 	var ids = order.map(func(index): return int(catalog.stages[index].id))
-	_expect(order.size() == catalog.stages.size() and ids.slice(-5) == [46, 47, 48, 44, 45], "the rescue, crane and school stages precede the review and cannon finale without renumbering saved IDs")
+	var saved_order: Array = GameCatalog.read_json("res://data/stage-order.json").order
+	_expect(order.size() == catalog.stages.size() and ids == saved_order and ids.slice(-2) == [44, 45], "navigation uses the saved one-time shuffle and preserves the finale groups")
+	var fixed_positions = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 15: 15, 20: 21, 25: 33, 45: 47, 47: 44, 48: 45}
+	for position in fixed_positions:
+		_expect(ids[position - 1] == fixed_positions[position], "requested fixed position %d is preserved" % position)
+	var unique_ids: Dictionary = {}
+	for id in ids:
+		unique_ids[id] = true
+	_expect(unique_ids.size() == catalog.stages.size(), "the saved shuffle contains every stage exactly once")
 	var navigates_all = true
 	for position in range(order.size()):
 		var index = int(order[position])
