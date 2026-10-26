@@ -51,7 +51,9 @@ func _run() -> void:
 		if int(stage.id) > 45:
 			continue
 		if int(stage.id) in [21, 33]:
-			_expect(stage.get("randomCatalogScope", "") == "all", "both laboratories opt into the full live catalog")
+			_expect(stage.get("randomCatalogScope", "") == "selectable", "both laboratories include additions but exclude banned objects")
+			var eligible = catalog.selectable_items()
+			_expect(eligible.size() == catalog.ordered_items.size() - 2 and not catalog.is_catalog_selectable("counter") and not catalog.is_catalog_selectable("cannon-object"), "only counter and cannon are excluded from the laboratory pool")
 			var laboratory_rng = RandomNumberGenerator.new()
 			var observed_addition = false
 			for seed_value in range(32):
@@ -60,8 +62,8 @@ func _run() -> void:
 				laboratory_rng.seed = seed_value
 				var expected: Array = []
 				for shot in range(15):
-					expected.append(str(catalog.ordered_items[laboratory_rng.randi_range(0, catalog.ordered_items.size() - 1)].id))
-				_expect(actual == expected, "laboratory %d samples all current items with its seed" % int(stage.id))
+					expected.append(str(eligible[laboratory_rng.randi_range(0, eligible.size() - 1)].id))
+				_expect(actual == expected and not actual.has("counter") and not actual.has("cannon-object"), "laboratory %d samples eligible items and never banned objects" % int(stage.id))
 				observed_addition = observed_addition or actual.any(func(id): return bool(catalog.items[id].get("selectionOnly", false)))
 			_expect(observed_addition, "laboratory %d actually draws added items" % int(stage.id))
 			# Every addition, including a future item, must survive the actual stage's filter.
@@ -69,8 +71,8 @@ func _run() -> void:
 			future.id = "future-selection-only-item"
 			var probe = GameCatalog.new()
 			for item in additions + [future]:
-				probe.ordered_items = [item]
-				probe.items = {item.id: item}
+				probe.ordered_items = [catalog.items["counter"], item, catalog.items["cannon-object"]]
+				probe.items = {item.id: item, "counter": catalog.items["counter"], "cannon-object": catalog.items["cannon-object"]}
 				var queue = probe.build_queue(stage, laboratory_rng)
 				_expect(queue.size() == 15 and queue.count(item.id) == 15, "laboratory %d accepts addition %s" % [int(stage.id), item.id])
 			continue

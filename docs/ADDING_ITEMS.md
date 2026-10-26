@@ -27,7 +27,7 @@ IDは既存のモノのIDと一致させ、タグは読みで探せるひらが�
 ## 自由選択一覧からの除外
 `objects-manifest.json`のモノに`catalogSelectable: false`を指定すると、自由選択の一覧・検索結果・履歴からの検索に表示しない。省略時は選択可能。検索インデックスは削除せず、材質・寸法・得点も変更しない。ステージに指定した発射リストや`randomCatalog`の抽選は引き続き使用できる。現在の対象は`counter`と`cannon-object`。生成元`tools/extend-late-content.mjs`にも設定を残し、再生成で解除されないようにする。
 ## 自由選択専用の追加
-例外として`randomCatalogScope: "all"`を指定した全カタログ抽選では`selectionOnly`も抽選する。ランダム実験室ときゅうきょくちかしつが対象で、将来の追加品も自動的に候補へ入る。`selectable`は一覧表示可能品、未指定は従来の通常抽選を維持する。
+`randomCatalogScope: "selectable"`では`selectionOnly`と将来追加品も抽選し、`catalogSelectable: false`のban対象は除外する。ランダム実験室・きゅうきょくちかしつ・クレーンゲームが対象。現時点のban対象はカウンターとなんでもキャノンの2種。未指定は従来の通常抽選を維持する。
 `selectionOnly: true`のモノは自由選択一覧と検索で選べるが、`randomCatalog`の自動抽選には含めない。省略時は従来どおり抽選可能。`catalogSelectable`とは独立した設定で、カウンターなどの非表示物を抽選から除外するものではない。既存ステージの発射候補は書き換えず、同じシードの抽選順も維持する。明示したステージキューへの登録は可能だが、専用品を既存キューへ自動追加しない。
 自由選択専用アセットの原稿は`tools/selection-food.mjs`と`tools/selection-tools.mjs`。`./build.sh selection-items`でSVG・PNG・lossless WebP・物体データ・確認画像を再生成する。検索タグはこの処理から読み書きせず、前述の手順で索引へ直接記述する。新しい表示名と正式名は両方かな表記にし、商標名やブランドロゴを描かない。通常のビルドは保存済みの生成物を使用する。
 ## 候補数と発射順
