@@ -1713,6 +1713,8 @@
 		"noodle-strainer keeps its modeled surface physically solid",
 		"desktop-hole-punch leaves the intended non-solid area empty in actual physics",
 		"desktop-hole-punch keeps its modeled surface physically solid",
+		"desktop-hole-punch leaves the intended non-solid area empty in actual physics",
+		"desktop-hole-punch keeps its modeled surface physically solid",
 		"hand-cranked-gramophone leaves the intended non-solid area empty in actual physics",
 		"hand-cranked-gramophone keeps its modeled surface physically solid",
 		"coffee-maker leaves the intended non-solid area empty in actual physics",
