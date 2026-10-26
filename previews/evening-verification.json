@@ -1,0 +1,69 @@
+{
+  "objects": 483,
+  "stages": 51,
+  "added": [
+    {
+      "id": "hand-cranked-gramophone",
+      "name": "てまわしちくおんき"
+    },
+    {
+      "id": "rice-paddle",
+      "name": "しゃもじ"
+    },
+    {
+      "id": "noodle-strainer",
+      "name": "みずきり"
+    },
+    {
+      "id": "ramen-bowl",
+      "name": "ラーメン"
+    },
+    {
+      "id": "kamaboko-board",
+      "name": "かまぼこ"
+    },
+    {
+      "id": "yuzu",
+      "name": "ゆず"
+    },
+    {
+      "id": "chestnut-yokan",
+      "name": "くりようかん"
+    },
+    {
+      "id": "oyakodon",
+      "name": "おやこどん"
+    },
+    {
+      "id": "desktop-hole-punch",
+      "name": "あなあけパンチ"
+    }
+  ],
+  "engine": "Godot 4.7.2.stable.official.ed1daf0bf",
+  "godotSuites": 11,
+  "godotChecks": 3184,
+  "webSuites": [
+    "mirrors",
+    "share",
+    "bgm",
+    "input-hint",
+    "progress"
+  ],
+  "status": "passed",
+  "visualReview": {
+    "renderer": "Node.js sharp/librsvg",
+    "artwork": "Directly authored SVG; not image generation or a browser screenshot",
+    "files": [
+      "selection-evening.png",
+      "selection-evening-colliders.png"
+    ],
+    "refinement": "Soft egg folds overlap the chicken pieces in the sky-blue striped oyakodon bowl."
+  },
+  "preserved": {
+    "existingObjects": 474,
+    "stageData": "byte-identical",
+    "washingMachine": "unchanged",
+    "buildShGitMode": "100755"
+  },
+  "actionsChecked": false
+}
