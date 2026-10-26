@@ -1734,9 +1734,9 @@
 		},
 		"push-mower": {
 			"inverted_friction": 0.600000023841858,
-			"inverted_px": 38.4253387451172,
+			"inverted_px": 38.5553894042969,
 			"upright_friction": 0.025000000372529,
-			"upright_px": 147.46989440918
+			"upright_px": 147.55859375
 		}
 	},
 	"status": "passed",

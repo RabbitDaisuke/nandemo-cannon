@@ -1038,8 +1038,10 @@
     "leaf-blower": {},
     "push-mower": {
       "wheelFixtures": [
-        3,
-        4
+        4,
+        5,
+        6,
+        7
       ]
     },
     "timed-bomb": {

@@ -1,0 +1,18 @@
+{
+  "retakes": ["vending-machine", "bench-seat", "timed-bomb", "ventilation-fan", "wood-stamp", "push-mower"],
+  "reference": "assets/objects/washing-machine.svg",
+  "referenceFilesUnchanged": true,
+  "referenceCatalogRecordUnchanged": true,
+  "visual": {
+    "renderer": "Node.js sharp/librsvg, authored SVG originals",
+    "comparison": "breakroom-box-retakes.png",
+    "colliders": "selection-breakroom-colliders.png",
+    "browserUsed": false
+  },
+  "suites": [
+    {"suite": "selection", "checks": 1687, "failures": []},
+    {"suite": "hazard", "checks": 139, "failures": []}
+  ],
+  "mowerDisplacement": {"upright": 147.55859375, "inverted": 38.5553894042969},
+  "scope": "Retaken SVG/PNG/WebP and matching collision shapes; no stage, UI, search, timer or spring logic changes. GitHub Actions and browser QA were not observed."
+}
