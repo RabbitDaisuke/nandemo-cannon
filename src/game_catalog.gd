@@ -80,6 +80,8 @@ func _build_base_queue(stage: Dictionary, rng: RandomNumberGenerator) -> Array:
 	if str(stage.get("queuePolicy", "")) == "randomCatalog":
 		var random_queue: Array = []
 		var candidates = selectable_items() if str(stage.get("randomCatalogScope", "")) == "selectable" else random_items()
+		if str(stage.get("randomCatalogScope", "")) == "all":
+			candidates = ordered_items
 		assert(not candidates.is_empty(), "Random laboratory needs eligible catalog items")
 		for index in range(15):
 			random_queue.append(str(candidates[rng.randi_range(0, candidates.size() - 1)].id))

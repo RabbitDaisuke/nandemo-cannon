@@ -50,6 +50,30 @@ func _run() -> void:
 	for stage in catalog.stages:
 		if int(stage.id) > 45:
 			continue
+		if int(stage.id) in [21, 33]:
+			_expect(stage.get("randomCatalogScope", "") == "all", "both laboratories opt into the full live catalog")
+			var laboratory_rng = RandomNumberGenerator.new()
+			var observed_addition = false
+			for seed_value in range(32):
+				laboratory_rng.seed = seed_value
+				var actual = catalog.build_queue(stage, laboratory_rng)
+				laboratory_rng.seed = seed_value
+				var expected: Array = []
+				for shot in range(15):
+					expected.append(str(catalog.ordered_items[laboratory_rng.randi_range(0, catalog.ordered_items.size() - 1)].id))
+				_expect(actual == expected, "laboratory %d samples all current items with its seed" % int(stage.id))
+				observed_addition = observed_addition or actual.any(func(id): return bool(catalog.items[id].get("selectionOnly", false)))
+			_expect(observed_addition, "laboratory %d actually draws added items" % int(stage.id))
+			# Every addition, including a future item, must survive the actual stage's filter.
+			var future = additions[0].duplicate(true)
+			future.id = "future-selection-only-item"
+			var probe = GameCatalog.new()
+			for item in additions + [future]:
+				probe.ordered_items = [item]
+				probe.items = {item.id: item}
+				var queue = probe.build_queue(stage, laboratory_rng)
+				_expect(queue.size() == 15 and queue.count(item.id) == 15, "laboratory %d accepts addition %s" % [int(stage.id), item.id])
+			continue
 		for seed_value in [1, 51, 1039]:
 			var rng = RandomNumberGenerator.new()
 			rng.seed = seed_value

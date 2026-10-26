@@ -5903,6 +5903,7 @@
       "preplaced": [],
       "queuePolicy": "randomCatalog",
       "selectionPolicy": "fifteen seeded draws from every current catalog item, including future additions",
+      "randomCatalogScope": "all",
       "lesson": "なにがでるかな。すべてのものから ランダムで15こ。"
     },
     {
@@ -6921,6 +6922,7 @@
       "queuePolicy": "randomCatalog",
       "selectAnyCatalogItem": true,
       "selectionPolicy": "seeded whole-catalog queue; optional free selection overrides the current and following throws",
+      "randomCatalogScope": "all",
       "lesson": "なんでもためせる ちかのじっけんしつ。ものをえらんでもいい。"
     },
     {
