@@ -84,7 +84,9 @@ func _navigation_checks() -> void:
 	_expect(catalog.items.size() == 442 and catalog.stages.size() == 48, "the complete expansion loads 442 objects and 48 stable-ID stages")
 	var order = catalog.stage_order()
 	var ids = order.map(func(index): return int(catalog.stages[index].id))
-	var saved_order: Array = GameCatalog.read_json("res://data/stage-order.json").order
+	var saved_order: Array = GameCatalog.read_json("res://data/stage-order.json").order.map(func(id): return int(id))
+	for stage in catalog.stages:
+		_expect(int(stage.get("sequenceOrder", -1)) == saved_order.find(int(stage.id)) + 1, "JSON stage ID resolves to its saved presentation rank")
 	_expect(order.size() == catalog.stages.size() and ids == saved_order and ids.slice(-2) == [44, 45], "navigation uses the saved one-time shuffle and preserves the finale groups")
 	var fixed_positions = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 15: 15, 20: 21, 25: 33, 45: 47, 47: 44, 48: 45}
 	for position in fixed_positions:
