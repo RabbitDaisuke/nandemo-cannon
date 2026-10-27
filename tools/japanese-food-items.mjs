@@ -70,12 +70,13 @@ add('pepper-shaker','こしょう','plastic',.55,38,
  O(64,14,30,8,ink)+O(64,13,25,5,'#839591')+
  [[54,12],[62,10],[70,12],[62,15],[78,14]].map(([x,y])=>R(x,y,3,2,ink)).join(''));
 
-const leftHandle=oval(13,58,11,10,12),leftHole=oval(13,58,6,5,12);
-const rightHandle=oval(115,58,11,10,12),rightHole=oval(115,58,6,5,12);
+const leftHandle=[[2,53],[5,49],[21,49],[26,54],[26,62],[21,66],[5,66],[2,62]];
+const leftHole=[[7,55],[9,54],[18,54],[21,56],[21,59],[18,61],[9,61],[7,59]];
+const rightHandle=leftHandle.map(([x,y])=>[128-x,y]),rightHole=leftHole.map(([x,y])=>[128-x,y]);
 add('sukiyaki-pot','すきやきなべ','food',3.8,91,
  [poly([22,52],[32,36],[50,30],[82,30],[100,38],[108,52],[103,89],[88,105],[40,105],[25,89]),...rim(leftHandle,leftHole),...rim(rightHandle,rightHole)],
  ring(leftHandle,leftHole,ink)+ring(rightHandle,rightHole,ink)+
- L([[5,58],[7,52],[13,50],[19,53]],2,'#7c8d8f')+L([[108,54],[114,50],[121,53],[123,59]],2,'#7c8d8f')+
+ L([[4,55],[7,51],[20,51],[23,54]],2,'#7c8d8f')+L([[105,54],[108,51],[121,51],[124,55]],2,'#7c8d8f')+
  E('M24 52H106L102 87L88 103H41L27 87Z','#3f4d51')+
  P('M31 65L36 85L48 96H77L68 99H43L31 88L27 67Z','#738181')+P('M95 66L102 63L98 86L86 97H78L88 86Z','#202b36')+
  O(64,52,44,24,ink)+O(64,51,39,20,'#82958e')+O(64,51,35,17,'#633c2b')+
@@ -111,13 +112,25 @@ add('charcoal-grill','しちりん','ceramic',4.2,69,
 items.at(-1).depletedArt=grillArt(false);
 items.at(-1).pivot=[64,44];
 
-const sausage=[[86,8],[98,11],[98,19],[105,26],[103,37],[49,108],[39,114],[31,113],[25,120],[16,114],[22,106],[21,95],[28,84],[80,20],[82,17]];
-add('fish-sausage','ぎょにくソーセージ','food',.6,44,[poly(...sausage)],
- E('M86 8L98 11L96 20L85 22L81 17Z',silver)+E('M25 104L35 112L25 120L16 114Z',silver)+
- E('M82 20L91 17L101 23L105 30L101 40L49 107L39 113L29 110L22 102L23 93L30 82Z','#e27b63')+
- P('M86 24L92 23L97 28L96 35L44 102L37 107L32 104L30 99L35 90Z','#f4a281')+
- P('M100 32L99 40L48 106L40 109L37 108L46 99L92 39Z','#b95c55')+
- L([[85,29],[36,94]],3,'#ffc7a0')+L([[88,11],[91,15]],2,'#e7e4ce')+L([[22,113],[27,112]],2,white));
+// Draw both crimps perpendicular to the same wrapper axis, then rotate together.
+const sausageAngle=38*Math.PI/180;
+const sausageFixture=points=>poly(...points.map(([x,y])=>[
+ Number((64+(x-64)*Math.cos(sausageAngle)-(y-64)*Math.sin(sausageAngle)).toFixed(3)),
+ Number((64+(x-64)*Math.sin(sausageAngle)+(y-64)*Math.cos(sausageAngle)).toFixed(3))
+]));
+const sausageBody=[[61,14],[67,14],[69,20],[76,26],[79,34],[79,94],[77,102],[70,109],[67,115],[61,115],[58,109],[51,102],[49,94],[49,34],[52,26],[59,20]];
+const sausageTop=[[61,13],[57,6],[64,4],[71,6],[67,13]],sausageBottom=[[61,115],[57,122],[64,124],[71,122],[67,115]];
+add('fish-sausage','ぎょにくソーセージ','food',.6,44,
+ [sausageBody,sausageTop,sausageBottom,[[57,11],[71,11],[71,17],[57,17]],[[57,111],[71,111],[71,117],[57,117]]].map(sausageFixture),
+ '<g transform="rotate(38 64 64)">'+
+ E(path(sausageTop),'#e9987a',3)+E(path(sausageBottom),'#e9987a',3)+
+ E(path(sausageBody),'#e27b63')+
+ P('M60 23L66 21L72 27L74 35V94L71 102L65 108L60 105L55 98L54 89V35L56 28Z','#f4a281')+
+ P('M75 29L77 35V94L74 101L68 108L64 109L69 99L71 91V36Z','#b95c55')+
+ L([[58,32],[57,43],[57,92]],3,'#ffc7a0')+
+ L([[64,7],[64,12]],1.5,'#f9c4a0')+L([[64,116],[64,122]],1.5,'#f9c4a0')+
+ E('M58 12H70V16H58Z',silver,2)+R(60,13,8,1,white)+
+ E('M58 112H70V116H58Z',silver,2)+R(60,113,8,1,white)+'</g>');
 
 add('rolled-hand-towel','おしぼり','cloth',.4,52,
  [poly([17,71],[61,28],[76,23],[91,27],[106,42],[109,57],[101,72],[59,112],[43,119],[28,115],[17,103],[13,87])],
