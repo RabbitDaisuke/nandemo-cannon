@@ -18,6 +18,7 @@ import {items as playground} from './playground-items.mjs';
 import {items as breakroom} from './breakroom-items.mjs';
 import {items as bathroom} from './bathroom-items.mjs';
 import {items as evening} from './evening-items.mjs';
+import {items as japaneseFood} from './japanese-food-items.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const require = createRequire(import.meta.url);
@@ -32,6 +33,7 @@ groups.push(['playground', playground]);
 groups.push(['breakroom', breakroom]);
 groups.push(['bathroom', bathroom]);
 groups.push(['evening', evening]);
+groups.push(['japanese-food', japaneseFood]);
 const entries = groups.flatMap(([, items]) => items);
 if (new Set(entries.map(item => item.id)).size !== entries.length) throw Error('Duplicate selection item ID');
 const coverage = JSON.parse(await read('assets/font/generated-coverage.json')).chars;

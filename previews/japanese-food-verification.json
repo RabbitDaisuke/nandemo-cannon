@@ -1,0 +1,48 @@
+{
+  "objects": 492,
+  "stages": 51,
+  "added": [
+    {"id": "yakisoba-plate", "name": "やきそば"},
+    {"id": "wasabi-tube", "name": "わさび"},
+    {"id": "pepper-shaker", "name": "こしょう"},
+    {"id": "sukiyaki-pot", "name": "すきやきなべ"},
+    {"id": "charcoal-grill", "name": "しちりん"},
+    {"id": "fish-sausage", "name": "ぎょにくソーセージ"},
+    {"id": "rolled-hand-towel", "name": "おしぼり"},
+    {"id": "egg-over-rice", "name": "たまごかけごはん"},
+    {"id": "zenzai", "name": "ぜんざい"},
+    {"id": "seasoned-rice", "name": "たきこみごはん"}
+  ],
+  "retake": {
+    "id": "kamaboko-board",
+    "change": "Removed only the foreground slice marked with a cross in the supplied reference, including its fixture.",
+    "boardFixture": "unchanged",
+    "worldDimensionsAndCrop": "unchanged"
+  },
+  "interactionChecks": [
+    "Charcoal grill uses the existing six-frame animated fire and ignites nearby wood.",
+    "Its eight-second fuel supply expires and swaps to grey charcoal while leaving the grill intact.",
+    "Contact with real pool water extinguishes it; drying or repeating launch cannot restore spent fuel.",
+    "Rolled hand towel absorbs only contacting water, up to six units, while preserving excess water and the volume balance.",
+    "Plastic pepper container does not use impact/load breakage or water release.",
+    "Both sukiyaki handles contain actual empty collision space."
+  ],
+  "engine": "Godot 4.7.2.stable.official.ed1daf0bf",
+  "godotSuites": 11,
+  "godotChecks": 3270,
+  "webSuites": ["mirrors", "share", "bgm", "input-hint", "progress"],
+  "status": "passed",
+  "visualReview": {
+    "renderer": "Node.js sharp/librsvg",
+    "files": ["selection-japanese-food.png", "selection-japanese-food-colliders.png", "selection-evening.png", "japanese-food-fire.png"],
+    "firePreview": "Source SVGs composed at the shared fuel-light draw coordinates, showing frames 0 and 3 and the depleted state; not an engine screenshot."
+  },
+  "preserved": {
+    "otherExistingObjects": 481,
+    "stageData": "byte-identical",
+    "washingMachine": "unchanged",
+    "existingFestivalYakisoba": "unchanged",
+    "buildShGitMode": "100755"
+  },
+  "actionsChecked": false
+}

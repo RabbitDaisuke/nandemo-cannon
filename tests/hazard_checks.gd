@@ -59,6 +59,7 @@ func _run() -> void:
 		records[record.id] = record
 	await _timed_bomb_checks()
 	await _mobile_source_checks()
+	await _charcoal_grill_checks()
 	await _reset()
 	var jet = _spawn("flamethrower", Vector2(800, 250))
 	fixture_world.hazards.on_launch(jet)
@@ -483,9 +484,36 @@ func _run() -> void:
 	await process_frame
 	quit(0 if failures.is_empty() else 1)
 
+func _charcoal_grill_checks() -> void:
+	await _reset()
+	var grill = _spawn("charcoal-grill", Vector2(400, 250))
+	var log = _spawn("log", Vector2(400, 215))
+	fixture_world.hazards.on_launch(grill)
+	await _physics_steps(2)
+	_expect(grill.fuel_seconds == 8.0 and fixture_world.hazards.fire_frames.size() == 6, "the charcoal grill launches with finite fuel and the shared animated flame")
+	fixture_world.hazards._heat_contacts()
+	_expect(log.burning and not grill.burning, "heat above the grate ignites wood without burning away the ceramic grill")
+	await _reset()
+	grill = _spawn("charcoal-grill", Vector2(400, 250))
+	fixture_world.hazards.on_launch(grill)
+	for tick in range(959):
+		fixture_world.hazards.tick(1.0 / 120.0)
+	_expect(grill.fuel_seconds > 0.0, "the charcoal grill stays lit until its finite eight-second fuel supply expires")
+	fixture_world.hazards.tick(1.0 / 120.0)
+	_expect(grill.alive and is_zero_approx(grill.fuel_seconds) and grill.visual.texture.resource_path.ends_with("charcoal-grill-depleted.svg"), "spent charcoal turns grey and leaves the physical grill in place")
+	await _reset({"water": [{"rect": [300, 200, 200, 150], "finite": true}]})
+	grill = _spawn("charcoal-grill", Vector2(400, 250))
+	fixture_world.hazards.on_launch(grill)
+	fixture_world.liquid._affect_bodies()
+	_expect(grill.alive and grill.wet_seconds > 0.0 and is_zero_approx(grill.fuel_seconds) and grill.visual.texture.resource_path.ends_with("charcoal-grill-depleted.svg"), "real pool contact extinguishes the charcoal grill and changes its coal texture")
+	fixture_world.liquid.regions.clear()
+	fixture_world.hazards.tick(4.0)
+	fixture_world.hazards.on_launch(grill)
+	_expect(is_zero_approx(grill.fuel_seconds), "a water-extinguished grill does not regain fuel after drying or another launch callback")
+
 func _check_water_balance() -> void:
 	_expect(float(records.sponge.physics.capacity) == 24.0 and float(records.towel.physics.capacity) == 12.0, "sponge and towel capacities counter one large jug and one water balloon respectively")
-	for id in ["sponge", "towel"]:
+	for id in ["sponge", "towel", "rolled-hand-towel"]:
 		await _reset()
 		var absorber = _spawn(id, Vector2(400, 250))
 		absorber.rotation = PI / 4.0

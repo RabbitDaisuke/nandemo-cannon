@@ -48149,38 +48149,6 @@
               99
             ]
           ]
-        },
-        {
-          "polygon": [
-            [
-              7,
-              89
-            ],
-            [
-              14,
-              77
-            ],
-            [
-              27,
-              73
-            ],
-            [
-              39,
-              79
-            ],
-            [
-              46,
-              92
-            ],
-            [
-              46,
-              109
-            ],
-            [
-              7,
-              109
-            ]
-          ]
         }
       ],
       "physics": {
@@ -48191,7 +48159,7 @@
         "burnSeconds": 3.5,
         "flowResponse": 1.15
       },
-      "opaquePixels": 8186,
+      "opaquePixels": 7834,
       "selectionOnly": true
     },
     {
@@ -48610,6 +48578,1585 @@
         "flowResponse": 1.15
       },
       "opaquePixels": 7984,
+      "selectionOnly": true
+    },
+    {
+      "id": "yakisoba-plate",
+      "nameJa": "やきそば",
+      "svg": "objects/yakisoba-plate.svg",
+      "png": "raster/objects/yakisoba-plate.png",
+      "webp": "raster/objects/yakisoba-plate.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        6,
+        26,
+        116,
+        73
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        58,
+        38
+      ],
+      "worldWidth": 83,
+      "worldHeight": 52.23275862068966,
+      "worldScale": 0.7155172413793104,
+      "material": "food",
+      "mass": 2.3,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "yakisoba-plate",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              6,
+              62
+            ],
+            [
+              14,
+              47
+            ],
+            [
+              37,
+              35
+            ],
+            [
+              89,
+              35
+            ],
+            [
+              112,
+              47
+            ],
+            [
+              122,
+              62
+            ],
+            [
+              115,
+              82
+            ],
+            [
+              95,
+              98
+            ],
+            [
+              34,
+              98
+            ],
+            [
+              13,
+              82
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              24,
+              57
+            ],
+            [
+              29,
+              40
+            ],
+            [
+              47,
+              28
+            ],
+            [
+              72,
+              27
+            ],
+            [
+              91,
+              34
+            ],
+            [
+              103,
+              50
+            ],
+            [
+              101,
+              66
+            ],
+            [
+              82,
+              77
+            ],
+            [
+              42,
+              77
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 6550,
+      "selectionOnly": true
+    },
+    {
+      "id": "wasabi-tube",
+      "nameJa": "わさび",
+      "svg": "objects/wasabi-tube.svg",
+      "png": "raster/objects/wasabi-tube.png",
+      "webp": "raster/objects/wasabi-tube.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        31,
+        8,
+        64,
+        113
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        33,
+        56
+      ],
+      "worldWidth": 34,
+      "worldHeight": 60.03125,
+      "worldScale": 0.53125,
+      "material": "plastic",
+      "mass": 0.35,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "wasabi-tube",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              32,
+              10
+            ],
+            [
+              94,
+              10
+            ],
+            [
+              91,
+              31
+            ],
+            [
+              84,
+              85
+            ],
+            [
+              76,
+              95
+            ],
+            [
+              50,
+              95
+            ],
+            [
+              41,
+              85
+            ],
+            [
+              35,
+              31
+            ]
+          ]
+        },
+        {
+          "rect": [
+            48,
+            94,
+            30,
+            26
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 5340,
+      "selectionOnly": true
+    },
+    {
+      "id": "pepper-shaker",
+      "nameJa": "こしょう",
+      "svg": "objects/pepper-shaker.svg",
+      "png": "raster/objects/pepper-shaker.png",
+      "webp": "raster/objects/pepper-shaker.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        30,
+        6,
+        68,
+        115
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        34,
+        58
+      ],
+      "worldWidth": 38,
+      "worldHeight": 64.26470588235294,
+      "worldScale": 0.5588235294117647,
+      "material": "plastic",
+      "mass": 0.55,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "pepper-shaker",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              31,
+              34
+            ],
+            [
+              38,
+              26
+            ],
+            [
+              90,
+              26
+            ],
+            [
+              97,
+              34
+            ],
+            [
+              97,
+              110
+            ],
+            [
+              87,
+              120
+            ],
+            [
+              41,
+              120
+            ],
+            [
+              31,
+              110
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              33,
+              13
+            ],
+            [
+              43,
+              7
+            ],
+            [
+              85,
+              7
+            ],
+            [
+              95,
+              13
+            ],
+            [
+              95,
+              34
+            ],
+            [
+              33,
+              34
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.5,
+        "restitution": 0.15,
+        "flammable": true,
+        "explosionResistance": 0.3,
+        "burnSeconds": 5,
+        "flowResponse": 1
+      },
+      "opaquePixels": 7472,
+      "selectionOnly": true
+    },
+    {
+      "id": "sukiyaki-pot",
+      "nameJa": "すきやきなべ",
+      "svg": "objects/sukiyaki-pot.svg",
+      "png": "raster/objects/sukiyaki-pot.png",
+      "webp": "raster/objects/sukiyaki-pot.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        2,
+        28,
+        124,
+        77
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        62,
+        36
+      ],
+      "worldWidth": 91,
+      "worldHeight": 56.50806451612903,
+      "worldScale": 0.7338709677419355,
+      "material": "food",
+      "mass": 3.8,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "sukiyaki-pot",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              22,
+              52
+            ],
+            [
+              32,
+              36
+            ],
+            [
+              50,
+              30
+            ],
+            [
+              82,
+              30
+            ],
+            [
+              100,
+              38
+            ],
+            [
+              108,
+              52
+            ],
+            [
+              103,
+              89
+            ],
+            [
+              88,
+              105
+            ],
+            [
+              40,
+              105
+            ],
+            [
+              25,
+              89
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              24,
+              58
+            ],
+            [
+              23,
+              63
+            ],
+            [
+              18,
+              61
+            ],
+            [
+              19,
+              58
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              23,
+              63
+            ],
+            [
+              19,
+              67
+            ],
+            [
+              16,
+              62
+            ],
+            [
+              18,
+              61
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              19,
+              67
+            ],
+            [
+              13,
+              68
+            ],
+            [
+              13,
+              63
+            ],
+            [
+              16,
+              62
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              13,
+              68
+            ],
+            [
+              8,
+              67
+            ],
+            [
+              10,
+              62
+            ],
+            [
+              13,
+              63
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              8,
+              67
+            ],
+            [
+              3,
+              63
+            ],
+            [
+              8,
+              61
+            ],
+            [
+              10,
+              62
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              3,
+              63
+            ],
+            [
+              2,
+              58
+            ],
+            [
+              7,
+              58
+            ],
+            [
+              8,
+              61
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              2,
+              58
+            ],
+            [
+              3,
+              53
+            ],
+            [
+              8,
+              56
+            ],
+            [
+              7,
+              58
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              3,
+              53
+            ],
+            [
+              7,
+              49
+            ],
+            [
+              10,
+              54
+            ],
+            [
+              8,
+              56
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              7,
+              49
+            ],
+            [
+              13,
+              48
+            ],
+            [
+              13,
+              53
+            ],
+            [
+              10,
+              54
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              13,
+              48
+            ],
+            [
+              19,
+              49
+            ],
+            [
+              16,
+              54
+            ],
+            [
+              13,
+              53
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              19,
+              49
+            ],
+            [
+              23,
+              53
+            ],
+            [
+              18,
+              56
+            ],
+            [
+              16,
+              54
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              23,
+              53
+            ],
+            [
+              24,
+              58
+            ],
+            [
+              19,
+              58
+            ],
+            [
+              18,
+              56
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              126,
+              58
+            ],
+            [
+              125,
+              63
+            ],
+            [
+              120,
+              61
+            ],
+            [
+              121,
+              58
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              125,
+              63
+            ],
+            [
+              121,
+              67
+            ],
+            [
+              118,
+              62
+            ],
+            [
+              120,
+              61
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              121,
+              67
+            ],
+            [
+              115,
+              68
+            ],
+            [
+              115,
+              63
+            ],
+            [
+              118,
+              62
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              115,
+              68
+            ],
+            [
+              110,
+              67
+            ],
+            [
+              112,
+              62
+            ],
+            [
+              115,
+              63
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              110,
+              67
+            ],
+            [
+              105,
+              63
+            ],
+            [
+              110,
+              61
+            ],
+            [
+              112,
+              62
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              105,
+              63
+            ],
+            [
+              104,
+              58
+            ],
+            [
+              109,
+              58
+            ],
+            [
+              110,
+              61
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              104,
+              58
+            ],
+            [
+              105,
+              53
+            ],
+            [
+              110,
+              56
+            ],
+            [
+              109,
+              58
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              105,
+              53
+            ],
+            [
+              110,
+              49
+            ],
+            [
+              112,
+              54
+            ],
+            [
+              110,
+              56
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              110,
+              49
+            ],
+            [
+              115,
+              48
+            ],
+            [
+              115,
+              53
+            ],
+            [
+              112,
+              54
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              115,
+              48
+            ],
+            [
+              121,
+              49
+            ],
+            [
+              118,
+              54
+            ],
+            [
+              115,
+              53
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              121,
+              49
+            ],
+            [
+              125,
+              53
+            ],
+            [
+              120,
+              56
+            ],
+            [
+              118,
+              54
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              125,
+              53
+            ],
+            [
+              126,
+              58
+            ],
+            [
+              121,
+              58
+            ],
+            [
+              120,
+              56
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 6158,
+      "selectionOnly": true
+    },
+    {
+      "id": "charcoal-grill",
+      "nameJa": "しちりん",
+      "svg": "objects/charcoal-grill.svg",
+      "png": "raster/objects/charcoal-grill.png",
+      "webp": "raster/objects/charcoal-grill.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        16,
+        23,
+        96,
+        100
+      ],
+      "pivotSource": [
+        64,
+        44
+      ],
+      "pivotCropped": [
+        48,
+        21
+      ],
+      "worldWidth": 69,
+      "worldHeight": 71.875,
+      "worldScale": 0.71875,
+      "material": "ceramic",
+      "mass": 4.2,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "fuel_light",
+      "colliderTemplate": "charcoal-grill",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              16,
+              44
+            ],
+            [
+              26,
+              29
+            ],
+            [
+              46,
+              23
+            ],
+            [
+              82,
+              23
+            ],
+            [
+              103,
+              30
+            ],
+            [
+              112,
+              44
+            ],
+            [
+              105,
+              103
+            ],
+            [
+              90,
+              114
+            ],
+            [
+              38,
+              114
+            ],
+            [
+              23,
+              103
+            ]
+          ]
+        },
+        {
+          "rect": [
+            32,
+            110,
+            15,
+            11
+          ]
+        },
+        {
+          "rect": [
+            81,
+            110,
+            15,
+            11
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.55,
+        "restitution": 0.03,
+        "flammable": false,
+        "explosionResistance": 0.15,
+        "burnSeconds": null,
+        "flowResponse": 0.5,
+        "durationSeconds": 8,
+        "activation": "launch",
+        "fireRadius": 34,
+        "depletedSprite": "objects/charcoal-grill-depleted.svg"
+      },
+      "opaquePixels": 7914,
+      "selectionOnly": true
+    },
+    {
+      "id": "fish-sausage",
+      "nameJa": "ぎょにくソーセージ",
+      "svg": "objects/fish-sausage.svg",
+      "png": "raster/objects/fish-sausage.png",
+      "webp": "raster/objects/fish-sausage.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        14,
+        6,
+        93,
+        116
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        50,
+        58
+      ],
+      "worldWidth": 44,
+      "worldHeight": 54.88172043010753,
+      "worldScale": 0.4731182795698925,
+      "material": "food",
+      "mass": 0.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "fish-sausage",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              86,
+              8
+            ],
+            [
+              98,
+              11
+            ],
+            [
+              98,
+              19
+            ],
+            [
+              105,
+              26
+            ],
+            [
+              103,
+              37
+            ],
+            [
+              49,
+              108
+            ],
+            [
+              39,
+              114
+            ],
+            [
+              31,
+              113
+            ],
+            [
+              25,
+              120
+            ],
+            [
+              16,
+              114
+            ],
+            [
+              22,
+              106
+            ],
+            [
+              21,
+              95
+            ],
+            [
+              28,
+              84
+            ],
+            [
+              80,
+              20
+            ],
+            [
+              82,
+              17
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 3967,
+      "selectionOnly": true
+    },
+    {
+      "id": "rolled-hand-towel",
+      "nameJa": "おしぼり",
+      "svg": "objects/rolled-hand-towel.svg",
+      "png": "raster/objects/rolled-hand-towel.png",
+      "webp": "raster/objects/rolled-hand-towel.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        12,
+        22,
+        98,
+        98
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        52,
+        42
+      ],
+      "worldWidth": 52,
+      "worldHeight": 52,
+      "worldScale": 0.5306122448979592,
+      "material": "cloth",
+      "mass": 0.4,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "absorb",
+      "colliderTemplate": "rolled-hand-towel",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              17,
+              71
+            ],
+            [
+              61,
+              28
+            ],
+            [
+              76,
+              23
+            ],
+            [
+              91,
+              27
+            ],
+            [
+              106,
+              42
+            ],
+            [
+              109,
+              57
+            ],
+            [
+              101,
+              72
+            ],
+            [
+              59,
+              112
+            ],
+            [
+              43,
+              119
+            ],
+            [
+              28,
+              115
+            ],
+            [
+              17,
+              103
+            ],
+            [
+              13,
+              87
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.8,
+        "restitution": 0.01,
+        "flammable": true,
+        "explosionResistance": 0.1,
+        "burnSeconds": 3,
+        "flowResponse": 1.1,
+        "capacity": 6,
+        "wetMassMultiplier": 2,
+        "releasesWhenSqueezed": false
+      },
+      "opaquePixels": 5957,
+      "selectionOnly": true
+    },
+    {
+      "id": "egg-over-rice",
+      "nameJa": "たまごかけごはん",
+      "svg": "objects/egg-over-rice.svg",
+      "png": "raster/objects/egg-over-rice.png",
+      "webp": "raster/objects/egg-over-rice.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        30,
+        112,
+        88
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        34
+      ],
+      "worldWidth": 72,
+      "worldHeight": 56.57142857142858,
+      "worldScale": 0.6428571428571429,
+      "material": "food",
+      "mass": 1.5,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "egg-over-rice",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              9,
+              54
+            ],
+            [
+              18,
+              40
+            ],
+            [
+              39,
+              30
+            ],
+            [
+              84,
+              30
+            ],
+            [
+              108,
+              40
+            ],
+            [
+              119,
+              54
+            ],
+            [
+              113,
+              77
+            ],
+            [
+              96,
+              99
+            ],
+            [
+              80,
+              109
+            ],
+            [
+              80,
+              117
+            ],
+            [
+              48,
+              117
+            ],
+            [
+              48,
+              109
+            ],
+            [
+              31,
+              99
+            ],
+            [
+              15,
+              77
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7059,
+      "selectionOnly": true
+    },
+    {
+      "id": "zenzai",
+      "nameJa": "ぜんざい",
+      "svg": "objects/zenzai.svg",
+      "png": "raster/objects/zenzai.png",
+      "webp": "raster/objects/zenzai.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        30,
+        112,
+        88
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        34
+      ],
+      "worldWidth": 74,
+      "worldHeight": 58.14285714285714,
+      "worldScale": 0.6607142857142857,
+      "material": "food",
+      "mass": 1.7,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "zenzai",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              9,
+              54
+            ],
+            [
+              18,
+              40
+            ],
+            [
+              39,
+              30
+            ],
+            [
+              84,
+              30
+            ],
+            [
+              108,
+              40
+            ],
+            [
+              119,
+              54
+            ],
+            [
+              113,
+              77
+            ],
+            [
+              96,
+              99
+            ],
+            [
+              80,
+              109
+            ],
+            [
+              80,
+              117
+            ],
+            [
+              48,
+              117
+            ],
+            [
+              48,
+              109
+            ],
+            [
+              31,
+              99
+            ],
+            [
+              15,
+              77
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7059,
+      "selectionOnly": true
+    },
+    {
+      "id": "seasoned-rice",
+      "nameJa": "たきこみごはん",
+      "svg": "objects/seasoned-rice.svg",
+      "png": "raster/objects/seasoned-rice.png",
+      "webp": "raster/objects/seasoned-rice.webp",
+      "sourceGrid": [
+        128,
+        128
+      ],
+      "viewBox": [
+        8,
+        12,
+        112,
+        106
+      ],
+      "pivotSource": [
+        64,
+        64
+      ],
+      "pivotCropped": [
+        56,
+        52
+      ],
+      "worldWidth": 72,
+      "worldHeight": 68.14285714285715,
+      "worldScale": 0.6428571428571429,
+      "material": "food",
+      "mass": 1.6,
+      "score": 100,
+      "bodyKind": "dynamic",
+      "behavior": "solid",
+      "colliderTemplate": "seasoned-rice",
+      "fixtures": [
+        {
+          "polygon": [
+            [
+              9,
+              54
+            ],
+            [
+              18,
+              40
+            ],
+            [
+              39,
+              30
+            ],
+            [
+              84,
+              30
+            ],
+            [
+              108,
+              40
+            ],
+            [
+              119,
+              54
+            ],
+            [
+              113,
+              77
+            ],
+            [
+              96,
+              99
+            ],
+            [
+              80,
+              109
+            ],
+            [
+              80,
+              117
+            ],
+            [
+              48,
+              117
+            ],
+            [
+              48,
+              109
+            ],
+            [
+              31,
+              99
+            ],
+            [
+              15,
+              77
+            ]
+          ]
+        },
+        {
+          "polygon": [
+            [
+              64,
+              35
+            ],
+            [
+              59,
+              22
+            ],
+            [
+              66,
+              12
+            ],
+            [
+              73,
+              18
+            ],
+            [
+              76,
+              25
+            ],
+            [
+              87,
+              18
+            ],
+            [
+              96,
+              22
+            ],
+            [
+              89,
+              32
+            ],
+            [
+              78,
+              36
+            ]
+          ]
+        }
+      ],
+      "physics": {
+        "friction": 0.62,
+        "restitution": 0.1,
+        "flammable": true,
+        "explosionResistance": 0.12,
+        "burnSeconds": 3.5,
+        "flowResponse": 1.15
+      },
+      "opaquePixels": 7463,
       "selectionOnly": true
     }
   ]

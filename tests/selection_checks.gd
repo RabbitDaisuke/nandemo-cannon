@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 205, "the reviewed expansions contain 205 selection-only objects")
+	_expect(additions.size() == 215, "the reviewed expansions contain 215 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
@@ -44,6 +44,8 @@ func _run() -> void:
 	_expect(search.find_items("りょうり").map(func(item): return item.id) == search.find_items("ごはん").map(func(item): return item.id), "meal and gohan aliases remain identical after the expansion")
 	for entry in [["レコード", "hand-cranked-gramophone"], ["もりつけ", "rice-paddle"], ["てぼ", "noodle-strainer"], ["ゆきり", "noodle-strainer"], ["めん", "ramen-bowl"], ["いたかまぼこ", "kamaboko-board"], ["かんきつ", "yuzu"], ["ようかん", "chestnut-yokan"], ["みつば", "oyakodon"]]:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "evening additions match their independent manual alias: " + entry[0])
+	for entry in [["やきそば", "yakisoba-plate"], ["チューブ", "wasabi-tube"], ["スパイス", "pepper-shaker"], ["なべりょうり", "sukiyaki-pot"], ["もくたん", "charcoal-grill"], ["ねりもの", "fish-sausage"], ["てふき", "rolled-hand-towel"], ["しょうゆ", "egg-over-rice"], ["あずき", "zenzai"], ["たきこみ", "seasoned-rice"]]:
+		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "Japanese meal additions match their independent manual alias: " + entry[0])
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
 	_expect(search.find_items("ちゅうしゃき").is_empty() and search.find_items("ちゅうしきゃき").is_empty(), "the withdrawn syringe was not added")
@@ -104,6 +106,9 @@ func _run() -> void:
 	var plastic_coffee: ThrowBody = game._create_actor(catalog.items["bottled-coffee"], Vector2(400, 160))
 	_expect(plastic_coffee.behavior == "solid" and not plastic_coffee._supports_load_break() and not plastic_coffee.spec.has("waterUnits") and not plastic_coffee.spec.has("releaseUnits"), "the plastic coffee bottle neither cracks under load nor releases water")
 	game.destroy_actor(plastic_coffee, "test")
+	var pepper: ThrowBody = game._create_actor(catalog.items["pepper-shaker"], Vector2(400, 160))
+	_expect(pepper.behavior == "solid" and pepper.record.material == "plastic" and not pepper._supports_load_break() and not pepper.spec.has("waterUnits"), "the plastic pepper container neither shatters nor releases water")
+	game.destroy_actor(pepper, "test")
 	await process_frame
 	for item in additions:
 		var actor: ThrowBody = game._create_actor(item, Vector2(400, 160))
@@ -113,6 +118,8 @@ func _run() -> void:
 		game.destroy_actor(actor, "test")
 	await process_frame
 	for probe in [
+		["sukiyaki-pot", Vector2(13, 58), Vector2(3, 58)],
+		["sukiyaki-pot", Vector2(115, 58), Vector2(125, 58)],
 		["paint-palette", Vector2(91, 77), Vector2(64, 65)],
 		["film-roll", Vector2(98, 61), Vector2(118, 61)],
 		["metal-spatula", Vector2(37.47, 87.94), Vector2(44.40, 91.94)],

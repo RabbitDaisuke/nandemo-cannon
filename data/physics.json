@@ -1086,7 +1086,25 @@
     "kamaboko-board": {},
     "yuzu": {},
     "chestnut-yokan": {},
-    "oyakodon": {}
+    "oyakodon": {},
+    "yakisoba-plate": {},
+    "wasabi-tube": {},
+    "pepper-shaker": {},
+    "sukiyaki-pot": {},
+    "charcoal-grill": {
+      "durationSeconds": 8,
+      "fireRadius": 34,
+      "depletedSprite": "objects/charcoal-grill-depleted.svg"
+    },
+    "fish-sausage": {},
+    "rolled-hand-towel": {
+      "capacity": 6,
+      "wetMassMultiplier": 2,
+      "releasesWhenSqueezed": false
+    },
+    "egg-over-rice": {},
+    "zenzai": {},
+    "seasoned-rice": {}
   },
   "stateRules": {
     "breakage": {

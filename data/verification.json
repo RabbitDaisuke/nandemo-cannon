@@ -1,9 +1,9 @@
 {
-  "objects": 482,
+  "objects": 492,
   "maps": 51,
   "stagesWith15Shots": 51,
-  "croppedSpritesChecked": 482,
-  "uniqueRenderedSprites": 481,
+  "croppedSpritesChecked": 492,
+  "uniqueRenderedSprites": 491,
   "animationFrames": 34,
   "checks": [
     "UTF-8 catalog and SVG reads",
@@ -20,7 +20,7 @@
     "40 new SVG silhouettes cropped from alpha bounds, with compound collision fixtures",
     "Stage 18 retains permanent ice and sole-grip boots; numbering is an implementation assumption",
     "Stage 16 plate uses an open concave terrain polygon; timed fireworks are physical bodies",
-    "482 item records; all 51 queues provide 15 throws from existing items",
+    "492 item records; all 51 queues provide 15 throws from existing items",
     "51 maps have static terrain data"
   ],
   "limits": [
