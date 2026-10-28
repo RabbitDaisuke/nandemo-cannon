@@ -1053,8 +1053,16 @@
     },
     "wood-stamp": {},
     "ventilation-fan": {},
-    "yellow-washbowl": {},
-    "wooden-washbowl": {},
+    "yellow-washbowl": {
+      "capacity": 4,
+      "wetMassMultiplier": 2,
+      "releasesWhenSqueezed": false
+    },
+    "wooden-washbowl": {
+      "capacity": 4,
+      "wetMassMultiplier": 2,
+      "releasesWhenSqueezed": false
+    },
     "shower-head": {
       "waterSource": {
         "position": [
@@ -1104,7 +1112,40 @@
     },
     "egg-over-rice": {},
     "zenzai": {},
-    "seasoned-rice": {}
+    "seasoned-rice": {},
+    "grand-piano": {},
+    "toilet-paper-pack": {
+      "capacity": 10,
+      "wetMassMultiplier": 2,
+      "releasesWhenSqueezed": false
+    },
+    "hand-cranked-roast": {},
+    "bonsai": {},
+    "stuffed-peppers": {},
+    "quail-eggs": {},
+    "audio-interface": {},
+    "flip-clock": {},
+    "timpani": {},
+    "camera-film": {},
+    "chelsea-bun": {},
+    "xray-scanner": {},
+    "barmbrack": {},
+    "bathroom-scale": {},
+    "desk-telephone": {},
+    "tomme-cheese": {},
+    "treadmill": {},
+    "brick-chimney": {},
+    "stone-tunnel": {},
+    "chicken-roaster": {},
+    "caramel-popcorn": {},
+    "stretcher": {
+      "wheelFixtures": [
+        13,
+        14,
+        15,
+        16
+      ]
+    }
   },
   "stateRules": {
     "breakage": {

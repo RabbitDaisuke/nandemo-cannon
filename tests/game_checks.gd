@@ -374,9 +374,11 @@ func _catalog_visibility_checks() -> void:
 		_check(game.next_item_id() == str(game.current_stage.queue[0]), "A stale hidden free selection bypassed the launch guard: " + id)
 		game.selected_catalog_id = ""
 	# Prove visibility is data-driven without editing a tag or adding an ID branch.
+	_type_catalog_query("カメラ")
+	var visible_camera_ids = game.catalog_results.map(func(item): return str(item.id))
 	game.catalog.items["camera"].catalogSelectable = false
 	_type_catalog_query("カメラ")
-	_check(game.catalog_results.is_empty() and game.item_search.find_items("カメラ").any(func(item): return str(item.id) == "camera"), "Picker restriction is not independent of names and manual search tags")
+	_check(game.catalog_results.map(func(item): return str(item.id)) == visible_camera_ids.filter(func(id): return id != "camera") and game.item_search.find_items("カメラ").any(func(item): return str(item.id) == "camera"), "Picker restriction must remove only the hidden item while preserving other matching items and the independent search index")
 	game.catalog.items["camera"].erase("catalogSelectable")
 	_type_catalog_query("カメラ")
 	_check(game.catalog_results.any(func(item): return str(item.id) == "camera"), "Omitting catalogSelectable did not restore the default visible behavior")

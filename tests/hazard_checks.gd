@@ -60,6 +60,7 @@ func _run() -> void:
 	await _timed_bomb_checks()
 	await _mobile_source_checks()
 	await _charcoal_grill_checks()
+	await _bonsai_checks()
 	await _reset()
 	var jet = _spawn("flamethrower", Vector2(800, 250))
 	fixture_world.hazards.on_launch(jet)
@@ -511,14 +512,39 @@ func _charcoal_grill_checks() -> void:
 	fixture_world.hazards.on_launch(grill)
 	_expect(is_zero_approx(grill.fuel_seconds), "a water-extinguished grill does not regain fuel after drying or another launch callback")
 
+func _bonsai_checks() -> void:
+	await _reset()
+	fixture_world.gravity_value = 980.0
+	PhysicsServer2D.area_set_param(fixture_world.get_world_2d().space, PhysicsServer2D.AREA_PARAM_GRAVITY, 980.0)
+	_add_static_rect(Rect2(80, 400, 800, 40))
+	var resting_bonsai = _spawn("bonsai", Vector2(400, 250), false)
+	resting_bonsai.position.y += 400.0 - resting_bonsai.get_world_bounds().end.y
+	resting_bonsai.age = 1.0
+	await _physics_steps(90)
+	_expect(is_instance_valid(resting_bonsai) and resting_bonsai.alive and fixture_world.destroyed.is_empty(), "the bonsai's ceramic pot survives ordinary floor support")
+	await _reset()
+	_add_static_rect(Rect2(80, 400, 800, 40))
+	var falling_bonsai = _spawn("bonsai", Vector2(400, 220), false)
+	falling_bonsai.age = 1.0
+	falling_bonsai.linear_velocity = Vector2(0, 650)
+	await _physics_steps(90)
+	_expect(fixture_world.impacts.any(func(entry): return entry.id == "bonsai") and fixture_world.destroyed.count({"id": "bonsai", "reason": "impact"}) == 1, "a real strong floor collision shatters the bonsai's pot exactly once")
+
 func _check_water_balance() -> void:
 	_expect(float(records.sponge.physics.capacity) == 24.0 and float(records.towel.physics.capacity) == 12.0, "sponge and towel capacities counter one large jug and one water balloon respectively")
-	for id in ["sponge", "towel", "rolled-hand-towel"]:
+	_expect(float(records["yellow-washbowl"].physics.capacity) == 4.0 and float(records["wooden-washbowl"].physics.capacity) == 4.0 and float(records["toilet-paper-pack"].physics.capacity) == 10.0, "washbowls hold only a little water while the paper bundle has its own finite absorption capacity")
+	for id in ["yellow-washbowl", "wooden-washbowl"]:
+		await _reset()
+		var bowl = _spawn(id, Vector2(400, 250))
+		fixture_world.liquid.regions = [{"rect": Rect2(399, 249, 2, 2), "velocity": Vector2.ZERO}]
+		fixture_world.liquid._affect_bodies()
+		_expect(is_zero_approx(float(bowl.get_meta("absorbed", 0.0))), "%s does not absorb water suspended in its empty cavity without touching its sides or bottom" % id)
+	for id in ["sponge", "towel", "rolled-hand-towel", "yellow-washbowl", "wooden-washbowl", "toilet-paper-pack"]:
 		await _reset()
 		var absorber = _spawn(id, Vector2(400, 250))
 		absorber.rotation = PI / 4.0
 		var bounds = absorber.get_world_bounds()
-		# A corner lies inside the rotated AABB but outside the actual cloth.
+		# A corner lies inside the rotated AABB but outside the actual body.
 		var dry_corner = Rect2(bounds.position, Vector2(1, 1))
 		fixture_world.liquid.regions = [{"rect": dry_corner, "velocity": Vector2.ZERO}]
 		fixture_world.liquid._affect_bodies()

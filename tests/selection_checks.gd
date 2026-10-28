@@ -19,7 +19,7 @@ func _run() -> void:
 	var catalog = GameCatalog.new()
 	var additions = catalog.ordered_items.filter(func(item): return bool(item.get("selectionOnly", false)))
 	var originals = catalog.ordered_items.filter(func(item): return not bool(item.get("selectionOnly", false)))
-	_expect(additions.size() == 215, "the reviewed expansions contain 215 selection-only objects")
+	_expect(additions.size() == 237, "the reviewed expansions contain 237 selection-only objects")
 	var search = Search.new(catalog.ordered_items)
 	_expect(is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldWidth), 69.0) and is_equal_approx(float(catalog.items["chunky-red-bean-bun"].worldHeight), 69.0 * 85.0 / 111.0), "the larger cut face keeps the bun's original physical dimensions")
 	var kana = RegEx.new()
@@ -46,7 +46,12 @@ func _run() -> void:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "evening additions match their independent manual alias: " + entry[0])
 	for entry in [["やきそば", "yakisoba-plate"], ["チューブ", "wasabi-tube"], ["スパイス", "pepper-shaker"], ["なべりょうり", "sukiyaki-pot"], ["もくたん", "charcoal-grill"], ["ねりもの", "fish-sausage"], ["てふき", "rolled-hand-towel"], ["しょうゆ", "egg-over-rice"], ["あずき", "zenzai"], ["たきこみ", "seasoned-rice"]]:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "Japanese meal additions match their independent manual alias: " + entry[0])
+	for entry in [["けんばん", "grand-piano"], ["トイレットペーパー", "toilet-paper-pack"], ["くしやき", "hand-cranked-roast"], ["はちうえ", "bonsai"], ["ひきにく", "stuffed-peppers"], ["ゆでたまご", "quail-eggs"], ["ろくおん", "audio-interface"], ["おきどけい", "flip-clock"], ["だがっき", "timpani"], ["げんぞう", "camera-film"], ["うずまき", "chelsea-bun"], ["てにもつ", "xray-scanner"], ["ドライフルーツ", "barmbrack"], ["はかり", "bathroom-scale"], ["じゅわき", "desk-telephone"], ["にゅうせいひん", "tomme-cheese"], ["ルームランナー", "treadmill"], ["けむり", "brick-chimney"], ["アーチ", "stone-tunnel"]]:
+		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "October 28 additions match their independent manual alias: " + entry[0])
+	for entry in [["ロースター", "chicken-roaster"], ["キャラメル", "caramel-popcorn"], ["たんか", "stretcher"]]:
+		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "the additional roaster, popcorn and stretcher match their manual aliases: " + entry[0])
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
+	_expect(["yellow-washbowl", "wooden-washbowl", "toilet-paper-pack"].all(func(id): return id in water_ids), "the two small-capacity washbowls and toilet paper are discoverable as water tools")
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
 	_expect(search.find_items("ちゅうしゃき").is_empty() and search.find_items("ちゅうしきゃき").is_empty(), "the withdrawn syringe was not added")
 	var baseline = GameCatalog.new()
@@ -118,6 +123,11 @@ func _run() -> void:
 		game.destroy_actor(actor, "test")
 	await process_frame
 	for probe in [
+		["stone-tunnel", Vector2(62, 80), Vector2(15, 80)],
+		["grand-piano", Vector2(61, 110), Vector2(22, 110)],
+		["hand-cranked-roast", Vector2(65, 109), Vector2(33, 109)],
+		["treadmill", Vector2(80, 65), Vector2(88, 65)],
+		["xray-scanner", Vector2(64, 62), Vector2(35, 62)],
 		["sukiyaki-pot", Vector2(13, 58), Vector2(3, 58)],
 		["sukiyaki-pot", Vector2(115, 58), Vector2(125, 58)],
 		["paint-palette", Vector2(91, 77), Vector2(64, 65)],
@@ -215,7 +225,7 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var wheel_measurements: Dictionary = {}
-	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck", "flatbed-dolly", "mini-forklift", "garbage-truck", "push-mower"]:
+	for id in ["care-bed", "ambulance", "fire-engine", "ladder-truck", "flatbed-dolly", "mini-forklift", "garbage-truck", "push-mower", "stretcher"]:
 		wheel_measurements[id] = await _wheel_checks(catalog.items[id])
 	var result = {"suite": "selection", "checks": checks, "failures": failures, "measurements": wheel_measurements, "status": "passed" if failures.is_empty() else "failed"}
 	FileAccess.open("res://previews/selection-checks.json", FileAccess.WRITE).store_string(JSON.stringify(result, "\t") + "\n")

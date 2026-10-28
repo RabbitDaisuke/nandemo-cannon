@@ -26,7 +26,8 @@ add('yellow-washbowl','きいろいおけ','plastic',.8,62,
  E('M8 42L27 29H101L120 42L107 51H21Z','#f5d576')+
  P('M23 42L33 35H96L107 42L100 46H30Z','#be8f39')+
  P('M26 52L34 55L44 99H35Z','#f8da7e')+P('M96 55L105 51L97 99H89Z','#b57a29')+
- R(46,99,39,4,'#e5b649'));
+ R(46,99,39,4,'#e5b649'),
+ 'absorb',{capacity:4,wetMassMultiplier:2,releasesWhenSqueezed:false});
 
 add('wooden-washbowl','きのおけ','wood',1.2,61,
  [poly([9,34],[22,38],[29,97],[23,110],[15,100]),poly([105,38],[119,34],[114,100],[105,110],[98,97]),poly([23,96],[106,96],[105,110],[23,110])],
@@ -38,7 +39,8 @@ add('wooden-washbowl','きのおけ','wood',1.2,61,
  [27,45,64,83,101].map((x,i)=>P(`M${x} 46H${x+3}L${x+2-(i-2)*2} 104H${x-(i-2)*2}Z`,'#795938')).join('')+
  P('M15 58L25 64H106L115 58V66L105 72H25L16 66Z',ink)+P('M18 61L27 67H104L112 62V65L104 69H27L18 64Z','#96a6a0')+
  P('M19 89L28 95H104L112 89V97L104 103H27L20 97Z',ink)+P('M23 93L29 98H103L109 94V97L102 100H29L23 96Z','#96a6a0')+
- R(33,48,3,9,'#f0d3a2')+R(70,75,3,13,'#dfbb83'));
+ R(33,48,3,9,'#f0d3a2')+R(70,75,3,13,'#dfbb83'),
+ 'absorb',{capacity:4,wetMassMultiplier:2,releasesWhenSqueezed:false});
 
 // A finite handheld shower uses the same mobile-source reservoir as the fountain.
 add('shower-head','シャワー','metal',1.1,67,
