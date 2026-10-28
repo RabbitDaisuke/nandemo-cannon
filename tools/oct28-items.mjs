@@ -238,22 +238,21 @@ add('desk-telephone','でんわき','appliance',2.4,73,
 
 // Small cheese wheel with a cut wedge and pale paste, textured natural rind.
 add('tomme-cheese','トムチーズ','food',1.5,66,
- [poly([12,52],[25,33],[51,25],[85,29],[109,43],[118,61],[113,90],[93,108],[61,114],[30,105],[13,86])],
- E('M13 53H117L112 89L93 107L61 113L31 104L14 86Z','#8f8d70')+
- P('M22 63L49 76L78 75L105 63L103 87L86 101L60 106L35 99L23 83Z','#b2ae89')+
+ [poly([12,52],[25,33],[51,25],[85,29],[109,43],[118,61],[112,89],[104,96],[64,77],[25,94],[14,86])],
+ E('M13 53H117L112 89L104 96L64 77L25 94L14 86Z','#8f8d70')+
  O(65,54,53,29,ink)+O(65,53,48,25,'#b9b798')+
  P('M22 49L33 37L53 31L77 33L96 42L102 52L87 64L60 70L36 63Z','#cfceb0')+
  E('M64 54L105 72L104 96L64 77L25 94L24 70Z','#ead9a3',3)+
  P('M64 58L99 73V88L64 72L30 86V72Z','#f7e8b7')+
  L([[64,57],[64,75]],2,'#c6b47f')+
- [[31,46],[49,34],[72,37],[94,48],[27,55],[82,57],[44,61],[18,79],[31,99],[82,103],[109,83]].map(([x,y],i)=>P(`M${x-3} ${y}l4 -3l4 2l-2 3l-5 1Z`,i%2?'#929675':'#e1dcc0')).join('')+
+ [[31,46],[49,34],[72,37],[94,48],[27,55],[82,57],[44,61],[18,79],[109,83]].map(([x,y],i)=>P(`M${x-3} ${y}l4 -3l4 2l-2 3l-5 1Z`,i%2?'#929675':'#e1dcc0')).join('')+
  [[40,73],[51,70],[77,74],[90,80]].map(([x,y])=>O(x,y,2,1,'#c6ad72')).join(''));
-const tomme=items.at(-1),cheeseScale=.84;
-tomme.art=E('M5 92H123L117 105L98 117H31L11 105Z','#6097aa')+
+const tomme=items.at(-1),cheeseScale=.84,plateLift=7;
+tomme.art=`<g transform="translate(0 -${plateLift})">`+E('M5 92H123L117 105L98 117H31L11 105Z','#6097aa')+
  O(64,92,59,25,ink)+O(64,91,54,21,'#b7e1e4')+O(64,91,45,16,'#7fb8cf')+
- L([[12,98],[29,108],[48,112],[80,112],[102,105],[116,97]],3,'#d7eeee')+
+ L([[12,98],[29,108],[48,112],[80,112],[102,105],[116,97]],3,'#d7eeee')+'</g>'+
  `<g transform="translate(9 -3) scale(${cheeseScale})">${tomme.art}</g>`;
-tomme.fixtures=[poly(...oval(64,94,59,25)),...tomme.fixtures.map(f=>poly(...f.polygon.map(([x,y])=>[9+x*cheeseScale,-3+y*cheeseScale])))];
+tomme.fixtures=[poly(...oval(64,94-plateLift,59,25)),...tomme.fixtures.map(f=>poly(...f.polygon.map(([x,y])=>[9+x*cheeseScale,-3+y*cheeseScale])))];
 tomme.width=77;
 
 add('treadmill','ランニングマシン','appliance',9.2,99,
