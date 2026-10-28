@@ -128,7 +128,7 @@ func _run() -> void:
 		["stone-tunnel", Vector2(46, 90), Vector2(16, 90)],
 		["grand-piano", Vector2(61, 110), Vector2(22, 110)],
 		["hand-cranked-roast", Vector2(65, 98), Vector2(64, 115)],
-		["treadmill", Vector2(70, 62), Vector2(88, 65)],
+		["treadmill", Vector2(74, 61), Vector2(88, 65)],
 		["xray-scanner", Vector2(64, 62), Vector2(35, 62)],
 		["sukiyaki-pot", Vector2(13, 58), Vector2(3, 58)],
 		["sukiyaki-pot", Vector2(115, 58), Vector2(125, 58)],
