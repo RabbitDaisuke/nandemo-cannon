@@ -40,16 +40,18 @@ add('grand-piano','グランドピアノ','wood',10.5,96,
  E('M8 79L20 67H25L13 82V87H8Z','#344653',2)+E('M79 82L91 70H96L84 83V87H79Z','#344653',2)+
  L([[46,91],[46,101],[62,101]],4,ink)+R(49,98,4,7,gold)+R(57,98,4,7,gold));
 
-// Four rolls across, two rows front-to-back; no vertically stacked tiers.
-const roll=(x,y)=>E(`M${x-12} ${y}H${x+12}V${y+24}L${x+8} ${y+28}H${x-8}L${x-12} ${y+24}Z`,'#d1dbcf',2)+
- P(`M${x-9} ${y+3}H${x+7}V${y+23}L${x+4} ${y+25}H${x-7}L${x-9} ${y+22}Z`,white)+
- O(x,y,12,7,ink)+O(x,y-1,10,5,white)+O(x,y-1,4,2,'#a79372')+O(x,y-1,2,1,'#4b514d')+
- L([[x-8,y+10],[x-8,y+19]],1,'#ffffff');
+// User sketch: two rolls across, two high, two deep, with a central wrapping band.
+const roll=(x,y)=>E(`M${x-23} ${y}H${x+23}V${y+37}L${x+17} ${y+43}H${x-17}L${x-23} ${y+37}Z`,'#d1dbcf',3)+
+ P(`M${x-17} ${y+4}H${x+14}V${y+36}L${x+9} ${y+39}H${x-13}L${x-17} ${y+34}Z`,white)+
+ O(x,y,23,11,ink)+O(x,y-1,19,8,white)+O(x,y-1,8,4,'#a79372')+O(x,y-1,4,2,'#4b514d')+
+ L([[x-16,y+15],[x-16,y+30]],2,'#ffffff');
 add('toilet-paper-pack','トイレペーパー','paper',1.3,72,
- [poly([15,39],[20,34],[28,32],[100,32],[112,38],[113,62],[107,68],[107,84],[102,88],[14,88],[9,84],[9,59],[15,50])],
- [28,52,76,100].map(x=>roll(x,39)).join('')+[22,46,70,94].map(x=>roll(x,59)).join('')+
- E('M10 70H106V82H10Z','#79a7aa',2)+R(15,72,86,2,'#b3d5cb')+
- E('M49 70H67V82H49Z',white,2)+P('M54 74L59 72L63 75L59 79L54 78Z','#729b81'),
+ [poly([19,14],[28,5],[43,3],[58,7],[65,12],[74,5],[88,3],[104,6],[113,14],[113,96],[106,104],[106,110],[100,116],[20,116],[12,110],[12,28],[19,20])],
+ roll(43,58)+roll(88,58)+roll(36,72)+roll(82,72)+
+ roll(43,14)+roll(88,14)+roll(36,28)+roll(82,28)+
+ E('M106 66L112 52V70L106 84Z','#527d89',2)+
+ E('M15 66H106V84H15Z','#79a7aa',2)+R(21,69,79,3,'#b3d5cb')+
+ E('M53 66H72V84H53Z',white,2)+P('M58 71L64 68L68 72L64 79L58 77Z','#729b81'),
  'absorb',{capacity:10,wetMassMultiplier:2,releasesWhenSqueezed:false});
 
 // A solid hand crank and a finite campfire share the same moving rigid body.
