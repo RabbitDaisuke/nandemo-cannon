@@ -4960,7 +4960,7 @@
       100,
       100,
       "hand-cranked-roast",
-      "solid"
+      "fuel_light"
     ],
     [
       "bonsai",
@@ -4994,7 +4994,7 @@
     ],
     [
       "audio-interface",
-      "オーディオアイエフ",
+      "オーディオアイオー",
       "appliance",
       2.5,
       100,
@@ -5088,7 +5088,7 @@
       "food",
       1.5,
       100,
-      66,
+      77,
       "tomme-cheese",
       "solid"
     ],

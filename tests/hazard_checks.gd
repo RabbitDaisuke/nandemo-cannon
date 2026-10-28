@@ -60,6 +60,7 @@ func _run() -> void:
 	await _timed_bomb_checks()
 	await _mobile_source_checks()
 	await _charcoal_grill_checks()
+	await _offset_fuel_fire_checks()
 	await _bonsai_checks()
 	await _reset()
 	var jet = _spawn("flamethrower", Vector2(800, 250))
@@ -511,6 +512,51 @@ func _charcoal_grill_checks() -> void:
 	fixture_world.hazards.tick(4.0)
 	fixture_world.hazards.on_launch(grill)
 	_expect(is_zero_approx(grill.fuel_seconds), "a water-extinguished grill does not regain fuel after drying or another launch callback")
+
+func _offset_fuel_fire_checks() -> void:
+	for angle in [0.0, PI * 0.5, PI]:
+		await _reset()
+		var rotated_roast = _spawn("hand-cranked-roast", Vector2(400, 250))
+		rotated_roast.rotation = angle
+		fixture_world.hazards.on_launch(rotated_roast)
+		var direction = Vector2.DOWN.rotated(angle)
+		var expected = rotated_roast.global_position + direction * (48.0 * float(rotated_roast.record.worldScale))
+		var near_fire = _spawn("sd-card", expected + direction * 28.0)
+		var near_center = _spawn("sd-card", rotated_roast.global_position - direction * 28.0)
+		await _physics_steps(2)
+		_expect(rotated_roast.fuel_seconds == 8.0 and fixture_world.hazards.fire_frames.size() == 6 and fixture_world.hazards._fuel_fire_emitter(rotated_roast).is_equal_approx(expected) and is_equal_approx(fixture_world.hazards._fuel_fire_width(rotated_roast), 40.0 * float(rotated_roast.record.worldScale)), "the spit roast's finite animated flame stays at its wood pile with the authored width at rotation %s" % angle)
+		fixture_world.hazards._heat_contacts()
+		_expect(near_fire.burning and not near_center.burning and not rotated_roast.burning, "the rotated wood pile heats its actual neighborhood instead of the center of the roast at rotation %s" % angle)
+	await _reset()
+	for id in ["fuel-lantern", "charcoal-grill", "campfire"]:
+		var existing = _spawn(id, Vector2(400, 250))
+		existing.rotation = 0.6
+		_expect(fixture_world.hazards._fuel_fire_emitter(existing).is_equal_approx(existing.global_position) and is_equal_approx(fixture_world.hazards._fuel_fire_width(existing), clampf(existing.get_world_bounds().size.x * 0.9, 30.0, 92.0)), "%s retains its original center emitter and bounds-based flame size without optional fields" % id)
+	var other_fuel = _spawn("fuel-lantern", Vector2(200, 200))
+	other_fuel.spec.fireSource = [80, 90]
+	other_fuel.spec.fireVisualWidth = 24.0
+	other_fuel.rotation = -PI / 3.0
+	var other_origin = other_fuel.to_global(Vector2(16, 26) * float(other_fuel.record.worldScale))
+	_expect(fixture_world.hazards._fuel_fire_emitter(other_fuel).is_equal_approx(other_origin) and is_equal_approx(fixture_world.hazards._fuel_fire_width(other_fuel), 24.0 * float(other_fuel.record.worldScale)), "source-grid flame position and width apply to another fuel item without an item-ID rule")
+	await _reset()
+	var roast = _spawn("hand-cranked-roast", Vector2(400, 250))
+	fixture_world.hazards.on_launch(roast)
+	for tick in range(959):
+		fixture_world.hazards.tick(1.0 / 120.0)
+	_expect(roast.fuel_seconds > 0.0, "the wood under the spit roast remains lit until its eight-second deadline")
+	fixture_world.hazards.tick(1.0 / 120.0)
+	_expect(roast.alive and is_zero_approx(roast.fuel_seconds) and roast.visual.texture.resource_path.ends_with("hand-cranked-roast-depleted.svg"), "spent spit-roast fuel changes to grey wood while the prop remains solid")
+	fixture_world.hazards.on_launch(roast)
+	_expect(is_zero_approx(roast.fuel_seconds), "an exhausted spit roast cannot regain fuel through another launch notification")
+	await _reset({"water": [{"rect": [300, 200, 200, 150], "finite": true}]})
+	roast = _spawn("hand-cranked-roast", Vector2(400, 250))
+	fixture_world.hazards.on_launch(roast)
+	fixture_world.liquid._affect_bodies()
+	_expect(roast.alive and roast.wet_seconds > 0.0 and is_zero_approx(roast.fuel_seconds) and roast.visual.texture.resource_path.ends_with("hand-cranked-roast-depleted.svg"), "actual water contact extinguishes the wood beneath the roast and swaps its texture")
+	fixture_world.liquid.regions.clear()
+	fixture_world.hazards.tick(4.0)
+	fixture_world.hazards.on_launch(roast)
+	_expect(is_zero_approx(roast.fuel_seconds), "drying a water-extinguished spit roast cannot relight its spent fuel")
 
 func _bonsai_checks() -> void:
 	await _reset()

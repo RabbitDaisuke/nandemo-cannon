@@ -166,7 +166,7 @@ func _heat_contacts() -> void:
 				"cold_jet", "extinguisher":
 					_jet(actor, true)
 				"campfire", "fuel_light":
-					ignite_area(actor.global_position, float(actor.spec.get("fireRadius", 40)), actor, 0.1)
+					ignite_area(_fuel_fire_emitter(actor), float(actor.spec.get("fireRadius", 40)), actor, 0.1)
 		if actor.behavior == "ice_mass":
 			cool_area(actor.global_position, float(actor.spec.get("coldRadius", 30)), actor, false)
 		if _stove_active(actor):
@@ -175,6 +175,18 @@ func _heat_contacts() -> void:
 			for offset in [-half_span, 0.0, half_span]:
 				var point = emitter + Vector2(offset, -8.0).rotated(actor.rotation)
 				ignite_area(point, float(actor.spec.get("fireRadius", 24.0)), actor, 0.25)
+
+func _fuel_fire_emitter(actor: ThrowBody) -> Vector2:
+	if not actor.spec.has("fireSource"):
+		return actor.global_position
+	var source = GameCatalog.vector(actor.spec.fireSource)
+	var pivot = GameCatalog.vector(actor.record.get("pivotSource", [64, 64]))
+	return actor.to_global((source - pivot) * float(actor.record.worldScale))
+
+func _fuel_fire_width(actor: ThrowBody) -> float:
+	if actor.spec.has("fireVisualWidth"):
+		return maxf(0.0, float(actor.spec.fireVisualWidth) * float(actor.record.worldScale))
+	return clampf(actor.get_world_bounds().size.x * 0.9, 30.0, 92.0)
 
 func _stove_active(actor: ThrowBody) -> bool:
 	return actor.behavior == "stove" and actor.alive and not actor.break_requested and actor.wet_seconds <= 0.0 and actor.frozen_seconds <= 0.0
@@ -412,9 +424,18 @@ func _draw() -> void:
 			for offset in [-span * 0.3, 0.0, span * 0.3]:
 				draw_texture_rect(fire_frames[frame], Rect2(offset - 12, -30, 24, 32), false)
 			draw_set_transform(Vector2.ZERO)
-		if actor.burning or (actor.fuel_seconds > 0.0 and actor.behavior in ["campfire", "fuel_light"]):
+		if actor.burning:
 			var width = clampf(actor.get_world_bounds().size.x * 0.9, 30.0, 92.0)
 			draw_texture_rect(fire_frames[frame], Rect2(actor.global_position - Vector2(width * 0.5, width), Vector2(width, width)), false)
+		elif actor.fuel_seconds > 0.0 and actor.behavior in ["campfire", "fuel_light"]:
+			var width = _fuel_fire_width(actor)
+			var emitter = _fuel_fire_emitter(actor)
+			if actor.spec.has("fireSource"):
+				draw_set_transform(emitter, actor.rotation)
+				draw_texture_rect(fire_frames[frame], Rect2(Vector2(-width * 0.5, -width), Vector2(width, width)), false)
+				draw_set_transform(Vector2.ZERO)
+			else:
+				draw_texture_rect(fire_frames[frame], Rect2(emitter - Vector2(width * 0.5, width), Vector2(width, width)), false)
 		if actor.fuel_seconds > 0.0 and actor.behavior in ["flame_jet", "cold_jet", "extinguisher"]:
 			var anchor = GameCatalog.vector(actor.spec.get("emissionAnchor", [6, 55]))
 			var origin = actor.to_global((anchor - Vector2(64, 64)) * float(actor.record.worldScale))

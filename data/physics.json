@@ -1119,7 +1119,16 @@
       "wetMassMultiplier": 2,
       "releasesWhenSqueezed": false
     },
-    "hand-cranked-roast": {},
+    "hand-cranked-roast": {
+      "durationSeconds": 8,
+      "fireRadius": 34,
+      "fireSource": [
+        64,
+        112
+      ],
+      "fireVisualWidth": 40,
+      "depletedSprite": "objects/hand-cranked-roast-depleted.svg"
+    },
     "bonsai": {},
     "stuffed-peppers": {},
     "quail-eggs": {},

@@ -50,6 +50,8 @@ func _run() -> void:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "October 28 additions match their independent manual alias: " + entry[0])
 	for entry in [["ロースター", "chicken-roaster"], ["キャラメル", "caramel-popcorn"], ["たんか", "stretcher"]]:
 		_expect(search.find_items(entry[0]).any(func(item): return item.id == entry[1]), "the additional roaster, popcorn and stretcher match their manual aliases: " + entry[0])
+	_expect(catalog.items["audio-interface"].nameJa == "オーディオアイオー" and search.find_items("オーディオアイオー").any(func(item): return item.id == "audio-interface") and search.find_items("オーディオアイエフ").any(func(item): return item.id == "audio-interface"), "the audio interface uses its corrected name while the former label stays searchable")
+	_expect(search.find_items("たきび").any(func(item): return item.id == "hand-cranked-roast"), "the roast's hand-authored fire alias finds its new finite campfire")
 	var water_ids = search.find_items("みず").map(func(item): return item.id)
 	_expect(["yellow-washbowl", "wooden-washbowl", "toilet-paper-pack"].all(func(id): return id in water_ids), "the two small-capacity washbowls and toilet paper are discoverable as water tools")
 	_expect(["coconut-drink", "rice-vinegar", "bubble-tea", "mango-lassi", "iceberg", "torpedo"].all(func(id): return id in water_ids) and not water_ids.has("canola-oil"), "handwritten water aliases include the new water tools without presenting oil as water")
@@ -123,10 +125,10 @@ func _run() -> void:
 		game.destroy_actor(actor, "test")
 	await process_frame
 	for probe in [
-		["stone-tunnel", Vector2(62, 80), Vector2(15, 80)],
+		["stone-tunnel", Vector2(46, 90), Vector2(16, 90)],
 		["grand-piano", Vector2(61, 110), Vector2(22, 110)],
-		["hand-cranked-roast", Vector2(65, 109), Vector2(33, 109)],
-		["treadmill", Vector2(80, 65), Vector2(88, 65)],
+		["hand-cranked-roast", Vector2(65, 98), Vector2(64, 115)],
+		["treadmill", Vector2(70, 62), Vector2(88, 65)],
 		["xray-scanner", Vector2(64, 62), Vector2(35, 62)],
 		["sukiyaki-pot", Vector2(13, 58), Vector2(3, 58)],
 		["sukiyaki-pot", Vector2(115, 58), Vector2(125, 58)],
