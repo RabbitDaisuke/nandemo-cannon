@@ -247,12 +247,12 @@ add('tomme-cheese','トムチーズ','food',1.5,66,
  L([[64,57],[64,75]],2,'#c6b47f')+
  [[31,46],[49,34],[72,37],[94,48],[27,55],[82,57],[44,61],[18,79],[109,83]].map(([x,y],i)=>P(`M${x-3} ${y}l4 -3l4 2l-2 3l-5 1Z`,i%2?'#929675':'#e1dcc0')).join('')+
  [[40,73],[51,70],[77,74],[90,80]].map(([x,y])=>O(x,y,2,1,'#c6ad72')).join(''));
-const tomme=items.at(-1),cheeseScale=.84,plateLift=7;
+const tomme=items.at(-1),cheeseScale=.84,cheeseOffsetY=19,plateLift=7;
 tomme.art=`<g transform="translate(0 -${plateLift})">`+E('M5 92H123L117 105L98 117H31L11 105Z','#6097aa')+
  O(64,92,59,25,ink)+O(64,91,54,21,'#b7e1e4')+O(64,91,45,16,'#7fb8cf')+
  L([[12,98],[29,108],[48,112],[80,112],[102,105],[116,97]],3,'#d7eeee')+'</g>'+
- `<g transform="translate(9 -3) scale(${cheeseScale})">${tomme.art}</g>`;
-tomme.fixtures=[poly(...oval(64,94-plateLift,59,25)),...tomme.fixtures.map(f=>poly(...f.polygon.map(([x,y])=>[9+x*cheeseScale,-3+y*cheeseScale])))];
+ `<g transform="translate(9 ${cheeseOffsetY}) scale(${cheeseScale})">${tomme.art}</g>`;
+tomme.fixtures=[poly(...oval(64,94-plateLift,59,25)),...tomme.fixtures.map(f=>poly(...f.polygon.map(([x,y])=>[9+x*cheeseScale,cheeseOffsetY+y*cheeseScale])))];
 tomme.width=77;
 
 add('treadmill','ランニングマシン','appliance',9.2,99,
