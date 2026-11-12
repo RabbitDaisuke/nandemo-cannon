@@ -53,6 +53,7 @@ if [[ "$build_mode" != check && "$build_mode" != runtime ]]; then
     node tools/extend-playground-stage.mjs
     node tools/extend-breakroom-stage.mjs
     node tools/extend-bathroom-stage.mjs
+    node tools/extend-electronics-store-stage.mjs
     exec node tools/extend-rescue-stages.mjs
   fi
   node tools/rasterize-assets.mjs

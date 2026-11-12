@@ -1,6 +1,7 @@
 {
 	"checks": [
-		"the complete expansion loads 514 objects and 51 stable-ID stages",
+		"the complete expansion loads all authored stages without changing the 514-object catalog",
+		"JSON stage ID resolves to its saved presentation rank",
 		"JSON stage ID resolves to its saved presentation rank",
 		"JSON stage ID resolves to its saved presentation rank",
 		"JSON stage ID resolves to its saved presentation rank",
