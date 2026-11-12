@@ -14,7 +14,7 @@ const stage={
  cannon:[810,450],scoreZone:[20,125,610,325],scoreGroundY:450,
  terrain:[
   {rect:[0,450,960,90]}, {rect:[0,110,20,340]},
-  {rect:[20,270,240,18]}, {rect:[20,374,170,18]},
+  {rect:[20,270,170,18]}, {rect:[20,374,240,18]},
   {rect:[420,390,190,60]}
  ],
  // Oversized queues already draw fifteen distinct kinds in seeded random order.
@@ -78,7 +78,7 @@ art+=R(20,450,940,90,ink)+R(20,454,940,86,'#b0bcb6')+R(20,454,940,5,'#e0dfca');
 for(const y of [481,518]) art+=R(20,y,940,2,'#91a7a5');
 for(const x of [76,194,312,430,548,666,784,902]) art+=P(`M${x} 459L${x+(x-480)*.18} 540H${x+(x-480)*.18+2}L${x+2} 459Z`,'#91a7a5');
 // Cantilever shelves are anchored to the solid left wall. Their bays stay open.
-for(const [x,y,w,h] of [[20,270,240,18],[20,374,170,18]]) {
+for(const [x,y,w,h] of [[20,270,170,18],[20,374,240,18]]) {
  art+=R(x,y,w,h,ink)+R(x,y+3,w-3,4,white)+R(x,y+7,w-3,h-10,blue)+
   R(x+13,y+9,33,4,'#efc686')+R(x+51,y+9,21,4,'#b8d3cc')+
   R(x+w-28,y+7,23,h-10,'#2d617a');
