@@ -15,7 +15,6 @@ const stage={
  terrain:[
   {rect:[0,450,960,90]}, {rect:[0,110,20,340]},
   {rect:[20,270,240,18]}, {rect:[20,374,170,18]},
-  {polygon:[[260,270],[420,390],[420,408],[260,288]]},
   {rect:[420,390,190,60]}
  ],
  // Oversized queues already draw fifteen distinct kinds in seeded random order.
@@ -31,7 +30,7 @@ const stage={
   'white-printer','robot-vacuum','air-conditioner','coffee-maker','desk-telephone','audio-interface'
  ],
  preplaced:[],
- lesson:'かでんも おもちゃも だいしゅうごう！\nたなと スロープをつかって つみあげよう！'
+ lesson:'かでんも おもちゃも だいしゅうごう！\nたなと てんじだいをつかって つみあげよう！'
 };
 const ids=new Set(manifest.items.map(item=>item.id));
 if(stage.queue.some(id=>!ids.has(id))) throw Error('Unknown electronics-store item');
@@ -84,15 +83,7 @@ for(const [x,y,w,h] of [[20,270,240,18],[20,374,170,18]]) {
   R(x+13,y+9,33,4,'#efc686')+R(x+51,y+9,21,4,'#b8d3cc')+
   R(x+w-28,y+7,23,h-10,'#2d617a');
 }
-// A fixed loading ramp links the upper shelf to a low showroom island.
-// Its underside is a real open passage, not a filled triangular collider.
-art+=P('M260 270L420 390V408L260 288Z',ink)+
- P('M260 274L417 392V396L260 278Z','#e2d9b9')+
- P('M260 281L417 399V403L260 285Z','#658c98');
-for(let n=1;n<10;n++) {
- const x=260+n*16,y=270+n*12;
- art+=P(`M${x} ${y+4}L${x+3} ${y+6}V${y+10}L${x} ${y+8}Z`,'#8a9f9b');
-}
+// Keep the shelf ends open so throws can enter the lower bay from the right.
 // Closed display pedestal, with its top edge shared by the static body.
 art+=R(420,390,190,60,ink)+R(423,393,184,6,white)+R(423,399,184,47,'#b8c9c3')+
  R(423,399,184,9,red)+R(429,401,42,5,'#f1d6a7')+R(478,401,27,5,'#dcccb2')+
@@ -108,4 +99,4 @@ const shapes=stage.terrain.map(t=>t.rect?R(...t.rect,'#50f0aa'):`<polygon points
 const overlay=`<svg width="960" height="540"><g fill="#50f0aa" fill-opacity=".2" stroke="#50f0aa" stroke-width="2">${shapes}</g></svg>`;
 await sharp(Buffer.from(svg)).composite([{input:Buffer.from(overlay),left:0,top:0}]).png().toFile(path.join(root,'previews/electronics-store-colliders.png'));
 for(const [name,data] of [['stages',stages],['ui-ja',ui]]) await fs.writeFile(path.join(root,`data/${name}.json`),JSON.stringify(data,null,2)+'\n','utf8');
-console.log(`Electronics store: ${stage.queue.length} existing candidates, fifteen random throws, shelves and an open ramp.`);
+console.log(`Electronics store: ${stage.queue.length} existing candidates, fifteen random throws, separate shelves and display pedestal.`);
