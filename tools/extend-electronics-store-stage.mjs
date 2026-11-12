@@ -73,10 +73,10 @@ for(const [x,w] of [[674,70],[766,63],[848,70]]) {
 // Rear checkout desk stays pale and behind the cannon, with no hidden collider.
 art+=R(610,346,42,44,'#9eb9b2')+R(615,351,32,29,'#c7d7c7')+
  R(625,389,14,8,'#a1b7aa')+R(605,396,61,8,'#a6b8aa');
-// Ground line is exactly y=450. Tile joints recede toward the rear wall.
+// Ground line is exactly y=450. Depth joints run parallel down-right.
 art+=R(20,450,940,90,ink)+R(20,454,940,86,'#b0bcb6')+R(20,454,940,5,'#e0dfca');
 for(const y of [481,518]) art+=R(20,y,940,2,'#91a7a5');
-for(const x of [76,194,312,430,548,666,784,902]) art+=P(`M${x} 459L${x+(x-480)*.18} 540H${x+(x-480)*.18+2}L${x+2} 459Z`,'#91a7a5');
+for(const x of [76,194,312,430,548,666,784,902]) art+=P(`M${x} 459L${x+72} 540H${x+74}L${x+2} 459Z`,'#91a7a5');
 // Cantilever shelves are anchored to the solid left wall. Their bays stay open.
 for(const [x,y,w,h] of [[20,270,170,18],[20,374,240,18]]) {
  art+=R(x,y,w,h,ink)+R(x,y+3,w-3,4,white)+R(x,y+7,w-3,h-10,blue)+
